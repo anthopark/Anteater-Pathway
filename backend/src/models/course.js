@@ -6,6 +6,7 @@ const courseSchema = new mongoose.Schema({
     num: String,
     title: String,
     unit: String,
+    level: String,
     desc: String,
     prerequisite: String,
     restriction: String,
