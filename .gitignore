@@ -23,6 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # This project
+.env
 .vscode/
 /courses/course-data-*/
+/courses/populate_mongo.py
 /backend/node_modules/
