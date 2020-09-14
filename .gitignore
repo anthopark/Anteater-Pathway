@@ -23,4 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # This project
-course-data-*/
+.vscode/
+/courses/course-data-*/
+/backend/node_modules/
