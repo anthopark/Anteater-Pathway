@@ -5,7 +5,6 @@ require('./db/mongoose');
 
 const courseRouter = require('./routers/course');
 
-
 const app = express();
 const port = process.env.PORT || 5000;
 

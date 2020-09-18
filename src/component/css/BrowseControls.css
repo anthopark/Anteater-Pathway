@@ -1,0 +1,13 @@
+.browse-controls .controls-col {
+    font-size: 80%;
+}
+
+.browse-dropdown {
+    margin: 5px;
+}
+
+#submit-btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

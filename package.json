@@ -10,7 +10,9 @@
     "react-dom": "^16.13.1",
     "react-panelgroup": "^1.0.12",
     "react-scripts": "3.4.3",
-    "react-split-pane": "^0.1.92"
+    "react-split-pane": "^0.1.92",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
