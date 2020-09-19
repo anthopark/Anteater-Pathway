@@ -1,8 +1,4 @@
-.browse-controls .controls-col {
-    font-size: 80%;
-}
-
-.browse-dropdown {
+.browse-form-div .browse-form .browse-dropdown {
     margin: 5px;
 }
 
@@ -10,4 +6,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#submit-btn {
+    width: 100px;
+    height: 60px;
 }

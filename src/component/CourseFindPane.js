@@ -2,12 +2,12 @@ import React from "react";
 import { Tab } from "semantic-ui-react";
 
 import './css/CourseFindPane.css'
-import BrowseControls from './BrowseControls';
+import BrowseFrom from './BrowseForm';
 
 const panes = [
     {
         menuItem: 'Browse',
-        render: () => <Tab.Pane attached={false}><BrowseControls /></Tab.Pane>
+        render: () => <Tab.Pane attached={false}><BrowseFrom /></Tab.Pane>
     },
     {
         menuItem: 'Search',
