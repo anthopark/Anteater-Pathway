@@ -4,10 +4,6 @@ import {
     Dropdown,
     Form,
     Grid,
-    Input,
-    Radio,
-    Select,
-    TextArea,
 } from 'semantic-ui-react'
 
 import './css/BrowseForm.css'
@@ -26,34 +22,40 @@ const levelOptions = [
 
 export default class BrowseForm extends React.Component {
 
+    onFormSubmit = () => {
+        console.log('submit!')
+    }
+
     render() {
+
         return (
             <div className="browse-form-div">
-                <Form className="browse-form">
-                    <Grid columns='equal'>
-                        <Grid.Column width={10}>
+                <Form className="browse-form" onSubmit={this.onFormSubmit}>
+                    <Form.Group>
+                        <Form.Field width={8}>
+                            <label>Department</label>
                             <Dropdown className="browse-dropdown"
-                                placeholder='Select Department'
+                                placeholder='Select dept'
                                 fluid
                                 search
                                 selection
                                 options={deptOptions}
                             />
+                        </Form.Field>
+                        <Form.Field width={8}>
+                            <label>Level</label>
                             <Dropdown className="browse-dropdown"
-                                placeholder='Select Level'
+                                placeholder='Select level'
                                 fluid
                                 search
                                 selection
                                 options={levelOptions}
                             />
-                        </Grid.Column>
-
-                        <Grid.Column id="submit-btn-box">
-                            <Form.Field control={Button} id="submit-btn">Browse!</Form.Field>
-                        </Grid.Column>
-                    </Grid>
+                        </Form.Field>
+                    </Form.Group>
+                    <Button fluid={true} type="submit">Browse!</Button>
                 </Form>
-            </div>
+            </div >
         );
     }
 }

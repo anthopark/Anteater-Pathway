@@ -15,6 +15,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
+                <h1>Nav Bar Here</h1>
                 <PanelGroup panelWidths={panelConfig} borderColor="#EEEEEE" spacing={5}>
                     <MainPanel />
                     <LeftPanel />
