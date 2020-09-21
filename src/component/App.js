@@ -2,7 +2,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 import React from "react";
 import MainPanel from "./MainPanel";
-import LeftPanel from "./LeftPanel";
+import RightPanel from "./RightPanel";
 import PanelGroup from "react-panelgroup";
 
 const panelConfig = [
@@ -18,7 +18,7 @@ export default class App extends React.Component {
                 <h1>Nav Bar Here</h1>
                 <PanelGroup panelWidths={panelConfig} borderColor="#EEEEEE" spacing={5}>
                     <MainPanel />
-                    <LeftPanel />
+                    <RightPanel />
                 </PanelGroup>
             </div>
         );

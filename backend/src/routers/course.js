@@ -124,19 +124,20 @@ const allowedCourseLevel = {
     'Upper Division': true,
     'Undergraduate': true,
     'Graduate': true,
-}
+    'Other': true,
+};
 // endpoint for browsing courses - by department and level
 router.get('/api/browse', async (req, res) => {
     const dept = req.query.dept;
     const level = req.query.level;
     console.log(`dept: ${dept}, level: ${level}`)
-    
+
     if (!allowedCourseDept[dept]) {
-        res.status(404).send({ error: 'Not allowed course department query'});
+        res.status(404).send({ error: 'Not allowed course department query' });
     }
 
     if (level && !allowedCourseLevel[level]) {
-        res.status(404).send({ error: 'Not allowed course level query'});
+        res.status(404).send({ error: 'Not allowed course level query' });
     }
 
     try {
@@ -144,7 +145,13 @@ router.get('/api/browse', async (req, res) => {
         if (!level) {
             courses = await Course.find({ dept });
         } else if (level === 'Undergraduate') {
-            courses = await Course.find({ dept, $or: [{level: 'Lower Division'}, {level: 'Upper Division'}]})
+            courses = await Course.find({ dept, $or: [{ level: 'Lower Division' }, { level: 'Upper Division' }] })
+        } else if (level === 'Other') {
+            courses = await Course.find({
+                dept, level: {
+                    $nin: ['Lower Division', 'Upper Division', 'Undergraduate', 'Graduate']
+                }
+            });
         } else {
             courses = await Course.find({ dept, level });
         }
@@ -162,18 +169,30 @@ router.get('/api/search', async (req, res) => {
     console.log(`dept: ${dept}, level: ${num}`);
 
     if (!allowedCourseDept[dept]) {
-        res.status(404).send({ error: 'Not allowed course department query'});
+        res.status(404).send({ error: 'Not allowed course department query' });
     }
 
     try {
         let courses = []
         // allows substring, case insensitive search
-        courses = await Course.find({ dept, num: {$regex: num, $options: "i"}});
+        courses = await Course.find({ dept, num: { $regex: num, $options: "i" } });
         res.send(courses);
     } catch (e) {
         res.status(500).send(e.toString());
     }
 })
+
+// endpoint for getting all the distinct department values
+router.get('/api/course/dept/all', async (req, res) => {
+    try {
+        let allDepts = []
+        allDepts = await Course.find().distinct('dept');
+        res.send(allDepts);
+    } catch (e) {
+        res.status(500).send(e.toString());
+    }
+})
+
 
 
 module.exports = router;

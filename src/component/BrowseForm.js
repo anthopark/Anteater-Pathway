@@ -22,8 +22,27 @@ const levelOptions = [
 
 export default class BrowseForm extends React.Component {
 
+    state = {
+        deptOption: [],
+        levelOptions: [],
+        deptDropdownValue: null,
+        levelDropdownValue: null,
+    };
+
+    componentDidMount() {
+        // API calls to retrieve dropdown items for departments
+    }
+
     onFormSubmit = () => {
         console.log('submit!')
+    }
+
+    onDeptDropdownChange = () => {
+
+    }
+
+    onLevelDropdownChange = () => {
+        
     }
 
     render() {
