@@ -4,14 +4,8 @@ import {
     Dropdown,
     Form,
     Input,
-    Grid,
 } from 'semantic-ui-react';
 import './css/SearchForm.css'
-
-const deptOptions = [
-    { key: 'COMPSCI', text: 'COMPSCI', value: 'COMPSCI' },
-    { key: 'IN4MATX', text: 'IN4MATX', value: 'IN4MATX' }
-]
 
 export default class SearchForm extends React.Component {
 
@@ -32,10 +26,10 @@ export default class SearchForm extends React.Component {
                                 fluid
                                 search
                                 selection
-                                options={deptOptions}
+                                options={this.props.deptOptions}
                             />
                         </Form.Field>
-                        <Form.Field  width={6}>
+                        <Form.Field width={6}>
                             <label>Course Number</label>
                             <Input
                                 className="search-input"
@@ -43,7 +37,9 @@ export default class SearchForm extends React.Component {
                             />
                         </Form.Field>
                     </Form.Group>
-                    <Button fluid={true} type="submit">Search!</Button>
+
+                    <Button id="search-submit-btn" fluid={true} type="submit">Search!</Button>
+
                 </Form>
             </div>
         );

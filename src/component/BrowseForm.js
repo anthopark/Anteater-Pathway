@@ -3,22 +3,10 @@ import {
     Button,
     Dropdown,
     Form,
-    Grid,
 } from 'semantic-ui-react'
 
 import './css/BrowseForm.css'
 
-const deptOptions = [
-    { key: 'COMPSCI', text: 'COMPSCI', value: 'COMPSCI' },
-    { key: 'IN4MATX', text: 'IN4MATX', value: 'IN4MATX' }
-]
-
-const levelOptions = [
-    { key: 'Lower Division', text: 'Lower Division', value: 'Lower Division' },
-    { key: 'Upper Division', text: 'Upper Division', value: 'Upper Division' },
-    { key: 'Undergraduate', text: 'Undergraduate', value: 'Undergraduate' },
-    { key: 'Graduate', text: 'Graduate', value: 'Graduate' },
-]
 
 export default class BrowseForm extends React.Component {
 
@@ -42,7 +30,7 @@ export default class BrowseForm extends React.Component {
     }
 
     onLevelDropdownChange = () => {
-        
+
     }
 
     render() {
@@ -58,7 +46,7 @@ export default class BrowseForm extends React.Component {
                                 fluid
                                 search
                                 selection
-                                options={deptOptions}
+                                options={this.props.deptOptions}
                             />
                         </Form.Field>
                         <Form.Field width={8}>
@@ -68,11 +56,13 @@ export default class BrowseForm extends React.Component {
                                 fluid
                                 search
                                 selection
-                                options={levelOptions}
+                                options={this.props.levelOptions}
                             />
                         </Form.Field>
                     </Form.Group>
-                    <Button fluid={true} type="submit">Browse!</Button>
+                    <Form.Field>
+                        <Button id="browse-submit-btn" fluid={true} type="submit">Browse!</Button>
+                    </Form.Field>
                 </Form>
             </div >
         );

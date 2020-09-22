@@ -1,6 +1,7 @@
 const express = require('express');
 const Course = require('../models/course');
 const router = new express.Router();
+const logRequest = require('../middleware/log');
 
 const allowedCourseDept = {
     "AC ENG": true,
@@ -127,7 +128,7 @@ const allowedCourseLevel = {
     'Other': true,
 };
 // endpoint for browsing courses - by department and level
-router.get('/api/browse', async (req, res) => {
+router.get('/api/browse', logRequest, async (req, res) => {
     const dept = req.query.dept;
     const level = req.query.level;
     console.log(`dept: ${dept}, level: ${level}`)
@@ -163,7 +164,7 @@ router.get('/api/browse', async (req, res) => {
 })
 
 // endpoint for searching courses - by department and number
-router.get('/api/search', async (req, res) => {
+router.get('/api/search', logRequest, async (req, res) => {
     const dept = req.query.dept;
     const num = req.query.num;
     console.log(`dept: ${dept}, level: ${num}`);
@@ -183,7 +184,7 @@ router.get('/api/search', async (req, res) => {
 })
 
 // endpoint for getting all the distinct department values
-router.get('/api/course/dept/all', async (req, res) => {
+router.get('/api/course/dept/all', logRequest, async (req, res) => {
     try {
         let allDepts = []
         allDepts = await Course.find().distinct('dept');
