@@ -10,8 +10,9 @@ import './css/SearchForm.css'
 export default class SearchForm extends React.Component {
 
 
-    onFormSubmit() {
+    onFormSubmit = () => {
         console.log('submit!')
+        this.props.onSearchSubmit('I&C SCI', '46')
     }
 
     render() {

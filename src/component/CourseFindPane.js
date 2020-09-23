@@ -5,12 +5,12 @@ import './css/CourseFindPane.css'
 import BrowseForm from './BrowseForm';
 import SearchForm from './SearchForm';
 
-import courseAxios from '../api/course-api';
+import courseApi from '../api/course-api';
 
 const fetchAllDeptOptions = async () => {
     let response = []
     try {
-        response = await courseAxios.get('/api/course/dept/all');
+        response = await courseApi.get('/course/dept/all');
     } catch (e) {
         console.log(e.toString());
 
@@ -52,6 +52,7 @@ export default class CourseFindPane extends React.Component {
                     render: () => (
                         <Tab.Pane attached={false}>
                             <BrowseForm
+                                onBrowseSubmit={this.props.onBrowseSubmit}
                                 deptOptions={this.state.deptOptions}
                                 levelOptions={this.state.levelOptions}
                             />
@@ -62,7 +63,10 @@ export default class CourseFindPane extends React.Component {
                     menuItem: 'Search',
                     render: () => (
                         <Tab.Pane attached={false}>
-                            <SearchForm deptOptions={this.state.deptOptions} />
+                            <SearchForm
+                                onSearchSubmit={this.props.onSearchSubmit}
+                                deptOptions={this.state.deptOptions}
+                            />
                         </Tab.Pane>
                     )
                 },

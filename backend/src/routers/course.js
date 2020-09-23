@@ -134,11 +134,11 @@ router.get('/api/browse', logRequest, async (req, res) => {
     console.log(`dept: ${dept}, level: ${level}`)
 
     if (!allowedCourseDept[dept]) {
-        res.status(404).send({ error: 'Not allowed course department query' });
+        return res.status(404).send({ error: 'Not allowed course department query' });
     }
 
     if (level && !allowedCourseLevel[level]) {
-        res.status(404).send({ error: 'Not allowed course level query' });
+        return res.status(404).send({ error: 'Not allowed course level query' });
     }
 
     try {
@@ -170,7 +170,7 @@ router.get('/api/search', logRequest, async (req, res) => {
     console.log(`dept: ${dept}, level: ${num}`);
 
     if (!allowedCourseDept[dept]) {
-        res.status(404).send({ error: 'Not allowed course department query' });
+        return res.status(404).send({ error: 'Not allowed course department query' });
     }
 
     try {

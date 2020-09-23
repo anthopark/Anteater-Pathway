@@ -23,6 +23,7 @@ export default class BrowseForm extends React.Component {
 
     onFormSubmit = () => {
         console.log('submit!')
+        this.props.onBrowseSubmit(1,1)
     }
 
     onDeptDropdownChange = () => {
