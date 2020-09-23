@@ -7,7 +7,7 @@ import PanelGroup from "react-panelgroup";
 
 const panelConfig = [
     {resize: "stretch"},
-    {size: 400, minSize: 0, maxSize: 700, resize: "dynamic", snap: [300]}
+    {size: 450, minSize: 0, maxSize: 700, resize: "dynamic", snap: [300]}
 ]
 
 export default class App extends React.Component {

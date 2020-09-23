@@ -16,13 +16,13 @@ const fetchAllDeptOptions = async () => {
 
         // return dummy data
         return [
-            { key: 0, text: 'COMPSCI', value: 'COMPSCI' },
-            { key: 1, text: 'IN4MATX', value: 'IN4MATX' },
+            { label: 'COMPSCI', value: 'COMPSCI' },
+            { label: 'IN4MATX', value: 'IN4MATX' },
         ]
     }
 
     return response.data.map((dept, i) => {
-        return { key: i, text: dept, value: dept, };
+        return { label: dept, value: dept, };
     });
 }
 
@@ -40,11 +40,11 @@ export default class CourseFindPane extends React.Component {
         this.setState({
             deptOptions: result,
             levelOptions: [
-                { key: 0, text: 'Lower Division', value: 'Lower Division' },
-                { key: 1, text: 'Upper Division', value: 'Upper Division' },
-                { key: 2, text: 'Undergraduate', value: 'Undergraduate' },
-                { key: 3, text: 'Graduate', value: 'Graduate' },
-                { key: 4, text: 'Other', value: 'Other' },
+                { label: 'Lower Division', value: 'Lower Division' },
+                { label: 'Upper Division', value: 'Upper Division' },
+                { label: 'Undergraduate', value: 'Undergraduate' },
+                { label: 'Graduate', value: 'Graduate' },
+                { label: 'Other', value: 'Other' },
             ],
             panes: [
                 {

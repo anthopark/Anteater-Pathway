@@ -1,18 +1,47 @@
 import React from 'react';
 import {
     Button,
-    Dropdown,
     Form,
     Input,
+    Message
 } from 'semantic-ui-react';
+import Select from 'react-select';
 import './css/SearchForm.css'
 
 export default class SearchForm extends React.Component {
 
+    state = {
+        deptItem: null,
+        numValue: '',
+        isDeptValid: true,
+    }
 
     onFormSubmit = () => {
         console.log('submit!')
-        this.props.onSearchSubmit('I&C SCI', '46')
+        this.setState({ isDeptValid: true })
+        const { deptItem, numValue } = this.state
+
+        if (!deptItem) return this.setState({ isDeptValid: false })
+
+        this.props.onSearchSubmit(
+            deptItem.value,
+            numValue
+        )
+    }
+
+    onDeptDropdownChange = (e) => {
+        this.setState({ isDeptValid: true })
+        console.log(e);
+        this.setState({
+            deptItem: e,
+        })
+    }
+
+    onNumInputChange = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            numValue: e.target.value,
+        })
     }
 
     render() {
@@ -22,25 +51,24 @@ export default class SearchForm extends React.Component {
                     <Form.Group>
                         <Form.Field width={10}>
                             <label>Department</label>
-                            <Dropdown className="search-dropdown"
-                                placeholder='Select dept'
-                                fluid
-                                search
-                                selection
+                            <Select
+                                isClearable={true}
                                 options={this.props.deptOptions}
+                                value={this.state.deptItem}
+                                onChange={this.onDeptDropdownChange}
                             />
                         </Form.Field>
                         <Form.Field width={6}>
-                            <label>Course Number</label>
+                            <label>Number</label>
                             <Input
-                                className="search-input"
                                 placeholder='3A, 39c, 121'
+                                value={this.state.numValue}
+                                onChange={this.onNumInputChange}
                             />
                         </Form.Field>
                     </Form.Group>
-
                     <Button id="search-submit-btn" fluid={true} type="submit">Search!</Button>
-
+                    <Message hidden={this.state.isDeptValid} color='red'>Please select department!</Message>
                 </Form>
             </div>
         );

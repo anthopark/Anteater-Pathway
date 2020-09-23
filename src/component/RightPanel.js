@@ -34,12 +34,20 @@ export default class RightPanel extends React.Component {
         console.log(deptValue, levelValue)
         const courses = await fetchCourses('/browse', deptValue, levelValue);
 
+        this.setState({
+            courses: courses
+        })
+
         console.log(courses);
     }
 
     onSearchSubmit = async (deptValue, numValue) => {
         console.log(deptValue, numValue)
         const courses = await fetchCourses('/search', deptValue, numValue);
+
+        this.setState({
+            courses: courses
+        })
 
         console.log(courses);
     }
@@ -52,7 +60,9 @@ export default class RightPanel extends React.Component {
                     onBrowseSubmit={this.onBrowseSubmit}
                     onSearchSubmit={this.onSearchSubmit}
                 />
-                <CourseListPane />
+                <CourseListPane
+                    courses={this.state.courses}
+                />
             </div>
         );
     }

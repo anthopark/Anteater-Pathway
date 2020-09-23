@@ -1,9 +1,11 @@
 import React from 'react';
 import {
     Button,
-    Dropdown,
     Form,
+    Message,
 } from 'semantic-ui-react'
+
+import Select from 'react-select';
 
 import './css/BrowseForm.css'
 
@@ -13,25 +15,35 @@ export default class BrowseForm extends React.Component {
     state = {
         deptOption: [],
         levelOptions: [],
-        deptDropdownValue: null,
-        levelDropdownValue: null,
+        deptItem: null,
+        levelItem: null,
+        isDeptValid: true,
     };
 
-    componentDidMount() {
-        // API calls to retrieve dropdown items for departments
-    }
-
     onFormSubmit = () => {
+        this.setState({ isDeptValid: true });
         console.log('submit!')
-        this.props.onBrowseSubmit(1,1)
+        if (!this.state.deptItem) return this.setState({ isDeptValid: false });
+        const { deptItem, levelItem } = this.state
+        this.props.onBrowseSubmit(
+            deptItem.value,
+            levelItem ? levelItem.value : undefined
+        )
     }
 
-    onDeptDropdownChange = () => {
-
+    onDeptDropdownChange = (e) => {
+        this.setState({ isDeptValid: true });
+        console.log(e);
+        this.setState({
+            deptItem: e,
+        })
     }
 
-    onLevelDropdownChange = () => {
-
+    onLevelDropdownChange = (e) => {
+        console.log(e);
+        this.setState({
+            levelItem: e,
+        })
     }
 
     render() {
@@ -42,28 +54,26 @@ export default class BrowseForm extends React.Component {
                     <Form.Group>
                         <Form.Field width={8}>
                             <label>Department</label>
-                            <Dropdown className="browse-dropdown"
-                                placeholder='Select dept'
-                                fluid
-                                search
-                                selection
+                            <Select
+                                isClearable={true}
                                 options={this.props.deptOptions}
+                                value={this.state.deptItem}
+                                onChange={this.onDeptDropdownChange}
                             />
                         </Form.Field>
                         <Form.Field width={8}>
                             <label>Level</label>
-                            <Dropdown className="browse-dropdown"
-                                placeholder='Select level'
-                                fluid
-                                search
-                                selection
+                            <Select
+                                isClearable={true}
                                 options={this.props.levelOptions}
+                                value={this.state.levelItem}
+                                onChange={this.onLevelDropdownChange}
                             />
                         </Form.Field>
                     </Form.Group>
-                    <Form.Field>
-                        <Button id="browse-submit-btn" fluid={true} type="submit">Browse!</Button>
-                    </Form.Field>
+
+                    <Button id="browse-submit-btn" fluid={true} type="submit">Browse!</Button>
+                    <Message hidden={this.state.isDeptValid} color='red'>Please select department!</Message>
                 </Form>
             </div >
         );
