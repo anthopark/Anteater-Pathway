@@ -55,7 +55,7 @@ export default class RightPanel extends React.Component {
 
     render() {
         return (
-            <div className="left-panel">
+            <div className="right-panel">
                 <CourseFindPane
                     onBrowseSubmit={this.onBrowseSubmit}
                     onSearchSubmit={this.onSearchSubmit}
