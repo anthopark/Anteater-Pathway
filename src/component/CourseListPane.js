@@ -14,6 +14,7 @@ const Container = styled.div`
 
 const CourseList = styled.div`
 
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -35,10 +36,13 @@ export default class CourseListPane extends React.Component {
                                 index={index}
                                 dept={course.dept}
                                 num={course.num}
+                                title={course.title}
                                 unit={course.unit}
+                                desc={course.desc}
                             />
                         ))}
                     </CourseList>
+
                 </Segment>
             </Container>
         );
