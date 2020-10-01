@@ -6,7 +6,7 @@ Drag n Drop UC Irvine degree planner. It is currently under development.
 
 * Browse courses by departments and course level (Ex, lower division, graduate, etc.)
 * Search courses by specifying departments and course
-* Add school year such as 20-21, and each school year will have 4 quarters in it
+* Add school year such as 20-21, which includes 4 quarters in it
 * Drag n Drop courses on the planner
 
 ## Getting Started
@@ -42,3 +42,6 @@ npm install
 npm start
 ```
 
+### The Node.js Backend Project
+
+This backend project will try to establish connection to MongoDB Atlas using the `ATLAS_URI` environment variable in `.env`, which isn't currently shared in this repository. As in an early development stage, the frontend project can be run with dummy course data.  
