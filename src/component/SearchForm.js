@@ -23,9 +23,7 @@ const customStyles = {
         ...provided,
         margin: '0px',
     }),
-    indicatorSeparator: state => ({
-        display: 'none',
-    }),
+
     indicatorsContainer: (provided, state) => ({
         ...provided,
         height: '35spx',

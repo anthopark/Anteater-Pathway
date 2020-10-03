@@ -17,6 +17,7 @@ const SearchResultBox = styled.div`
 
 `;
 
+// school department options to show on the dropdown select
 const fetchAllDeptOptions = async () => {
     let response = []
     try {
@@ -36,23 +37,26 @@ const fetchAllDeptOptions = async () => {
     });
 }
 
-// const fetchCourses = async (apiURL, param1, param2) => {
-//     let params = null;
-//     params = apiURL.includes('browse') ?
-//         { dept: param1, level: param2 } : { dept: param1, num: param2 };
+// search course by school department, course level, and/or course number
+const fetchCourses = async (apiURL, dept, level, num) => {
+    let params = {
+        dept,
+        level,
+        num,
+    }
 
-//     let response = []
-//     try {
-//         response = await courseApi.get(apiURL, {
-//             params
-//         })
-//     } catch (e) {
-//         console.log(e.toString());
-//         return [];
-//     }
+    let response = []
+    try {
+        response = await courseApi.get(apiURL, {
+            params
+        })
+    } catch (e) {
+        console.log(e.toString());
+        return [];
+    }
 
-//     return response.data;
-// }
+    return response.data;
+}
 
 class SidePanel extends Component {
 
@@ -62,8 +66,15 @@ class SidePanel extends Component {
         courses: [],
     }
 
-    onCourseSearch = async () => {
+    onCourseSearch = async (dept, level, num) => {
+        console.log(dept, level, num);
+        const courses = await fetchCourses('/course/search', dept, level, num);
 
+        this.setState({
+            courses: courses
+        })
+
+        console.log(courses);
     }
 
     async componentDidMount() {

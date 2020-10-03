@@ -127,11 +127,15 @@ const allowedCourseLevel = {
     'Graduate': true,
     'Other': true,
 };
-// endpoint for browsing courses - by department and level
-router.get('/api/browse', logRequest, async (req, res) => {
+
+
+// endpoint for fetching course data by dept, level, and course number
+router.get('/api/course/search', logRequest, async (req, res) => {
     const dept = req.query.dept;
     const level = req.query.level;
-    console.log(`dept: ${dept}, level: ${level}`)
+    const num = req.query.num;
+
+    console.log(dept, level, num);
 
     if (!allowedCourseDept[dept]) {
         return res.status(404).send({ error: 'Not allowed course department query' });
@@ -141,20 +145,31 @@ router.get('/api/browse', logRequest, async (req, res) => {
         return res.status(404).send({ error: 'Not allowed course level query' });
     }
 
+    let courses = [];
+
     try {
-        let courses = []
         if (!level) {
-            courses = await Course.find({ dept });
+            courses = await Course.find({
+                dept, num: { $regex: num, $options: "i" }
+            });
         } else if (level === 'Undergraduate') {
-            courses = await Course.find({ dept, $or: [{ level: 'Lower Division' }, { level: 'Upper Division' }] })
+            courses = await Course.find({
+                dept,
+                $or: [{ level: 'Lower Division' }, { level: 'Upper Division' }],
+                num: { $regex: num, $options: "i" }
+            })
         } else if (level === 'Other') {
             courses = await Course.find({
-                dept, level: {
+                dept,
+                level: {
                     $nin: ['Lower Division', 'Upper Division', 'Undergraduate', 'Graduate']
-                }
+                },
+                num: { $regex: num, $options: "i" }
             });
         } else {
-            courses = await Course.find({ dept, level });
+            courses = await Course.find({ 
+                dept, level, num: { $regex: num, $options: "i" }
+            });
         }
 
         res.send(courses);
@@ -163,25 +178,6 @@ router.get('/api/browse', logRequest, async (req, res) => {
     }
 })
 
-// endpoint for searching courses - by department and number
-router.get('/api/search', logRequest, async (req, res) => {
-    const dept = req.query.dept;
-    const num = req.query.num;
-    console.log(`dept: ${dept}, level: ${num}`);
-
-    if (!allowedCourseDept[dept]) {
-        return res.status(404).send({ error: 'Not allowed course department query' });
-    }
-
-    try {
-        let courses = []
-        // allows substring, case insensitive search
-        courses = await Course.find({ dept, num: { $regex: num, $options: "i" } });
-        res.send(courses);
-    } catch (e) {
-        res.status(500).send(e.toString());
-    }
-})
 
 // endpoint for getting all the distinct department values
 router.get('/api/course/dept/all', logRequest, async (req, res) => {
@@ -193,7 +189,5 @@ router.get('/api/course/dept/all', logRequest, async (req, res) => {
         res.status(500).send(e.toString());
     }
 })
-
-
 
 module.exports = router;
