@@ -7,12 +7,11 @@ import SidePanel from './SidePanel';
 import MainPanel from './MainPanel';
 
 const Container = styled.div`
-
-
+    height: 100vh;
 `;
 
 const panelConfig = [
-    { size: 300, minSize: 0, maxSize: 300, resize: "dynamic" },
+    { size: 270, minSize: 0, maxSize: 270, resize: "dynamic" },
     { resize: "stretch"}
 ]
 

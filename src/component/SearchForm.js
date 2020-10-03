@@ -32,19 +32,6 @@ const customStyles = {
     }),
 };
 
-
-const dummyDept = [
-    { label: 'COMPSCI', value: 'COMPSCI' },
-    { label: 'IN4MATX', value: 'IN4MATX' },
-    { label: 'STATS', value: 'STATS' },
-]
-
-
-
-
-
-
-
 const Container = styled.div`
     padding: 0 10px;
 
@@ -52,14 +39,61 @@ const Container = styled.div`
 
 class SearchForm extends Component {
 
-
-    onFormSubmit = (e) => {
-
+    state = {
+        deptItem: null,
+        levelItem: null,
+        numValue: '',
+        isDeptValid: true,
     }
 
 
+    onBtnClick = (e) => {
+        e.preventDefault();
+        console.log(e.target);
+        this.setState({ isDeptValid: true });
+        const { deptItem, levelItem, numValue } = this.state;
+
+        if (!deptItem) return this.setState({ isDeptValid: false })
+
+        this.props.onCourseSearch(
+            deptItem.value,
+            levelItem ? levelItem.value : undefined,
+            numValue
+        )
+    }
+
+    onDeptDropdownChange = (e) => {
+        this.setState({ isDeptValid: true })
+        console.log(e);
+        this.setState({
+            deptItem: e,
+        })
+    }
+
+    onLevelDropdownChange = (e) => {
+        console.log(e);
+        this.setState({
+            levelItem: e,
+        })
+    }
+
+    onNumInputChange = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            numValue: e.target.value,
+        })
+    }
+
     render() {
 
+        let errorMessage;
+        if (!this.state.isDeptValid) {
+            errorMessage = (
+                <div className="error-message-box">
+                    Please select a department
+                </div>
+            )
+        }
 
         return (
             <Container>
@@ -70,8 +104,10 @@ class SearchForm extends Component {
                             id="dept-dropdown"
                             styles={customStyles}
                             isClearable={true}
-                            options={dummyDept}
+                            options={this.props.deptOptions}
+                            onChange={this.onDeptDropdownChange}
                         />
+                        {errorMessage}
                     </div>
                     <div className="form-field">
                         <label className="search-form-label">Level</label>
@@ -79,7 +115,8 @@ class SearchForm extends Component {
                             id="dept-dropdown"
                             styles={customStyles}
                             isClearable={true}
-                            options={dummyDept}
+                            options={this.props.levelOptions}
+                            onChange={this.onLevelDropdownChange}
                         />
                     </div>
                     <div className="form-field">
@@ -87,14 +124,13 @@ class SearchForm extends Component {
                         <input
                             className="form-input number-input"
                             id="number-input"
+                            placeholder='3A, 39c, 121'
+                            onChange={this.onNumInputChange}
                         />
                     </div>
-                    <div className="form-field">
+                    <div className="form-field form-btn-field">
+                        <a href="/" className="btn form-btn" onClick={this.onBtnClick}>Search</a>
                     </div>
-
-
-
-
                 </form>
             </Container>
         );
