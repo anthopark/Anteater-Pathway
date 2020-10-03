@@ -1,3 +1,25 @@
-#search-submit-btn {
-    margin-top: 10px;
+.search-form-label {
+    display: block;
+    font-size: 17px;
+    font-weight: 700;
+    margin-left: 3px;
+    margin-bottom: 3px;
+}
+
+.form-field {
+    margin-bottom: 7px;
+}
+
+.form-input {
+    padding: 7px;
+    font-size: 16px;
+    width: 100%;
+    height: 37px;
+    border: 1px solid #9e9e9e;
+    border-radius: 5px;
+}
+
+.form-input:focus {
+    outline: none;
+    box-shadow: 0 0 2px #318dd8;
 }

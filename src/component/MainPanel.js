@@ -1,20 +1,19 @@
-import React from "react";
-import {
-    Segment,
-} from 'semantic-ui-react';
-import PlannerControl from './PlannerControl'
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import './css/MainPanel.css'
+const Container = styled.div`
 
-export default class MainPanel extends React.Component {
+
+`;
+
+class MainPanel extends Component {
     render() {
         return (
-            <div className="main-panel-div">
-                <PlannerControl />
-                <Segment>
-                    <h1>Main Panel</h1>
-                </Segment>
-            </div>
+            <Container>
+            
+            </Container>
         );
     }
 }
+
+export default MainPanel;

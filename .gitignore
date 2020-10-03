@@ -25,6 +25,7 @@ yarn-error.log*
 # This project
 .env
 .vscode/
+old-component/
 /courses/course-data-*/
 /courses/course_scrap_by_school.py
 /backend/node_modules/
