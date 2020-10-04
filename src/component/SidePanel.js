@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
+import CourseList from './CourseList';
 import courseApi from '../api/course-api';
 
 const Container = styled.div`
@@ -104,6 +105,9 @@ class SidePanel extends Component {
                 </SearchFormBox>
 
                 <SearchResultBox>
+                    <CourseList
+                        courses={this.state.courses}
+                    />
                 </SearchResultBox>
             </Container>
         );

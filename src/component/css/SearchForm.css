@@ -45,6 +45,7 @@
   text-align: center;
   text-decoration: none;
   border-radius: 100px;
+  transition: all 0.2s
 }
 
 .btn:hover {
