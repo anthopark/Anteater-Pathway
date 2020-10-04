@@ -7,7 +7,6 @@ import courseApi from '../api/course-api';
 
 const Container = styled.div`
     width: 100%;
-
 `;
 
 const SearchFormBox = styled.div`

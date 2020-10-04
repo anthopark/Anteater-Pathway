@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     font-family: Lato, sans-serif;
+    height: 100%;
 }

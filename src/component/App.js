@@ -7,11 +7,13 @@ import SidePanel from './SidePanel';
 import MainPanel from './MainPanel';
 
 const Container = styled.div`
+    display: flex;
+    flex-flow: column;
     height: 100vh;
 `;
 
 const panelConfig = [
-    { size: 270, minSize: 0, maxSize: 270, resize: "dynamic" },
+    { size: 300, minSize: 0, maxSize: 300, resize: "dynamic" },
     { resize: "stretch"}
 ]
 
