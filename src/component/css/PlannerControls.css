@@ -1,0 +1,27 @@
+.btn-box {
+
+}
+
+.ctrl-btn {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: .2rem solid #17a878;
+    border-radius: .5rem;
+    color: #17a878;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0 .3rem;
+    padding: .5rem 1.5rem;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.ctrl-btn:hover, .ctrl-btn:focus {
+    color: #fff;
+    outline: 0;
+    box-shadow: 0 0 4rem 4rem #17a878 inset;
+}

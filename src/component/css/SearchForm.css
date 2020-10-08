@@ -1,68 +1,68 @@
 .search-form-label {
   display: block;
-  font-size: 14px;
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-left: 3px;
-  margin-bottom: 3px;
+  margin-left: 0.3rem;
+  margin-bottom: 0.3rem;
 }
 
 .form-field {
-  margin-bottom: 7px;
+  margin-bottom: 0.7rem;
 }
 
 .error-message-box {
-    color: rgb(250, 90, 90);
+  color: rgb(250, 90, 90);
 }
 
 .form-input {
-  padding: 7px;
-  font-size: 16px;
+  padding: 0.7rem;
+  font-size: 1.6rem;
   width: 100%;
-  height: 35px;
-  border: 1px solid #9e9e9e;
-  border-radius: 5px;
+  height: 3.5rem;
+  border: 0.1rem solid #9e9e9e;
+  border-radius: 0.5rem;
 }
 
 .form-input:focus {
   outline: none;
-  box-shadow: 0 0 2px #209fc5;
+  box-shadow: 0 0 0.2rem #209fc5;
 }
 
 ::placeholder {
-    font-size: 14px;
-    opacity: 0.8;
+  font-size: 1.4rem;
+  opacity: 0.8;
 }
 
 .form-btn-field {
-    margin-top: 11px;
+  margin-top: 1.1rem;
 }
 
 .btn:link,
 .btn:visited {
   display: block;
-  padding: 6px;
+  padding: 0.6rem;
   width: 100%;
   text-align: center;
   text-decoration: none;
-  border-radius: 100px;
-  transition: all 0.2s
+  border-radius: 10rem;
+  transition: all 0.2s;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-.2rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 .btn:active {
-    transform: translate(-1px);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(-.1rem);
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
 }
 
 .form-btn {
   color: #fff;
-  height: 35px;
-  font-size: 17px;
-  letter-spacing: .7px;;
+  height: 3.5rem;
+  font-size: 1.7rem;
+  letter-spacing: 0.07rem;
   font-weight: 700;
   background-color: rgb(19, 159, 214);
 }

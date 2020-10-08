@@ -8,30 +8,38 @@ const customStyles = {
         ...provided,
         background: '#fff',
         borderColor: '#9e9e9e',
-        minHeight: '35spx',
-        height: '35spx',
+        fontSize: '1.6rem',
+        minHeight: '3.5rem',
+        height: '3.5rem',
         boxShadow: state.isFocused ? null : null,
     }),
 
     valueContainer: (provided, state) => ({
         ...provided,
-        height: '35spx',
-        padding: '0 6px'
+        height: '3.5rem',
+        fontSize: '1.6rem',
+        padding: '0 .6rem'
     }),
 
     input: (provided, state) => ({
         ...provided,
-        margin: '0px',
+        margin: '0',
+        fontSize: '1.6rem',
     }),
 
     indicatorsContainer: (provided, state) => ({
         ...provided,
-        height: '35spx',
+        height: '3.5rem',
+        fontSize: '1.6rem',
     }),
+    option: (provided, state) => ({
+        ...provided,
+        fontSize: '1.6rem',
+      }),
 };
 
 const Container = styled.div`
-    padding: 5px 15px;
+    padding: .5rem 1.5rem;
 
 `;
 
