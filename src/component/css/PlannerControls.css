@@ -6,9 +6,9 @@
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
-    border: .2rem solid #17a878;
+    border: .2rem solid #116fbd;
     border-radius: .5rem;
-    color: #17a878;
+    color:#116fbd;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -23,5 +23,30 @@
 .ctrl-btn:hover, .ctrl-btn:focus {
     color: #fff;
     outline: 0;
-    box-shadow: 0 0 4rem 4rem #17a878 inset;
+    box-shadow: 0 0 4rem 4rem #116fbd inset;
+}
+
+.mini-form-field {
+    display: flex;
+    align-items: center;
+}
+
+.mini-form-userinput {
+    margin-right: 1rem;
+}
+
+.mini-btn {
+    padding: .7rem 1.5rem;
+    appearance: none;
+    background-color: #116fbd;
+    border: 1px solid #116fbd;
+    border-radius: .5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    transition: all 0.2s;
+}
+
+.mini-form-input {
+    width: 13rem;
 }

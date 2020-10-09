@@ -11,6 +11,7 @@
 }
 
 .error-message-box {
+  font-size: 1.6rem;
   color: rgb(250, 90, 90);
 }
 
@@ -64,5 +65,5 @@
   font-size: 1.7rem;
   letter-spacing: 0.07rem;
   font-weight: 700;
-  background-color: rgb(19, 159, 214);
+  background-color: #116fbd;
 }

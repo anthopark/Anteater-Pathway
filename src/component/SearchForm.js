@@ -118,7 +118,7 @@ class SearchForm extends Component {
                     <div className="form-field">
                         <label className="search-form-label">Level</label>
                         <Select
-                            id="dept-dropdown"
+                            id="level-dropdown"
                             styles={customStyles}
                             isClearable={true}
                             options={this.props.levelOptions}
