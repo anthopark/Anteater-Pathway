@@ -1,3 +1,8 @@
+:root {
+  --button-color: #116fbd;
+  --text-color: #f0f2f3;
+}
+
 .header {
   flex: 0 1 auto;
 }

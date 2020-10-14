@@ -46,8 +46,10 @@ const Container = styled.div`
 `;
 
 const MiniFormBox = styled.div`
-    padding: .3rem .5rem;
+    padding: 1rem 1.5rem;
     background-color: #fff;
+    border: .2rem solid var(--button-color);
+    border-radius: 1rem;
 `;
 
 const generateSchoolYear = (startYear, endYear) => {
@@ -93,6 +95,7 @@ class PlannerControls extends Component {
                         }
                         on={['click']}
                         position="bottom left"
+                        offset={[0, 10]}
                     >
                         <Popup.Content>
                             <MiniFormBox>
@@ -122,6 +125,7 @@ class PlannerControls extends Component {
                         }
                         on={['click']}
                         position="bottom left"
+                        offset={[0, 10]}
                     >
                         <Popup.Content>
                             <MiniFormBox>
@@ -148,6 +152,7 @@ class PlannerControls extends Component {
                         }
                         on={['click']}
                         position="bottom left"
+                        offset={[0, 10]}
                     >
                         <Popup.Content>
                             <MiniFormBox>

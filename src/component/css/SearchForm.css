@@ -37,17 +37,6 @@
 .form-btn-field {
   margin-top: 1.1rem;
 }
-/* 
-.btn:link,
-.btn:visited {
-  display: block;
-  padding: 0.6rem;
-  width: 100%;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 10rem;
-  transition: all 0.2s;
-} */
 
 button, button:focus, button:active {
   outline: none;
@@ -67,11 +56,11 @@ button, button:focus, button:active {
 
 .btn.search-btn {
   width: 100%;
-  color: #fff;
+  color: var(--text-color);
   height: 3.5rem;
   border-radius: 10rem;
   font-size: 1.7rem;
   letter-spacing: 0.07rem;
   font-weight: 700;
-  background-color: #116fbd;
+  background-color: var(--button-color);
 }

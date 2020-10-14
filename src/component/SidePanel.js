@@ -50,6 +50,7 @@ const fetchAllDeptOptions = async () => {
     });
 }
 
+
 // search course by school department, course level, and/or course number
 const fetchCourses = async (apiURL, dept, level, num) => {
     let params = {
@@ -70,6 +71,7 @@ const fetchCourses = async (apiURL, dept, level, num) => {
 
     return response.data;
 }
+
 
 class SidePanel extends Component {
 
@@ -98,7 +100,6 @@ class SidePanel extends Component {
             })
         }, 400)
 
-
         console.log(courses);
     }
 
@@ -125,9 +126,8 @@ class SidePanel extends Component {
                 <ResultInfoBox>
                     <div className="result-msg">
                         <div className="icon-box">
-                            <i className="big spinner loading icon"></i>
+                            <i class="fas fa-spinner fa-spin fa-2x"></i>
                         </div>
-                        Searching...
                     </div>
                 </ResultInfoBox>
             );
@@ -137,7 +137,7 @@ class SidePanel extends Component {
                 <ResultInfoBox>
                     <div className="result-msg">
                         <div className="icon-box">
-                            <i className="big search icon"></i>
+                            <i class="fas fa-search fa-2x"></i>
                         </div>
                         Find your courses!
                     </div>
@@ -149,7 +149,7 @@ class SidePanel extends Component {
                 <ResultInfoBox>
                     <div className="result-msg">
                         <div className="icon-box">
-                            <i className="big exclamation icon"></i>
+                            <i class="fas fa-exclamation fa-2x"></i>
                         </div>
                         No courses found!
                     </div>
