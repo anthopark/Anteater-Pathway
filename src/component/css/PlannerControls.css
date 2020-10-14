@@ -20,10 +20,11 @@
     transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 
-.ctrl-btn:hover, .ctrl-btn:focus {
+.ctrl-btn:hover, .ctrl-btn:focus, .ctrl-btn:active {
     color: #fff;
     outline: 0;
     box-shadow: 0 0 4rem 4rem #116fbd inset;
+    border: .2rem solid #116fbd;
 }
 
 .mini-form-field {
