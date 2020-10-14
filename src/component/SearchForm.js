@@ -136,6 +136,7 @@ class SearchForm extends Component {
                     </div>
                     <div className="form-field form-btn-field">
                         <a href="/" className="btn form-btn" onClick={this.onBtnClick}>Search</a>
+                        <button className="btn form-btn" type="submit">Search</button>
                     </div>
                 </form>
             </Container>

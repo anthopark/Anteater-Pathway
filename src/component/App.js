@@ -23,7 +23,7 @@ class App extends Component {
         return (
             <Container>
                 <div className="header">
-                    <h1>Nav Bar Here</h1>
+                    <h1>Nav Bar</h1>
                 </div>
 
                 <div className="main">

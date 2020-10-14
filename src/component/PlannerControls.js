@@ -46,10 +46,8 @@ const Container = styled.div`
 `;
 
 const MiniFormBox = styled.div`
-    padding: 1rem 1.5rem;
+    padding: .3rem .5rem;
     background-color: #fff;
-    border: .2rem solid #116fbd;
-    border-radius: 1rem;
 `;
 
 const generateSchoolYear = (startYear, endYear) => {
@@ -95,7 +93,6 @@ class PlannerControls extends Component {
                         }
                         on={['click']}
                         position="bottom left"
-                        offset={`[10, 10]`}
                     >
                         <Popup.Content>
                             <MiniFormBox>
@@ -108,7 +105,7 @@ class PlannerControls extends Component {
                                             />
                                         </div>
                                         <div className="mini-form-btn">
-                                            <button class="btn mini-btn" type="submit">Add</button>
+                                            <button className="btn mini-btn" type="submit">Add</button>
                                         </div>
                                     </div>
                                 </form>
@@ -125,7 +122,6 @@ class PlannerControls extends Component {
                         }
                         on={['click']}
                         position="bottom left"
-                        offset={`[10, 10]`}
                     >
                         <Popup.Content>
                             <MiniFormBox>
@@ -135,7 +131,7 @@ class PlannerControls extends Component {
                                             <input className="form-input mini-form-input" placeholder="Plan Name" />
                                         </div>
                                         <div className="mini-form-btn">
-                                            <button class="btn mini-btn" type="submit">Load</button>
+                                            <button className="btn mini-btn" type="submit">Load</button>
                                         </div>
                                     </div>
                                 </form>
@@ -152,7 +148,6 @@ class PlannerControls extends Component {
                         }
                         on={['click']}
                         position="bottom left"
-                        offset={`[10, 10]`}
                     >
                         <Popup.Content>
                             <MiniFormBox>
@@ -162,7 +157,7 @@ class PlannerControls extends Component {
                                             <input className="form-input mini-form-input" placeholder="Plan Name" />
                                         </div>
                                         <div className="mini-form-btn">
-                                            <button class="btn mini-btn" type="submit">Save</button>
+                                            <button className="btn mini-btn" type="submit">Save</button>
                                         </div>
                                     </div>
                                 </form>

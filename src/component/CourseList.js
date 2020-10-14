@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CourseItem from './CourseItem';
 
 const Container = styled.div`
-    padding: 5px 15px;
+    padding: 0 1.5rem;
 `;
 
 const ListControlBox = styled.div`
@@ -12,7 +12,7 @@ const ListControlBox = styled.div`
 
 const ItemListBox = styled.div`
     overflow-y: auto;
-    max-height: 550px;
+    max-height: 45rem;
 `;
 
 const ItemList = styled.div`

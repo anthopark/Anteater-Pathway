@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
 
+import './css/SidePanel.css';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
 import CourseList from './CourseList';
 import courseApi from '../api/course-api';
 
+
 const Container = styled.div`
     width: 100%;
+    display: flex;
+    flex-flow: column;
 `;
 
 const SearchFormBox = styled.div`
-
+    flex: 0 1 auto;
 `;
 
 const SearchResultBox = styled.div`
-
+    flex: 1 1 auto;
 `;
+
+const ResultInfoBox = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 
 // school department options to show on the dropdown select
 const fetchAllDeptOptions = async () => {
@@ -64,15 +77,27 @@ class SidePanel extends Component {
         deptOptions: [],
         levelOptions: [],
         courses: [],
+        isSearched: false,
+        isLoading: false,
     }
 
     onCourseSearch = async (dept, level, num) => {
         console.log(dept, level, num);
-        const courses = await fetchCourses('/course/search', dept, level, num);
 
         this.setState({
-            courses: courses
+            isLoading: true,
         })
+
+        const courses = await fetchCourses('/course/search', dept, level, num);
+
+        setTimeout(() => {
+            this.setState({
+                courses: courses,
+                isSearched: true,
+                isLoading: false,
+            })
+        }, 400)
+
 
         console.log(courses);
     }
@@ -93,10 +118,55 @@ class SidePanel extends Component {
     }
 
     render() {
+        let resultContent = undefined;
+        if (this.state.isLoading) {
+            // loading display
+            resultContent = (
+                <ResultInfoBox>
+                    <div className="result-msg">
+                        <div className="icon-box">
+                            <i className="big spinner loading icon"></i>
+                        </div>
+                        Searching...
+                    </div>
+                </ResultInfoBox>
+            );
+        } else if (!this.state.isSearched) {
+            // initial display
+            resultContent = (
+                <ResultInfoBox>
+                    <div className="result-msg">
+                        <div className="icon-box">
+                            <i className="big search icon"></i>
+                        </div>
+                        Find your courses!
+                    </div>
+                </ResultInfoBox>
+            );
+        } else if (this.state.isSearched && this.state.courses.length === 0) {
+            // searched but no result back
+            resultContent = (
+                <ResultInfoBox>
+                    <div className="result-msg">
+                        <div className="icon-box">
+                            <i className="big exclamation icon"></i>
+                        </div>
+                        No courses found!
+                    </div>
+                </ResultInfoBox>
+            );
+        } else {
+            resultContent = (
+                <CourseList
+                    courses={this.state.courses}
+                />
+            );
+        }
+
         return (
             <Container>
                 <SearchFormBox>
-                    <SearchForm 
+                    <SearchForm
                         onCourseSearch={this.onCourseSearch}
                         deptOptions={this.state.deptOptions}
                         levelOptions={this.state.levelOptions}
@@ -104,9 +174,7 @@ class SidePanel extends Component {
                 </SearchFormBox>
 
                 <SearchResultBox>
-                    <CourseList
-                        courses={this.state.courses}
-                    />
+                    {resultContent}
                 </SearchResultBox>
             </Container>
         );
