@@ -15,10 +15,12 @@ const Container = styled.div`
 
 const SearchFormBox = styled.div`
     flex: 0 1 auto;
+    padding: .5rem 1.5rem;
 `;
 
 const SearchResultBox = styled.div`
     flex: 1 1 auto;
+    padding: .5rem 1rem .5rem 1.5rem;
 `;
 
 const ResultInfoBox = styled.div`
@@ -98,9 +100,17 @@ class SidePanel extends Component {
                 isSearched: true,
                 isLoading: false,
             })
-        }, 400)
+        }, 300)
 
         console.log(courses);
+    }
+
+    onResetClick = (e) => {
+        e.preventDefault();
+        this.setState({
+            courses: [],
+            isSearched: false,
+        })
     }
 
     async componentDidMount() {
@@ -126,7 +136,7 @@ class SidePanel extends Component {
                 <ResultInfoBox>
                     <div className="result-msg">
                         <div className="icon-box">
-                            <i class="fas fa-spinner fa-spin fa-2x"></i>
+                            <i className="fas fa-spinner fa-spin fa-2x"></i>
                         </div>
                     </div>
                 </ResultInfoBox>
@@ -137,7 +147,7 @@ class SidePanel extends Component {
                 <ResultInfoBox>
                     <div className="result-msg">
                         <div className="icon-box">
-                            <i class="fas fa-search fa-2x"></i>
+                            <i className="fas fa-search fa-2x"></i>
                         </div>
                         Find your courses!
                     </div>
@@ -149,7 +159,7 @@ class SidePanel extends Component {
                 <ResultInfoBox>
                     <div className="result-msg">
                         <div className="icon-box">
-                            <i class="fas fa-exclamation fa-2x"></i>
+                            <i className="fas fa-exclamation fa-2x"></i>
                         </div>
                         No courses found!
                     </div>
@@ -157,9 +167,18 @@ class SidePanel extends Component {
             );
         } else {
             resultContent = (
-                <CourseList
-                    courses={this.state.courses}
-                />
+                <div>
+                    <div className="control-box">
+                        <a href="/" className="reset-link" onClick={this.onResetClick}>
+                            <i className="fas fa-redo-alt reset-icon"></i>
+                            Reset
+                        </a>
+
+                    </div>
+                    <CourseList
+                        courses={this.state.courses}
+                    />
+                </div>
             );
         }
 
