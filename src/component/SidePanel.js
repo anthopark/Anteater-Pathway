@@ -20,7 +20,7 @@ const SearchFormBox = styled.div`
 
 const SearchResultBox = styled.div`
     flex: 1 1 auto;
-    padding: .5rem 1rem .5rem 1.5rem;
+    padding: .5rem .1rem .5rem 1.5rem;
 `;
 
 const ResultInfoBox = styled.div`

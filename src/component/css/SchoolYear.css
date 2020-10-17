@@ -1,0 +1,17 @@
+.year-info-box {
+    display: inline-block;
+    border: .2rem solid #bbb;
+    border-radius: 1rem;
+    padding: .5rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.year-main-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.quarter-list-box {
+    display: flex;
+    justify-content: left;
+}

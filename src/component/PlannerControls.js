@@ -42,7 +42,9 @@ const customStyles = {
 
 const Container = styled.div`
     margin: 0 1.5rem;
+
     display: flex;
+    flex: 0 1 auto;
 `;
 
 const MiniFormBox = styled.div`
