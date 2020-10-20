@@ -12,20 +12,17 @@ const Container = styled.div`
 
 class PlannerPane extends Component {
 
-    state = {
-        schoolYears : [],
-    };
-
-
-
     render() {
         return (
             <Container>
                 <div className="year-list-box">
                     <SchoolYear
                         year={'20/21'}
-                        
+                        terms={null}
                     />
+                    {this.props.schoolYears.map( 
+                        ({year, terms}) => (<SchoolYear year={year} terms={terms} />))
+                    }
                 </div>
             </Container>
         );

@@ -11,11 +11,31 @@ const Container = styled.div`
 `;
 
 class MainPanel extends Component {
+
+    state = {
+        schoolYears: []
+    }
+
+    createSchoolYear = (year) => {
+        let schoolYears = this.state.schoolYears;
+        schoolYears.push({
+            year,
+            terms: []
+        })
+        this.setState({
+            schoolYears: schoolYears,
+        })
+    }
+
     render() {
         return (
             <Container>
-                <PlannerControls />
-                <PlannerPane />
+                <PlannerControls
+                    createSchoolYear={this.createSchoolYear}
+                />
+                <PlannerPane 
+                    schoolYears={this.state.schoolYears}
+                />
             </Container>
         );
     }

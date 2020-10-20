@@ -20,7 +20,7 @@ const customStyles = {
         ...provided,
         height: '3.5rem',
         fontSize: '1.6rem',
-        padding: '0 .6rem'
+        padding: '0 .6rem',
     }),
 
     input: (provided, state) => ({
@@ -59,8 +59,9 @@ const generateSchoolYear = (startYear, endYear) => {
 class PlannerControls extends Component {
 
     state = {
-        years: [],
-        addYearValue: null,
+        addYearOptions: [],
+        addYearValue: '20/21',
+        isYearValueValid: true,
         loadInputValue: '',
         saveInputValue: '',
     }
@@ -68,12 +69,27 @@ class PlannerControls extends Component {
     componentDidMount() {
         this.setState({
             // generate school years from 15/16 - 30/31
-            years: generateSchoolYear(15, 30)
+            addYearOptions: generateSchoolYear(15, 30)
         })
     }
 
     onYearSubmit = async (e) => {
         e.preventDefault();
+        if (!this.state.addYearValue) {
+            return this.setState({
+                isYearValueValid: false,
+            })
+        }
+
+        this.props.createSchoolYear(this.state.addYearValue);
+
+        // removing selected year from the dropdown options
+        let addYearOptions = this.state.addYearOptions;
+        addYearOptions = addYearOptions.filter(option => option.value !== this.state.addYearValue)
+        this.setState({
+            addYearOptions: addYearOptions,
+            addYearValue: null,
+        })
     }
 
     onLoadSubmit = async (e) => {
@@ -87,6 +103,7 @@ class PlannerControls extends Component {
     onYearDropdownChange = (e) => {
         this.setState({
             addYearValue: e.value,
+            isYearValueValid: true,
         })
     }
 
@@ -103,6 +120,16 @@ class PlannerControls extends Component {
     }
 
     render() {
+        let errorMessage;
+        if (!this.state.isYearValueValid) {
+            errorMessage = (
+                <div className="error-message-box">
+                    Please select an academic year
+                </div>
+            );
+        }
+
+
         return (
             <Container>
                 <div className="btn-box">
@@ -123,14 +150,22 @@ class PlannerControls extends Component {
                                         <div className="mini-form-userinput">
                                             <Select
                                                 styles={customStyles}
-                                                options={this.state.years}
+                                                value={
+                                                    {
+                                                        label: this.state.addYearValue,
+                                                        value: this.state.addYearValue
+                                                    }
+                                                }
+                                                options={this.state.addYearOptions}
                                                 onChange={this.onYearDropdownChange}
+                                                placeholder={"Select..."}
                                             />
                                         </div>
                                         <div className="mini-form-btn">
                                             <button className="btn mini-btn" type="submit">Add</button>
                                         </div>
                                     </div>
+                                    {errorMessage}
                                 </form>
                             </div>
 
