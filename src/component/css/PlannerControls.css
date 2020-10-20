@@ -6,9 +6,9 @@
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
-    border: .2rem solid #116fbd;
+    border: .2rem solid var(--button-color);
     border-radius: .5rem;
-    color:#116fbd;
+    color:var(--button-color);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -21,10 +21,17 @@
 }
 
 .ctrl-btn:hover, .ctrl-btn:focus, .ctrl-btn:active {
-    color: var(--text-color);
+    color: var(--color-white);
     outline: 0;
     box-shadow: 0 0 4rem 4rem var(--button-color) inset;
     border: .2rem solid var(--button-color);
+}
+
+.mini-form-box {
+    padding: 1rem 1.5rem;
+    background-color: #fff;
+    border: .2rem solid var(--button-color);
+    border-radius: 1rem;
 }
 
 .mini-form-field {
@@ -44,7 +51,7 @@
     border-radius: .5rem;
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--text-color);
+    color: var(--color-white);
     transition: all 0.2s;
 }
 

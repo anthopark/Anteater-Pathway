@@ -1,6 +1,20 @@
 .quarter-header {
-    padding: .7rem 1.5rem;
-    font-size: 1.5rem;
+    padding: 1.3rem 1.5rem .7rem 1.5rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.07rem;
     font-weight: 700;
     text-align: center;
+    border-bottom: .1rem solid #bbb;
+}
+
+.quarter-course-list {
+    padding: 1.5rem 1rem;
+}
+
+
+.total-unit-box {
+    padding: .7rem 1rem;
+    border-top: .1rem solid #bbb;
+    font-size: 1.4rem;
+    text-align: right;
 }

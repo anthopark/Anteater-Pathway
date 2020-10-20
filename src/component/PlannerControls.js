@@ -47,12 +47,6 @@ const Container = styled.div`
     flex: 0 1 auto;
 `;
 
-const MiniFormBox = styled.div`
-    padding: 1rem 1.5rem;
-    background-color: #fff;
-    border: .2rem solid var(--button-color);
-    border-radius: 1rem;
-`;
 
 const generateSchoolYear = (startYear, endYear) => {
     return Array(endYear - startYear + 1).fill().map((_, idx) => {
@@ -64,7 +58,12 @@ const generateSchoolYear = (startYear, endYear) => {
 
 class PlannerControls extends Component {
 
-    state = { years: [], selectedYear: null }
+    state = {
+        years: [],
+        addYearValue: null,
+        loadInputValue: '',
+        saveInputValue: '',
+    }
 
     componentDidMount() {
         this.setState({
@@ -85,6 +84,24 @@ class PlannerControls extends Component {
         e.preventDefault();
     }
 
+    onYearDropdownChange = (e) => {
+        this.setState({
+            addYearValue: e.value,
+        })
+    }
+
+    onLoadInputChange = (e) => {
+        this.setState({
+            loadInputValue: e.target.value,
+        })
+    }
+
+    onSaveInputChange = (e) => {
+        this.setState({
+            saveInputValue: e.target.value,
+        })
+    }
+
     render() {
         return (
             <Container>
@@ -100,13 +117,14 @@ class PlannerControls extends Component {
                         offset={[0, 10]}
                     >
                         <Popup.Content>
-                            <MiniFormBox>
+                            <div className="mini-form-box">
                                 <form id="year-form" onSubmit={this.onYearSubmit}>
                                     <div className="mini-form-field">
                                         <div className="mini-form-userinput">
                                             <Select
                                                 styles={customStyles}
                                                 options={this.state.years}
+                                                onChange={this.onYearDropdownChange}
                                             />
                                         </div>
                                         <div className="mini-form-btn">
@@ -114,7 +132,9 @@ class PlannerControls extends Component {
                                         </div>
                                     </div>
                                 </form>
-                            </MiniFormBox>
+                            </div>
+
+
                         </Popup.Content>
                     </Popup>
                 </div>
@@ -130,18 +150,25 @@ class PlannerControls extends Component {
                         offset={[0, 10]}
                     >
                         <Popup.Content>
-                            <MiniFormBox>
+                            <div className="mini-form-box">
                                 <form id="load-form" onSubmit={this.onLoadSubmit}>
                                     <div className="mini-form-field">
                                         <div className="mini-form-userinput">
-                                            <input className="form-input mini-form-input" placeholder="Plan Name" />
+                                            <input
+                                                className="form-input mini-form-input"
+                                                placeholder="Plan Name"
+                                                value={this.state.loadInputValue}
+                                                onChange={this.onLoadInputChange}
+                                            />
                                         </div>
                                         <div className="mini-form-btn">
                                             <button className="btn mini-btn" type="submit">Load</button>
                                         </div>
                                     </div>
                                 </form>
-                            </MiniFormBox>
+                            </div>
+
+
                         </Popup.Content>
                     </Popup>
                 </div>
@@ -157,18 +184,25 @@ class PlannerControls extends Component {
                         offset={[0, 10]}
                     >
                         <Popup.Content>
-                            <MiniFormBox>
+                            <div className="mini-form-box">
                                 <form id="save-form" onSubmit={this.onSaveSubmit}>
                                     <div className="mini-form-field">
                                         <div className="mini-form-userinput">
-                                            <input className="form-input mini-form-input" placeholder="Plan Name" />
+                                            <input
+                                                className="form-input mini-form-input"
+                                                placeholder="Plan Name"
+                                                value={this.state.saveInputValue}
+                                                onChange={this.onSaveInputChange}
+                                            />
                                         </div>
                                         <div className="mini-form-btn">
                                             <button className="btn mini-btn" type="submit">Save</button>
                                         </div>
                                     </div>
                                 </form>
-                            </MiniFormBox>
+                            </div>
+
+
                         </Popup.Content>
                     </Popup>
 

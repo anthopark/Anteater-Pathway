@@ -1,22 +1,22 @@
 .course-item {
     width: 26.7rem;
-    background-color: #f0f0ff;
-    border: .1rem solid #b8b8ff57;
+    background-color: var(--course-bg-color);
+    /* border: .1rem solid var(--course-border-color); */
     border-radius: 1rem;
     padding: .7rem;
     margin: 0;
-    box-shadow: 0 .3rem .5rem rgba(0,0,0,0.2);
+    box-shadow: 0 .3rem .5rem var(--shadow-color);
     transition: all 0.2s
   }
   
   .course-item:hover {
     transform: translateY(-.3rem);
-    box-shadow: 0 1rem 1rem rgba(0,0,0,0.2)
+    box-shadow: 0 1rem 1rem var(--shadow-color);
   }
   
   .course-item:active {
     transform: translateY(-1px);
-    box-shadow: 0 5px 1rem rgba(0,0,0,0.2);
+    box-shadow: 0 5px 1rem var(--shadow-color);
   }
   
   .course-header {
@@ -31,11 +31,11 @@
   }
   
   .course-num {
-    color: #1f2152;
+    color: var(--course-info-color);
   }
   
   .course-unit {
-    color: #1f2152;
+    color: var(--course-info-color);
   }
   
   .course-title-box {
@@ -46,5 +46,5 @@
   
   .course-title {
     font-size: 1.5rem;
-    color: #3a3b3a;
+    color: var(--course-title-color);
   }

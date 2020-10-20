@@ -15,7 +15,7 @@ class SchoolYear extends Component {
             <Container>
                 <div className="year-info-box">
                     <span className="year-main-text">
-                        {`20${this.props.year.split('/')[0]}/20${this.props.year.split('/')[1]}`} Academic Year</span>
+                        {`${this.props.year.split('/')[0]}-${this.props.year.split('/')[1]}`} Academic Year</span>
                 </div>
                 <div className="quarter-list-box">
                     <SingleQuarter

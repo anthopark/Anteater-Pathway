@@ -24,6 +24,7 @@ class PlannerPane extends Component {
                 <div className="year-list-box">
                     <SchoolYear
                         year={'20/21'}
+                        
                     />
                 </div>
             </Container>

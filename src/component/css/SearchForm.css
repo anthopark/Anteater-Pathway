@@ -56,7 +56,7 @@ button, button:focus, button:active {
 
 .btn.search-btn {
   width: 100%;
-  color: var(--text-color);
+  color: var(--color-white);
   height: 3.5rem;
   border-radius: 10rem;
   font-size: 1.7rem;
