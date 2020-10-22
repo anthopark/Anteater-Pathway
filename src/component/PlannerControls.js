@@ -60,16 +60,25 @@ class PlannerControls extends Component {
 
     state = {
         addYearOptions: [],
-        addYearValue: '20/21',
+        addYearValue: null,
         isYearValueValid: true,
         loadInputValue: '',
         saveInputValue: '',
     }
 
     componentDidMount() {
+
+        const defaultYear = '20/21'
+
         this.setState({
-            // generate school years from 15/16 - 30/31
-            addYearOptions: generateSchoolYear(15, 30)
+            addYearOptions: generateSchoolYear(15, 30),
+        })
+
+        // creating a default academic year
+        this.props.createSchoolYear(defaultYear);
+        let addYearOptions = generateSchoolYear(15, 30);
+        this.setState({
+            addYearOptions: addYearOptions.filter((options) => options.value != defaultYear)
         })
     }
 
@@ -81,11 +90,11 @@ class PlannerControls extends Component {
             })
         }
 
-        this.props.createSchoolYear(this.state.addYearValue);
+        this.props.createSchoolYear(this.state.addYearValue.value);
 
         // removing selected year from the dropdown options
         let addYearOptions = this.state.addYearOptions;
-        addYearOptions = addYearOptions.filter(option => option.value !== this.state.addYearValue)
+        addYearOptions = addYearOptions.filter(option => option.value !== this.state.addYearValue.value)
         this.setState({
             addYearOptions: addYearOptions,
             addYearValue: null,
@@ -102,7 +111,7 @@ class PlannerControls extends Component {
 
     onYearDropdownChange = (e) => {
         this.setState({
-            addYearValue: e.value,
+            addYearValue: e,
             isYearValueValid: true,
         })
     }
@@ -116,6 +125,12 @@ class PlannerControls extends Component {
     onSaveInputChange = (e) => {
         this.setState({
             saveInputValue: e.target.value,
+        })
+    }
+
+    onAddYearPopupClose = (e) => {
+        this.setState({
+            isYearValueValid: true,
         })
     }
 
@@ -140,6 +155,7 @@ class PlannerControls extends Component {
                                 type="button">Add School Year</button>
                         }
                         on={['click']}
+                        onClose={this.onAddYearPopupClose}
                         position="bottom left"
                         offset={[0, 10]}
                     >
@@ -150,15 +166,9 @@ class PlannerControls extends Component {
                                         <div className="mini-form-userinput">
                                             <Select
                                                 styles={customStyles}
-                                                value={
-                                                    {
-                                                        label: this.state.addYearValue,
-                                                        value: this.state.addYearValue
-                                                    }
-                                                }
                                                 options={this.state.addYearOptions}
                                                 onChange={this.onYearDropdownChange}
-                                                placeholder={"Select..."}
+                                                value={this.state.addYearValue}
                                             />
                                         </div>
                                         <div className="mini-form-btn">
