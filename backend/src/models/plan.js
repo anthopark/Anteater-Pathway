@@ -14,6 +14,7 @@ const planSchema = new mongoose.Schema({
             terms: [
                 [ 
                     {
+                        id: String,
                         dept: String,
                         num: String,
                         unit: String,

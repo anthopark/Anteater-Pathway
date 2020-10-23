@@ -5,30 +5,45 @@ import styled from 'styled-components';
 import SingleQuarter from './SingleQuarter';
 
 const Container = styled.div`
-    border: .3rem solid #000;
     min-width: 100rem;
+    margin-bottom: 1rem;
 `;
 
 class SchoolYear extends Component {
+
+
+    onTrashClick = () => {
+        this.props.removeSchoolYear(this.props.year)
+    }
+
     render() {
         return (
             <Container>
                 <div className="year-info-box">
                     <span className="year-main-text">
-                        {`${this.props.year.split('/')[0]}-${this.props.year.split('/')[1]}`} Academic Year</span>
+                        {`${this.props.year.split('/')[0]}-${this.props.year.split('/')[1]}`} Academic Year
+                    </span>
+                    <div className="trash-icon-box">
+                        <a href="#" className="trash-icon-link" onClick={this.onTrashClick}><i class="fas fa-trash-alt fa-lg"></i></a>
+                    </div>
                 </div>
                 <div className="quarter-list-box">
+
                     <SingleQuarter
-                        term={`Fall 20${this.props.year.split('/')[0]}`}
+                        header={`Fall 20${this.props.year.split('/')[0]}`}
+                        courses={this.props.terms[0]}
                     />
                     <SingleQuarter
-                        term={`Winter 20${this.props.year.split('/')[1]}`}
+                        header={`Winter 20${this.props.year.split('/')[1]}`}
+                        courses={this.props.terms[1]}
                     />
                     <SingleQuarter
-                        term={`Spring 20${this.props.year.split('/')[1]}`}
+                        header={`Spring 20${this.props.year.split('/')[1]}`}
+                        courses={this.props.terms[2]}
                     />
                     <SingleQuarter
-                        term={`Summer 20${this.props.year.split('/')[1]}`}
+                        header={`Summer 20${this.props.year.split('/')[1]}`}
+                        courses={this.props.terms[3]}
                     />
                 </div>
 

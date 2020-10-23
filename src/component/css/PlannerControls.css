@@ -34,6 +34,12 @@
     border-radius: 1rem;
 }
 
+.mini-form-error-message {
+    margin-top: .5rem;
+    font-size: 1.4rem;
+    color: rgb(250, 90, 90);
+}
+
 .mini-form-field {
     display: flex;
     align-items: center;

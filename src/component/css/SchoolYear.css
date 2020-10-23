@@ -7,11 +7,25 @@
 }
 
 .year-main-text {
+    display: inline-block;
+    margin-right: 1.5rem;
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+.trash-icon-box {
+    display: inline-block;
+    transform: translateY(-.2rem);
+}
+
+.trash-icon-link:link,
+.trash-icon-link:visited {
+    color: var(--color-black);
+    text-decoration: none;
 }
 
 .quarter-list-box {
     display: flex;
     justify-content: left;
+    align-items: flex-start;
 }

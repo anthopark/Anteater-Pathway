@@ -17,7 +17,7 @@ class PlannerPane extends Component {
             <Container>
                 <div className="year-list-box">
                     {this.props.schoolYears.map( 
-                        ({year, terms}) => (<SchoolYear year={year} terms={terms} />))
+                        ({year, terms}) => (<SchoolYear year={year} terms={terms} removeSchoolYear={this.props.removeSchoolYear} />))
                     }
                 </div>
             </Container>

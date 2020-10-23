@@ -48,39 +48,17 @@ const Container = styled.div`
 `;
 
 
-const generateSchoolYear = (startYear, endYear) => {
-    return Array(endYear - startYear + 1).fill().map((_, idx) => {
-        return {
-            label: `${startYear + idx}/${startYear + idx + 1}`, value: `${startYear + idx}/${startYear + idx + 1}`
-        }
-    })
-}
+
 
 class PlannerControls extends Component {
 
     state = {
-        addYearOptions: [],
         addYearValue: null,
         isYearValueValid: true,
         loadInputValue: '',
         saveInputValue: '',
     }
 
-    componentDidMount() {
-
-        const defaultYear = '20/21'
-
-        this.setState({
-            addYearOptions: generateSchoolYear(15, 30),
-        })
-
-        // creating a default academic year
-        this.props.createSchoolYear(defaultYear);
-        let addYearOptions = generateSchoolYear(15, 30);
-        this.setState({
-            addYearOptions: addYearOptions.filter((options) => options.value != defaultYear)
-        })
-    }
 
     onYearSubmit = async (e) => {
         e.preventDefault();
@@ -93,10 +71,7 @@ class PlannerControls extends Component {
         this.props.createSchoolYear(this.state.addYearValue.value);
 
         // removing selected year from the dropdown options
-        let addYearOptions = this.state.addYearOptions;
-        addYearOptions = addYearOptions.filter(option => option.value !== this.state.addYearValue.value)
         this.setState({
-            addYearOptions: addYearOptions,
             addYearValue: null,
         })
     }
@@ -131,6 +106,19 @@ class PlannerControls extends Component {
     onAddYearPopupClose = (e) => {
         this.setState({
             isYearValueValid: true,
+            addYearValue: null,
+        })
+    }
+
+    onLoadPopupClose = (e) => {
+        this.setState({
+            loadInputValue: '',
+        })
+    }
+
+    onSavePopupClose = (e) => {
+        this.setState({
+            saveInputValue: ''
         })
     }
 
@@ -138,7 +126,7 @@ class PlannerControls extends Component {
         let errorMessage;
         if (!this.state.isYearValueValid) {
             errorMessage = (
-                <div className="error-message-box">
+                <div className="mini-form-error-message">
                     Please select an academic year
                 </div>
             );
@@ -166,7 +154,7 @@ class PlannerControls extends Component {
                                         <div className="mini-form-userinput">
                                             <Select
                                                 styles={customStyles}
-                                                options={this.state.addYearOptions}
+                                                options={this.props.yearDropDownOptions}
                                                 onChange={this.onYearDropdownChange}
                                                 value={this.state.addYearValue}
                                             />

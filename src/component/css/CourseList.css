@@ -30,3 +30,7 @@
     overflow-y: auto;
     max-height: 65rem;
 }
+
+.course-item-box {
+    margin: 1rem 0;
+}

@@ -13,15 +13,19 @@ class CourseList extends Component {
             <Container>
                 <div className="course-list">
                     {this.props.courses.map((course, index) => (
-                        <CourseItem
-                            key={course._id}
-                            index={index}
-                            dept={course.dept}
-                            num={course.num}
-                            title={course.title}
-                            unit={course.unit}
-                            desc={course.desc}
-                        />
+
+                        <div className="course-item-box">
+                            <CourseItem
+                                key={course._id}
+                                index={index}
+                                dept={course.dept}
+                                num={course.num}
+                                title={course.title}
+                                unit={course.unit}
+                                desc={course.desc}
+                            />
+                        </div>
+
                     ))}
                 </div>
             </Container >
