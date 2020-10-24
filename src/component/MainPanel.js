@@ -58,12 +58,7 @@ class MainPanel extends Component {
         schoolYears.push({
             year,
             terms: [
-                [{
-                    dept: 'COMPSCI',
-                    num: '143A',
-                    title: 'OS',
-                    unit: '4'
-                }], [], [], []
+                [], [], [], []
             ]
         })
 

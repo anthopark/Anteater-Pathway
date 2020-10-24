@@ -29,6 +29,7 @@
 .course-list {
     overflow-y: auto;
     max-height: 65rem;
+
 }
 
 .course-item-box {

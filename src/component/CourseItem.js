@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
 import styled from 'styled-components';
 import './css/CourseItem.css';
 
 const Container = styled.div`
     width: 100%;
+
 `;
 
 class CourseItem extends Component {
@@ -21,8 +21,10 @@ class CourseItem extends Component {
                     </div>
                 </div>
             </Container>
-        );
+        )
     }
+
 }
+
 
 export default CourseItem;

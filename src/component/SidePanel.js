@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './css/SidePanel.css';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
-import CourseList from './CourseList';
+import CourseResult from './CourseResult';
 import courseApi from '../api/course-api';
 
 
@@ -175,7 +175,7 @@ class SidePanel extends Component {
                         </a>
 
                     </div>
-                    <CourseList
+                    <CourseResult
                         courses={this.state.courses}
                     />
                 </div>

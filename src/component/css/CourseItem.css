@@ -4,12 +4,12 @@
     /* border: .1rem solid var(--course-border-color); */
     border-radius: 1rem;
     padding: .7rem;
-    margin: 0;
+    margin-bottom: 1rem;
     box-shadow: 0 .3rem .5rem var(--shadow-color);
     transition: all 0.2s
   }
   
-  .course-item:hover {
+  /* .course-item:hover {
     transform: translateY(-.3rem);
     box-shadow: 0 1rem 1rem var(--shadow-color);
   }
@@ -18,7 +18,7 @@
     transform: translateY(-1px);
     box-shadow: 0 5px 1rem var(--shadow-color);
   }
-  
+   */
   .course-header {
     display: flex;
     justify-content: space-between;
