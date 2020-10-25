@@ -11,7 +11,7 @@ const Container = styled.div`
 
 class SchoolYear extends Component {
 
-
+    
     onTrashClick = () => {
         this.props.removeSchoolYear(this.props.year)
     }
@@ -24,7 +24,7 @@ class SchoolYear extends Component {
                         {`${this.props.year.split('/')[0]}-${this.props.year.split('/')[1]}`} Academic Year
                     </span>
                     <div className="trash-icon-box">
-                        <a href="#" className="trash-icon-link" onClick={this.onTrashClick}><i class="fas fa-trash-alt fa-lg"></i></a>
+                        <a href="#" className="trash-icon-link" onClick={this.onTrashClick}><i className="fas fa-trash-alt fa-lg"></i></a>
                     </div>
                 </div>
                 <div className="quarter-list-box">

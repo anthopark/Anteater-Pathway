@@ -80,13 +80,12 @@ class SidePanel extends Component {
     state = {
         deptOptions: [],
         levelOptions: [],
-        courses: [],
         isSearched: false,
         isLoading: false,
     }
 
     onCourseSearch = async (dept, level, num) => {
-        console.log(dept, level, num);
+        console.log(`Search with ${dept}, ${level}, ${num}`);
 
         this.setState({
             isLoading: true,
@@ -95,22 +94,23 @@ class SidePanel extends Component {
         const courses = await fetchCourses('/course/search', dept, level, num);
 
         setTimeout(() => {
+            // Reflect the search result to the App Data
+            this.props.updateSearchResult(courses);
+            
             this.setState({
-                courses: courses,
                 isSearched: true,
                 isLoading: false,
             })
-        }, 300)
-
-        console.log(courses);
+        }, 200)
     }
 
     onResetClick = (e) => {
         e.preventDefault();
         this.setState({
-            courses: [],
             isSearched: false,
         })
+
+        this.props.updateSearchResult([])
     }
 
     async componentDidMount() {
@@ -153,7 +153,7 @@ class SidePanel extends Component {
                     </div>
                 </ResultInfoBox>
             );
-        } else if (this.state.isSearched && this.state.courses.length === 0) {
+        } else if (this.state.isSearched && this.props.appData['search-result'].courses.length === 0) {
             // searched but no result back
             resultContent = (
                 <ResultInfoBox>
@@ -176,7 +176,7 @@ class SidePanel extends Component {
 
                     </div>
                     <CourseResult
-                        courses={this.state.courses}
+                        courses={this.props.appData['search-result'].courses}
                     />
                 </div>
             );
