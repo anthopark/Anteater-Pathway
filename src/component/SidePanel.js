@@ -153,7 +153,7 @@ class SidePanel extends Component {
                     </div>
                 </ResultInfoBox>
             );
-        } else if (this.state.isSearched && this.props.appData['search-result'].courses.length === 0) {
+        } else if (this.state.isSearched && this.props.appData.dndData['search-result'].length === 0) {
             // searched but no result back
             resultContent = (
                 <ResultInfoBox>
@@ -176,7 +176,7 @@ class SidePanel extends Component {
 
                     </div>
                     <CourseResult
-                        courses={this.props.appData['search-result'].courses}
+                        courses={this.props.appData.dndData['search-result']}
                     />
                 </div>
             );

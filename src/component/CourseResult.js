@@ -8,7 +8,7 @@ import './css/CourseList.css'
 // import CourseList from './CourseList';
 
 const Container = styled.div`
-    position: static;
+
 `;
 
 
@@ -17,7 +17,7 @@ class CourseResult extends Component {
         return (
             <Container>
                 <Droppable
-                    droppableId="course-result-list"
+                    droppableId="search-result"
                 >
                     {(provided) => (
                         <div

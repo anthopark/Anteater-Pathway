@@ -19,32 +19,125 @@ const panelConfig = [
     { resize: "stretch" }
 ]
 
+const sortSchoolYears = (schoolYears) => {
+    return schoolYears.sort((prev, next) => {
+        const prevYear = parseInt(prev.year.split('/')[0])
+        const nextYear = parseInt(next.year.split('/')[1])
+        if (prevYear < nextYear) return -1;
+        if (prevYear > nextYear) return 1;
+        else return 0
+    })
+}
+
+const sortAddYearOptions = (options) => {
+    return options.sort((prev, next) => {
+        const prevYear = parseInt(prev.value.split('/')[0])
+        const nextYear = parseInt(next.value.split('/')[1])
+        if (prevYear < nextYear) return -1;
+        if (prevYear > nextYear) return 1;
+        else return 0
+    })
+}
+
+const generateSchoolYear = (startYear, endYear) => {
+    return Array(endYear - startYear + 1).fill().map((_, idx) => {
+        return {
+            label: `${startYear + idx}/${startYear + idx + 1}`, value: `${startYear + idx}/${startYear + idx + 1}`
+        }
+    })
+}
+
 
 class App extends Component {
 
     state = {
-        'search-result': {
-            id: 'search-result', // droppable id
-            courses: []
-        }
+        // data for user degree plan
+        planData: [],
+
+        // data representing each droppable column
+        dndData: {
+            'search-result': []
+        },
+
+        // options for add year drop down selections
+        addYearOptions: generateSchoolYear(15, 30),
+
     }
 
     onDragEnd = (result) => {
 
     }
 
+    // gets called when search button is called
+    // 
     updateSearchResult = (courses) => {
-        this.setState({
-            'search-result': {
-                ...this.state['search-result'],
-                courses: courses,
-            }
-        })
-        console.log(this.state['search-result'].courses);
+
+        const newState = {
+            ...this.state
+        };
+
+        newState.dndData['search-result'] = courses;
+        this.setState(newState);
+
+        console.log(this.state);
     }
 
-    addSchoolYearTerms = (termId, plannedCourses) => {
+    //
+    addSchoolYear = (year, fCourses, wCourses, spCourses, suCourses) => {
+        // fCourses: array containing courses for fall quarter
+        let newState = {
+            ...this.state
+        };
 
+        // 'planData' and 'dndData' will share the same course array for data consistency. 
+        const faCourses = fCourses ? fCourses : []
+        const wiCourses = wCourses ? wCourses : []
+        const sprCourses = spCourses ? spCourses : []
+        const sumCourses = suCourses ? suCourses : []
+
+        newState.planData.push({
+            year: year,
+            terms: [
+                faCourses,
+                wiCourses,
+                sprCourses,
+                sumCourses,
+            ]
+        });
+
+        // creating the droppable columns
+        newState.dndData[year + 'f'] = faCourses;
+        newState.dndData[year + 'w'] = wiCourses;
+        newState.dndData[year + 'sp'] = sprCourses;
+        newState.dndData[year + 'su'] = sumCourses;
+
+
+        sortSchoolYears(newState.planData);
+        newState.addYearOptions = newState.addYearOptions.filter(option => option.value !== year);
+
+        this.setState(newState);
+    }
+
+    removeSchoolYear = (year) => {
+        const newState = {
+            ...this.state
+        };
+
+        newState.planData = newState.planData.filter(plan => plan.year !== year);
+        
+        newState.addYearOptions.push({
+            label: year, value: year
+        });
+
+        sortAddYearOptions(newState.addYearOptions);
+
+        // delete corresponding dnd column data
+        delete newState.dndData[year+'f'];
+        delete newState.dndData[year+'w'];
+        delete newState.dndData[year+'sp'];
+        delete newState.dndData[year+'su'];
+
+        this.setState(newState);
     }
 
     render() {
@@ -65,6 +158,8 @@ class App extends Component {
                             />
                             <MainPanel
                                 appData={this.state}
+                                addSchoolYear={this.addSchoolYear}
+                                removeSchoolYear={this.removeSchoolYear}
                             />
                         </PanelGroup>
                     </div>
