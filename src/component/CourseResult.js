@@ -16,9 +16,7 @@ class CourseResult extends Component {
     render() {
         return (
             <Container>
-                <Droppable
-                    droppableId="search-result"
-                >
+                <Droppable droppableId="search-result">
                     {(provided) => (
                         <div
                             className="course-list"

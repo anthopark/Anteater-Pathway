@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
+
 import CourseItem from './CourseItem';
 import './css/SingleQuarter.css';
 import styled from 'styled-components';
@@ -15,7 +17,7 @@ const computeTotalUnit = (courses) => {
     let result = 0;
 
     courses.forEach((course) => {
-
+        result += parseInt(course.unit);
     })
 
     return result;
@@ -23,13 +25,7 @@ const computeTotalUnit = (courses) => {
 }
 class SingleQuarter extends Component {
 
-    state = { totalUnit: 0, courseItems: [] };
 
-    componentDidMount = () => {
-        this.setState({
-            courseItems: this.props.courses
-        })
-    }
 
     render() {
         return (
@@ -37,24 +33,46 @@ class SingleQuarter extends Component {
                 <div className="quarter-header">
                     {this.props.header}
                 </div>
-                <div className="quarter-course-list">
-                    {this.state.courseItems.map((course) => {
-                        return (
-                            <div className="course-item-box">
-                                <CourseItem
-                                    key={course.id}
-                                    dept={course.dept}
-                                    num={course.num}
-                                    title={course.title}
-                                    unit={course.unit}
-                                />
-                            </div>
-                        );
-                    })
-                    }
-                </div>
+
+                <Droppable droppableId={this.props.drpblId}>
+                    {(provided) => (
+                        <div
+                            className="quarter-course-list"
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            {this.props.courses.map((course, index) =>
+                                <Draggable
+                                    key={course._id}
+                                    draggableId={course._id}
+                                    index={index}
+                                >
+                                    {(provided, snapshot) => (
+                                        <div
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            ref={provided.innerRef}
+                                        >
+                                            <CourseItem
+                                                key={course.id}
+                                                dept={course.dept}
+                                                num={course.num}
+                                                title={course.title}
+                                                unit={course.unit}
+                                            />
+                                        </div>
+                                    )}
+                                </Draggable>
+                            )}
+                            {provided.placeholder}
+                        </div>
+                    )}
+
+                </Droppable>
+
+
                 <div className="total-unit-box">
-                    Unit: {this.state.totalUnit}
+                    Unit: {computeTotalUnit(this.props.courses)}
                 </div>
             </Container>
         );

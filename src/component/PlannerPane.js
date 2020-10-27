@@ -6,8 +6,6 @@ import SchoolYear from './SchoolYear';
 const Container = styled.div`
     flex: 1 1 auto;
     padding: 2rem 2rem;
-
-
 `;
 
 class PlannerPane extends Component {

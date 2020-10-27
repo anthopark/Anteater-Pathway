@@ -11,7 +11,7 @@ const Container = styled.div`
 
 class SchoolYear extends Component {
 
-    
+
     onTrashClick = () => {
         this.props.removeSchoolYear(this.props.year)
     }
@@ -30,18 +30,22 @@ class SchoolYear extends Component {
                 <div className="quarter-list-box">
 
                     <SingleQuarter
+                        drpblId={this.props.year + 'f'}
                         header={`Fall 20${this.props.year.split('/')[0]}`}
                         courses={this.props.terms[0]}
                     />
                     <SingleQuarter
+                        drpblId={this.props.year + 'w'}
                         header={`Winter 20${this.props.year.split('/')[1]}`}
                         courses={this.props.terms[1]}
                     />
                     <SingleQuarter
+                        drpblId={this.props.year + 'sp'}
                         header={`Spring 20${this.props.year.split('/')[1]}`}
                         courses={this.props.terms[2]}
                     />
                     <SingleQuarter
+                        drpblId={this.props.year + 'su'}
                         header={`Summer 20${this.props.year.split('/')[1]}`}
                         courses={this.props.terms[3]}
                     />
