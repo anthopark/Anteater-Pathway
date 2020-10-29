@@ -102,7 +102,7 @@ class SidePanel extends Component {
                 isSearched: true,
                 isLoading: false,
             })
-        }, 200)
+        }, 150)
     }
 
     onResetClick = (e) => {
@@ -131,7 +131,7 @@ class SidePanel extends Component {
 
     render() {
         let resultContent = undefined;
-        
+
         if (this.state.isLoading) {
             // loading display
             resultContent = (
@@ -146,7 +146,7 @@ class SidePanel extends Component {
         } else if (
             !this.state.isSearched ||
             (this.props.appData['initial-result-num'] !== 0 &&
-            this.props.appData.dndData['search-result'].length === 0)
+                this.props.appData.dndData['search-result'].length === 0)
         ) {
             // initial display
             resultContent = (
@@ -156,6 +156,17 @@ class SidePanel extends Component {
                             <i className="fas fa-search fa-2x"></i>
                         </div>
                         Find your courses!
+                    </div>
+                </ResultInfoBox>
+            );
+        } else if (this.props.appData.isAlreadyPlanned && this.props.appData.dndData['search-result'].length === 0) {
+            resultContent = (
+                <ResultInfoBox>
+                    <div className="result-msg">
+                        <div className="icon-box">
+                            <i className="fas fa-exclamation fa-2x"></i>
+                        </div>
+                        You've had the course(s) planned!
                     </div>
                 </ResultInfoBox>
             );

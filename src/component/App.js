@@ -19,6 +19,14 @@ const panelConfig = [
     { resize: "stretch" }
 ]
 
+const isNewCourse = (courseId, dndData) => {
+    for (const drpblId in dndData) {
+        if (dndData[drpblId].some(course => course._id === courseId))
+            return false;
+    }
+    return true;
+}
+
 const reorderCourses = (courseList, startIndex, endIndex) => {
     const result = Array.from(courseList);
     const [removed] = result.splice(startIndex, 1);
@@ -88,15 +96,19 @@ class App extends Component {
 
         // number of resulting courses when searched initially
         'initial-result-num': 0,
+
+        // flag for searched course is already in plan
+        isAlreadyPlanned: false,
     }
 
     onDragEnd = (result) => {
-        const { source, destination } = result;
+        const { source, destination, draggableId } = result;
         console.log(source);
         console.log(destination);
 
         if (!destination) return;
         if (destination.droppableId === "search-result") return;
+        // return if destination already contains the course
 
         if (source.droppableId === destination.droppableId) {
             // moved from the same school term -> reorder
@@ -107,7 +119,7 @@ class App extends Component {
             )
             console.log(reorderedResult);
 
-            const newState = { ...this.state};
+            const newState = { ...this.state };
 
             newState.dndData[source.droppableId] = reorderedResult;
             this.setState(newState);
@@ -124,7 +136,7 @@ class App extends Component {
 
             console.log(movedResult);
 
-            const newState = { ...this.state};
+            const newState = { ...this.state };
 
             newState.dndData[source.droppableId] = movedResult[source.droppableId];
             newState.dndData[destination.droppableId] = movedResult[destination.droppableId];
@@ -147,9 +159,9 @@ class App extends Component {
                 break;
             }
         }
-        
+
         const newState = { ...this.state };
-        
+
         if (term === 'f') newState.planData[idx].terms[0] = courses;
         else if (term === 'w') newState.planData[idx].terms[1] = courses;
         else if (term === 'sp') newState.planData[idx].terms[2] = courses;
@@ -165,9 +177,19 @@ class App extends Component {
             ...this.state
         };
 
-        newState.dndData['search-result'] = courses;
-        newState['initial-result-num'] = courses.length;
-        
+        newState.isAlreadyPlanned = false;
+        const newCourses = courses.filter(course => {
+            if (isNewCourse(course._id, this.state.dndData))
+                return true;
+            else {
+                newState.isAlreadyPlanned = true;
+                return false;
+            }
+        })
+
+        newState.dndData['search-result'] = newCourses;
+        newState['initial-result-num'] = newCourses.length;
+
         this.setState(newState);
 
         console.log(this.state);
