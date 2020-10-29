@@ -80,12 +80,14 @@ class App extends Component {
 
         // data representing each droppable column
         dndData: {
-            'search-result': []
+            'search-result': [],
         },
 
         // options for add year drop down selections
         addYearOptions: generateSchoolYear(15, 30),
 
+        // number of resulting courses when searched initially
+        'initial-result-num': 0,
     }
 
     onDragEnd = (result) => {
@@ -164,6 +166,8 @@ class App extends Component {
         };
 
         newState.dndData['search-result'] = courses;
+        newState['initial-result-num'] = courses.length;
+        
         this.setState(newState);
 
         console.log(this.state);

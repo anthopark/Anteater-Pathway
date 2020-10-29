@@ -84,6 +84,7 @@ class SidePanel extends Component {
         isLoading: false,
     }
 
+
     onCourseSearch = async (dept, level, num) => {
         console.log(`Search with ${dept}, ${level}, ${num}`);
 
@@ -96,7 +97,7 @@ class SidePanel extends Component {
         setTimeout(() => {
             // Reflect the search result to the App Data
             this.props.updateSearchResult(courses);
-            
+
             this.setState({
                 isSearched: true,
                 isLoading: false,
@@ -130,6 +131,7 @@ class SidePanel extends Component {
 
     render() {
         let resultContent = undefined;
+        
         if (this.state.isLoading) {
             // loading display
             resultContent = (
@@ -141,7 +143,11 @@ class SidePanel extends Component {
                     </div>
                 </ResultInfoBox>
             );
-        } else if (!this.state.isSearched) {
+        } else if (
+            !this.state.isSearched ||
+            (this.props.appData['initial-result-num'] !== 0 &&
+            this.props.appData.dndData['search-result'].length === 0)
+        ) {
             // initial display
             resultContent = (
                 <ResultInfoBox>
@@ -165,6 +171,7 @@ class SidePanel extends Component {
                     </div>
                 </ResultInfoBox>
             );
+
         } else {
             resultContent = (
                 <div>
@@ -180,6 +187,7 @@ class SidePanel extends Component {
                     />
                 </div>
             );
+
         }
 
         return (
