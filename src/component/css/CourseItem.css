@@ -48,3 +48,9 @@
     font-size: 1.5rem;
     color: var(--course-title-color);
   }
+
+  .course-trash-icon-box {
+    display: inline-block;
+    margin-left: .5rem;
+    transform: translateY(-.2rem);
+  }

@@ -54,11 +54,12 @@ class SingleQuarter extends Component {
                                             ref={provided.innerRef}
                                         >
                                             <CourseItem
-                                                key={course.id}
+                                                key={course._id}
                                                 dept={course.dept}
                                                 num={course.num}
                                                 title={course.title}
                                                 unit={course.unit}
+                                                isPlanned={true}
                                             />
                                         </div>
                                     )}

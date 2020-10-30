@@ -21,6 +21,7 @@ const panelConfig = [
 
 const isNewCourse = (courseId, dndData) => {
     for (const drpblId in dndData) {
+        if (drpblId === 'search-result') continue;
         if (dndData[drpblId].some(course => course._id === courseId))
             return false;
     }
@@ -202,27 +203,21 @@ class App extends Component {
             ...this.state
         };
 
-        // 'planData' and 'dndData' will share the same course array for data consistency. 
-        const faCourses = fCourses ? fCourses : []
-        const wiCourses = wCourses ? wCourses : []
-        const sprCourses = spCourses ? spCourses : []
-        const sumCourses = suCourses ? suCourses : []
-
         newState.planData.push({
             year: year,
             terms: [
-                faCourses,
-                wiCourses,
-                sprCourses,
-                sumCourses,
+                fCourses ? fCourses : [],
+                wCourses ? wCourses : [],
+                spCourses ? spCourses : [],
+                suCourses ? suCourses : [],
             ]
         });
 
         // creating the droppable columns
-        newState.dndData[year + 'f'] = faCourses;
-        newState.dndData[year + 'w'] = wiCourses;
-        newState.dndData[year + 'sp'] = sprCourses;
-        newState.dndData[year + 'su'] = sumCourses;
+        newState.dndData[year + 'f'] = fCourses ? fCourses : [];
+        newState.dndData[year + 'w'] = wCourses ? wCourses : [];
+        newState.dndData[year + 'sp'] = spCourses ? spCourses : [];
+        newState.dndData[year + 'su'] = suCourses ? suCourses : [];
 
 
         sortSchoolYears(newState.planData);

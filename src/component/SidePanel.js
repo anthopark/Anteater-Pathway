@@ -144,7 +144,7 @@ class SidePanel extends Component {
                 </ResultInfoBox>
             );
         } else if (
-            !this.state.isSearched ||
+            !this.state.isSearched || // also checks if no result because of dragging out courses
             (this.props.appData['initial-result-num'] !== 0 &&
                 this.props.appData.dndData['search-result'].length === 0)
         ) {

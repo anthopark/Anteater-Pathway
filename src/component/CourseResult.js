@@ -41,7 +41,7 @@ class CourseResult extends Component {
                                                 num={course.num}
                                                 title={course.title}
                                                 unit={course.unit}
-                                                desc={course.desc}
+                                                isPlanned={false}
                                             />
                                         </div>
                                     )}
