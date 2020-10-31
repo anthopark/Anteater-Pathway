@@ -6,6 +6,7 @@ import PanelGroup from 'react-panelgroup';
 import styled from 'styled-components';
 import SidePanel from './SidePanel';
 import MainPanel from './MainPanel';
+import Navigation from './Navigation';
 
 
 const Container = styled.div`
@@ -258,7 +259,7 @@ class App extends Component {
 
             <Container>
                 <div className="header">
-                    <h1>Nav Bar</h1>
+                    <Navigation />
                 </div>
                 <DragDropContext
                     onDragEnd={this.onDragEnd}
