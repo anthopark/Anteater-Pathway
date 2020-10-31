@@ -14,12 +14,12 @@ const Container = styled.div`
 class MainPanel extends Component {
 
     componentDidMount() {
-        
+
         // creating a default academic year
         const defaultYear = '20/21'
         this.props.addSchoolYear(defaultYear);
     }
-    
+
     render() {
         return (
             <Container>
@@ -30,6 +30,7 @@ class MainPanel extends Component {
                 <PlannerPane
                     appData={this.props.appData}
                     removeSchoolYear={this.props.removeSchoolYear}
+                    removeCourse={this.props.removeCourse}
                 />
             </Container>
         );

@@ -14,8 +14,15 @@ class PlannerPane extends Component {
         return (
             <Container>
                 <div className="year-list-box">
-                    {this.props.appData.planData.map( 
-                        ({year, terms}, index) => (<SchoolYear key={index} year={year} terms={terms} removeSchoolYear={this.props.removeSchoolYear} />))
+                    {this.props.appData.planData.map(
+                        ({ year, terms }, index) => (
+                            <SchoolYear
+                                key={index}
+                                year={year}
+                                terms={terms}
+                                removeSchoolYear={this.props.removeSchoolYear}
+                                removeCourse={this.props.removeCourse}
+                            />))
                     }
                 </div>
             </Container>

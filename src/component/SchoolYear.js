@@ -33,21 +33,25 @@ class SchoolYear extends Component {
                         drpblId={this.props.year + 'f'}
                         header={`Fall 20${this.props.year.split('/')[0]}`}
                         courses={this.props.terms[0]}
+                        removeCourse={this.props.removeCourse}
                     />
                     <SingleQuarter
                         drpblId={this.props.year + 'w'}
                         header={`Winter 20${this.props.year.split('/')[1]}`}
                         courses={this.props.terms[1]}
+                        removeCourse={this.props.removeCourse}
                     />
                     <SingleQuarter
                         drpblId={this.props.year + 'sp'}
                         header={`Spring 20${this.props.year.split('/')[1]}`}
                         courses={this.props.terms[2]}
+                        removeCourse={this.props.removeCourse}
                     />
                     <SingleQuarter
                         drpblId={this.props.year + 'su'}
                         header={`Summer 20${this.props.year.split('/')[1]}`}
                         courses={this.props.terms[3]}
+                        removeCourse={this.props.removeCourse}
                     />
                 </div>
 

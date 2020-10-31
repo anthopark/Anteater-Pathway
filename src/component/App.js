@@ -248,6 +248,19 @@ class App extends Component {
         this.setState(newState);
     }
 
+    removeCourse = (drpblId, courseId) => {
+        const newState = {
+            ...this.state
+        };
+
+        const removedList = newState.dndData[drpblId].filter((course) => course._id !== courseId)
+        newState.dndData[drpblId] = removedList;
+
+
+        this.setState(newState);
+        this.syncPlanData(drpblId, removedList);
+    }
+
     render() {
         return (
 
@@ -268,6 +281,7 @@ class App extends Component {
                                 appData={this.state}
                                 addSchoolYear={this.addSchoolYear}
                                 removeSchoolYear={this.removeSchoolYear}
+                                removeCourse={this.removeCourse}
                             />
                         </PanelGroup>
                     </div>

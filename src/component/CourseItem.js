@@ -21,7 +21,11 @@ class CourseItem extends Component {
         if (this.props.isPlanned && this.state.isHovered) {
             trashIcon = (
                 <div className="course-trash-icon-box">
-                    <a href="#" className="trash-icon-link" onClick={() => console.log('delete course!')}><i className="fas fa-trash-alt fa-sm"></i></a>
+                    <a href="#"
+                        className="trash-icon-link"
+                        onClick={() => this.props.removeCourse(this.props.drpblId, this.props.id)}>
+                        <i className="fas fa-trash-alt fa-sm"></i>
+                    </a>
                 </div>
             );
         }
@@ -35,7 +39,7 @@ class CourseItem extends Component {
                 <div className="course-item">
                     <div className="course-header">
                         <div className="course-num">{`${this.props.dept} ${this.props.num}`}</div>
-                        <div className="course-unit">{`${this.props.unit} Unit`}{ trashIcon }</div>
+                        <div className="course-unit">{`${this.props.unit} Unit`}{trashIcon}</div>
                     </div>
                     <div className="course-title-box">
                         <div className="course-title">{this.props.title}</div>
