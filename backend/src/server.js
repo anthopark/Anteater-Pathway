@@ -4,6 +4,7 @@ require('dotenv').config();
 require('./db/mongoose');
 
 const courseRouter = require('./routers/course');
+const planRouter = require('./routers/plan');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -12,6 +13,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(courseRouter);
+app.use(planRouter);
 
 
 app.listen(port, () => {

@@ -4,6 +4,7 @@ const planSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
         minlength: 4,
         maxlength: 20,

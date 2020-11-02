@@ -261,6 +261,15 @@ class App extends Component {
         this.syncPlanData(drpblId, removedList);
     }
 
+    savePlan = () => {
+
+    }
+
+
+    loadPlan = () => {
+        
+    }
+
     render() {
         return (
 
