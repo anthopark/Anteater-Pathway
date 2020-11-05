@@ -9,22 +9,7 @@ const planSchema = new mongoose.Schema({
         minlength: 4,
         maxlength: 20,
     },
-    degreePlan: [
-        {
-            schoolYear: String,
-            terms: [
-                [ 
-                    {
-                        id: String,
-                        dept: String,
-                        num: String,
-                        unit: String,
-                        title: String,
-                    }
-                ]
-            ]
-        }
-    ]
+    degreePlan: []
 });
 
 const Plan = mongoose.model('Plan', planSchema);
