@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const panelConfig = [
     { size: 300, minSize: 0, maxSize: 300, resize: "dynamic" },
-    { resize: "stretch" }
+    { resize: "dynamic" }
 ]
 
 const isNewCourse = (courseId, dndData) => {
@@ -103,7 +103,7 @@ class App extends Component {
     }
 
     onDragEnd = (result) => {
-        const { source, destination, draggableId } = result;
+        const { source, destination } = result;
         console.log(source);
         console.log(destination);
 
@@ -196,7 +196,7 @@ class App extends Component {
         console.log(this.state);
     }
 
-    //
+
     addSchoolYear = (year, fCourses, wCourses, spCourses, suCourses) => {
         // fCourses: array containing courses for fall quarter
         let newState = {
@@ -266,8 +266,28 @@ class App extends Component {
     }
 
 
-    loadPlan = () => {
+    loadPlan = (planData) => {
         
+        const newState = {
+            planData: [],
+            dndData: {
+                'search-result': [],
+            },
+            addYearOptions: generateSchoolYear(15, 30),
+            'initial-result-num': 0,
+            isAlreadyPlanned: false,
+        }
+
+        planData.forEach((plan) => {
+            newState.dndData[`${plan.year}f`] = plan.terms[0]
+            newState.dndData[`${plan.year}w`] = plan.terms[1]
+            newState.dndData[`${plan.year}sp`] = plan.terms[2]
+            newState.dndData[`${plan.year}su`] = plan.terms[3]
+            newState.addYearOptions =
+                newState.addYearOptions.filter(option => option.value !== plan.year);
+        })
+
+        this.setState(newState);
     }
 
     render() {

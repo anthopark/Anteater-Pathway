@@ -24,6 +24,7 @@ class MainPanel extends Component {
         return (
             <Container>
                 <PlannerControls
+                    appData={this.props.appData}
                     createSchoolYear={this.props.addSchoolYear}
                     yearDropDownOptions={this.props.appData.addYearOptions}
                 />

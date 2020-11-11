@@ -3,6 +3,7 @@ import './css/PlannerControls.css';
 import styled from 'styled-components';
 import { Popup } from 'semantic-ui-react';
 import Select from 'react-select';
+import courseApi from '../api/course-api';
 
 const customStyles = {
     control: (provided, state) => ({
@@ -47,6 +48,21 @@ const Container = styled.div`
     flex: 0 1 auto;
 `;
 
+const savePlanData = async (userId, planData) => {
+    let response;
+    try {
+        response = await courseApi.post('/plan/save', {
+            userId,
+            degreePlan: planData,
+        });
+    } catch (e) {
+        console.log(e.toString());
+    }
+
+    return response;
+}
+
+
 
 
 
@@ -55,8 +71,12 @@ class PlannerControls extends Component {
     state = {
         addYearValue: null,
         isYearValueValid: true,
+        isSaveInputValueValid: true,
+        isLoadInputValueValid: true,
         loadInputValue: '',
         saveInputValue: '',
+        isSaved: false,
+        isSavedError: false,
     }
 
 
@@ -82,6 +102,37 @@ class PlannerControls extends Component {
 
     onSaveSubmit = async (e) => {
         e.preventDefault();
+
+        this.setState({
+            isSaved: false,
+            isSavedError: false,
+            isSaveInputValueValid: true,
+        })
+
+        if (!this.state.saveInputValue ||
+            this.state.saveInputValue.length > 20 ||
+            this.state.saveInputValue.length < 4)
+            return this.setState({
+                isSaveInputValueValid: false,
+            });
+
+
+        const response = await savePlanData(this.state.saveInputValue, this.props.appData.planData);
+
+        console.log(response);
+
+        if (response) {
+            this.setState({
+                isSaved: true
+            })
+        } else {
+            this.setState({
+                isSavedError: true
+            })
+        }
+
+        console.log(response);
+
     }
 
     onYearDropdownChange = (e) => {
@@ -118,7 +169,10 @@ class PlannerControls extends Component {
 
     onSavePopupClose = (e) => {
         this.setState({
-            saveInputValue: ''
+            saveInputValue: '',
+            isSaved: false,
+            isSavedError: false,
+            isSaveInputValueValid: true,
         })
     }
 
@@ -128,6 +182,27 @@ class PlannerControls extends Component {
             errorMessage = (
                 <div className="mini-form-error-message">
                     Please select an academic year
+                </div>
+            );
+        }
+
+        let saveMessage;
+        if (this.state.isSaved) {
+            saveMessage = (
+                <div className="mini-form-success-message">
+                    Successfully Saved!
+                </div>
+            );
+        } else if (this.state.isSavedError) {
+            saveMessage = (
+                <div className="mini-form-failed-message">
+                    Something went wrong!
+                </div>
+            );
+        } else if (!this.state.isSaveInputValueValid) {
+            saveMessage = (
+                <div className="mini-form-failed-message">
+                    Input 4~20 characters!
                 </div>
             );
         }
@@ -181,6 +256,7 @@ class PlannerControls extends Component {
                         on={['click']}
                         position="bottom left"
                         offset={[0, 10]}
+                        onClose={this.onLoadPopupClose}
                     >
                         <Popup.Content>
                             <div className="mini-form-box">
@@ -215,6 +291,7 @@ class PlannerControls extends Component {
                         on={['click']}
                         position="bottom left"
                         offset={[0, 10]}
+                        onClose={this.onSavePopupClose}
                     >
                         <Popup.Content>
                             <div className="mini-form-box">
@@ -232,6 +309,7 @@ class PlannerControls extends Component {
                                             <button className="btn mini-btn" type="submit">Save</button>
                                         </div>
                                     </div>
+                                    {saveMessage}
                                 </form>
                             </div>
 

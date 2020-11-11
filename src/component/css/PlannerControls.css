@@ -40,6 +40,20 @@
     color: rgb(250, 90, 90);
 }
 
+.mini-form-success-message {
+    margin-top: .5rem;
+    font-size: 1.6rem;
+    color: rgb(38, 172, 83);
+    text-align: center;
+}
+
+.mini-form-failed-message {
+    margin-top: .5rem;
+    font-size: 1.6rem;
+    color: rgb(250, 90, 90);
+    text-align: center;
+}
+
 .mini-form-field {
     display: flex;
     align-items: center;

@@ -20,13 +20,3 @@ app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 })
 
-// const Course = require('./models/course');
-
-// const testCourse = async () => {
-//     const course = await Course.find({
-//         dept: 'IN4MATX',
-//     });
-//     console.log(course);
-// }
-
-// testCourse()
