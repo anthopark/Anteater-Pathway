@@ -26,7 +26,7 @@ a {
   left: 0;
   display: block;
   border-radius: 28px;
-  background: rgba(255, 218, 150, 0.5);
+  background: #cbe4eeab;
   width: 40px;
   height: 40px;
   transition: all 0.3s ease;
@@ -57,7 +57,7 @@ a {
 
 .about-button:hover:before {
   width: 100%;
-  background: rgb(255, 218, 150);
+  background: #cbe4ee;
 }
 
 .about-button:hover svg {

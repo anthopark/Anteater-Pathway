@@ -302,7 +302,7 @@ class App extends Component {
                     onDragEnd={this.onDragEnd}
                 >
                     <div className="main">
-                        <PanelGroup panelWidths={panelConfig} borderColor="#EEEEEE" spacing={5}>
+                        <PanelGroup panelWidths={panelConfig} borderColor="#dbdbd9" spacing={3}>
                             <SidePanel
                                 appData={this.state}
                                 updateSearchResult={this.updateSearchResult}

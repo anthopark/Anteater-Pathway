@@ -42,7 +42,7 @@ const customStyles = {
 };
 
 const Container = styled.div`
-    margin: 0 1.5rem;
+    margin: 1rem 1.5rem 0rem 1.5rem;
 
     display: flex;
     flex: 0 1 auto;
