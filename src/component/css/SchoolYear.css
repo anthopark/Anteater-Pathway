@@ -4,6 +4,7 @@
     border-radius: 1rem;
     padding: .5rem 1.5rem;
     margin-bottom: 1rem;
+    color: #3a4241;
 }
 
 .year-main-text {
@@ -11,17 +12,22 @@
     margin-right: 1.5rem;
     font-size: 1.5rem;
     font-weight: 700;
+    color: #3a4241;
 }
 
 .trash-icon-box {
     display: inline-block;
     transform: translateY(-.2rem);
+    color: #3a4241;
 }
 
 .trash-icon-link:link,
 .trash-icon-link:visited {
     color: var(--color-black);
     text-decoration: none;
+    color: #3a4241;
+
+
 }
 
 .quarter-list-box {

@@ -2,9 +2,11 @@
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
+  color: #3a4241;
 }
 
 .icon-box {
+  
   margin-bottom: 1rem;
 }
 
@@ -13,12 +15,13 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: .3rem;
+
 }
 
 .control-box a,
 .control-box a:link {
   text-decoration: none;
-  color: #858080;
+  color: #3a4241;
   transition: all 0.2s;
 }
 
