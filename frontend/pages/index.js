@@ -6,6 +6,9 @@ import {
   RightPanelContainer,
 } from '@components/layout'
 
+
+import LeftSideBar from '@components/leftsidebar';
+
 export default function Home() {
   return (
     <>
@@ -13,9 +16,10 @@ export default function Home() {
         <title>Anteater Pathway</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <PageContainer>
         <LeftPanelContainer>
-          Left Panel
+          <LeftSideBar />
         </LeftPanelContainer>
         <MainPanelContainer>
           Main Panel
@@ -24,6 +28,7 @@ export default function Home() {
           Right Panel
         </RightPanelContainer>
       </PageContainer>
+
     </>
 
 
