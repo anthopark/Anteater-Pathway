@@ -12,7 +12,7 @@ export const LeftSideBarContainer = styled.div`
     width: 100%;
     height: 100%;
     background: linear-gradient(to right, ${sideBarBgColor1}, ${sideBarBgColor2});
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.7rem;
 `;
 
 export const SearchFormContainer = styled.div`
@@ -46,7 +46,7 @@ export const ThreeColumnGridBox = styled.div`
 
 
 export const FormTextInput = styled.input`
-    height: 3.5rem;
+    height: 3.2rem;
     padding: .5rem 1rem;
     margin: 0 0;
     border-radius: 10px;
