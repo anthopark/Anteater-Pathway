@@ -2,7 +2,7 @@ const express = require('express');
 const Plan = require('../models/plan');
 const router = new express.Router();
 const logRequest = require('../middleware/log');
-const { default: userEvent } = require('@testing-library/user-event');
+
 
 router.post('/api/plan/save', logRequest, async (req, res) => {
 

@@ -190,4 +190,6 @@ router.get('/api/course/dept/all', logRequest, async (req, res) => {
     }
 })
 
+router.get('/', (req, res) => { res.send('Running!') })
+
 module.exports = router;
