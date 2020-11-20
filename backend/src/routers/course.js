@@ -184,6 +184,7 @@ router.get('/api/course/dept/all', logRequest, async (req, res) => {
     try {
         let allDepts = []
         allDepts = await Course.find().distinct('dept');
+        console.log(allDepts);
         res.send(allDepts);
     } catch (e) {
         res.status(500).send(e.toString());

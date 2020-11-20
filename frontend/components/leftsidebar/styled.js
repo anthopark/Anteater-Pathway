@@ -18,7 +18,7 @@ export const LeftSideBarContainer = styled.div`
 export const SearchFormContainer = styled.div`
     width: 100%;
     background-color: ${searchFormBgColor};
-    padding: 1.5rem 1.7rem;
+    padding: 1.2rem 1.7rem;
     border-radius: 20px;
     font-size: 1.4rem;
 `;
@@ -34,7 +34,6 @@ export const FormFieldBox = styled.div`
 export const FormLabel = styled.label`
     display: inline-block;
     color: ${textColor};
-    font-weight: 700;
     margin-bottom: .3rem;
 `;
 
@@ -77,5 +76,28 @@ export const SearchButton = styled.button`
     border-radius: 10px;
     color: ${textColor};
     background: linear-gradient(135deg, #F08D61, #EA6226);
-
 `;
+
+export const dropdownStyle = {
+    control: (provided) => ({
+        ...provided,
+        borderRadius: '10px',
+        minHeight: '3.2rem',
+        height: '3.2rem',
+    }),
+
+    input: (provided) => ({
+        ...provided,
+        paddingBottom: '6px',
+    }),
+
+    placeholder: (provided) => ({
+        ...provided,
+        paddingBottom: '6px',
+    }),
+
+    singleValue: (provided) => ({
+        ...provided,
+        paddingBottom: '6px',
+    })
+}
