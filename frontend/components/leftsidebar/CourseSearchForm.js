@@ -10,20 +10,36 @@ import {
     FormTextInput,
     ThreeColumnGridBox,
     SearchButton,
+    FormErrorBox,
     dropdownStyle,
 } from './styled';
 
 const fetchAllDistinctDept = async () => {
-    let data = []
+    let allDepartments = []
     try {
         const response = await courseAPI.get('dept/all');
-        data = response.data;
+        allDepartments = response.data;
+        return allDepartments.map(dept => ({ label: dept, value: dept }));
     } catch (e) {
         console.log(e.toString());
         return []
     }
+}
 
-    return data.map(dept => ({ label: dept, value: dept}));
+const fetchCourses = async (dept, level, num) => {
+
+    const params = {
+        dept, level, num
+    }
+    let courses = []
+    try {
+        const response = await courseAPI.get('search', { params });
+        courses = response.data;
+        return courses;
+    } catch (e) {
+        console.log(e.toString());
+        return []
+    }
 }
 
 
@@ -40,7 +56,8 @@ const CourseSearchForm = () => {
     const [levelValue, setLevelValue] = useState();
     const [numValue, setNumValue] = useState('');
     const [deptOptions, setDeptOptions] = useState([]);
-    
+    const [isFormValid, setIsFormValid] = useState(true);
+
     useEffect(() => {
         const fetchDept = async () => {
             setDeptOptions(await fetchAllDistinctDept());
@@ -50,9 +67,25 @@ const CourseSearchForm = () => {
     }, [])
 
 
-    const onFormSubmit = (e) => {
+    const onFormSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submit!');
+
+        if (!deptValue) {
+            return setIsFormValid(false);
+        }
+
+        console.log(await fetchCourses(deptValue.value,
+            levelValue ? levelValue.value : undefined,
+            numValue));
+    }
+
+    let formErrorBox;
+    if (!isFormValid) {
+        formErrorBox = (
+            <FormErrorBox>
+                Please select a department
+            </FormErrorBox>
+        );
     }
 
     return (
@@ -67,8 +100,9 @@ const CourseSearchForm = () => {
                         value={deptValue}
                         placeholder='ex. ECON, HIST'
                         isClearable
-                        onChange={e => setDeptValue(e)}
+                        onChange={e => {setDeptValue(e); setIsFormValid(true)}}
                     />
+                    { formErrorBox }
                 </FormFieldBox>
                 <FormFieldBox>
                     <FormLabel>Level</FormLabel>

@@ -78,6 +78,18 @@ export const SearchButton = styled.button`
     background: linear-gradient(135deg, #F08D61, #EA6226);
 `;
 
+export const FormErrorBox = styled.div`
+    border: 1px solid #EB6C6C;
+    border-radius: 7px;
+    color: #D14646;
+    font-size: 1.4rem;
+    /* font-weight: 700; */
+    text-align: center;
+    background-color: #F6C8C8;
+    padding: .2rem;
+    margin-top: .6rem;
+`;
+
 export const dropdownStyle = {
     control: (provided) => ({
         ...provided,
