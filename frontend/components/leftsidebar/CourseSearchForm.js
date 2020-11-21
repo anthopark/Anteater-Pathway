@@ -1,6 +1,7 @@
 import Select from 'react-select';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
+import { AppContext } from '@components/AppContextProvider';
 import courseAPI from '@api/course';
 import {
     SearchFormContainer,
@@ -10,8 +11,8 @@ import {
     FormTextInput,
     ThreeColumnGridBox,
     SearchButton,
-    FormErrorBox,
     dropdownStyle,
+    dropdownErrorStyle,
 } from './styled';
 
 const fetchAllDistinctDept = async () => {
@@ -52,6 +53,8 @@ const CourseSearchForm = () => {
         { label: 'Other', value: 'Other' },
     ];
 
+    const { setSearchedCourses } = useContext(AppContext);
+
     const [deptValue, setDeptValue] = useState();
     const [levelValue, setLevelValue] = useState();
     const [numValue, setNumValue] = useState('');
@@ -73,19 +76,13 @@ const CourseSearchForm = () => {
         if (!deptValue) {
             return setIsFormValid(false);
         }
-
-        console.log(await fetchCourses(deptValue.value,
+        const result = await fetchCourses(
+            deptValue.value,
             levelValue ? levelValue.value : undefined,
-            numValue));
-    }
-
-    let formErrorBox;
-    if (!isFormValid) {
-        formErrorBox = (
-            <FormErrorBox>
-                Please select a department
-            </FormErrorBox>
-        );
+            numValue
+        )
+        
+        setSearchedCourses(result);
     }
 
     return (
@@ -95,14 +92,13 @@ const CourseSearchForm = () => {
                     <FormLabel>Department</FormLabel>
                     <Select
                         instanceId='dept'
-                        styles={dropdownStyle}
+                        styles={isFormValid ? dropdownStyle : dropdownErrorStyle}
                         options={deptOptions}
                         value={deptValue}
                         placeholder='ex. ECON, HIST'
                         isClearable
-                        onChange={e => {setDeptValue(e); setIsFormValid(true)}}
+                        onChange={e => { setDeptValue(e); setIsFormValid(true); }}
                     />
-                    { formErrorBox }
                 </FormFieldBox>
                 <FormFieldBox>
                     <FormLabel>Level</FormLabel>
