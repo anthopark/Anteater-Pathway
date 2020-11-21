@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 const sideBarBgColor1 = "#213CB2";
 const sideBarBgColor2 = "#0D2AAB";
-
-const textColor = "#EEEEEE";
-
+const textColor = "#EAEAEA";
 const searchFormBgColor = "#2850FF";
+const searchResultBgColor = "#122782";
+const clearButtonColor = "#95AFF4"
 
 
 export const LeftSideBarContainer = styled.div`
@@ -15,12 +15,15 @@ export const LeftSideBarContainer = styled.div`
     padding: 3rem 1.7rem;
 `;
 
+// CourseSearchForm
+
 export const SearchFormContainer = styled.div`
     width: 100%;
     background-color: ${searchFormBgColor};
     padding: 1.2rem 1.7rem;
     border-radius: 20px;
     font-size: 1.4rem;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, .6);
 `;
 
 export const SearchForm = styled.form`
@@ -28,7 +31,7 @@ export const SearchForm = styled.form`
 `;
 
 export const FormFieldBox = styled.div`
-    margin-bottom: .5rem;
+    margin-bottom: .3rem;
 `;
 
 export const FormLabel = styled.label`
@@ -76,28 +79,91 @@ export const SearchButton = styled.button`
     border-radius: 10px;
     color: ${textColor};
     background: linear-gradient(135deg, #F08D61, #EA6226);
+    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, .4);
+    transition: all .3s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 3px 3px 2px rgba(0, 0, 0, .3);
+    }
+
+    &:active {
+        transform: translateY(-1px);
+        box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, .4);
+    }
 `;
+
 
 export const dropdownStyle = {
     control: (provided) => ({
         ...provided,
         borderRadius: '10px',
-        minHeight: '3.2rem',
-        height: '3.2rem',
+        minHeight: '3.5rem',
+        height: '3.5rem',
     }),
 
-    input: (provided) => ({
+    clearIndicator: (provided) => ({
         ...provided,
-        paddingBottom: '6px',
+        paddingRight: '4px',
     }),
-
-    placeholder: (provided) => ({
-        ...provided,
-        paddingBottom: '6px',
-    }),
-
-    singleValue: (provided) => ({
-        ...provided,
-        paddingBottom: '6px',
-    })
 }
+
+export const dropdownErrorStyle = {
+    control: (provided) => ({
+        ...provided,
+        borderRadius: '10px',
+        minHeight: '3.5rem',
+        height: '3.5rem',
+        // border: '2px solid #EB6C6C',
+        boxShadow: '0px 1px 3px 4px #EB6C6C',
+    }),
+
+    clearIndicator: (provided) => ({
+        ...provided,
+        paddingRight: '4px',
+    }),
+}
+
+// SearchResultList
+
+export const ResultListContainer = styled.div`
+    margin-top: 3rem;
+    padding: 1rem 3.3rem 3rem;
+    background-color: ${searchResultBgColor};
+    border-radius: 20px;
+`;
+
+export const ClearButtonBox = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+`;
+
+export const ClearButton = styled.a`
+    display: inline-block;
+    padding-top: .1rem;
+    width: 3.6rem;
+    height: 1.7rem;
+    background-color: ${clearButtonColor};
+    border-radius: 100px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: ${textColor};
+    transition: all .3s;
+    cursor: pointer;
+
+    &:link,
+    &:visited {
+        text-decoration: none;
+    }
+
+    &:hover {
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0px);
+    }
+
+`;

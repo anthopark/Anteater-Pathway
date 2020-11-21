@@ -1,6 +1,7 @@
 import Select from 'react-select';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
+import { AppContext } from '@components/AppContextProvider';
 import courseAPI from '@api/course';
 import {
     SearchFormContainer,
@@ -11,19 +12,35 @@ import {
     ThreeColumnGridBox,
     SearchButton,
     dropdownStyle,
+    dropdownErrorStyle,
 } from './styled';
 
 const fetchAllDistinctDept = async () => {
-    let data = []
+    let allDepartments = []
     try {
         const response = await courseAPI.get('dept/all');
-        data = response.data;
+        allDepartments = response.data;
+        return allDepartments.map(dept => ({ label: dept, value: dept }));
     } catch (e) {
         console.log(e.toString());
         return []
     }
+}
 
-    return data.map(dept => ({ label: dept, value: dept}));
+const fetchCourses = async (dept, level, num) => {
+
+    const params = {
+        dept, level, num
+    }
+    let courses = []
+    try {
+        const response = await courseAPI.get('search', { params });
+        courses = response.data;
+        return courses;
+    } catch (e) {
+        console.log(e.toString());
+        return []
+    }
 }
 
 
@@ -36,11 +53,14 @@ const CourseSearchForm = () => {
         { label: 'Other', value: 'Other' },
     ];
 
+    const { setSearchedCourses } = useContext(AppContext);
+
     const [deptValue, setDeptValue] = useState();
     const [levelValue, setLevelValue] = useState();
     const [numValue, setNumValue] = useState('');
     const [deptOptions, setDeptOptions] = useState([]);
-    
+    const [isFormValid, setIsFormValid] = useState(true);
+
     useEffect(() => {
         const fetchDept = async () => {
             setDeptOptions(await fetchAllDistinctDept());
@@ -50,9 +70,19 @@ const CourseSearchForm = () => {
     }, [])
 
 
-    const onFormSubmit = (e) => {
+    const onFormSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submit!');
+
+        if (!deptValue) {
+            return setIsFormValid(false);
+        }
+        const result = await fetchCourses(
+            deptValue.value,
+            levelValue ? levelValue.value : undefined,
+            numValue
+        )
+        
+        setSearchedCourses(result);
     }
 
     return (
@@ -62,11 +92,12 @@ const CourseSearchForm = () => {
                     <FormLabel>Department</FormLabel>
                     <Select
                         instanceId='dept'
-                        styles={dropdownStyle}
+                        styles={isFormValid ? dropdownStyle : dropdownErrorStyle}
                         options={deptOptions}
                         value={deptValue}
                         placeholder='ex. ECON, HIST'
-                        onChange={e => setDeptValue(e)}
+                        isClearable
+                        onChange={e => { setDeptValue(e); setIsFormValid(true); }}
                     />
                 </FormFieldBox>
                 <FormFieldBox>
@@ -77,6 +108,7 @@ const CourseSearchForm = () => {
                         options={levelOptions}
                         value={levelValue}
                         placeholder='ex. Upper Div.'
+                        isClearable
                         onChange={e => setLevelValue(e)}
                     />
                 </FormFieldBox>

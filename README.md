@@ -1,33 +1,33 @@
-# Zot Planner
+# Anteater Pathway
 
-Drag n Drop UC Irvine degree planner. It is currently under development.
+Drag & Drop UC Irvine Degree Planner.
 
 ## Features
 
-* Browse courses by departments and course level (Ex, lower division, graduate, etc.)
-* Search courses by specifying departments and course
-* Add school year such as 20-21, which includes 4 quarters in it
-* Drag n Drop courses on the planner
+* Drag & drop course items to visually plan out path to graduation
+* Browse and search courses and view their information including  
+* Add multiple school years to complete entire degree plan
+* Responsive Design for Desktops and Tablets
 
 ## Getting Started
 
 This instruction is for setting up the project locally.
 
-Zot Planner is composed of two different parts. The root directory contains a React project, and the sub directory `backend` contains a Node.js/Express.js project. The React project at the root was created by `npx create-react-app` and the backend Node.js project was created by `npm init`. Additionally, the `course` directory contains the `Python` scripts for web scrapping the UCI course data and populating the `Mongodb Atlas DB`.
+Anteater Pathway is composed of two different parts. The `frondend` directory contains a Next.js (a React.js framework) for client application, and the directory `backend` contains a Node.js  server to handle requests from the client app for connection to MongoDB Atlas. The Next.js project at the root was created by `npx create-next-app` and the backend Node.js project was created by `npm init`.
 
 ### Prerequisites
 
-You will need `npm` command to run both frontend React project and the backend Node.js Project. This requires [Node.js](https://nodejs.org/en/) installation in your local machine.
+You need `npm` command to run both frontend Next.js project and the backend Node.js Project. This requires [Node.js](https://nodejs.org/en/) installation in your local machine.
 
-### The React Frontend Project
+### The Next.js Frontend Project
 
-The react app will by default run on `localhost:3000`
+The Next.js app will by default run on `localhost:3000`
 
 1. Clone the repository and change directory to the root.
 
 ``` shell
-git clone git@github.com:anthopark/Zot-Planner.git
-cd Zot-Planner
+git clone git@github.com:anthopark/Anteater-Pathway.git
+cd Anteater-Pathway/frontend
 ```
 
 2. Install npm dependencies.
@@ -41,7 +41,11 @@ npm install
 ``` shell
 npm start
 ```
+* If Nodemon is installed globally,
+``` shell
+npm run dev
+```
 
-### The Node.js Backend Project
+### The Node.js Backend Project Deployed on Heroku
 
-This backend project will try to establish connection to MongoDB Atlas using the `ATLAS_URI` environment variable in `.env`, which isn't currently shared in this repository. As in an early development stage, the frontend project can be run with dummy course data.  
+This backend project will try to establish connection to MongoDB Atlas with the `ATLAS_URI` environment variable in `.env`, which isn't shared in this repository. However, the Node.js server is currently deployed on the Heroku, listening to HTTP requests [here](https://anteater-pathway.herokuapp.com/). Note that the development environment for Next.js app is configured to make requests to this deployment.

@@ -1,13 +1,5 @@
 import Head from 'next/head'
-import { 
-  PageContainer,
-  LeftPanelContainer,
-  MainPanelContainer,
-  RightPanelContainer,
-} from '@components/layout'
-
-
-import LeftSideBar from '@components/leftsidebar';
+import App from '@components/App';
 
 export default function Home() {
   return (
@@ -17,21 +9,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageContainer>
-        <LeftPanelContainer>
-          <LeftSideBar />
-        </LeftPanelContainer>
-        <MainPanelContainer>
-          Main Panel
-        </MainPanelContainer>
-        <RightPanelContainer>
-          Right Panel
-        </RightPanelContainer>
-      </PageContainer>
+      <App />
+
 
     </>
-
-
-
   )
 }
