@@ -66,6 +66,7 @@ const CourseSearchForm = () => {
                         options={deptOptions}
                         value={deptValue}
                         placeholder='ex. ECON, HIST'
+                        isClearable
                         onChange={e => setDeptValue(e)}
                     />
                 </FormFieldBox>
@@ -77,6 +78,7 @@ const CourseSearchForm = () => {
                         options={levelOptions}
                         value={levelValue}
                         placeholder='ex. Upper Div.'
+                        isClearable
                         onChange={e => setLevelValue(e)}
                     />
                 </FormFieldBox>

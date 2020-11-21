@@ -82,22 +82,12 @@ export const dropdownStyle = {
     control: (provided) => ({
         ...provided,
         borderRadius: '10px',
-        minHeight: '3.2rem',
-        height: '3.2rem',
+        minHeight: '3.5rem',
+        height: '3.5rem',
     }),
 
-    input: (provided) => ({
+    clearIndicator: (provided) => ({
         ...provided,
-        paddingBottom: '6px',
+        paddingRight: '4px',
     }),
-
-    placeholder: (provided) => ({
-        ...provided,
-        paddingBottom: '6px',
-    }),
-
-    singleValue: (provided) => ({
-        ...provided,
-        paddingBottom: '6px',
-    })
 }
