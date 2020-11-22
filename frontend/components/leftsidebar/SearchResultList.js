@@ -3,6 +3,7 @@ import {
     ClearButtonBox,
     ClearButton
 } from './styled';
+
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect, useContext } from 'react';

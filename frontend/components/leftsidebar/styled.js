@@ -1,3 +1,4 @@
+import { text } from '@fortawesome/fontawesome-svg-core';
 import styled from 'styled-components';
 
 const sideBarBgColor1 = "#213CB2";
@@ -9,10 +10,18 @@ const clearButtonColor = "#95AFF4"
 
 
 export const LeftSideBarContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     background: linear-gradient(to right, ${sideBarBgColor1}, ${sideBarBgColor2});
     padding: 3rem 1.7rem;
+`;
+
+// Logo
+export const LogoContainer = styled.div`
+    background-color: ${searchResultBgColor};
+    padding: 3rem;
 `;
 
 // CourseSearchForm
@@ -125,7 +134,6 @@ export const dropdownErrorStyle = {
 }
 
 // SearchResultList
-
 export const ResultListContainer = styled.div`
     margin-top: 3rem;
     padding: 1rem 3.3rem 3rem;
@@ -165,5 +173,52 @@ export const ClearButton = styled.a`
     &:active {
         transform: translateY(0px);
     }
-
 `;
+
+// AdditionalLinks
+
+export const AdditionalLinksContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    width: 100%;
+    padding-left: 3.2rem;
+`;
+
+export const LinkBox = styled.div`
+    margin-top: 1.2rem;
+`;
+
+export const IconLink = styled.a`
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    cursor: pointer;
+
+    &:link,
+    &:visited {
+        text-decoration: none;
+    }
+`;
+
+
+export const SvgImage = styled.img`
+    display: inline-block;
+    width: 3.3rem;
+`;
+
+export const LinkText = styled.span`
+    color: ${textColor};
+    font-size: 1.8rem;
+    letter-spacing: .4rem;
+    padding-left: ${({paddingLeft}) => paddingLeft};
+`;
+
+
+export const gitHubIconStyle = {
+    display: 'inline-block',
+    fontSize: '3.3rem',
+    color: '#EAEAEA',
+}
