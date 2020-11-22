@@ -16,7 +16,7 @@ const AdditionalLinks = () => {
             <LinkBox>
                 <IconLink href="https://github.com/anthopark/Anteater-Pathway" target="_blank">
                     <FontAwesomeIcon icon={faGithub} style={gitHubIconStyle} />
-                    <LinkText paddingLeft={'1.5rem'}>
+                    <LinkText paddingLeft={'1.7rem'}>
                         Contribute
                     </LinkText>
                 </IconLink>
@@ -24,7 +24,7 @@ const AdditionalLinks = () => {
             <LinkBox>
                 <IconLink href="/">
                     <SvgImage src='./bobame.svg' />
-                    <LinkText paddingLeft={'2.3rem'}>
+                    <LinkText paddingLeft={'2.5rem'}>
                         Boba me
                     </LinkText>
                 </IconLink>

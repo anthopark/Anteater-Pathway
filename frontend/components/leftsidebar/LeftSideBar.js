@@ -4,7 +4,7 @@ import {
 
 import Logo from './Logo';
 import CourseSearchForm from './CourseSearchForm';
-import SearchResultList from './SearchResultList';
+import SearchResult from './SearchResult';
 import AdditionalLinks from './AdditionalLinks';
 
 export const LeftSideBar = () => {
@@ -13,7 +13,7 @@ export const LeftSideBar = () => {
         <LeftSideBarContainer>
             <Logo />
             <CourseSearchForm />
-            <SearchResultList />
+            <SearchResult />
             <AdditionalLinks />
         </LeftSideBarContainer>
 
