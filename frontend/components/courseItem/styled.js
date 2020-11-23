@@ -12,9 +12,10 @@ export const CourseItemContainer = styled.div`
     background-color: ${itemBgColor};
     height: 3.6rem;
     min-height: 3.6rem;
-    /* padding: 0 2rem; */
     margin-bottom: .8rem;
-    margin-right: .8rem;
+    // apply margin right only when listed on search result
+    // due to spacing with scroll bar
+    margin-right: ${({searchList}) => searchList ? '.8rem' : '0rem' };
 
     font-size: 1.6rem;
     color: ${courseTextColor};

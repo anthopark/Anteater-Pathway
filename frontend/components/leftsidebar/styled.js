@@ -33,7 +33,7 @@ export const SearchFormContainer = styled.div`
     background-color: ${searchFormBgColor};
     padding: 1.2rem 1.7rem;
     border-radius: 20px;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, .6);
 `;
 
@@ -42,7 +42,7 @@ export const SearchForm = styled.form`
 `;
 
 export const FormFieldBox = styled.div`
-    margin-bottom: .3rem;
+    margin-bottom: .4rem;
 `;
 
 export const FormLabel = styled.label`
@@ -184,7 +184,7 @@ export const ResultMessageBox = styled.div`
     align-items: center;
     padding-left: .2rem;
     color: ${textColor};
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: .1rem;
 `;

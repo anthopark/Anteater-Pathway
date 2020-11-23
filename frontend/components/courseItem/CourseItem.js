@@ -7,7 +7,7 @@ import {
 export const CourseItem = (props) => {
     return (
         <>
-            <CourseItemContainer>
+            <CourseItemContainer searchList={props.searchList}>
                 <DeptText>
                     {props.dept}
                 </DeptText>

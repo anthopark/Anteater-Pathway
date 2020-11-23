@@ -1,4 +1,4 @@
-import { faRedo, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faRedo, faSearch, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '@components/AppContextProvider';
@@ -39,7 +39,7 @@ const SearchResultList = () => {
         // no found courses
         searchResultMessage = (
             <ResultMessageBox>
-                <FontAwesomeIcon icon={faSearch} />
+                <FontAwesomeIcon icon={faExclamationCircle} style={{fontSize: '1.7rem'}} />
                 <ResultMessageText>
                     No courses found
                 </ResultMessageText>
@@ -60,6 +60,7 @@ const SearchResultList = () => {
                 dept={course.dept}
                 num={course.num}
                 unit={course.unit}
+                searchList={true}
             />
         ));
     }
@@ -69,7 +70,9 @@ const SearchResultList = () => {
             <ClearButtonBox>
                 { clearButton }
             </ClearButtonBox>
+            
             { searchResultMessage }
+            
             <ResultListBox>
                 { resultList }
             </ResultListBox>
