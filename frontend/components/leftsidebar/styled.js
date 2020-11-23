@@ -49,6 +49,7 @@ export const FormLabel = styled.label`
     display: inline-block;
     color: ${textColor};
     margin-bottom: .3rem;
+    letter-spacing: .1rem;
 `;
 
 export const ThreeColumnGridBox = styled.div`
@@ -178,7 +179,23 @@ export const ClearButton = styled.a`
     }
 `;
 
-export const ResultListContainer = styled.div`
+export const ResultMessageBox = styled.div`
+    display: flex;
+    align-items: center;
+    padding-left: .2rem;
+    color: ${textColor};
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: .1rem;
+`;
+
+export const ResultMessageText = styled.span`
+    display: inline-block;
+    margin-left: 1rem;
+`;
+
+
+export const ResultListBox = styled.div`
     display: flex;
     flex-direction: column;
     max-height: 44rem;

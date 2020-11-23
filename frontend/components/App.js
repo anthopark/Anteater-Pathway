@@ -1,11 +1,15 @@
 import AppContextProvider from '@components/AppContextProvider';
+import LeftSideBar from '@components/leftsidebar';
+import MainPanel from '@components/mainPanel';
+
 import {
   PageContainer,
   LeftPanelContainer,
   MainPanelContainer,
   RightPanelContainer,
 } from '@components/layout'
-import LeftSideBar from '@components/leftsidebar';
+
+
 
 const App = () => {
   return (
@@ -15,7 +19,7 @@ const App = () => {
           <LeftSideBar />
         </LeftPanelContainer>
         <MainPanelContainer>
-          Main Panel
+          <MainPanel />
         </MainPanelContainer>
         <RightPanelContainer>
           Right Panel

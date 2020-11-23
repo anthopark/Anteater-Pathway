@@ -6,7 +6,7 @@ export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
     const [appData, setAppData] = useState({});
-    const [searchedCourses, setSearchedCourses] = useState([]);
+    const [searchedCourses, setSearchedCourses] = useState(null);
     
     return ( 
         <AppContext.Provider value={{

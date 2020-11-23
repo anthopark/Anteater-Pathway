@@ -22,7 +22,7 @@ const AdditionalLinks = () => {
                 </IconLink>
             </LinkBox>
             <LinkBox>
-                <IconLink href="/">
+                <IconLink href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LTKH3TMC5ZLS8&item_name=Please+help+me+pay+for+the+Anteater+Pathway+server+%3AD&currency_code=USD&amount=2" target="_blank">
                     <SvgImage src='./bobame.svg' />
                     <LinkText paddingLeft={'2.5rem'}>
                         Boba me

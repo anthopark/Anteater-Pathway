@@ -1,4 +1,4 @@
-import { faRedo } from '@fortawesome/free-solid-svg-icons';
+import { faRedo, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '@components/AppContextProvider';
@@ -9,8 +9,11 @@ import {
     SearchResultContainer,
     ClearButtonBox,
     ClearButton,
-    ResultListContainer,
+    ResultListBox,
+    ResultMessageBox,
+    ResultMessageText,
 } from './styled';
+
 
 
 
@@ -18,31 +21,58 @@ const SearchResultList = () => {
 
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
 
+    let clearButton;
+    let resultList;
+    let searchResultMessage;
+
+    if (!searchedCourses) {
+        // haven't searched
+        searchResultMessage = (
+            <ResultMessageBox>
+                <FontAwesomeIcon icon={faSearch} style={{fontSize: '1.7rem'}} />
+                <ResultMessageText>
+                    Find your courses
+                </ResultMessageText>
+            </ResultMessageBox>
+        );
+    } else if (Array.isArray(searchedCourses) && searchedCourses.length === 0) {
+        // no found courses
+        searchResultMessage = (
+            <ResultMessageBox>
+                <FontAwesomeIcon icon={faSearch} />
+                <ResultMessageText>
+                    No courses found
+                </ResultMessageText>
+            </ResultMessageBox>
+        );
+    } else if (Array.isArray(searchedCourses) && searchedCourses.length !== 0) {
+        // courses found
+        clearButton = (
+            <ClearButton onClick={() => setSearchedCourses(null)}>
+                <FontAwesomeIcon icon={faRedo} />
+            </ClearButton>
+        );
+
+        resultList = searchedCourses.map((course, index) => (
+            <CourseItem
+                key={index}
+                id={course._id}
+                dept={course.dept}
+                num={course.num}
+                unit={course.unit}
+            />
+        ));
+    }
+
     return (
         <SearchResultContainer>
             <ClearButtonBox>
-                {searchedCourses.length !== 0 ?
-                    (
-                        <ClearButton onClick={() => setSearchedCourses([])}>
-                            <FontAwesomeIcon icon={faRedo} />
-                        </ClearButton>
-                    ) : undefined
-                }
-
+                { clearButton }
             </ClearButtonBox>
-            <ResultListContainer>
-                {searchedCourses.map((course, index) => (
-                    <CourseItem
-                        key={index}
-                        id={course._id}
-                        dept={course.dept}
-                        num={course.num}
-                        unit={course.unit}
-                    />
-                ))}
-            </ResultListContainer>
-
-
+            { searchResultMessage }
+            <ResultListBox>
+                { resultList }
+            </ResultListBox>
         </SearchResultContainer>
     );
 }
