@@ -15,8 +15,6 @@ import {
 } from './styled';
 
 
-
-
 const SearchResultList = () => {
 
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);

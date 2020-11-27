@@ -1,4 +1,4 @@
-import MainControls from './MainControls';
+import MainControls from './mainControls/';
 
 import {
     MainPanelContainer,

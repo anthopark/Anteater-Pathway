@@ -69,7 +69,7 @@ export const FormTextInput = styled.input`
     transition: .3s;
     
     &:focus {
-        border: 2px solid dodgerblue; 
+        border: 1px solid dodgerblue; 
     }
 
     ::placeholder {
