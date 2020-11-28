@@ -1,30 +1,11 @@
 import AppContextProvider from '@components/AppContextProvider';
-import LeftSideBar from '@components/leftsidebar';
-import MainPanel from '@components/mainPanel';
-
-import {
-  PageContainer,
-  LeftPanelContainer,
-  MainPanelContainer,
-  RightPanelContainer,
-} from '@components/layout'
-
+import Page from '@components/Page';
 
 
 const App = () => {
   return (
     <AppContextProvider>
-      <PageContainer>
-        <LeftPanelContainer>
-          <LeftSideBar />
-        </LeftPanelContainer>
-        <MainPanelContainer>
-          <MainPanel />
-        </MainPanelContainer>
-        <RightPanelContainer>
-          Right Panel
-        </RightPanelContainer>
-      </PageContainer>
+      <Page />
     </AppContextProvider>
   );
 }
