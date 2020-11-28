@@ -13,11 +13,27 @@ import {
 } from '@components/layout';
 
 const Page = () => {
-
+    const { planData, setPlanData } = useContext(AppContext);
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
+
+    console.log(planData);
 
     const onDragEnd = (result) => {
         const { source, destination } = result;
+
+        if (!destination) return;
+        if (destination.droppableId === 'search-result') return;
+        
+        if (source.droppableId === 'search-result') {
+            // moved from search result to a quarter
+
+            // update plannedCourses
+
+        } else if (source.droppableId !== 'search-result' && source.droppableId !== destination.droppableId) {
+            // moved from one quarter to the other
+        }else if (source.droppableId === destination.droppableId) {
+            // moved to the same quarter
+        }
     };
 
     return (
@@ -28,7 +44,7 @@ const Page = () => {
                 <LeftPanelContainer>
                     <LeftSideBar />
                 </LeftPanelContainer>
-                
+
                 <MainPanelContainer>
                     <MainPanel />
                 </MainPanelContainer>

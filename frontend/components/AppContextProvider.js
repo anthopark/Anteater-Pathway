@@ -1,17 +1,18 @@
-import { createContext } from "react";
-import { useState } from 'react';
-
+import { createContext, useState } from 'react';
 
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
-    const [appData, setAppData] = useState({});
+    const [planData, setPlanData] = useState([]);
+    const [plannedCourses, setPlannedCourses] = useState([]);
     const [searchedCourses, setSearchedCourses] = useState(null);
     const [yearOptions, setYearOptions] = useState(null);
     
-    return ( 
+    
+    return (
         <AppContext.Provider value={{
-            appData, setAppData,
+            planData, setPlanData,
+            plannedCourses, setPlannedCourses,
             searchedCourses, setSearchedCourses,
             yearOptions, setYearOptions,
         }}>

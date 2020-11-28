@@ -22,7 +22,9 @@ export const InnerBackgroundContainer = styled.div`
     
 `;
 
-// MainControls
+export const AcademicYearsBox = styled.div`
+
+`;
 
 
 

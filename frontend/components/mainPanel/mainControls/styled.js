@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Popup from 'reactjs-popup';
 
 const buttonColor = "#2850FF";
@@ -114,11 +114,18 @@ export const TextInput = styled.input`
     border: transparent;
     padding: .5rem 1rem;
     height: 3.5rem;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .4);
+    ${({isFormValid}) => (
+        isFormValid ?
+        `box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .4);`
+        :
+        `box-shadow: 0px 1px 3px 2px #EB6C6C;`
+    )}
+    
     transition: all .2s;
 
     &:focus {
-        border: 1px solid dodgerblue; 
+        border: 1px solid dodgerblue;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .4); 
     }
 
     ::placeholder {

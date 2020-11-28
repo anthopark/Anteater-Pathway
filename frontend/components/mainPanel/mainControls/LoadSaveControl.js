@@ -16,13 +16,13 @@ const LoadSaveControl = () => {
     const onFormSubmit = (e) => {
         e.preventDefault();
 
-        if (!inputValue) return setIsFormValid(false);
-
         if (isLoadSelected && currentButton === 'load') {
             // Load
+            if (!inputValue) return setIsFormValid(false);
             console.log('load', inputValue);
         } else if (!isLoadSelected && currentButton === 'save') {
             // Save
+            if (!inputValue) return setIsFormValid(false);
             console.log('save', inputValue);
         }
     }
@@ -32,10 +32,15 @@ const LoadSaveControl = () => {
             <TextInput
                 type="text"
                 value={inputValue}
+                isFormValid={isFormValid}
                 onChange={(e) => {
                     setInputValue(e.target.value);
                     setIsFormValid(true);
                 }}
+                onClick={(e) => {
+                    setIsFormValid(true);
+                }}
+                placeholder="ex. student ID"
             />
             <div></div>
             <ToggleButtonContainer>
