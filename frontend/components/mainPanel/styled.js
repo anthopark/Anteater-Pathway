@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Popup from 'reactjs-popup';
+
 
 const backgroundLGStartColor = "#F6F9FF";
 const backgroundLGEndColor = "#EDF1FC"

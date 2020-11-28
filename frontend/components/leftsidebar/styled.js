@@ -126,8 +126,8 @@ export const dropdownErrorStyle = {
         borderRadius: '10px',
         minHeight: '3.5rem',
         height: '3.5rem',
-        // border: '2px solid #EB6C6C',
-        boxShadow: '0px 0px 3px 3px #EB6C6C',
+        border: 'transparent',
+        boxShadow: '0px 0px 4px 3px #EB6C6C',
     }),
 
     clearIndicator: (provided) => ({
