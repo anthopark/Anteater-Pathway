@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const textColor = "#2B3C86";
+const removeButtonColor = "#95AFF4";
 
 export const AcademicYearContainer = styled.div`
     width: 100%;
@@ -10,14 +11,48 @@ export const AcademicYearContainer = styled.div`
 
 
 export const AcademicYearHeader = styled.div`
-
+    display: flex;
+    align-items: center;
 `;
 
 export const YearText = styled.span`
-    font-size: 2.6rem;
+    font-size: 3.2rem;
     font-weight: 700;
     letter-spacing: .2rem;
     color: ${textColor};
+`;
+
+export const RemoveButton = styled.a`
+
+    width: 3.3rem;
+    height: 2.8rem;
+    margin-left: 1rem;
+    margin-top: .5rem;
+    padding: .4rem 1rem;
+    display: inline-block;
+    background-color: ${removeButtonColor};
+    color: #EAEAEA;
+    text-align: center;
+    cursor: pointer;
+    
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 10px;
+    
+
+
+    &:link,
+    &:visited {
+        text-decoration: none;
+    }
+
+    &:hover {
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0px);
+    }
 `;
 
 export const QuarterGrid = styled.div`
@@ -53,6 +88,7 @@ export const QuarterFooter = styled.div`
     justify-content: flex-end;
     padding: 1rem;
     font-size: 1.4rem;
+    color: ${textColor};
 `;
 
 export const TotalUnitBox = styled.span`

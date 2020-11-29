@@ -1,18 +1,18 @@
 import AddYearControl from './AddYearControl';
 import LoadSaveControl from './LoadSaveControl';
 
-import { 
+import {
     MainControlsContainer,
- } from './styled';
+} from './styled';
 
 
-export const MainControls = () => {
-    return ( 
+export const MainControls = ({ addAcademicYear }) => {
+    return (
         <MainControlsContainer>
-            <AddYearControl />
+            <AddYearControl addAcademicYear={addAcademicYear} />
             <div></div>
             <div></div>
             <LoadSaveControl />
         </MainControlsContainer>
-     );
+    );
 }

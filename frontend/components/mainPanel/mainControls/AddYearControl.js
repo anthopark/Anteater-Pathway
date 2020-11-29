@@ -19,22 +19,21 @@ const generateYearOptions = (startYear, lastYear) => {
     })
 }
 
-const AddYearControl = () => {
+const AddYearControl = ({ addAcademicYear }) => {
 
-    const { yearOptions, setYearOptions } = useContext(AppContext);
+    const { yearOptions } = useContext(AppContext);
     const [yearValue, setYearValue] = useState(null);
     const [isFormValid, setIsFormValid] = useState(true);
 
-    useEffect(() => {
-        setYearOptions(generateYearOptions(15, 30));
-    }, [])
-
     const onFormSubmit = async (e) => {
         e.preventDefault();
+        
         if (!yearValue) {
             return setIsFormValid(false);
         }
 
+        addAcademicYear(yearValue.value.split('/')[0]);
+        setYearValue(null);
     }
 
     return (

@@ -13,8 +13,21 @@ import {
 
 const defaultYear = '20';
 
+
+const sortPlanData = (planData) => {
+    planData.sort((prev, next) => {
+        const prevYear = parseInt(Object.keys(prev)[0].slice(0, 2));
+        const nextYear = parseInt(Object.keys(next)[0].slice(0, 2));
+        if (prevYear < nextYear) return -1;
+        else if (prevYear > nextYear) return 1;
+        else return 0;
+    })
+}
+
 export const MainPanel = () => {
+
     const { planData, setPlanData } = useContext(AppContext);
+    const { yearOptions, setYearOptions } = useContext(AppContext);
     const [academicYears, setAcademicYears] = useState([]);
 
     const addAcademicYear = (year) => {
@@ -26,24 +39,61 @@ export const MainPanel = () => {
 
         const currentPlanData = [...planData];
         currentPlanData.push(newAcademicYear);
+
+        sortPlanData(currentPlanData);
         setPlanData(currentPlanData);
+        removeAddedYearOption(year);
+    }
+
+    const removeAcademicYear = (year) => {
+        const newPlanData = planData.filter((academicYearData) => {
+            // allow type coercion 
+            return year != Object.keys(academicYearData)[0].slice(0, 2);
+        })
+
+        setPlanData(newPlanData);
+        addRemovedYearOption(year);
+    }
+
+
+    const removeAddedYearOption = (year) => {
+        const newYearOptions = yearOptions.filter((option) => {
+            return option.value.split('/')[0] !== year;
+        })
+
+        setYearOptions(newYearOptions);
+    }
+
+    const addRemovedYearOption = (year) => {
+        const newYearOptions = [...yearOptions];
+        newYearOptions.push({
+            label: `${year} & ${year+1}`, value: `${year}/${year+1}` 
+        })
+
+        newYearOptions.sort((prev, next) => {
+            const prevYear = parseInt(prev.value.split('/')[0]);
+            const nextYear = parseInt(next.value.split('/')[0]);
+            if (prevYear < nextYear) return -1;
+            else if (prevYear > nextYear) return 1;
+            else return 0;
+        })
+
+        setYearOptions(newYearOptions);
     }
 
     const populateAcademicYears = () => {
-        if (planData.length > 0) {
-            const academicYearComponents = planData.map((academicYearData, index) => {
-                return (
-                    <AcademicYear
-                        key={index}
-                        year={parseInt(Object.keys(academicYearData)[0].slice(0, 2))} // ex. extract 20 out of '20f'
-                        quarters={academicYearData}
-                    />
-                )
-            })
+        const academicYearComponents = planData.map((academicYearData, index) => {
+            return (
+                <AcademicYear
+                    key={index}
+                    year={parseInt(Object.keys(academicYearData)[0].slice(0, 2))} // ex. extract 20 out of '20f'
+                    quarters={academicYearData}
+                    removeAcademicYear={removeAcademicYear}
+                />
+            )
+        })
 
-            setAcademicYears(academicYearComponents);
-        }
-
+        setAcademicYears(academicYearComponents);
     }
 
     useEffect(() => {
@@ -59,8 +109,10 @@ export const MainPanel = () => {
     return (
         <MainPanelContainer>
             <InnerBackgroundContainer>
-                
-                <MainControls />
+
+                <MainControls
+                    addAcademicYear={addAcademicYear}
+                 />
 
                 <AcademicYearsBox>
                     {academicYears}
