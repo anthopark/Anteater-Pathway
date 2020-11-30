@@ -87,7 +87,7 @@ export const MainPanel = () => {
                 <AcademicYear
                     key={index}
                     year={parseInt(Object.keys(academicYearData)[0].slice(0, 2))} // ex. extract 20 out of '20f'
-                    quarters={academicYearData}
+                    academicYearData={academicYearData}
                     removeAcademicYear={removeAcademicYear}
                 />
             )

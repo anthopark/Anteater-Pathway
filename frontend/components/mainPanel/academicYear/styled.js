@@ -9,14 +9,13 @@ export const AcademicYearContainer = styled.div`
     
 `;
 
-
 export const AcademicYearHeader = styled.div`
     display: flex;
     align-items: center;
 `;
 
 export const YearText = styled.span`
-    font-size: 3.2rem;
+    font-size: 2.6rem;
     font-weight: 700;
     letter-spacing: .2rem;
     color: ${textColor};
@@ -24,11 +23,11 @@ export const YearText = styled.span`
 
 export const RemoveButton = styled.a`
 
-    width: 3.3rem;
-    height: 2.8rem;
+    width: 3.5rem;
+    height: 2.3rem;
     margin-left: 1rem;
-    margin-top: .5rem;
-    padding: .4rem 1rem;
+    margin-top: .4rem;
+    padding: .2rem 1rem;
     display: inline-block;
     background-color: ${removeButtonColor};
     color: #EAEAEA;
@@ -59,9 +58,11 @@ export const QuarterGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 2rem;
+    align-items: start;
 `;
 
 export const QuarterContainer = styled.div`
+
     border-radius: 20px;
     margin-top: 1.5rem;
     background-color: #fff;
@@ -80,13 +81,18 @@ export const QuarterHeader = styled.div`
 `;
 
 export const QuarterCourses = styled.div`
+    width: 100%;
+    display: grid;
+    
     min-height: 4rem;
+    
 `;
 
 export const QuarterFooter = styled.div`
     display: flex;
     justify-content: flex-end;
-    padding: 1rem;
+    padding-top: .5rem;
+    padding-bottom: 1rem;
     font-size: 1.4rem;
     color: ${textColor};
 `;

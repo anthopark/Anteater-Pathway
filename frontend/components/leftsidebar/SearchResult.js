@@ -19,7 +19,7 @@ import {
 
 
 const SearchResultList = () => {
-
+    const { plannedCourses } = useContext(AppContext);
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
 
     let clearButton;
@@ -54,33 +54,35 @@ const SearchResultList = () => {
             </ClearButton>
         );
 
-        resultList = searchedCourses.map((course, index) => (
-            <Draggable
-                key={course._id}
-                draggableId={course._id}
-                index={index}
-            >
-                {(provided) => (
-                    <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+        resultList = searchedCourses.map((course, index) => {
+            if (!plannedCourses[course._id]) {
+                return (
+                    <Draggable
+                        key={course._id}
+                        draggableId={course._id}
+                        index={index}
                     >
-                        <CourseItem
-                            key={index}
-                            id={course._id}
-                            dept={course.dept}
-                            num={course.num}
-                            unit={course.unit}
-                            searchList={true}
-                        />
-                    </div>
+                        {(provided) => (
+                            <div
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                ref={provided.innerRef}
+                            >
+                                <CourseItem
+                                    key={index}
+                                    id={course._id}
+                                    dept={course.dept}
+                                    num={course.num}
+                                    unit={course.unit}
+                                    searchList={true}
+                                />
+                            </div>
+                        )}
+                    </Draggable>
+                )
+            }
 
-                )}
-
-            </Draggable>
-
-        ));
+        });
     }
 
     return (

@@ -12,7 +12,7 @@ const generateYearOptions = (startYear, lastYear) => {
 
 const AppContextProvider = ({ children }) => {
     const [planData, setPlanData] = useState([]);
-    const [plannedCourses, setPlannedCourses] = useState([]);
+    const [plannedCourses, setPlannedCourses] = useState({});
     const [searchedCourses, setSearchedCourses] = useState(null);
     const [yearOptions, setYearOptions] = useState(generateYearOptions(15, 30));
     

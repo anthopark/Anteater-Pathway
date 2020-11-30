@@ -5,7 +5,7 @@ const desktopBreakPoint = '1200px';
 export const PageContainer = styled.div`
     height: 100vh;
     display: grid;
-    grid-template-columns: 280px 3.6fr 1fr;
+    grid-template-columns: 280px 4fr 1fr;
     @media (max-width: ${desktopBreakPoint}) {
         grid-template-columns: 270px 1fr 0fr;
     }
