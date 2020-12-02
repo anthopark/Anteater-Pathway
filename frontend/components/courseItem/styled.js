@@ -1,16 +1,12 @@
+import MainControls from '@components/mainPanel/mainControls';
 import styled from 'styled-components';
 
 const itemBgColor = "#EBE0F6";
 const courseTextColor = "#1A2556"
 
+
 export const CourseItemContainer = styled.div`
     width: ${({searchList}) => searchList ? 'auto' : '100%' };
-    height: 3.6rem;
-    min-height: 3.6rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    
     border-radius: 10px;
     background-color: ${itemBgColor};
 
@@ -19,8 +15,17 @@ export const CourseItemContainer = styled.div`
     // due to spacing with scroll bar
     margin-right: ${({searchList}) => searchList ? '.8rem' : '0rem' };
 
-    font-size: 1.6rem;
     color: ${courseTextColor};
+`;
+
+// minimal version
+
+export const MinimalVersionContainer = styled.div`
+    width: 100%;
+    padding: .8rem;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.6rem;
 `;
 
 export const DeptText = styled.div`
@@ -31,4 +36,36 @@ export const DeptText = styled.div`
 export const NumText = styled.div`
     text-align: center;
     letter-spacing: .2rem;
+`;
+
+// extended version
+
+export const ExtendedVersionContainer = styled.div`
+    width: 100%;
+    padding: .5rem .7rem;
+`;
+
+export const UpperBox = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .2rem;
+`;
+
+export const CourseInfoBox = styled.span`
+    display: inline-block;
+    color: ${courseTextColor};
+    font-size: 1.7rem;
+    font-weight: 700;
+`;
+
+export const LowerBox = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
+export const CourseTitleBox = styled.span`
+    display: inline-block;
+    font-size: 1.5rem;
 `;
