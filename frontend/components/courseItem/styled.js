@@ -55,7 +55,7 @@ export const UpperBox = styled.div`
 export const CourseInfoBox = styled.span`
     display: inline-block;
     color: ${courseTextColor};
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     font-weight: 700;
 `;
 
@@ -63,6 +63,7 @@ export const LowerBox = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 0 .3rem;
 `;
 
 export const CourseTitleBox = styled.span`

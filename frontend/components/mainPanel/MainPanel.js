@@ -28,6 +28,7 @@ export const MainPanel = () => {
 
     const { planData, setPlanData } = useContext(AppContext);
     const { yearOptions, setYearOptions } = useContext(AppContext);
+    const { plannedCourses, setPlannedCourses } = useContext(AppContext);
     const [academicYears, setAcademicYears] = useState([]);
 
     const addAcademicYear = (year) => {
@@ -45,17 +46,26 @@ export const MainPanel = () => {
         removeAddedYearOption(year);
     }
 
+    // passed as prop to the AcademicYear for delete button
     const removeAcademicYear = (year) => {
         const newPlanData = planData.filter((academicYearData) => {
             // allow type coercion 
-            return year != Object.keys(academicYearData)[0].slice(0, 2);
+            if(year != Object.keys(academicYearData)[0].slice(0, 2)) {
+                return true;
+            } else {
+                const coursesToDelete = Object.values(academicYearData);
+                setTimeout(() => {
+                    // to be run after setPlanData()
+                    deleteCoursesFromPlannedCourses(coursesToDelete);
+                }, 0)
+                return false;
+            };
         })
-
         setPlanData(newPlanData);
         addRemovedYearOption(year);
     }
 
-
+    // update year options upon adding academic year
     const removeAddedYearOption = (year) => {
         const newYearOptions = yearOptions.filter((option) => {
             return option.value.split('/')[0] !== year;
@@ -64,6 +74,7 @@ export const MainPanel = () => {
         setYearOptions(newYearOptions);
     }
 
+    // update year options upon deleting academic year
     const addRemovedYearOption = (year) => {
         const newYearOptions = [...yearOptions];
         newYearOptions.push({
@@ -79,6 +90,20 @@ export const MainPanel = () => {
         })
 
         setYearOptions(newYearOptions);
+    }
+
+    const deleteCoursesFromPlannedCourses = (courses) => {
+        // courses given as [['courseId'], ['courseId'], ...]
+        const newPlannedCourses = {...plannedCourses};
+
+        for (const innerArr of courses) {
+            for (const courseId of innerArr) {
+                console.log('delete this', courseId);
+                delete newPlannedCourses[courseId];
+            }
+        }
+
+        setPlannedCourses(newPlannedCourses);
     }
 
     const populateAcademicYears = () => {
