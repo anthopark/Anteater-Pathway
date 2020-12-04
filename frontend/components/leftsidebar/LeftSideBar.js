@@ -8,14 +8,13 @@ import SearchResult from './SearchResult';
 import AdditionalLinks from './AdditionalLinks';
 
 export const LeftSideBar = () => {
-    return (
 
+    return (
         <LeftSideBarContainer>
             <Logo />
             <CourseSearchForm />
             <SearchResult />
             <AdditionalLinks />
         </LeftSideBarContainer>
-
     );
 }

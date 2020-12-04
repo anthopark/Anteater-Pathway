@@ -6,4 +6,3 @@ const base = axios.create({
     baseURL
 })
 
-export default base;
