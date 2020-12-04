@@ -54,10 +54,12 @@ export const MainPanel = () => {
                 return true;
             } else {
                 const coursesToDelete = Object.values(academicYearData);
+                
+                // to be run after setPlanData()
                 setTimeout(() => {
-                    // to be run after setPlanData()
                     deleteCoursesFromPlannedCourses(coursesToDelete);
                 }, 0)
+                
                 return false;
             };
         })
@@ -98,7 +100,6 @@ export const MainPanel = () => {
 
         for (const innerArr of courses) {
             for (const courseId of innerArr) {
-                console.log('delete this', courseId);
                 delete newPlannedCourses[courseId];
             }
         }

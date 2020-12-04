@@ -16,6 +16,12 @@ export const CourseItemContainer = styled.div`
     margin-right: ${({searchList}) => searchList ? '.8rem' : '0rem' };
 
     color: ${courseTextColor};
+    transition: all .3s;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2); 
+    }
 `;
 
 // minimal version
