@@ -200,6 +200,7 @@ export const ResultListBox = styled.div`
     flex-direction: column;
     max-height: 44rem;
     overflow-y: auto;
+    padding: .3rem 0;
 
     ::-webkit-scrollbar {
         width: .8rem;

@@ -67,6 +67,7 @@ const SearchResultList = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                                 ref={provided.innerRef}
+                                
                             >
                                 <CourseItem
                                     key={index}

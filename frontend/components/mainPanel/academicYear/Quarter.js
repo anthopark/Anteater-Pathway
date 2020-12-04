@@ -21,8 +21,13 @@ const Quarter = ({ heading, courses, quarterId }) => {
 
     useEffect(() => {
         // compute total unit upon re-rendering
+        let units = 0;
+        courses.forEach(courseId => {
+            units += parseInt(plannedCourses[courseId].unit);
+        })
+        setTotalUnit(units);
     })
-    
+
     const courseItems = courses.map((courseId, index) => (
         <Draggable
             key={courseId}
@@ -70,9 +75,11 @@ const Quarter = ({ heading, courses, quarterId }) => {
             </Droppable>
 
             <QuarterFooter>
-                <TotalUnitBox>
-                    Unit: {totalUnit}
-                </TotalUnitBox>
+                {totalUnit === 0 ? undefined : (
+                    <TotalUnitBox>
+                        {`${totalUnit} units`} 
+                    </TotalUnitBox>
+                )}
             </QuarterFooter>
         </QuarterContainer>
     );
