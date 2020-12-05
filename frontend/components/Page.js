@@ -52,7 +52,6 @@ const Page = () => {
             quarterCourses.splice(destination.index, 0, removed._id);
 
             setPlanData(newPlanData);
-            setSearchedCourses(newSearchedCourses);
         } else if (source.droppableId !== 'search-result' && source.droppableId !== destination.droppableId) {
             // moved from one quarter to the other
             

@@ -18,6 +18,6 @@ export const fetchCourses = async(dept, level, num) => {
         return courses;
     } catch (e) {
         console.log(e.toString());
-        return 
+        return [];
     }
 };

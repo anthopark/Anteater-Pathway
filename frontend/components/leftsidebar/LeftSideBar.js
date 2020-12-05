@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
     LeftSideBarContainer,
 } from './styled';
@@ -9,11 +11,13 @@ import AdditionalLinks from './AdditionalLinks';
 
 export const LeftSideBar = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
+
     return (
         <LeftSideBarContainer>
             <Logo />
-            <CourseSearchForm />
-            <SearchResult />
+            <CourseSearchForm setIsLoading={setIsLoading}/>
+            <SearchResult isLoading={isLoading}/>
             <AdditionalLinks />
         </LeftSideBarContainer>
     );

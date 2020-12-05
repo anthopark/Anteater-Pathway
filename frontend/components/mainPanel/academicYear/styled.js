@@ -84,7 +84,7 @@ export const QuarterCourses = styled.div`
     width: 100%;
     display: grid;
     
-    min-height: 4rem;
+    min-height: 5rem;
     
 `;
 

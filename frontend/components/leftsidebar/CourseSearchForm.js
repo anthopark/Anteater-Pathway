@@ -17,6 +17,7 @@ import {
     dropdownStyle,
     dropdownErrorStyle,
 } from './styled';
+import { setBatchedUpdates } from 'react-query';
 
 const fetchDeptOptions =  () => {
     return courseMetadata.departments.map((dept) => ({
@@ -29,9 +30,10 @@ const fetchLevelOptions = () => {
     }))
 }
 
-const CourseSearchForm = () => {
+const CourseSearchForm = ({setIsLoading}) => {
 
     const { setSearchedCourses } = useContext(AppContext);
+    
 
     const [deptValue, setDeptValue] = useState();
     const [levelValue, setLevelValue] = useState();
@@ -45,12 +47,14 @@ const CourseSearchForm = () => {
             return setIsFormValid(false);
         }
 
-        const result = await fetchCourses(
+        setIsLoading(true);
+        let result = await fetchCourses(
             deptValue.value,
             levelValue ? levelValue.value : undefined,
             numValue
         )
-        
+        setIsLoading(false);
+
         setSearchedCourses(result);
     }
 

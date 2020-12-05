@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useContext } from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { faRedo, faSearch, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faRedo, faSearch, faExclamationCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { AppContext } from '@components/AppContextProvider';
@@ -14,19 +14,27 @@ import {
     ClearButton,
     ResultListBox,
     ResultMessageBox,
+    LoadingIconBox,
     ResultMessageText,
 } from './styled';
 
 
-const SearchResultList = () => {
+const SearchResultList = ({ isLoading }) => {
     const { plannedCourses } = useContext(AppContext);
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
 
+    let isSearchedPlannedCourse;
     let clearButton;
     let resultList;
     let searchResultMessage;
 
-    if (!searchedCourses) {
+    if (isLoading) {
+        searchResultMessage = (
+            <LoadingIconBox>
+                <FontAwesomeIcon icon={faSpinner} style={{ fontSize: '1.7rem', marginLeft: '7.5rem' }} spin />
+            </LoadingIconBox>
+        );
+    } else if (!searchedCourses) {
         // haven't searched
         searchResultMessage = (
             <ResultMessageBox>
@@ -48,11 +56,6 @@ const SearchResultList = () => {
         );
     } else if (Array.isArray(searchedCourses) && searchedCourses.length !== 0) {
         // courses found
-        clearButton = (
-            <ClearButton onClick={() => setSearchedCourses(null)}>
-                <FontAwesomeIcon icon={faRedo} />
-            </ClearButton>
-        );
 
         resultList = searchedCourses.map((course, index) => {
             if (!plannedCourses[course._id]) {
@@ -67,7 +70,7 @@ const SearchResultList = () => {
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                                 ref={provided.innerRef}
-                                
+
                             >
                                 <CourseItem
                                     key={index}
@@ -81,10 +84,31 @@ const SearchResultList = () => {
                         )}
                     </Draggable>
                 )
+            } else {
+                isSearchedPlannedCourse = true;
+                return false;
             }
-
         });
+
+        if (resultList.every((val) => val === false)) {
+            console.log('dam');
+            searchResultMessage = (
+                <ResultMessageBox>
+                    <FontAwesomeIcon icon={faExclamationCircle} style={{ fontSize: '1.7rem' }} />
+                    <ResultMessageText>
+                        Already planned
+                    </ResultMessageText>
+                </ResultMessageBox>
+            );
+        } else {
+            clearButton = (
+                <ClearButton onClick={() => setSearchedCourses(null)}>
+                    <FontAwesomeIcon icon={faRedo} />
+                </ClearButton>
+            );    
+        }
     }
+
 
     return (
         <SearchResultContainer>

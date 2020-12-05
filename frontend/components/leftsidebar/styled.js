@@ -189,6 +189,11 @@ export const ResultMessageBox = styled.div`
     letter-spacing: .1rem;
 `;
 
+export const LoadingIconBox = styled.div`
+    color: ${textColor};
+`;
+
+
 export const ResultMessageText = styled.span`
     display: inline-block;
     margin-left: 1rem;
