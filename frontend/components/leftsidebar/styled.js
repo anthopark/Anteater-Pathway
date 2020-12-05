@@ -7,12 +7,23 @@ const searchFormBgColor = "#2850FF";
 const searchResultBgColor = "#122782";
 const clearButtonColor = "#95AFF4"
 
+const scrollBarColor = "#775E7B"
+const scrollBarHoverColor = "#9D7DA3"
+
 
 export const LeftSideBarContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     background: linear-gradient(to right, ${sideBarBgColor1}, ${sideBarBgColor2});
-    padding: 3rem 1.7rem;
+    padding: 3rem 2.2rem;
+`;
+
+// Logo
+export const LogoContainer = styled.div`
+    background-color: ${searchResultBgColor};
+    padding: 3rem;
 `;
 
 // CourseSearchForm
@@ -22,7 +33,7 @@ export const SearchFormContainer = styled.div`
     background-color: ${searchFormBgColor};
     padding: 1.2rem 1.7rem;
     border-radius: 20px;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, .6);
 `;
 
@@ -31,13 +42,14 @@ export const SearchForm = styled.form`
 `;
 
 export const FormFieldBox = styled.div`
-    margin-bottom: .3rem;
+    margin-bottom: .4rem;
 `;
 
 export const FormLabel = styled.label`
     display: inline-block;
     color: ${textColor};
     margin-bottom: .3rem;
+    letter-spacing: .1rem;
 `;
 
 export const ThreeColumnGridBox = styled.div`
@@ -57,7 +69,7 @@ export const FormTextInput = styled.input`
     transition: .3s;
     
     &:focus {
-        border: 2px solid dodgerblue; 
+        border: 1px solid dodgerblue; 
     }
 
     ::placeholder {
@@ -114,8 +126,8 @@ export const dropdownErrorStyle = {
         borderRadius: '10px',
         minHeight: '3.5rem',
         height: '3.5rem',
-        // border: '2px solid #EB6C6C',
-        boxShadow: '0px 1px 3px 4px #EB6C6C',
+        border: 'transparent',
+        boxShadow: '0px 0px 4px 3px #EB6C6C',
     }),
 
     clearIndicator: (provided) => ({
@@ -125,10 +137,9 @@ export const dropdownErrorStyle = {
 }
 
 // SearchResultList
-
-export const ResultListContainer = styled.div`
+export const SearchResultContainer = styled.div`
     margin-top: 3rem;
-    padding: 1rem 3.3rem 3rem;
+    padding: 1rem 1.7rem 2rem 3.3rem;
     background-color: ${searchResultBgColor};
     border-radius: 20px;
 `;
@@ -137,6 +148,7 @@ export const ClearButtonBox = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    padding-right: 1.8rem;
     margin-bottom: 1.5rem;
 `;
 
@@ -165,5 +177,103 @@ export const ClearButton = styled.a`
     &:active {
         transform: translateY(0px);
     }
-
 `;
+
+export const ResultMessageBox = styled.div`
+    display: flex;
+    align-items: center;
+    padding-left: .2rem;
+    color: ${textColor};
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: .1rem;
+`;
+
+export const LoadingIconBox = styled.div`
+    color: ${textColor};
+`;
+
+
+export const ResultMessageText = styled.span`
+    display: inline-block;
+    margin-left: 1rem;
+`;
+
+
+export const ResultListBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    max-height: 44rem;
+    overflow-y: auto;
+    padding: .3rem 0;
+
+    ::-webkit-scrollbar {
+        width: .8rem;
+        margin-left: .5rem;
+    }
+    
+
+    ::-webkit-scrollbar-thumb {
+        
+        background-color: ${scrollBarColor};
+        border-radius: 20px;
+        margin-left: .5rem;
+    }
+
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color:${scrollBarHoverColor};
+        margin-left: .5rem;
+        
+    }
+
+    ::-webkit-scrollbar-button {
+        display:none;
+    }
+`;
+
+// AdditionalLinks
+export const AdditionalLinksContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    width: 100%;
+    padding: 0 3.6rem;
+`;
+
+export const LinkBox = styled.div`
+    margin-top: 1.2rem;
+`;
+
+export const IconLink = styled.a`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    cursor: pointer;
+
+    &:link,
+    &:visited {
+        text-decoration: none;
+    }
+`;
+
+
+export const SvgImage = styled.img`
+    display: inline-block;
+    width: 3.1rem;
+`;
+
+export const LinkText = styled.span`
+    color: ${textColor};
+    font-size: 1.6rem;
+    letter-spacing: .4rem;
+    padding-left: ${({ paddingLeft }) => paddingLeft};
+`;
+
+
+export const gitHubIconStyle = {
+    display: 'inline-block',
+    fontSize: '3.1rem',
+    color: '#EAEAEA',
+}

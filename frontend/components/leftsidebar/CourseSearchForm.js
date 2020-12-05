@@ -2,7 +2,10 @@ import Select from 'react-select';
 import { useState, useEffect, useContext } from 'react';
 
 import { AppContext } from '@components/AppContextProvider';
-import courseAPI from '@api/course';
+import { fetchCourses } from '@api/course';
+
+import courseMetadata from '@data/course-metadata.json';
+
 import {
     SearchFormContainer,
     SearchForm,
@@ -14,61 +17,28 @@ import {
     dropdownStyle,
     dropdownErrorStyle,
 } from './styled';
+import { setBatchedUpdates } from 'react-query';
 
-const fetchAllDistinctDept = async () => {
-    let allDepartments = []
-    try {
-        const response = await courseAPI.get('dept/all');
-        allDepartments = response.data;
-        return allDepartments.map(dept => ({ label: dept, value: dept }));
-    } catch (e) {
-        console.log(e.toString());
-        return []
-    }
+const fetchDeptOptions =  () => {
+    return courseMetadata.departments.map((dept) => ({
+        label: dept, value: dept
+    }))
+}
+const fetchLevelOptions = () => {
+    return courseMetadata.levels.map((level) => ({
+        label: level, value: level
+    }))
 }
 
-const fetchCourses = async (dept, level, num) => {
-
-    const params = {
-        dept, level, num
-    }
-    let courses = []
-    try {
-        const response = await courseAPI.get('search', { params });
-        courses = response.data;
-        return courses;
-    } catch (e) {
-        console.log(e.toString());
-        return []
-    }
-}
-
-
-const CourseSearchForm = () => {
-    const levelOptions = [
-        { label: 'Lower Division', value: 'Lower Division' },
-        { label: 'Upper Division', value: 'Upper Division' },
-        { label: 'Undergraduate', value: 'Undergraduate' },
-        { label: 'Graduate', value: 'Graduate' },
-        { label: 'Other', value: 'Other' },
-    ];
+const CourseSearchForm = ({setIsLoading}) => {
 
     const { setSearchedCourses } = useContext(AppContext);
+    
 
     const [deptValue, setDeptValue] = useState();
     const [levelValue, setLevelValue] = useState();
     const [numValue, setNumValue] = useState('');
-    const [deptOptions, setDeptOptions] = useState([]);
     const [isFormValid, setIsFormValid] = useState(true);
-
-    useEffect(() => {
-        const fetchDept = async () => {
-            setDeptOptions(await fetchAllDistinctDept());
-        }
-
-        fetchDept();
-    }, [])
-
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
@@ -76,12 +46,15 @@ const CourseSearchForm = () => {
         if (!deptValue) {
             return setIsFormValid(false);
         }
-        const result = await fetchCourses(
+
+        setIsLoading(true);
+        let result = await fetchCourses(
             deptValue.value,
             levelValue ? levelValue.value : undefined,
             numValue
         )
-        
+        setIsLoading(false);
+
         setSearchedCourses(result);
     }
 
@@ -93,7 +66,7 @@ const CourseSearchForm = () => {
                     <Select
                         instanceId='dept'
                         styles={isFormValid ? dropdownStyle : dropdownErrorStyle}
-                        options={deptOptions}
+                        options={fetchDeptOptions()}
                         value={deptValue}
                         placeholder='ex. ECON, HIST'
                         isClearable
@@ -105,7 +78,7 @@ const CourseSearchForm = () => {
                     <Select
                         instanceId='level'
                         styles={dropdownStyle}
-                        options={levelOptions}
+                        options={fetchLevelOptions()}
                         value={levelValue}
                         placeholder='ex. Upper Div.'
                         isClearable

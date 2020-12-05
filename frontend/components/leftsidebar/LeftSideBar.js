@@ -1,17 +1,24 @@
+import { useState } from 'react';
+
 import {
     LeftSideBarContainer,
 } from './styled';
 
+import Logo from './Logo';
 import CourseSearchForm from './CourseSearchForm';
-import SearchResultList from './SearchResultList';
+import SearchResult from './SearchResult';
+import AdditionalLinks from './AdditionalLinks';
 
 export const LeftSideBar = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
+
     return (
-
         <LeftSideBarContainer>
-            <CourseSearchForm />
-            <SearchResultList />
+            <Logo />
+            <CourseSearchForm setIsLoading={setIsLoading}/>
+            <SearchResult isLoading={isLoading}/>
+            <AdditionalLinks />
         </LeftSideBarContainer>
-
     );
 }
