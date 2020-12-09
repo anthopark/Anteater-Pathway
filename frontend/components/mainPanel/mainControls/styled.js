@@ -7,11 +7,12 @@ const toggleButtonContainerColor = "#A2A7B9";
 
 export const MainControlsContainer = styled.div`
     width: 100%;
-    height: 35px;
+    height: 8rem;
     display: grid;
     font-size: 1.4rem;
     grid-template-columns: 1fr 1fr .6fr 1.4fr;
     column-gap: 2rem;
+    align-items: start;
 `;
 
 export const AddYearForm = styled.form`

@@ -5,7 +5,7 @@ export const AppContext = createContext();
 const generateYearOptions = (startYear, lastYear) => {
     return Array(lastYear - startYear + 1).fill().map((_, idx) => {
         return {
-            label: `${startYear + idx} & ${startYear + idx + 1}`, value: `${startYear + idx}/${startYear + idx + 1}`
+            label: `20${startYear + idx} & 20${startYear + idx + 1}`, value: `${startYear + idx}/${startYear + idx + 1}`
         }
     })
 }

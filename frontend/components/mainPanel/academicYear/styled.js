@@ -15,7 +15,8 @@ const fadeIn = keyframes`
 
 export const AcademicYearContainer = styled.div`
     width: 100%;
-    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding-right: 1rem;
     
 `;
 

@@ -34,7 +34,7 @@ export const SearchFormContainer = styled.div`
     padding: 1.2rem 1.7rem;
     border-radius: 20px;
     font-size: 1.5rem;
-    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, .6);
+    /* box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, .6); */
 `;
 
 export const SearchForm = styled.form`
@@ -138,10 +138,11 @@ export const dropdownErrorStyle = {
 
 // SearchResultList
 export const SearchResultContainer = styled.div`
-    margin-top: 3rem;
+    margin-top: 4rem;
     padding: 1rem 1.7rem 2rem 3.3rem;
     background-color: ${searchResultBgColor};
     border-radius: 20px;
+    max-height: 465px;
 `;
 
 export const ClearButtonBox = styled.div`
@@ -203,7 +204,7 @@ export const ResultMessageText = styled.span`
 export const ResultListBox = styled.div`
     display: flex;
     flex-direction: column;
-    max-height: 44rem;
+    max-height: 90%;
     overflow-y: auto;
     padding: .3rem 0;
 
@@ -242,7 +243,7 @@ export const AdditionalLinksContainer = styled.div`
 `;
 
 export const LinkBox = styled.div`
-    margin-top: 1.2rem;
+    margin-top: 1.5rem;
 `;
 
 export const IconLink = styled.a`
@@ -267,7 +268,7 @@ export const SvgImage = styled.img`
 export const LinkText = styled.span`
     color: ${textColor};
     font-size: 1.6rem;
-    letter-spacing: .4rem;
+    letter-spacing: .3rem;
     padding-left: ${({ paddingLeft }) => paddingLeft};
 `;
 
