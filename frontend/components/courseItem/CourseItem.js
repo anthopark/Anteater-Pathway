@@ -18,8 +18,10 @@ import {
 
 export const CourseItem = (props) => {
 
+    const { searchedCourses } = useContext(AppContext);
     const { plannedCourses, setPlannedCourses } = useContext(AppContext);
     const { planData, setPlanData } = useContext(AppContext);
+    const { setCurrentClickedCourse } = useContext(AppContext);
 
     const containerRef = useRef(null);
     const [containerWidth, setContainerWidth] = useState(0);
@@ -55,9 +57,9 @@ export const CourseItem = (props) => {
                 academicYear[term] = courses.filter((courseId) => courseId !== props.id);
             }
         }
-        
+
         // remove from plannedCourses
-        const newPlannedCourses = {...plannedCourses};
+        const newPlannedCourses = { ...plannedCourses };
         delete newPlannedCourses[props.id]
 
         setPlanData(newPlanData);
@@ -66,7 +68,21 @@ export const CourseItem = (props) => {
         setTimeout(() => {
             setPlannedCourses(newPlannedCourses)
         }, 0);
+
+        // reset currentClickedCourse
+        setCurrentClickedCourse(null);
     }
+
+    const updateCurrentClickedCourse = () => {
+        if (plannedCourses[props.id]) {
+            setCurrentClickedCourse(plannedCourses[props.id]);
+        } else {
+            // search in searchedCourses
+            setCurrentClickedCourse(searchedCourses.filter(course => course._id === props.id)[0]);
+        }
+    }
+
+
 
     let minimalVersionUI = (
         <MinimalVersionContainer>
@@ -107,8 +123,9 @@ export const CourseItem = (props) => {
             isSearched={props.searchList}
             isPlanned={props.isPlanned}
             ref={containerRef}
-            onMouseEnter={(e) => { setIsHover(true) }}
-            onMouseLeave={(e) => { setIsHover(false) }}
+            onMouseEnter={(e) => { setIsHover(true); }}
+            onMouseLeave={(e) => { setIsHover(false); }}
+            onMouseDown={(e) => { updateCurrentClickedCourse(); }}
         >
             { containerWidth > 190 ? extendedVersionUI : minimalVersionUI}
         </CourseItemContainer>

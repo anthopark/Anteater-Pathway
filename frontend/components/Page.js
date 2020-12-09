@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { AppContext } from '@components/AppContextProvider';
 import LeftSideBar from '@components/leftsidebar';
 import MainPanel from '@components/mainPanel';
+import RightPanel from '@components/rightPanel';
 
 import {
     PageContainer,
@@ -25,10 +26,12 @@ const Page = () => {
     const { planData, setPlanData } = useContext(AppContext);
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
     const { plannedCourses, setPlannedCourses, } = useContext(AppContext);
+    const { currentClickedCourse } = useContext(AppContext);
 
     console.log('planData\n', planData);
     console.log('searchedCourses\n', searchedCourses);
     console.log('plannedCourses\n', plannedCourses);
+    console.log('currentClickedCourse\n', currentClickedCourse);
 
     const onDragEnd = (result) => {
         console.log(result);
@@ -96,7 +99,7 @@ const Page = () => {
             </DragDropContext>
 
             <RightPanelContainer>
-                Right Panel
+                <RightPanel />
             </RightPanelContainer>
         </PageContainer>
     );
