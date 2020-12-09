@@ -1,11 +1,22 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const textColor = "#2B3C86";
 const removeButtonColor = "#95AFF4";
 
+const fadeIn = keyframes`
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+`;
+
 export const AcademicYearContainer = styled.div`
     width: 100%;
-    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding-right: 1rem;
     
 `;
 
@@ -37,16 +48,17 @@ export const RemoveButton = styled.a`
     font-size: 1.5rem;
     font-weight: 700;
     border-radius: 10px;
+
+    animation: ${fadeIn} .5s;
+    transition: transform .3s;
     
-
-
     &:link,
     &:visited {
         text-decoration: none;
     }
 
     &:hover {
-        transform: translateY(-1px);
+        transform: translateY(-2px);
     }
 
     &:active {

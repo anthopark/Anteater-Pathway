@@ -19,4 +19,5 @@ html {
 body {  
   box-sizing: border-box;
   min-width: 1056px;
+  min-height: 700px;
 }

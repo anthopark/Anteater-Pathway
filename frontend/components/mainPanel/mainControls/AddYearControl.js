@@ -11,13 +11,6 @@ import {
     dropdownErrorStyle,
 } from './styled';
 
-const generateYearOptions = (startYear, lastYear) => {
-    return Array(lastYear - startYear + 1).fill().map((_, idx) => {
-        return {
-            label: `${startYear + idx} & ${startYear + idx + 1}`, value: `${startYear + idx}/${startYear + idx + 1}`
-        }
-    })
-}
 
 const AddYearControl = ({ addAcademicYear }) => {
 
@@ -44,6 +37,7 @@ const AddYearControl = ({ addAcademicYear }) => {
                 styles={isFormValid ? dropdownStyle : dropdownErrorStyle}
                 value={yearValue}
                 onChange={(e) => { setYearValue(e); setIsFormValid(true); }}
+                placeholder="school year"
             />
             <div></div>
             <MainControlButton type="submit">

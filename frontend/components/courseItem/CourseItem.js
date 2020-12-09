@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useRef, useContext, useLayoutEffect } from 'react';
 
+import { AppContext } from '@components/AppContextProvider';
 import {
     CourseItemContainer,
     MinimalVersionContainer,
@@ -10,14 +11,19 @@ import {
     LowerBox,
     CourseInfoBox,
     CourseTitleBox,
+    RemoveButton,
 } from './styled'
 
 
 
 export const CourseItem = (props) => {
 
+    const { plannedCourses, setPlannedCourses } = useContext(AppContext);
+    const { planData, setPlanData } = useContext(AppContext);
+
     const containerRef = useRef(null);
     const [containerWidth, setContainerWidth] = useState(0);
+    const [isHover, setIsHover] = useState(false);
 
     // holds the timer for setTimeout and clearInterval
     let movement_timer = null;
@@ -41,6 +47,27 @@ export const CourseItem = (props) => {
         movement_timer = setTimeout(updateContainerWidth, RESET_TIMEOUT);
     })
 
+    const onRemoveButtonClick = () => {
+        // remove from planData
+        const newPlanData = [...planData];
+        for (const academicYear of newPlanData) {
+            for (const [term, courses] of Object.entries(academicYear)) {
+                academicYear[term] = courses.filter((courseId) => courseId !== props.id);
+            }
+        }
+        
+        // remove from plannedCourses
+        const newPlannedCourses = {...plannedCourses};
+        delete newPlannedCourses[props.id]
+
+        setPlanData(newPlanData);
+
+        // run after setPlanData is completed
+        setTimeout(() => {
+            setPlannedCourses(newPlannedCourses)
+        }, 0);
+    }
+
     let minimalVersionUI = (
         <MinimalVersionContainer>
             <DeptText>
@@ -49,6 +76,10 @@ export const CourseItem = (props) => {
             <NumText>
                 {props.num}
             </NumText>
+            {isHover && props.isPlanned ?
+                (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
+                : undefined
+            }
         </MinimalVersionContainer>
     )
 
@@ -59,15 +90,26 @@ export const CourseItem = (props) => {
                 <CourseInfoBox>{`${props.unit} Units`}</CourseInfoBox>
             </UpperBox>
             <LowerBox>
-                <CourseTitleBox>{ props.title}</CourseTitleBox>
+                <CourseTitleBox>{props.title}</CourseTitleBox>
             </LowerBox>
+            {isHover && props.isPlanned ?
+                (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
+                : undefined
+            }
         </ExtendedVersionContainer>
     );
 
 
 
+
     return (
-        <CourseItemContainer searchList={props.searchList} ref={containerRef}>
+        <CourseItemContainer
+            isSearched={props.searchList}
+            isPlanned={props.isPlanned}
+            ref={containerRef}
+            onMouseEnter={(e) => { setIsHover(true) }}
+            onMouseLeave={(e) => { setIsHover(false) }}
+        >
             { containerWidth > 190 ? extendedVersionUI : minimalVersionUI}
         </CourseItemContainer>
     );
