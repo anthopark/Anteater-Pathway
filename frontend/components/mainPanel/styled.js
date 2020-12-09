@@ -14,7 +14,6 @@ export const MainPanelContainer = styled.div`
     width: 100%;
     height: 100vh;
     padding: 1.2rem 1.2rem;
-    /* overflow: hidden; */
 `;
 
 export const InnerBackgroundContainer = styled.div`
