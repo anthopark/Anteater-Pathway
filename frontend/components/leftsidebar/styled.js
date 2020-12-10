@@ -3,6 +3,8 @@ import styled from 'styled-components';
 const sideBarBgColor1 = "#213CB2";
 const sideBarBgColor2 = "#0D2AAB";
 const textColor = "#EAEAEA";
+const logoRegularColor = "#DEDEDE";
+const logoEmphasisColor = "#E47B00";
 const searchFormBgColor = "#2850FF";
 const searchResultBgColor = "#122782";
 const clearButtonColor = "#95AFF4"
@@ -22,8 +24,32 @@ export const LeftSideBarContainer = styled.div`
 
 // Logo
 export const LogoContainer = styled.div`
-    background-color: ${searchResultBgColor};
-    padding: 3rem;
+    width: 100%;
+    display: flex;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+`;
+
+
+export const LogoImage = styled.img`
+    margin-right: 1rem;
+`;
+
+export const LogoHeading = styled.h1`
+    padding-top: .3rem;
+    display: block;
+    width: 100%;
+    font-family: 'Concert One', cursive;
+    letter-spacing: .1rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    `;
+
+export const LogoTextSpan = styled.span`
+    display: block;
+    text-align: ${({ align }) => (align)};
+    color: ${({ emphasis }) => (emphasis ? logoEmphasisColor : logoRegularColor)};
+    margin-bottom: 1rem;
 `;
 
 // CourseSearchForm
@@ -138,11 +164,11 @@ export const dropdownErrorStyle = {
 
 // SearchResultList
 export const SearchResultContainer = styled.div`
-    margin-top: 4rem;
+    margin-top: 3rem;
     padding: 1rem 1.7rem 2rem 3.3rem;
     background-color: ${searchResultBgColor};
     border-radius: 20px;
-    max-height: 465px;
+    max-height: 420px;
 `;
 
 export const ClearButtonBox = styled.div`

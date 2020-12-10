@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <Head>
         <title>Anteater Pathway</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg"/>
       </Head>
 
       <App />
