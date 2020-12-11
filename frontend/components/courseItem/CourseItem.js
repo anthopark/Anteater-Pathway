@@ -16,17 +16,16 @@ import {
 
 
 
-export const CourseItem = (props) => {
+export const CourseItem = ({courseInfo, ...props}) => {
 
-    const { plannedCourses, setPlannedCourses } = useContext(AppContext);
-    const { planData, setPlanData } = useContext(AppContext);
+    const { setCurrentClickedCourse } = useContext(AppContext);
 
     const containerRef = useRef(null);
     const [containerWidth, setContainerWidth] = useState(0);
     const [isHover, setIsHover] = useState(false);
 
     // holds the timer for setTimeout and clearInterval
-    let movement_timer = null;
+    let movementTimer = null;
 
     // the number of ms the window size must stay the same size before the
     // dimension state variable is reset
@@ -43,38 +42,23 @@ export const CourseItem = (props) => {
     }, [])
 
     window.addEventListener('resize', () => {
-        clearInterval(movement_timer);
-        movement_timer = setTimeout(updateContainerWidth, RESET_TIMEOUT);
+        clearInterval(movementTimer);
+        movementTimer = setTimeout(updateContainerWidth, RESET_TIMEOUT);
     })
 
     const onRemoveButtonClick = () => {
-        // remove from planData
-        const newPlanData = [...planData];
-        for (const academicYear of newPlanData) {
-            for (const [term, courses] of Object.entries(academicYear)) {
-                academicYear[term] = courses.filter((courseId) => courseId !== props.id);
-            }
-        }
-        
-        // remove from plannedCourses
-        const newPlannedCourses = {...plannedCourses};
-        delete newPlannedCourses[props.id]
-
-        setPlanData(newPlanData);
-
-        // run after setPlanData is completed
-        setTimeout(() => {
-            setPlannedCourses(newPlannedCourses)
-        }, 0);
+        props.removeCourseItem(courseInfo._id);
+        setCurrentClickedCourse(null);
     }
+
 
     let minimalVersionUI = (
         <MinimalVersionContainer>
             <DeptText>
-                {props.dept}
+                {courseInfo.dept}
             </DeptText>
             <NumText>
-                {props.num}
+                {courseInfo.num}
             </NumText>
             {isHover && props.isPlanned ?
                 (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
@@ -86,11 +70,11 @@ export const CourseItem = (props) => {
     let extendedVersionUI = (
         <ExtendedVersionContainer>
             <UpperBox>
-                <CourseInfoBox>{`${props.dept} ${props.num}`}</CourseInfoBox>
-                <CourseInfoBox>{`${props.unit} Units`}</CourseInfoBox>
+                <CourseInfoBox>{`${courseInfo.dept} ${courseInfo.num}`}</CourseInfoBox>
+                <CourseInfoBox>{`${courseInfo.unit} Units`}</CourseInfoBox>
             </UpperBox>
             <LowerBox>
-                <CourseTitleBox>{props.title}</CourseTitleBox>
+                <CourseTitleBox>{courseInfo.title}</CourseTitleBox>
             </LowerBox>
             {isHover && props.isPlanned ?
                 (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
@@ -99,16 +83,14 @@ export const CourseItem = (props) => {
         </ExtendedVersionContainer>
     );
 
-
-
-
     return (
         <CourseItemContainer
             isSearched={props.searchList}
             isPlanned={props.isPlanned}
             ref={containerRef}
-            onMouseEnter={(e) => { setIsHover(true) }}
-            onMouseLeave={(e) => { setIsHover(false) }}
+            onMouseEnter={(e) => { setIsHover(true); }}
+            onMouseLeave={(e) => { setIsHover(false); }}
+            onMouseDown={(e) => { setCurrentClickedCourse(courseInfo); }}
         >
             { containerWidth > 190 ? extendedVersionUI : minimalVersionUI}
         </CourseItemContainer>

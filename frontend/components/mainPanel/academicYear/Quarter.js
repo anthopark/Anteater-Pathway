@@ -12,48 +12,31 @@ import {
     TotalUnitBox,
 } from './styled';
 
-const Quarter = ({ heading, courses, quarterId }) => {
 
+const Quarter = ({ quarterId, heading, courses }) => {
 
-    const { plannedCourses } = useContext(AppContext);
+    const { planData, setPlanData } = useContext(AppContext);
+    const [totalUnits, setTotalUnits] = useState(0);
 
-    const [totalUnit, setTotalUnit] = useState(0);
+    const removeCourseItem = (courseId) => {
+        // delete from planData
+        const newPlanData = [...planData];
+        for (const yearPlanData of newPlanData) {
+            for (const [term, courses] of Object.entries(yearPlanData)) {
+                yearPlanData[term] = courses.filter((course) => course._id !== courseId);
+            }
+        }
+        setPlanData(newPlanData);
+    }
 
     useEffect(() => {
-        // compute total unit upon re-rendering
-        let units = 0;
-        courses.forEach(courseId => {
-            units += parseInt(plannedCourses[courseId].unit);
+        // compute total units
+        let total = 0;
+        courses.forEach((course) => {
+            total += parseInt(course.unit);
         })
-        setTotalUnit(units);
-    })
-
-    const courseItems = courses.map((courseId, index) => (
-        <Draggable
-            key={courseId}
-            draggableId={courseId}
-            index={index}
-        >
-            {(provided) => (
-                <div
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                >
-                    <CourseItem
-                        key={index}
-                        id={courseId}
-                        dept={plannedCourses[courseId].dept}
-                        num={plannedCourses[courseId].num}
-                        unit={plannedCourses[courseId].unit}
-                        title={plannedCourses[courseId].title}
-                        isPlanned={true}
-                    />
-                </div>
-            )}
-        </Draggable>
-
-    ));
+        setTotalUnits(total);
+    }, [planData])
 
     return (
         <QuarterContainer>
@@ -67,17 +50,38 @@ const Quarter = ({ heading, courses, quarterId }) => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
-                        {courseItems}
+                        {courses.map((course, index) => (
+                            <Draggable
+                                key={course._id}
+                                draggableId={course._id}
+                                index={index}
+                            >
+                                {(provided) => (
+                                    <div
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        ref={provided.innerRef}
+                                    >
+                                        <CourseItem
+                                            courseInfo={course}
+                                            isPlanned={true}
+                                            removeCourseItem={removeCourseItem}
+                                        />
+                                    </div>
+                                )}
+                            </Draggable>
+                            ))
+                        }
+
                         {provided.placeholder}
                     </QuarterCourses>
                 )}
-
             </Droppable>
 
             <QuarterFooter>
-                {totalUnit === 0 ? undefined : (
+                {totalUnits === 0 ? undefined : (
                     <TotalUnitBox>
-                        {`${totalUnit} units`} 
+                        {`${totalUnits} units`}
                     </TotalUnitBox>
                 )}
             </QuarterFooter>

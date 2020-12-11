@@ -5,24 +5,24 @@ export const AppContext = createContext();
 const generateYearOptions = (startYear, lastYear) => {
     return Array(lastYear - startYear + 1).fill().map((_, idx) => {
         return {
-            label: `20${startYear + idx} & 20${startYear + idx + 1}`, value: `${startYear + idx}/${startYear + idx + 1}`
+            label: `${startYear + idx} & ${startYear + idx + 1}`, value: `${startYear + idx}/${startYear + idx + 1}`
         }
     })
 }
 
 const AppContextProvider = ({ children }) => {
     const [planData, setPlanData] = useState([]);
-    const [plannedCourses, setPlannedCourses] = useState({});
     const [searchedCourses, setSearchedCourses] = useState(null);
     const [yearOptions, setYearOptions] = useState(generateYearOptions(15, 30));
+    const [currentClickedCourse, setCurrentClickedCourse] = useState(null);
     
     
     return (
         <AppContext.Provider value={{
             planData, setPlanData,
-            plannedCourses, setPlannedCourses,
             searchedCourses, setSearchedCourses,
             yearOptions, setYearOptions,
+            currentClickedCourse, setCurrentClickedCourse,
         }}>
             {children}
         </AppContext.Provider>

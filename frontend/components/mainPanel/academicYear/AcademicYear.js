@@ -13,7 +13,7 @@ import {
 
 
 
-export const AcademicYear = ({ year, academicYearData, removeAcademicYear }) => {
+export const AcademicYear = ({ year, yearPlanData, removeAcademicYear }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -37,22 +37,22 @@ export const AcademicYear = ({ year, academicYearData, removeAcademicYear }) => 
                 <Quarter
                     quarterId={year + 'f'}
                     heading={`Fall 20${year}`}
-                    courses={academicYearData[year + 'f']}
+                    courses={yearPlanData[year + 'f']}
                 />
                 <Quarter
                     quarterId={year + 'w'}
                     heading={`Winter 20${year + 1}`}
-                    courses={academicYearData[year + 'w']}
+                    courses={yearPlanData[year + 'w']}
                 />
                 <Quarter
                     quarterId={year + 'sp'}
                     heading={`Spring 20${year + 1}`}
-                    courses={academicYearData[year + 'sp']}
+                    courses={yearPlanData[year + 'sp']}
                 />
                 <Quarter
                     quarterId={year + 'su'}
                     heading={`Summer 20${year + 1}`}
-                    courses={academicYearData[year + 'su']}
+                    courses={yearPlanData[year + 'su']}
                 />
             </QuarterGrid>
         </AcademicYearContainer>
