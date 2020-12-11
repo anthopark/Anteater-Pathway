@@ -25,12 +25,10 @@ const getQuarterCourses = (droppableId, planData) => {
 const Page = () => {
     const { planData, setPlanData } = useContext(AppContext);
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
-    const { plannedCourses, setPlannedCourses, } = useContext(AppContext);
     const { currentClickedCourse } = useContext(AppContext);
 
     console.log('planData\n', planData);
     console.log('searchedCourses\n', searchedCourses);
-    console.log('plannedCourses\n', plannedCourses);
     console.log('currentClickedCourse\n', currentClickedCourse);
 
     const onDragEnd = (result) => {
@@ -42,18 +40,14 @@ const Page = () => {
 
         if (source.droppableId === 'search-result') {
             // moved from search result to one of the quarters
-
-            // update plannedCourses first, then move
-            updatePlannedCourses(draggableId);
-
-            // move 
             const newPlanData = [...planData];
             const newSearchedCourses = [...searchedCourses];
             const quarterCourses = getQuarterCourses(destination.droppableId, newPlanData);
 
             const [removed] = newSearchedCourses.splice(source.index, 1);
-            quarterCourses.splice(destination.index, 0, removed._id);
-
+            quarterCourses.splice(destination.index, 0, removed);
+            console.log({removed});
+            console.log({newPlanData});
             setPlanData(newPlanData);
         } else if (source.droppableId !== 'search-result' && source.droppableId !== destination.droppableId) {
             // moved from one quarter to the other
@@ -78,11 +72,6 @@ const Page = () => {
         }
     };
 
-    const updatePlannedCourses = (courseId) => {
-        const newPlannedCourses = { ...plannedCourses };
-        newPlannedCourses[courseId] = searchedCourses.filter((course) => course._id === courseId)[0];
-        setPlannedCourses(newPlannedCourses);
-    }
 
     return (
         <PageContainer>

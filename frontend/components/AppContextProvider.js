@@ -12,7 +12,6 @@ const generateYearOptions = (startYear, lastYear) => {
 
 const AppContextProvider = ({ children }) => {
     const [planData, setPlanData] = useState([]);
-    const [plannedCourses, setPlannedCourses] = useState({});
     const [searchedCourses, setSearchedCourses] = useState(null);
     const [yearOptions, setYearOptions] = useState(generateYearOptions(15, 30));
     const [currentClickedCourse, setCurrentClickedCourse] = useState(null);
@@ -21,7 +20,6 @@ const AppContextProvider = ({ children }) => {
     return (
         <AppContext.Provider value={{
             planData, setPlanData,
-            plannedCourses, setPlannedCourses,
             searchedCourses, setSearchedCourses,
             yearOptions, setYearOptions,
             currentClickedCourse, setCurrentClickedCourse,

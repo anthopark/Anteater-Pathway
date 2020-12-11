@@ -20,13 +20,25 @@ import {
 
 
 const SearchResultList = ({ isLoading }) => {
-    const { plannedCourses } = useContext(AppContext);
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
+    const { planData } = useContext(AppContext);
 
     let isSearchedPlannedCourse;
     let clearButton;
     let resultList;
     let searchResultMessage;
+
+    const isAlreadyPlanned = (courseId) => {
+        for (const yearPlanData of planData) {
+            for (const courses of Object.values(yearPlanData)) {
+                if (courses.some((course) => course._id === courseId)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     if (isLoading) {
         searchResultMessage = (
@@ -58,7 +70,7 @@ const SearchResultList = ({ isLoading }) => {
         // courses found
 
         resultList = searchedCourses.map((course, index) => {
-            if (!plannedCourses[course._id]) {
+            if (!isAlreadyPlanned(course._id)) {
                 return (
                     <Draggable
                         key={course._id}
@@ -73,11 +85,7 @@ const SearchResultList = ({ isLoading }) => {
 
                             >
                                 <CourseItem
-                                    key={index}
-                                    id={course._id}
-                                    dept={course.dept}
-                                    num={course.num}
-                                    unit={course.unit}
+                                    courseInfo={course}
                                     searchList={true}
                                 />
                             </div>
@@ -90,8 +98,8 @@ const SearchResultList = ({ isLoading }) => {
             }
         });
 
+        // resultList as an array of all false values indicates that there were searched, but already planned
         if (resultList.every((val) => val === false)) {
-            console.log('dam');
             searchResultMessage = (
                 <ResultMessageBox>
                     <FontAwesomeIcon icon={faExclamationCircle} style={{ fontSize: '1.7rem' }} />
