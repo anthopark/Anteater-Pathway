@@ -2,7 +2,7 @@ const express = require('express');
 const Plan = require('../models/plan');
 const router = new express.Router();
 const logRequest = require('../middleware/log');
-
+const { StatusCodes } = require('http-status-codes');
 
 router.post('/api/plan/save', logRequest, async (req, res) => {
 
@@ -12,15 +12,15 @@ router.post('/api/plan/save', logRequest, async (req, res) => {
             // update existing plan
             plan.degreePlan = req.body.degreePlan;
             await plan.save(); 
-            res.status(200).send(plan)
+            res.status(StatusCodes.OK).send(plan)
         } else {
             // create new plan
             const newPlan = new Plan(req.body);
             await newPlan.save();
-            res.status(201).send(newPlan);
+            res.status(StatusCodes.CREATED).send(newPlan);
         }
     } catch (e) {
-        res.status(400).send(e);
+        res.status(StatusCodes.BAD_REQUEST).send(e);
     }
 
 })
@@ -31,11 +31,11 @@ router.get('/api/plan/load', logRequest, async (req, res) => {
     try {
         const plan = await Plan.findOne({ userId: req.body.userId });
         if (plan)
-            res.status(200).send(plan.degreePlan);
+            res.status(StatusCodes.OK).send(plan.degreePlan);
         else
-            res.status(404).send({ error: "Not found" });
+            res.status(StatusCodes.NOT_FOUND).send({ error: "Not found" });
     } catch (e) {
-        res.status(400).send(e);
+        res.status(StatusCodes.BAD_REQUEST).send(e);
     }
 
 })

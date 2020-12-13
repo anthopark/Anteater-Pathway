@@ -2,6 +2,7 @@ const express = require('express');
 const Course = require('../models/course');
 const router = new express.Router();
 const logRequest = require('../middleware/log');
+const { StatusCodes } = require('http-status-codes');
 
 const allowedCourseDept = {
     "AC ENG": true,
@@ -131,18 +132,16 @@ const allowedCourseLevel = {
 
 // endpoint for fetching course data by dept, level, and course number
 router.get('/api/course/search', logRequest, async (req, res) => {
-    const dept = req.query.dept;
-    const level = req.query.level;
-    const num = req.query.num;
+    const { dept, level, num } = req.query;
 
     console.log(dept, level, num);
 
     if (!allowedCourseDept[dept]) {
-        return res.status(404).send({ error: 'Not allowed course department query' });
+        return res.status(StatusCodes.NOT_FOUND).send({ error: 'Not allowed course department query' });
     }
 
     if (level && !allowedCourseLevel[level]) {
-        return res.status(404).send({ error: 'Not allowed course level query' });
+        return res.status(StatusCodes.NOT_FOUND).send({ error: 'Not allowed course level query' });
     }
 
     let courses = [];
@@ -174,7 +173,7 @@ router.get('/api/course/search', logRequest, async (req, res) => {
 
         res.send(courses);
     } catch (e) {
-        res.status(500).send(e.toString());
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.toString());
     }
 })
 
@@ -182,12 +181,11 @@ router.get('/api/course/search', logRequest, async (req, res) => {
 // endpoint for getting all the distinct department values
 router.get('/api/course/dept/all', logRequest, async (req, res) => {
     try {
-        let allDepts = []
-        allDepts = await Course.find().distinct('dept');
+        const allDepts = await Course.find().distinct('dept');
         console.log(allDepts);
         res.send(allDepts);
     } catch (e) {
-        res.status(500).send(e.toString());
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.toString());
     }
 })
 
