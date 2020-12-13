@@ -7,12 +7,13 @@ const toggleButtonContainerColor = "#A2A7B9";
 
 export const MainControlsContainer = styled.div`
     width: 100%;
-    height: 8rem;
+    height: 6rem;
     display: grid;
     font-size: 1.4rem;
     grid-template-columns: 1fr 1fr .6fr 1.4fr;
     column-gap: 2rem;
     align-items: start;
+    margin-bottom: 2rem;
 `;
 
 export const AddYearForm = styled.form`
@@ -106,10 +107,16 @@ export const StyledPopup = styled(Popup)`
 export const LoadSaveForm = styled.form`
     display: grid;
     grid-template-columns: 45% 5% 50%;
+    margin-right: 1rem;
+`;
+
+export const TextInputBox = styled.div`
+
 `;
 
 
 export const TextInput = styled.input`
+    width: 100%;
     border-radius: 10px;
     outline: none;
     border: transparent;
@@ -132,6 +139,19 @@ export const TextInput = styled.input`
     ::placeholder {
         opacity: .8;
     }
+`;
+
+export const ErrorMessage = styled.p`
+    display: block;
+    width: 100%;
+    color: #EB6C6C;
+    font-weight: 400;
+    font-size: 1.2rem;
+
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 3;
 `;
 
 export const ToggleButtonContainer = styled.div`
