@@ -11,7 +11,7 @@ router.post('/api/plan/save', logRequest, async (req, res) => {
         if (plan) {
             // update existing plan
             plan.degreePlan = req.body.degreePlan;
-            await plan.save(); 
+            await plan.save();
             res.status(StatusCodes.OK).send(plan)
         } else {
             // create new plan
@@ -20,7 +20,7 @@ router.post('/api/plan/save', logRequest, async (req, res) => {
             res.status(StatusCodes.CREATED).send(newPlan);
         }
     } catch (e) {
-        res.status(StatusCodes.BAD_REQUEST).send(e);
+        res.status(StatusCodes.BAD_REQUEST).send(e.toString());
     }
 
 })
@@ -35,7 +35,7 @@ router.get('/api/plan/load', logRequest, async (req, res) => {
         else
             res.status(StatusCodes.NOT_FOUND).send({ error: "Not found" });
     } catch (e) {
-        res.status(StatusCodes.BAD_REQUEST).send(e);
+        res.status(StatusCodes.BAD_REQUEST).send(e.toString());
     }
 
 })

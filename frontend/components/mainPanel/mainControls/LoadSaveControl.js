@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+import { AppContext } from '@components/AppContextProvider';
+import { savePlan } from '@api/plan';
+
 import {
     LoadSaveForm,
     TextInputBox,
@@ -16,7 +20,24 @@ const isInputValid = (inputString) => {
     return true;
 }
 
+// extracts course ids from planData
+// returns [ {'20f': [courseId1, courseId2,] }, {}, ...]
+const extractCourseIds = (planData) => {
+    const result = [];
+    for (const yearData of planData) {
+        const convertedYearData = {};
+        for (const [term, courses] of Object.entries(yearData)) {
+            convertedYearData[term] = courses.map(course => course._id);
+        }
+        result.push(convertedYearData);
+    }
+    return result;
+}
+
 const LoadSaveControl = () => {
+
+    const { planData, setPlanData } = useContext(AppContext);
+
     const [isLoadSelected, setIsLoadSelected] = useState(true);
     const [currentButton, setCurrentButton] = useState('load');
     const [inputValue, setInputValue] = useState('');
@@ -29,10 +50,15 @@ const LoadSaveControl = () => {
             // Load
             if (!isInputValid(inputValue)) return setIsFormValid(false);
             console.log('load', inputValue);
+            
         } else if (!isLoadSelected && currentButton === 'save') {
             // Save
             if (!isInputValid(inputValue)) return setIsFormValid(false);
             console.log('save', inputValue);
+
+            const degreePlan = extractCourseIds(planData);
+            console.log('degreePlan\n', degreePlan);
+            savePlan(inputValue, degreePlan);
         }
     }
 

@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+
+const baseDevURL = 'https://localhost:5000/api/course/';
 const baseURL = 'https://anteater-pathway.herokuapp.com/api/course/'
 
 const base = axios.create({
     baseURL
 })
 
-export const fetchCourses = async(dept, level, num) => {
+export const fetchCourses = async (dept, level, num) => {
     const params = {
         dept, level, num
     }

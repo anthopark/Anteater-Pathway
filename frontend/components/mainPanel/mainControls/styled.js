@@ -146,7 +146,8 @@ export const ErrorMessage = styled.p`
     width: 100%;
     color: #EB6C6C;
     font-weight: 400;
-    font-size: 1.2rem;
+    margin-top: .2rem;
+    font-size: 1.4rem;
 
     grid-column-start: 4;
     grid-column-end: 5;
