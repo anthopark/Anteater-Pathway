@@ -10,8 +10,10 @@ const base = axios.create({
 export const savePlan = async (userId, degreePlan) => {
     try {
         await base.post('save', { userId, degreePlan });
+        return true;
     } catch (e) {
-        console.log(e.toString());
+        console.error(e.toString());
+        return false;
     }
 }
 
