@@ -3,7 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { AppContext } from '@components/AppContextProvider';
-import { savePlan } from '@api/plan';
+import { 
+    savePlan, loadPlan,
+    PLAN_SAVED_NEW, PLAN_LOADED,
+    PLAN_SAVED_OLD, PLAN_LOAD_NOT_FOUND,
+    PLAN_SAVED_FAILED, PLAN_LOAD_FAILED,
+  } from '@api/plan';
 
 import {
     LoadSaveFormContainer,
@@ -23,12 +28,14 @@ const FORM_LOADING = 2;
 const FORM_SAVE_SUCCESS = 3;
 const FORM_SAVE_FAIL = 4;
 const FORM_LOAD_SUCCESS = 5;
-const FORM_LOAD_FAIL = 6;
+const FORM_LOAD_NOT_FOUND = 6;
+const FORM_LOAD_FAIL = 7;
 
 const INVALID_INPUT_MESSAGE = 'Must be 4-20 characters';
 const SAVE_SUCCESS_MESSAGE = 'Saved!';
 const SAVE_FAIL_MESSAGE = 'Something went wrong :(';
 const LOAD_SUCCESS_MESSAGE = 'Loaded!';
+const LOAD_NOT_FOUND_MESSAGE = 'ID not found :(';
 const LOAD_FAIL_MESSAGE = 'Something went wrong :('
 
 
@@ -104,6 +111,12 @@ const createMessageUI = (formStatus) => {
                 {LOAD_SUCCESS_MESSAGE}
             </FormMessage>
         );
+    } else if (formStatus === FORM_LOAD_NOT_FOUND) {
+        return (
+            <FormMessage error>
+                {LOAD_NOT_FOUND_MESSAGE}
+            </FormMessage>
+        );
     } else if (formStatus === FORM_LOAD_FAIL) {
         return (
             <FormMessage error>
@@ -130,26 +143,39 @@ const LoadSaveControl = () => {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
-
+        
+        
+        
         if (isLoadSelected && currentButton === 'load') {
             // Load
             if (!isInputValid(inputValue)) return setFormStatus(FORM_INPUT_INVALID);
-            console.log('load', inputValue);
+
+            setFormStatus(FORM_LOADING)
+            const loadResult = await loadPlan(inputValue);
+            
+            if (loadResult.code === PLAN_LOADED) {
+                setFormStatus(FORM_LOAD_SUCCESS);
+            } else if (loadResult.code === PLAN_LOAD_NOT_FOUND) {
+                setFormStatus(FORM_LOAD_NOT_FOUND);
+            } else if (loadResult.code === PLAN_LOAD_FAILED) {
+                setFormStatus(FORM_LOAD_FAIL);
+            }
+            
+            console.log('degreePlan Loaded', loadResult.planData);
+
 
         } else if (!isLoadSelected && currentButton === 'save') {
             // Save
             if (!isInputValid(inputValue)) return setFormStatus(FORM_INPUT_INVALID);
-            console.log('save', inputValue);
 
             setFormStatus(FORM_LOADING)
-
             const degreePlan = extractCourseIds(planData);
-            const isSuccessful = await savePlan(inputValue, degreePlan); // returns bool for success/fail
+            const saveResult = await savePlan(inputValue, degreePlan); // returns bool for success/fail
 
-            if (isSuccessful) {
+            if (saveResult === PLAN_SAVED_NEW || saveResult === PLAN_SAVED_OLD) {
                 setFormStatus(FORM_SAVE_SUCCESS);
-            } else {
-                setFormStatus(FORM_FAIL);
+            } else if (saveResult === PLAN_SAVED_FAILED) {
+                setFormStatus(FORM_SAVE_FAIL);
             }
 
             console.log('degreePlan Saved\n', degreePlan);

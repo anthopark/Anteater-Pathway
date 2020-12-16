@@ -167,6 +167,7 @@ export const StatusIconBox = styled.div`
 export const FormMessage = styled.p`
     display: block;
     width: 100%;
+    padding-left: .5rem;
     font-weight: 400;
     margin-top: 1rem;
     font-size: 1.3rem;
