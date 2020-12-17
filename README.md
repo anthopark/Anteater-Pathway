@@ -8,7 +8,7 @@
 
 <p align="center">Drag n Drop UCI Degree Planner</p>
 <p align="center">
-    <img alt="demo-animation" src="anteater-pathway-demo.gif" width="600"/>
+    <img alt="demo-animation" src="anteater-pathway-demo.gif" width="800"/>
 </p>
 
 ## How it works
