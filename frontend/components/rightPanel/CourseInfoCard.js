@@ -10,6 +10,7 @@ import {
     AdditionalInfoBox,
     InfoLabel,
     AdditionalInfoText,
+    IllustImage,
 } from './styled';
 
 const CourseInfoCard = () => {
@@ -35,12 +36,7 @@ const CourseInfoCard = () => {
                                             <AdditionalInfoBox key={index}>
                                                 <InfoLabel>{info.label}:</InfoLabel>
                                                 <AdditionalInfoText>
-                                                    {
-                                                        currentClickedCourse[info.field].endsWith('.') ?
-                                                            currentClickedCourse[info.field].slice(0, -1)
-                                                            : currentClickedCourse[info.field]
-
-                                                    }
+                                                    {currentClickedCourse[info.field]}
                                                 </AdditionalInfoText>
                                             </AdditionalInfoBox>
                                         )
@@ -51,7 +47,11 @@ const CourseInfoCard = () => {
 
 
                     )
-                    : undefined
+                    : (
+                        <CourseInfoCardContainer>
+                            <IllustImage src='/illust-1.svg' />
+                        </CourseInfoCardContainer>
+                    )
             }
         </>
     );

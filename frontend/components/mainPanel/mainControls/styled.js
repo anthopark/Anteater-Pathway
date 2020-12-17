@@ -7,12 +7,13 @@ const toggleButtonContainerColor = "#A2A7B9";
 
 export const MainControlsContainer = styled.div`
     width: 100%;
-    height: 8rem;
+    height: 6rem;
     display: grid;
     font-size: 1.4rem;
-    grid-template-columns: 1fr 1fr .6fr 1.4fr;
+    grid-template-columns: 1fr 1fr .5fr 1.5fr;
     column-gap: 2rem;
     align-items: start;
+    margin-bottom: 2rem;
 `;
 
 export const AddYearForm = styled.form`
@@ -103,18 +104,40 @@ export const StyledPopup = styled(Popup)`
 
 // LoadSaveControl
 
+export const LoadSaveFormContainer = styled.div`
+    width: 100%;
+`;
+
 export const LoadSaveForm = styled.form`
     display: grid;
-    grid-template-columns: 45% 5% 50%;
+    grid-template-columns: 53% 47%;
+    padding-right: 10px;
+    position: relative;
+`;
+
+
+export const TextInputContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: .6rem;
+`;
+
+export const TextInputBox = styled.div`
+    width: 85%;
+    margin-right: .6rem;
+
 `;
 
 
 export const TextInput = styled.input`
+    width: 100%;
     border-radius: 10px;
     outline: none;
     border: transparent;
     padding: .5rem 1rem;
     height: 3.5rem;
+
     ${({isFormValid}) => (
         isFormValid ?
         `box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .4);`
@@ -134,12 +157,33 @@ export const TextInput = styled.input`
     }
 `;
 
+export const StatusIconBox = styled.div`
+    width: 15%;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+`;
+
+export const FormMessage = styled.p`
+    display: block;
+    width: 100%;
+    padding-left: .5rem;
+    font-weight: 400;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    color: ${({error}) => error ? '#EB6C6C' : 'green'};
+
+    position: absolute;
+    z-index: 1;
+`;
+
 export const ToggleButtonContainer = styled.div`
     width: 100%;
     border-radius: 100px;
     background-color: ${toggleButtonContainerColor};
     height: 3.5rem;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, .4);
+    
     
 `;
 

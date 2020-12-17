@@ -16,7 +16,7 @@ import {
 
 
 
-export const CourseItem = ({courseInfo, ...props}) => {
+export const CourseItem = ({ courseInfo, ...props }) => {
 
     const { setCurrentClickedCourse } = useContext(AppContext);
 
@@ -60,9 +60,10 @@ export const CourseItem = ({courseInfo, ...props}) => {
             <NumText>
                 {courseInfo.num}
             </NumText>
-            {isHover && props.isPlanned ?
-                (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
-                : undefined
+            {
+                isHover && props.isPlanned ?
+                    (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
+                    : undefined
             }
         </MinimalVersionContainer>
     )
@@ -76,9 +77,10 @@ export const CourseItem = ({courseInfo, ...props}) => {
             <LowerBox>
                 <CourseTitleBox>{courseInfo.title}</CourseTitleBox>
             </LowerBox>
-            {isHover && props.isPlanned ?
-                (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
-                : undefined
+            {
+                isHover && props.isPlanned ?
+                    (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
+                    : undefined
             }
         </ExtendedVersionContainer>
     );

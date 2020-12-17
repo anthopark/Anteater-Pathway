@@ -54,3 +54,9 @@ export const InfoLabel = styled.label`
 export const AdditionalInfoText = styled.p`
     font-size: 1.6rem;
 `;
+
+export const IllustImage = styled.img`
+    width: 100%;
+    max-height: 25rem;
+    margin: 3rem auto;
+`
