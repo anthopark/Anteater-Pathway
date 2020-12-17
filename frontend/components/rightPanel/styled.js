@@ -57,6 +57,6 @@ export const AdditionalInfoText = styled.p`
 
 export const IllustImage = styled.img`
     width: 100%;
-    max-height: 25rem;
-    margin: 3rem auto;
+    max-height: 20rem;
+    margin: 5rem auto;
 `

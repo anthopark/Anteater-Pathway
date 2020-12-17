@@ -12,7 +12,7 @@ const scrollBarHoverColor = "#A2A7B9"
 
 export const MainPanelContainer = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding: 1.2rem 1.2rem;
 `;
 
@@ -28,8 +28,12 @@ export const InnerBackgroundContainer = styled.div`
 export const AcademicYearsBox = styled.div`
     /* max-height: 100px; */
     /* overflow-y: scroll; */
-    max-height: 90%;
+    max-height: 85rem;
     overflow: auto;
+
+    scrollbar-color: ${scrollBarColor} transparent;
+    scrollbar-width: thin;
+    scrollbar-face-color: ${scrollBarHoverColor};
 
     ::-webkit-scrollbar {
         width: .8rem;

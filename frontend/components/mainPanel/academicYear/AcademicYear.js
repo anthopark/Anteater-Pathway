@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
+import { AppContext } from '@components/AppContextProvider';
 import Quarter from './Quarter';
 
 import {
@@ -14,6 +15,8 @@ import {
 
 
 export const AcademicYear = ({ year, yearPlanData, removeAcademicYear }) => {
+    const { setCurrentClickedCourse } = useContext(AppContext)
+
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -28,7 +31,9 @@ export const AcademicYear = ({ year, yearPlanData, removeAcademicYear }) => {
                 </YearText>
                 {
                     isHovered ?
-                        <RemoveButton onClick={() => removeAcademicYear(year)}>X</RemoveButton>
+                        <RemoveButton onClick={() => {
+                            removeAcademicYear(year); setCurrentClickedCourse(null); 
+                        }}>X</RemoveButton>
                         : undefined
                 }
             </AcademicYearHeader>

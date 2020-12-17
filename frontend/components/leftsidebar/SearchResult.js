@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useContext } from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import SimpleBar from 'simplebar-react';
 import { faRedo, faSearch, faExclamationCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
