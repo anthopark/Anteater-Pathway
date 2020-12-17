@@ -4,7 +4,7 @@ const courseInfoCardBgColor = '#EDF1FC';
 const textColor = '#1A2556';
 
 export const RightPanelContainer = styled.div`
-    height: 100vh;
+    height: 100%;
     padding: 1.2rem 1.2rem 1.2rem 0;
 `;
 

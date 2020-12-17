@@ -90,6 +90,9 @@ export const QuarterHeader = styled.div`
     letter-spacing: .1rem;
     padding: 1rem;
     font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `;
 
 export const QuarterCourses = styled.div`

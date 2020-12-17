@@ -14,6 +14,8 @@ import {
     RemoveButton,
 } from './styled'
 
+const EXTEND_UI_THRESHOLD = 185;
+
 
 
 export const CourseItem = ({ courseInfo, ...props }) => {
@@ -94,7 +96,7 @@ export const CourseItem = ({ courseInfo, ...props }) => {
             onMouseLeave={(e) => { setIsHover(false); }}
             onMouseDown={(e) => { setCurrentClickedCourse(courseInfo); }}
         >
-            { containerWidth > 190 ? extendedVersionUI : minimalVersionUI}
+            { containerWidth > EXTEND_UI_THRESHOLD ? extendedVersionUI : minimalVersionUI}
         </CourseItemContainer>
     );
 }
