@@ -37,7 +37,7 @@ const AddYearControl = ({ addAcademicYear }) => {
                 styles={isFormValid ? dropdownStyle : dropdownErrorStyle}
                 value={yearValue}
                 onChange={(e) => { setYearValue(e); setIsFormValid(true); }}
-                placeholder="school year"
+                placeholder="year"
             />
             <div></div>
             <MainControlButton type="submit">

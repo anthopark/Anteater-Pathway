@@ -4,6 +4,7 @@ import Popup from 'reactjs-popup';
 const buttonColor = "#2850FF";
 const textColor = "#EAEAEA";
 const toggleButtonContainerColor = "#A2A7B9";
+const placeHolderTextColor = "#747474";
 
 export const MainControlsContainer = styled.div`
     width: 100%;
@@ -153,6 +154,7 @@ export const TextInput = styled.input`
     }
 
     ::placeholder {
+        color: ${placeHolderTextColor};
         opacity: .8;
     }
 `;

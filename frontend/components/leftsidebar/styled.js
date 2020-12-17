@@ -8,6 +8,7 @@ const logoEmphasisColor = "#E47B00";
 const searchFormBgColor = "#2850FF";
 const searchResultBgColor = "#122782";
 const clearButtonColor = "#95AFF4"
+const placeHolderTextColor = "#747474";
 
 const scrollBarColor = "#775E7B"
 const scrollBarHoverColor = "#9D7DA3"
@@ -26,13 +27,14 @@ export const LeftSideBarContainer = styled.div`
 export const LogoContainer = styled.div`
     width: 100%;
     display: flex;
+    justify-content: center;
     margin-bottom: 2rem;
     padding: 0 1rem;
 `;
 
 
 export const LogoImage = styled.img`
-    margin-right: 1rem;
+    width: 20rem;
 `;
 
 export const LogoHeading = styled.h1`
@@ -99,6 +101,7 @@ export const FormTextInput = styled.input`
     }
 
     ::placeholder {
+        color: ${placeHolderTextColor};
         opacity: .8;
     }
 `;
@@ -165,10 +168,9 @@ export const dropdownErrorStyle = {
 // SearchResultList
 export const SearchResultContainer = styled.div`
     margin-top: 3rem;
-    padding: 1rem 1.7rem 2rem 3.3rem;
+    padding: 1rem 1.7rem 3rem 3.3rem;
     background-color: ${searchResultBgColor};
     border-radius: 20px;
-    max-height: 420px;
 `;
 
 export const ClearButtonBox = styled.div`
@@ -230,9 +232,13 @@ export const ResultMessageText = styled.span`
 export const ResultListBox = styled.div`
     display: flex;
     flex-direction: column;
-    max-height: 90%;
+    max-height: 35.5rem;
     overflow-y: auto;
     padding: .3rem 0;
+
+    scrollbar-color: ${scrollBarColor} transparent;
+    scrollbar-width: thin;
+    scrollbar-face-color: ${scrollBarHoverColor};
 
     ::-webkit-scrollbar {
         width: .8rem;
