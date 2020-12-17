@@ -14,7 +14,7 @@ export const PLAN_LOAD_FAILED = 6;
 
 
 const base = axios.create({
-    baseURL: baseDevURL,
+    baseURL: baseURL,
 })
 
 const extractErrorCode = (message) => {

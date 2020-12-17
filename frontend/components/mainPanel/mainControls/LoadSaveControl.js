@@ -155,6 +155,7 @@ const LoadSaveControl = () => {
             
             if (loadResult.code === PLAN_LOADED) {
                 setFormStatus(FORM_LOAD_SUCCESS);
+                setPlanData(loadResult.planData);
             } else if (loadResult.code === PLAN_LOAD_NOT_FOUND) {
                 setFormStatus(FORM_LOAD_NOT_FOUND);
             } else if (loadResult.code === PLAN_LOAD_FAILED) {

@@ -1,13 +1,15 @@
 const express = require('express');
-const Plan = require('../models/plan');
-const router = new express.Router();
-const logRequest = require('../middleware/log');
 const { StatusCodes } = require('http-status-codes');
+const Plan = require('../models/plan');
+const logRequest = require('../middleware/log');
+const { fetchCompletePlan } = require('./helpers');
+
+const router = new express.Router();
 
 router.post('/api/plan/save', logRequest, async (req, res) => {
 
     try {
-        const plan = await Plan.findOne({ userId: req.body.userId});
+        const plan = await Plan.findOne({ userId: req.body.userId });
         if (plan) {
             // update existing plan
             plan.degreePlan = req.body.degreePlan;
@@ -27,13 +29,19 @@ router.post('/api/plan/save', logRequest, async (req, res) => {
 
 
 router.get('/api/plan/load', logRequest, async (req, res) => {
-    
+
+    const { userId } = req.query
+
     try {
-        const plan = await Plan.findOne({ userId: req.body.userId });
-        if (plan)
-            res.status(StatusCodes.OK).send(plan.degreePlan);
-        else
-            res.status(StatusCodes.NOT_FOUND).send({ error: "Not found" });
+        const plan = await Plan.findOne({ userId });
+        if (!plan) {
+            console.log('hmm');
+            res.status(StatusCodes.NOT_FOUND).send({ message: 'Not found lol' });
+        }
+        else {
+            const result = await fetchCompletePlan(plan.degreePlan);
+            res.status(StatusCodes.OK).send(result);
+        }
     } catch (e) {
         res.status(StatusCodes.BAD_REQUEST).send(e.toString());
     }
