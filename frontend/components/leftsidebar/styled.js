@@ -211,6 +211,7 @@ export const ClearButton = styled.a`
 export const ResultMessageBox = styled.div`
     display: flex;
     align-items: center;
+    padding-top: 1rem;
     padding-left: .2rem;
     color: ${textColor};
     font-size: 1.5rem;

@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import SimpleBar from 'simplebar-react';
-import { faRedo, faSearch, faExclamationCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faRedo, faArrowUp, faExclamationCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { AppContext } from '@components/AppContextProvider';
@@ -51,7 +51,7 @@ const SearchResultList = ({ isLoading }) => {
         // haven't searched
         searchResultMessage = (
             <ResultMessageBox>
-                <FontAwesomeIcon icon={faSearch} style={{ fontSize: '1.7rem' }} />
+                <FontAwesomeIcon icon={faArrowUp} style={{ fontSize: '1.7rem' }} />
                 <ResultMessageText>
                     Find your courses
                 </ResultMessageText>
