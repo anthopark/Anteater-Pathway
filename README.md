@@ -6,8 +6,10 @@
 
 <h1 align="center">Anteater Pathway</h1>
 
-<p align="center">Drag n Drop UCI Degree Plan Helper</p>
-
+<p align="center">Drag n Drop UCI Degree Planner</p>
+<p align="center">
+    <img alt="demo-animation" src="anteater-pathway-demo.gif" width="600"/>
+</p>
 
 ## How it works
 
