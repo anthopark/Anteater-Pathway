@@ -1,6 +1,20 @@
-# Anteater Pathway
+<p align="center">
+    <a href="https://anteaterpathway.com">
+        <img alt="anteater-pathway-logo" src="https://raw.githubusercontent.com/anthopark/Anteater-Pathway/master/frontend/public/favicon.svg" width="100" />
+    </a>
+</p>
 
-Drag & Drop UC Irvine Degree Planner.
+<h1 align="center">Anteater Pathway</h1>
+
+<p align="center">Drag n Drop UCI Degree Plan Helper</p>
+
+
+## How it works
+
+1. Search and browse all UCI courses.
+2. Drag and drop courses to plan academic years.
+3. Load and save your planner.
+4. View course information on the right hand card.
 
 ## Features
 
