@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { setFocusHandler } from 'react-query';
 
 export const AppContext = createContext();
 
@@ -15,7 +16,7 @@ const AppContextProvider = ({ children }) => {
     const [searchedCourses, setSearchedCourses] = useState(null);
     const [yearOptions, setYearOptions] = useState(generateYearOptions(15, 30));
     const [currentClickedCourse, setCurrentClickedCourse] = useState(null);
-    
+    const [customUnitCourses, setCustomUnitCourses] = useState({});
     
     return (
         <AppContext.Provider value={{
@@ -23,6 +24,7 @@ const AppContextProvider = ({ children }) => {
             searchedCourses, setSearchedCourses,
             yearOptions, setYearOptions,
             currentClickedCourse, setCurrentClickedCourse,
+            customUnitCourses, setCustomUnitCourses,
         }}>
             {children}
         </AppContext.Provider>

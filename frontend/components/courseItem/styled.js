@@ -4,6 +4,7 @@ import styled, {keyframes, css} from 'styled-components';
 const itemBgColor = "#EBE0F6";
 const courseTextColor = "#1A2556"
 const removeButtonColor = "#E0787E";
+const placeHolderTextColor = "#747474";
 
 const fadeIn = keyframes`
     0% {
@@ -110,8 +111,6 @@ export const RemoveButton = styled.a`
 
     width: 3rem;
     height: 2rem;
-    margin-left: 1rem;
-    margin-top: .4rem;
     padding: .1rem 1rem;
     display: inline-block;
     background-color: ${removeButtonColor};
@@ -120,8 +119,12 @@ export const RemoveButton = styled.a`
     cursor: pointer;
 
     position: absolute;
-    top: 3px;
-    right: 10px;
+    top: 7px;
+    ${({isCustomUnits}) => isCustomUnits ? 
+        css`left: 10px;` 
+        : css`right: 10px;`
+    }
+
     z-index: 10;
     
     font-size: 1.3rem;
@@ -135,4 +138,79 @@ export const RemoveButton = styled.a`
     &:visited {
         text-decoration: none;
     }
+`;
+
+// CustomUnitForm
+
+const buttonBgColor = "#4B8AAE";
+const buttonTextColor = "#EAEAEA";
+
+export const CustomUnitsFormContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    z-index: 10;
+`;
+
+export const FormBox = styled.form`
+    animation: ${fadeIn} 1s;
+    width: 9rem;
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const IconBox = styled.div`
+    width: 9rem;
+    display: flex;
+    justify-content: center;
+`;
+
+
+export const UnitInput = styled.input`
+    width: 4rem;
+    height: 2rem;
+    padding: .2rem .5rem;
+    margin: 0 0;
+    border-radius: 5px;
+    outline: none;
+    border: transparent;
+    transition: .3s;
+    border: 1px solid dodgerblue;
+
+    ${({isFormValid}) => (
+        isFormValid ?
+        ''
+        :
+        css`
+        border:transparent;
+        box-shadow: 0px 1px 3px 2px #EB6C6C;
+        `
+    )}
+    
+    &:focus {
+        border: 1px solid dodgerblue; 
+    }
+
+    ::placeholder {
+        color: ${placeHolderTextColor};
+        opacity: .8;
+    }
+`
+
+export const SubmitButton = styled.button`
+    background: none;
+    border:none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
+
+    width: 4.7rem;
+    height: 2rem;
+    font-weight: 700;
+    border-radius: 5px;
+    background-color: ${buttonBgColor};
+    color: ${buttonTextColor};
+    font-size: 1.3rem;
 `;

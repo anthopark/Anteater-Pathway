@@ -26,10 +26,12 @@ const Page = () => {
     const { planData, setPlanData } = useContext(AppContext);
     const { searchedCourses, setSearchedCourses } = useContext(AppContext);
     const { currentClickedCourse } = useContext(AppContext);
+    const { customUnitCourses } = useContext(AppContext);
 
     console.log('planData\n', planData);
     console.log('searchedCourses\n', searchedCourses);
     console.log('currentClickedCourse\n', currentClickedCourse);
+    console.log('customUnitCourses\n', customUnitCourses);
 
     const onDragEnd = (result) => {
         console.log(result);
