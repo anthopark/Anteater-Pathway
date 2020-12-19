@@ -1,6 +1,8 @@
-import { useState, useRef, useContext, useLayoutEffect } from 'react';
+import { useState, useRef, useContext, useLayoutEffect, useEffect } from 'react';
 
 import { AppContext } from '@components/AppContextProvider';
+import CustomUnitsForm from './CustomUnitsForm';
+
 import {
     CourseItemContainer,
     MinimalVersionContainer,
@@ -12,19 +14,25 @@ import {
     CourseInfoBox,
     CourseTitleBox,
     RemoveButton,
+    CustomUnitsFormContainer,
 } from './styled'
 
 const EXTEND_UI_THRESHOLD = 185;
 
+const isCustomUnits = (units) => {
+    return units.includes('-')
+}
 
 
 export const CourseItem = ({ courseInfo, ...props }) => {
 
     const { setCurrentClickedCourse } = useContext(AppContext);
+    const { customUnitCourses, setCustomUnitCourses } = useContext(AppContext);
 
     const containerRef = useRef(null);
     const [containerWidth, setContainerWidth] = useState(0);
     const [isHover, setIsHover] = useState(false);
+
 
     // holds the timer for setTimeout and clearInterval
     let movementTimer = null;
@@ -50,8 +58,40 @@ export const CourseItem = ({ courseInfo, ...props }) => {
 
     const onRemoveButtonClick = () => {
         props.removeCourseItem(courseInfo._id);
+        
         setCurrentClickedCourse(null);
+        
+        // delete the custom input value 
+        if (courseInfo._id in customUnitCourses) {
+            const newCustomUnitCourses = { ...customUnitCourses }
+            delete newCustomUnitCourses[courseInfo._id];
+            setCustomUnitCourses(newCustomUnitCourses);
+        }
     }
+
+    let hoverStateUI = (
+        <>
+            <RemoveButton
+                onClick={onRemoveButtonClick}
+                isCustomUnits={isCustomUnits(courseInfo.unit)}
+            >
+                X
+            </RemoveButton>
+            <>
+                {
+                    isCustomUnits(courseInfo.unit) ?
+                        (
+                            <CustomUnitsForm
+                                courseId={courseInfo._id}
+                                minUnit={parseInt(courseInfo.unit.split('-')[0])}
+                                maxUnit={parseInt(courseInfo.unit.split('-')[1])}
+                            />
+                        )
+                        : undefined
+                }
+            </>
+        </>
+    );
 
 
     let minimalVersionUI = (
@@ -64,7 +104,7 @@ export const CourseItem = ({ courseInfo, ...props }) => {
             </NumText>
             {
                 isHover && props.isPlanned ?
-                    (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
+                    hoverStateUI
                     : undefined
             }
         </MinimalVersionContainer>
@@ -74,14 +114,14 @@ export const CourseItem = ({ courseInfo, ...props }) => {
         <ExtendedVersionContainer>
             <UpperBox>
                 <CourseInfoBox>{`${courseInfo.dept} ${courseInfo.num}`}</CourseInfoBox>
-                <CourseInfoBox>{`${courseInfo.unit} Units`}</CourseInfoBox>
+                <CourseInfoBox>{`${ courseInfo._id in customUnitCourses ? customUnitCourses[courseInfo._id]: courseInfo.unit } Units`}</CourseInfoBox>
             </UpperBox>
             <LowerBox>
                 <CourseTitleBox>{courseInfo.title}</CourseTitleBox>
             </LowerBox>
             {
                 isHover && props.isPlanned ?
-                    (<RemoveButton onClick={onRemoveButtonClick}>X</RemoveButton>)
+                    hoverStateUI
                     : undefined
             }
         </ExtendedVersionContainer>

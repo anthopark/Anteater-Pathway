@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://anteaterpathway.com">
-        <img alt="anteater-pathway-logo" src="https://raw.githubusercontent.com/anthopark/Anteater-Pathway/master/frontend/public/favicon.svg" width="100" />
+        <img alt="anteater-pathway-logo" src="frontend/public/logo-only-icon.svg" width="100" />
     </a>
 </p>
 
