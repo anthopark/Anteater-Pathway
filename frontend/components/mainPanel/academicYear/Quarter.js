@@ -14,8 +14,9 @@ import {
 
 
 const Quarter = ({ quarterId, heading, courses }) => {
-
     const { planData, setPlanData } = useContext(AppContext);
+    const { customUnitCourses } = useContext(AppContext);
+
     const [totalUnits, setTotalUnits] = useState(0);
 
     const removeCourseItem = (courseId) => {
@@ -33,10 +34,15 @@ const Quarter = ({ quarterId, heading, courses }) => {
         // compute total units
         let total = 0;
         courses.forEach((course) => {
-            total += parseInt(course.unit);
+            if (course._id in customUnitCourses) {
+                total += parseInt(customUnitCourses[course._id]);
+            } else {
+                total += parseInt(course.unit);
+            }
+            
         })
         setTotalUnits(total);
-    }, [planData])
+    }, [planData, customUnitCourses])
 
     return (
         <QuarterContainer>
@@ -50,26 +56,27 @@ const Quarter = ({ quarterId, heading, courses }) => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
-                        {courses.map((course, index) => (
-                            <Draggable
-                                key={course._id}
-                                draggableId={course._id}
-                                index={index}
-                            >
-                                {(provided) => (
-                                    <div
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        ref={provided.innerRef}
-                                    >
-                                        <CourseItem
-                                            courseInfo={course}
-                                            isPlanned={true}
-                                            removeCourseItem={removeCourseItem}
-                                        />
-                                    </div>
-                                )}
-                            </Draggable>
+                        {
+                            courses.map((course, index) => (
+                                <Draggable
+                                    key={course._id}
+                                    draggableId={course._id}
+                                    index={index}
+                                >
+                                    {(provided) => (
+                                        <div
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            ref={provided.innerRef}
+                                        >
+                                            <CourseItem
+                                                courseInfo={course}
+                                                isPlanned={true}
+                                                removeCourseItem={removeCourseItem}
+                                            />
+                                        </div>
+                                    )}
+                                </Draggable>
                             ))
                         }
 
