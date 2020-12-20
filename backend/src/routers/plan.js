@@ -36,7 +36,6 @@ router.get('/api/plan/load', logRequest, async (req, res) => {
     try {
         const plan = await Plan.findOne({ userId });
         if (!plan) {
-            console.log('hmm');
             res.status(StatusCodes.NOT_FOUND).send({ message: 'Not found lol' });
         }
         else {
