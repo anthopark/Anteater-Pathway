@@ -1,0 +1,10 @@
+department,number,title,unit,ge,description,prerequisite,restriction,same as,overlaps with,concurrent with,grading option,repeatability,corequisite,prerequisite or corequisite
+GREEK,1A,Fundamentals of Greek,5,,"Elements of Classical Greek grammar, syntax, and vocabulary.",,GREEK 1A and GREEK S1AB may not be taken for full credit.,,GREEK S1AB.,,,,,
+GREEK,1B,Fundamentals of Greek,5,,"Elements of Classical Greek grammar, syntax, and vocabulary.",GREEK 1A. GREEK 1A with a grade of C or better,GREEK 1B and GREEK S1AB and GREEK S1BC may not be taken for full credit.,,"GREEK S1AB, GREEK S1BC.",,,,,
+GREEK,1C,Fundamentals of Greek,5,VI,Introduction to reading texts.,GREEK 1B. GREEK 1B with a grade of C or better,GREEK 1C and GREEK S1BC may not be taken for full credit.,,GREEK S1BC.,,,,,
+GREEK,99,Special Studies in Greek,1-4,,Lower-division level independent research with Greek faculty.,,,,,,,May be repeated for credit unlimited times.,,
+GREEK,100,Topics in  Attic Greek,4,,"Selected readings in Attic Greek prose and poetry. Authors may include Xenophon, Lysias, Antiphon, Euripides, and others. Selections from prose and poetry will be read each quarter. Grammar and syntax review included.",GREEK 1C. GREEK 1C with a grade of C or better. Placement into GREEK 100 is also accepted.,,,,,,Unlimited as topics vary.,,
+GREEK,103,Seminar in Greek Prose,4,,Specialized and focused study of a particular Greek prose author or topic.,GREEK 100,,,,,,Unlimited as topics vary.,,
+GREEK,104,Seminar in Greek Poetry,4,,Specialized and focused study of a particular topic or author of Greek poetry.,GREEK 100,,,,,,Unlimited as topics vary.,,
+GREEK,198,Directed Group Study,4,,Special topics in Greek culture and civilization through directed reading and research.,,,,,,,May be repeated for credit unlimited times.,,
+GREEK,199,Independent Studies in Greek,1-4,,Independent research with Greek faculty.,,,,,,,May be repeated for credit unlimited times.,,
