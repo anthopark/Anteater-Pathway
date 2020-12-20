@@ -46,7 +46,7 @@ router.get('/api/course/search', logRequest, async (req, res) => {
                 dept, level, num: { $regex: num, $options: "i" }
             });
         }
-
+        // should send statuscode.OK here too
         res.send(courses);
     } catch (e) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.toString());
@@ -59,6 +59,7 @@ router.get('/api/course/dept/all', logRequest, async (req, res) => {
     try {
         const allDepts = await Course.find().distinct('dept');
         console.log(allDepts);
+        // should send statuscode.OK here
         res.send(allDepts);
     } catch (e) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.toString());
