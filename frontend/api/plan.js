@@ -14,7 +14,7 @@ export const PLAN_LOAD_FAILED = 6;
 
 
 const base = axios.create({
-    baseURL: baseURL,
+    baseURL: baseDevURL,
 })
 
 const extractErrorCode = (message) => {
@@ -22,9 +22,9 @@ const extractErrorCode = (message) => {
 }
 
 
-export const savePlan = async (userId, degreePlan) => {
+export const savePlan = async (userId, degreePlan, customUnits) => {
     try {
-        const response = await base.post('save', { userId, degreePlan });
+        const response = await base.post('save', { userId, degreePlan, customUnits });
         console.log(response);
         if (response.status === StatusCodes.OK) {
             // updated the existing plan
@@ -53,7 +53,8 @@ export const loadPlan = async (userId) => {
         const response = await base.get('load', { params });
         if (response.status === StatusCodes.OK) {
             return {
-                planData: response.data,
+                planData: response.data.degreePlan,
+                customUnits: response.data.customUnits,
                 code: PLAN_LOADED,
             };
         }
