@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const uri = process.env.ATLAS_URI;
 
 mongoose.connect(uri, {
@@ -9,7 +10,7 @@ mongoose.connect(uri, {
 });
 
 const connection = mongoose.connection;
-connection.once('open', () => {
+connection.once('open', async () => {
     console.log('MongoDB database connection established successfully');
-})
+});
 
