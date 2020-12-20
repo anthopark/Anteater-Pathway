@@ -32,4 +32,4 @@ yarn-error.log*
 .env.production.local
 
 # Anteater Pathway speicific
-initial-version/
+course-data/.env
