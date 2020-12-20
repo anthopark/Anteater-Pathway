@@ -8,7 +8,6 @@ const fetchCompletePlan = async (degreePlan) => {
     let courseIds = [];
 
     for (const yearData of degreePlan) {
-        console.log(yearData);
         for (const courses of Object.values(yearData)) {
             for (const course of courses) {
                 courseIds.push(course);
