@@ -11,6 +11,7 @@ import {
     SearchForm,
     FormFieldBox,
     FormLabel,
+    optionalSpanStyle,
     FormTextInput,
     ThreeColumnGridBox,
     SearchButton,
@@ -74,7 +75,7 @@ const CourseSearchForm = ({setIsLoading}) => {
                     />
                 </FormFieldBox>
                 <FormFieldBox>
-                    <FormLabel>Level</FormLabel>
+                    <FormLabel>Level <span style={optionalSpanStyle}>(optional)</span></FormLabel>
                     <Select
                         instanceId='level'
                         styles={dropdownStyle}
@@ -86,7 +87,7 @@ const CourseSearchForm = ({setIsLoading}) => {
                     />
                 </FormFieldBox>
                 <FormFieldBox>
-                    <FormLabel>Number</FormLabel>
+                    <FormLabel>Number <span style={optionalSpanStyle}>(optional)</span></FormLabel>
                     <ThreeColumnGridBox>
                         <FormTextInput
                             type='text'
