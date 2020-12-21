@@ -12,7 +12,8 @@ const planSchema = new mongoose.Schema({
     degreePlan: [],
     customUnits: {}
 }, {
-    collection: 'plans'
+    collection: 'plans',
+    minimize: false // prevent empty object from removal
 });
 
 const Plan = mongoose.model('Plan', planSchema);

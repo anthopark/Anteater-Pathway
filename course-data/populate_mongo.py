@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv('./.env')
-course_data_dir = Path('./course-data-by-dept-2020-12-19/')
+course_data_dir = Path('./course-data-by-dept-2020-12-20/')
 
 SCHOOL_DEPT = {
     'Claire Trevor School of the Arts': set(['ARTS', 'ART', 'DANCE', 'DRAMA', 'MUSIC']),

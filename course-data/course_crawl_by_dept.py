@@ -42,8 +42,7 @@ DATA_SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 def break_title_line(title_line: str) -> ('dept', 'number', 'title', 'unit'):
     title_line = unidecode(title_line)
-    line_parsed = [token.strip()
-                   for token in title_line.split('.') if token.strip() != '']
+    line_parsed = [token.strip() for token in title_line.split('. ') if token.strip() != '']
 
     dept = ' '.join(line_parsed[0].split(' ')[:-1])
     num = line_parsed[0].split(' ')[-1]
