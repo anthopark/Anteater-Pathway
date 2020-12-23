@@ -33,6 +33,7 @@
 * Browse and search courses and view their information including  
 * Add multiple school years to complete entire degree plan
 * Input custom unit value for research credit courses
+* Display previous quarters a course had been offered
 * Responsive Design for Desktops and Tablets
 
 ## Getting Started

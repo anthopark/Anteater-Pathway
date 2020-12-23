@@ -84,15 +84,12 @@ if __name__ == "__main__":
     db = client[os.environ.get('DB_NAME')]
     course_collection = db['courses']
 
-
-
     # {'COMPSCI-141': ['2021 Winter', '2020 Fall', '2020 Summer I', ...]}
     course_termlist_dict = construct_course_termlist_dict()
 
     print('Testing Log')
     print('COMPSCI-161:', course_termlist_dict['COMPSCI-161'])
     print('COMPSCI-141:', course_termlist_dict['COMPSCI-141'])
-
 
     # Updating the existing course documents, by adding a new field "prevQuarters"
     for course, termlist in course_termlist_dict.items():
