@@ -12,6 +12,11 @@ import {
     TotalUnitBox,
 } from './styled';
 
+const roundToPrecision = (value, precision) => {
+    let multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+}
+
 
 const Quarter = ({ quarterId, heading, courses }) => {
     const { planData, setPlanData } = useContext(AppContext);
@@ -37,7 +42,7 @@ const Quarter = ({ quarterId, heading, courses }) => {
             if (course._id in customUnitCourses) {
                 total += parseInt(customUnitCourses[course._id]);
             } else {
-                total += parseInt(course.unit);
+                total += course.unit.includes('.') ?  Number(course.unit): parseInt(course.unit);
             }
             
         })
@@ -88,7 +93,7 @@ const Quarter = ({ quarterId, heading, courses }) => {
             <QuarterFooter>
                 {totalUnits === 0 ? undefined : (
                     <TotalUnitBox>
-                        {`${totalUnits} units`}
+                        {`${roundToPrecision(totalUnits, 1)} units`}
                     </TotalUnitBox>
                 )}
             </QuarterFooter>

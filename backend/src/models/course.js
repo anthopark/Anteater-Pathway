@@ -7,6 +7,7 @@ const courseSchema = new mongoose.Schema({
     title: String,
     unit: String,
     level: String,
+    ge: String,
     desc: String,
     prerequisite: String,
     restriction: String,
@@ -18,7 +19,7 @@ const courseSchema = new mongoose.Schema({
     corequisite: String,
     preOrCorequisite: String
 }, {
-    collection: 'course'
+    collection: 'courses'
 })
 
 const Course = mongoose.model('Course', courseSchema);

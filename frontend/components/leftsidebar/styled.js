@@ -78,7 +78,14 @@ export const FormLabel = styled.label`
     color: ${textColor};
     margin-bottom: .3rem;
     letter-spacing: .1rem;
+    font-weight: 700;
 `;
+
+export const optionalSpanStyle = {
+    letterSpacing: '0',
+    fontSize: '1.3rem',
+    fontWeight: '400',
+}
 
 export const ThreeColumnGridBox = styled.div`
     width: 100%;

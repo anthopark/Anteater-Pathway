@@ -6,6 +6,12 @@
 
 <h1 align="center">Anteater Pathway</h1>
 
+<p align="center">
+    <a href="https://anteaterpathway.com">
+        www.anteaterpathway.com
+    </a>
+</p>
+
 <p align="center">Drag n Drop UCI Degree Planner</p>
 
 <p align="center">
@@ -26,13 +32,15 @@
 * Drag & drop course items to visually plan out path to graduation
 * Browse and search courses and view their information including  
 * Add multiple school years to complete entire degree plan
+* Input custom unit value for research credit courses
+* Display previous quarters a course had been offered
 * Responsive Design for Desktops and Tablets
 
 ## Getting Started
 
 This instruction is for setting up the project locally.
 
-Anteater Pathway is composed of two different parts. The `frondend` directory contains a Next.js (a React.js framework) for client application, and the directory `backend` contains a Node.js  server to handle requests from the client app for connection to MongoDB Atlas. The Next.js project at the root was created by `npx create-next-app` and the backend Node.js project was created by `npm init`.
+Anteater Pathway is composed of two different parts. The `frondend` directory contains a Next.js (a React.js framework) for client application, and the directory `backend` contains a Node.js  server to handle requests from the client app for connection to MongoDB Atlas. The Next.js project in `frontend` was created by `npx create-next-app` and the `backend` Node.js project was created by `npm init`.
 
 ### Prerequisites
 

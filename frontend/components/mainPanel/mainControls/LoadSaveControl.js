@@ -133,6 +133,7 @@ const createMessageUI = (formStatus) => {
 const LoadSaveControl = () => {
 
     const { planData, setPlanData } = useContext(AppContext);
+    const { customUnitCourses, setCustomUnitCourses } = useContext(AppContext);
 
     const [isLoadSelected, setIsLoadSelected] = useState(true);
     const [currentButton, setCurrentButton] = useState('load');
@@ -144,8 +145,6 @@ const LoadSaveControl = () => {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         
-        
-        
         if (isLoadSelected && currentButton === 'load') {
             // Load
             if (!isInputValid(inputValue)) return setFormStatus(FORM_INPUT_INVALID);
@@ -154,8 +153,10 @@ const LoadSaveControl = () => {
             const loadResult = await loadPlan(inputValue);
             
             if (loadResult.code === PLAN_LOADED) {
+                console.log(loadResult);
                 setFormStatus(FORM_LOAD_SUCCESS);
                 setPlanData(loadResult.planData);
+                setCustomUnitCourses(loadResult.customUnits);
             } else if (loadResult.code === PLAN_LOAD_NOT_FOUND) {
                 setFormStatus(FORM_LOAD_NOT_FOUND);
             } else if (loadResult.code === PLAN_LOAD_FAILED) {
@@ -163,15 +164,13 @@ const LoadSaveControl = () => {
             }
             
             console.log('degreePlan Loaded', loadResult.planData);
-
-
         } else if (!isLoadSelected && currentButton === 'save') {
             // Save
             if (!isInputValid(inputValue)) return setFormStatus(FORM_INPUT_INVALID);
 
             setFormStatus(FORM_LOADING)
             const degreePlan = extractCourseIds(planData);
-            const saveResult = await savePlan(inputValue, degreePlan); // returns bool for success/fail
+            const saveResult = await savePlan(inputValue, degreePlan, customUnitCourses); // returns bool for success/fail
 
             if (saveResult === PLAN_SAVED_NEW || saveResult === PLAN_SAVED_OLD) {
                 setFormStatus(FORM_SAVE_SUCCESS);

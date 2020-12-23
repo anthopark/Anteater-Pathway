@@ -123,15 +123,17 @@
         "WRITING"
     ],
     "courseExtraInfo": [
-        {"label": "Description", "field": "desc" },
+        {"label": "GE category", "field": "ge" },
+        {"label": "Previously offered", "field": "prevQuarters" },
         {"label": "Prerequisite", "field": "prerequisite" },
+        {"label": "Pre or corequisite", "field": "corequisite" },
         {"label": "Same as", "field": "sameAs" },
         {"label": "Overlaps with", "field": "overlapsWith" },
         {"label": "Concurrent with", "field": "concurrentWith" },
-        {"label": "Grading option", "field": "gradingOption" },
         {"label": "Corequisite", "field": "repeatability" },
-        {"label": "Pre or corequisite", "field": "corequisite" },
+        {"label": "Restriction", "field": "restriction" },
+        {"label": "Grading option", "field": "gradingOption" },
         {"label": "Repeatability", "field": "preOrCorequisite" },
-        {"label": "Restriction", "field": "restriction" }
+        {"label": "Description", "field": "desc" }
     ]
 }

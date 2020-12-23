@@ -13,6 +13,7 @@ router.post('/api/plan/save', logRequest, async (req, res) => {
         if (plan) {
             // update existing plan
             plan.degreePlan = req.body.degreePlan;
+            plan.customUnits = req.body.customUnits;
             await plan.save();
             res.status(StatusCodes.OK).send(plan)
         } else {
@@ -35,12 +36,14 @@ router.get('/api/plan/load', logRequest, async (req, res) => {
     try {
         const plan = await Plan.findOne({ userId });
         if (!plan) {
-            console.log('hmm');
             res.status(StatusCodes.NOT_FOUND).send({ message: 'Not found lol' });
         }
         else {
             const result = await fetchCompletePlan(plan.degreePlan);
-            res.status(StatusCodes.OK).send(result);
+            res.status(StatusCodes.OK).send({
+                degreePlan: result,
+                customUnits: plan.customUnits,
+            });
         }
     } catch (e) {
         res.status(StatusCodes.BAD_REQUEST).send(e.toString());
