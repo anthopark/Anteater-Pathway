@@ -42,7 +42,7 @@ class Course(Document):
     repeatability = StringField(max_length=1000)
     corequisite = StringField(max_length=1000)
     preOrCorequisite = StringField(max_length=1500)
-
+    v = IntField(db_field='__v')
     meta={'collection': 'courses'}
 
 

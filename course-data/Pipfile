@@ -11,7 +11,7 @@ unidecode = "*"
 mongoengine = "*"
 python-dotenv = "*"
 bs4 = "*"
-pymongo = {extras = ["srv"], version = "*"}
+pymongo = {extras = ["tls"], version = "*"}
 
 [requires]
 python_version = "3.8"
