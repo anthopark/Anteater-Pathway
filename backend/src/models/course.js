@@ -8,6 +8,7 @@ const courseSchema = new mongoose.Schema({
     unit: String,
     level: String,
     ge: String,
+    prevQuarters: [String],
     desc: String,
     prerequisite: String,
     restriction: String,
