@@ -20,9 +20,8 @@ export const CourseInfoCardContainer = styled.div`
     display: flex;
     flex-direction: column;
     color: ${textColor};
-    box-shadow: 0px 3px 7px 3px rgba(0,0,0, 0.1)
+    box-shadow: 0px 3px 7px 3px rgba(0,0,0, 0.1);
 `;
-
 
 export const DeptNumBox = styled.div`
     font-size: 1.8rem;
@@ -101,7 +100,11 @@ export const ExpandToggleButton = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    color: rgba(0, 0, 0, 0.3)
+    color: rgba(0, 0, 0, 0.3);
+    transition: all .2s;
+    &:hover {
+        color: rgba(0, 0, 0, 0.6);
+    }
 
 `;
 
