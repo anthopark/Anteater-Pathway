@@ -25,6 +25,7 @@
     "react-select": "^3.1.0",
     "reactjs-popup": "^2.0.4",
     "simplebar-react": "^2.3.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "styled-react-modal": "^2.0.1"
   }
 }
