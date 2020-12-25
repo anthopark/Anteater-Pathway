@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
-// ONLY RUN THIS WHEN COURSES COLLECTION IS INITIALIZED
-const { duplicateNecessaryCourses } = require('../scripts/db-scripts');
-// RUN AFTER UPDATING PREVQUARTERS ARE UPDATED, TO REMOVE "prevQuarter" FROM RESEARCH CREDIT COURSES
-const { removeFieldFromCourses } = require('../scripts/db-scripts');
+
+const {
+    // ONLY RUN THIS WHEN COURSES COLLECTION IS INITIALIZED
+    duplicateNecessaryCourses,
+    // ONLY RUN AFTER UPDATING "prevQuarters", TO REMOVE "prevQuarter" FROM RESEARCH CREDIT COURSES
+    removeFieldFromCourses } = require('../scripts/db-scripts');
 
 
 const uri = process.env.ATLAS_URI;

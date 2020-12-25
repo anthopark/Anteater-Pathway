@@ -61,35 +61,34 @@ const duplicateNecessaryCourses = async () => {
 // Remove "prevQuarters" field from research credit courses
 const removeFieldFromCourses = async () => {
 
-    let specialTopicCourses = await Course.find({
+    const specialTopicCourses = await Course.find({
         title: { $regex: 'special topic', $options: 'i' },
         prevQuarters : {$exists : true}
     })
 
 
-    let undergradResearchCreditCourses = await Course.find({
+    const undergradResearchCreditCourses = await Course.find({
         $or: [{ title: { $regex: 'independent', $options: 'i' } }, { title: { $regex: 'individual', $options: 'i' } }, { title: { $regex: 'research', $options: 'i' } }],
         num: { $regex: '199', $options: 'i' },
         prevQuarters : {$exists : true}
     })
 
 
-    let gradResearchCreditCourses299 = await Course.find({
+    const gradResearchCreditCourses299 = await Course.find({
         $or: [{ title: { $regex: 'independent', $options: 'i' } }, { title: { $regex: 'individual', $options: 'i' } }, { title: { $regex: 'research', $options: 'i' } }],
         num: { $regex: '299', $options: 'i' },
         prevQuarters : {$exists : true}
     })
 
-    let gradResearchCreditCourses298 = await Course.find({
+    const gradResearchCreditCourses298 = await Course.find({
         $or: [{ title: { $regex: 'independent', $options: 'i' } }, { title: { $regex: 'individual', $options: 'i' } }, { title: { $regex: 'research', $options: 'i' } }],
         num: { $regex: '298', $options: 'i' },
         prevQuarters : {$exists : true}
     })
 
-    let gradResearchCreditCourses290 = await Course.find({
+    const gradResearchCreditCourses290 = await Course.find({
         $or: [{ title: { $regex: 'independent', $options: 'i' } }, { title: { $regex: 'individual', $options: 'i' } }, { title: { $regex: 'research', $options: 'i' } }],
-        num: { $regex: '290', $options: 'i' },
-        prevQuarters : {$exists : true}
+        num: { $regex: '290', $options: 'i' }
     })
 
     await removePrevQuartersField(specialTopicCourses);
