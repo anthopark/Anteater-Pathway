@@ -19,7 +19,7 @@ import {
     ExpandToggleButton,
     ExpandToggleButtonText,
 } from './styled';
-import { setFocusHandler } from 'react-query';
+
 
 const CourseInfoCard = () => {
 
@@ -103,7 +103,8 @@ const CourseInfoCard = () => {
                                         <>
                                             {renderExtraInfo()}
                                         </>
-                                    ) :
+                                    )
+                                    :
                                     (
                                         <>
                                             {renderExtraInfo(3)}
