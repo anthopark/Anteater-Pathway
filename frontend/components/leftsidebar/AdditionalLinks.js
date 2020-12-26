@@ -17,7 +17,7 @@ const AdditionalLinks = () => {
                 <IconLink href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=LTKH3TMC5ZLS8&item_name=I+would+love+%242+boba%21+This+woud+also+help+the+team+pay+for+the+server.+Thank+you+%3A%29&currency_code=USD&amount=2" target="_blank">
                     <SvgImage src='./bobame.svg' />
                     <LinkText paddingLeft={'1.7rem'}>
-                        Boba me
+                        Boba us
                     </LinkText>
                 </IconLink>
             </LinkBox>
