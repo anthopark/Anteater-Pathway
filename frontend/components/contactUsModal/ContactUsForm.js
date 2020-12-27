@@ -19,15 +19,12 @@ import {
     ModalButton,
     StatusIconBox,
     FormStatusMessage,
-
 } from './styled';
 
 const FORM_READY = 0;
 const FORM_LOADING = 1;
 const FORM_SUCCESS = 2;
 const FORM_FAILED = 3;
-
-
 
 const ContactUsForm = () => {
 

@@ -24,12 +24,10 @@ const getQuarterCourses = (droppableId, planData) => {
 
 const Page = () => {
     const { planData, setPlanData } = useContext(AppContext);
-    const { searchedCourses, setSearchedCourses } = useContext(AppContext);
-    const { currentClickedCourse } = useContext(AppContext);
-    const { customUnitCourses } = useContext(AppContext);
-
+    const { searchedCourses } = useContext(AppContext);
+    
     const onDragEnd = (result) => {
-        const { source, destination, draggableId } = result;
+        const { source, destination } = result;
 
         if (!destination) return;
         if (destination.droppableId === 'search-result') return;
