@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { StatusCodes } from 'http-status-codes';
 
-const baseDevURL = 'http://localhost:5000/api/plan/';
-const baseURL = 'https://anteater-pathway.herokuapp.com/api/plan/';
-
 
 export const PLAN_SAVED_NEW = 1;
 export const PLAN_SAVED_OLD = 2;
@@ -14,7 +11,7 @@ export const PLAN_LOAD_FAILED = 6;
 
 
 const base = axios.create({
-    baseURL: baseURL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL
 })
 
 const extractErrorCode = (message) => {
@@ -24,8 +21,7 @@ const extractErrorCode = (message) => {
 
 export const savePlan = async (userId, degreePlan, customUnits) => {
     try {
-        const response = await base.post('save', { userId, degreePlan, customUnits });
-        console.log(response);
+        const response = await base.post('/plan/save', { userId, degreePlan, customUnits });
         if (response.status === StatusCodes.OK) {
             // updated the existing plan
             return PLAN_SAVED_OLD;
@@ -50,7 +46,7 @@ export const loadPlan = async (userId) => {
     const params = { userId };
 
     try {
-        const response = await base.get('load', { params });
+        const response = await base.get('/plan/load', { params });
         if (response.status === StatusCodes.OK) {
             return {
                 planData: response.data.degreePlan,

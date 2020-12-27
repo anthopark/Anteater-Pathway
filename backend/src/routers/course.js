@@ -1,9 +1,10 @@
 const express = require('express');
 const Course = require('../models/course');
-const router = new express.Router();
 const logRequest = require('../middleware/log');
 const { StatusCodes } = require('http-status-codes');
 const courseMetaData = require('../../data/course-metadata.json');
+
+const router = new express.Router();
 
 
 // endpoint for fetching course data by dept, level, and course number
