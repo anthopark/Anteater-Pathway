@@ -153,7 +153,6 @@ const LoadSaveControl = () => {
             const loadResult = await loadPlan(inputValue);
             
             if (loadResult.code === PLAN_LOADED) {
-                console.log(loadResult);
                 setFormStatus(FORM_LOAD_SUCCESS);
                 setPlanData(loadResult.planData);
                 setCustomUnitCourses(loadResult.customUnits);
@@ -163,7 +162,6 @@ const LoadSaveControl = () => {
                 setFormStatus(FORM_LOAD_FAIL);
             }
             
-            console.log('degreePlan Loaded', loadResult.planData);
         } else if (!isLoadSelected && currentButton === 'save') {
             // Save
             if (!isInputValid(inputValue)) return setFormStatus(FORM_INPUT_INVALID);
@@ -177,8 +175,6 @@ const LoadSaveControl = () => {
             } else if (saveResult === PLAN_SAVED_FAILED) {
                 setFormStatus(FORM_SAVE_FAIL);
             }
-
-            console.log('degreePlan Saved\n', degreePlan);
         }
     }
 
@@ -189,7 +185,6 @@ const LoadSaveControl = () => {
     return (
         <LoadSaveFormContainer>
             <LoadSaveForm onSubmit={onFormSubmit}>
-
                 <TextInputContainer>
                     <TextInputBox>
                         <TextInput
@@ -235,13 +230,8 @@ const LoadSaveControl = () => {
                         Save
                         </ToggleButton>
                 </ToggleButtonContainer>
-
             </LoadSaveForm>
-
-
-
         </LoadSaveFormContainer>
-
     );
 }
 

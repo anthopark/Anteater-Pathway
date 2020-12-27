@@ -1,11 +1,7 @@
 import axios from 'axios';
 
-
-const baseDevURL = 'http://localhost:5000/api/course/';
-const baseURL = 'https://anteater-pathway.herokuapp.com/api/course/'
-
 const base = axios.create({
-    baseURL: baseURL,
+    baseURL: process.env.NEXT_PUBLIC_API_URL
 })
 
 export const fetchCourses = async (dept, level, num) => {
@@ -15,7 +11,7 @@ export const fetchCourses = async (dept, level, num) => {
     
     try{
         let courses = [];
-        const response = await base.get('search', { params });
+        const response = await base.get('/course/search', { params });
         courses = response.data;
         return courses;
     } catch (e) {

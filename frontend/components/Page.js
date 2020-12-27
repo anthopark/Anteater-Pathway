@@ -28,13 +28,7 @@ const Page = () => {
     const { currentClickedCourse } = useContext(AppContext);
     const { customUnitCourses } = useContext(AppContext);
 
-    console.log('planData\n', planData);
-    console.log('searchedCourses\n', searchedCourses);
-    console.log('currentClickedCourse\n', currentClickedCourse);
-    console.log('customUnitCourses\n', customUnitCourses);
-
     const onDragEnd = (result) => {
-        console.log(result);
         const { source, destination, draggableId } = result;
 
         if (!destination) return;
@@ -48,8 +42,7 @@ const Page = () => {
 
             const [removed] = newSearchedCourses.splice(source.index, 1);
             quarterCourses.splice(destination.index, 0, removed);
-            console.log({removed});
-            console.log({newPlanData});
+
             setPlanData(newPlanData);
         } else if (source.droppableId !== 'search-result' && source.droppableId !== destination.droppableId) {
             // moved from one quarter to the other

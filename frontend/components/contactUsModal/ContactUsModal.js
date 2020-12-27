@@ -55,7 +55,7 @@ export const ContactUsModal = () => {
                 </FormBox>
                 <ModalFooter>
                     <FooterText>
-                        Designed and created with ❤️ by
+                        Designed and developed with ❤️ by
                         <NameLink href='https://github.com/emilyPhee' target='_blank'>Emily Phee</NameLink>
                          &
                         <NameLink href='https://github.com/anthopark' target='_blank'>Anthony Park</NameLink>

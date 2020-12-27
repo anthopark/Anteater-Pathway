@@ -1,9 +1,10 @@
 import Select from 'react-select';
-import { useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-
+import { submitFeedBack, CONTACT_API_CODE } from '@api/contact';
 import contactUsData from '@data/contact-us-data.json';
 
 import {
@@ -23,7 +24,7 @@ import {
 
 const FORM_READY = 0;
 const FORM_LOADING = 1;
-const FORM_COMPLETE = 2;
+const FORM_SUCCESS = 2;
 const FORM_FAILED = 3;
 
 
@@ -35,7 +36,7 @@ const ContactUsForm = () => {
     const [isSelectInvalid, setIsSelectInvalid] = useState(false);
     const [isMessageInvalid, setIsMessageInvalid] = useState(false);
     const [formStatus, setFormStatus] = useState(FORM_READY);
-
+    const reRef = useRef();
 
 
     const onFormSubmit = async (e) => {
@@ -43,7 +44,16 @@ const ContactUsForm = () => {
         if (!optionValue) return setIsSelectInvalid(true);
         if (!messageValue) return setIsMessageInvalid(true);
 
+        const token = await reRef.current.executeAsync();
+        reRef.current.reset();
+
         setFormStatus(FORM_LOADING);
+        const contactResult = await submitFeedBack(optionValue, messageValue, token);
+        if (contactResult === CONTACT_API_CODE.SUCCESS) {
+            setFormStatus(FORM_SUCCESS);
+        } else {
+            setFormStatus(FORM_FAILED);
+        }
     };
 
     let contactFormUI;
@@ -74,6 +84,12 @@ const ContactUsForm = () => {
                 <FormActionBox>
                     <ModalButton color='send' type='submit'>Send</ModalButton>
                 </FormActionBox>
+
+                <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    size='invisible'
+                    ref={reRef}
+                />
             </MessageForm>
         );
     } else if (formStatus === FORM_LOADING) {
@@ -83,7 +99,7 @@ const ContactUsForm = () => {
             </StatusIconBox>
         );
 
-    } else if (formStatus === FORM_COMPLETE) {
+    } else if (formStatus === FORM_SUCCESS) {
         contactFormUI = (
             <StatusIconBox>
                 <FontAwesomeIcon icon={faCheck} style={{ 'fontSize': '2.7rem', 'color': '#54F03A' }} />
