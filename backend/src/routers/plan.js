@@ -2,7 +2,7 @@ const express = require('express');
 const { StatusCodes } = require('http-status-codes');
 const Plan = require('../models/plan');
 const logRequest = require('../middleware/log');
-const { fetchCompletePlan } = require('./helpers');
+const { fetchCompletePlan } = require('./helpers/plan');
 
 const router = new express.Router();
 

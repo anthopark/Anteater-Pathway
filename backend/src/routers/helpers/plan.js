@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Course = require('../models/course');
-const Plan = require('../models/plan');
+const Course = require('../../models/course');
+const Plan = require('../../models/plan');
 
 const fetchCompletePlan = async (degreePlan) => {
 

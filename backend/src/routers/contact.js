@@ -2,6 +2,7 @@ const express = require('express');
 const logRequest = require('../middleware/log');
 const fetch = require('node-fetch');
 const { StatusCodes } = require('http-status-codes');
+const { sendMail } = require('./helpers/contact');
 
 const router = new express.Router();
 
@@ -19,13 +20,16 @@ const validateHuman = async (token) => {
 
 router.post('/api/contact/feedback', logRequest, async (req, res) => {
     const {issueOption, message, reToken} = req.body;
-    console.log(issueOption, message);
+    console.log(`Issue Category: ${issueOption}`);
+    console.log(`Message\n`, message);
     try {
         const isHuman = await validateHuman(reToken);
+        
         if (!isHuman) {
             return res.status(StatusCodes.BAD_REQUEST);
         }
 
+        await sendMail(issueOption, message);
         res.status(StatusCodes.OK).send();
     } catch(e) {
         console.error(e.toString());
