@@ -3,8 +3,6 @@ import styled from 'styled-components';
 const sideBarBgColor1 = "#213CB2";
 const sideBarBgColor2 = "#0D2AAB";
 const textColor = "#EAEAEA";
-const logoRegularColor = "#DEDEDE";
-const logoEmphasisColor = "#E47B00";
 const searchFormBgColor = "#2850FF";
 const searchResultBgColor = "#122782";
 const clearButtonColor = "#95AFF4"
@@ -37,22 +35,6 @@ export const LogoImage = styled.img`
     width: 20rem;
 `;
 
-export const LogoHeading = styled.h1`
-    padding-top: .3rem;
-    display: block;
-    width: 100%;
-    font-family: 'Concert One', cursive;
-    letter-spacing: .1rem;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    `;
-
-export const LogoTextSpan = styled.span`
-    display: block;
-    text-align: ${({ align }) => (align)};
-    color: ${({ emphasis }) => (emphasis ? logoEmphasisColor : logoRegularColor)};
-    margin-bottom: 1rem;
-`;
 
 // CourseSearchForm
 

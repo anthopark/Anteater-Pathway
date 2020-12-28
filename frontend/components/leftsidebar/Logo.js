@@ -1,15 +1,16 @@
 import {
     LogoContainer,
     LogoImage,
-    LogoHeading,
-    LogoTextSpan,
 } from './styled'
 
 const Logo = () => {
 
     return (
         <LogoContainer>
-            <LogoImage src="/logo.svg"></LogoImage>
+            <a href="https://github.com/anthopark/Anteater-Pathway" target="_blank">
+                <LogoImage src="/logo.svg"></LogoImage>
+            </a>
+
         </LogoContainer>
     );
 }
