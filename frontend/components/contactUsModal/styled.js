@@ -253,7 +253,7 @@ const fadeIn = keyframes`
 `;
 
 export const StatusIconBox = styled.div`
-    animation: fadeIn 1s ease;
+    animation: ${fadeIn} 1s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
