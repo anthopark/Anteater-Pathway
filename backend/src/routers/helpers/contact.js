@@ -4,17 +4,21 @@ const nodemailer = require('nodemailer');
 const sendMail = async (issueOption, message) => {
 
     const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
+        host: "smtp.mail.yahoo.com",
+        port: 465,
+        service: 'yahoo',
+        secure: false,
         auth: {
-            type: 'login',
-            user: process.env.GMAIL_USERNAME,
-            pass: process.env.GMAIL_PASSWORD,
-        }
+            user: process.env.YAHOO_USERNAME,
+            pass: process.env.YAHOO_PASSWORD,
+        },
+        debug: false,
+        logger: true
     })
 
     return new Promise((resolve, reject) => {
         const mailOptions = {
-            from: process.env.GMAIL_USERNAME,
+            from: process.env.YAHOO_USERNAME,
             to: process.env.GMAIL_USERNAME,
             subject: `[Anteater-Pathway][${issueOption}]`,
             text: message
