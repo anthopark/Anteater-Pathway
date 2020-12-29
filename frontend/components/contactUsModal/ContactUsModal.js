@@ -43,6 +43,7 @@ export const ContactUsModal = () => {
             <StyledModal
                 isOpen={isOpen}
                 onEscapeKeydown={toggleModal}
+                onBackgroundClick={toggleModal}
             >
                 <ModalHeader>
                     <LogoImage src='/logo-only-icon.svg' />
