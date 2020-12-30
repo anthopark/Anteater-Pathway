@@ -16,6 +16,9 @@ import {
     FormBox,
     ModalFooter,
     FooterText,
+    ContributorsBox,
+    ContributorsHeader,
+    ContributorItem,
     NameLink,
     ContributeLink,
     IconText,
@@ -55,6 +58,13 @@ export const ContactUsModal = () => {
                     <ContactUsForm />
                 </FormBox>
                 <ModalFooter>
+                    <ContributorsBox>
+                        <ContributorsHeader>Contributors</ContributorsHeader>
+                        <ContributorItem>
+                        <NameLink href='https://github.com/emmohac' target='_blank'>Huy Minh Tran</NameLink>
+                        offered advice on coding style and refactored code in backend.
+                        </ContributorItem>
+                    </ContributorsBox>
                     <FooterText>
                         Designed and developed with ❤️ by
                         <NameLink href='https://github.com/emilyPhee' target='_blank'>Emily Phee</NameLink>

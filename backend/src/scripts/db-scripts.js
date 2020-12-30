@@ -98,8 +98,17 @@ const removeFieldFromCourses = async () => {
     await removePrevQuartersField(gradResearchCreditCourses290);
 }
 
+const duplicateSpecificCourse = async (dept, num, numCopy) => {
+    const course = await Course.find({
+        dept, num
+    });
+    duplicateCourses(course, numCopy);
+    console.log('completed!');
+}
+
 
 module.exports = {
     duplicateNecessaryCourses,
     removeFieldFromCourses,
+    duplicateSpecificCourse,
 }

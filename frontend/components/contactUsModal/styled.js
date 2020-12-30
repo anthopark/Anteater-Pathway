@@ -81,7 +81,24 @@ export const ModalFooter = styled.div`
     align-items: center;
 `;
 
+export const ContributorsBox = styled.div`
+    width: 100%;
+`;
+
+export const ContributorsHeader = styled.div`
+    font-size: 2rem;
+    color: ${textColor};
+    margin-bottom: 1rem;
+`;
+
+export const ContributorItem = styled.li`
+    padding-left: 2rem;
+    color: ${textColor};
+    font-size: 1.8rem;
+`;
+
 export const FooterText = styled.p`
+    margin-top: 5rem; 
     color: ${textColor};
     letter-spacing: .1rem;
     font-size: 1.8rem;
