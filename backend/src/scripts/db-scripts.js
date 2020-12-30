@@ -32,7 +32,7 @@ const duplicateNecessaryCourses = async () => {
 
     let undergradResearchCreditCourses = await Course.find({
         $or: [{ title: { $regex: 'independent', $options: 'i' } }, { title: { $regex: 'individual', $options: 'i' } }, { title: { $regex: 'research', $options: 'i' } }],
-        num: { $regex: '199', $options: 'i' },
+        num: { $regex: '180', $options: 'i' },
     })
 
     let gradResearchCreditCourses299 = await Course.find({
@@ -50,11 +50,13 @@ const duplicateNecessaryCourses = async () => {
         num: { $regex: '290', $options: 'i' }
     })
 
-    await duplicateCourses(specialTopicCourses, 4); // make 4 more documents for each course
-    await duplicateCourses(undergradResearchCreditCourses, 9);
-    await duplicateCourses(gradResearchCreditCourses299, 19);
-    await duplicateCourses(gradResearchCreditCourses298, 19);
-    await duplicateCourses(gradResearchCreditCourses290, 19);
+    // await duplicateCourses(specialTopicCourses, 4); // make 4 more documents for each course
+    // await duplicateCourses(undergradResearchCreditCourses, 9);
+    // await duplicateCourses(gradResearchCreditCourses299, 19);
+    // await duplicateCourses(gradResearchCreditCourses298, 19);
+    // await duplicateCourses(gradResearchCreditCourses290, 19);
+    console.log(undergradResearchCreditCourses);
+    console.log(undergradResearchCreditCourses.length);
     console.log('duplicate completed!');
 }
 
@@ -107,8 +109,20 @@ const duplicateSpecificCourse = async (dept, num, numCopy) => {
 }
 
 
+const deleteAllDuplicatedExceptOriginal = async (dept, num, originalID) => {
+    await Course.deleteMany({
+        dept, num,
+        _id : { $ne: originalID }
+    });
+
+
+    console.log('complete!');
+}
+
+
 module.exports = {
     duplicateNecessaryCourses,
     removeFieldFromCourses,
     duplicateSpecificCourse,
+    deleteAllDuplicatedExceptOriginal,
 }

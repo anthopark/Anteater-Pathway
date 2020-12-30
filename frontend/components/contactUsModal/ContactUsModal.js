@@ -60,10 +60,14 @@ export const ContactUsModal = () => {
                 <ModalFooter>
                     <ContributorsBox>
                         <ContributorsHeader>Contributors</ContributorsHeader>
-                        <ContributorItem>
-                        <NameLink href='https://github.com/emmohac' target='_blank'>Huy Minh Tran</NameLink>
-                        offered advice on coding style and refactored code in backend.
-                        </ContributorItem>
+                        {
+                            contactUsData.contributors.map((contributor, index) => (
+                                <ContributorItem key={index}>
+                                    <NameLink href={contributor.link} target='_blank'>{contributor.name}</NameLink>
+                                    {contributor.contribution}
+                                </ContributorItem>
+                            ))
+                        }
                     </ContributorsBox>
                     <FooterText>
                         Designed and developed with ❤️ by
