@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Course = require('../models/course');
 
 
 const {
@@ -6,7 +7,8 @@ const {
     duplicateNecessaryCourses,
     // ONLY RUN AFTER UPDATING "prevQuarters", TO REMOVE "prevQuarter" FROM RESEARCH CREDIT COURSES
     removeFieldFromCourses,
-    duplicateSpecificCourse } = require('../scripts/db-scripts');
+    duplicateSpecificCourse,
+    deleteAllDuplicatedExceptOriginal, } = require('../scripts/db-scripts');
 
 
 const uri = process.env.ATLAS_URI;

@@ -98,7 +98,7 @@ export const ContributorItem = styled.li`
 `;
 
 export const FooterText = styled.p`
-    margin-top: 5rem; 
+    margin-top: 3rem; 
     color: ${textColor};
     letter-spacing: .1rem;
     font-size: 1.8rem;
@@ -137,7 +137,7 @@ export const IconText = styled.p`
 `;
 
 export const ModalActionBox = styled.div`
-    margin-top: 3rem;
+    margin-top: 0rem;
     display: flex;
     width: 100%;
     justify-content: flex-end;
