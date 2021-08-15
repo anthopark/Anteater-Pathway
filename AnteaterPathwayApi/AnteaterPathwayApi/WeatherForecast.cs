@@ -1,6 +1,6 @@
 using System;
 
-namespace api_server
+namespace AnteaterPathwayApi
 {
     public class WeatherForecast
     {

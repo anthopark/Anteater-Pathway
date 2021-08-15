@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:10412",
-      "sslPort": 44386
+      "applicationUrl": "http://localhost:19915",
+      "sslPort": 44302
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "api_server": {
+    "AnteaterPathwayApi": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

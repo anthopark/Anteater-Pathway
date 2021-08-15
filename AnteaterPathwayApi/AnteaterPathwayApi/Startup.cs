@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-namespace api_server
+namespace AnteaterPathwayApi
 {
     public class Startup
     {
@@ -29,7 +29,7 @@ namespace api_server
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "api_server", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "AnteaterPathwayApi", Version = "v1"});
             });
         }
 
@@ -40,7 +40,7 @@ namespace api_server
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api_server v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AnteaterPathwayApi v1"));
             }
 
             app.UseHttpsRedirection();

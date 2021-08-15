@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace api_server.Controllers
+namespace AnteaterPathwayApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
