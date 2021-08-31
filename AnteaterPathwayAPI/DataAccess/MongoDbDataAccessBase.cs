@@ -55,6 +55,7 @@ namespace AnteaterPathwayAPI.DataAccess
 
     public interface IMongoDbDataAcessBase<T>
     {
+        IMongoCollection<T> Collection { get; }
         Task Add(T record);
         Task<bool> Update(T record);
         Task<T> Find(string id);

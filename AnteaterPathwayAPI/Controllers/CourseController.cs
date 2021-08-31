@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using AnteaterPathwayAPI.DataAccess.Repositories;
 using AnteaterPathwayAPI.Models;
@@ -22,7 +23,7 @@ namespace AnteaterPathwayAPI.Controllers
         [HttpGet("All")]
         public async Task<ActionResult<List<Course>>> GetAllCourses()
         {
-            var result = await _courseRepository.FindAll();
+            var result = await _courseRepository.GetAllCompactCourses();
 
             if (result.Count == 0)
             {

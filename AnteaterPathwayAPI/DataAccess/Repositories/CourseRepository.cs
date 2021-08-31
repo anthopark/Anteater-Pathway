@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnteaterPathwayAPI.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AnteaterPathwayAPI.DataAccess.Repositories
@@ -19,10 +21,30 @@ namespace AnteaterPathwayAPI.DataAccess.Repositories
 
             return course;
         }
+
+        public async Task<List<Course>> GetAllCompactCourses()
+        {
+            var fieldsBuilder = Builders<Course>.Projection;
+            var fields = fieldsBuilder
+                .Exclude(item => item.Id)
+                .Exclude(item => item.Description)
+                .Exclude(item => item.Unit)
+                .Exclude(item => item.GeCategory)
+                .Exclude(item => item.Restriction)
+                .Exclude(item => item.OverlapsWith)
+                .Exclude(item => item.ConcurrentWith)
+                .Exclude(item => item.GradingOption)
+                .Exclude(item => item.Repeatability)
+                .Exclude(item => item.Corequisite)
+                .Exclude(item => item.PreOrCorequisite);
+
+            return await Collection.Find(_ => true).Project<Course>(fields).ToListAsync();
+        }
     }
 
     public interface ICourseRepository : IMongoDbDataAcessBase<Course>
     {
         Task<Course> GetCourse(string department, string number);
+        Task<List<Course>> GetAllCompactCourses();
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using AnteaterPathwayAPI.DataAccess;
 using AnteaterPathwayAPI.DataAccess.Repositories;
@@ -38,7 +39,12 @@ namespace AnteaterPathwayAPI
             services.AddSingleton<IMongoDbContext, MongoDbContext>();
             services.AddSingleton<ICourseRepository, CourseRepository>();
             
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                });
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "AnteaterPathwayAPI", Version = "v1"});
