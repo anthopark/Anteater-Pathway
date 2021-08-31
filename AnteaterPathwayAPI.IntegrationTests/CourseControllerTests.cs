@@ -28,7 +28,9 @@ namespace AnteaterPathwayAPI.IntegrationTests
                 {
                     Department = "COMPSCI",
                     Number = $"{i + 1}",
-                    Title = $"Intro to CompSci {i+1}" 
+                    Title = $"Intro to CompSci {i+1}",
+                    Unit = "4",
+                    Description = "This course is part of CS introductory series."
                 };
                 
                 courseCollection.InsertOne(course);
@@ -38,7 +40,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
         #region GetAllCourse() Test Scenarios
         
         [Trait("Category", "Course Search Integration Tests")]
-        [Fact(DisplayName = "GetAllCourses() Returns a list of three of courses when collection contains 3 courses")]
+        [Fact(DisplayName = "GetAllCourses() returns a list of three of courses when collection contains 3 courses")]
         public async void ReturnsCorrectNumberOfCourses_WhenCollectionIsNotEmpty()
         {
             AddTestCourseItemsToDb(3);
@@ -49,7 +51,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
         }
 
         [Trait("Category", "Course Search Integration Tests")]
-        [Fact(DisplayName = "GetAllCourses() Returns 404 when collection is Empty")]
+        [Fact(DisplayName = "GetAllCourses() returns 404 when collection is empty")]
         public async void Returns404_WhenCollectionIsEmpty()
         {
             AddTestCourseItemsToDb(0);
@@ -57,6 +59,26 @@ namespace AnteaterPathwayAPI.IntegrationTests
             var result = await _sut.GetAllCourses();
             
             Assert.True(result.Result is NotFoundResult);
+        }
+
+        [Trait("Category", "Course Search Integration Tests")]
+        [Fact(DisplayName = "Courses from GetAllCourse() only contains a certain fields")]
+        public async void ReturnedCoursesOnlyContainsCertainFields()
+        {
+            AddTestCourseItemsToDb(3);
+
+            var result = await _sut.GetAllCourses();
+            
+            foreach (var course in result.Value)
+            {
+                Assert.NotNull(course.Department);
+                Assert.NotNull(course.Number);
+                Assert.NotNull(course.Title);
+                
+                Assert.Null(course.Description);
+                Assert.Null(course.Unit);
+                Assert.Null(course.GeCategory);
+            }
         }
         
         #endregion
