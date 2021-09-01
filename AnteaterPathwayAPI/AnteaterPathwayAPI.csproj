@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="CsvHelper" Version="27.1.1" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
         <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
@@ -19,6 +20,105 @@
       <_ContentIncludedByDefault Remove="IntegrationTests\obj\IntegrationTests.csproj.nuget.dgspec.json" />
       <_ContentIncludedByDefault Remove="IntegrationTests\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="IntegrationTests\obj\project.packagespec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="CourseDataScripts\course_data_generator.py">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Academic English (AC ENG).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\African American Studies (AFAM).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Anatomy and Neurobiology (ANATOMY).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Anthropology (ANTHRO).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Arabic (ARABIC).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Armenian (ARMN).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Art (ART).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Art History (ART HIS).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Arts (ARTS).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Asian American Studies (ASIANAM).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Biological Chemistry (BIOCHEM).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Biological Sciences (BIO SCI).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Biomedical and Translational Science (BATS).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Biomedical Engineering (BME).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Business Analytics (BANA).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Chemical and Biomolecular Engineering (CBE).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Chemical Engr and Materials Science (CBEMS).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Chemistry (CHEM).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Chicano-Latino Studies (CHC-LAT).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Chinese (CHINESE).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Civil and Environmental Engineering (ENGRCEE).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Classics (CLASSIC).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Cognitive Sciences (COGS).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Comparative Literature (COM LIT).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Computer Science (COMPSCI).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Computer Science and Engineering (CSE).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Criminology, Law and Society (CRM-LAW).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Criticism (CRITISM).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Culture and Theory (CLT&amp;THY).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Dance (DANCE).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="CourseDataScripts\course-data\Data Science (DATA).csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

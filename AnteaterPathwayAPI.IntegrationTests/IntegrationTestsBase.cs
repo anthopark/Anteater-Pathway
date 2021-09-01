@@ -2,6 +2,7 @@ using System;
 using AnteaterPathwayAPI.DataAccess;
 using Mongo2Go;
 using AnteaterPathwayAPI.SystemConfigurations;
+using Xunit.Abstractions;
 
 namespace AnteaterPathwayAPI.IntegrationTests
 {

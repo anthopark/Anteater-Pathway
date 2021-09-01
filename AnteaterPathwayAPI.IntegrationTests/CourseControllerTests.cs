@@ -4,6 +4,7 @@ using AnteaterPathwayAPI.DataAccess.Repositories;
 using AnteaterPathwayAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
+using Xunit.Sdk;
 
 namespace AnteaterPathwayAPI.IntegrationTests
 {
@@ -18,7 +19,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
             _sut = new CourseController(_courseRepository);
         }
 
-        private void AddTestCourseItemsToDb(int amount = 1)
+        private void AddTestCourseItemsToMongoDb(int amount = 1)
         {
             var courseCollection = _courseRepository.Collection;
 
@@ -43,7 +44,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
         [Fact(DisplayName = "GetAllCourses() returns a list of three of courses when collection contains 3 courses")]
         public async void ReturnsCorrectNumberOfCourses_WhenCollectionIsNotEmpty()
         {
-            AddTestCourseItemsToDb(3);
+            AddTestCourseItemsToMongoDb(3);
             
             var result = await _sut.GetAllCourses();
             
@@ -54,7 +55,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
         [Fact(DisplayName = "GetAllCourses() returns 404 when collection is empty")]
         public async void Returns404_WhenCollectionIsEmpty()
         {
-            AddTestCourseItemsToDb(0);
+            AddTestCourseItemsToMongoDb(0);
 
             var result = await _sut.GetAllCourses();
             
@@ -65,7 +66,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
         [Fact(DisplayName = "Courses from GetAllCourse() only contains a certain fields")]
         public async void ReturnedCoursesOnlyContainsCertainFields()
         {
-            AddTestCourseItemsToDb(3);
+            AddTestCourseItemsToMongoDb(3);
 
             var result = await _sut.GetAllCourses();
             

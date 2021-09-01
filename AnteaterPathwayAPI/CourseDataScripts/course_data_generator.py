@@ -35,7 +35,7 @@ EXTRA_DESCRIPTIONS = [
     'Prerequisite or corequisite:'
 ]
 
-DATA_SAVE_DIR = Path(f'./course-data-{str(date.today())}/')
+DATA_SAVE_DIR = Path(f'./course-data/')
 DATA_SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 
