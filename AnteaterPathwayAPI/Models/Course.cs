@@ -6,33 +6,37 @@ namespace AnteaterPathwayAPI.Models
     [BsonIgnoreExtraElements]
     public class Course : MongoDbBaseModel
     {
-        [BsonElement("dept")]
+        [BsonRequired][BsonElement("dept")]
         public string Department { get; set; }
-        [BsonElement("num")]
+        
+        [BsonRequired][BsonElement("deptCode")]
+        public string DepartmentCode { get; set; }
+        [BsonRequired][BsonElement("num")]
         public string Number { get; set; }
-        [BsonElement("title")]
+        [BsonRequired][BsonElement("title")]
         public string Title { get; set; }
-        [BsonElement("unit")]
+        
+        [BsonIgnoreIfNull][BsonElement("unit")]
         public string Unit { get; set; }
-        [BsonElement("desc")]
+        [BsonIgnoreIfNull][BsonElement("desc")]
         public string Description { get; set; }
-        [BsonElement("ge")]
+        [BsonIgnoreIfNull][BsonElement("ge")]
         public string GeCategory { get; set; }
-        [BsonElement("restriction")]
+        [BsonIgnoreIfNull][BsonElement("restriction")]
         public string Restriction { get; set; }
-        [BsonElement("sameAs")]
+        [BsonIgnoreIfNull][BsonElement("sameAs")]
         public string SameAs { get; set; }
-        [BsonElement("overlapsWith")]
+        [BsonIgnoreIfNull][BsonElement("overlapsWith")]
         public string OverlapsWith { get; set; }
-        [BsonElement("concurrentWith")]
+        [BsonIgnoreIfNull][BsonElement("concurrentWith")]
         public string ConcurrentWith { get; set; }
-        [BsonElement("gradingOption")]
+        [BsonIgnoreIfNull][BsonElement("gradingOption")]
         public string GradingOption { get; set; }
-        [BsonElement("repeatability")]
+        [BsonIgnoreIfNull][BsonElement("repeatability")]
         public string Repeatability { get; set; }
-        [BsonElement("corequisite")]
+        [BsonIgnoreIfNull][BsonElement("corequisite")]
         public string Corequisite { get; set; }
-        [BsonElement("preOrCorequisite")]
+        [BsonIgnoreIfNull][BsonElement("preOrCorequisite")]
         public string PreOrCorequisite { get; set; }
     }
 }

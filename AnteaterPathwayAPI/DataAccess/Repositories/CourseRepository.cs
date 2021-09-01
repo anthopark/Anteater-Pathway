@@ -10,12 +10,12 @@ namespace AnteaterPathwayAPI.DataAccess.Repositories
     {
         public CourseRepository(IMongoDbContext dbContext) : base("courses", dbContext) {}
 
-        public async Task<Course> GetCourse(string department, string number)
+        public async Task<Course> GetCourse(string departmentCode, string number)
         {
-            var departmentFilter = Builders<Course>.Filter.Eq(item => item.Department, department);
+            var departmentCodeFilter = Builders<Course>.Filter.Eq(item => item.DepartmentCode, departmentCode);
             var numberFilter = Builders<Course>.Filter.Eq(item => item.Number, number);
 
-            var filter = Builders<Course>.Filter.And(departmentFilter, numberFilter);
+            var filter = Builders<Course>.Filter.And(departmentCodeFilter, numberFilter);
 
             var course = await Collection.Find(filter).FirstOrDefaultAsync();
 
@@ -44,7 +44,7 @@ namespace AnteaterPathwayAPI.DataAccess.Repositories
 
     public interface ICourseRepository : IMongoDbDataAcessBase<Course>
     {
-        Task<Course> GetCourse(string department, string number);
+        Task<Course> GetCourse(string departmentCode, string number);
         Task<List<Course>> GetAllCompactCourses();
     }
 }

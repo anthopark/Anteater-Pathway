@@ -7,6 +7,7 @@ import csv
 
 CSV_HEADERS = [
     'department',
+    'department code',
     'number',
     'title',
     'unit',
@@ -124,7 +125,9 @@ if __name__ == "__main__":
             for course_div in course_divs:
                 title_line = course_div.select(
                     'p.courseblocktitle strong')[0].text
-                course_data = list(break_title_line(title_line))
+                course_data = [dept[:dept.index("(")].strip()]
+                
+                course_data.extend(list(break_title_line(title_line)))
 
                 ge_category = course_div.select('div.courseblockdesc p strong')
                 course_data.append(extract_ge_category(ge_category))

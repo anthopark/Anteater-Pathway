@@ -4,7 +4,7 @@ import csv
 from dotenv import load_dotenv
 import os
 
-COURSE_DATA_DIR = Path('./course-data-2021-08-26/')
+COURSE_DATA_DIR = Path('./course-data/')
 
 load_dotenv('mongodb.env')
 
@@ -29,12 +29,15 @@ class Course(Document):
 
 
 db = connect(os.environ.get('DB_NAME'), host=os.environ.get('MONGODB_URI'))
+course_count = 0
+csv_file_count = 0
 
 if __name__ == "__main__":
 
     for data_file in COURSE_DATA_DIR.iterdir():
         if not data_file.name.endswith('.csv'):
             continue
+        csv_file_count += 1
         with open(data_file, 'r') as read_file:
             csv_reader = csv.DictReader(read_file)
             for row in csv_reader:
@@ -66,10 +69,14 @@ if __name__ == "__main__":
                     course.preOrCorequisite = row['prerequisite or corequisite'].strip(
                     )
 
-                try:
-                    course.save()
-                except:
-                    print(row)
-                    raise
+                course_count += 1
+                # try:
+                #     course.save()
+                # except:
+                #     print(row)
+                #     raise
+                
+print(f"total_count: {course_count}")
+print(f"csv_file_count: {csv_file_count}")
 
     

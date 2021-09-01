@@ -6,6 +6,9 @@ namespace AnteaterPathwayAPI.Applications
     {
         [Name("department")]
         public string Department { get; set; }
+        
+        [Name("department code")]
+        public string DepartmentCode { get; set; }
         [Name("number")]
         public string Number { get; set; }
         [Name("title")]

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using AnteaterPathwayAPI.Controllers;
 using AnteaterPathwayAPI.DataAccess.Repositories;
 using AnteaterPathwayAPI.Models;
@@ -10,33 +11,13 @@ namespace AnteaterPathwayAPI.IntegrationTests
 {
     public class CourseControllerTests : IntegrationTestsBase
     {
-        private ICourseRepository _courseRepository;
         private readonly CourseController _sut;
         
         public CourseControllerTests() : base()
         {
-            _courseRepository = new CourseRepository(DbContext);
             _sut = new CourseController(_courseRepository);
         }
 
-        private void AddTestCourseItemsToMongoDb(int amount = 1)
-        {
-            var courseCollection = _courseRepository.Collection;
-
-            for (int i = 0; i < amount; i++)
-            {
-                var course = new Course()
-                {
-                    Department = "COMPSCI",
-                    Number = $"{i + 1}",
-                    Title = $"Intro to CompSci {i+1}",
-                    Unit = "4",
-                    Description = "This course is part of CS introductory series."
-                };
-                
-                courseCollection.InsertOne(course);
-            }
-        }
         
         #region GetAllCourse() Test Scenarios
         
@@ -44,7 +25,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
         [Fact(DisplayName = "GetAllCourses() returns a list of three of courses when collection contains 3 courses")]
         public async void ReturnsCorrectNumberOfCourses_WhenCollectionIsNotEmpty()
         {
-            AddTestCourseItemsToMongoDb(3);
+            await AddTestCourseItemsToMongoDb(3);
             
             var result = await _sut.GetAllCourses();
             
@@ -55,7 +36,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
         [Fact(DisplayName = "GetAllCourses() returns 404 when collection is empty")]
         public async void Returns404_WhenCollectionIsEmpty()
         {
-            AddTestCourseItemsToMongoDb(0);
+            await AddTestCourseItemsToMongoDb(0);
 
             var result = await _sut.GetAllCourses();
             
@@ -66,13 +47,13 @@ namespace AnteaterPathwayAPI.IntegrationTests
         [Fact(DisplayName = "Courses from GetAllCourse() only contains a certain fields")]
         public async void ReturnedCoursesOnlyContainsCertainFields()
         {
-            AddTestCourseItemsToMongoDb(3);
+            await AddTestCourseItemsToMongoDb(3);
 
             var result = await _sut.GetAllCourses();
             
             foreach (var course in result.Value)
             {
-                Assert.NotNull(course.Department);
+                Assert.NotNull(course.DepartmentCode);
                 Assert.NotNull(course.Number);
                 Assert.NotNull(course.Title);
                 
