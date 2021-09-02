@@ -4,6 +4,7 @@ from unidecode import unidecode
 from pathlib import Path
 from datetime import date
 import csv
+import sys
 
 CSV_HEADERS = [
     'department',
@@ -36,7 +37,7 @@ EXTRA_DESCRIPTIONS = [
     'Prerequisite or corequisite:'
 ]
 
-DATA_SAVE_DIR = Path(f'./course-data/')
+DATA_SAVE_DIR = Path(f'./{sys.argv[1]}/')
 DATA_SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 

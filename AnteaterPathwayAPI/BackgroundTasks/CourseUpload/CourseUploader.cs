@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -9,12 +8,14 @@ using AnteaterPathwayAPI.DataAccess.Repositories;
 using AnteaterPathwayAPI.Models;
 using CsvHelper;
 
-namespace AnteaterPathwayAPI.Applications
+namespace AnteaterPathwayAPI.BackgroundTasks.CourseUpload
 {
     public class CourseUploader
     {
         private readonly ICourseRepository _courseRepository;
 
+        private string _csvDirectory;
+        
         private long _updateCount = 0;
         private long _insertCount = 0;
         private long _recordCount = 0;
@@ -23,7 +24,7 @@ namespace AnteaterPathwayAPI.Applications
         {
             get
             {
-                var csvDirectoryPath = $"{Directory.GetCurrentDirectory()}/CourseDataScripts/course-data/";
+                var csvDirectoryPath = $"{Directory.GetCurrentDirectory()}/CourseDataScripts/{_csvDirectory}/";
 
                 if (!Directory.Exists(csvDirectoryPath))
                 {
@@ -41,7 +42,7 @@ namespace AnteaterPathwayAPI.Applications
                 {
                     if (!csvFile.EndsWith(".csv"))
                     {
-                        throw new Exception($"Invalid CSV file format: {csvFile}");
+                        throw new FormatException($"Invalid CSV file format: {csvFile}");
                     }
                 }
 
@@ -52,9 +53,10 @@ namespace AnteaterPathwayAPI.Applications
         public long InsertedCount => _insertCount;
         public long UpdateCount => _updateCount;
 
-        public CourseUploader(ICourseRepository courseRepository)
+        public CourseUploader(ICourseRepository courseRepository, string csvDirectory)
         {
             _courseRepository = courseRepository;
+            _csvDirectory = csvDirectory;
         }
 
         public async Task Upload()
@@ -65,20 +67,20 @@ namespace AnteaterPathwayAPI.Applications
             {
                 foreach (var courseCsvRecord in GetRecordsFromCsvFile(csvFile))
                 {
-                    var courseDocument = await _courseRepository.GetCourse(courseCsvRecord.DepartmentCode, courseCsvRecord.Number);
-                    
+                    var courseDocument =
+                        await _courseRepository.GetCourse(courseCsvRecord.DepartmentCode, courseCsvRecord.Number);
+
                     if (courseDocument is null)
                     {
-                        // TODO: Insert as a new course document
                         InsertNewCourseDocument(courseCsvRecord);
                         _insertCount++;
                     }
                     else
                     {
-                        // TODO: Update the existing course document
                         UpdateCourseDocument(courseDocument, courseCsvRecord);
                         _updateCount++;
                     }
+
                     _recordCount++;
                 }
             }
@@ -142,7 +144,8 @@ namespace AnteaterPathwayAPI.Applications
 
         public string ReportStatistics()
         {
-            return $"Csv File Counts: {CsvFiles.Length}\n" +
+            return $"Course Upload Report: {DateTime.UtcNow.ToString("MM-dd-yyyy")}\n" +
+                   $"CSV File Counts: {CsvFiles.Length}\n" +
                    $"Total Records: {_recordCount}\n" +
                    $"Updated: {_updateCount}; Newly inserted: {_insertCount}";
         }

@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="CliWrap" Version="3.3.3" />
         <PackageReference Include="CsvHelper" Version="27.1.1" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
         <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
@@ -23,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="CourseDataScripts\course_data_generator.py">
+      <None Update="CourseDataScripts\download_course_data.py">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="CourseDataScripts\course-data\Academic English (AC ENG).csv">

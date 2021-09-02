@@ -1,6 +1,6 @@
 using CsvHelper.Configuration.Attributes;
 
-namespace AnteaterPathwayAPI.Applications
+namespace AnteaterPathwayAPI.BackgroundTasks.CourseUpload
 {
     public class CourseCsvRecord
     {
