@@ -40,7 +40,6 @@ EXTRA_DESCRIPTIONS = [
 DATA_SAVE_DIR = Path(f'./{sys.argv[1]}/')
 DATA_SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
-
 def break_title_line(title_line: str) -> ('dept', 'number', 'title', 'unit'):
     title_line = unidecode(title_line)
     line_parsed = [token.strip()

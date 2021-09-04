@@ -36,7 +36,7 @@ namespace AnteaterPathwayAPI.IntegrationTests
                 DatabaseName = "TestDB"
                 
                 // ConnectionString = "mongodb://localhost:27017",
-                // DatabaseName = "AnteaterPathwayDB"
+                // DatabaseName = "TestDB"
             };
 
             DbContext = new MongoDbContext(settings);

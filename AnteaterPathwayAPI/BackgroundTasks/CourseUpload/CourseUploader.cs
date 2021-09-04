@@ -7,35 +7,35 @@ using System.Threading.Tasks;
 using AnteaterPathwayAPI.DataAccess.Repositories;
 using AnteaterPathwayAPI.Models;
 using CsvHelper;
+using Microsoft.Extensions.Logging;
 
 namespace AnteaterPathwayAPI.BackgroundTasks.CourseUpload
 {
     public class CourseUploader
     {
         private readonly ICourseRepository _courseRepository;
+        private readonly string _dataDirectoryPath;
 
-        private string _csvDirectory;
+        private readonly ILogger _logger;
         
         private long _updateCount = 0;
         private long _insertCount = 0;
         private long _recordCount = 0;
-
+        
         public string[] CsvFiles
         {
             get
             {
-                var csvDirectoryPath = $"{Directory.GetCurrentDirectory()}/CourseDataScripts/{_csvDirectory}/";
-
-                if (!Directory.Exists(csvDirectoryPath))
+                if (!Directory.Exists(_dataDirectoryPath))
                 {
-                    throw new DirectoryNotFoundException($"Couldn't find {csvDirectoryPath}");
+                    throw new DirectoryNotFoundException($"Couldn't find {_dataDirectoryPath}");
                 }
 
-                var csvFiles = Directory.GetFiles(csvDirectoryPath);
+                var csvFiles = Directory.GetFiles(_dataDirectoryPath);
 
                 if (csvFiles.Length == 0)
                 {
-                    throw new FileNotFoundException($"No files has been found in {csvDirectoryPath}");
+                    throw new FileNotFoundException($"No files has been found in {_dataDirectoryPath}");
                 }
 
                 foreach (var csvFile in csvFiles)
@@ -50,21 +50,26 @@ namespace AnteaterPathwayAPI.BackgroundTasks.CourseUpload
             }
         }
 
-        public long InsertedCount => _insertCount;
+        public int CsvFileCount => CsvFiles.Length;
+
+        public long InsertCount => _insertCount;
         public long UpdateCount => _updateCount;
 
-        public CourseUploader(ICourseRepository courseRepository, string csvDirectory)
+        public CourseUploader(ICourseRepository courseRepository, ILogger<CourseUploader> logger, string dataDirectoryPath)
         {
             _courseRepository = courseRepository;
-            _csvDirectory = csvDirectory;
+            _logger = logger;
+            _dataDirectoryPath = dataDirectoryPath;
         }
 
         public async Task Upload()
         {
             ResetStatistics();
+            _logger.LogInformation("Start Uploading {CsvFileCount} files...", CsvFileCount);
 
             foreach (var csvFile in CsvFiles)
             {
+                _logger.LogInformation("Uploading {CsvFile}", csvFile);
                 foreach (var courseCsvRecord in GetRecordsFromCsvFile(csvFile))
                 {
                     var courseDocument =
@@ -84,6 +89,8 @@ namespace AnteaterPathwayAPI.BackgroundTasks.CourseUpload
                     _recordCount++;
                 }
             }
+            
+            _logger.LogInformation("Finished Uploading {CsvFileCount} files", CsvFileCount);
         }
 
         private IEnumerable<CourseCsvRecord> GetRecordsFromCsvFile(string csvFile)
@@ -145,7 +152,7 @@ namespace AnteaterPathwayAPI.BackgroundTasks.CourseUpload
         public string ReportStatistics()
         {
             return $"Course Upload Report: {DateTime.UtcNow.ToString("MM-dd-yyyy")}\n" +
-                   $"CSV File Counts: {CsvFiles.Length}\n" +
+                   $"CSV File Counts: {CsvFileCount}\n" +
                    $"Total Records: {_recordCount}\n" +
                    $"Updated: {_updateCount}; Newly inserted: {_insertCount}";
         }

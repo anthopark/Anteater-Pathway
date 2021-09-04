@@ -1,27 +1,42 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using CliWrap;
 using CliWrap.Buffered;
+using Microsoft.Extensions.Logging;
 
 namespace AnteaterPathwayAPI.BackgroundTasks.CourseDownload
 {
     public class CourseDownloader
     {
-        private readonly string _downloadDirectory;
+        private const string _downloadScript = "download_course_data.py";
+        private const string _downloadDirectoryName = "course-data";
+        private readonly string _downloadScriptPath;
 
-        public CourseDownloader(string downloadDirectory)
+        private readonly ILogger _logger;
+
+        public CourseDownloader(ILogger<CourseDownloader> logger, string downloadScriptPath)
         {
-            _downloadDirectory = downloadDirectory;
+            _logger = logger;
+            _downloadScriptPath = downloadScriptPath;
+
+            if (!Directory.Exists(_downloadScriptPath))
+            {
+                throw new DirectoryNotFoundException($"Couldn't find {_downloadScriptPath}");
+            }
         }
 
         public async Task Download()
         {
-            var result = await ExecuteCommand("python3", $"download_course_data.py {_downloadDirectory}");
+            _logger.LogInformation("Start downloading courses...");
+            string args = $"{_downloadScript} {_downloadDirectoryName}";
+            var result = await ExecuteCommand("python3", args);
 
             if (result.ExitCode != 0)
             {
-                throw new Exception(result.StandardError);
+                _logger.LogError("python3 {Args} has non-zero exit\n\n{ErrorMessage}", args, result.StandardError);
             }
+            _logger.LogInformation("Finished downloading courses");
                 
         }
 
@@ -29,7 +44,7 @@ namespace AnteaterPathwayAPI.BackgroundTasks.CourseDownload
         {
             var result = await Cli.Wrap(pathToExe)
                 .WithArguments(args)
-                .WithWorkingDirectory("./CourseDataScripts")
+                .WithWorkingDirectory(_downloadScriptPath)
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync();
 

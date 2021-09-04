@@ -1,3 +1,5 @@
+*/logs/*
+
 *.swp
 *.*~
 project.lock.json
