@@ -24,5 +24,10 @@
     <ItemGroup>
       <ProjectReference Include="..\AnteaterPathwayAPI\AnteaterPathwayAPI.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="test-course-catalogue-data" />
+      <Folder Include="test-course-offering-data" />
+    </ItemGroup>
     
 </Project>

@@ -1,11 +1,10 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using CliWrap;
 using CliWrap.Buffered;
 using Microsoft.Extensions.Logging;
 
-namespace AnteaterPathwayAPI.BackgroundTasks.CourseDownload
+namespace AnteaterPathwayAPI.BackgroundTasks.CourseDataDownload
 {
     public class CourseDownloader
     {

@@ -9,6 +9,7 @@ using Xunit.Sdk;
 
 namespace AnteaterPathwayAPI.IntegrationTests
 {
+    [Collection("IntegrationTests")]
     public class CourseControllerTests : IntegrationTestsBase
     {
         private readonly CourseController _sut;

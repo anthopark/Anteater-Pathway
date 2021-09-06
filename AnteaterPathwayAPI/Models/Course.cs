@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AnteaterPathwayAPI.Models
@@ -49,5 +50,16 @@ namespace AnteaterPathwayAPI.Models
         
         [BsonIgnoreIfNull][BsonElement("preOrCorequisite")]
         public string PreOrCorequisite { get; set; }
+
+        private List<string> _offeredTerms = new();
+
+        [BsonIgnoreIfNull]
+        [BsonElement("offeredTerms")]
+        public List<string> OfferedTerms
+        {
+            get => _offeredTerms;
+            set => _offeredTerms = value;
+        }
+
     }
 }

@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="CourseDataScripts/download_course_data.py">
+        <None Update="CourseDataScripts\download_catalogue_data.py">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="CourseDataScripts/course-data/*">

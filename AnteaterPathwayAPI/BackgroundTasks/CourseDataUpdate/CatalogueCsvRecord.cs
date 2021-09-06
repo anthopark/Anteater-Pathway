@@ -1,8 +1,8 @@
 using CsvHelper.Configuration.Attributes;
 
-namespace AnteaterPathwayAPI.BackgroundTasks.CourseUpload
+namespace AnteaterPathwayAPI.BackgroundTasks.CourseDataUpdate
 {
-    public class CourseCsvRecord
+    public class CatalogueCsvRecord
     {
         [Name("department")]
         public string Department { get; set; }
