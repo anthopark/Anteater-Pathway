@@ -11,9 +11,9 @@ import csv
 import re
 import time
 import random
+import sys
 
-
-DATA_SAVE_DIR = Path(f'./course-offering-data/')
+DATA_SAVE_DIR = Path(f'./{sys.argv[1]}/')
 DATA_SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -88,4 +88,4 @@ if __name__ == "__main__":
                 csv_writer.writerow([dept, num])
 
             driver.execute_script("window.history.go(-1)")
-            time.sleep(random.randint(3, 8))
+            # time.sleep(random.randint(3, 8))
