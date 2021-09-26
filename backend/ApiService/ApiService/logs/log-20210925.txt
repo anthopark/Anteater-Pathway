@@ -248,3 +248,16 @@ For more information on configuring HTTPS see https://go.microsoft.com/fwlink/?l
 2021-09-25 18:47:25.306 -04:00 [INF] HTTP GET /api/course/all responded 200 in 681.2967 ms
 2021-09-25 18:47:25.556 -04:00 [INF] HTTP GET /favicon.ico responded 404 in 0.1186 ms
 2021-09-25 19:09:25.354 -04:00 [INF] Application is shutting down...
+2021-09-25 23:18:59.562 -04:00 [INF] Now listening on: https://localhost:5001
+2021-09-25 23:18:59.583 -04:00 [INF] Now listening on: http://localhost:5000
+2021-09-25 23:18:59.583 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-25 23:18:59.583 -04:00 [INF] Hosting environment: Development
+2021-09-25 23:18:59.583 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/backend/ApiService/ApiService
+2021-09-25 23:19:18.061 -04:00 [INF] Application is shutting down...
+2021-09-25 23:19:23.341 -04:00 [INF] Now listening on: https://localhost:5001
+2021-09-25 23:19:23.362 -04:00 [INF] Now listening on: http://localhost:5000
+2021-09-25 23:19:23.362 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-25 23:19:23.362 -04:00 [INF] Hosting environment: Development
+2021-09-25 23:19:23.362 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/backend/ApiService/ApiService
+2021-09-25 23:19:31.042 -04:00 [INF] HTTP GET /api/course/all responded 200 in 647.3942 ms
+2021-09-25 23:19:31.271 -04:00 [INF] HTTP GET /favicon.ico responded 404 in 0.0905 ms
