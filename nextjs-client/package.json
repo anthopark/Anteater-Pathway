@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "cd .. && husky install nextjs-client/.husky",
-    "pre-commit": "yarn lint --fix && git add -A ."
+    "pre-commit": "yarn lint --fix && git add -A .",
+    "prettier-format": "prettier --write ."
   },
   "dependencies": {
     "husky": "^7.0.2",
@@ -18,6 +19,8 @@
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2"
+    "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.4.1"
   }
 }

@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd nextjs-client && yarn pre-commit
+cd nextjs-client && yarn prettier-format && yarn pre-commit 
