@@ -14,7 +14,11 @@ On the branch name, "US" stands for "User Story" and it is followed by the numbe
 $ git push -u azure
 ```
 
-3. Make changes on the code base and stage the changes and commit the changes.
+3. On Azure DevOps, Link the pushed branch to your working ticket.
+
+
+4. Make changes on the code base and stage the changes and commit the changes.
+
 
 ```shell
 $ git add .
@@ -26,13 +30,13 @@ A commit message should start with a verb in the present tense, briefly describi
 
 You can make multiple commits before creating a PR (Pull Request).
 
-4. Push the commits to the branch on remote (azure). Make sure you are on the right branch.
+5. Push the commits to the branch on remote (azure). Make sure you are on the right branch.
 
 ```shell
 $ git push
 ```
 
-5. Create a PR on Azure once finished developing for the ticket
+6. Create a PR on Azure once finished developing for the ticket
 
 On Azure Repo > Pull Requests page, You should be able to see "Create a pull request" button for the push
 
