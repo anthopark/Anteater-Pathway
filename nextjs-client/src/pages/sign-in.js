@@ -1,9 +1,20 @@
+import { Helmet } from "react-helmet";
 import Layout from "../components/Layout/";
+import SignIn from "../components/SignIn";
 
-export default function SignIn() {
-  return <></>;
+function SignInPage() {
+  return (
+    <>
+      <Helmet>
+        <title>Sign In - Anteater Pathway</title>
+      </Helmet>
+      <SignIn />
+    </>
+  );
 }
 
-Main.getLayout = function getLayout(page) {
+SignInPage.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
+
+export default SignInPage;

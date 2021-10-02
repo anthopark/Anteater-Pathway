@@ -1,12 +1,22 @@
 import { ThemeProvider } from "styled-components";
-import GlobalStyles from "../styles/GlobalStyles";
-import { StyledLayout } from "./styled";
+import { Helmet } from "react-helmet";
+import { StyledContainer } from "./styled";
+import LeftSideBar from "../LeftSideBar";
 
 export const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={{}}>
-      <GlobalStyles />
-      <StyledLayout>{children}</StyledLayout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="Anteater Pathway"
+          content="Drag N Drop UC Irvine Degree Planner"
+        />
+      </Helmet>
+      <StyledContainer>
+        <LeftSideBar />
+        {children}
+      </StyledContainer>
     </ThemeProvider>
   );
 };

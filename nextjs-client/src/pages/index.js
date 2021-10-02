@@ -1,9 +1,21 @@
-import Layout from "../components/Layout";
+import { Helmet } from "react-helmet";
 
-export default function Main() {
-  return <>Hello</>;
+import Layout from "../components/Layout";
+import Planner from "../components/Planner";
+
+function MainPage() {
+  return (
+    <>
+      <Helmet>
+        <title>Anteater Pathway</title>
+      </Helmet>
+      <Planner />
+    </>
+  );
 }
 
-Main.getLayout = function getLayout(page) {
+MainPage.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
+
+export default MainPage;
