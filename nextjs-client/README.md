@@ -16,9 +16,7 @@ $ git push -u azure
 
 3. On Azure DevOps, Link the pushed branch to your working ticket.
 
-
 4. Make changes on the code base and stage the changes and commit the changes.
-
 
 ```shell
 $ git add .

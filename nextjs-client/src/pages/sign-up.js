@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 
-export default function Main() {
-  return <>Hello</>;
+export default function SignUp() {
+  return <></>;
 }
 
 Main.getLayout = function getLayout(page) {
