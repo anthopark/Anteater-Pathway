@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
-import Layout from "../components/Layout";
-import SignUp from "../components/SignUp";
+import PageLayout from "@components/PageLayout";
+import SignUp from "@components/SignUp";
 
 function SignUpPage() {
   return (
@@ -14,7 +14,7 @@ function SignUpPage() {
 }
 
 SignUpPage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <PageLayout>{page}</PageLayout>;
 };
 
 export default SignUpPage;

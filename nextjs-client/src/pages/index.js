@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
-
-import Layout from "../components/Layout";
-import Planner from "../components/Planner";
+import PageLayout from "@components/PageLayout";
+import Planner from "@components/Planner";
 
 function MainPage() {
   return (
@@ -15,7 +14,7 @@ function MainPage() {
 }
 
 MainPage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+  return <PageLayout>{page}</PageLayout>;
 };
 
 export default MainPage;

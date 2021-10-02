@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { StyledContainer } from "./styled";
 import LeftSideBar from "../LeftSideBar";
 
-export const Layout = ({ children }) => {
+export const PageLayout = ({ children }) => {
   return (
     <ThemeProvider theme={{}}>
       <Helmet>
