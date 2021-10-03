@@ -1,20 +1,28 @@
 import styled from "styled-components";
+import { StyledLink } from "@components/share-styled-components";
 
 export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: blue;
+  background-color: ${({ theme }) => theme.colors.leftSideBarBg};
+  align-items: center;
+  padding: 2rem 0.5rem;
 
   .logo-container {
-    width: 10rem;
-    height: 10rem;
-    background-color: green;
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .menu-container {
-    width: 10rem;
-    height: 40rem;
-    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
+`;
+
+export const IconLink = styled(StyledLink)`
+  margin: 1.4rem 0;
 `;

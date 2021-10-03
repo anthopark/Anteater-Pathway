@@ -4,5 +4,5 @@ export const StyledContainer = styled.div`
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 10rem auto;
+  grid-template-columns: 9rem auto;
 `;

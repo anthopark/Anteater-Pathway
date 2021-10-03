@@ -1,3 +1,4 @@
+import { StyledContainer } from "./styled";
 export const Planner = () => {
-  return <>Planner</>;
+  return <StyledContainer>Planner</StyledContainer>;
 };

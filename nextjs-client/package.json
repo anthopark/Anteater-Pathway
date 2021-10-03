@@ -12,6 +12,10 @@
     "prettier-format": "prettier --write ."
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "husky": "^7.0.2",
     "next": "11.1.2",
     "react": "17.0.2",
