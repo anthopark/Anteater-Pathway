@@ -1,5 +1,6 @@
 import "@styles/global.css";
 import { GlobalContextProvider } from "@components/GlobalContextProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function MyApp({ Component, pageProps }) {
   // Use the layout defined at the page level, if available
@@ -7,7 +8,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <GlobalContextProvider>
-      {getLayout(<Component {...pageProps} />)}
+      <ChakraProvider>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
     </GlobalContextProvider>
   );
 }
