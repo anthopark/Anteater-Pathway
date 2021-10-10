@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Select from "react-select";
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -16,9 +15,9 @@ export const TopLayout = styled.div`
   grid-template-columns: auto 30rem;
 
   .left-pane {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.3fr 4fr 1fr;
   }
 
   .right-pane {
@@ -38,45 +37,5 @@ export const MainLayout = styled.div`
   }
 
   .right-pane {
-  }
-`;
-
-export const AddSchoolYearContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 28rem;
-  height: 100%;
-  padding: 0 2rem;
-  background-color: khaki;
-`;
-
-export const StyledReactSelect = styled(Select)`
-  .react-select__control {
-    width: 17rem;
-    height: 4rem;
-    font-size: 1.6rem;
-    border: 1px solid ${({ theme }) => theme.colors.selectBorder};
-    color: red;
-  }
-
-  // selected value in control
-  .react-select__single-value {
-    padding-top: 0.4rem;
-  }
-
-  .react-select__placeholder {
-    padding-top: 0.4rem;
-  }
-
-  .react-select__input {
-  }
-
-  .react-select__menu {
-    font-size: 1.6rem;
-  }
-
-  .react-select__option {
-    font-size: 1.6rem;
   }
 `;

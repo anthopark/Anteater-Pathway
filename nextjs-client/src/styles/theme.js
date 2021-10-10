@@ -1,6 +1,6 @@
 export const lightTheme = {
   colors: {
-    selectBorder: "#0E3D6B",
+    selectBorder: "transparent",
     leftSideBarBg: "#0E3D6B",
     pageBg: "#E5E5EF",
   },

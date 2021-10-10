@@ -1,7 +1,7 @@
 import { StyledContainer, TopLayout, MainLayout } from "./styled";
-import { AddCustomCourse } from "./AddCustomCourse";
-import { AddAcademicYear } from "./AddAcademicYear";
-import { CourseSearchBar } from "./CourseSearchBar";
+import { CustomCourseControl } from "./CustomCourseControl";
+import AcademicYearControl from "./AcademicYearControl";
+import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
 import { UserProfile } from "./UserProfile";
 
 export const Planner = () => {
@@ -9,9 +9,9 @@ export const Planner = () => {
     <StyledContainer>
       <TopLayout>
         <div className="left-pane">
-          <AddAcademicYear />
+          <AcademicYearControl />
           <CourseSearchBar />
-          <AddCustomCourse />
+          <CustomCourseControl />
         </div>
         <div className="right-pane">
           <UserProfile />

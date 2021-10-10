@@ -17,5 +17,27 @@ export const useAcademicYear = () => {
     setYearOptions(getYearOptions());
   }, []);
 
-  return { yearOptions };
+  const disableSelectedOption = (userAcademicYears) => {
+    console.log(userAcademicYears);
+    const copyOfYearOptions = [...yearOptions];
+
+    for (const year of userAcademicYears) {
+      const index = copyOfYearOptions.findIndex(
+        (option) => option.value === year
+      );
+
+      if (index !== -1) {
+        copyOfYearOptions[index] = {
+          ...copyOfYearOptions[index],
+          disabled: true,
+        };
+      }
+    }
+
+    console.log(copyOfYearOptions);
+
+    setYearOptions(copyOfYearOptions);
+  };
+
+  return { yearOptions, disableSelectedOption };
 };
