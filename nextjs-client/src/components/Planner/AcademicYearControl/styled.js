@@ -11,32 +11,32 @@ export const StyledContainer = styled.form`
 `;
 
 export const StyledReactSelect = styled(Select)`
+  font-family: Oxygen;
+  font-size: 1.6rem;
+  padding-top: 0.4rem;
+
   .react-select__control {
     width: 14rem;
     height: 4.5rem;
-    font-size: 1.6rem;
     border: 1px solid ${({ theme }) => theme.colors.selectBorder};
     border-radius: 10px;
   }
 
   // selected value in control
   .react-select__single-value {
-    padding-top: 0.4rem;
   }
 
   .react-select__placeholder {
-    padding-top: 0.4rem;
+    letter-spacing: 0.1rem;
   }
 
   .react-select__input {
   }
 
   .react-select__menu {
-    font-size: 1.6rem;
     border-radius: 10px;
   }
 
   .react-select__option {
-    font-size: 1.6rem;
   }
 `;

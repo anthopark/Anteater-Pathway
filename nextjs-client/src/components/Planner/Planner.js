@@ -1,5 +1,5 @@
 import { StyledContainer, TopLayout, MainLayout } from "./styled";
-import { CustomCourseControl } from "./CustomCourseControl";
+import { CustomCourseControl } from "./CustomCourseControl/CustomCourseControl";
 import AcademicYearControl from "./AcademicYearControl";
 import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
 import { UserProfile } from "./UserProfile";

@@ -40,11 +40,11 @@ export const AcademicYearControl = () => {
       <Button
         ml="1.3rem"
         fontSize="1.5rem"
-        width="5.5rem"
-        height="4.5rem"
+        width="4.5rem"
+        height="4rem"
         backgroundColor="blue.700"
         colorScheme="blue"
-        borderRadius=".7rem"
+        borderRadius="1rem"
         type="submit"
         onClick={handleButtonClick}
         onSubmit={handleButtonClick}

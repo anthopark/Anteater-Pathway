@@ -18,8 +18,7 @@ class AppUser {
   }
 
   removeAcademicYear(year) {
-    const index = this._academicYears.indexOf(year);
-    if (index !== -1) {
+    if (this._academicYears.includes(year)) {
       this._academicYears.splice(index, 1);
     }
   }
