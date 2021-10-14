@@ -1,4 +1,4 @@
-import { useGlobalValues } from "@components/GlobalContextProvider";
+import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { ThemeProvider } from "styled-components";
 import { Helmet } from "react-helmet";
 import { StyledContainer } from "./styled";
@@ -7,7 +7,7 @@ import { lightTheme, darkTheme } from "@styles/theme";
 import { useDarkMode } from "src/hooks/useDarkMode";
 
 export const PageLayout = ({ children }) => {
-  const { theme } = useGlobalValues();
+  const { theme } = useGlobalObjects();
   const { isComponentMounted } = useDarkMode();
   const themeStyles = theme === "light" ? lightTheme : darkTheme;
 

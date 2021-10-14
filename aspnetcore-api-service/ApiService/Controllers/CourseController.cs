@@ -20,9 +20,9 @@ namespace ApiService.Controllers
         
         // GET: api/course/all
         [HttpGet("All")]
-        public async Task<ActionResult<List<Course>>> GetAllCourses()
+        public async Task<ActionResult<List<List<CompactCourse>>>> GetCompactCourses()
         {
-            var result = await _courseRepository.GetAllCompactCourses();
+            var result = await _courseRepository.GetAllGroupedCompactCourses();
 
             if (result.Count == 0)
             {

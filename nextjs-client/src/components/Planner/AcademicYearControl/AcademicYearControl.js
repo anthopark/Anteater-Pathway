@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useAcademicYear } from "src/hooks/useAcademicYear";
 import { useState } from "react";
-import { useGlobalValues } from "@components/GlobalContextProvider";
+import { useGlobalObjects } from "@components/GlobalContextProvider";
 
 export const AcademicYearControl = () => {
-  const { appUser, setAppUser } = useGlobalValues();
+  const { appUser, setAppUser } = useGlobalObjects();
   const [selectedYear, setSelectedYear] = useState(null);
   const { yearOptions, disableSelectedOption } = useAcademicYear();
 

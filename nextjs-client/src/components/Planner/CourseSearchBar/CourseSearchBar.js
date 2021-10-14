@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@chakra-ui/react";
 import {
   StyledContainer,
@@ -6,10 +7,95 @@ import {
 } from "./styled";
 import { components, createFilter } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faPlus,
+  faExclamationCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { useCoursesForSearch } from "src/hooks/useCoursesForSearch";
+import { useGlobalObjects } from "@components/GlobalContextProvider";
+import { Course } from "src/entities/course";
 
-const DropdownIndicator = (props) => {
+const MULTI_SELECT_LIMIT = 4;
+
+export const CourseSearchBar = () => {
+  const { appUser, setAppUser } = useGlobalObjects();
+  const [inputValue, setInputValue] = useState();
+  const [selectedCourses, setSelectedCourses] = useState([]);
+  const [cachedOptions, setCachedOptions] = useState([]);
+  const { selectOptions, setSelectOptions, setCoursesForOptions } =
+    useCoursesForSearch();
+
+  const handleButtonClick = (event) => {
+    event.preventDefault();
+    for (const searchedCourse of selectedCourses) {
+      appUser.planTentatively(new Course(searchedCourse));
+    }
+    setAppUser(appUser);
+  };
+
+  const handleSelectChange = (selectedCourses) => {
+    setSelectedCourses(selectedCourses);
+
+    if (selectedCourses.length >= MULTI_SELECT_LIMIT) {
+      setSelectOptions([]);
+      setCachedOptions(selectOptions);
+    } else if (cachedOptions.length > 0 && selectedCourses.length >= 1) {
+      setSelectOptions(cachedOptions);
+      setCachedOptions(selectOptions);
+    } else if (selectedCourses.length === 0) {
+      setSelectOptions([]);
+      setCachedOptions([]);
+    }
+  };
+
+  const handleInputChange = (value) => {
+    setInputValue(value);
+    setCoursesForOptions(value);
+  };
+
+  return (
+    <StyledContainer>
+      <StyledReactSelect
+        isMulti
+        placeholder="Find your courses..."
+        options={selectOptions}
+        closeMenuOnSelect={false}
+        classNamePrefix="react-select"
+        components={{
+          DropdownIndicator: CustomDropdownIndicator,
+          IndicatorSeparator: null,
+          Option: CustomOption,
+          Menu: CustomMenu,
+        }}
+        isValidNewOption={isValidNewOption}
+        getOptionLabel={(option) => option.courseCode}
+        getOptionValue={(option) => option}
+        value={selectedCourses}
+        onChange={handleSelectChange}
+        inputValue={inputValue}
+        onInputChange={handleInputChange}
+        filterOption={createFilter({ ignoreAccents: false })}
+      />
+      <Button
+        ml="1.3rem"
+        fontSize="1.5rem"
+        width="4.5rem"
+        height="4rem"
+        backgroundColor="blue.700"
+        colorScheme="blue"
+        borderRadius="1rem"
+        type="submit"
+        onClick={handleButtonClick}
+        onSubmit={handleButtonClick}
+      >
+        <FontAwesomeIcon icon={faPlus} size="1x" color="white" />
+      </Button>
+    </StyledContainer>
+  );
+};
+
+const CustomDropdownIndicator = (props) => {
   return (
     components.DropdownIndicator && (
       <components.DropdownIndicator {...props}>
@@ -47,7 +133,7 @@ const CustomMenu = (props) => {
   const optionSelectedLength = props.getValue().length || 0;
   return (
     <components.Menu {...props}>
-      {optionSelectedLength < 4 ? (
+      {optionSelectedLength < MULTI_SELECT_LIMIT ? (
         props.children
       ) : (
         <div
@@ -58,6 +144,11 @@ const CustomMenu = (props) => {
             letterSpacing: ".1rem",
           }}
         >
+          <FontAwesomeIcon
+            icon={faExclamationCircle}
+            size="1x"
+            style={{ marginRight: "1rem" }}
+          />
           No more courses can be selected.
         </div>
       )}
@@ -66,49 +157,4 @@ const CustomMenu = (props) => {
 };
 
 const isValidNewOption = (inputValue, selectValue) =>
-  inputValue.length > 0 && selectValue.length < 4;
-
-export const CourseSearchBar = () => {
-  const { selectOptions, handleInputChange } = useCoursesForSearch();
-
-  const handleButtonClick = (event) => {
-    event.preventDefault();
-  };
-
-  return (
-    <StyledContainer>
-      <StyledReactSelect
-        isMulti
-        placeholder="Find your courses..."
-        options={selectOptions}
-        closeMenuOnSelect={false}
-        classNamePrefix="react-select"
-        components={{
-          DropdownIndicator,
-          IndicatorSeparator: null,
-          Option: CustomOption,
-          Menu: CustomMenu,
-        }}
-        isValidNewOption={isValidNewOption}
-        getOptionLabel={(option) => option.courseCode}
-        getOptionValue={(option) => option}
-        onInputChange={handleInputChange}
-        filterOption={createFilter({ ignoreAccents: false })}
-      />
-      <Button
-        ml="1.3rem"
-        fontSize="1.5rem"
-        width="4.5rem"
-        height="4rem"
-        backgroundColor="blue.700"
-        colorScheme="blue"
-        borderRadius="1rem"
-        type="submit"
-        onClick={handleButtonClick}
-        onSubmit={handleButtonClick}
-      >
-        <FontAwesomeIcon icon={faPlus} size="1x" color="white" />
-      </Button>
-    </StyledContainer>
-  );
-};
+  inputValue.length > 0 && selectValue.length < MULTI_SELECT_LIMIT;

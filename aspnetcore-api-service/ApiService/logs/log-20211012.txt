@@ -1,0 +1,51 @@
+2021-10-12 16:25:29.742 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 16:25:29.764 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 16:25:29.764 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 16:25:29.764 -04:00 [INF] Hosting environment: Development
+2021-10-12 16:25:29.764 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 16:25:43.256 -04:00 [INF] HTTP GET /api/course/all responded 200 in 656.3146 ms
+2021-10-12 16:43:15.577 -04:00 [INF] Application is shutting down...
+2021-10-12 16:43:20.671 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 16:43:20.693 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 16:43:20.693 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 16:43:20.693 -04:00 [INF] Hosting environment: Development
+2021-10-12 16:43:20.693 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 16:43:26.068 -04:00 [INF] HTTP GET /api/course/all responded 200 in 656.4092 ms
+2021-10-12 16:44:35.102 -04:00 [INF] HTTP GET /api/course/all responded 200 in 80.6735 ms
+2021-10-12 16:47:03.638 -04:00 [INF] Application is shutting down...
+2021-10-12 16:47:07.035 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 16:47:07.057 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 16:47:07.058 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 16:47:07.058 -04:00 [INF] Hosting environment: Development
+2021-10-12 16:47:07.058 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 16:47:16.472 -04:00 [INF] HTTP GET /api/course/all responded 200 in 633.7089 ms
+2021-10-12 17:20:33.800 -04:00 [INF] Application is shutting down...
+2021-10-12 17:20:38.821 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 17:20:38.842 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 17:20:38.842 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 17:20:38.843 -04:00 [INF] Hosting environment: Development
+2021-10-12 17:20:38.843 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 17:20:47.093 -04:00 [INF] HTTP GET /api/course/all responded 200 in 662.7090 ms
+2021-10-12 17:26:42.225 -04:00 [INF] Application is shutting down...
+2021-10-12 17:26:49.429 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 17:26:49.454 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 17:26:49.454 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 17:26:49.454 -04:00 [INF] Hosting environment: Development
+2021-10-12 17:26:49.454 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 17:30:45.411 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 17:30:45.465 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 17:30:45.466 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 17:30:45.466 -04:00 [INF] Hosting environment: Development
+2021-10-12 17:30:45.466 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 17:36:27.323 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 17:36:27.346 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 17:36:27.346 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 17:36:27.346 -04:00 [INF] Hosting environment: Development
+2021-10-12 17:36:27.346 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 17:39:39.906 -04:00 [INF] Now listening on: https://localhost:5001
+2021-10-12 17:39:39.927 -04:00 [INF] Now listening on: http://localhost:5000
+2021-10-12 17:39:39.927 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-10-12 17:39:39.928 -04:00 [INF] Hosting environment: Development
+2021-10-12 17:39:39.928 -04:00 [INF] Content root path: /home/antho/Projects/AnteaterPathway/aspnetcore-api-service/ApiService
+2021-10-12 17:39:49.024 -04:00 [INF] HTTP GET /api/course/all responded 200 in 655.5204 ms
+2021-10-12 23:46:49.406 -04:00 [INF] Application is shutting down...

@@ -9,20 +9,25 @@ export const useCoursesForSearch = () => {
     setCourses(dummyCourses);
   }, []);
 
-  const handleInputChange = (inputValue) => {
+  const setCoursesForOptions = (inputValue) => {
     if (inputValue.length >= 2) {
-      for (let i = 0; i < courses.length; i++) {
+      for (const groupedCourses of courses) {
         if (
-          courses[i][0].departmentCode
+          groupedCourses.length > 0 &&
+          groupedCourses[0].departmentCode
             .toLowerCase()
             .includes(inputValue.toLowerCase())
         ) {
-          setSelectOptions([...courses[i]]);
+          setSelectOptions(groupedCourses);
           break;
         }
       }
     }
   };
 
-  return { selectOptions, handleInputChange };
+  return {
+    selectOptions,
+    setSelectOptions,
+    setCoursesForOptions,
+  };
 };
