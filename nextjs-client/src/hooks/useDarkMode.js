@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useDarkMode = () => {
-  const [theme, setTheme] = useState("light");
+  const [themeMode, setTheme] = useState("light");
   const [isComponentMounted, setIsComponentMounted] = useState(false);
 
   const setMode = (mode) => {
@@ -10,7 +10,7 @@ export const useDarkMode = () => {
   };
 
   const themeToggler = () => {
-    theme === "light" ? setMode("dark") : setMode("light");
+    themeMode === "light" ? setMode("dark") : setMode("light");
   };
 
   useEffect(() => {
@@ -19,5 +19,5 @@ export const useDarkMode = () => {
     setIsComponentMounted(true);
   }, []);
 
-  return { theme, themeToggler, isComponentMounted };
+  return { themeMode, themeToggler, isComponentMounted };
 };

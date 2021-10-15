@@ -7,6 +7,7 @@ export const StyledContainer = styled.form`
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 0 2rem;
 `;
 
 export const StyledReactSelect = styled(Select)`

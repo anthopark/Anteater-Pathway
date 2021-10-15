@@ -7,9 +7,9 @@ import { lightTheme, darkTheme } from "@styles/theme";
 import { useDarkMode } from "src/hooks/useDarkMode";
 
 export const PageLayout = ({ children }) => {
-  const { theme } = useGlobalObjects();
+  const { themeMode } = useGlobalObjects();
   const { isComponentMounted } = useDarkMode();
-  const themeStyles = theme === "light" ? lightTheme : darkTheme;
+  const themeStyles = themeMode === "light" ? lightTheme : darkTheme;
 
   if (!isComponentMounted) return null;
 

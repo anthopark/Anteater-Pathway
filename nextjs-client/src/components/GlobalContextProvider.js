@@ -5,12 +5,12 @@ import { useDarkMode } from "src/hooks/useDarkMode";
 const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
-  const { theme, themeToggler } = useDarkMode();
+  const { themeMode, themeToggler } = useDarkMode();
   const { appUser, setAppUser } = useAppUser();
   return (
     <GlobalContext.Provider
       value={{
-        theme,
+        themeMode,
         themeToggler,
         appUser,
         setAppUser,

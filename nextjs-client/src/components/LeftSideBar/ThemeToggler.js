@@ -4,10 +4,10 @@ import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { IconLink } from "./styled";
 
 export const ThemeToggler = () => {
-  const { theme, themeToggler } = useGlobalObjects();
+  const { themeMode, themeToggler } = useGlobalObjects();
   return (
     <IconLink onClick={themeToggler}>
-      {theme === "light" ? (
+      {themeMode === "light" ? (
         <FontAwesomeIcon icon={faMoon} size="3x" color="white" />
       ) : (
         <FontAwesomeIcon icon={faSun} size="3x" color="white" />

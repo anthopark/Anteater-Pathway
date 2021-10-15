@@ -79,6 +79,7 @@ export const CourseSearchBar = () => {
       />
       <Button
         ml="1.3rem"
+        mt=".3rem"
         fontSize="1.5rem"
         width="4.5rem"
         height="4rem"

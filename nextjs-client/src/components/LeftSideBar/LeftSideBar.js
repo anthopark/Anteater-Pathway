@@ -8,8 +8,8 @@ import { ThemeToggler } from "./ThemeToggler";
 export const LeftSideBar = () => {
   return (
     <StyledContainer>
-      <div className="logo-container">
-        <Image src="/logo.svg" alt="logo" width="60" height="73" />
+      <div className="logo-container" style={{ marginLeft: ".8rem" }}>
+        <Image src="/logo.svg" alt="logo" width="55" height="65" />
       </div>
       <div className="menu-container">
         <ThemeToggler />

@@ -10,7 +10,7 @@ export const StyledContainer = styled.div`
 
 export const TopLayout = styled.div`
   width: 100%;
-  height: 10rem;
+  height: 9rem;
   display: grid;
   grid-template-columns: auto 30rem;
 

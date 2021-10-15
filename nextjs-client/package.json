@@ -21,6 +21,7 @@
     "@fortawesome/react-fontawesome": "^0.1.15",
     "firebase": "^8.10.0",
     "firebase-admin": "^8.10.0",
+    "formik": "^2.2.9",
     "framer-motion": "^4",
     "husky": "^7.0.2",
     "next": "11.1.2",
