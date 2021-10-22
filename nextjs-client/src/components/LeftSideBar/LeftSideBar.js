@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { StyledContainer, IconLink } from "./styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { ThemeToggler } from "./ThemeToggler";
 
 export const LeftSideBar = () => {
@@ -14,10 +12,10 @@ export const LeftSideBar = () => {
       <div className="menu-container">
         <ThemeToggler />
         <IconLink>
-          <FontAwesomeIcon icon={faEnvelope} size="3x" color="white" />
+          <FontAwesomeIcon icon={["fas", "envelope"]} size="3x" color="white" />
         </IconLink>
         <IconLink>
-          <FontAwesomeIcon icon={faGithub} size="3x" color="white" />
+          <FontAwesomeIcon icon={["fab", "github"]} size="3x" color="white" />
         </IconLink>
       </div>
     </StyledContainer>

@@ -1,20 +1,10 @@
-import { useGlobalObjects } from "@components/GlobalContextProvider";
-import { ThemeProvider } from "styled-components";
 import { Helmet } from "react-helmet";
 import { StyledContainer } from "./styled";
 import LeftSideBar from "../LeftSideBar";
-import { lightTheme, darkTheme } from "@styles/theme";
-import { useDarkMode } from "src/hooks/useDarkMode";
 
 export const PageLayout = ({ children }) => {
-  const { themeMode } = useGlobalObjects();
-  const { isComponentMounted } = useDarkMode();
-  const themeStyles = themeMode === "light" ? lightTheme : darkTheme;
-
-  if (!isComponentMounted) return null;
-
   return (
-    <ThemeProvider theme={themeStyles}>
+    <>
       <Helmet>
         <meta charSet="utf-8" />
         <meta
@@ -27,6 +17,6 @@ export const PageLayout = ({ children }) => {
         <LeftSideBar />
         {children}
       </StyledContainer>
-    </ThemeProvider>
+    </>
   );
 };

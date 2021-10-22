@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "@chakra-ui/react";
 import {
   StyledContainer,
   StyledReactSelect,
@@ -7,14 +6,10 @@ import {
 } from "./styled";
 import { components, createFilter } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSearch,
-  faPlus,
-  faExclamationCircle,
-} from "@fortawesome/free-solid-svg-icons";
 import { useCoursesForSearch } from "src/hooks/useCoursesForSearch";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { Course } from "src/entities/course";
+import ChakraButton from "@components/ChakraButton";
 
 const MULTI_SELECT_LIMIT = 4;
 
@@ -28,10 +23,14 @@ export const CourseSearchBar = () => {
 
   const handleButtonClick = (event) => {
     event.preventDefault();
-    for (const searchedCourse of selectedCourses) {
-      appUser.planTentatively(new Course(searchedCourse));
+
+    if (selectedCourses.length > 0) {
+      for (const searchedCourse of selectedCourses) {
+        appUser.planTentatively(new Course(searchedCourse));
+      }
+      setAppUser(appUser);
+      setSelectedCourses([]);
     }
-    setAppUser(appUser);
   };
 
   const handleSelectChange = (selectedCourses) => {
@@ -77,21 +76,11 @@ export const CourseSearchBar = () => {
         onInputChange={handleInputChange}
         filterOption={createFilter({ ignoreAccents: false })}
       />
-      <Button
-        ml="1.3rem"
-        mt=".3rem"
-        fontSize="1.5rem"
-        width="4.5rem"
-        height="4rem"
-        backgroundColor="blue.700"
-        colorScheme="blue"
-        borderRadius="1rem"
-        type="submit"
-        onClick={handleButtonClick}
-        onSubmit={handleButtonClick}
-      >
-        <FontAwesomeIcon icon={faPlus} size="1x" color="white" />
-      </Button>
+      <div style={{ marginLeft: "1.3rem", marginTop: ".4rem" }}>
+        <ChakraButton onClick={handleButtonClick}>
+          <FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />
+        </ChakraButton>
+      </div>
     </StyledContainer>
   );
 };
@@ -101,7 +90,7 @@ const CustomDropdownIndicator = (props) => {
     components.DropdownIndicator && (
       <components.DropdownIndicator {...props}>
         <FontAwesomeIcon
-          icon={faSearch}
+          icon={["fas", "search"]}
           size="1x"
           style={{ marginRight: ".7rem" }}
         />
@@ -146,7 +135,7 @@ const CustomMenu = (props) => {
           }}
         >
           <FontAwesomeIcon
-            icon={faExclamationCircle}
+            icon={["fas", "exclamation-circle"]}
             size="1x"
             style={{ marginRight: "1rem" }}
           />

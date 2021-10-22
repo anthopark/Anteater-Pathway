@@ -1,10 +1,9 @@
-import { Button } from "@chakra-ui/react";
-import { StyledContainer, StyledReactSelect } from "./styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useAcademicYear } from "src/hooks/useAcademicYear";
 import { useState } from "react";
+import { StyledContainer, StyledReactSelect } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
+import ChakraButton from "@components/ChakraButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAcademicYear } from "src/hooks/useAcademicYear";
 
 export const AcademicYearControl = () => {
   const { appUser, setAppUser } = useGlobalObjects();
@@ -37,21 +36,11 @@ export const AcademicYearControl = () => {
         isOptionDisabled={(option) => option.disabled}
         isClearable
       />
-      <Button
-        ml="1.3rem"
-        mt=".3rem"
-        fontSize="1.5rem"
-        width="4.5rem"
-        height="4rem"
-        backgroundColor="blue.700"
-        colorScheme="blue"
-        borderRadius="1rem"
-        type="submit"
-        onClick={handleButtonClick}
-        onSubmit={handleButtonClick}
-      >
-        <FontAwesomeIcon icon={faPlus} size="1x" color="white" />
-      </Button>
+      <div style={{ marginLeft: "1.3rem", marginTop: ".4rem" }}>
+        <ChakraButton onClick={handleButtonClick}>
+          <FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />
+        </ChakraButton>
+      </div>
     </StyledContainer>
   );
 };
