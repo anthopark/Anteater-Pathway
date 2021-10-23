@@ -3,13 +3,13 @@ import dummyCourses from "../components/Planner/CourseSearchBar/dummy-courses.js
 
 export const useCoursesForSearch = () => {
   const [courses, setCourses] = useState([]);
-  const [selectOptions, setSelectOptions] = useState([]);
+  const [currentCourseOptions, setCurrentCourseOptions] = useState([]);
 
   useEffect(() => {
     setCourses(dummyCourses);
   }, []);
 
-  const setCoursesForOptions = (inputValue) => {
+  const updateCurrentCourseOptions = (inputValue) => {
     if (inputValue.length >= 2) {
       for (const groupedCourses of courses) {
         if (
@@ -18,7 +18,7 @@ export const useCoursesForSearch = () => {
             .toLowerCase()
             .includes(inputValue.toLowerCase())
         ) {
-          setSelectOptions(groupedCourses);
+          setCurrentCourseOptions(groupedCourses);
           break;
         }
       }
@@ -26,8 +26,8 @@ export const useCoursesForSearch = () => {
   };
 
   return {
-    selectOptions,
-    setSelectOptions,
-    setCoursesForOptions,
+    currentCourseOptions,
+    setCurrentCourseOptions,
+    updateCurrentCourseOptions,
   };
 };

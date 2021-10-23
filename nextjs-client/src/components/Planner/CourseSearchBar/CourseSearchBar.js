@@ -17,11 +17,13 @@ const MULTI_SELECT_LIMIT = 4;
 
 export const CourseSearchBar = () => {
   const { appUser, setAppUser } = useGlobalObjects();
-  const [inputValue, setInputValue] = useState();
+  const {
+    currentCourseOptions,
+    setCurrentCourseOptions,
+    updateCurrentCourseOptions,
+  } = useCoursesForSearch();
+  const [searchInputValue, setSearchInputValue] = useState("");
   const [selectedCourses, setSelectedCourses] = useState([]);
-  const [cachedOptions, setCachedOptions] = useState([]);
-  const { selectOptions, setSelectOptions, setCoursesForOptions } =
-    useCoursesForSearch();
   const toast = useToast();
 
   const handleButtonClick = (event) => {
@@ -48,24 +50,27 @@ export const CourseSearchBar = () => {
     }
   };
 
-  const handleSelectChange = (selectedCourses) => {
-    setSelectedCourses(selectedCourses);
+  const handleSelectChange = (value) => {
+    console.log(value);
+    setSelectedCourses(value);
+    console.log(selectedCourses);
 
-    if (selectedCourses.length >= MULTI_SELECT_LIMIT) {
-      setSelectOptions([]);
-      setCachedOptions(selectOptions);
-    } else if (cachedOptions.length > 0 && selectedCourses.length >= 1) {
-      setSelectOptions(cachedOptions);
-      setCachedOptions(selectOptions);
-    } else if (selectedCourses.length === 0) {
-      setSelectOptions([]);
-      setCachedOptions([]);
+    if (value.length >= MULTI_SELECT_LIMIT) {
+      return setCurrentCourseOptions([]);
+    }
+
+    if (value.length < selectedCourses.length) {
+      updateCurrentCourseOptions(
+        selectedCourses[selectedCourses.length - 1].departmentCode
+      );
+    } else if (value.length === 0 && selectedCourses.length === 0) {
+      setCurrentCourseOptions([]);
     }
   };
 
   const handleInputChange = (value) => {
-    setInputValue(value);
-    setCoursesForOptions(value);
+    setSearchInputValue(value);
+    updateCurrentCourseOptions(value);
   };
 
   return (
@@ -73,7 +78,7 @@ export const CourseSearchBar = () => {
       <StyledReactSelect
         isMulti
         placeholder="Find your courses..."
-        options={selectOptions}
+        options={currentCourseOptions}
         closeMenuOnSelect={false}
         classNamePrefix="react-select"
         components={{
@@ -87,7 +92,7 @@ export const CourseSearchBar = () => {
         getOptionValue={(option) => option}
         value={selectedCourses}
         onChange={handleSelectChange}
-        inputValue={inputValue}
+        inputValue={searchInputValue}
         onInputChange={handleInputChange}
         filterOption={createFilter({ ignoreAccents: false })}
       />
