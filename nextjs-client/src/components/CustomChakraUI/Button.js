@@ -1,8 +1,8 @@
-import { Button } from "@chakra-ui/button";
+import { Button as ChakraButton } from "@chakra-ui/button";
 
-export const ChakraButton = ({ children, onClick, ...rest }) => {
+export const Button = ({ children, onClick, ...rest }) => {
   return (
-    <Button
+    <ChakraButton
       letterSpacing=".1rem"
       padding="2.1rem 1.6rem"
       colorScheme="brand"
@@ -15,6 +15,6 @@ export const ChakraButton = ({ children, onClick, ...rest }) => {
       {...rest}
     >
       {children}
-    </Button>
+    </ChakraButton>
   );
 };

@@ -7,7 +7,7 @@ import {
   PopoverBody,
   PopoverArrow,
   PopoverCloseButton,
-  Button,
+  Button as ChakraButton,
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CustomCourseForm } from "./CustomCourseForm";
@@ -17,7 +17,7 @@ export const CustomCourseControl = () => {
     <StyledContainer>
       <Popover>
         <PopoverTrigger>
-          <Button
+          <ChakraButton
             mt=".4rem"
             letterSpacing=".1rem"
             padding="2.1rem 1.6rem"
@@ -33,7 +33,7 @@ export const CustomCourseControl = () => {
               style={{ marginRight: "1rem" }}
             />
             Custom
-          </Button>
+          </ChakraButton>
         </PopoverTrigger>
         <PopoverContent width="30rem" padding="1rem" borderRadius="10px">
           <PopoverHeader

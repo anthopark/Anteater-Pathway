@@ -7,7 +7,7 @@ import {
   Input,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import ChakraButton from "@components/ChakraButton";
+import { Button } from "@components/CustomChakraUI";
 
 export const CustomCourseForm = () => {
   const { appUser, setAppUser } = useGlobalObjects();
@@ -198,7 +198,7 @@ export const CustomCourseForm = () => {
               </FormControl>
             )}
           </Field>
-          <ChakraButton>Create</ChakraButton>
+          <Button>Create</Button>
         </Form>
       )}
     </Formik>

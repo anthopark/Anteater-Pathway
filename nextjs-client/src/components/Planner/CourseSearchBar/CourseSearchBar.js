@@ -9,7 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCoursesForSearch } from "src/hooks/useCoursesForSearch";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { Course } from "src/entities/course";
-import ChakraButton from "@components/ChakraButton";
+import { Button } from "@components/CustomChakraUI";
+import { useToast } from "@chakra-ui/toast";
+import { ToastBox } from "@components/CustomChakraUI";
 
 const MULTI_SELECT_LIMIT = 4;
 
@@ -20,6 +22,7 @@ export const CourseSearchBar = () => {
   const [cachedOptions, setCachedOptions] = useState([]);
   const { selectOptions, setSelectOptions, setCoursesForOptions } =
     useCoursesForSearch();
+  const toast = useToast();
 
   const handleButtonClick = (event) => {
     event.preventDefault();
@@ -30,6 +33,18 @@ export const CourseSearchBar = () => {
       }
       setAppUser(appUser);
       setSelectedCourses([]);
+
+      toast({
+        position: "bottom-right",
+        duration: 3000,
+        render: () => (
+          <ToastBox
+            status="success"
+            dataOfInterest={selectedCourses.map((item) => item.courseCode)}
+            message="Courses added to planner:"
+          />
+        ),
+      });
     }
   };
 
@@ -77,9 +92,9 @@ export const CourseSearchBar = () => {
         filterOption={createFilter({ ignoreAccents: false })}
       />
       <div style={{ marginLeft: "1.3rem", marginTop: ".4rem" }}>
-        <ChakraButton onClick={handleButtonClick}>
+        <Button onClick={handleButtonClick}>
           <FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />
-        </ChakraButton>
+        </Button>
       </div>
     </StyledContainer>
   );
