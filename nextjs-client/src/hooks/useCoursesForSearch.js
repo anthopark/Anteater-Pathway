@@ -26,6 +26,9 @@ export const useCoursesForSearch = () => {
       if (
         groupedCourse[0][findOption]
           .toLowerCase()
+          .startsWith(inputValue.toLowerCase()) &&
+        groupedCourse[0][findOption]
+          .toLowerCase()
           .includes(inputValue.toLowerCase())
       ) {
         result = groupedCourse;

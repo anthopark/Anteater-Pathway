@@ -37,8 +37,8 @@ export const ToastBox = ({ status, dataOfInterest, message, ...rest }) => {
               fontSize="1.6rem"
               borderRadius="5px"
               pt=".3rem"
-              pr=".3rem"
-              pl=".3rem"
+              pr=".4rem"
+              pl=".4rem"
               mb=".5rem"
               mr=".5rem"
             >

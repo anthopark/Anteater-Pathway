@@ -2,7 +2,7 @@ import { StyledContainer, TopLayout, MainLayout } from "./styled";
 import { CustomCourseControl } from "./CustomCourseControl/CustomCourseControl";
 import AcademicYearControl from "./AcademicYearControl";
 import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
-import { UserProfile } from "./UserProfile";
+import { UserProfile } from "./UserProfile/UserProfile";
 
 export const Planner = () => {
   return (

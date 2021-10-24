@@ -15,6 +15,24 @@ html {
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+@media screen and (min-width: 1400px) {
+  html {
+    font-size: 67.5%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 72.5%;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  html {
+    font-size: 77.5%;
+  }
+}
+
 body {
   box-sizing: border-box;
 }
