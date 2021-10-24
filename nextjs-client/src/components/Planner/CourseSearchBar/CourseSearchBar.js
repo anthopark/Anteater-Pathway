@@ -9,9 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCoursesForSearch } from "src/hooks/useCoursesForSearch";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { Course } from "src/entities/course";
-import { Button } from "@components/CustomChakraUI";
+import { Button, ToastBox } from "@components/CustomChakraUI";
 import { useToast } from "@chakra-ui/toast";
-import { ToastBox } from "@components/CustomChakraUI";
 
 const MULTI_SELECT_LIMIT = 4;
 
@@ -30,8 +29,8 @@ export const CourseSearchBar = () => {
     event.preventDefault();
 
     if (selectedCourses.length > 0) {
-      for (const searchedCourse of selectedCourses) {
-        appUser.planTentatively(new Course(searchedCourse));
+      for (const selectedCourse of selectedCourses) {
+        appUser.planTentatively(new Course(selectedCourse));
       }
       setAppUser(appUser);
       setSelectedCourses([]);
@@ -51,9 +50,7 @@ export const CourseSearchBar = () => {
   };
 
   const handleSelectChange = (value) => {
-    console.log(value);
     setSelectedCourses(value);
-    console.log(selectedCourses);
 
     if (value.length >= MULTI_SELECT_LIMIT) {
       return setCurrentCourseOptions([]);
@@ -61,7 +58,7 @@ export const CourseSearchBar = () => {
 
     if (value.length < selectedCourses.length) {
       updateCurrentCourseOptions(
-        selectedCourses[selectedCourses.length - 1].departmentCode
+        selectedCourses[selectedCourses.length - 1]?.departmentCode
       );
     } else if (value.length === 0 && selectedCourses.length === 0) {
       setCurrentCourseOptions([]);
@@ -70,7 +67,10 @@ export const CourseSearchBar = () => {
 
   const handleInputChange = (value) => {
     setSearchInputValue(value);
-    updateCurrentCourseOptions(value);
+
+    if (value.length >= 2) {
+      updateCurrentCourseOptions(value);
+    }
   };
 
   return (

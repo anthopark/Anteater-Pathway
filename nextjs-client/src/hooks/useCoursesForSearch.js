@@ -2,27 +2,38 @@ import { useState, useEffect } from "react";
 import dummyCourses from "../components/Planner/CourseSearchBar/dummy-courses.json";
 
 export const useCoursesForSearch = () => {
-  const [courses, setCourses] = useState([]);
+  const [allCourses, setAllCourses] = useState([]);
   const [currentCourseOptions, setCurrentCourseOptions] = useState([]);
 
   useEffect(() => {
-    setCourses(dummyCourses);
+    setAllCourses(dummyCourses);
   }, []);
 
   const updateCurrentCourseOptions = (inputValue) => {
-    if (inputValue.length >= 2) {
-      for (const groupedCourses of courses) {
-        if (
-          groupedCourses.length > 0 &&
-          groupedCourses[0].departmentCode
-            .toLowerCase()
-            .includes(inputValue.toLowerCase())
-        ) {
-          setCurrentCourseOptions(groupedCourses);
-          break;
-        }
+    let foundCourseOptions = [];
+
+    foundCourseOptions = findCourseOptions(inputValue, "departmentCode");
+
+    if (foundCourseOptions.length > 0) {
+      setCurrentCourseOptions(foundCourseOptions);
+    }
+  };
+
+  const findCourseOptions = (inputValue, findOption) => {
+    let result = [];
+
+    for (const groupedCourse of allCourses) {
+      if (
+        groupedCourse[0][findOption]
+          .toLowerCase()
+          .includes(inputValue.toLowerCase())
+      ) {
+        result = groupedCourse;
+        break;
       }
     }
+
+    return result;
   };
 
   return {
