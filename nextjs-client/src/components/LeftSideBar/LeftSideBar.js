@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { StyledContainer, IconLink } from "./styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ThemeToggler } from "./ThemeToggler";
@@ -8,9 +7,7 @@ export const LeftSideBar = () => {
   return (
     <StyledContainer>
       <div className="logo-container" style={{ marginLeft: ".8rem" }}>
-        <Link href="/" passHref>
-          <Image src="/logo.svg" alt="logo" width="55" height="65" />
-        </Link>
+        <Image src="/logo.svg" alt="logo" width="55" height="65" />
       </div>
       <div className="menu-container">
         <ThemeToggler />
