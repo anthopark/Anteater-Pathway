@@ -44,7 +44,7 @@ export const CustomCourseControl = () => {
             <p>Create Custom Course</p>
           </PopoverHeader>
           <PopoverArrow />
-          <PopoverCloseButton />
+          <PopoverCloseButton mt=".5rem" mr=".5rem" size="md" />
           <PopoverBody>
             <CustomCourseForm />
           </PopoverBody>

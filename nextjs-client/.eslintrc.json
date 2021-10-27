@@ -2,6 +2,7 @@
   "extends": ["next/core-web-vitals", "prettier"],
   "rules": {
     "no-unused-vars": "error",
-    "indent": ["error", 2]
+    "template-curly-spacing": "off",
+    "indent": "off"
   }
 }

@@ -8,9 +8,12 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { Button } from "@components/CustomChakraUI";
+import { useToastBox } from "src/hooks/useToastBox";
 
 export const CustomCourseForm = () => {
   const { appUser, setAppUser } = useGlobalObjects();
+  const { showToastBox } = useToastBox();
+
   const validateDepartmentCode = (value) => {
     let error;
     if (!value) {
@@ -57,9 +60,16 @@ export const CustomCourseForm = () => {
   };
 
   const handleSubmit = (values) => {
+    console.log(values);
     appUser.planTentatively(new Course(values));
     setAppUser(appUser);
     console.log(appUser);
+
+    showToastBox({
+      status: "success",
+      dataOfInterest: [`${values.departmentCode} ${values.number}`],
+      message: "Course added:",
+    });
   };
 
   return (
@@ -68,9 +78,12 @@ export const CustomCourseForm = () => {
         departmentCode: "",
         number: "",
         title: "",
-        Unit: "",
+        unit: "",
       }}
-      onSubmit={handleSubmit}
+      onSubmit={(values, { resetForm }) => {
+        handleSubmit(values);
+        resetForm();
+      }}
     >
       {() => (
         <Form>
@@ -96,7 +109,7 @@ export const CustomCourseForm = () => {
                   height="3.3rem"
                   borderRadius="7px"
                   id="departmentCode"
-                  placeholder="Ex. ECON, HIST"
+                  placeholder="Ex. ECON, HISTORY"
                 />
                 <FormErrorMessage fontSize="1.3rem">
                   {form.errors.departmentCode}

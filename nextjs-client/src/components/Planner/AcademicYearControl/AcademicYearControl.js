@@ -1,16 +1,16 @@
-import { useToast } from "@chakra-ui/toast";
 import { useState } from "react";
 import { StyledContainer, StyledReactSelect } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
-import { Button, ToastBox } from "@components/CustomChakraUI";
+import { Button } from "@components/CustomChakraUI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAcademicYear } from "src/hooks/useAcademicYear";
+import { useToastBox } from "src/hooks/useToastBox";
 
 export const AcademicYearControl = () => {
   const { appUser, setAppUser } = useGlobalObjects();
   const [selectedYear, setSelectedYear] = useState(null);
   const { yearOptions, disableSelectedOption } = useAcademicYear();
-  const toast = useToast();
+  const { showToastBox } = useToastBox();
 
   const handleSelectYear = (option) => {
     setSelectedYear(option);
@@ -25,16 +25,10 @@ export const AcademicYearControl = () => {
       disableSelectedOption(appUser.academicYears);
       setSelectedYear(null);
 
-      toast({
-        position: "bottom-right",
-        duration: 3000,
-        render: () => (
-          <ToastBox
-            status="success"
-            dataOfInterest={[selectedYear.label]}
-            message="Academic Year Added:"
-          />
-        ),
+      showToastBox({
+        status: "success",
+        dataOfInterest: [selectedYear.label],
+        message: "Academic Year Added:",
       });
     }
   };
