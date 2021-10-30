@@ -1,33 +1,23 @@
+import { Planner } from "./planner";
+
 export class AppUser {
   constructor() {
-    // years are two-digit number. ex. 21, 22
-    this._academicYears = [];
-    // courses just added from seacrh bar
-    this._tentativelyPlannedCourses = [];
+    this._isAuthenticated = false;
+    this._planner = new Planner();
   }
 
-  get academicYears() {
-    return [...this._academicYears];
+  get isAuthenticated() {
+    return this._isAuthenticated;
   }
 
-  get tentativelyPlannedCourses() {
-    return [...this._tentativelyPlannedCourses];
-  }
-
-  addAcademicYear(year) {
-    if (!this._academicYears.includes(year)) {
-      this._academicYears.push(year);
-      this._academicYears.sort((prev, next) => prev - next);
+  set isAuthenticated(newValue) {
+    if (typeof newValue !== "boolean") {
+      throw new TypeError("The type must be boolean");
     }
+    this._isAuthenticated = newValue;
   }
 
-  removeAcademicYear(year) {
-    if (this._academicYears.includes(year)) {
-      this._academicYears.splice(index, 1);
-    }
-  }
-
-  planTentatively(course) {
-    this._tentativelyPlannedCourses.push(course);
+  get planner() {
+    return this._planner;
   }
 }

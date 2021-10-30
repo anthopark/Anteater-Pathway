@@ -20,9 +20,11 @@ export const AcademicYearControl = () => {
     event.preventDefault();
 
     if (selectedYear) {
-      appUser.addAcademicYear(selectedYear.value);
+      appUser.planner.addAcademicYear(selectedYear.value);
       setAppUser(appUser);
-      disableSelectedOption(appUser.academicYears);
+      disableSelectedOption(
+        appUser.planner.academicYears.map((item) => item.year)
+      );
       setSelectedYear(null);
 
       showToastBox({
@@ -30,6 +32,8 @@ export const AcademicYearControl = () => {
         dataOfInterest: [selectedYear.label],
         message: "Academic Year Added:",
       });
+
+      console.log(appUser);
     }
   };
 

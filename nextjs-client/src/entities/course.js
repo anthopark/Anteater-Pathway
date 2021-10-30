@@ -1,11 +1,11 @@
 export class Course {
-  constructor(addedCourse) {
+  constructor(courseItem) {
     // id for draggerable
     this._id = this._generateGuid();
-    this._departmentCode = addedCourse.departmentCode.trim();
-    this._number = addedCourse.number.trim();
-    this._unit = addedCourse.unit.trim();
-    this._title = addedCourse.title.trim();
+    this._departmentCode = courseItem.departmentCode.trim();
+    this._number = courseItem.number.trim();
+    this._unit = courseItem.unit.trim();
+    this._title = courseItem.title.trim();
   }
 
   get id() {

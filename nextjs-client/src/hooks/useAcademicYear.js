@@ -18,7 +18,6 @@ export const useAcademicYear = () => {
   }, []);
 
   const disableSelectedOption = (userAcademicYears) => {
-    console.log(userAcademicYears);
     const copyOfYearOptions = [...yearOptions];
 
     for (const year of userAcademicYears) {
@@ -33,8 +32,6 @@ export const useAcademicYear = () => {
         };
       }
     }
-
-    console.log(copyOfYearOptions);
 
     setYearOptions(copyOfYearOptions);
   };
