@@ -5,8 +5,8 @@ export const StyledContainer = styled.form`
   display: flex;
   justify-content: start;
   align-items: center;
-  width: 100%;
   height: 100%;
+  width: 30rem;
   padding-right: 2rem;
 `;
 

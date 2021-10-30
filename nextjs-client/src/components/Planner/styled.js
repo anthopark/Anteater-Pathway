@@ -12,16 +12,17 @@ export const StyledContainer = styled.div`
 export const TopLayout = styled.div`
   width: 100%;
   height: 9rem;
-  display: grid;
-  grid-template-columns: auto minmax(20rem, 30rem);
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #bbbbbb;
 
-  .left-pane {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-  }
-
-  .right-pane {
+  .right-end-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    padding-left: 2rem;
+    width: 30rem;
   }
 `;
 

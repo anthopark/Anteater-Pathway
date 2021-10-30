@@ -5,6 +5,6 @@ export const StyledContainer = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  padding: 0 2rem;
   font-family: Oxygen;
+  margin-right: 2rem;
 `;

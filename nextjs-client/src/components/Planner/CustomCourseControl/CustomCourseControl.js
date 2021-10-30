@@ -15,7 +15,7 @@ import { CustomCourseForm } from "./CustomCourseForm";
 export const CustomCourseControl = () => {
   return (
     <StyledContainer>
-      <Popover>
+      <Popover arrowSize="1.2rem">
         <PopoverTrigger>
           <ChakraButton
             mt=".4rem"
@@ -35,7 +35,12 @@ export const CustomCourseControl = () => {
             Custom
           </ChakraButton>
         </PopoverTrigger>
-        <PopoverContent width="30rem" padding="1rem" borderRadius="10px">
+        <PopoverContent
+          width="30rem"
+          padding="1rem"
+          borderRadius="10px"
+          margin="0.5rem 1.5rem"
+        >
           <PopoverHeader
             fontSize="1.6rem"
             fontWeight="bold"
