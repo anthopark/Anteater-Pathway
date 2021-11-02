@@ -3,6 +3,8 @@ import { StyledContainer, IconLink } from "./styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ThemeToggler } from "./ThemeToggler";
 
+const ICON_SIZE = "2.7rem";
+
 export const LeftSideBar = () => {
   return (
     <StyledContainer>
@@ -10,12 +12,20 @@ export const LeftSideBar = () => {
         <Image src="/logo.svg" alt="logo" width="55" height="65" />
       </div>
       <div className="menu-container">
-        <ThemeToggler />
+        <ThemeToggler iconSize={ICON_SIZE} />
         <IconLink>
-          <FontAwesomeIcon icon={["fas", "envelope"]} size="3x" color="white" />
+          <FontAwesomeIcon
+            icon={["fas", "envelope"]}
+            style={{ fontSize: ICON_SIZE }}
+            color="white"
+          />
         </IconLink>
         <IconLink>
-          <FontAwesomeIcon icon={["fab", "github"]} size="3x" color="white" />
+          <FontAwesomeIcon
+            icon={["fab", "github"]}
+            style={{ fontSize: ICON_SIZE }}
+            color="white"
+          />
         </IconLink>
       </div>
     </StyledContainer>

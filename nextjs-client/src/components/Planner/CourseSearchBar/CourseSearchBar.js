@@ -29,8 +29,8 @@ export const CourseSearchBar = () => {
     event.preventDefault();
 
     if (selectedCourses.length > 0) {
-      for (const selectedCourse of selectedCourses) {
-        appUser.planTentatively(new Course(selectedCourse));
+      for (const courseItem of selectedCourses) {
+        appUser.planner.addCourse(new Course(courseItem));
       }
       setAppUser(appUser);
       setSelectedCourses([]);
@@ -40,6 +40,8 @@ export const CourseSearchBar = () => {
         dataOfInterest: selectedCourses.map((item) => item.courseCode),
         message: "Course(s) added:",
       });
+
+      console.log(appUser);
     }
   };
 
@@ -62,7 +64,7 @@ export const CourseSearchBar = () => {
   const handleInputChange = (value) => {
     setSearchInputValue(value);
 
-    if (value.length >= 2) {
+    if (value.length >= 2 && value[value.length - 1] != " ") {
       updateCurrentCourseOptions(value);
     }
   };

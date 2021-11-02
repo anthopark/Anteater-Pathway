@@ -5,7 +5,7 @@ export class Planner {
     // years are two-digit number. ex. 21, 22
     this._academicYears = [];
     // courses just added from seacrh bar
-    this._courseBag = [];
+    this._addedCourses = [];
   }
 
   get academicYears() {
@@ -23,15 +23,15 @@ export class Planner {
     }
   }
 
-  get courseBag() {
-    return this._courseBag;
+  get addedCourses() {
+    return this._addedCourses;
   }
 
-  set courseBag(newCourseBag) {
-    this._courseBag = newCourseBag;
+  set addedCourses(newCourseBag) {
+    this._addedCourses = newCourseBag;
   }
 
-  addCourseToCourseBag(course) {
-    this._courseBag.push(course);
+  addCourse(course) {
+    this._addedCourses.push(course);
   }
 }

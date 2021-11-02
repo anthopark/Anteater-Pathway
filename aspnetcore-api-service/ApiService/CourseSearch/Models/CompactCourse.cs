@@ -1,13 +1,10 @@
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace ApiService.Models
+namespace ApiService.CourseSearch.Models
 {
     [BsonIgnoreExtraElements]
     public class CompactCourse
     {
-        [BsonRequired][BsonElement("dept")]
-        public string Department { get; set; }
-        
         [BsonRequired][BsonElement("deptCode")]
         public string DepartmentCode { get; set; }
         

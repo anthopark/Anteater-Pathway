@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using ApiService.CourseSearch.Models;
 using ApiService.DataAccess;
 using ApiService.DataAccess.Repositories;
 using ApiService.Models;

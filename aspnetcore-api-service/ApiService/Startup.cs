@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using ApiService.CourseSearch.Applications;
 using ApiService.DataAccess;
 using ApiService.DataAccess.Repositories;
 using ApiService.SystemConfiguration;
@@ -37,7 +38,10 @@ namespace ApiService
             services.AddSingleton<IMongoDbSettings>(sp => 
                 sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
             services.AddSingleton<IMongoDbContext, MongoDbContext>();
+            
             services.AddSingleton<ICourseRepository, CourseRepository>();
+            
+            services.AddSingleton<ICourseFinder, CourseFinder>();
             
             services.AddControllers()
                 .AddJsonOptions(options =>

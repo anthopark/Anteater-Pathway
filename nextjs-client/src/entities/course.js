@@ -6,6 +6,7 @@ export class Course {
     this._number = courseItem.number.trim();
     this._unit = courseItem.unit.trim();
     this._title = courseItem.title.trim();
+    this._isCustom = false;
   }
 
   get id() {
@@ -22,6 +23,17 @@ export class Course {
 
   get unit() {
     return this._unit;
+  }
+
+  get isCustom() {
+    return this._isCustom;
+  }
+
+  set isCustom(newValue) {
+    if (typeof newValue !== "boolean") {
+      throw new TypeError("The type must be boolean");
+    }
+    this._isCustom = newValue;
   }
 
   _generateGuid() {

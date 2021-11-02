@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using ApiService.Models;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace ApiService.Models
+namespace ApiService.CourseSearch.Models
 {
     [BsonIgnoreExtraElements]
     public class Course : MongoDbBaseModel

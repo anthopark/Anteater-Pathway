@@ -61,7 +61,9 @@ export const CustomCourseForm = () => {
 
   const handleSubmit = (values) => {
     console.log(values);
-    appUser.planTentatively(new Course(values));
+    const newCourse = new Course(values);
+    newCourse.isCustom = true;
+    appUser.planner.addCourse(newCourse);
     setAppUser(appUser);
     console.log(appUser);
 
