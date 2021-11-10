@@ -4,7 +4,10 @@ export const lightTheme = {
   colors: {
     selectBorder: "transparent",
     leftSideBarBg: "#0E3D6B",
-    pageBg: "#E5E5EF",
+    pageBg: "#E2E2EB",
+    paneBg: "#f3f9ff",
+    paneHeaderFont: "#7E7676",
+    tentativeCourse: "#9BE7CB",
   },
 };
 
@@ -13,6 +16,9 @@ export const darkTheme = {
     selectBorder: "red",
     leftSideBarBg: "#0E3D6B",
     pageBg: "#191930",
+    paneBg: "#FFFFFF",
+    paneHeaderFont: "#7E7676",
+    tentativeCourse: "#9BE7CB",
   },
 };
 

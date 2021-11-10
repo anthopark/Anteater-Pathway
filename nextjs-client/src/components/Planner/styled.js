@@ -14,7 +14,7 @@ export const TopLayout = styled.div`
   height: 9rem;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #bbbbbb;
+  border-bottom: 2px solid #bbbbbb;
 
   .right-end-box {
     display: flex;
@@ -30,11 +30,14 @@ export const MainLayout = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(auto, 3fr) minmax(30rem, 1fr);
+  grid-template-columns: minmax(auto, 3.8fr) minmax(30rem, 1fr);
   .left-pane {
   }
 
   .right-pane {
-    background-color: lightgrey;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 2rem 2rem;
+    border-left: darkgoldenrod solid 1px;
   }
 `;

@@ -3,8 +3,10 @@ import { CustomCourseControl } from "./CustomCourseControl/CustomCourseControl";
 import AcademicYearControl from "./AcademicYearControl";
 import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
 import { UserProfile } from "./UserProfile/UserProfile";
+import { RightSidePane } from "./RightSidePane/RightSidePane";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "../../firebase/client-app";
+import { DragDropContextProvider } from "./DragDropContextProvider";
 
 export const Planner = () => {
   const [user, loading] = useAuthState(firebase.auth());
@@ -22,10 +24,14 @@ export const Planner = () => {
           <UserProfile user={user} />
         </div>
       </TopLayout>
-      <MainLayout>
-        <div className="left-pane"></div>
-        <div className="right-pane"></div>
-      </MainLayout>
+      <DragDropContextProvider>
+        <MainLayout>
+          <div className="left-pane"></div>
+          <div className="right-pane">
+            <RightSidePane />
+          </div>
+        </MainLayout>
+      </DragDropContextProvider>
     </StyledContainer>
   );
 };

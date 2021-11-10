@@ -33,7 +33,7 @@ namespace ApiService.CourseSearch.Controllers
                 return NotFound();
             }
 
-            return result;
+            return Ok(result);
         }
     }
 }

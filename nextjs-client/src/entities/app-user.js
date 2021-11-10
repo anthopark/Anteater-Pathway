@@ -1,9 +1,11 @@
 import { Planner } from "./planner";
+import { TentativePlanner } from "./tentative-planner";
 
 export class AppUser {
   constructor() {
     this._isAuthenticated = false;
     this._planner = new Planner();
+    this._tentativePlanner = new TentativePlanner();
   }
 
   get isAuthenticated() {
@@ -19,5 +21,17 @@ export class AppUser {
 
   get planner() {
     return this._planner;
+  }
+
+  set planner(newPlanner) {
+    this._planner = newPlanner;
+  }
+
+  get tentativePlanner() {
+    return this._tentativePlanner;
+  }
+
+  set tentativePlanner(newTentativePlanner) {
+    this._tentativePlanner = newTentativePlanner;
   }
 }

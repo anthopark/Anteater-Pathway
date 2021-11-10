@@ -15,7 +15,7 @@ import { useToastBox } from "src/hooks/useToastBox";
 const MULTI_SELECT_LIMIT = 4;
 
 export const CourseSearchBar = () => {
-  const { appUser, setAppUser } = useGlobalObjects();
+  const { appUser, updateAppUser } = useGlobalObjects();
   const {
     currentCourseOptions,
     setCurrentCourseOptions,
@@ -30,9 +30,9 @@ export const CourseSearchBar = () => {
 
     if (selectedCourses.length > 0) {
       for (const courseItem of selectedCourses) {
-        appUser.planner.addCourse(new Course(courseItem));
+        appUser.tentativePlanner.addCourse(new Course(courseItem));
       }
-      setAppUser(appUser);
+      updateAppUser(appUser);
       setSelectedCourses([]);
 
       showToastBox({

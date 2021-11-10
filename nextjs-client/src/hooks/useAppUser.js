@@ -8,5 +8,13 @@ export const useAppUser = () => {
     setAppUser(new AppUser());
   }, []);
 
-  return { appUser, setAppUser };
+  const updateAppUser = (appUser) => {
+    const newAppUser = new AppUser();
+    newAppUser.isAuthenticated = appUser.isAuthenticated;
+    newAppUser.planner = appUser.planner;
+    newAppUser.tentativePlanner = appUser.tentativePlanner;
+    setAppUser(newAppUser);
+  };
+
+  return { appUser, updateAppUser };
 };

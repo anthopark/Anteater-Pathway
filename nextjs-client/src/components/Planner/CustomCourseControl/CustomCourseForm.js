@@ -11,15 +11,15 @@ import { Button } from "@components/CustomChakraUI";
 import { useToastBox } from "src/hooks/useToastBox";
 
 export const CustomCourseForm = () => {
-  const { appUser, setAppUser } = useGlobalObjects();
+  const { appUser, updateAppUser } = useGlobalObjects();
   const { showToastBox } = useToastBox();
 
   const validateDepartmentCode = (value) => {
     let error;
     if (!value) {
       error = "Department is required";
-    } else if (value.trim().length >= 12) {
-      error = "Please use < 12 characters";
+    } else if (value.trim().length >= 9) {
+      error = "Please use < 9 characters";
     }
 
     return error;
@@ -29,8 +29,8 @@ export const CustomCourseForm = () => {
     let error;
     if (!value) {
       error = "Number is required";
-    } else if (value.trim().length >= 7) {
-      error = "Please use < 7 characters";
+    } else if (value.trim().length >= 6) {
+      error = "Please use < 6 characters";
     }
 
     return error;
@@ -63,8 +63,8 @@ export const CustomCourseForm = () => {
     console.log(values);
     const newCourse = new Course(values);
     newCourse.isCustom = true;
-    appUser.planner.addCourse(newCourse);
-    setAppUser(appUser);
+    appUser.tentativePlanner.addCourse(newCourse);
+    updateAppUser(appUser);
     console.log(appUser);
 
     showToastBox({

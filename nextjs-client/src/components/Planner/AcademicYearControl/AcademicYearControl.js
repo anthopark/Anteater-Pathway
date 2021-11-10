@@ -7,7 +7,7 @@ import { useAcademicYear } from "src/hooks/useAcademicYear";
 import { useToastBox } from "src/hooks/useToastBox";
 
 export const AcademicYearControl = () => {
-  const { appUser, setAppUser } = useGlobalObjects();
+  const { appUser, updateAppUser } = useGlobalObjects();
   const [selectedYear, setSelectedYear] = useState(null);
   const { yearOptions, disableSelectedOption } = useAcademicYear();
   const { showToastBox } = useToastBox();
@@ -21,7 +21,7 @@ export const AcademicYearControl = () => {
 
     if (selectedYear) {
       appUser.planner.addAcademicYear(selectedYear.value);
-      setAppUser(appUser);
+      updateAppUser(appUser);
       disableSelectedOption(
         appUser.planner.academicYears.map((item) => item.year)
       );

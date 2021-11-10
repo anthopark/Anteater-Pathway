@@ -9,7 +9,7 @@ const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
   const { themeMode, themeToggler, isComponentMounted } = useDarkMode();
-  const { appUser, setAppUser } = useAppUser();
+  const { appUser, updateAppUser } = useAppUser();
 
   const themeStyles = themeMode === "light" ? lightTheme : darkTheme;
 
@@ -21,7 +21,7 @@ export const GlobalContextProvider = ({ children }) => {
         themeMode,
         themeToggler,
         appUser,
-        setAppUser,
+        updateAppUser,
       }}
     >
       <ChakraProvider theme={chakraTheme}>
