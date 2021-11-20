@@ -8,6 +8,9 @@ import {
   faExclamationCircle,
   faCheckCircle,
   faSignOutAlt,
+  faEllipsisV,
+  faInfoCircle,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
@@ -20,5 +23,8 @@ library.add(
   faSearch,
   faExclamationCircle,
   faCheckCircle,
-  faSignOutAlt
+  faSignOutAlt,
+  faEllipsisV,
+  faInfoCircle,
+  faTimesCircle
 );

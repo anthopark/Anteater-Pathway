@@ -8,6 +8,11 @@ export const lightTheme = {
     paneBg: "#f3f9ff",
     paneHeaderFont: "#7E7676",
     tentativeCourse: "#9BE7CB",
+    courseItemShadow: "rgba(0,0,0, 0.2)",
+    courseMenuBg: "#f3f9ff",
+    lightBorder: "#bbbbbb",
+    defaultText: "#5C5C5C",
+    redText: "#E34522",
   },
 };
 

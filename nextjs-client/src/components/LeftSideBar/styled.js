@@ -7,7 +7,7 @@ export const StyledContainer = styled.div`
   justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.leftSideBarBg};
   align-items: center;
-  padding: 2rem 0.5rem;
+  padding: 1.5rem 0.5rem;
 
   .logo-container {
     display: flex;

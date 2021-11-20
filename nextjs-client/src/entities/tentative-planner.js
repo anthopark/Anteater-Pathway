@@ -12,6 +12,8 @@ export class TentativePlanner {
     }
   }
 
+  deleteCourse() {}
+
   get leftCourseItems() {
     return this._leftCourseItems;
   }

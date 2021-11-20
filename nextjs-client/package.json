@@ -12,6 +12,7 @@
     "prettier-format": "prettier --write ."
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.1",
     "@chakra-ui/react": "^1.6.9",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -32,6 +33,7 @@
     "react-firebaseui": "^5.0.2",
     "react-helmet": "^6.1.0",
     "react-select": "^5.1.0",
+    "react-tiny-popover": "^7.0.1",
     "styled-components": "^5.3.1"
   },
   "devDependencies": {

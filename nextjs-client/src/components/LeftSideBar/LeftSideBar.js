@@ -9,7 +9,7 @@ export const LeftSideBar = () => {
   return (
     <StyledContainer>
       <div className="logo-container" style={{ marginLeft: ".8rem" }}>
-        <Image src="/logo.svg" alt="logo" width="55" height="65" />
+        <Image src="/logo.svg" alt="logo" width="50" height="60" />
       </div>
       <div className="menu-container">
         <ThemeToggler iconSize={ICON_SIZE} />

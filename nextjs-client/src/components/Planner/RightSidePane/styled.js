@@ -31,11 +31,10 @@ export const TentativePlannerContainer = styled.div`
     margin-top: 1rem;
     margin-bottom: 1.7rem;
     width: 100%;
-    height: 100%;
     padding: 0 1.2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     .course-list {
       padding: 0 0.1rem;
