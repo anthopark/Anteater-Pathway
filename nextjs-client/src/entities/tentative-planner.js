@@ -12,7 +12,23 @@ export class TentativePlanner {
     }
   }
 
-  deleteCourse() {}
+  deleteCourse(courseId) {
+    let foundIndex = this._leftCourseItems.findIndex(
+      (course) => course.id === courseId
+    );
+
+    if (foundIndex !== -1) {
+      this._leftCourseItems.splice(foundIndex, 1);
+    } else {
+      foundIndex = this._rightCourseItems.findIndex(
+        (course) => course.id === courseId
+      );
+
+      if (foundIndex !== -1) {
+        this._rightCourseItems.splice(foundIndex, 1);
+      }
+    }
+  }
 
   get leftCourseItems() {
     return this._leftCourseItems;
