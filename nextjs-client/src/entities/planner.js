@@ -20,4 +20,6 @@ export class Planner {
       this._academicYears.sort((prev, next) => prev.year - next.year);
     }
   }
+
+  updateCourseColor(courseId, newColor) {}
 }

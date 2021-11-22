@@ -26,9 +26,9 @@ const fontColors = {
   color2: "#5C5C5C",
   color3: "#5C5C5C",
   color4: "#5C5C5C",
-  color5: "#5C5C5C",
-  color6: "#5C5C5C",
-  color7: "#5C5C5C",
+  color5: "#EAE3E3",
+  color6: "#EAE3E3",
+  color7: "#EAE3E3",
   color8: "#5C5C5C",
 };
 
@@ -71,6 +71,7 @@ export const TentativeContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.3rem;
+  font-weight: bold;
   letter-spacing: 1px;
 
   .course-code-box {
@@ -119,7 +120,8 @@ export const MenuContainer = styled.div`
   }
 
   .color-picker-container {
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 0.2rem;
     border-top: 2px solid #d9d9d9;
     border-bottom: 2px solid #d9d9d9;
   }

@@ -7,6 +7,7 @@ export class Course {
     this._unit = courseItem.unit.trim();
     this._title = courseItem.title.trim();
     this._isCustom = false;
+    this._color = "color1";
   }
 
   get id() {
@@ -34,6 +35,14 @@ export class Course {
       throw new TypeError("The type must be boolean");
     }
     this._isCustom = newValue;
+  }
+
+  get color() {
+    return this._color;
+  }
+
+  set color(newValue) {
+    this._color = newValue;
   }
 
   _generateGuid() {

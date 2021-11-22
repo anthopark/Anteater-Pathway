@@ -28,6 +28,33 @@ export class TentativePlanner {
         this._rightCourseItems.splice(foundIndex, 1);
       }
     }
+
+    this.balanceCourseItems();
+  }
+
+  updateCourseColor(courseId, newColor) {
+    const foundCourse = this._findCourse(courseId);
+    if (foundCourse) {
+      foundCourse.color = newColor;
+    }
+  }
+
+  balanceCourseItems() {
+    let imbalanceCourses = [];
+
+    if (this._leftCourseItems.length > this._rightCourseItems.length) {
+      imbalanceCourses = this._leftCourseItems.splice(
+        this._rightCourseItems.length
+      );
+    } else if (this._leftCourseItems.length < this._rightCourseItems.length) {
+      imbalanceCourses = this._rightCourseItems.splice(
+        this._leftCourseItems.length
+      );
+    }
+
+    for (const course of imbalanceCourses) {
+      this.addCourse(course);
+    }
   }
 
   get leftCourseItems() {
@@ -40,5 +67,25 @@ export class TentativePlanner {
 
   get bothCourseItems() {
     return [this._leftCourseItems, this._rightCourseItems];
+  }
+
+  _findCourse(courseId) {
+    let result;
+
+    for (const course of this._leftCourseItems) {
+      if (course.id === courseId) {
+        result = course;
+        break;
+      }
+    }
+
+    for (const course of this._rightCourseItems) {
+      if (course.id === courseId) {
+        result = course;
+        break;
+      }
+    }
+
+    return result;
   }
 }

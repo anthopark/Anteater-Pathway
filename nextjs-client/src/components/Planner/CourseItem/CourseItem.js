@@ -20,7 +20,7 @@ const shortenText = (maxCharacters, input) => {
 };
 
 export const CourseItem = ({ isTentative, courseInfo }) => {
-  const [bgColor, setBgColor] = useState("color1");
+  const [bgColor, setBgColor] = useState(courseInfo.color);
   const [isHover, setIsHover] = useState(false);
 
   let CourseItemUI;
@@ -93,7 +93,12 @@ const CourseItemMenu = ({ courseInfo, isTentative, bgColor, setBgColor }) => {
             </a>
           </div>
           <div className="color-picker-container">
-            <CourseColorPicker bgColor={bgColor} setBgColor={setBgColor} />
+            <CourseColorPicker
+              isTentative={isTentative}
+              courseInfo={courseInfo}
+              bgColor={bgColor}
+              setBgColor={setBgColor}
+            />
           </div>
           <div className="delete-container">
             <a className="delete-link" onClick={handleDelete}>
@@ -137,12 +142,26 @@ const availableColors = [
   "color8",
 ];
 
-const CourseColorPicker = ({ bgColor, setBgColor }) => {
+const CourseColorPicker = ({
+  courseInfo,
+  isTentative,
+  bgColor,
+  setBgColor,
+}) => {
   const [currentColor, setCurrentColor] = useState(bgColor);
+  const { appUser, updateAppUser } = useGlobalObjects();
 
   const handleColorPickerClick = (color) => {
     setCurrentColor(color);
     setBgColor(color);
+
+    if (isTentative) {
+      appUser.tentativePlanner.updateCourseColor(courseInfo.id, color);
+    } else {
+      appUser.planner.updateCourseColor(courseInfo.id, color);
+    }
+
+    updateAppUser(appUser);
   };
 
   return (
