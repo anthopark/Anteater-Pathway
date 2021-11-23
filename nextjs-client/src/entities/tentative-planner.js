@@ -4,6 +4,26 @@ export class TentativePlanner {
     this._rightCourseItems = [];
   }
 
+  get droppables() {
+    return [
+      { droppableId: "tpLeft", courseItems: this._leftCourseItems },
+      { droppableId: "tpRight", courseItems: this._rightCourseItems },
+    ];
+  }
+
+  findDroppable(droppableId) {
+    if (droppableId === "tpLeft") return this._leftCourseItems;
+    else if (droppableId === "tpRight") return this._rightCourseItems;
+  }
+
+  updateDroppable(droppableId, newCourseItems) {
+    if (droppableId === "tpLeft") {
+      this._leftCourseItems = newCourseItems;
+    } else if (droppableId === "tpRight") {
+      this._rightCourseItems = newCourseItems;
+    }
+  }
+
   addCourse(course) {
     if (this._leftCourseItems.length <= this._rightCourseItems.length) {
       this._leftCourseItems.push(course);

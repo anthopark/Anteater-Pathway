@@ -26,18 +26,15 @@ const TentativePlannerUI = () => {
     <TentativePlannerContainer>
       <div className="header">Tentatively Planned</div>
       <div className="content">
-        {[
-          appUser.tentativePlanner.leftCourseItems,
-          appUser.tentativePlanner.rightCourseItems,
-        ].map((courseItems, index) => (
-          <Droppable key={index} droppableId={`tpci-${index}`}>
+        {appUser.tentativePlanner.droppables.map((droppable, index) => (
+          <Droppable key={index} droppableId={droppable["droppableId"]}>
             {(provided) => (
               <div
                 className="course-list"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {courseItems.map((course, index) => (
+                {droppable["courseItems"].map((course, index) => (
                   <Draggable
                     key={course.id}
                     draggableId={course.id}

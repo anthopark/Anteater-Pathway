@@ -10,6 +10,9 @@ const fadeIn = keyframes`
     }
 `;
 
+const darkFontColor = "#5C5C5C";
+const lightFontColor = "#E6EAE7";
+
 const bgColors = {
   color1: "#64ecbb",
   color2: "#E19F91",
@@ -22,14 +25,14 @@ const bgColors = {
 };
 
 const fontColors = {
-  color1: "#5C5C5C",
-  color2: "#5C5C5C",
-  color3: "#5C5C5C",
-  color4: "#5C5C5C",
-  color5: "#EAE3E3",
-  color6: "#EAE3E3",
-  color7: "#EAE3E3",
-  color8: "#5C5C5C",
+  color1: darkFontColor,
+  color2: darkFontColor,
+  color3: darkFontColor,
+  color4: darkFontColor,
+  color5: lightFontColor,
+  color6: darkFontColor,
+  color7: lightFontColor,
+  color8: darkFontColor,
 };
 
 const courseItemBorderRadius = "8px";
@@ -57,6 +60,7 @@ export const StyledContainer = styled.div`
       top: 0;
       left: 0;
       animation: ${fadeIn} 1s ease;
+      cursor: move;
     }
   }
 `;
@@ -145,7 +149,9 @@ export const CourseColorPickerContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 14rem;
+  width: 13rem;
+  padding-left: 1rem;
+  padding-right: 0.2rem;
 `;
 
 export const ColorPicker = styled.div`

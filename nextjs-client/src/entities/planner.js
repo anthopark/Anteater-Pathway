@@ -2,7 +2,6 @@ import { AcademicYear } from "./academic-year";
 
 export class Planner {
   constructor() {
-    // years are two-digit number. ex. 21, 22
     this._academicYears = [];
   }
 
