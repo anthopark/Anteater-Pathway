@@ -1,5 +1,6 @@
 log-*.txt
 test-course-*/
+firebase/service-account-key.json
 
 *.swp
 *.*~
