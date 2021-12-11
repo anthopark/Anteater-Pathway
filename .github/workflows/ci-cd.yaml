@@ -18,7 +18,9 @@ jobs:
           dotnet-version: "6.0.x"
 
       - name: Retore dependencies 🛠️
-        run: cd PlannerAPI && dotnet restore
+        working-directory: ./PlannerAPI/
+        run: dotnet restore
 
       - name: Build app 🚀
-        run: cd PlannerAPI && dotnet build -c Release --no-restore
+        working-directory: ./PlannerAPI/
+        run: dotnet build -c Release --no-restore
