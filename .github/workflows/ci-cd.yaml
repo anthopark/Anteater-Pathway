@@ -24,3 +24,7 @@ jobs:
       - name: Build app 🚀
         working-directory: ./PlannerAPI/
         run: dotnet build -c Release --no-restore
+
+      - name: Run automated tests 🧪
+        working-directory: ./PlannerAPI/
+        run: dotnet test -c Release --no-build
