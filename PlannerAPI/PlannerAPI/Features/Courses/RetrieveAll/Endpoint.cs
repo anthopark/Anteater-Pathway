@@ -41,21 +41,16 @@ namespace PlannerAPI.Features.Courses.RetrieveAll
 
         private static List<List<CourseViewModel>> MapToViewModel(List<List<Course>> allCourses)
         {
-            var result = new List<List<CourseViewModel>>();
-            
-            foreach (var courses in allCourses)
-            {
-                result.Add(courses.Select(course => new CourseViewModel
-                {
-                    DepartmentCode = course.DepartmentCode,
-                    Number = course.Number,
-                    CourseCode = $"{course.DepartmentCode} {course.Number}",
-                    Title = course.Title,
-                    Unit = course.Unit
-                }).ToList());
-            }
-
-            return result;
+            return allCourses.Select(courses => courses.Select(course => new CourseViewModel
+                    {
+                        DepartmentCode = course.DepartmentCode,
+                        Number = course.Number,
+                        CourseCode = $"{course.DepartmentCode} {course.Number}",
+                        Title = course.Title,
+                        Unit = course.Unit
+                    })
+                    .ToList())
+                .ToList();
         }
     }
 }

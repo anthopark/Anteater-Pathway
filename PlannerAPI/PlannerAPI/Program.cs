@@ -1,3 +1,4 @@
+using System.Text.Json;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Http.Json;
 using PlannerAPI.DataAccess;
@@ -29,7 +30,7 @@ try
     builder.Services.AddFastEndpoints();
     builder.Services.AddSwagger();
     builder.Services.Configure<JsonOptions>(option =>
-        option.SerializerOptions.PropertyNamingPolicy = null);
+        option.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 
     var app = builder.Build();
     app.UseSerilogRequestLogging();
