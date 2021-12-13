@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  DOTNET_VERSION: "6.0.x"
+  AZURE_WEBAPP_NAME: anteater-pathway-planner-api
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,7 +19,7 @@ jobs:
       - name: Setup .NET 6 🔧
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "6.0.x"
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Retore dependencies 🛠️
         working-directory: ./PlannerAPI/
@@ -28,3 +32,14 @@ jobs:
       - name: Run automated tests 🧪
         working-directory: ./PlannerAPI/
         run: dotnet test -c Release --no-build
+
+      - name: Publish app 📰
+        working-directory: ./PlannerAPI/
+        run: dotnet publish -c Release -o ./out
+
+      - name: Deploy to Azure Web Apps 🚢
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_SECRET }}
+          package: ./PlannerAPI/out/
