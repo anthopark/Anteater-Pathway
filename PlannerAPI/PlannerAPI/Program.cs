@@ -15,8 +15,8 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     await DB.InitAsync(
-        builder.Configuration["MongoDbSettings:DatabaseName"],
-        MongoClientSettings.FromConnectionString(builder.Configuration["MongoDbSettings:ConnectionString"]));
+        builder.Configuration["DatabaseName"],
+        MongoClientSettings.FromConnectionString(builder.Configuration["ConnectionString"]));
     
     builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console()
