@@ -21,7 +21,7 @@ namespace PlannerAPI.Features.Courses.RetrieveAll
         {
             var courses = await CourseRetriever.RetrieveAllGroupedByDepartment();
 
-            var result = MapToCompactCourses(courses);
+            var result = MapToViewModel(courses);
 
             if (result.Count == 0)
             {
@@ -39,7 +39,7 @@ namespace PlannerAPI.Features.Courses.RetrieveAll
             }
         }
 
-        private static List<List<CourseViewModel>> MapToCompactCourses(List<List<Course>> allCourses)
+        private static List<List<CourseViewModel>> MapToViewModel(List<List<Course>> allCourses)
         {
             var result = new List<List<CourseViewModel>>();
             

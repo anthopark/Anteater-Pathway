@@ -34,7 +34,7 @@ jobs:
         run: dotnet test -c Release --no-build
 
       - name: Publish app 📰
-        working-directory: ./PlannerAPI/
+        working-directory: ./PlannerAPI/PlannerAPI/
         run: dotnet publish -c Release -o ./out
 
       - name: Deploy to Azure Web Apps 🚢
@@ -42,4 +42,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_SECRET }}
-          package: ./PlannerAPI/out/
+          package: ./PlannerAPI/PlannerAPI/out/
