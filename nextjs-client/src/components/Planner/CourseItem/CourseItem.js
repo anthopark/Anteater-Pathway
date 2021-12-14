@@ -11,6 +11,8 @@ import { useState } from "react";
 import { Popover } from "react-tiny-popover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
+import { useDisclosure } from "@chakra-ui/react";
+import { CourseDetailModal } from "./CourseDetailModal";
 
 const shortenText = (maxCharacters, input) => {
   if (typeof input === "string" && input.length > maxCharacters) {
@@ -62,6 +64,11 @@ export const CourseItem = ({ isTentative, courseInfo }) => {
 
 const CourseItemMenu = ({ courseInfo, isTentative, bgColor, setBgColor }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const {
+    isOpen: isModalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure();
   const { appUser, updateAppUser } = useGlobalObjects();
 
   const handleDelete = () => {
@@ -80,7 +87,7 @@ const CourseItemMenu = ({ courseInfo, isTentative, bgColor, setBgColor }) => {
       content={
         <MenuContainer>
           <div className="info-link-container">
-            <a className="info-link">
+            <a className="info-link" onClick={onModalOpen}>
               <FontAwesomeIcon
                 icon={["fas", "info-circle"]}
                 style={{
@@ -91,6 +98,11 @@ const CourseItemMenu = ({ courseInfo, isTentative, bgColor, setBgColor }) => {
               />
               <p className="info-text">info</p>
             </a>
+            <CourseDetailModal
+              courseInfo={courseInfo}
+              isModalOpen={isModalOpen}
+              onModalClose={onModalClose}
+            />
           </div>
           <div className="color-picker-container">
             <CourseColorPicker

@@ -20,8 +20,6 @@ export const RightSidePane = () => {
 const TentativePlannerUI = () => {
   const { appUser } = useGlobalObjects();
 
-  console.log(appUser);
-
   return (
     <TentativePlannerContainer>
       <div className="header">Tentatively Planned</div>

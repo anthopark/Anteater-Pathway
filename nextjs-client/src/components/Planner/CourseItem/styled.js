@@ -155,8 +155,8 @@ export const CourseColorPickerContainer = styled.div`
 `;
 
 export const ColorPicker = styled.div`
-  width: 2rem;
-  height: 2rem;
+  width: 22px;
+  height: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,8 +168,8 @@ export const ColorPicker = styled.div`
   margin-bottom: 0.8rem;
 
   .color-box {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 16px;
+    height: 16px;
     background-color: ${({ color }) => bgColors[color]};
   }
 `;

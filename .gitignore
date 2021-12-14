@@ -1,6 +1,6 @@
 log-*.txt
 test-course-*/
-firebase/service-account-key.json
+service-account-key.json
 appsettings.Production.json
 
 *.swp

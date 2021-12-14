@@ -13,13 +13,14 @@
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
-    "@chakra-ui/react": "^1.6.9",
+    "@chakra-ui/react": "^1.7.3",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
+    "axios": "^0.24.0",
     "firebase": "^8.10.0",
     "firebase-admin": "^8.10.0",
     "formik": "^2.2.9",
@@ -32,6 +33,7 @@
     "react-firebase-hooks": "^3.0.4",
     "react-firebaseui": "^5.0.2",
     "react-helmet": "^6.1.0",
+    "react-query": "^3.34.3",
     "react-select": "^5.1.0",
     "react-tiny-popover": "^7.0.1",
     "styled-components": "^5.3.1"
