@@ -26,6 +26,10 @@ export class Course {
     return this._unit;
   }
 
+  get title() {
+    return this._title;
+  }
+
   get isCustom() {
     return this._isCustom;
   }

@@ -6,6 +6,7 @@ export const lightTheme = {
     leftSideBarBg: "#0E3D6B",
     pageBg: "#E2E2EB",
     paneBg: "#f3f9ff",
+    modalBg: "#f3f9ff",
     paneHeaderFont: "#7E7676",
     tentativeCourse: "#9BE7CB",
     courseItemShadow: "rgba(0,0,0, 0.2)",

@@ -20,6 +20,7 @@ export const GlobalContextProvider = ({ children }) => {
       value={{
         themeMode,
         themeToggler,
+        themeStyles,
         appUser,
         updateAppUser,
       }}

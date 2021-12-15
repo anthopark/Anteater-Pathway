@@ -28,6 +28,7 @@ export const StyledReactSelect = styled(Select)`
 
   .react-select__placeholder {
     letter-spacing: 0.1rem;
+    font-size: 1.4rem;
   }
 
   .react-select__input {

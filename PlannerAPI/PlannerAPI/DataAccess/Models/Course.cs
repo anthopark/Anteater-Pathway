@@ -20,6 +20,8 @@ namespace PlannerAPI.DataAccess.Models
         [Field("desc")] public string? Description { get; set; }
 
         [Field("ge")] public string? GeCategory { get; set; }
+        
+        [Field("prerequisite")] public string? Prerequisite { get; set; }
 
         [Field("restriction")] public string? Restriction { get; set; }
 

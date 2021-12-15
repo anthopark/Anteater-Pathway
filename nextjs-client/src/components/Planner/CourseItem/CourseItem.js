@@ -84,6 +84,7 @@ const CourseItemMenu = ({ courseInfo, isTentative, bgColor, setBgColor }) => {
       positions={["bottom"]}
       padding={5}
       onClickOutside={() => setIsPopoverOpen(false)}
+      isLazy={true}
       content={
         <MenuContainer>
           <div className="info-link-container">

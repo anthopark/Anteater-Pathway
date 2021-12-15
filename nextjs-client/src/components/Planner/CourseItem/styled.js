@@ -173,3 +173,56 @@ export const ColorPicker = styled.div`
     background-color: ${({ color }) => bgColors[color]};
   }
 `;
+export const ModalBodyLoadingContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ModalBodyErrorContainer = styled(ModalBodyLoadingContainer)`
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.colors.redText};
+`;
+
+export const ModalBodyContainer = styled(ModalBodyLoadingContainer)`
+  flex-direction: column;
+  width: 100%;
+
+  .course-info-property-container {
+    width: 100%;
+    margin: 0.3rem 0;
+    .course-info-property {
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-align: left;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .course-info-content {
+      font-size: 1.3rem;
+      padding-left: 0.3rem;
+    }
+  }
+
+  .ge-category-text {
+    margin-left: 0.5rem;
+    font-weight: normal;
+  }
+
+  .offered-terms-box {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.3rem;
+    .term-box {
+      font-size: 1.1rem;
+      padding: 0.6rem 0.8rem;
+      letter-spacing: 1px;
+      margin-right: 0.7rem;
+      margin-bottom: 0.7rem;
+      border-radius: 7px;
+    }
+  }
+`;
