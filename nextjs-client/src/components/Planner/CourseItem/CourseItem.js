@@ -87,24 +87,27 @@ const CourseItemMenu = ({ courseInfo, isTentative, bgColor, setBgColor }) => {
       isLazy={true}
       content={
         <MenuContainer>
-          <div className="info-link-container">
-            <a className="info-link" onClick={onModalOpen}>
-              <FontAwesomeIcon
-                icon={["fas", "info-circle"]}
-                style={{
-                  fontSize: "1.6rem",
-                  marginTop: ".3rem",
-                  color: "#5C5C5C",
-                }}
+          {courseInfo.isCustom ? null : (
+            <div className="info-link-container">
+              <a className="info-link" onClick={onModalOpen}>
+                <FontAwesomeIcon
+                  icon={["fas", "info-circle"]}
+                  style={{
+                    fontSize: "1.6rem",
+                    marginTop: ".3rem",
+                    color: "#5C5C5C",
+                  }}
+                />
+                <p className="info-text">info</p>
+              </a>
+              <CourseDetailModal
+                courseInfo={courseInfo}
+                isModalOpen={isModalOpen}
+                onModalClose={onModalClose}
               />
-              <p className="info-text">info</p>
-            </a>
-            <CourseDetailModal
-              courseInfo={courseInfo}
-              isModalOpen={isModalOpen}
-              onModalClose={onModalClose}
-            />
-          </div>
+            </div>
+          )}
+
           <div className="color-picker-container">
             <CourseColorPicker
               isTentative={isTentative}

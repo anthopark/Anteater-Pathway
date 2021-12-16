@@ -10,7 +10,7 @@ import {
 import { Button } from "@components/CustomChakraUI";
 import { useToastBox } from "src/hooks/useToastBox";
 
-export const CustomCourseForm = () => {
+export const CustomCourseForm = ({ setIsPopoverOpen }) => {
   const { appUser, updateAppUser } = useGlobalObjects();
   const { showToastBox } = useToastBox();
 
@@ -85,6 +85,7 @@ export const CustomCourseForm = () => {
       onSubmit={(values, { resetForm }) => {
         handleSubmit(values);
         resetForm();
+        setIsPopoverOpen(false);
       }}
     >
       {() => (

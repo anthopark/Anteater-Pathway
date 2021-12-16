@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StyledContainer } from "./styled";
 import {
   Popover,
@@ -13,9 +14,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CustomCourseForm } from "./CustomCourseForm";
 
 export const CustomCourseControl = () => {
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
   return (
     <StyledContainer>
-      <Popover arrowSize="1.2rem">
+      <Popover arrowSize="1.2rem" isOpen={isPopoverOpen} isLazy={true}>
         <PopoverTrigger>
           <ChakraButton
             mt=".4rem"
@@ -25,6 +28,7 @@ export const CustomCourseControl = () => {
             backgroundColor="brand.700"
             borderRadius="1rem"
             fontSize="1.6rem"
+            onClick={() => setIsPopoverOpen(true)}
           >
             <FontAwesomeIcon
               icon={["fas", "plus"]}
@@ -49,9 +53,14 @@ export const CustomCourseControl = () => {
             <p>Create Custom Course</p>
           </PopoverHeader>
           <PopoverArrow />
-          <PopoverCloseButton mt=".5rem" mr=".5rem" size="md" />
+          <PopoverCloseButton
+            mt=".5rem"
+            mr=".5rem"
+            size="md"
+            onClick={() => setIsPopoverOpen(false)}
+          />
           <PopoverBody>
-            <CustomCourseForm />
+            <CustomCourseForm setIsPopoverOpen={setIsPopoverOpen} />
           </PopoverBody>
         </PopoverContent>
       </Popover>

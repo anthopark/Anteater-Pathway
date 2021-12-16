@@ -1,31 +1,28 @@
-import Link from "next/link";
 import { Button } from "@components/CustomChakraUI";
 import { StyledContainer } from "./styled";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/menu";
 import { Avatar } from "@chakra-ui/avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import firebase from "../../../firebase/client-app";
+import { auth } from "src/firebase/firebase-config";
+import { signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-const NonSignedInUI = (
-  <>
-    <Button
-      backgroundColor="transparent"
-      colorScheme="gray"
-      color="#574C4C"
-      mr="1rem"
-      mt=".4rem"
-    >
-      <Link href="/sign-in">Sign in</Link>
-    </Button>
-    <Button backgroundColor="#CB1582" colorScheme="pink" mt=".4rem">
-      <Link href="/sign-up">Sign up</Link>
-    </Button>
-  </>
-);
+const provider = new GoogleAuthProvider();
+
+const onSignInButtonClick = async () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const NonSignedInUI = <Button onClick={onSignInButtonClick}>Sign In</Button>;
 
 const signOutUser = async (user) => {
   if (user) {
-    await firebase.auth().signOut();
+    await signOut(auth);
   }
 };
 

@@ -5,13 +5,13 @@ import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
 import { UserProfile } from "./UserProfile/UserProfile";
 import { RightSidePane } from "./RightSidePane/RightSidePane";
 import { useAuthState } from "react-firebase-hooks/auth";
-import firebase from "../../firebase/client-app";
 import { DragDropContextProvider } from "./DragDropContextProvider";
+import { auth } from "src/firebase/firebase-config";
 
 export const Planner = () => {
-  const [user, loading] = useAuthState(firebase.auth());
+  const [user, loading, error] = useAuthState(auth);
 
-  console.log(`Loading: ${loading} | Current user: ${user}`);
+  console.log(`Loading: ${loading} | Current user: ${user} | Error: ${error}`);
   console.log(user);
 
   return (
