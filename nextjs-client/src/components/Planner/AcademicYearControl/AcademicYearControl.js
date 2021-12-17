@@ -7,10 +7,20 @@ import { useAcademicYear } from "src/hooks/useAcademicYear";
 import { useToastBox } from "src/hooks/useToastBox";
 
 export const AcademicYearControl = () => {
-  const { appUser, updateAppUser } = useGlobalObjects();
+  const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
   const [selectedYear, setSelectedYear] = useState(null);
-  const { yearOptions, disableSelectedOption } = useAcademicYear();
+  const { yearOptions, setYearOptions, disableSelectedOption } =
+    useAcademicYear();
   const { showToastBox } = useToastBox();
+
+  const selectCustomStyles = {
+    option: (styles, { isDisabled }) => ({
+      ...styles,
+      color: isDisabled
+        ? themeStyles.colors.disabledText
+        : themeStyles.colors.defaultText,
+    }),
+  };
 
   const handleSelectYear = (option) => {
     setSelectedYear(option);
@@ -22,8 +32,11 @@ export const AcademicYearControl = () => {
     if (selectedYear) {
       appUser.planner.addAcademicYear(selectedYear.value);
       updateAppUser(appUser);
-      disableSelectedOption(
-        appUser.planner.academicYears.map((item) => item.year)
+      setYearOptions(
+        disableSelectedOption(
+          appUser.planner.academicYears.map((item) => item.year),
+          yearOptions
+        )
       );
       setSelectedYear(null);
 
@@ -40,6 +53,7 @@ export const AcademicYearControl = () => {
   return (
     <StyledContainer>
       <StyledReactSelect
+        styles={selectCustomStyles}
         classNamePrefix="react-select"
         placeholder="Add Year"
         options={yearOptions}

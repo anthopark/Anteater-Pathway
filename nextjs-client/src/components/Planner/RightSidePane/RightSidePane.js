@@ -1,18 +1,12 @@
-import {
-  StyledContainer,
-  TentativePlannerContainer,
-  CourseDetailUIContainer,
-} from "./styled";
-import { useState } from "react";
+import { StyledContainer, TentativePlannerContainer } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import CourseItem from "../CourseItem";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
 export const RightSidePane = () => {
-  const [displayCourseDetail] = useState(false);
   return (
     <StyledContainer>
-      {displayCourseDetail ? <CourseDetailUI /> : <TentativePlannerUI />}
+      <TentativePlannerUI />
     </StyledContainer>
   );
 };
@@ -58,8 +52,4 @@ const TentativePlannerUI = () => {
       </div>
     </TentativePlannerContainer>
   );
-};
-
-const CourseDetailUI = () => {
-  return <CourseDetailUIContainer></CourseDetailUIContainer>;
 };

@@ -17,10 +17,10 @@ export const TentativePlannerContainer = styled.div`
   font-family: oxygen;
   max-height: 40rem;
   overflow: hidden;
-  padding: 0 0.3rem;
+  padding: 0.2rem 0.7rem;
 
   .header {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     letter-spacing: 0.1rem;
     padding-top: 1rem;
     padding-left: 1.6rem;
@@ -37,12 +37,10 @@ export const TentativePlannerContainer = styled.div`
     overflow-y: auto;
 
     .course-list {
-      padding: 0 0.1rem;
+      padding: 0 0.2rem;
       .course-item-wrapper {
         padding: 0.3rem;
       }
     }
   }
 `;
-
-export const CourseDetailUIContainer = styled.div``;

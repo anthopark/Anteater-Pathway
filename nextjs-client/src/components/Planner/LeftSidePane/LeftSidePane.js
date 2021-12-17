@@ -12,12 +12,13 @@ export const LeftSidePane = () => {
   const { appUser, themeStyles } = useGlobalObjects();
   return (
     <StyledContainer>
-      <Accordion allowMultiple>
+      <Accordion allowMultiple allowToggle index={mouseDownAccordionIndex}>
         {appUser.planner.academicYears.map((academicYear, index) => (
           <AccordionItem
             key={index}
             mb="2rem"
             borderRadius="12px"
+            boxShadow="0 1px 6px rgba(100, 100, 100, 0.1)"
             bg={themeStyles.colors.academicYearBg}
           >
             <AccordionButton

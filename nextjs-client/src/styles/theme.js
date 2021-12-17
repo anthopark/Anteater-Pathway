@@ -14,6 +14,7 @@ export const lightTheme = {
     lightBorder: "#bbbbbb",
     defaultText: "#5C5C5C",
     redText: "#E34522",
+    disabledText: "#cccccc",
     academicYearBg: "#f3f9ff",
   },
 };

@@ -1,3 +1,4 @@
+import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { useState, useEffect } from "react";
 
 const getYearOptions = () => {
@@ -10,31 +11,38 @@ const getYearOptions = () => {
   }));
 };
 
+const disableSelectedOption = (userAcademicYears, yearOptions) => {
+  const copyOfYearOptions = [...yearOptions];
+
+  for (const year of userAcademicYears) {
+    const index = copyOfYearOptions.findIndex(
+      (option) => option.value === year
+    );
+
+    if (index !== -1) {
+      copyOfYearOptions[index] = {
+        ...copyOfYearOptions[index],
+        disabled: true,
+      };
+    }
+  }
+
+  return copyOfYearOptions;
+};
+
 export const useAcademicYear = () => {
+  const { appUser } = useGlobalObjects();
   const [yearOptions, setYearOptions] = useState([]);
 
   useEffect(() => {
-    setYearOptions(getYearOptions());
+    const years = getYearOptions();
+    setYearOptions(
+      disableSelectedOption(
+        appUser.planner.academicYears.map((item) => item.year),
+        years
+      )
+    );
   }, []);
 
-  const disableSelectedOption = (userAcademicYears) => {
-    const copyOfYearOptions = [...yearOptions];
-
-    for (const year of userAcademicYears) {
-      const index = copyOfYearOptions.findIndex(
-        (option) => option.value === year
-      );
-
-      if (index !== -1) {
-        copyOfYearOptions[index] = {
-          ...copyOfYearOptions[index],
-          disabled: true,
-        };
-      }
-    }
-
-    setYearOptions(copyOfYearOptions);
-  };
-
-  return { yearOptions, disableSelectedOption };
+  return { yearOptions, setYearOptions, disableSelectedOption };
 };

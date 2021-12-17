@@ -39,5 +39,6 @@ export const StyledReactSelect = styled(Select)`
   }
 
   .react-select__option {
+    letter-spacing: 1px;
   }
 `;
