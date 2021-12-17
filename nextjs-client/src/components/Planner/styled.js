@@ -15,6 +15,7 @@ export const TopLayout = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 2px solid #bbbbbb;
+  margin-bottom: 1rem;
 
   .right-end-box {
     display: flex;
@@ -30,14 +31,14 @@ export const MainLayout = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(auto, 3.8fr) minmax(30rem, 1fr);
+  grid-template-columns: minmax(auto, 3.8fr) minmax(35rem, 1fr);
   .left-pane {
+    padding: 2rem 2rem 2rem 0;
   }
 
   .right-pane {
     display: flex;
     flex-direction: column;
-    padding: 2rem 0 2rem 2rem;
-    border-left: darkgoldenrod solid 1px;
+    padding: 2rem 0 2rem 1rem;
   }
 `;

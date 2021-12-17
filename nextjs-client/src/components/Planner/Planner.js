@@ -3,7 +3,8 @@ import { CustomCourseControl } from "./CustomCourseControl/CustomCourseControl";
 import AcademicYearControl from "./AcademicYearControl";
 import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
 import { UserProfile } from "./UserProfile/UserProfile";
-import { RightSidePane } from "./RightSidePane/RightSidePane";
+import RightSidePane from "./RightSidePane";
+import LeftSidePane from "./LeftSidePane";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { DragDropContextProvider } from "./DragDropContextProvider";
 import { auth } from "src/firebase/firebase-config";
@@ -26,7 +27,9 @@ export const Planner = () => {
       </TopLayout>
       <DragDropContextProvider>
         <MainLayout>
-          <div className="left-pane"></div>
+          <div className="left-pane">
+            <LeftSidePane />
+          </div>
           <div className="right-pane">
             <RightSidePane />
           </div>

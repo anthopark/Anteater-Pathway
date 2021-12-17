@@ -28,7 +28,7 @@ export const CustomCourseControl = () => {
             backgroundColor="brand.700"
             borderRadius="1rem"
             fontSize="1.6rem"
-            onClick={() => setIsPopoverOpen(true)}
+            onClick={() => setIsPopoverOpen(!isPopoverOpen)}
           >
             <FontAwesomeIcon
               icon={["fas", "plus"]}
