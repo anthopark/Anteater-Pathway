@@ -23,10 +23,21 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   return result;
 };
 
-export const DragDropContextProvider = ({ children }) => {
+export const DragDropContextProvider = ({
+  children,
+  isCourseDragging,
+  setIsCourseDragging,
+}) => {
   const { appUser, updateAppUser } = useGlobalObjects();
 
+  const onDragStart = () => {
+    if (!isCourseDragging) {
+      setIsCourseDragging(true);
+    }
+  };
+
   const onDragEnd = (result) => {
+    setIsCourseDragging(false);
     const { source, destination } = result;
 
     if (!destination) {
@@ -77,5 +88,9 @@ export const DragDropContextProvider = ({ children }) => {
     updateAppUser(appUser);
   };
 
-  return <DragDropContext onDragEnd={onDragEnd}>{children}</DragDropContext>;
+  return (
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+      {children}
+    </DragDropContext>
+  );
 };

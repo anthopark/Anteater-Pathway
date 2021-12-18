@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StyledContainer, TopLayout, MainLayout } from "./styled";
 import { CustomCourseControl } from "./CustomCourseControl/CustomCourseControl";
 import AcademicYearControl from "./AcademicYearControl";
@@ -11,6 +12,7 @@ import { auth } from "src/firebase/firebase-config";
 
 export const Planner = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [isCourseDragging, setIsCourseDragging] = useState(false);
 
   console.log(`Loading: ${loading} | Current user: ${user} | Error: ${error}`);
   console.log(user);
@@ -25,10 +27,13 @@ export const Planner = () => {
           <UserProfile user={user} />
         </div>
       </TopLayout>
-      <DragDropContextProvider>
+      <DragDropContextProvider
+        isCourseDragging={isCourseDragging}
+        setIsCourseDragging={setIsCourseDragging}
+      >
         <MainLayout>
           <div className="left-pane">
-            <LeftSidePane />
+            <LeftSidePane isCourseDragging={isCourseDragging} />
           </div>
           <div className="right-pane">
             <RightSidePane />

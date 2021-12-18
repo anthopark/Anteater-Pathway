@@ -21,7 +21,15 @@ export class Planner {
     }
   }
 
-  updateCourseColor(courseId, newColor) {}
+  removeAcademicYear(year) {
+    if (this._academicYears.some((item) => item.year === year)) {
+      this._academicYears.splice(
+        this._academicYears.findIndex((item) => item.year === year),
+        1
+      );
+      this._sortAcademicYears();
+    }
+  }
 
   _addDefaultAcademicYear() {
     let currentAcademicYear = new Date().getFullYear() - 2000;

@@ -42,7 +42,7 @@ export const useAcademicYear = () => {
         years
       )
     );
-  }, []);
+  }, [appUser]);
 
   return { yearOptions, setYearOptions, disableSelectedOption };
 };
