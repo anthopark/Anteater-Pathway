@@ -4,7 +4,7 @@ const QUARTER_SEASONS = ["fall", "winter", "spring", "summer"];
 export class AcademicYear {
   constructor(year) {
     this._year = year;
-    this._quarters = QUARTER_SEASONS.map((season) => new Quarter(season));
+    this._quarters = QUARTER_SEASONS.map((season) => new Quarter(year, season));
   }
 
   get year() {

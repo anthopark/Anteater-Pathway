@@ -1,6 +1,47 @@
 export class Quarter {
-  constructor(season) {
+  constructor(year, season) {
+    this._year = year;
     this._season = season;
     this._plannedCourses = [];
+    this._totalUnit = 0;
+  }
+
+  get droppableId() {
+    return `${this._year}-${this._season}`;
+  }
+
+  get header() {
+    let yearForHeader = this._year;
+
+    if (this._season !== "fall") {
+      yearForHeader += 1;
+    }
+
+    return `${this._season.toUpperCase()} 20${yearForHeader}`;
+  }
+
+  get season() {
+    return this._season;
+  }
+
+  get plannedCourses() {
+    return this._plannedCourses;
+  }
+
+  set plannedCourses(newPlannedCourses) {
+    this._plannedCourses = newPlannedCourses;
+  }
+
+  get totalUnit() {
+    return this._totalUnit;
+  }
+
+  _calculateTotalUnit() {
+    let result = 0;
+    for (const course of this._plannedCourses) {
+      result += parseFloat(course.unit);
+    }
+
+    this._totalUnit = result;
   }
 }

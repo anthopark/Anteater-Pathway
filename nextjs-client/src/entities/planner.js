@@ -31,6 +31,34 @@ export class Planner {
     }
   }
 
+  findQuarterByDroppableId(quarterDroppableId) {
+    let result;
+
+    const [year, season] = quarterDroppableId.split("-");
+
+    const academicYearFoundIndex = this._academicYears.findIndex(
+      (academicYear) => academicYear.year === year
+    );
+
+    if (academicYearFoundIndex === -1) {
+      throw Error(`Academic year not found: ${year}`);
+    }
+
+    const quarters = this._academicYears[academicYearFoundIndex].quarter;
+
+    const quarterFoundIndex = quarters.findIndex(
+      (quarter) => quarter.season === season
+    );
+
+    if (quarterFoundIndex === -1) {
+      throw Error(`Season not found: ${year} ${saeson}`);
+    }
+
+    result = quarters[quarterFoundIndex].plannedCourses;
+
+    return result;
+  }
+
   _addDefaultAcademicYear() {
     let currentAcademicYear = new Date().getFullYear() - 2000;
 

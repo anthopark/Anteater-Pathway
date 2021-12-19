@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StyledContainer, RemoveBox } from "./styled";
+import { QuartersDisplay } from "./QuartersDisplay";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import {
@@ -91,7 +92,7 @@ export const LeftSidePane = ({ isCourseDragging }) => {
             </div>
 
             <AccordionPanel>
-              <div className="accordion-panel-box">hahahah</div>
+              <QuartersDisplay academicYear={academicYear} />
             </AccordionPanel>
           </AccordionItem>
         ))}
