@@ -15,6 +15,7 @@ export const StyledContainer = styled.div`
   height: 100%;
   font-family: oxygen;
   color: ${({ theme }) => theme.colors.defaultText};
+
   .accordion-top {
     display: flex;
   }
@@ -58,7 +59,6 @@ export const QuartersDisplayContainer = styled.div`
   gap: 1.3rem;
   font-family: oxygen;
   .quarter-box {
-    min-height: 10rem;
     padding: 1rem;
     border-radius: 10px;
     display: flex;
@@ -68,8 +68,22 @@ export const QuartersDisplayContainer = styled.div`
     background-color: lightsalmon;
 
     .header {
+      padding-bottom: 0.5rem;
       letter-spacing: 1px;
       font-size: 1.5rem;
+    }
+
+    .course-list {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      min-height: 6rem;
+      background-color: lightsteelblue;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .course-item-wrapper {
+      }
     }
 
     .footer {

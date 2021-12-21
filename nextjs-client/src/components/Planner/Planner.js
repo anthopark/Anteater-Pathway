@@ -12,6 +12,7 @@ import { auth } from "src/firebase/firebase-config";
 
 export const Planner = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [openedAccordionIndices, setOpenedAccordionIndices] = useState([]);
   const [isCourseDragging, setIsCourseDragging] = useState(false);
 
   console.log(`Loading: ${loading} | Current user: ${user} | Error: ${error}`);
@@ -30,10 +31,16 @@ export const Planner = () => {
       <DragDropContextProvider
         isCourseDragging={isCourseDragging}
         setIsCourseDragging={setIsCourseDragging}
+        openedAccordionIndices={openedAccordionIndices}
+        setOpenedAccordionIndices={setOpenedAccordionIndices}
       >
         <MainLayout>
           <div className="left-pane">
-            <LeftSidePane isCourseDragging={isCourseDragging} />
+            <LeftSidePane
+              isCourseDragging={isCourseDragging}
+              openedAccordionIndices={openedAccordionIndices}
+              setOpenedAccordionIndices={setOpenedAccordionIndices}
+            />
           </div>
           <div className="right-pane">
             <RightSidePane />

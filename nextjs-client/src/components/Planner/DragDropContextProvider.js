@@ -39,13 +39,13 @@ export const DragDropContextProvider = ({
   const onDragEnd = (result) => {
     setIsCourseDragging(false);
     const { source, destination } = result;
+    console.log(source);
+    console.log(destination);
 
     if (!destination) {
       return;
     }
 
-    console.log(source);
-    console.log(destination);
     const sId = source.droppableId;
     const dId = destination.droppableId;
 

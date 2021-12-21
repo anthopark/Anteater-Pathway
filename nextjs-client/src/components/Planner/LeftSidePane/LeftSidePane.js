@@ -11,22 +11,19 @@ import {
   AccordionPanel,
 } from "@chakra-ui/react";
 
-export const LeftSidePane = ({ isCourseDragging }) => {
+export const LeftSidePane = ({
+  isCourseDragging,
+  openedAccordionIndices,
+  setOpenedAccordionIndices,
+}) => {
   const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
-  const [openAccordionIndex, setOpenAccordionIndex] = useState(-1);
   const [hoveredAccordionIndex, setHoveredAccordionIndex] = useState(-1);
 
   const handleMouseEnter = (accordionIndex) => {
-    if (isCourseDragging) {
-      setOpenAccordionIndex(accordionIndex);
-    }
     setHoveredAccordionIndex(accordionIndex);
   };
 
   const handleMouseLeave = () => {
-    if (isCourseDragging) {
-      setOpenAccordionIndex(-1);
-    }
     setHoveredAccordionIndex(-1);
   };
 
@@ -36,16 +33,31 @@ export const LeftSidePane = ({ isCourseDragging }) => {
   };
 
   const handleButtonClick = (accordionIndex) => {
-    if (openAccordionIndex === accordionIndex) {
-      setOpenAccordionIndex(-1);
+    if (openedAccordionIndices.includes(accordionIndex)) {
+      collapseAccordion(accordionIndex);
     } else {
-      setOpenAccordionIndex(accordionIndex);
+      openAccordion(accordionIndex);
+    }
+  };
+
+  const openAccordion = (accordionIndex) => {
+    if (!openedAccordionIndices.includes(accordionIndex)) {
+      openedAccordionIndices.push(accordionIndex);
+      setOpenedAccordionIndices([...openedAccordionIndices]);
+    }
+  };
+
+  const collapseAccordion = (accordionIndex) => {
+    if (openedAccordionIndices.includes(accordionIndex)) {
+      setOpenedAccordionIndices(
+        openedAccordionIndices.filter((index) => index !== accordionIndex)
+      );
     }
   };
 
   return (
     <StyledContainer>
-      <Accordion allowMultiple index={openAccordionIndex}>
+      <Accordion allowMultiple index={openedAccordionIndices} allowToggle>
         {appUser.planner.academicYears.map((academicYear, index) => (
           <AccordionItem
             key={index}
