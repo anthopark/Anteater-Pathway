@@ -10,12 +10,28 @@ const fadeIn = keyframes`
     }
 `;
 
+const widthfadeOut = keyframes`
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0%;
+    }
+`;
+
 export const StyledContainer = styled.div`
-  width: 100%;
-  height: 100%;
   font-family: oxygen;
   color: ${({ theme }) => theme.colors.defaultText};
-
+  .accordion-item-wrapper {
+    ${({ isRemovingAccordion }) =>
+      isRemovingAccordion
+        ? css`
+            width: 0%;
+            animation: ${widthfadeOut} 0.3s ease-out;
+          `
+        : null}
+  }
   .accordion-top {
     display: flex;
   }
@@ -30,6 +46,13 @@ export const StyledContainer = styled.div`
       letter-spacing: 1px;
       font-size: 2.1rem;
     }
+
+    ${({ isRemovingAccordion }) =>
+      isRemovingAccordion
+        ? css`
+            display: none;
+          `
+        : null}
   }
 `;
 

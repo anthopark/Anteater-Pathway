@@ -31,32 +31,38 @@ export class Planner {
     }
   }
 
-  findQuarterByDroppableId(quarterDroppableId) {
-    let result;
+  findDroppable(droppableId) {
+    const quarter = this._findQuarter(droppableId);
+    return quarter.plannedCourses;
+  }
 
-    const [year, season] = quarterDroppableId.split("-");
+  updateDroppable(droppableId, newCourseItems) {
+    const quarter = this._findQuarter(droppableId);
+    quarter.plannedCourses = newCourseItems;
+  }
+
+  _findQuarter(droppableId) {
+    const [year, season] = droppableId.split("-").slice(1);
 
     const academicYearFoundIndex = this._academicYears.findIndex(
-      (academicYear) => academicYear.year === year
+      (academicYear) => academicYear.year === parseInt(year)
     );
 
     if (academicYearFoundIndex === -1) {
-      throw Error(`Academic year not found: ${year}`);
+      throw new Error(`Academic year not found: ${year}`);
     }
 
-    const quarters = this._academicYears[academicYearFoundIndex].quarter;
+    const quarters = this._academicYears[academicYearFoundIndex].quarters;
 
     const quarterFoundIndex = quarters.findIndex(
       (quarter) => quarter.season === season
     );
 
     if (quarterFoundIndex === -1) {
-      throw Error(`Season not found: ${year} ${saeson}`);
+      throw new Error(`Season not found: ${year} ${saeson}`);
     }
 
-    result = quarters[quarterFoundIndex].plannedCourses;
-
-    return result;
+    return quarters[quarterFoundIndex];
   }
 
   _addDefaultAcademicYear() {

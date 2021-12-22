@@ -9,9 +9,14 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const move = (source, destination, droppableSource, droppableDestination) => {
-  const sourceClone = Array.from(source);
-  const destClone = Array.from(destination);
+const move = (
+  sourceArr,
+  destinationArr,
+  droppableSource,
+  droppableDestination
+) => {
+  const sourceClone = Array.from(sourceArr);
+  const destClone = Array.from(destinationArr);
   const [removed] = sourceClone.splice(droppableSource.index, 1);
 
   destClone.splice(droppableDestination.index, 0, removed);
@@ -23,29 +28,19 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   return result;
 };
 
-export const DragDropContextProvider = ({
-  children,
-  isCourseDragging,
-  setIsCourseDragging,
-}) => {
+export const DragDropContextProvider = ({ children }) => {
   const { appUser, updateAppUser } = useGlobalObjects();
-
-  const onDragStart = () => {
-    if (!isCourseDragging) {
-      setIsCourseDragging(true);
-    }
-  };
 
   const onDragEnd = (result) => {
     setIsCourseDragging(false);
     const { source, destination } = result;
-    console.log(source);
-    console.log(destination);
 
     if (!destination) {
       return;
     }
 
+    console.log(source);
+    console.log(destination);
     const sId = source.droppableId;
     const dId = destination.droppableId;
 
@@ -74,6 +69,17 @@ export const DragDropContextProvider = ({
       }
     } else if (sId.startsWith("tp") && dId.startsWith("p")) {
       // tentative planner -> planner
+      const result = move(
+        appUser.tentativePlanner.findDroppable(sId),
+        appUser.planner.findDroppable(dId),
+        source,
+        destination
+      );
+
+      console.log(result);
+
+      appUser.tentativePlanner.updateDroppable(sId, result[sId]);
+      appUser.planner.updateDroppable(dId, result[dId]);
     } else if (sId.startsWith("p") && dId.startsWith("tp")) {
       // planner -> tentative planner
     } else if (sId.startsWith("p") && dId.startsWith("p")) {
@@ -88,9 +94,5 @@ export const DragDropContextProvider = ({
     updateAppUser(appUser);
   };
 
-  return (
-    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-      {children}
-    </DragDropContext>
-  );
+  return <DragDropContext onDragEnd={onDragEnd}>{children}</DragDropContext>;
 };

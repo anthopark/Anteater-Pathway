@@ -6,20 +6,20 @@ export class TentativePlanner {
 
   get droppables() {
     return [
-      { droppableId: "tpLeft", courseItems: this._leftCourseItems },
-      { droppableId: "tpRight", courseItems: this._rightCourseItems },
+      { droppableId: "tp-left", courseItems: this._leftCourseItems },
+      { droppableId: "tp-right", courseItems: this._rightCourseItems },
     ];
   }
 
   findDroppable(droppableId) {
-    if (droppableId === "tpLeft") return this._leftCourseItems;
-    else if (droppableId === "tpRight") return this._rightCourseItems;
+    if (droppableId === "tp-left") return this._leftCourseItems;
+    else if (droppableId === "tp-right") return this._rightCourseItems;
   }
 
   updateDroppable(droppableId, newCourseItems) {
-    if (droppableId === "tpLeft") {
+    if (droppableId === "tp-left") {
       this._leftCourseItems = newCourseItems;
-    } else if (droppableId === "tpRight") {
+    } else if (droppableId === "tp-right") {
       this._rightCourseItems = newCourseItems;
     }
   }

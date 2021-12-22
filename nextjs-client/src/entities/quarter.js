@@ -7,7 +7,7 @@ export class Quarter {
   }
 
   get droppableId() {
-    return `${this._year}-${this._season}`;
+    return `p-${this._year}-${this._season}`;
   }
 
   get header() {
@@ -17,7 +17,9 @@ export class Quarter {
       yearForHeader += 1;
     }
 
-    return `${this._season.toUpperCase()} 20${yearForHeader}`;
+    return `${
+      this._season[0].toUpperCase() + this._season.slice(1)
+    } 20${yearForHeader}`;
   }
 
   get season() {
