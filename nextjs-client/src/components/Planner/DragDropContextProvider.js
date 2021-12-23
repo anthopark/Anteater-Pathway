@@ -32,7 +32,6 @@ export const DragDropContextProvider = ({ children }) => {
   const { appUser, updateAppUser } = useGlobalObjects();
 
   const onDragEnd = (result) => {
-    setIsCourseDragging(false);
     const { source, destination } = result;
 
     if (!destination) {

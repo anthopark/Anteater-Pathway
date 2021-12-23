@@ -96,6 +96,7 @@ export const MenuTrigger = styled.div`
   animation: ${fadeIn} 1s;
   .trigger-link {
     display: inline-block;
+    padding: 0 0.4rem;
   }
 `;
 
