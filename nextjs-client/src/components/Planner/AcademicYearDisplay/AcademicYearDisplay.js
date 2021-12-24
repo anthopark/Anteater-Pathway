@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Accordion,
@@ -17,60 +17,79 @@ import { useGlobalObjects } from "@components/GlobalContextProvider";
 
 export const AcademicYearDisplay = () => {
   const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
-  const [openedAccordionIndices, setOpenedAccordionIndices] = useState([]);
-  const [removingAccorionIndex, setRemovingAccorionIndex] = useState(-1);
-  const [hoveredAccordionIndex, setHoveredAccordionIndex] = useState(-1);
+  const [openedYears, setOpenedYears] = useState([]);
+  const [openedIndices, setOpenedIndices] = useState([]);
+  const [removingIndex, setRemovingIndex] = useState(-1);
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
+
+  useEffect(() => {
+    setOpenedIndices(getUpdatedOpenedIndices());
+  }, [appUser, openedYears]);
 
   const handleMouseEnter = (accordionIndex) => {
-    setHoveredAccordionIndex(accordionIndex);
+    setHoveredIndex(accordionIndex);
   };
 
   const handleMouseLeave = () => {
-    setHoveredAccordionIndex(-1);
+    setHoveredIndex(-1);
   };
 
   const handleRemoveAcademicYear = (year, accordionIndex) => {
-    if (openedAccordionIndices.includes(accordionIndex)) {
-      collapseAccordion(accordionIndex);
+    if (openedYears.includes(year)) {
+      collapseAccordion(year);
     }
-    setRemovingAccorionIndex(accordionIndex);
+
+    setRemovingIndex(accordionIndex);
 
     setTimeout(() => {
       appUser.planner.removeAcademicYear(year);
       updateAppUser(appUser);
-      setRemovingAccorionIndex(-1);
-    }, 400);
+      setRemovingIndex(-1);
+    }, 300);
   };
 
-  const handleButtonClick = (accordionIndex) => {
-    if (openedAccordionIndices.includes(accordionIndex)) {
-      collapseAccordion(accordionIndex);
+  const handleAccordionOpen = (year) => {
+    let newOpenedYears = [...openedYears];
+
+    if (newOpenedYears.includes(year)) {
+      newOpenedYears = newOpenedYears.filter((yearValue) => yearValue !== year);
     } else {
-      openAccordion(accordionIndex);
+      newOpenedYears.push(year);
+    }
+
+    const newOpenedIndices = [];
+    appUser.planner.academicYears.forEach((academicYear, index) => {
+      if (newOpenedYears.includes(academicYear.year)) {
+        newOpenedIndices.push(index);
+      }
+    });
+
+    setOpenedYears(newOpenedYears);
+    setOpenedIndices(newOpenedIndices);
+  };
+
+  const collapseAccordion = (year) => {
+    if (openedYears.includes(year)) {
+      setOpenedYears(openedYears.filter((index) => index !== year));
     }
   };
 
-  const openAccordion = (accordionIndex) => {
-    if (!openedAccordionIndices.includes(accordionIndex)) {
-      openedAccordionIndices.push(accordionIndex);
-      setOpenedAccordionIndices([...openedAccordionIndices]);
-    }
-  };
-
-  const collapseAccordion = (accordionIndex) => {
-    if (openedAccordionIndices.includes(accordionIndex)) {
-      setOpenedAccordionIndices(
-        openedAccordionIndices.filter((index) => index !== accordionIndex)
-      );
-    }
+  const getUpdatedOpenedIndices = () => {
+    const newOpenedIndices = [];
+    appUser.planner.academicYears.forEach((academicYear, index) => {
+      if (openedYears.includes(academicYear.year)) {
+        newOpenedIndices.push(index);
+      }
+    });
+    return newOpenedIndices;
   };
   return (
     <AcademicYearDisplayContainer>
-      <Accordion allowMultiple index={openedAccordionIndices}>
+      <Accordion allowMultiple index={openedIndices}>
         {appUser.planner.academicYears.map((academicYear, index) => (
           <AccordionItemContainer
             key={index}
-            isRemovingAccordion={removingAccorionIndex === index}
+            isRemovingAccordion={removingIndex === index}
           >
             <div className="accordion-item-wrapper">
               <AccordionItem
@@ -87,7 +106,7 @@ export const AcademicYearDisplay = () => {
                     borderRadius="12px"
                     _focus={{ border: "none" }}
                     _hover={{ backgroundColor: "none" }}
-                    onClick={() => handleButtonClick(index)}
+                    onClick={() => handleAccordionOpen(academicYear.year)}
                   >
                     <div className="accordion-button-box">
                       <div className="academic-year-text">{`20${
@@ -98,9 +117,9 @@ export const AcademicYearDisplay = () => {
                   </AccordionButton>
                   <RemoveBox
                     className="remove-box"
-                    isHover={hoveredAccordionIndex === index}
+                    isHover={hoveredIndex === index}
                   >
-                    {hoveredAccordionIndex === index ? (
+                    {hoveredIndex === index ? (
                       <FontAwesomeIcon
                         className="remove-box-icon"
                         icon={["fas", "times-circle"]}

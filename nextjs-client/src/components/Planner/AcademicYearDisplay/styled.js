@@ -20,7 +20,9 @@ const widthfadeOut = keyframes`
     }
 `;
 
-export const AcademicYearDisplayContainer = styled.div``;
+export const AcademicYearDisplayContainer = styled.div`
+  transition: all 0.3s;
+`;
 
 export const AccordionItemContainer = styled.div`
   font-family: oxygen;
@@ -31,7 +33,7 @@ export const AccordionItemContainer = styled.div`
       isRemovingAccordion
         ? css`
             width: 0%;
-            animation: ${widthfadeOut} 0.3s ease-out;
+            animation: ${widthfadeOut} 0.2s ease-out;
           `
         : null}
   }
@@ -109,6 +111,7 @@ export const QuartersDisplayContainer = styled.div`
       justify-content: center;
       align-items: center;
       .course-item-wrapper {
+        width: 100%;
       }
     }
 
