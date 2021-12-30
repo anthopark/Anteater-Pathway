@@ -41,6 +41,13 @@ export class Planner {
     quarter.plannedCourses = newCourseItems;
   }
 
+  updateCourseColor(courseId, newColor) {
+    const foundCourse = this._findCourse(courseId);
+    if (foundCourse) {
+      foundCourse.color = newColor;
+    }
+  }
+
   _findQuarter(droppableId) {
     const [year, season] = droppableId.split("-").slice(1);
 
@@ -63,6 +70,20 @@ export class Planner {
     }
 
     return quarters[quarterFoundIndex];
+  }
+
+  _findCourse(courseId) {
+    for (const academicYear of this._academicYears) {
+      for (const quarter of academicYear.quarters) {
+        for (const course of quarter.plannedCourses) {
+          if (course.id === courseId) {
+            return course;
+          }
+        }
+      }
+    }
+
+    return null;
   }
 
   _addDefaultAcademicYear() {

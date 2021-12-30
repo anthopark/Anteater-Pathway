@@ -4,6 +4,7 @@ export class Course {
     this._id = this._generateGuid();
     this._departmentCode = courseItem.departmentCode.trim();
     this._number = courseItem.number.trim();
+    this._courseCode = courseItem.courseCode.trim();
     this._unit = courseItem.unit.trim();
     this._title = courseItem.title.trim();
     this._isCustom = false;
@@ -20,6 +21,10 @@ export class Course {
 
   get number() {
     return this._number;
+  }
+
+  get courseCode() {
+    return this._courseCode;
   }
 
   get unit() {

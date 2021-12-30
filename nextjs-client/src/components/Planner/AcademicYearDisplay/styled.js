@@ -80,36 +80,36 @@ export const RemoveBox = styled.div`
 `;
 
 export const QuartersDisplayContainer = styled.div`
-  width: 100%;
   display: grid;
-  padding: 0 0.8rem;
+  width: 100%;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1.3rem;
+  align-items: start;
+  padding: 0 0.8rem;
+  column-gap: 1.3rem;
   font-family: oxygen;
+
   .quarter-box {
     padding: 1rem;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     background-color: ${({ theme }) => theme.colors.quarterBoxBg};
     .header {
       padding-bottom: 0.3rem;
       letter-spacing: 1px;
       font-size: 1.5rem;
+      text-align: center;
     }
 
     .course-list {
       width: 100%;
-      padding: 0.3rem;
-      min-height: 6rem;
+      padding: 0.2rem;
+      min-height: 4rem;
       display: flex;
       flex-direction: column;
 
       align-items: center;
       .course-item-wrapper {
         width: 100%;
+        padding: 0.3rem;
       }
     }
 

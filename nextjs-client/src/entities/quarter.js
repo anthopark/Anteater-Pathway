@@ -35,6 +35,8 @@ export class Quarter {
   }
 
   get totalUnit() {
+    this._calculateTotalUnit();
+
     return this._totalUnit;
   }
 

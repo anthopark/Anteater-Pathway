@@ -6,7 +6,7 @@ import {
 } from "./styled";
 import { CourseItemMenu } from "./CourseItemMenu";
 
-const EXTEND_UI_THRESHOLD = 185;
+const EXTEND_UI_THRESHOLD = 220;
 
 // the number of ms the window size must stay the same size before the
 // dimension state variable is reset
@@ -54,7 +54,15 @@ export const CourseItem = ({ isTentative, courseInfo }) => {
     </CompactUIContainer>
   );
 
-  let extentedUI = <ExtendedUIContainer></ExtendedUIContainer>;
+  let extentedUI = (
+    <ExtendedUIContainer bgColor={bgColor}>
+      <div className="top-box">
+        <div className="course-code">{courseInfo.courseCode}</div>
+        <div className="course-unit">{`${courseInfo.unit} units`}</div>
+      </div>
+      <div className="bottom-box">{courseInfo.title}</div>
+    </ExtendedUIContainer>
+  );
 
   return (
     <StyledContainer

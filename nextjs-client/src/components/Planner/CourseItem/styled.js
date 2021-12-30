@@ -30,12 +30,12 @@ const fontColors = {
   color3: darkFontColor,
   color4: darkFontColor,
   color5: lightFontColor,
-  color6: darkFontColor,
+  color6: lightFontColor,
   color7: lightFontColor,
   color8: darkFontColor,
 };
 
-const courseItemBorderRadius = "8px";
+const courseItemBorderRadius = "0.8rem";
 
 export const StyledContainer = styled.div`
   width: 100%;
@@ -85,7 +85,30 @@ export const CompactUIContainer = styled.div`
   }
 `;
 
-export const ExtendedUIContainer = styled.div``;
+export const ExtendedUIContainer = styled.div`
+  width: 100%;
+  background-color: ${({ bgColor }) => bgColors[bgColor]};
+  color: ${({ bgColor }) => fontColors[bgColor]};
+  padding: 0.6rem;
+  border-radius: ${courseItemBorderRadius};
+
+  .top-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .bottom-box {
+    width: 100%;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: lighter;
+  }
+`;
 
 export const MenuTrigger = styled.div`
   cursor: pointer;
