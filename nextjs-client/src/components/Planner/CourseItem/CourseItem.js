@@ -1,18 +1,16 @@
+import { useState, useLayoutEffect, useRef } from "react";
 import {
-  RegularContainer,
+  ExtendedUIContainer,
   StyledContainer,
-  TentativeContainer,
-  MenuTrigger,
-  MenuContainer,
-  CourseColorPickerContainer,
-  ColorPicker,
+  CompactUIContainer,
 } from "./styled";
-import { useState } from "react";
-import { Popover } from "react-tiny-popover";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useGlobalObjects } from "@components/GlobalContextProvider";
-import { useDisclosure } from "@chakra-ui/react";
-import { CourseDetailModal } from "./CourseDetailModal";
+import { CourseItemMenu } from "./CourseItemMenu";
+
+const EXTEND_UI_THRESHOLD = 185;
+
+// the number of ms the window size must stay the same size before the
+// dimension state variable is reset
+const RESET_TIMEOUT = 150;
 
 const shortenText = (maxCharacters, input) => {
   if (typeof input === "string" && input.length > maxCharacters) {
@@ -24,32 +22,49 @@ const shortenText = (maxCharacters, input) => {
 export const CourseItem = ({ isTentative, courseInfo }) => {
   const [bgColor, setBgColor] = useState(courseInfo.color);
   const [isHover, setIsHover] = useState(false);
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
 
-  let CourseItemUI;
+  // holds the timer for setTimeout and clearInterval
+  let movementTimer = null;
 
-  if (isTentative) {
-    CourseItemUI = (
-      <>
-        <TentativeContainer bgColor={bgColor}>
-          <div className="course-code-box">
-            <div className="department">
-              {shortenText(7, courseInfo.departmentCode)}
-            </div>
-            <div className="number">{shortenText(5, courseInfo.number)}</div>
-          </div>
-        </TentativeContainer>
-      </>
-    );
-  } else {
-    CourseItemUI = <RegularContainer></RegularContainer>;
-  }
+  const updateContainerWidth = () => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+    }
+  };
+
+  useLayoutEffect(() => {
+    updateContainerWidth();
+  }, []);
+
+  window.addEventListener("resize", () => {
+    clearInterval(movementTimer);
+    movementTimer = setTimeout(updateContainerWidth, RESET_TIMEOUT);
+  });
+
+  let compactUI = (
+    <CompactUIContainer bgColor={bgColor}>
+      <div className="course-code-box">
+        <div className="department">
+          {shortenText(7, courseInfo.departmentCode)}
+        </div>
+        <div className="number">{shortenText(5, courseInfo.number)}</div>
+      </div>
+    </CompactUIContainer>
+  );
+
+  let extentedUI = <ExtendedUIContainer></ExtendedUIContainer>;
 
   return (
     <StyledContainer
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
+      ref={containerRef}
     >
-      {CourseItemUI}
+      {isTentative || containerWidth <= EXTEND_UI_THRESHOLD
+        ? compactUI
+        : extentedUI}
       {isHover ? (
         <CourseItemMenu
           isTentative={isTentative}
@@ -59,139 +74,5 @@ export const CourseItem = ({ isTentative, courseInfo }) => {
         />
       ) : null}
     </StyledContainer>
-  );
-};
-
-const CourseItemMenu = ({ courseInfo, isTentative, bgColor, setBgColor }) => {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const {
-    isOpen: isModalOpen,
-    onOpen: onModalOpen,
-    onClose: onModalClose,
-  } = useDisclosure();
-  const { appUser, updateAppUser } = useGlobalObjects();
-
-  const handleDelete = () => {
-    if (isTentative) {
-      appUser.tentativePlanner.deleteCourse(courseInfo.id);
-      updateAppUser(appUser);
-    }
-  };
-
-  return (
-    <Popover
-      isOpen={isPopoverOpen}
-      positions={["bottom"]}
-      padding={5}
-      onClickOutside={() => setIsPopoverOpen(false)}
-      isLazy={true}
-      content={
-        <MenuContainer>
-          {courseInfo.isCustom ? null : (
-            <div className="info-link-container">
-              <a className="info-link" onClick={onModalOpen}>
-                <FontAwesomeIcon
-                  icon={["fas", "info-circle"]}
-                  style={{
-                    fontSize: "1.6rem",
-                    marginTop: ".3rem",
-                    color: "#5C5C5C",
-                  }}
-                />
-                <p className="info-text">info</p>
-              </a>
-              <CourseDetailModal
-                courseInfo={courseInfo}
-                isModalOpen={isModalOpen}
-                onModalClose={onModalClose}
-              />
-            </div>
-          )}
-
-          <div className="color-picker-container">
-            <CourseColorPicker
-              isTentative={isTentative}
-              courseInfo={courseInfo}
-              bgColor={bgColor}
-              setBgColor={setBgColor}
-            />
-          </div>
-          <div className="delete-container">
-            <a className="delete-link" onClick={handleDelete}>
-              <FontAwesomeIcon
-                icon={["fas", "times-circle"]}
-                style={{
-                  fontSize: "1.6rem",
-                  marginTop: ".3rem",
-                  color: "#E34522",
-                }}
-              />
-              <p className="delete-text">delete</p>
-            </a>
-          </div>
-        </MenuContainer>
-      }
-    >
-      <MenuTrigger>
-        <a
-          className="trigger-link"
-          onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-        >
-          <FontAwesomeIcon
-            icon={["fas", "ellipsis-v"]}
-            style={{ fontSize: "1.6rem", color: "#5C5656" }}
-          />
-        </a>
-      </MenuTrigger>
-    </Popover>
-  );
-};
-
-const availableColors = [
-  "color1",
-  "color2",
-  "color3",
-  "color4",
-  "color5",
-  "color6",
-  "color7",
-  "color8",
-];
-
-const CourseColorPicker = ({
-  courseInfo,
-  isTentative,
-  bgColor,
-  setBgColor,
-}) => {
-  const [currentColor, setCurrentColor] = useState(bgColor);
-  const { appUser, updateAppUser } = useGlobalObjects();
-
-  const handleColorPickerClick = (color) => {
-    setCurrentColor(color);
-    setBgColor(color);
-
-    if (isTentative) {
-      appUser.tentativePlanner.updateCourseColor(courseInfo.id, color);
-    } else {
-      appUser.planner.updateCourseColor(courseInfo.id, color);
-    }
-
-    updateAppUser(appUser);
-  };
-
-  return (
-    <CourseColorPickerContainer>
-      {availableColors.map((color, index) => (
-        <ColorPicker
-          key={index}
-          color={color}
-          currentColor={currentColor}
-          onClick={() => handleColorPickerClick(color)}
-        >
-          <div className="color-box"></div>
-        </ColorPicker>
-      ))}
-    </CourseColorPickerContainer>
   );
 };

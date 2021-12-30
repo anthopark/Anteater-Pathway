@@ -23,7 +23,7 @@ export const AcademicYearDisplay = () => {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
   useEffect(() => {
-    setOpenedIndices(getUpdatedOpenedIndices());
+    setOpenedIndices(getUpdatedOpenedIndices(openedYears));
   }, [appUser, openedYears]);
 
   const handleMouseEnter = (accordionIndex) => {
@@ -57,15 +57,8 @@ export const AcademicYearDisplay = () => {
       newOpenedYears.push(year);
     }
 
-    const newOpenedIndices = [];
-    appUser.planner.academicYears.forEach((academicYear, index) => {
-      if (newOpenedYears.includes(academicYear.year)) {
-        newOpenedIndices.push(index);
-      }
-    });
-
     setOpenedYears(newOpenedYears);
-    setOpenedIndices(newOpenedIndices);
+    setOpenedIndices(getUpdatedOpenedIndices(newOpenedYears));
   };
 
   const collapseAccordion = (year) => {
@@ -74,7 +67,7 @@ export const AcademicYearDisplay = () => {
     }
   };
 
-  const getUpdatedOpenedIndices = () => {
+  const getUpdatedOpenedIndices = (openedYears) => {
     const newOpenedIndices = [];
     appUser.planner.academicYears.forEach((academicYear, index) => {
       if (openedYears.includes(academicYear.year)) {
@@ -83,6 +76,7 @@ export const AcademicYearDisplay = () => {
     });
     return newOpenedIndices;
   };
+
   return (
     <AcademicYearDisplayContainer>
       <Accordion allowMultiple index={openedIndices}>

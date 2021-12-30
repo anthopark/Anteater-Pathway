@@ -82,7 +82,7 @@ export const RemoveBox = styled.div`
 export const QuartersDisplayContainer = styled.div`
   width: 100%;
   display: grid;
-  padding: 0 1rem;
+  padding: 0 0.8rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1.3rem;
   font-family: oxygen;
@@ -93,22 +93,20 @@ export const QuartersDisplayContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: lightsalmon;
-
+    background-color: ${({ theme }) => theme.colors.quarterBoxBg};
     .header {
-      padding-bottom: 0.5rem;
+      padding-bottom: 0.3rem;
       letter-spacing: 1px;
       font-size: 1.5rem;
     }
 
     .course-list {
       width: 100%;
-      padding: 0.5rem 1rem;
+      padding: 0.3rem;
       min-height: 6rem;
-      background-color: lightsteelblue;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+
       align-items: center;
       .course-item-wrapper {
         width: 100%;

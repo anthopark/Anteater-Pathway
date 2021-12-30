@@ -28,7 +28,7 @@ export const QuartersDisplay = ({ academicYear }) => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <CourseItem isTentative courseInfo={course} />
+                        <CourseItem courseInfo={course} />
                       </div>
                     )}
                   </Draggable>

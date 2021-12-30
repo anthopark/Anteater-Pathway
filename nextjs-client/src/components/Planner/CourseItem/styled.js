@@ -65,7 +65,7 @@ export const StyledContainer = styled.div`
   }
 `;
 
-export const TentativeContainer = styled.div`
+export const CompactUIContainer = styled.div`
   width: 100%;
   height: 3.5rem;
   background-color: ${({ bgColor }) => bgColors[bgColor]};
@@ -85,7 +85,7 @@ export const TentativeContainer = styled.div`
   }
 `;
 
-export const RegularContainer = styled.div``;
+export const ExtendedUIContainer = styled.div``;
 
 export const MenuTrigger = styled.div`
   cursor: pointer;
@@ -150,7 +150,7 @@ export const CourseColorPickerContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 13rem;
+  width: 145px;
   padding-left: 1rem;
   padding-right: 0.2rem;
 `;

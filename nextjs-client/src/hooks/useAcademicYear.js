@@ -2,7 +2,7 @@ import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { useState, useEffect } from "react";
 
 const getYearOptions = () => {
-  const startYear = new Date().getFullYear() - 2007;
+  const startYear = new Date().getFullYear() - 2005;
 
   const yearArray = [...Array(17).keys()].map((item) => item + startYear);
   return yearArray.map((year) => ({

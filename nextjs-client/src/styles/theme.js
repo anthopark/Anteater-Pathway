@@ -16,6 +16,7 @@ export const lightTheme = {
     redText: "#E34522",
     disabledText: "#cccccc",
     academicYearBg: "#f3f9ff",
+    quarterBoxBg: "#EFE9FA",
   },
 };
 
