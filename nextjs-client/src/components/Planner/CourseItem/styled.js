@@ -98,7 +98,7 @@ export const ExtendedUIContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     font-size: 1.3rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 1px;
   }
 

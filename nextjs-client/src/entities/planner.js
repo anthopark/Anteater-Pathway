@@ -42,9 +42,21 @@ export class Planner {
   }
 
   updateCourseColor(courseId, newColor) {
-    const foundCourse = this._findCourse(courseId);
+    const { course: foundCourse } = this._findCourse(courseId);
     if (foundCourse) {
       foundCourse.color = newColor;
+    }
+  }
+
+  deleteCourse(courseId) {
+    const { quarter: foundQuarter } = this._findCourse(courseId);
+    if (foundQuarter) {
+      foundQuarter.plannedCourses.splice(
+        foundQuarter.plannedCourses.findIndex(
+          (course) => course.id === courseId
+        ),
+        1
+      );
     }
   }
 
@@ -66,7 +78,7 @@ export class Planner {
     );
 
     if (quarterFoundIndex === -1) {
-      throw new Error(`Season not found: ${year} ${saeson}`);
+      throw new Error(`Season not found: ${year} ${season}`);
     }
 
     return quarters[quarterFoundIndex];
@@ -77,7 +89,7 @@ export class Planner {
       for (const quarter of academicYear.quarters) {
         for (const course of quarter.plannedCourses) {
           if (course.id === courseId) {
-            return course;
+            return { quarter, course };
           }
         }
       }

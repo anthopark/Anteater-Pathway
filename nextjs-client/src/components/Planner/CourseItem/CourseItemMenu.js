@@ -39,8 +39,11 @@ export const CourseItemMenu = ({
   const handleDelete = () => {
     if (isTentative) {
       appUser.tentativePlanner.deleteCourse(courseInfo.id);
-      updateAppUser(appUser);
+    } else {
+      appUser.planner.deleteCourse(courseInfo.id);
     }
+
+    updateAppUser(appUser);
   };
 
   return (

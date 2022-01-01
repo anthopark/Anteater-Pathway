@@ -35,9 +35,11 @@ export const TentativePlannerContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow-y: auto;
+    overflow-x: hidden;
 
     .course-list {
       padding: 0 0.2rem;
+      min-height: 4rem;
       .course-item-wrapper {
         padding: 0.3rem;
       }

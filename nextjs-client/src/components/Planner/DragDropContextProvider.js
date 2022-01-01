@@ -75,18 +75,41 @@ export const DragDropContextProvider = ({ children }) => {
         destination
       );
 
-      console.log(result);
-
       appUser.tentativePlanner.updateDroppable(sId, result[sId]);
       appUser.planner.updateDroppable(dId, result[dId]);
     } else if (sId.startsWith("p") && dId.startsWith("tp")) {
       // planner -> tentative planner
+      const result = move(
+        appUser.planner.findDroppable(sId),
+        appUser.tentativePlanner.findDroppable(dId),
+        source,
+        destination
+      );
+
+      appUser.planner.updateDroppable(sId, result[sId]);
+      appUser.tentativePlanner.updateDroppable(dId, result[dId]);
     } else if (sId.startsWith("p") && dId.startsWith("p")) {
       // planner -> planner
       if (sId === dId) {
         // reorder
+        const newCourseItems = reorder(
+          appUser.planner.findDroppable(sId),
+          source.index,
+          destination.index
+        );
+
+        appUser.planner.updateDroppable(sId, newCourseItems);
       } else {
         // move
+        const result = move(
+          appUser.planner.findDroppable(sId),
+          appUser.planner.findDroppable(dId),
+          source,
+          destination
+        );
+
+        appUser.planner.updateDroppable(sId, result[sId]);
+        appUser.planner.updateDroppable(dId, result[dId]);
       }
     }
 
