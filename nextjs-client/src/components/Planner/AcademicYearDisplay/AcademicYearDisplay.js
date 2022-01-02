@@ -116,7 +116,7 @@ export const AcademicYearDisplay = () => {
                     {hoveredIndex === index ? (
                       <FontAwesomeIcon
                         className="remove-box-icon"
-                        icon={["fas", "times-circle"]}
+                        icon={["fas", "times"]}
                         onClick={() =>
                           handleRemoveAcademicYear(academicYear.year, index)
                         }

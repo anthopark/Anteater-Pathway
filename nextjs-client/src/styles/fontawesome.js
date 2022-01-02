@@ -11,6 +11,7 @@ import {
   faEllipsisV,
   faInfoCircle,
   faTimesCircle,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
@@ -26,5 +27,6 @@ library.add(
   faSignOutAlt,
   faEllipsisV,
   faInfoCircle,
-  faTimesCircle
+  faTimesCircle,
+  faTimes
 );

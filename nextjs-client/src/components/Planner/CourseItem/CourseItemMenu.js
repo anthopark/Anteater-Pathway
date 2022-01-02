@@ -20,6 +20,10 @@ const availableColors = [
   "color6",
   "color7",
   "color8",
+  "color9",
+  "color10",
+  "color11",
+  "color12",
 ];
 
 export const CourseItemMenu = ({

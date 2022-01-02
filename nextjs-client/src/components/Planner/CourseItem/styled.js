@@ -15,13 +15,17 @@ const lightFontColor = "#E6EAE7";
 
 const bgColors = {
   color1: "#64ecbb",
-  color2: "#E19F91",
-  color3: "#E0C08F",
+  color2: "#F48484",
+  color3: "#6FE6EE",
   color4: "#9DED4E",
   color5: "#63A2DB",
   color6: "#A79DEB",
   color7: "#CA6DEB",
   color8: "#A8CB1E",
+  color9: "#E19F91",
+  color10: "#E0C08F",
+  color11: "#F898C6",
+  color12: "#E4E756",
 };
 
 const fontColors = {
@@ -33,6 +37,10 @@ const fontColors = {
   color6: lightFontColor,
   color7: lightFontColor,
   color8: darkFontColor,
+  color9: darkFontColor,
+  color10: darkFontColor,
+  color11: darkFontColor,
+  color12: darkFontColor,
 };
 
 const courseItemBorderRadius = "0.8rem";
