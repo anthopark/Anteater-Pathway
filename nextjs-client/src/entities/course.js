@@ -6,7 +6,8 @@ export class Course {
     this._number = courseItem.number.trim();
     this._unit = courseItem.unit.trim();
     this._title = courseItem.title.trim();
-    this._isCustom = false;
+    this._isCustomCreated = false;
+    this._isCustomUnit = this._unit.includes("-");
     this._color = "color1";
   }
 
@@ -30,19 +31,27 @@ export class Course {
     return this._unit;
   }
 
+  set unit(newUnit) {
+    this._unit = newUnit;
+  }
+
   get title() {
     return this._title;
   }
 
-  get isCustom() {
-    return this._isCustom;
+  get isCustomCreated() {
+    return this._isCustomCreated;
   }
 
-  set isCustom(newValue) {
+  set isCustomCreated(newValue) {
     if (typeof newValue !== "boolean") {
       throw new TypeError("The type must be boolean");
     }
-    this._isCustom = newValue;
+    this._isCustomCreated = newValue;
+  }
+
+  get isCustomUnit() {
+    return this._isCustomUnit;
   }
 
   get color() {

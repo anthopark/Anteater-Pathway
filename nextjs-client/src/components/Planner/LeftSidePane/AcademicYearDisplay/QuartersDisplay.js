@@ -38,7 +38,9 @@ export const QuartersDisplay = ({ academicYear }) => {
             )}
           </Droppable>
           {quarter.totalUnit > 0 ? (
-            <div className="footer">{quarter.totalUnit} units</div>
+            <div className="footer">{`${quarter.totalUnit} ${
+              parseFloat(quarter.totalUnit) !== 1 ? "units" : "unit"
+            }`}</div>
           ) : null}
         </div>
       ))}

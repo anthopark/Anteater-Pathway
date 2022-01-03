@@ -59,7 +59,7 @@ export const CourseItemMenu = ({
       isLazy={true}
       content={
         <MenuContainer>
-          {courseInfo.isCustom ? null : (
+          {courseInfo.isCustomCreated ? null : (
             <div className="info-link-container">
               <a className="info-link" onClick={onModalOpen}>
                 <FontAwesomeIcon

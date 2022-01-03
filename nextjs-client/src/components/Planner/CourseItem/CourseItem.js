@@ -58,7 +58,9 @@ export const CourseItem = ({ isTentative, courseInfo }) => {
     <ExtendedUIContainer bgColor={bgColor}>
       <div className="top-box">
         <div className="course-code">{courseInfo.courseCode}</div>
-        <div className="course-unit">{`${courseInfo.unit} units`}</div>
+        <div className="course-unit">{`${courseInfo.unit} ${
+          parseFloat(courseInfo.unit) !== 1 ? "units" : "unit"
+        }`}</div>
       </div>
       <div className="bottom-box">{courseInfo.title}</div>
     </ExtendedUIContainer>

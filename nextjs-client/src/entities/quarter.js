@@ -43,7 +43,9 @@ export class Quarter {
   _calculateTotalUnit() {
     let result = 0;
     for (const course of this._plannedCourses) {
-      result += parseFloat(course.unit);
+      if (!isNaN(parseFloat(course.unit))) {
+        result += parseFloat(course.unit);
+      }
     }
 
     this._totalUnit = result;

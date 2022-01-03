@@ -38,8 +38,6 @@ export const DragDropContextProvider = ({ children }) => {
       return;
     }
 
-    console.log(source);
-    console.log(destination);
     const sId = source.droppableId;
     const dId = destination.droppableId;
 
