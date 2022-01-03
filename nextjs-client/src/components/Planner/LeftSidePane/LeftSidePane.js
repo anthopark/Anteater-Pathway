@@ -1,4 +1,4 @@
-import AcademicYearDislay from "../AcademicYearDisplay";
+import AcademicYearDislay from "./AcademicYearDisplay";
 import { StyledContainer } from "./styled";
 
 export const LeftSidePane = () => {

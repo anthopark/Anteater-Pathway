@@ -1,21 +1,24 @@
+import { StyledContainer } from "./styled";
+import { useGlobalObjects } from "@components/GlobalContextProvider";
+import CourseItem from "@components/Planner/CourseItem";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import CourseItem from "../CourseItem";
-import { QuartersDisplayContainer } from "./styled";
 
-export const QuartersDisplay = ({ academicYear }) => {
+export const TentativePlanner = () => {
+  const { appUser } = useGlobalObjects();
+
   return (
-    <QuartersDisplayContainer>
-      {academicYear.quarters.map((quarter, index) => (
-        <div className="quarter-box" key={index}>
-          <div className="header">{quarter.header}</div>
-          <Droppable droppableId={quarter.droppableId}>
+    <StyledContainer>
+      <div className="header">Tentatively Planned</div>
+      <div className="content">
+        {appUser.tentativePlanner.droppables.map((droppable, index) => (
+          <Droppable key={index} droppableId={droppable["droppableId"]}>
             {(provided) => (
               <div
                 className="course-list"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {quarter.plannedCourses.map((course, index) => (
+                {droppable["courseItems"].map((course, index) => (
                   <Draggable
                     key={course.id}
                     draggableId={course.id}
@@ -28,7 +31,7 @@ export const QuartersDisplay = ({ academicYear }) => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <CourseItem courseInfo={course} />
+                        <CourseItem isTentative courseInfo={course} />
                       </div>
                     )}
                   </Draggable>
@@ -37,11 +40,8 @@ export const QuartersDisplay = ({ academicYear }) => {
               </div>
             )}
           </Droppable>
-          {quarter.totalUnit > 0 ? (
-            <div className="footer">{quarter.totalUnit} units</div>
-          ) : null}
-        </div>
-      ))}
-    </QuartersDisplayContainer>
+        ))}
+      </div>
+    </StyledContainer>
   );
 };
