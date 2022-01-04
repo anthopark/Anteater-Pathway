@@ -142,7 +142,8 @@ export const MenuContainer = styled.div`
   font-size: 1.4rem;
 
   .info-link-container {
-    padding: 0.3rem 1rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #d9d9d9;
     .info-link {
       cursor: pointer;
       display: flex;
@@ -158,12 +159,11 @@ export const MenuContainer = styled.div`
   .color-picker-container {
     padding-top: 1rem;
     padding-bottom: 0.2rem;
-    border-top: 2px solid #d9d9d9;
     border-bottom: 2px solid #d9d9d9;
   }
 
   .delete-container {
-    padding: 0.3rem 1rem;
+    padding: 0.5rem 1rem;
     .delete-link {
       cursor: pointer;
       display: flex;
@@ -174,6 +174,20 @@ export const MenuContainer = styled.div`
         color: ${({ theme }) => theme.colors.redText};
       }
     }
+  }
+`;
+
+export const CustomUnitFormContainer = styled.div`
+  font-family: oxygen;
+  color: ${({ theme }) => theme.colors.defaultText};
+  padding: 0.5rem 0.9rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #d9d9d9;
+  .form-box {
+    padding-top: 0.3rem;
+    width: auto;
+    display: flex;
+    align-items: center;
   }
 `;
 

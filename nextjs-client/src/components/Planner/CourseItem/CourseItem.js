@@ -6,7 +6,7 @@ import {
 } from "./styled";
 import { CourseItemMenu } from "./CourseItemMenu";
 
-const EXTEND_UI_THRESHOLD = 220;
+const EXTEND_UI_THRESHOLD = 210;
 
 // the number of ms the window size must stay the same size before the
 // dimension state variable is reset

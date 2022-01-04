@@ -65,7 +65,6 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
     newCourse.isCustomCreated = true;
     appUser.tentativePlanner.addCourse(newCourse);
     updateAppUser(appUser);
-    console.log(appUser);
 
     showToastBox({
       status: "success",
@@ -112,6 +111,7 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                   height="3.3rem"
                   borderRadius="7px"
                   id="departmentCode"
+                  autoComplete="off"
                   placeholder="Ex. ECON, HISTORY"
                 />
                 <FormErrorMessage fontSize="1.3rem">
@@ -149,6 +149,7 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                     borderRadius="7px"
                     id="number"
                     placeholder="Ex. 101, 1A"
+                    autoComplete="off"
                   />
                   <FormErrorMessage fontSize="1.3rem">
                     {form.errors.number}
@@ -178,6 +179,7 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                     borderRadius="7px"
                     id="unit"
                     placeholder="Ex. 2, 4"
+                    autoComplete="off"
                   />
                   <FormErrorMessage fontSize="1.3rem">
                     {form.errors.unit}
@@ -207,6 +209,7 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                   borderRadius="7px"
                   id="title"
                   placeholder="Ex. Basic Statistics"
+                  autoComplete="off"
                 />
                 <FormErrorMessage fontSize="1.3rem">
                   {form.errors.title}

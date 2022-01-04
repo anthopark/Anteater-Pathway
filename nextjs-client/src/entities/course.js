@@ -1,3 +1,5 @@
+const DEFAULT_COLOR = "color1";
+
 export class Course {
   constructor(courseItem) {
     // id for draggerable
@@ -8,7 +10,13 @@ export class Course {
     this._title = courseItem.title.trim();
     this._isCustomCreated = false;
     this._isCustomUnit = this._unit.includes("-");
-    this._color = "color1";
+    this._customMinUnit = null;
+    this._customMaxUnit = null;
+    if (this._isCustomUnit) {
+      this._customMinUnit = this._unit.split("-")[0];
+      this._customMaxUnit = this._unit.split("-")[1];
+    }
+    this._color = DEFAULT_COLOR;
   }
 
   get id() {
@@ -52,6 +60,14 @@ export class Course {
 
   get isCustomUnit() {
     return this._isCustomUnit;
+  }
+
+  get customMinUnit() {
+    return this._customMinUnit;
+  }
+
+  get customMaxUnit() {
+    return this._customMaxUnit;
   }
 
   get color() {

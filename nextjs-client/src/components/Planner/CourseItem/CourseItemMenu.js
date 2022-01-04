@@ -3,11 +3,20 @@ import {
   MenuTrigger,
   MenuContainer,
   CourseColorPickerContainer,
+  CustomUnitFormContainer,
   ColorPicker,
 } from "./styled";
+import { Formik, Field, Form } from "formik";
 import { CourseDetailModal } from "./CourseDetailModal";
 import { Popover } from "react-tiny-popover";
-import { useDisclosure } from "@chakra-ui/react";
+import {
+  useDisclosure,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  Button,
+} from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -80,6 +89,16 @@ export const CourseItemMenu = ({
             </div>
           )}
 
+          {courseInfo.isCustomUnit ? (
+            <div className="custom-unit-form-container">
+              <CustomUnitForm
+                courseInfo={courseInfo}
+                appUser={appUser}
+                updateAppUser={updateAppUser}
+              />
+            </div>
+          ) : null}
+
           <div className="color-picker-container">
             <CourseColorPicker
               isTentative={isTentative}
@@ -116,6 +135,87 @@ export const CourseItemMenu = ({
         </a>
       </MenuTrigger>
     </Popover>
+  );
+};
+
+const CustomUnitForm = ({ courseInfo }) => {
+  const validateCustomUnit = (value) => {
+    let error;
+
+    if (!value) {
+      error = "Unit is required";
+    } else if (isNaN(Number(value.trim()))) {
+      error = "Invalid value";
+    } else if (Number(value.trim()) < Number(courseInfo.customMinUnit)) {
+      error = `Can't be less than ${courseInfo.customMinUnit}`;
+    } else if (Number(value.trim()) > Number(courseInfo.customMaxUnit)) {
+      error = `Can't be larger than ${courseInfo.customMaxUnit}`;
+    }
+    return error;
+  };
+
+  const handleSubmit = () => {};
+
+  return (
+    <CustomUnitFormContainer>
+      <Formik
+        initialValues={{
+          customUnit: null,
+        }}
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values);
+          resetForm();
+        }}
+      >
+        {() => (
+          <Form>
+            <Field name="customUnit" validate={validateCustomUnit}>
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.customUnit}>
+                  <FormLabel
+                    htmlFor="custom-unit"
+                    fontSize="1.4rem"
+                    letterSpacing="1px"
+                    p={0}
+                    m={0}
+                  >
+                    Custom Unit
+                  </FormLabel>
+                  <div className="form-box">
+                    <Input
+                      {...field}
+                      id="custom-unit"
+                      w="5rem"
+                      fontSize="1.4rem"
+                      mr="1rem"
+                      letterSpacing="1px"
+                      placeholder={`${courseInfo.customMinUnit}-${courseInfo.customMaxUnit}`}
+                      borderColor="#4e8cfa"
+                      autoComplete="off"
+                      _hover={{
+                        borderColor: "#4e8cfa",
+                      }}
+                    />
+                    <Button
+                      fontSize="1.4rem"
+                      w="4.5rem"
+                      letterSpacing="1px"
+                      bgColor="brand.700"
+                      colorScheme="brand"
+                    >
+                      Set
+                    </Button>
+                  </div>
+                  <FormErrorMessage fontSize="1.4rem">
+                    {form.errors.customUnit}
+                  </FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+          </Form>
+        )}
+      </Formik>
+    </CustomUnitFormContainer>
   );
 };
 
