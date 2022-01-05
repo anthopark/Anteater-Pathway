@@ -60,6 +60,13 @@ export class Planner {
     }
   }
 
+  updateCustomUnit(courseId, newUnitValue) {
+    const { course: foundCourse } = this._findCourse(courseId);
+    if (foundCourse) {
+      foundCourse.unit = newUnitValue.trim();
+    }
+  }
+
   _findQuarter(droppableId) {
     const [year, season] = droppableId.split("-").slice(1);
 

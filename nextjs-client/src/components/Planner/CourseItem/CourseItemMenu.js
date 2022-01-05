@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useToastBox } from "src/hooks/useToastBox";
 
 const availableColors = [
   "color1",
@@ -89,7 +90,7 @@ export const CourseItemMenu = ({
             </div>
           )}
 
-          {courseInfo.isCustomUnit ? (
+          {!isTentative && courseInfo.isCustomUnit ? (
             <div className="custom-unit-form-container">
               <CustomUnitForm
                 courseInfo={courseInfo}
@@ -138,7 +139,9 @@ export const CourseItemMenu = ({
   );
 };
 
-const CustomUnitForm = ({ courseInfo }) => {
+const CustomUnitForm = ({ courseInfo, appUser, updateAppUser }) => {
+  const { showToastBox } = useToastBox();
+
   const validateCustomUnit = (value) => {
     let error;
 
@@ -154,7 +157,16 @@ const CustomUnitForm = ({ courseInfo }) => {
     return error;
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (values) => {
+    appUser.planner.updateCustomUnit(courseInfo.id, values.customUnit);
+    updateAppUser(appUser);
+
+    showToastBox({
+      status: "success",
+      dataOfInterest: [courseInfo.courseCode],
+      message: `Custom Unit Updated to ${values.customUnit}:`,
+    });
+  };
 
   return (
     <CustomUnitFormContainer>
@@ -202,6 +214,7 @@ const CustomUnitForm = ({ courseInfo }) => {
                       letterSpacing="1px"
                       bgColor="brand.700"
                       colorScheme="brand"
+                      type="submit"
                     >
                       Set
                     </Button>
