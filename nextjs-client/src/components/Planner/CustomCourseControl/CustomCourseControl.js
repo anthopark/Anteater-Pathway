@@ -12,8 +12,10 @@ import {
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CustomCourseForm } from "./CustomCourseForm";
+import { useGlobalObjects } from "@components/GlobalContextProvider";
 
 export const CustomCourseControl = () => {
+  const { themeMode, themeStyles } = useGlobalObjects();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   return (
@@ -24,8 +26,8 @@ export const CustomCourseControl = () => {
             mt=".4rem"
             letterSpacing=".1rem"
             padding="2.1rem 1.6rem"
-            colorScheme="brand"
-            backgroundColor="brand.700"
+            colorScheme={themeMode === "light" ? "brand" : null}
+            bgColor={themeStyles.colors.defaultButtonBg}
             borderRadius="1rem"
             fontSize="1.6rem"
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}

@@ -1,4 +1,4 @@
-import { Button } from "./Button";
+import { DefaultButton } from "./DefaultButton";
 import { ToastBox } from "./ToastBox";
 
-export { Button, ToastBox };
+export { DefaultButton, ToastBox };

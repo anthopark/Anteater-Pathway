@@ -14,7 +14,7 @@ export const TopLayout = styled.div`
   height: 9rem;
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid #bbbbbb;
+  border-bottom: 1px solid #bbbbbb;
   margin-bottom: 1rem;
 
   .right-end-box {

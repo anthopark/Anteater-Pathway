@@ -1,4 +1,4 @@
-import { Button } from "@components/CustomChakraUI";
+import { DefaultButton } from "@components/CustomChakraUI";
 import { StyledContainer } from "./styled";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/menu";
 import { Avatar } from "@chakra-ui/avatar";
@@ -18,7 +18,9 @@ const onSignInButtonClick = async () => {
     });
 };
 
-const NonSignedInUI = <Button onClick={onSignInButtonClick}>Sign In</Button>;
+const NonSignedInUI = (
+  <DefaultButton onClick={onSignInButtonClick}>Sign In</DefaultButton>
+);
 
 const signOutUser = async (user) => {
   if (user) {

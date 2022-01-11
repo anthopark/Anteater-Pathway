@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyledContainer, StyledReactSelect } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
-import { Button } from "@components/CustomChakraUI";
+import { DefaultButton } from "@components/CustomChakraUI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAcademicYear } from "src/hooks/useAcademicYear";
 import { useToastBox } from "src/hooks/useToastBox";
@@ -63,9 +63,9 @@ export const AcademicYearControl = () => {
         isClearable
       />
       <div style={{ marginLeft: "1.3rem", marginTop: ".4rem" }}>
-        <Button onClick={handleButtonClick}>
+        <DefaultButton onClick={handleButtonClick}>
           <FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />
-        </Button>
+        </DefaultButton>
       </div>
     </StyledContainer>
   );

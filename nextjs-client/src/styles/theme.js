@@ -1,21 +1,27 @@
 import { extendTheme } from "@chakra-ui/react";
 
+const PRIMARY_BRAND_COLOR = "#0C335A";
+const MAIN_PAGE_BG_COLOR = "#E2E2EB";
+const WHITE_DISPLAY_1 = "#f3f9ff";
+
 export const lightTheme = {
   colors: {
     selectBorder: "transparent",
-    leftSideBarBg: "#0E3D6B",
-    pageBg: "#E2E2EB",
-    paneBg: "#f3f9ff",
-    modalBg: "#f3f9ff",
+    leftSideBarBg: PRIMARY_BRAND_COLOR,
+    defaultButtonBg: "brand.700",
+    pinkButtonBg: "pink.500",
+    pageBg: MAIN_PAGE_BG_COLOR,
+    paneBg: WHITE_DISPLAY_1,
+    modalBg: WHITE_DISPLAY_1,
     paneHeaderFont: "#7E7676",
     tentativeCourse: "#9BE7CB",
     courseItemShadow: "rgba(0,0,0, 0.2)",
-    courseMenuBg: "#f3f9ff",
+    courseMenuBg: WHITE_DISPLAY_1,
     lightBorder: "#bbbbbb",
     defaultText: "#5C5C5C",
     redText: "#E34522",
     disabledText: "#cccccc",
-    academicYearBg: "#f3f9ff",
+    academicYearBg: WHITE_DISPLAY_1,
     quarterBoxBg: "#EFE9FA",
   },
 };

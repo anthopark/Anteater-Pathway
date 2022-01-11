@@ -121,10 +121,11 @@ export const AcademicYearDisplay = () => {
                           handleRemoveAcademicYear(academicYear.year, index)
                         }
                         style={{
-                          fontSize: "1.6rem",
+                          fontSize: "1.7rem",
                           marginTop: ".3rem",
                           color: "#E34522",
                           cursor: "pointer",
+                          paddingBottom: "3px",
                         }}
                       />
                     ) : null}

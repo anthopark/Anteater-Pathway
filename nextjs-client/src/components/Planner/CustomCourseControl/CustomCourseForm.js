@@ -7,7 +7,7 @@ import {
   Input,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { Button } from "@components/CustomChakraUI";
+import { DefaultButton } from "@components/CustomChakraUI";
 import { useToastBox } from "src/hooks/useToastBox";
 
 export const CustomCourseForm = ({ setIsPopoverOpen }) => {
@@ -217,7 +217,7 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
               </FormControl>
             )}
           </Field>
-          <Button>Create</Button>
+          <DefaultButton>Create</DefaultButton>
         </Form>
       )}
     </Formik>

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCoursesForSearch } from "src/hooks/useCoursesForSearch";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { Course } from "src/entities/course";
-import { Button } from "@components/CustomChakraUI";
+import { DefaultButton } from "@components/CustomChakraUI";
 import { useToastBox } from "src/hooks/useToastBox";
 
 const MULTI_SELECT_LIMIT = 4;
@@ -93,9 +93,9 @@ export const CourseSearchBar = () => {
         filterOption={createFilter({ ignoreAccents: false })}
       />
       <div style={{ marginLeft: "1.3rem", marginTop: ".4rem" }}>
-        <Button onClick={handleButtonClick}>
+        <DefaultButton onClick={handleButtonClick}>
           <FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />
-        </Button>
+        </DefaultButton>
       </div>
     </StyledContainer>
   );
