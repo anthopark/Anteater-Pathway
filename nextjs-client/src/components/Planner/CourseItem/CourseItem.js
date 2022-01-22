@@ -4,7 +4,9 @@ import {
   StyledContainer,
   CompactUIContainer,
 } from "./styled";
+import { useDisclosure } from "@chakra-ui/react";
 import { CourseItemMenu } from "./CourseItemMenu";
+import { CourseDetailModal } from "./CourseDetailModal";
 
 const EXTEND_UI_THRESHOLD = 210;
 
@@ -21,9 +23,15 @@ const shortenText = (maxCharacters, input) => {
 
 export const CourseItem = ({ isTentative, courseInfo }) => {
   const [bgColor, setBgColor] = useState(courseInfo.color);
-  const [isHover, setIsHover] = useState(false);
+  const [isCourseItemHover, setIsCourseItemHover] = useState(false);
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
+
+  const {
+    isOpen: isModalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure();
 
   // holds the timer for setTimeout and clearInterval
   let movementTimer = null;
@@ -67,22 +75,29 @@ export const CourseItem = ({ isTentative, courseInfo }) => {
   );
 
   return (
-    <StyledContainer
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      ref={containerRef}
-    >
-      {isTentative || containerWidth <= EXTEND_UI_THRESHOLD
-        ? compactUI
-        : extentedUI}
-      {isHover ? (
+    <>
+      <StyledContainer
+        onMouseEnter={() => setIsCourseItemHover(true)}
+        onMouseLeave={() => setIsCourseItemHover(false)}
+        ref={containerRef}
+      >
+        {isTentative || containerWidth <= EXTEND_UI_THRESHOLD
+          ? compactUI
+          : extentedUI}
         <CourseItemMenu
           isTentative={isTentative}
           courseInfo={courseInfo}
           bgColor={bgColor}
           setBgColor={setBgColor}
+          isCourseItemHover={isCourseItemHover}
+          onModalOpen={onModalOpen}
         />
-      ) : null}
-    </StyledContainer>
+      </StyledContainer>
+      <CourseDetailModal
+        courseInfo={courseInfo}
+        isModalOpen={isModalOpen}
+        onModalClose={onModalClose}
+      />
+    </>
   );
 };

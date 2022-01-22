@@ -62,10 +62,6 @@ export const CourseDetailModal = ({
     fetchCourseConfig
   );
 
-  console.log(data);
-  console.log(isLoading);
-  console.log(error);
-
   let modalBodyUI = null;
 
   if (isLoading) {
@@ -126,6 +122,7 @@ export const CourseDetailModal = ({
       isOpen={isModalOpen}
       onClose={onModalClose}
       isCentered={true}
+      closeOnEsc={true}
       autoFocus={false}
       size="2xl"
     >

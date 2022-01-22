@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   MenuTrigger,
   MenuContainer,
@@ -7,10 +7,8 @@ import {
   ColorPicker,
 } from "./styled";
 import { Formik, Field, Form } from "formik";
-import { CourseDetailModal } from "./CourseDetailModal";
 import { Popover } from "react-tiny-popover";
 import {
-  useDisclosure,
   FormControl,
   FormLabel,
   Input,
@@ -41,14 +39,17 @@ export const CourseItemMenu = ({
   isTentative,
   bgColor,
   setBgColor,
+  isCourseItemHover,
+  onModalOpen,
 }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const {
-    isOpen: isModalOpen,
-    onOpen: onModalOpen,
-    onClose: onModalClose,
-  } = useDisclosure();
   const { appUser, updateAppUser } = useGlobalObjects();
+
+  useEffect(() => {
+    if (!isCourseItemHover) {
+      setIsPopoverOpen(false);
+    }
+  }, [isCourseItemHover]);
 
   const handleDelete = () => {
     if (isTentative) {
@@ -82,11 +83,6 @@ export const CourseItemMenu = ({
                 />
                 <p className="info-text">info</p>
               </a>
-              <CourseDetailModal
-                courseInfo={courseInfo}
-                isModalOpen={isModalOpen}
-                onModalClose={onModalClose}
-              />
             </div>
           )}
 
@@ -125,15 +121,17 @@ export const CourseItemMenu = ({
       }
     >
       <MenuTrigger>
-        <a
-          className="trigger-link"
-          onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-        >
-          <FontAwesomeIcon
-            icon={["fas", "ellipsis-v"]}
-            style={{ fontSize: "1.6rem", color: "#5C5656" }}
-          />
-        </a>
+        {isCourseItemHover ? (
+          <a
+            className="trigger-link"
+            onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+          >
+            <FontAwesomeIcon
+              icon={["fas", "ellipsis-v"]}
+              style={{ fontSize: "1.6rem", color: "#5C5656" }}
+            />
+          </a>
+        ) : null}
       </MenuTrigger>
     </Popover>
   );
