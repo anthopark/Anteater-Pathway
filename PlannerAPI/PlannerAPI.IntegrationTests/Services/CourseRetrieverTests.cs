@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using PlannerAPI.DataAccess;
-using PlannerAPI.DataAccess.Models;
+using PlannerAPI.DataAccess.Entities;
 using PlannerAPI.IntegrationTests.Utilities;
 using PlannerAPI.Services;
 using Xunit;

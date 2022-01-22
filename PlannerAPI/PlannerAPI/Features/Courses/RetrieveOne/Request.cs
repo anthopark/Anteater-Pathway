@@ -1,8 +1,7 @@
-namespace PlannerAPI.Features.Courses.RetrieveOne
+namespace PlannerAPI.Features.Courses.RetrieveOne;
+
+public class Request
 {
-    public class Request
-    {
-        public string? DepartmentCode { get; set; }
-        public string? Number { get; set; }
-    }
+    public string? DepartmentCode { get; set; }
+    public string? Number { get; set; }
 }

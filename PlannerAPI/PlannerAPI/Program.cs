@@ -1,5 +1,5 @@
 using System.Text.Json;
-using FastEndpoints.Swagger;
+using FastEndpoints.NSwag;
 using Microsoft.AspNetCore.Http.Json;
 using PlannerAPI.DataAccess;
 using PlannerAPI.Services;
@@ -18,17 +18,17 @@ try
     await DB.InitAsync(
         builder.Configuration["DatabaseName"],
         MongoClientSettings.FromConnectionString(builder.Configuration["ConnectionString"]));
-    
+
     builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console()
         .ReadFrom.Configuration(ctx.Configuration));
 
     builder.Services.AddScoped<ICourseRepository, CourseRepository>();
     builder.Services.AddScoped<ICourseRetriever, CourseRetriever>();
-    
+
     builder.Services.AddCors();
     builder.Services.AddFastEndpoints();
-    builder.Services.AddSwagger();
+    builder.Services.AddNSwag();
     builder.Services.Configure<JsonOptions>(option =>
         option.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 
@@ -39,8 +39,8 @@ try
 
     if (app.Environment.IsDevelopment())
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseOpenApi();
+        app.UseSwaggerUi3();
     }
     else
     {

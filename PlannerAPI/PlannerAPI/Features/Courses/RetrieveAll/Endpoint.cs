@@ -1,56 +1,52 @@
-using System.Linq;
-using MongoDB.Entities;
-using PlannerAPI.DataAccess;
-using PlannerAPI.DataAccess.Models;
+using PlannerAPI.DataAccess.Entities;
 using PlannerAPI.Services;
 
-namespace PlannerAPI.Features.Courses.RetrieveAll
+namespace PlannerAPI.Features.Courses.RetrieveAll;
+
+public class Endpoint : EndpointWithoutRequest<Response>
 {
-    public class Endpoint : EndpointWithoutRequest<Response>
+    public ICourseRetriever CourseRetriever { get; set; }
+
+    public override void Configure()
     {
-        public ICourseRetriever CourseRetriever { get; set; }
+        Verbs(Http.GET);
+        Routes("/api/course/all");
+        AllowAnonymous();
+    }
 
-        public override void Configure()
+    public override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
+    {
+        var courses = await CourseRetriever.RetrieveAllGroupedByDepartment();
+
+        var result = MapToViewModel(courses);
+
+        if (result.Count == 0)
         {
-            Verbs(Http.GET);
-            Routes("/api/course/all");
-            AllowAnonymous();
+            await SendNotFoundAsync();
         }
-
-        public override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
+        else
         {
-            var courses = await CourseRetriever.RetrieveAllGroupedByDepartment();
-
-            var result = MapToViewModel(courses);
-
-            if (result.Count == 0)
+            var response = new Response
             {
-                await SendNotFoundAsync();
-            }
-            else
-            {
-                var response = new Response
+                DepartmentCount = result.Count,
+                Courses = result
+            };
+
+            await SendAsync(response, statusCode: 200, cancellation: ct);
+        }
+    }
+
+    private static List<List<CourseViewModel>> MapToViewModel(List<List<Course>> allCourses)
+    {
+        return allCourses.Select(courses => courses.Select(course => new CourseViewModel
                 {
-                    DepartmentCount = result.Count,
-                    Courses = result
-                };
-
-                await SendAsync(response, statusCode: 200, cancellation: ct);
-            }
-        }
-
-        private static List<List<CourseViewModel>> MapToViewModel(List<List<Course>> allCourses)
-        {
-            return allCourses.Select(courses => courses.Select(course => new CourseViewModel
-                    {
-                        DepartmentCode = course.DepartmentCode,
-                        Number = course.Number,
-                        CourseCode = $"{course.DepartmentCode} {course.Number}",
-                        Title = course.Title,
-                        Unit = course.Unit
-                    })
-                    .ToList())
-                .ToList();
-        }
+                    DepartmentCode = course.DepartmentCode,
+                    Number = course.Number,
+                    CourseCode = $"{course.DepartmentCode} {course.Number}",
+                    Title = course.Title,
+                    Unit = course.Unit
+                })
+                .ToList())
+            .ToList();
     }
 }

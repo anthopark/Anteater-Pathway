@@ -1,8 +1,7 @@
-using MongoDB.Entities;
-using PlannerAPI.DataAccess.Models;
+using PlannerAPI.DataAccess.Entities;
 
-namespace PlannerAPI.DataAccess
-{
+namespace PlannerAPI.DataAccess;
+
     public class CourseRepository : DataAccessBase<Course>, ICourseRepository
     {
         public CourseRepository() : base()
@@ -23,4 +22,4 @@ namespace PlannerAPI.DataAccess
     {
         public Task<Course?> FindByCourseCode(string departmentCode, string number);
     }
-}
+

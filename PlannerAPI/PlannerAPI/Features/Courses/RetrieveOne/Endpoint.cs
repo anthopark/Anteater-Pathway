@@ -1,32 +1,30 @@
-using Microsoft.Extensions.Logging;
-using PlannerAPI.DataAccess.Models;
+using PlannerAPI.DataAccess.Entities;
 using PlannerAPI.Services;
 
-namespace PlannerAPI.Features.Courses.RetrieveOne
+namespace PlannerAPI.Features.Courses.RetrieveOne;
+
+public class Endpoint : Endpoint<Request, Course>
 {
-    public class Endpoint : Endpoint<Request, Course>
+    public ICourseRetriever CourseRetriever { get; set; }
+
+    public override void Configure()
     {
-        public ICourseRetriever CourseRetriever { get; set; }
+        Verbs(Http.GET);
+        Routes("/api/course/{DepartmentCode}/{Number}");
+        AllowAnonymous();
+    }
 
-        public override void Configure()
+    public override async Task HandleAsync(Request req, CancellationToken ct)
+    {
+        var result = await CourseRetriever.RetrieveOne(req.DepartmentCode.ToUpper(), req.Number.ToUpper());
+
+        if (result == null)
         {
-            Verbs(Http.GET);
-            Routes("/api/course/{DepartmentCode}/{Number}");
-            AllowAnonymous();
+            await SendNotFoundAsync();
         }
-
-        public override async Task HandleAsync(Request req, CancellationToken ct)
+        else
         {
-            var result = await CourseRetriever.RetrieveOne(req.DepartmentCode.ToUpper(), req.Number.ToUpper());
-            
-            if (result == null)
-            {
-                await SendNotFoundAsync();
-            }
-            else
-            {
-                await SendAsync(result, statusCode: 200, cancellation: ct);
-            }
+            await SendAsync(result, statusCode: 200, cancellation: ct);
         }
     }
 }
