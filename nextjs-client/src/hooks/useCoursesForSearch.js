@@ -1,13 +1,26 @@
 import { useState, useEffect } from "react";
-import dummyCourses from "../components/Planner/CourseSearchBar/dummy-courses.json";
+import { useQuery } from "react-query";
+import dummyCourses from "src/data/dummy-courses.json";
+import {
+  fetchAllCoursesGroupedByDepartment,
+  fetchCourseConfig,
+} from "src/fetch/fetch-course";
 
 export const useCoursesForSearch = () => {
   const [allCourses, setAllCourses] = useState([]);
   const [currentCourseOptions, setCurrentCourseOptions] = useState([]);
+  const { data } = useQuery(
+    `all-courses`,
+    fetchAllCoursesGroupedByDepartment,
+    fetchCourseConfig
+  );
 
   useEffect(() => {
     setAllCourses(dummyCourses);
-  }, []);
+    if (data) {
+      setAllCourses(data.courses);
+    }
+  }, [data]);
 
   const updateCurrentCourseOptions = (inputValue) => {
     let foundCourseOptions = [];
@@ -21,7 +34,6 @@ export const useCoursesForSearch = () => {
 
   const findCourseOptions = (inputValue, findOption) => {
     let result = [];
-
     for (const groupedCourse of allCourses) {
       if (
         groupedCourse[0][findOption]

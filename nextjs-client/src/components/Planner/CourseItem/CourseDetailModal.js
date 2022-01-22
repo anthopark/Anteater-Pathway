@@ -10,7 +10,7 @@ import {
 import { DefaultButton } from "@components/CustomChakraUI";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { useQuery } from "react-query";
-import { fetchCourseDetail } from "src/fetch/fetch-course";
+import { fetchCourseDetail, fetchCourseConfig } from "src/fetch/fetch-course";
 import {
   ModalBodyContainer,
   ModalBodyErrorContainer,
@@ -58,7 +58,8 @@ export const CourseDetailModal = ({
         number: courseInfo.number,
       },
     ],
-    fetchCourseDetail
+    fetchCourseDetail,
+    fetchCourseConfig
   );
 
   console.log(data);
@@ -80,19 +81,19 @@ export const CourseDetailModal = ({
   } else {
     modalBodyUI = (
       <ModalBodyContainer>
-        {data?.data.geCategory ? (
+        {data?.geCategory ? (
           <div className="course-info-property-container">
             <div className="course-info-property">
               GE Category:
-              <span className="ge-category-text">{`${data.data.geCategory}`}</span>
+              <span className="ge-category-text">{`${data.geCategory}`}</span>
             </div>
           </div>
         ) : null}
-        {data?.data.offeredTerms.length > 0 ? (
+        {data?.offeredTerms.length > 0 ? (
           <div className="course-info-property-container">
             <div className="course-info-property">Previously Offered:</div>
             <div className="offered-terms-box">
-              {data.data.offeredTerms.map((term, index) => (
+              {data.offeredTerms.map((term, index) => (
                 <div
                   className="term-box"
                   key={index}
@@ -105,12 +106,12 @@ export const CourseDetailModal = ({
           </div>
         ) : null}
         {courseInfoPropertyArr.map((propertyPair) => {
-          if (data.data[propertyPair[0]]) {
+          if (data[propertyPair[0]]) {
             return (
               <div className="course-info-property-container">
                 <div className="course-info-property">{`${propertyPair[1]}:`}</div>
                 <div className="course-info-content">
-                  {data.data[propertyPair[0]]}
+                  {data[propertyPair[0]]}
                 </div>
               </div>
             );
