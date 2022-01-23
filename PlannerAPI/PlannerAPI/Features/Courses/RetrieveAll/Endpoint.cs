@@ -12,28 +12,31 @@ public class Endpoint : EndpointWithoutRequest<Response>
         Verbs(Http.GET);
         Routes("/api/course/all");
         AllowAnonymous();
+        Describe(builder => builder
+            .Produces<Response>(200, "application/json")
+            .ProducesProblem(404)
+            .ProducesProblem(500));
     }
 
     public override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
     {
         var courses = await CourseRetriever.RetrieveAllGroupedByDepartment();
 
+        if (courses.Count == 0)
+        {
+            await SendNotFoundAsync(ct);
+            return;
+        }
+
         var result = MapToViewModel(courses);
 
-        if (result.Count == 0)
+        var response = new Response
         {
-            await SendNotFoundAsync();
-        }
-        else
-        {
-            var response = new Response
-            {
-                DepartmentCount = result.Count,
-                Courses = result
-            };
+            DepartmentCount = result.Count,
+            Courses = result
+        };
 
-            await SendAsync(response, statusCode: 200, cancellation: ct);
-        }
+        await SendAsync(response, statusCode: 200, cancellation: ct);
     }
 
     private static List<List<CourseViewModel>> MapToViewModel(List<List<Course>> allCourses)

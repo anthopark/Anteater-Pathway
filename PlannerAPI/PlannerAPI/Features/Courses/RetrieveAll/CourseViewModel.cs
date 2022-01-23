@@ -2,13 +2,13 @@ namespace PlannerAPI.Features.Courses.RetrieveAll;
 
 public class CourseViewModel
 {
-    public string? DepartmentCode { get; set; }
+    public string DepartmentCode { get; init; }
 
-    public string? Number { get; set; }
+    public string Number { get; init; }
 
-    public string? CourseCode { get; set; }
+    public string CourseCode { get; init; }
 
-    public string? Title { get; set; }
+    public string Title { get; init; }
 
-    public string? Unit { get; set; }
+    public string Unit { get; init; }
 }

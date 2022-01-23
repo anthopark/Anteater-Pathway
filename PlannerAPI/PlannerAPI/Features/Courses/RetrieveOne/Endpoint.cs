@@ -12,6 +12,10 @@ public class Endpoint : Endpoint<Request, Course>
         Verbs(Http.GET);
         Routes("/api/course/{DepartmentCode}/{Number}");
         AllowAnonymous();
+        Describe(builder => builder
+            .Produces<Course>(200, "application/json")
+            .ProducesProblem(404, "plain/text")
+            .ProducesProblem(500));
     }
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
@@ -20,11 +24,10 @@ public class Endpoint : Endpoint<Request, Course>
 
         if (result == null)
         {
-            await SendNotFoundAsync();
+            await SendNotFoundAsync(ct);
+            return;
         }
-        else
-        {
-            await SendAsync(result, statusCode: 200, cancellation: ct);
-        }
+        
+        await SendAsync(result, statusCode: 200, cancellation: ct);
     }
 }
