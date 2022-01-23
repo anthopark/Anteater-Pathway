@@ -7,4 +7,5 @@ export const StyledContainer = styled.div`
   align-items: center;
   font-family: Oxygen;
   margin-top: 0.4rem;
+  color: ${({ theme }) => theme.colors.defaultText};
 `;

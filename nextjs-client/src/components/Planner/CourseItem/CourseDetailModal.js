@@ -122,8 +122,7 @@ export const CourseDetailModal = ({
       isOpen={isModalOpen}
       onClose={onModalClose}
       isCentered={true}
-      closeOnEsc={true}
-      autoFocus={false}
+      onEsc={onModalClose}
       size="2xl"
     >
       <ModalOverlay />
