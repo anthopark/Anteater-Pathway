@@ -6,17 +6,24 @@ import {
   ModalBody,
   Button,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "src/firebase/firebase-config";
+import { signInUser } from "src/api/user";
 
 const provider = new GoogleAuthProvider();
 
 const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
   const onSignInButtonClick = async () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log(result);
+      .then(async (result) => {
         onModalClose();
+
+        const signInResult = await signInUser(
+          result.user.uid,
+          result.user.accessToken
+        );
+        console.log(signInResult);
       })
       .catch((error) => {
         console.log(error);
@@ -60,7 +67,7 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
             <div
               className="modal-title"
               style={{
-                marginTop: "1rem",
+                marginTop: "1.5rem",
                 fontSize: "1.7rem",
                 fontWeight: "normal",
               }}
@@ -69,11 +76,11 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
             </div>
           </div>
         </ModalHeader>
-        <ModalBody p="0 3rem">
+        <ModalBody p="1.5rem 3rem">
           <div
             style={{
               width: "100%",
-              padding: "2.5rem 0",
+              padding: "2.5rem 0 3.5rem 0",
               display: "flex",
               flexDirection: "column",
               borderBottom: "1px solid #cccccc",
@@ -117,8 +124,27 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
                   Sign in with Google
                 </div>
               </div>
-              <div></div>
             </Button>
+          </div>
+          <div
+            style={{
+              marginTop: "1rem",
+              fontSize: "1.2rem",
+            }}
+          >
+            <p style={{ marginBottom: ".7rem" }}>
+              Anteater Pathway does not monetize user identifiable data, such as
+              an email address, in any way.
+            </p>
+            <p>
+              By signing in, you agree to our
+              <Link href="/privacy">
+                <a style={{ marginLeft: ".5rem", color: "blue" }}>
+                  privacy policy
+                </a>
+              </Link>
+              .
+            </p>
           </div>
         </ModalBody>
       </ModalContent>

@@ -4,7 +4,7 @@ import dummyCourses from "src/data/dummy-courses.json";
 import {
   fetchAllCoursesGroupedByDepartment,
   fetchCourseConfig,
-} from "src/fetch/fetch-course";
+} from "src/api/course";
 
 export const useCoursesForSearch = () => {
   const [allCourses, setAllCourses] = useState([]);

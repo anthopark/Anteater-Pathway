@@ -10,7 +10,7 @@ import {
 import { DefaultButton } from "@components/CustomChakraUI";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { useQuery } from "react-query";
-import { fetchCourseDetail, fetchCourseConfig } from "src/fetch/fetch-course";
+import { fetchCourseDetail, fetchCourseConfig } from "src/api/course";
 import {
   ModalBodyContainer,
   ModalBodyErrorContainer,
