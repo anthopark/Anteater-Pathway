@@ -1,4 +1,4 @@
-namespace PlannerAPI.Features.Courses.RetrieveAll;
+namespace PlannerAPI.Features.Course.RetrieveAll;
 
 public class Response
 {

@@ -1,7 +1,7 @@
 using PlannerAPI.DataAccess.Entities;
 using PlannerAPI.Services;
 
-namespace PlannerAPI.Features.Courses.RetrieveAll;
+namespace PlannerAPI.Features.Course.RetrieveAll;
 
 public class Endpoint : EndpointWithoutRequest<Response>
 {
@@ -39,7 +39,7 @@ public class Endpoint : EndpointWithoutRequest<Response>
         await SendAsync(response, statusCode: 200, cancellation: ct);
     }
 
-    private static List<List<CourseViewModel>> MapToViewModel(List<List<Course>> allCourses)
+    private static List<List<CourseViewModel>> MapToViewModel(List<List<DataAccess.Entities.Course>> allCourses)
     {
         return allCourses.Select(courses => courses.Select(course => new CourseViewModel
                 {

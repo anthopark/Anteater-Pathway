@@ -1,4 +1,4 @@
-namespace PlannerAPI.Features.Courses.RetrieveOne;
+namespace PlannerAPI.Features.Course.RetrieveOne;
 
 public class Request
 {

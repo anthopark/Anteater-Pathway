@@ -1,9 +1,9 @@
 using PlannerAPI.DataAccess.Entities;
 using PlannerAPI.Services;
 
-namespace PlannerAPI.Features.Courses.RetrieveOne;
+namespace PlannerAPI.Features.Course.RetrieveOne;
 
-public class Endpoint : Endpoint<Request, Course>
+public class Endpoint : Endpoint<Request, DataAccess.Entities.Course>
 {
     public ICourseRetriever CourseRetriever { get; set; }
 
@@ -13,7 +13,7 @@ public class Endpoint : Endpoint<Request, Course>
         Routes("/api/course/{DepartmentCode}/{Number}");
         AllowAnonymous();
         Describe(builder => builder
-            .Produces<Course>(200, "application/json")
+            .Produces<DataAccess.Entities.Course>(200, "application/json")
             .ProducesProblem(404, "plain/text")
             .ProducesProblem(500));
     }
