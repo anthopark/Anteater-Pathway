@@ -17,6 +17,7 @@ export const fetchCourseDetail = async ({ queryKey }) => {
 
 export const fetchCourseConfig = {
   retry: 3,
+  retryDelay: 3000,
   staleTime: Infinity,
   cacheTime: Infinity,
   refetchOnMount: false,

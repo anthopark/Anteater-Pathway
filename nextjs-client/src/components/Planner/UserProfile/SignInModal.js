@@ -10,24 +10,48 @@ import Link from "next/link";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "src/firebase/firebase-config";
 import { signInUser } from "src/api/user";
+import { useToastBox } from "src/hooks/useToastBox";
+import { FirebaseError } from "firebase/app";
 
 const provider = new GoogleAuthProvider();
 
 const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
-  const onSignInButtonClick = async () => {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        onModalClose();
+  const { showToastBox } = useToastBox();
 
-        const signInResult = await signInUser(
-          result.user.uid,
-          result.user.accessToken
-        );
-        console.log(signInResult);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const onSignInButtonClick = async () => {
+    try {
+      const firebaseSignInResult = await signInWithPopup(auth, provider);
+
+      const backendSignInResult = await signInUser(
+        firebaseSignInResult.user.uid,
+        firebaseSignInResult.user.accessToken
+      );
+
+      console.log(firebaseSignInResult);
+
+      console.log(backendSignInResult);
+    } catch (e) {
+      console.log(e);
+      if (e instanceof FirebaseError) {
+      } else {
+        // backend PlannerAPI error
+        showToastBox({
+          status: "failure",
+          dataOfInterest: ["Server Error"],
+          message:
+            "Failed to authenticate with the server.\nYour planner data may not be saved.",
+        });
+      }
+
+      return;
+    }
+
+    onModalClose();
+    showToastBox({
+      status: "success",
+      dataOfInterest: [],
+      message: "Signed in successfully",
+    });
   };
 
   return (

@@ -8,12 +8,7 @@ import { auth } from "src/firebase/firebase-config";
 import { signOut } from "firebase/auth";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import SignInModal from "./SignInModal";
-
-const signOutUser = async (user) => {
-  if (user) {
-    await signOut(auth);
-  }
-};
+import { useToastBox } from "src/hooks/useToastBox";
 
 export const UserProfile = ({ user }) => {
   const { themeStyles, themeMode } = useGlobalObjects();
@@ -22,6 +17,27 @@ export const UserProfile = ({ user }) => {
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = useDisclosure();
+  const { showToastBox } = useToastBox();
+
+  const signOutUser = async (user) => {
+    if (user) {
+      try {
+        await signOut(auth);
+      } catch (e) {
+        showToastBox({
+          status: "failure",
+          dataOfInterest: [],
+          message: "Failed to sign out.",
+        });
+        return;
+      }
+      showToastBox({
+        status: "success",
+        dataOfInterest: [],
+        message: "Signed out successfully.",
+      });
+    }
+  };
 
   return (
     <>

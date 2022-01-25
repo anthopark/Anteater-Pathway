@@ -3,14 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const backgroundColor = {
   success: "green.500",
+  failure: "red.500",
 };
 
 const icon = {
   success: <FontAwesomeIcon icon={["fas", "check-circle"]} />,
+  failure: <FontAwesomeIcon icon={["fas", "exclamation-circle"]} />,
 };
 
 const badgeColorScheme = {
   success: "teal",
+  failure: "orange",
 };
 
 export const ToastBox = ({ status, dataOfInterest, message, ...rest }) => {
