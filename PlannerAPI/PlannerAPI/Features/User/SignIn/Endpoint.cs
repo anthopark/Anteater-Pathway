@@ -5,6 +5,7 @@ namespace PlannerAPI.Features.User.SignIn;
 public class Endpoint : Endpoint<Request, Response>
 {
     public IUserRepository UserRepository { get; set; }
+    public IPlannerRepository PlannerRepository { get; set; }
     
     public override void Configure()
     {
@@ -14,19 +15,21 @@ public class Endpoint : Endpoint<Request, Response>
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
-        var result = await UserRepository.FindUserByUID(req.UID);
+        var result = await UserRepository.FindUser(req.UID);
         var response = new Response();
         
         if (result == null)
         {
-            // create new user & new planner
+            await UserRepository.CreateUser(req.UID);
+            await PlannerRepository.CreatePlanner(req.UID);
+            
             response.IsNewUser = true;
         }
         else
         {
             response.IsNewUser = false;
         }
-
+        
         await SendAsync(response, 200, cancellation: ct);
     }
 }

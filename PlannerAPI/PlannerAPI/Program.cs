@@ -29,6 +29,7 @@ try
         .ReadFrom.Configuration(ctx.Configuration));
 
     builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddScoped<IPlannerRepository, PlannerRepository>();
     builder.Services.AddScoped<ICourseRepository, CourseRepository>();
     builder.Services.AddScoped<ICourseRetriever, CourseRetriever>();
 

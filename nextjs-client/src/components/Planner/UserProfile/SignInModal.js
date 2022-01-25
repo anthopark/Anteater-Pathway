@@ -12,6 +12,7 @@ import { auth } from "src/firebase/firebase-config";
 import { signInUser } from "src/api/user";
 import { useToastBox } from "src/hooks/useToastBox";
 import { FirebaseError } from "firebase/app";
+import { signOut } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
@@ -19,10 +20,12 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
   const { showToastBox } = useToastBox();
 
   const onSignInButtonClick = async () => {
+    let backendSignInResult;
+
     try {
       const firebaseSignInResult = await signInWithPopup(auth, provider);
 
-      const backendSignInResult = await signInUser(
+      backendSignInResult = await signInUser(
         firebaseSignInResult.user.uid,
         firebaseSignInResult.user.accessToken
       );
@@ -38,9 +41,9 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
         showToastBox({
           status: "failure",
           dataOfInterest: ["Server Error"],
-          message:
-            "Failed to authenticate with the server.\nYour planner data may not be saved.",
+          message: "Failed to authenticate with the server.",
         });
+        await signOut(auth);
       }
 
       return;
@@ -52,6 +55,16 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
       dataOfInterest: [],
       message: "Signed in successfully",
     });
+
+    await handleSignInResult(backendSignInResult);
+  };
+
+  const handleSignInResult = async (backendSignInResult) => {
+    if (backendSignInResult.isNewUser) {
+      // upload current planner to the backend
+    } else {
+      // download exisiting planner to the client
+    }
   };
 
   return (
