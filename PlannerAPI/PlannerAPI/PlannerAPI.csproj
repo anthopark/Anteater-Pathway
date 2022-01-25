@@ -1,11 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    </PropertyGroup>
+      <UserSecretsId>fe386866-a00f-425f-bc05-3677b94f6700</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="FastEndpoints" Version="2.20.0" />

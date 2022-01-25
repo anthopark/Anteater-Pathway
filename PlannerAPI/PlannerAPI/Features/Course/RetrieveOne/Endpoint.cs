@@ -28,6 +28,6 @@ public class Endpoint : Endpoint<Request, DataAccess.Entities.Course>
             return;
         }
         
-        await SendAsync(result, statusCode: 200, cancellation: ct);
+        await SendAsync(result, 200, cancellation: ct);
     }
 }

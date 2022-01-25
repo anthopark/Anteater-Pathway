@@ -36,7 +36,7 @@ public class Endpoint : EndpointWithoutRequest<Response>
             Courses = result
         };
 
-        await SendAsync(response, statusCode: 200, cancellation: ct);
+        await SendAsync(response, 200, cancellation: ct);
     }
 
     private static List<List<CourseViewModel>> MapToViewModel(List<List<DataAccess.Entities.Course>> allCourses)

@@ -10,7 +10,6 @@ public class Endpoint : Endpoint<Request, Response>
     {
         Verbs(Http.POST);
         Routes("/api/user/sign-in");
-        AllowAnonymous();
     }
 
     public override async Task HandleAsync(Request req, CancellationToken ct)

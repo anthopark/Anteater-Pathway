@@ -1,5 +1,6 @@
 global using System;
 global using FastEndpoints;
+global using FastEndpoints.Security;
 global using Microsoft.AspNetCore.Builder;
 global using System.Threading.Tasks;
 global using System.Collections.Generic;
