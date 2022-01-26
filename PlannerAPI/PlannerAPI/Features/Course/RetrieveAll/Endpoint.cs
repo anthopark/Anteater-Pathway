@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using PlannerAPI.DataAccess.Entities;
 using PlannerAPI.Services;
 
@@ -12,7 +13,7 @@ public class Endpoint : EndpointWithoutRequest<Response>
         Verbs(Http.GET);
         Routes("/api/course/all");
         AllowAnonymous();
-        ResponseCache(3600);
+        ResponseCache(3600, ResponseCacheLocation.Any, false);
         Describe(builder => builder
             .Produces<Response>(200, "application/json")
             .ProducesProblem(404)

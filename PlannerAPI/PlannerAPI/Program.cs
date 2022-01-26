@@ -1,5 +1,5 @@
 using System.Text.Json;
-using FastEndpoints.NSwag;
+using FastEndpoints.Swagger;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,8 +34,8 @@ try
 
     builder.Services.AddCors();
     builder.Services.AddFastEndpoints();
+    builder.Services.AddSwaggerDoc();
     builder.Services.AddResponseCaching();
-    builder.Services.AddNSwag();
     builder.Services.Configure<JsonOptions>(option =>
         option.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 
@@ -75,7 +75,7 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseOpenApi();
-        app.UseSwaggerUi3();
+        app.UseSwaggerUi3(s => s.ConfigureDefaults());
     }
     else
     {
