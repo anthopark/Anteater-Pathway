@@ -1,19 +1,46 @@
-import { StyledContainer, TopLayout, MainLayout } from "./styled";
+import { useEffect } from "react";
 import { CustomCourseControl } from "./CustomCourseControl/CustomCourseControl";
 import AcademicYearControl from "./AcademicYearControl";
 import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
 import { UserProfile } from "./UserProfile/UserProfile";
-import RightSidePane from "./RightSidePane";
-import LeftSidePane from "./LeftSidePane";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { DragDropContextProvider } from "./DragDropContextProvider";
 import { auth } from "src/firebase/firebase-config";
+import RightSidePane from "./RightSidePane";
+import LeftSidePane from "./LeftSidePane";
+import { StyledContainer, TopLayout, MainLayout } from "./styled";
+import { useSignIn } from "src/hooks/useSignIn";
+import { useGlobalObjects } from "@components/GlobalContextProvider";
+import { useToastBox } from "src/hooks/useToastBox";
 
 export const Planner = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const { appUser } = useGlobalObjects();
+  const [firebaseAuthUser, loading, error] = useAuthState(auth);
+  const { signInToBackend } = useSignIn();
+  const { showToastBox } = useToastBox();
 
-  console.log(`Loading: ${loading} | Current user: ${user} | Error: ${error}`);
-  console.log(user);
+  useEffect(() => {
+    const handleSignIn = async () => {
+      console.log("isAuth", appUser.isAuthenticated);
+
+      if (firebaseAuthUser && appUser.isAuthenticated === false) {
+        await signInToBackend(
+          firebaseAuthUser.uid,
+          firebaseAuthUser.accessToken
+        );
+      }
+
+      if (!loading && error) {
+        showToastBox({
+          status: "failure",
+          dataOfInterest: [],
+          message: "Authentication has failed",
+        });
+      }
+    };
+
+    handleSignIn();
+  }, [firebaseAuthUser]);
 
   return (
     <StyledContainer>
@@ -21,8 +48,8 @@ export const Planner = () => {
         <AcademicYearControl />
         <CourseSearchBar />
         <div className="right-end-box">
-          {user ? <CustomCourseControl /> : null}
-          <UserProfile user={user} />
+          {firebaseAuthUser ? <CustomCourseControl /> : null}
+          <UserProfile user={firebaseAuthUser} />
         </div>
       </TopLayout>
       <DragDropContextProvider>

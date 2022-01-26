@@ -4,11 +4,10 @@ import { useDisclosure } from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/menu";
 import { Avatar } from "@chakra-ui/avatar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { auth } from "src/firebase/firebase-config";
-import { signOut } from "firebase/auth";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import SignInModal from "./SignInModal";
 import { useToastBox } from "src/hooks/useToastBox";
+import { useSignOut } from "src/hooks/useSignOut";
 
 export const UserProfile = ({ user }) => {
   const { themeStyles, themeMode } = useGlobalObjects();
@@ -18,24 +17,25 @@ export const UserProfile = ({ user }) => {
     onClose: onModalClose,
   } = useDisclosure();
   const { showToastBox } = useToastBox();
+  const { signOutFromFirebase } = useSignOut();
 
   const signOutUser = async (user) => {
     if (user) {
       try {
-        await signOut(auth);
+        await signOutFromFirebase();
+
+        showToastBox({
+          status: "success",
+          dataOfInterest: [],
+          message: "Signed out successfully.",
+        });
       } catch (e) {
         showToastBox({
           status: "failure",
           dataOfInterest: [],
           message: "Failed to sign out.",
         });
-        return;
       }
-      showToastBox({
-        status: "success",
-        dataOfInterest: [],
-        message: "Signed out successfully.",
-      });
     }
   };
 

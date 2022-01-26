@@ -7,64 +7,24 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import Image from "next/image";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "src/firebase/firebase-config";
-import { signInUser } from "src/api/user";
-import { useToastBox } from "src/hooks/useToastBox";
 import { FirebaseError } from "firebase/app";
-import { signOut } from "firebase/auth";
 
 const provider = new GoogleAuthProvider();
 
 const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
-  const { showToastBox } = useToastBox();
-
   const onSignInButtonClick = async () => {
-    let backendSignInResult;
-
     try {
-      const firebaseSignInResult = await signInWithPopup(auth, provider);
-
-      backendSignInResult = await signInUser(
-        firebaseSignInResult.user.uid,
-        firebaseSignInResult.user.accessToken
-      );
-
-      console.log(firebaseSignInResult);
-
-      console.log(backendSignInResult);
+      await signInWithPopup(auth, provider);
     } catch (e) {
-      console.log(e);
-      if (e instanceof FirebaseError) {
-      } else {
-        // backend PlannerAPI error
-        showToastBox({
-          status: "failure",
-          dataOfInterest: ["Server Error"],
-          message: "Failed to authenticate with the server.",
-        });
-        await signOut(auth);
+      if (!(e instanceof FirebaseError)) {
+        throw e;
       }
-
-      return;
     }
 
     onModalClose();
-    showToastBox({
-      status: "success",
-      dataOfInterest: [],
-      message: "Signed in successfully",
-    });
-
-    await handleSignInResult(backendSignInResult);
-  };
-
-  const handleSignInResult = async (backendSignInResult) => {
-    if (backendSignInResult.isNewUser) {
-      // upload current planner to the backend
-    } else {
-      // download exisiting planner to the client
-    }
   };
 
   return (
@@ -94,11 +54,18 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
               alignItems: "center",
             }}
           >
-            <div className="logo">
-              <img
+            <div
+              className="logo"
+              style={{
+                position: "relative",
+                width: "4.3rem",
+                height: "4.8rem",
+              }}
+            >
+              <Image
                 src="/logo.svg"
-                style={{ width: "4.3rem" }}
                 alt="anteater-pathway-logo"
+                layout="fill"
               />
             </div>
             <div
@@ -140,14 +107,17 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
               >
                 <div
                   style={{
+                    position: "relative",
                     backgroundColor: "white",
                     borderRadius: "3px",
+                    width: "3.5rem",
+                    height: "3.3rem",
                   }}
                 >
-                  <img
+                  <Image
                     src="/google-sign-in-icon.svg"
                     alt="google-logo"
-                    style={{ width: "3.5rem" }}
+                    layout="fill"
                   />
                 </div>
                 <div
