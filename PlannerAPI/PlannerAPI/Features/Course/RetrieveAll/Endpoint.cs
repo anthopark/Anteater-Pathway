@@ -12,6 +12,7 @@ public class Endpoint : EndpointWithoutRequest<Response>
         Verbs(Http.GET);
         Routes("/api/course/all");
         AllowAnonymous();
+        ResponseCache(3600);
         Describe(builder => builder
             .Produces<Response>(200, "application/json")
             .ProducesProblem(404)

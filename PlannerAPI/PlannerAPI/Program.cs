@@ -3,7 +3,6 @@ using FastEndpoints.NSwag;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.IdentityModel.Tokens;
 using PlannerAPI.DataAccess;
@@ -35,6 +34,7 @@ try
 
     builder.Services.AddCors();
     builder.Services.AddFastEndpoints();
+    builder.Services.AddResponseCaching();
     builder.Services.AddNSwag();
     builder.Services.Configure<JsonOptions>(option =>
         option.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
@@ -70,6 +70,7 @@ try
     app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UseResponseCaching();
 
     if (app.Environment.IsDevelopment())
     {

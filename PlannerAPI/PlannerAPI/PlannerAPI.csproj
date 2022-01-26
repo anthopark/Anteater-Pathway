@@ -9,7 +9,7 @@
   </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FastEndpoints" Version="2.20.0" />
+      <PackageReference Include="FastEndpoints" Version="3.1.2" />
       <PackageReference Include="FastEndpoints.NSwag" Version="2.20.0" />
       <PackageReference Include="FastEndpoints.Security" Version="2.20.0" />
       <PackageReference Include="FastEndpoints.Swashbuckle" Version="2.20.0" />
