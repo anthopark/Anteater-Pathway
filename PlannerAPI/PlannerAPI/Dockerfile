@@ -18,5 +18,7 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 #ENTRYPOINT ["dotnet", "PlannerAPI.dll"]
+ARG ConnectionString
+ARG DataBaseName
 
 CMD ASPNETCORE_URLS=http://*:$PORT ConnectionString=$ConnectionString Database=$Database dotnet PlannerAPI.dll
