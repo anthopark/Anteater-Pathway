@@ -3,12 +3,6 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-ARG CONNECTION_STRING
-ARG DATABASE_NAME
-
-ENV ConnectionString=$CONNECTION_STRING
-ENV DatabaseName=$DATABASE_NAME
-
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["PlannerAPI.csproj", ""]
@@ -25,4 +19,4 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 #ENTRYPOINT ["dotnet", "PlannerAPI.dll"]
 
-CMD ASPNETCORE_URLS=http://*:$PORT ConnectionString=$ConnectionString DatabaseName=$DatabaseName dotnet PlannerAPI.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet PlannerAPI.dll
