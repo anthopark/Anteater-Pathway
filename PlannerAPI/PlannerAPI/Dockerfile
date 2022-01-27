@@ -24,4 +24,4 @@ ARG DATABASE_NAME
 ENV ConnectionString=$CONNECTION_STRING
 ENV DatabaseName=$DATABASE_NAME
 
-CMD ASPNETCORE_URLS=http://*:$PORT ConnectionString=$ConnectionString DatabaseName=$DatabaseName dotnet PlannerAPI.dll
+CMD ASPNETCORE_URLS=http://*:$PORT ConnectionString=${ConnectionString} DatabaseName=${DatabaseName} dotnet PlannerAPI.dll
