@@ -44,5 +44,5 @@ jobs:
       - name: Deploy Docker Container to Heroku 🚢
         working-directory: ./PlannerAPI/PlannerAPI/
         run: |
-          heroku container:push web -a $HEROKU_APP_NAME --arg CONNECTION_STRING=$MONGO_DB_URI --arg DATABASE_NAME=$MONGO_DB_NAME
+          heroku container:push web -a $HEROKU_APP_NAME --arg CONNECTION_STRING="$MONGO_DB_URI" --arg DATABASE_NAME=$MONGO_DB_NAME
           heroku container:release web -a $HEROKU_APP_NAME
