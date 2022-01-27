@@ -9,8 +9,6 @@ env:
   DOTNET_VERSION: "6.0.x"
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
   HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-  ConnectionString: ${{ secrets.MONGO_DB_URI }}
-  DatabaseName: ${{ secrets.MONGO_DB_NAME }}
 
 jobs:
   build:
@@ -45,3 +43,6 @@ jobs:
         run: |
           heroku container:push web -a $HEROKU_APP_NAME
           heroku container:release web -a $HEROKU_APP_NAME
+        env:
+          ConnectionString: ${{ secrets.MONGO_DB_URI }}
+          DatabaseName: ${{ secrets.MONGO_DB_NAME }}
