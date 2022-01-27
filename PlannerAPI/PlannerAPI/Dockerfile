@@ -21,7 +21,10 @@ COPY --from=publish /app/publish .
 ARG CONNECTION_STRING
 ARG DATABASE_NAME
 
+RUN echo $CONNECTION_STRING
+RUN echo $DATABASE_NAME
+
 ENV ConnectionString=$CONNECTION_STRING
 ENV DatabaseName=$DATABASE_NAME
 
-CMD ASPNETCORE_URLS=http://*:$PORT ConnectionString=${ConnectionString} DatabaseName=${DatabaseName} dotnet PlannerAPI.dll
+CMD ASPNETCORE_URLS=http://*:$PORT ConnectionString=$ConnectionString DatabaseName=$DatabaseName dotnet PlannerAPI.dll
