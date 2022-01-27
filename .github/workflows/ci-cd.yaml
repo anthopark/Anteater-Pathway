@@ -20,7 +20,7 @@ jobs:
       - name: Setup .NET 6 🔧
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: $DOTNET_VERSION
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Retore dependencies 🛠️
         working-directory: ./PlannerAPI/
