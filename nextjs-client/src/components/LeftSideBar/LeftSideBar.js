@@ -28,7 +28,10 @@ export const LeftSideBar = () => {
             color="white"
           />
         </IconLink>
-        <IconLink>
+        <IconLink
+          href="https://github.com/anthopark/Anteater-Pathway"
+          target="_blank"
+        >
           <FontAwesomeIcon
             icon={["fab", "github"]}
             style={{ fontSize: ICON_SIZE }}

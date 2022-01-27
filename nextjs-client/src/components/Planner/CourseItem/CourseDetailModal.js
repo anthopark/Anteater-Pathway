@@ -3,11 +3,9 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   Spinner,
 } from "@chakra-ui/react";
-import { DefaultButton } from "@components/CustomChakraUI";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { useQuery } from "react-query";
 import { fetchCourseDetail, fetchCourseConfig } from "src/api/course";
@@ -49,7 +47,7 @@ export const CourseDetailModal = ({
   isModalOpen,
   onModalClose,
 }) => {
-  const { themeMode, themeStyles } = useGlobalObjects();
+  const { themeStyles } = useGlobalObjects();
   const { data, isLoading, error } = useQuery(
     [
       `course-detail-${courseInfo.id}`,
@@ -156,19 +154,7 @@ export const CourseDetailModal = ({
           >{`${courseInfo.title}`}</div>
         </ModalHeader>
 
-        <ModalBody>{modalBodyUI}</ModalBody>
-
-        <ModalFooter>
-          <DefaultButton
-            bgColor={themeStyles.colors.pinkButtonBg}
-            colorScheme={themeMode === "light" ? "pink" : null}
-            fontSize="1.4rem"
-            padding="1.8rem 1.3rem"
-            onClick={onModalClose}
-          >
-            Close
-          </DefaultButton>
-        </ModalFooter>
+        <ModalBody mb=".5rem">{modalBodyUI}</ModalBody>
       </ModalContent>
     </Modal>
   );

@@ -5,6 +5,7 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.IdentityModel.Tokens;
+using PlannerAPI.Configurations;
 using PlannerAPI.DataAccess;
 using PlannerAPI.Services;
 using Serilog;
@@ -39,10 +40,12 @@ try
     builder.Services.Configure<JsonOptions>(option =>
         option.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 
+    var firebaseConfig = new FirebaseConfiguration();
+    firebaseConfig.LoadCredentialConfigurations(builder.Configuration);
     FirebaseApp.Create(new AppOptions
     {
         Credential =
-            GoogleCredential.FromFile(@"./anteater-pathway-71271-firebase-adminsdk-bgz2p-79df6c1846.json")
+            GoogleCredential.FromJson(firebaseConfig.GetCredentialInJsonText())
     });
 
     builder.Services
@@ -66,11 +69,11 @@ try
 
     app.UseSerilogRequestLogging();
     app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-    app.UseFastEndpoints();
     app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
     app.UseResponseCaching();
+    app.UseFastEndpoints();
 
     if (app.Environment.IsDevelopment())
     {

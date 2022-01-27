@@ -7,7 +7,8 @@ on:
 
 env:
   DOTNET_VERSION: "6.0.x"
-  AZURE_WEBAPP_NAME: anteater-pathway-planner-api
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
 
 jobs:
   build:
@@ -19,7 +20,7 @@ jobs:
       - name: Setup .NET 6 🔧
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: $DOTNET_VERSION
 
       - name: Retore dependencies 🛠️
         working-directory: ./PlannerAPI/
@@ -33,13 +34,12 @@ jobs:
         working-directory: ./PlannerAPI/
         run: dotnet test -c Release --no-build
 
-      - name: Publish app 📰
+      - name: Login to Heroku
         working-directory: ./PlannerAPI/PlannerAPI/
-        run: dotnet publish -c Release -o ./out
+        run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
-      - name: Deploy to Azure Web Apps 🚢
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_SECRET }}
-          package: ./PlannerAPI/PlannerAPI/out/
+      - name: Deploy Docker Container to Heroku 🚢
+        working-directory: ./PlannerAPI/PlannerAPI/
+        run: |
+          heroku container:push web -a $HEROKU_APP_NAME
+          heroku container:release web -a $HEROKU_APP_NAME
