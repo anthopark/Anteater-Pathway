@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace PlannerAPI.Configurations;
 
-public class FirebaseConfiguration
+public class FirebaseSettings
 {
     private class ServiceAccountCredential
     {

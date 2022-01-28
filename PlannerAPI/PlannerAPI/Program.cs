@@ -32,6 +32,7 @@ try
     builder.Services.AddScoped<IPlannerRepository, PlannerRepository>();
     builder.Services.AddScoped<ICourseRepository, CourseRepository>();
     builder.Services.AddScoped<ICourseRetriever, CourseRetriever>();
+    builder.Services.AddTransient<IEmailSender, EmailSender>();
 
     builder.Services.AddCors();
     builder.Services.AddFastEndpoints();
@@ -40,7 +41,7 @@ try
     builder.Services.Configure<JsonOptions>(option =>
         option.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 
-    var firebaseConfig = new FirebaseConfiguration();
+    var firebaseConfig = new FirebaseSettings();
     firebaseConfig.LoadCredentialConfigurations(builder.Configuration);
     FirebaseApp.Create(new AppOptions
     {
@@ -63,6 +64,7 @@ try
                 ValidAudience = builder.Configuration["Jwt:Firebase:ValidAudience"]
             };
         });
+    
 
 
     var app = builder.Build();
