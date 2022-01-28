@@ -16,7 +16,7 @@ export const useSignIn = () => {
       showToastBox({
         status: "failure",
         dataOfInterest: ["Server Error"],
-        message: "Failed to authenticate with the server.",
+        message: "Failed to authenticate with the server",
       });
       await signOutFromFirebase();
       return false;

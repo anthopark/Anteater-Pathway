@@ -11,16 +11,28 @@ export const StyledContainer = styled.div`
   padding: 0.2rem 0.7rem;
 
   .header {
-    font-size: 1.5rem;
+    padding: 0.9rem 1.3rem 0 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     letter-spacing: 0.1rem;
-    padding-top: 1rem;
-    padding-left: 1.6rem;
-    color: ${({ theme }) => theme.colors.paneHeaderFont};
+    .title {
+      font-size: 1.5rem;
+      color: ${({ theme }) => theme.colors.paneHeaderFont};
+    }
+
+    .clear-all-box {
+      padding-top: 0.2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-right: 0.3rem;
+      color: ${({ theme }) => theme.colors.emptyButton};
+    }
   }
 
   .content {
     margin-top: 1rem;
-    margin-bottom: 1.7rem;
+    margin-bottom: 0.8rem;
     width: 100%;
     padding: 0 1.2rem;
     display: grid;
@@ -35,5 +47,15 @@ export const StyledContainer = styled.div`
         padding: 0.3rem;
       }
     }
+  }
+
+  .footer {
+    color: ${({ theme }) => theme.colors.paneHeaderFont};
+    width: 100%;
+    text-align: right;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    padding: 0 1.2rem 1rem;
+    margin-top: -0.5rem;
   }
 `;

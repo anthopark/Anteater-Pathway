@@ -2,6 +2,7 @@ export class TentativePlanner {
   constructor() {
     this._leftCourseItems = [];
     this._rightCourseItems = [];
+    this._totalUnit = 0;
   }
 
   get droppables() {
@@ -52,6 +53,11 @@ export class TentativePlanner {
     this.balanceCourseItems();
   }
 
+  deleteAllCourses() {
+    this._leftCourseItems = [];
+    this._rightCourseItems = [];
+  }
+
   updateCourseColor(courseId, newColor) {
     const foundCourse = this._findCourse(courseId);
     if (foundCourse) {
@@ -84,6 +90,12 @@ export class TentativePlanner {
     }
   }
 
+  isEmpty() {
+    return (
+      this._leftCourseItems.length === 0 && this._rightCourseItems.length === 0
+    );
+  }
+
   get leftCourseItems() {
     return this._leftCourseItems;
   }
@@ -94,6 +106,30 @@ export class TentativePlanner {
 
   get bothCourseItems() {
     return [this._leftCourseItems, this._rightCourseItems];
+  }
+
+  get totalUnit() {
+    this._calculateTotalUnit();
+
+    return this._totalUnit;
+  }
+
+  _calculateTotalUnit() {
+    let result = 0;
+
+    for (const course of this._leftCourseItems) {
+      if (!isNaN(parseFloat(course.unit))) {
+        result += parseFloat(course.unit);
+      }
+    }
+
+    for (const course of this._rightCourseItems) {
+      if (!isNaN(parseFloat(course.unit))) {
+        result += parseFloat(course.unit);
+      }
+    }
+
+    this._totalUnit = result;
   }
 
   _findCourse(courseId) {

@@ -43,7 +43,7 @@ export const AcademicYearControl = () => {
       showToastBox({
         status: "success",
         dataOfInterest: [selectedYear.label],
-        message: "Academic Year Added:",
+        message: "Academic Year Added",
       });
 
       console.log(appUser);

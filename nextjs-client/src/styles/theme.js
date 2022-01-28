@@ -13,7 +13,7 @@ export const lightTheme = {
     pageBg: MAIN_PAGE_BG_COLOR,
     paneBg: WHITE_DISPLAY_1,
     modalBg: WHITE_DISPLAY_1,
-    paneHeaderFont: "#7E7676",
+    paneHeaderFont: "#7f7f7f",
     tentativeCourse: "#9BE7CB",
     courseItemShadow: "rgba(0,0,0, 0.2)",
     courseMenuBg: WHITE_DISPLAY_1,
@@ -23,6 +23,7 @@ export const lightTheme = {
     disabledText: "#cccccc",
     academicYearBg: WHITE_DISPLAY_1,
     quarterBoxBg: "#EFE9FA",
+    emptyButton: "#aaaaaa",
   },
 };
 

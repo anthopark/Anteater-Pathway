@@ -99,10 +99,10 @@ export const CourseDetailModal = ({
             </div>
           </div>
         ) : null}
-        {courseInfoPropertyArr.map((propertyPair) => {
+        {courseInfoPropertyArr.map((propertyPair, index) => {
           if (data[propertyPair[0]]) {
             return (
-              <div className="course-info-property-container">
+              <div className="course-info-property-container" key={index}>
                 <div className="course-info-property">{`${propertyPair[1]}:`}</div>
                 <div className="course-info-content">
                   {data[propertyPair[0]]}

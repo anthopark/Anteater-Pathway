@@ -1,5 +1,5 @@
-using PlannerAPI.DataAccess.Entities;
 using PlannerAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PlannerAPI.Features.Course.RetrieveOne;
 
@@ -12,6 +12,7 @@ public class Endpoint : Endpoint<Request, DataAccess.Entities.Course>
         Verbs(Http.GET);
         Routes("/api/course/{DepartmentCode}/{Number}");
         AllowAnonymous();
+        ResponseCache(3600, ResponseCacheLocation.Any, false);
         Describe(builder => builder
             .Produces<DataAccess.Entities.Course>(200, "application/json")
             .ProducesProblem(404, "plain/text")

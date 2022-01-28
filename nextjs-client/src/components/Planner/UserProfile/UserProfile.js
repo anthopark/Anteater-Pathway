@@ -27,13 +27,13 @@ export const UserProfile = ({ user }) => {
         showToastBox({
           status: "success",
           dataOfInterest: [],
-          message: "Signed out successfully.",
+          message: "Signed out successfully",
         });
       } catch (e) {
         showToastBox({
           status: "failure",
           dataOfInterest: [],
-          message: "Failed to sign out.",
+          message: "Failed to sign out",
         });
       }
     }

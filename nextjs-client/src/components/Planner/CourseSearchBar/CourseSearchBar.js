@@ -38,7 +38,7 @@ export const CourseSearchBar = () => {
       showToastBox({
         status: "success",
         dataOfInterest: selectedCourses.map((item) => item.courseCode),
-        message: "Course(s) added:",
+        message: "Course(s) added",
       });
 
       console.log(appUser);

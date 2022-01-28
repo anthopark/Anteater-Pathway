@@ -69,7 +69,7 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
     showToastBox({
       status: "success",
       dataOfInterest: [`${values.departmentCode} ${values.number}`],
-      message: "Course added:",
+      message: "Course added",
     });
   };
 
