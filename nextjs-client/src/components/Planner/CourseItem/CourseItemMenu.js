@@ -86,12 +86,13 @@ export const CourseItemMenu = ({
             </div>
           )}
 
-          {!isTentative && courseInfo.isCustomUnit ? (
+          {courseInfo.isCustomUnit ? (
             <div className="custom-unit-form-container">
               <CustomUnitForm
                 courseInfo={courseInfo}
                 appUser={appUser}
                 updateAppUser={updateAppUser}
+                isTentative={isTentative}
               />
             </div>
           ) : null}
@@ -137,7 +138,12 @@ export const CourseItemMenu = ({
   );
 };
 
-const CustomUnitForm = ({ courseInfo, appUser, updateAppUser }) => {
+const CustomUnitForm = ({
+  courseInfo,
+  appUser,
+  updateAppUser,
+  isTentative,
+}) => {
   const { showToastBox } = useToastBox();
 
   const validateCustomUnit = (value) => {
@@ -156,13 +162,20 @@ const CustomUnitForm = ({ courseInfo, appUser, updateAppUser }) => {
   };
 
   const handleSubmit = (values) => {
-    appUser.planner.updateCustomUnit(courseInfo.id, values.customUnit);
+    if (isTentative) {
+      appUser.tentativePlanner.updateCustomUnit(
+        courseInfo.id,
+        values.customUnit
+      );
+    } else {
+      appUser.planner.updateCustomUnit(courseInfo.id, values.customUnit);
+    }
     updateAppUser(appUser);
 
     showToastBox({
       status: "success",
       dataOfInterest: [courseInfo.courseCode],
-      message: `Custom Unit Updated to ${values.customUnit}:`,
+      message: `Custom Unit Updated to ${values.customUnit}`,
     });
   };
 

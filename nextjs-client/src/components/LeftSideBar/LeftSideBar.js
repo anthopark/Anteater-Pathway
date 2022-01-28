@@ -38,6 +38,11 @@ export const LeftSideBar = () => {
             color="white"
           />
         </IconLink>
+        {/* <IconLink>
+          <div className="donation-icon-container">
+            <Image src="/Boba-icon-v1.svg" alt="donation-icon" layout="fill" />
+          </div>
+        </IconLink> */}
       </div>
     </StyledContainer>
   );

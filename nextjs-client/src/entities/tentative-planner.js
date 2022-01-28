@@ -77,6 +77,13 @@ export class TentativePlanner {
     }
   }
 
+  updateCustomUnit(courseId, newUnit) {
+    const foundCourse = this._findCourse(courseId);
+    if (foundCourse) {
+      foundCourse.unit = newUnit.trim();
+    }
+  }
+
   get leftCourseItems() {
     return this._leftCourseItems;
   }

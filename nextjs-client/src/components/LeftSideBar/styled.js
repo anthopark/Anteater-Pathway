@@ -20,6 +20,12 @@ export const StyledContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+
+    .donation-icon-container {
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+    }
   }
 `;
 

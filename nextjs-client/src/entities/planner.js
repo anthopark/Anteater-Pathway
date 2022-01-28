@@ -60,10 +60,10 @@ export class Planner {
     }
   }
 
-  updateCustomUnit(courseId, newUnitValue) {
+  updateCustomUnit(courseId, newUnit) {
     const { course: foundCourse } = this._findCourse(courseId);
     if (foundCourse) {
-      foundCourse.unit = newUnitValue.trim();
+      foundCourse.unit = newUnit.trim();
     }
   }
 
