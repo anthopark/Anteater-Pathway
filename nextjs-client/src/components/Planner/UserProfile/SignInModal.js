@@ -58,8 +58,8 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
               className="logo"
               style={{
                 position: "relative",
-                width: "4.3rem",
-                height: "4.8rem",
+                width: "4.5rem",
+                height: "5rem",
               }}
             >
               <Image
@@ -72,7 +72,7 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
               className="modal-title"
               style={{
                 marginTop: "1.5rem",
-                fontSize: "1.7rem",
+                fontSize: "1.9rem",
                 fontWeight: "normal",
               }}
             >
@@ -123,7 +123,7 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
                 <div
                   style={{
                     width: "100%",
-                    fontSize: "1.5rem",
+                    fontSize: "1.7rem",
                     fontWeight: "500",
                     letterSpacing: "1px",
                   }}
@@ -136,7 +136,7 @@ const SignInModal = ({ isModalOpen, onModalClose, themeStyles }) => {
           <div
             style={{
               marginTop: "1rem",
-              fontSize: "1.2rem",
+              fontSize: "1.3rem",
             }}
           >
             <p style={{ marginBottom: ".7rem" }}>

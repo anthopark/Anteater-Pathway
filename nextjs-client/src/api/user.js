@@ -17,3 +17,14 @@ export const signInUser = async (uid, accessToken) => {
 
   return response.data;
 };
+
+export const sendUserContactMessage = async (senderEmail, content) => {
+  const payLoad = {
+    senderEmail,
+    content,
+  };
+
+  const response = await userApi.post("/contact-us", payLoad);
+
+  return response;
+};

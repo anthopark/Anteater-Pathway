@@ -11,7 +11,7 @@ import { DefaultButton } from "@components/CustomChakraUI";
 import { useToastBox } from "src/hooks/useToastBox";
 
 export const CustomCourseForm = ({ setIsPopoverOpen }) => {
-  const { appUser, updateAppUser } = useGlobalObjects();
+  const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
   const { showToastBox } = useToastBox();
 
   const validateDepartmentCode = (value) => {
@@ -112,7 +112,12 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                   borderRadius="7px"
                   id="departmentCode"
                   autoComplete="off"
+                  spellCheck={false}
                   placeholder="Ex. ECON, HISTORY"
+                  borderColor={themeStyles.colors.inputFormBorder}
+                  _hover={{
+                    borderColor: themeStyles.colors.inputFormBorderHover,
+                  }}
                 />
                 <FormErrorMessage fontSize="1.3rem">
                   {form.errors.departmentCode}
@@ -150,6 +155,11 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                     id="number"
                     placeholder="Ex. 101, 1A"
                     autoComplete="off"
+                    spellCheck={false}
+                    borderColor={themeStyles.colors.inputFormBorder}
+                    _hover={{
+                      borderColor: themeStyles.colors.inputFormBorderHover,
+                    }}
                   />
                   <FormErrorMessage fontSize="1.3rem">
                     {form.errors.number}
@@ -180,6 +190,11 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                     id="unit"
                     placeholder="Ex. 2, 4"
                     autoComplete="off"
+                    spellCheck={false}
+                    borderColor={themeStyles.colors.inputFormBorder}
+                    _hover={{
+                      borderColor: themeStyles.colors.inputFormBorderHover,
+                    }}
                   />
                   <FormErrorMessage fontSize="1.3rem">
                     {form.errors.unit}
@@ -210,6 +225,11 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
                   id="title"
                   placeholder="Ex. Basic Statistics"
                   autoComplete="off"
+                  spellCheck={false}
+                  borderColor={themeStyles.colors.inputFormBorder}
+                  _hover={{
+                    borderColor: themeStyles.colors.inputFormBorderHover,
+                  }}
                 />
                 <FormErrorMessage fontSize="1.3rem">
                   {form.errors.title}

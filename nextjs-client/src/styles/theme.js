@@ -24,6 +24,8 @@ export const lightTheme = {
     academicYearBg: WHITE_DISPLAY_1,
     quarterBoxBg: "#EFE9FA",
     emptyButton: "#aaaaaa",
+    inputFormBorder: "#9f9f9f",
+    inputFormBorderHover: "#0087cb",
   },
 };
 

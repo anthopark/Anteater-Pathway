@@ -9,13 +9,21 @@ public class Endpoint : Endpoint<Request>
     public override void Configure()
     {
         Verbs(Http.POST);
-        Routes("/api/contact-us");
+        Routes("/api/user/contact-us");
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
-        await EmailSender.SendContactUsEmailAsync(req.SenderEmail, req.ContactType, req.Content);
+        try
+        {
+            await EmailSender.SendContactUsEmailAsync(req.SenderEmail, req.Content);
+        }
+        catch (Exception e)
+        {
+            await SendErrorsAsync(ct);
+            return;
+        }
         await SendOkAsync(ct);
     }
 }

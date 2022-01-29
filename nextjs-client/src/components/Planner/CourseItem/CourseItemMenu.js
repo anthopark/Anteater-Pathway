@@ -213,10 +213,11 @@ const CustomUnitForm = ({
                       mr="1rem"
                       letterSpacing="1px"
                       placeholder={`${courseInfo.customMinUnit}-${courseInfo.customMaxUnit}`}
-                      borderColor="#4e8cfa"
                       autoComplete="off"
+                      spellCheck={false}
+                      borderColor={themeStyles.colors.inputFormBorder}
                       _hover={{
-                        borderColor: "#4e8cfa",
+                        borderColor: themeStyles.colors.inputFormBorderHover,
                       }}
                     />
                     <Button

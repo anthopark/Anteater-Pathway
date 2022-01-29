@@ -16,17 +16,9 @@ public class EmailSender : IEmailSender
     }
 
 
-    public async Task SendContactUsEmailAsync(string senderEmail, string contactType, string content)
+    public async Task SendContactUsEmailAsync(string senderEmail, string content)
     {
-        var message = new MimeMessage();
-        message.Sender = MailboxAddress.Parse(_emailSettings.FromEmail);
-        message.To.Add(MailboxAddress.Parse(_emailSettings.ToEmail));
-        message.Subject = $"[Anteater Pathway] {contactType}";
-
-        message.Body = new TextPart("plain")
-        {
-            Text = $"{content}\n\nUser Email: {senderEmail}"
-        };
+        var message = ComposeMessage(senderEmail, content);
 
         using var smtp = new SmtpClient();
         smtp.Connect(_emailSettings.Host, _emailSettings.Port, SecureSocketOptions.StartTls);
@@ -34,9 +26,23 @@ public class EmailSender : IEmailSender
         await smtp.SendAsync(message);
         smtp.Disconnect(true);
     }
+
+    private MimeMessage ComposeMessage(string senderEmail, string content)
+    {
+        var message = new MimeMessage();
+        message.Sender = MailboxAddress.Parse(_emailSettings.FromEmail);
+        message.To.Add(MailboxAddress.Parse(_emailSettings.ToEmail));
+        message.Subject = $"[Anteater Pathway] User Feedback";
+
+        message.Body = new TextPart("plain")
+        {
+            Text = $"\n{content}\n\nFrom: {senderEmail}"
+        };
+        return message;
+    }
 }
 
 public interface IEmailSender
 {
-    Task SendContactUsEmailAsync(string senderEmail, string contactType, string content);
+    Task SendContactUsEmailAsync(string senderEmail, string content);
 }

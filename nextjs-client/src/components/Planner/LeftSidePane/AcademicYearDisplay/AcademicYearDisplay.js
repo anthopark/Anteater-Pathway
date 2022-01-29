@@ -89,7 +89,7 @@ export const AcademicYearDisplay = () => {
               <AccordionItem
                 mb="2rem"
                 borderRadius="12px"
-                boxShadow="0 1px 6px rgba(100, 100, 100, 0.1)"
+                boxShadow="0 2px 4px rgba(100, 100, 100, 0.1)"
                 bg={themeStyles.colors.academicYearBg}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave()}
