@@ -21,8 +21,6 @@ export const Planner = () => {
 
   useEffect(() => {
     const handleSignIn = async () => {
-      console.log(firebaseAuthUser);
-
       if (firebaseAuthUser && appUser.isAuthenticated === false) {
         await signInToBackend(
           firebaseAuthUser.uid,

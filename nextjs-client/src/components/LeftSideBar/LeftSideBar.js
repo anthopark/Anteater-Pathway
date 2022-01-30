@@ -5,7 +5,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import ContactUsModal from "./ContactUsModal";
 // import { ThemeToggler } from "./ThemeToggler";
 
-const ICON_SIZE = "2.7rem";
+const ICON_SIZE = "2.8rem";
 
 export const LeftSideBar = () => {
   const {
