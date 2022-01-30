@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -15,11 +14,11 @@ import { ContactUsFormContainer } from "./styled";
 import { DefaultButton } from "@components/CustomChakraUI";
 import { sendUserContactMessage } from "src/api/user";
 import { useToastBox } from "src/hooks/useToastBox";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 export const ContactUsForm = ({ themeStyles, onModalClose }) => {
   const [firebaseAuthUser] = useAuthState(auth);
   const { showToastBox } = useToastBox();
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateEmail = (value) => {
     let error;
@@ -42,30 +41,26 @@ export const ContactUsForm = ({ themeStyles, onModalClose }) => {
   };
 
   const handleSubmit = async (values, resetForm) => {
-    let response;
-    setIsSubmitting(true);
-    try {
-      response = await sendUserContactMessage(values.email, values.content);
-    } catch (e) {
-      showToastBox({
-        status: "failure",
-        dataOfInterest: ["Server Error"],
-        message: "Something went wrong :(",
-      });
-      setIsSubmitting(false);
-      return;
-    }
+    return sendUserContactMessage(values.email, values.content)
+      .then((result) => {
+        console.log(result);
+        showToastBox({
+          status: "success",
+          dataOfInterest: [],
+          message: "Sent! Thank you :)",
+        });
 
-    if (response.status === 200) {
-      showToastBox({
-        status: "success",
-        dataOfInterest: [],
-        message: "Sent! Thank you :)",
+        resetForm();
+        onModalClose();
+      })
+      .catch((error) => {
+        console.log(error);
+        showToastBox({
+          status: "failure",
+          dataOfInterest: ["Server Error"],
+          message: "Something went wrong :(",
+        });
       });
-      resetForm();
-      onModalClose();
-    }
-    setIsSubmitting(false);
   };
 
   return (
@@ -75,11 +70,14 @@ export const ContactUsForm = ({ themeStyles, onModalClose }) => {
           email: firebaseAuthUser ? firebaseAuthUser.email : "",
           content: "",
         }}
-        onSubmit={(values, { resetForm }) => {
-          handleSubmit(values, resetForm);
+        onSubmit={async (values, { resetForm, setSubmitting }) => {
+          await handleSubmit(values, resetForm, setSubmitting);
+          setSubmitting(false);
         }}
+        validateOnBlur={false}
+        validateOnChange={false}
       >
-        {() => (
+        {(formik) => (
           <Form>
             <div className="email-form-container">
               <Field name="email" validate={validateEmail}>
@@ -142,19 +140,13 @@ export const ContactUsForm = ({ themeStyles, onModalClose }) => {
               </Field>
             </div>
             <div className="button-container">
-              {isSubmitting ? (
-                <DefaultButton p="1.8rem 2.5rem">
-                  <Spinner size="md" textAlign="center" />
-                </DefaultButton>
-              ) : (
-                <DefaultButton
-                  p="1.8rem 1.3rem"
-                  fontSize="1.5rem"
-                  type="submit"
-                >
-                  Send
-                </DefaultButton>
-              )}
+              <DefaultButton p="1.8rem 1.3rem" fontSize="1.5rem" type="submit">
+                {formik.isSubmitting ? (
+                  <Spinner size="md" textAlign="center" margin=".5rem 1.2rem" />
+                ) : (
+                  "Send"
+                )}
+              </DefaultButton>
             </div>
           </Form>
         )}

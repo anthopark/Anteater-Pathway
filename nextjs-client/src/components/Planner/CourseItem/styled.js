@@ -82,7 +82,7 @@ export const CompactUIContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bold;
   letter-spacing: 1px;
 

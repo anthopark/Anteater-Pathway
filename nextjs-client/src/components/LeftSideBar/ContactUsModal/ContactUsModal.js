@@ -61,7 +61,7 @@ export const ContactUsModal = ({ isModalOpen, onModalClose }) => {
                 fontWeight: "normal",
               }}
             >
-              Help us become more useful!
+              Help us become more useful to you!
             </div>
           </div>
         </ModalHeader>

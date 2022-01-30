@@ -86,6 +86,8 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
         resetForm();
         setIsPopoverOpen(false);
       }}
+      validateOnBlur={false}
+      validateOnChange={false}
     >
       {() => (
         <Form>

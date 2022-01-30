@@ -23,8 +23,8 @@ export const StyledContainer = styled.div`
 
     .donation-icon-container {
       position: relative;
-      width: 2rem;
-      height: 2rem;
+      width: 2.7rem;
+      height: 2.7rem;
     }
   }
 `;

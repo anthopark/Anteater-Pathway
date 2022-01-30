@@ -48,10 +48,14 @@ export const LeftSideBar = () => {
             />
           </IconLink>
           {/* <IconLink>
-          <div className="donation-icon-container">
-            <Image src="/Boba-icon-v1.svg" alt="donation-icon" layout="fill" />
-          </div>
-        </IconLink> */}
+            <div className="donation-icon-container">
+              <Image
+                src="/Boba-icon-v1.svg"
+                alt="donation-icon"
+                layout="fill"
+              />
+            </div>
+          </IconLink> */}
         </div>
       </StyledContainer>
       <ContactUsModal isModalOpen={isModalOpen} onModalClose={onModalClose} />

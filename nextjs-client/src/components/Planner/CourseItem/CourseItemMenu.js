@@ -43,7 +43,7 @@ export const CourseItemMenu = ({
   onModalOpen,
 }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const { appUser, updateAppUser } = useGlobalObjects();
+  const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
 
   useEffect(() => {
     if (!isCourseItemHover) {
@@ -93,6 +93,7 @@ export const CourseItemMenu = ({
                 appUser={appUser}
                 updateAppUser={updateAppUser}
                 isTentative={isTentative}
+                themeStyles={themeStyles}
               />
             </div>
           ) : null}
@@ -143,6 +144,7 @@ const CustomUnitForm = ({
   appUser,
   updateAppUser,
   isTentative,
+  themeStyles,
 }) => {
   const { showToastBox } = useToastBox();
 
@@ -189,6 +191,8 @@ const CustomUnitForm = ({
           handleSubmit(values);
           resetForm();
         }}
+        validateOnBlur={false}
+        validateOnChange={false}
       >
         {() => (
           <Form>
