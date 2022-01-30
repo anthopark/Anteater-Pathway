@@ -18,10 +18,11 @@ export const signInUser = async (uid, accessToken) => {
   return response.data;
 };
 
-export const sendUserContactMessage = async (senderEmail, content) => {
+export const sendUserContactMessage = async (senderEmail, content, reToken) => {
   const payLoad = {
     senderEmail,
     content,
+    reToken,
   };
 
   const response = await userApi.post("/contact-us", payLoad);

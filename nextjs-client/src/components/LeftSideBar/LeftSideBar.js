@@ -5,7 +5,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import ContactUsModal from "./ContactUsModal";
 // import { ThemeToggler } from "./ThemeToggler";
 
-const ICON_SIZE = "2.8rem";
+const ICON_SIZE = "3rem";
 
 export const LeftSideBar = () => {
   const {
@@ -47,7 +47,10 @@ export const LeftSideBar = () => {
               color="white"
             />
           </IconLink>
-          {/* <IconLink>
+          <IconLink
+            href="https://www.paypal.com/donate/?cmd=_donations&business=LTKH3TMC5ZLS8&item_name=Boba+keeps+us+going%21+This+will+help+us+pay+for+the+server+as+well%21+Thank+you+%3A%29&currency_code=USD&amount=2"
+            target="_blank"
+          >
             <div className="donation-icon-container">
               <Image
                 src="/Boba-icon-v1.svg"
@@ -55,7 +58,7 @@ export const LeftSideBar = () => {
                 layout="fill"
               />
             </div>
-          </IconLink> */}
+          </IconLink>
         </div>
       </StyledContainer>
       <ContactUsModal isModalOpen={isModalOpen} onModalClose={onModalClose} />

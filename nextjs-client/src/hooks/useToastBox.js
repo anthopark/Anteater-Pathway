@@ -8,7 +8,7 @@ export const useToastBox = () => {
     showToastBox: ({ status, dataOfInterest, message }) => {
       toast({
         position: "bottom-right",
-        duration: 3000,
+        duration: 3500,
         render: () => (
           <ToastBox
             status={status}

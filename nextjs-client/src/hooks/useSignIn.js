@@ -11,6 +11,7 @@ export const useSignIn = () => {
   const signInToBackend = async (uid, accessToken) => {
     signInUser(uid, accessToken)
       .then((result) => {
+        console.log(result);
         showToastBox({
           status: "success",
           dataOfInterest: [],

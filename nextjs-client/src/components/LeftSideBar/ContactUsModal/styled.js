@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContactUsFormContainer = styled.div`
-  padding: 0.5rem 4rem;
+  padding: 0.8rem 4rem 0.3rem 4rem;
   .email-form-container {
     padding: 0;
   }
