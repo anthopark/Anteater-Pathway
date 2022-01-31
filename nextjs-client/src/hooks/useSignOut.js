@@ -7,7 +7,10 @@ export const useSignOut = () => {
 
   const signOutFromFirebase = async () => {
     await signOut(auth);
+
+    appUser.uid = null;
     appUser.isAuthenticated = false;
+    appUser.accessToken = false;
     updateAppUser(appUser);
   };
 

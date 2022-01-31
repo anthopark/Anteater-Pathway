@@ -18,6 +18,7 @@ import {
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useToastBox } from "src/hooks/useToastBox";
+import { useSavePlanner } from "src/hooks/useSavePlanner";
 
 const availableColors = [
   "color1",
@@ -44,7 +45,7 @@ export const CourseItemMenu = ({
 }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
-
+  const { savePlannerToBackend } = useSavePlanner();
   useEffect(() => {
     if (!isCourseItemHover) {
       setIsPopoverOpen(false);
@@ -59,6 +60,7 @@ export const CourseItemMenu = ({
     }
 
     updateAppUser(appUser);
+    savePlannerToBackend(appUser);
   };
 
   return (
@@ -147,6 +149,7 @@ const CustomUnitForm = ({
   themeStyles,
 }) => {
   const { showToastBox } = useToastBox();
+  const { savePlannerToBackend } = useSavePlanner();
 
   const validateCustomUnit = (value) => {
     let error;
@@ -173,6 +176,7 @@ const CustomUnitForm = ({
       appUser.planner.updateCustomUnit(courseInfo.id, values.customUnit);
     }
     updateAppUser(appUser);
+    savePlannerToBackend(appUser);
 
     showToastBox({
       status: "success",
@@ -256,6 +260,7 @@ const CourseColorPicker = ({
 }) => {
   const [currentColor, setCurrentColor] = useState(bgColor);
   const { appUser, updateAppUser } = useGlobalObjects();
+  const { savePlannerToBackend } = useSavePlanner();
 
   const handleColorPickerClick = (color) => {
     setCurrentColor(color);
@@ -268,6 +273,7 @@ const CourseColorPicker = ({
     }
 
     updateAppUser(appUser);
+    savePlannerToBackend(appUser);
   };
 
   return (

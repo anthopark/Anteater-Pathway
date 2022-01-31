@@ -33,6 +33,7 @@ try
     builder.Services.AddScoped<ICourseRepository, CourseRepository>();
     builder.Services.AddScoped<ICourseRetriever, CourseRetriever>();
     builder.Services.AddTransient<IEmailSender, EmailSender>();
+    builder.Services.AddTransient<IReCaptchaVerifier, ReCaptchaVerifier>();
 
     builder.Services.AddCors();
     builder.Services.AddFastEndpoints();
@@ -68,7 +69,7 @@ try
 
 
     var app = builder.Build();
-
+    app.UseDefaultExceptionHandler();
     app.UseSerilogRequestLogging();
     app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
     app.UseRouting();

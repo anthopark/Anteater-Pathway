@@ -9,9 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { DefaultButton } from "@components/CustomChakraUI";
 import { useToastBox } from "src/hooks/useToastBox";
+import { useSavePlanner } from "src/hooks/useSavePlanner";
 
 export const CustomCourseForm = ({ setIsPopoverOpen }) => {
   const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
+  const { savePlannerToBackend } = useSavePlanner();
   const { showToastBox } = useToastBox();
 
   const validateDepartmentCode = (value) => {
@@ -71,6 +73,8 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
       dataOfInterest: [`${values.departmentCode} ${values.number}`],
       message: "Course added",
     });
+
+    savePlannerToBackend(appUser);
   };
 
   return (

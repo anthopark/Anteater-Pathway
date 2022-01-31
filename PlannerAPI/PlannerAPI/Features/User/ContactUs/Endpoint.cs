@@ -5,6 +5,7 @@ namespace PlannerAPI.Features.ContactUs;
 public class Endpoint : Endpoint<Request>
 {
     public IEmailSender EmailSender { get; set; }
+    public IReCaptchaVerifier ReCaptchaVerifier { get; set; }
     
     public override void Configure()
     {
@@ -15,6 +16,14 @@ public class Endpoint : Endpoint<Request>
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
+        var isRequestValid = await ReCaptchaVerifier.IsTokenValid(req.ReToken);
+
+        if (!isRequestValid)
+        {
+            await SendUnauthorizedAsync(ct);
+            return;
+        }
+        
         try
         {
             await EmailSender.SendContactUsEmailAsync(req.SenderEmail, req.Content);
@@ -24,6 +33,7 @@ public class Endpoint : Endpoint<Request>
             await SendErrorsAsync(ct);
             return;
         }
+        
         await SendOkAsync(ct);
     }
 }

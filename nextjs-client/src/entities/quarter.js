@@ -22,8 +22,20 @@ export class Quarter {
     } 20${yearForHeader}`;
   }
 
+  get year() {
+    return this._year;
+  }
+
+  set year(newValue) {
+    this._year = newValue;
+  }
+
   get season() {
     return this._season;
+  }
+
+  set season(newValue) {
+    this._season = newValue;
   }
 
   get plannedCourses() {

@@ -11,6 +11,7 @@ import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { Course } from "src/entities/course";
 import { DefaultButton } from "@components/CustomChakraUI";
 import { useToastBox } from "src/hooks/useToastBox";
+import { useSavePlanner } from "src/hooks/useSavePlanner";
 
 const MULTI_SELECT_LIMIT = 4;
 
@@ -24,13 +25,14 @@ export const CourseSearchBar = () => {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [selectedCourses, setSelectedCourses] = useState([]);
   const { showToastBox } = useToastBox();
+  const { savePlannerToBackend } = useSavePlanner();
 
   const handleButtonClick = (event) => {
     event.preventDefault();
 
     if (selectedCourses.length > 0) {
       for (const courseItem of selectedCourses) {
-        appUser.tentativePlanner.addCourse(new Course(courseItem));
+        appUser.tentativePlanner.addCourse(new Course(courseItem), appUser);
       }
       updateAppUser(appUser);
       setSelectedCourses([]);
@@ -41,7 +43,7 @@ export const CourseSearchBar = () => {
         message: "Course(s) added",
       });
 
-      console.log(appUser);
+      savePlannerToBackend(appUser);
     }
   };
 

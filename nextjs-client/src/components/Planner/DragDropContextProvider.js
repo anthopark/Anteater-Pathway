@@ -1,5 +1,6 @@
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { DragDropContext } from "react-beautiful-dnd";
+import { useSavePlanner } from "src/hooks/useSavePlanner";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -30,6 +31,7 @@ const move = (
 
 export const DragDropContextProvider = ({ children }) => {
   const { appUser, updateAppUser } = useGlobalObjects();
+  const { savePlannerToBackend } = useSavePlanner();
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -114,6 +116,7 @@ export const DragDropContextProvider = ({ children }) => {
     }
 
     updateAppUser(appUser);
+    savePlannerToBackend(appUser);
   };
 
   return <DragDropContext onDragEnd={onDragEnd}>{children}</DragDropContext>;

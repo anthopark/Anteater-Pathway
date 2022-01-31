@@ -5,9 +5,11 @@ import { DefaultButton } from "@components/CustomChakraUI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAcademicYear } from "src/hooks/useAcademicYear";
 import { useToastBox } from "src/hooks/useToastBox";
+import { useSavePlanner } from "src/hooks/useSavePlanner";
 
 export const AcademicYearControl = () => {
   const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
+  const { savePlannerToBackend } = useSavePlanner();
   const [selectedYear, setSelectedYear] = useState(null);
   const { yearOptions, setYearOptions, disableSelectedOption } =
     useAcademicYear();
@@ -46,7 +48,7 @@ export const AcademicYearControl = () => {
         message: "Academic Year Added",
       });
 
-      console.log(appUser);
+      savePlannerToBackend(appUser);
     }
   };
 

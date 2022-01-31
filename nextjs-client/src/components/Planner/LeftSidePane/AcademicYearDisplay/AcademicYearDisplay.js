@@ -14,9 +14,11 @@ import {
   RemoveBox,
 } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
+import { useSavePlanner } from "src/hooks/useSavePlanner";
 
 export const AcademicYearDisplay = () => {
   const { appUser, updateAppUser, themeStyles } = useGlobalObjects();
+  const { savePlannerToBackend } = useSavePlanner();
   const [openedYears, setOpenedYears] = useState([]);
   const [openedIndices, setOpenedIndices] = useState([]);
   const [removingIndex, setRemovingIndex] = useState(-1);
@@ -44,6 +46,7 @@ export const AcademicYearDisplay = () => {
     setTimeout(() => {
       appUser.planner.removeAcademicYear(year);
       updateAppUser(appUser);
+      savePlannerToBackend(appUser);
       setRemovingIndex(-1);
     }, 300);
   };

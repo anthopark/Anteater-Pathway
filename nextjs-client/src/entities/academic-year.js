@@ -11,7 +11,15 @@ export class AcademicYear {
     return this._year;
   }
 
+  set year(newValue) {
+    this._year = newValue;
+  }
+
   get quarters() {
     return this._quarters;
+  }
+
+  set qauraters(newValue) {
+    this._quarters = newValue;
   }
 }

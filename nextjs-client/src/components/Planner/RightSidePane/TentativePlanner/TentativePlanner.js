@@ -3,13 +3,16 @@ import { useGlobalObjects } from "@components/GlobalContextProvider";
 import CourseItem from "@components/Planner/CourseItem";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSavePlanner } from "src/hooks/useSavePlanner";
 
 export const TentativePlanner = () => {
   const { appUser, updateAppUser } = useGlobalObjects();
+  const { savePlannerToBackend } = useSavePlanner();
 
   const handleEmptyButtonClick = () => {
     appUser.tentativePlanner.deleteAllCourses();
     updateAppUser(appUser);
+    savePlannerToBackend(appUser);
   };
 
   return (
