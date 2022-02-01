@@ -20,7 +20,7 @@ public class Endpoint : EndpointWithoutRequest<Response>
             .ProducesProblem(500));
     }
 
-    public override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
         var courses = await CourseRetriever.RetrieveAllGroupedByDepartment();
 

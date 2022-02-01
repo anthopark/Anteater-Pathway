@@ -24,10 +24,13 @@ public class Endpoint : Endpoint<Request, Response>
             await PlannerRepository.CreatePlanner(req.UID);
             
             response.IsNewUser = true;
+            
+            Logger.LogInformation("New User Signed in: {UID}", req.UID);
         }
         else
         {
             response.IsNewUser = false;
+            Logger.LogInformation("Returning User Signed in: {UID}", req.UID);
         }
         
         await SendAsync(response, 200, cancellation: ct);

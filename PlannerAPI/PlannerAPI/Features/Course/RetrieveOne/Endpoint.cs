@@ -26,6 +26,7 @@ public class Endpoint : Endpoint<Request, DataAccess.Entities.Course>
         if (result == null)
         {
             await SendNotFoundAsync(ct);
+            Logger.LogError("Course not found: {DepartmentCode} {Number}", req.DepartmentCode, req.Number);
             return;
         }
         

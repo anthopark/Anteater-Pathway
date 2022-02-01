@@ -1,10 +1,9 @@
 using PlannerAPI.DataAccess.Entities;
 
-namespace PlannerAPI.Features.Planner.SaveEntire;
+namespace PlannerAPI.Features.Planner.LoadEntire;
 
-public class Request
+public class Response
 {
-    public string UID { get; set; }
     public List<CourseItem> TentativeLeft { get; set; }
     public List<CourseItem> TentativeRight { get; set; }
     public List<AcademicYear> MainPlanner { get; set; }

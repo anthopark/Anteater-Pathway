@@ -1,22 +1,21 @@
 using PlannerAPI.DataAccess;
-using Serilog;
 
-namespace PlannerAPI.Features.Planner.SaveEntire;
+namespace PlannerAPI.Features.Planner.LoadEntire;
 
-public class Endpoint : Endpoint<Request>
+public class Endpoint : Endpoint<Request, Response>
 {
     public IPlannerRepository PlannerRepository { get; set; }
-    
+
     public override void Configure()
     {
-        Verbs(Http.PATCH);
-        Routes("/api/planner/save/entire");
+        Verbs(Http.GET);
+        Routes("/api/planner/load/entire/{UID}");
     }
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
         var planner = await PlannerRepository.FindPlanner(req.UID);
-        
+
         if (planner == null)
         {
             Logger.LogError("Planner not found: {UID}", req.UID);
@@ -24,11 +23,13 @@ public class Endpoint : Endpoint<Request>
             return;
         }
 
-        planner.TentativeLeft = req.TentativeLeft;
-        planner.TentativeRight = req.TentativeRight;
-        planner.MainPlanner = req.MainPlanner;
+        var response = new Response
+        {
+            TentativeLeft = planner.TentativeLeft,
+            TentativeRight = planner.TentativeRight,
+            MainPlanner = planner.MainPlanner
+        };
 
-        await planner.SaveAsync(cancellation: ct);
-        await SendOkAsync(ct);
+        await SendAsync(response, 200, ct);
     }
 }

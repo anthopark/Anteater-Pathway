@@ -20,6 +20,7 @@ public class Endpoint : Endpoint<Request>
 
         if (!isRequestValid)
         {
+            Logger.LogError("Failed to validate reCaptcha: {ReToken}", req.ReToken);
             await SendUnauthorizedAsync(ct);
             return;
         }
@@ -30,6 +31,7 @@ public class Endpoint : Endpoint<Request>
         }
         catch (Exception e)
         {
+            Logger.LogError("Failed to send Contact Us email");
             await SendErrorsAsync(ct);
             return;
         }

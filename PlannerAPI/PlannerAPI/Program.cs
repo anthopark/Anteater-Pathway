@@ -65,10 +65,9 @@ try
                 ValidAudience = builder.Configuration["Jwt:Firebase:ValidAudience"]
             };
         });
-    
-
 
     var app = builder.Build();
+    
     app.UseDefaultExceptionHandler();
     app.UseSerilogRequestLogging();
     app.UseCors(b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

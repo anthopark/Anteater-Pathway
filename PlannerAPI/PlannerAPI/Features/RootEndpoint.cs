@@ -9,8 +9,9 @@ public class RootEndpoint : EndpointWithoutRequest
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(EmptyRequest req, CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
         await SendOkAsync(cancellation: ct);
     }
+    
 }
