@@ -1,7 +1,6 @@
 import "@styles/global.css";
 import "@styles/fontawesome";
 import { GlobalContextProvider } from "@components/GlobalContextProvider";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClientProvider, QueryClient } from "react-query";
 
 const queryClient = new QueryClient();
@@ -16,7 +15,6 @@ function MyApp({ Component, pageProps }) {
         <GlobalContextProvider>
           {getLayout(<Component {...pageProps} />)}
         </GlobalContextProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

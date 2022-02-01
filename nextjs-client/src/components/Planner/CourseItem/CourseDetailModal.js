@@ -121,7 +121,7 @@ export const CourseDetailModal = ({
       onClose={onModalClose}
       isCentered={true}
       onEsc={onModalClose}
-      size="2xl"
+      size="4xl"
     >
       <ModalOverlay />
       <ModalContent
@@ -131,7 +131,7 @@ export const CourseDetailModal = ({
         color={themeStyles.colors.defaultText}
         bgColor={themeStyles.colors.modalBg}
       >
-        <ModalHeader fontSize="1.6rem" letterSpacing="1px">
+        <ModalHeader fontSize="1.8rem" letterSpacing="1px">
           <div
             style={{
               width: "100%",
@@ -145,7 +145,7 @@ export const CourseDetailModal = ({
           <div
             style={{
               width: "100%",
-              fontSize: "1.5rem",
+              fontSize: "1.7rem",
               letterSpacing: "1px",
               textAlign: "center",
               fontWeight: "normal",

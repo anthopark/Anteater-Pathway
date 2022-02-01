@@ -1,4 +1,5 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
+import React from "react";
 import {
   ExtendedUIContainer,
   StyledContainer,
@@ -21,7 +22,7 @@ const shortenText = (maxCharacters, input) => {
   return input;
 };
 
-export const CourseItem = ({ isTentative, courseInfo }) => {
+const CourseItem = ({ isTentative, courseInfo, accordionOpenEvent }) => {
   const [bgColor, setBgColor] = useState(courseInfo.color);
   const [isCourseItemHover, setIsCourseItemHover] = useState(false);
   const containerRef = useRef(null);
@@ -41,6 +42,14 @@ export const CourseItem = ({ isTentative, courseInfo }) => {
       setContainerWidth(containerRef.current.offsetWidth);
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(updateContainerWidth, 400);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [accordionOpenEvent]);
 
   useLayoutEffect(() => {
     updateContainerWidth();
@@ -101,3 +110,5 @@ export const CourseItem = ({ isTentative, courseInfo }) => {
     </>
   );
 };
+
+export const MemoizedCourseItem = React.memo(CourseItem);

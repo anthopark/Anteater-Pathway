@@ -19,8 +19,6 @@ export const Planner = () => {
   const { signInToBackend } = useSignIn();
   const { showToastBox } = useToastBox();
 
-  console.log(appUser);
-
   useEffect(() => {
     const handleSignIn = async () => {
       if (firebaseAuthUser && appUser.isAuthenticated === false) {

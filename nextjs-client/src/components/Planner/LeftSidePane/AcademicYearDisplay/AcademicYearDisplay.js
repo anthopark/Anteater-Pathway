@@ -23,6 +23,7 @@ export const AcademicYearDisplay = () => {
   const [openedIndices, setOpenedIndices] = useState([]);
   const [removingIndex, setRemovingIndex] = useState(-1);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
+  const [accordionOpenEvent, setAccordionOpenEvent] = useState(false);
 
   useEffect(() => {
     setOpenedIndices(getUpdatedOpenedIndices(openedYears));
@@ -62,6 +63,10 @@ export const AcademicYearDisplay = () => {
 
     setOpenedYears(newOpenedYears);
     setOpenedIndices(getUpdatedOpenedIndices(newOpenedYears));
+
+    if (newOpenedYears.includes(year)) {
+      setAccordionOpenEvent(!accordionOpenEvent);
+    }
   };
 
   const collapseAccordion = (year) => {
@@ -136,7 +141,10 @@ export const AcademicYearDisplay = () => {
                 </div>
 
                 <AccordionPanel>
-                  <QuartersDisplay academicYear={academicYear} />
+                  <QuartersDisplay
+                    academicYear={academicYear}
+                    accordionOpenEvent={accordionOpenEvent}
+                  />
                 </AccordionPanel>
               </AccordionItem>
             </div>

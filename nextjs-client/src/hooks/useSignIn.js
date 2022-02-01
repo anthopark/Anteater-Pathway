@@ -3,12 +3,14 @@ import { useToastBox } from "./useToastBox";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { useSignOut } from "./useSignOut";
 import { useSavePlanner } from "./useSavePlanner";
+import { useLoadPlanner } from "./useLoadPlanner";
 
 export const useSignIn = () => {
   const { showToastBox } = useToastBox();
   const { appUser, updateAppUser } = useGlobalObjects();
   const { savePlannerToBackend } = useSavePlanner();
   const { signOutFromFirebase } = useSignOut();
+  const { loadPlannerFromBackend } = useLoadPlanner();
 
   const signInToBackend = async (uid, accessToken) => {
     return signInUser(uid, accessToken)
@@ -29,6 +31,7 @@ export const useSignIn = () => {
           savePlannerToBackend(appUser);
         } else {
           // download exisiting planner to the client
+          loadPlannerFromBackend(appUser);
         }
       })
       .catch((error) => {

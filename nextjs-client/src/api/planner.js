@@ -7,12 +7,8 @@ const plannerApi = axios.create({
 export const saveEntirePlanner = async (appUser) => {
   const payLoad = {
     uID: appUser.uid,
-    tentativeCourseItemsLeft: mapCourseItems(
-      appUser.tentativePlanner.leftCourseItems
-    ),
-    tentativeCourseItemsRight: mapCourseItems(
-      appUser.tentativePlanner.rightCourseItems
-    ),
+    tentativeLeft: mapCourseItems(appUser.tentativePlanner.leftCourseItems),
+    tentativeRight: mapCourseItems(appUser.tentativePlanner.rightCourseItems),
     mainPlanner: mapPlanner(appUser.planner),
   };
 
@@ -23,6 +19,16 @@ export const saveEntirePlanner = async (appUser) => {
   });
 
   return response;
+};
+
+export const loadEntirePlanner = async (appUser) => {
+  const response = await plannerApi.get(`/load/entire/${appUser.uid}`, {
+    headers: {
+      Authorization: `Bearer ${appUser.accessToken}`,
+    },
+  });
+
+  return response.data;
 };
 
 const mapPlanner = (planner) => {

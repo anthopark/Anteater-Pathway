@@ -240,7 +240,7 @@ export const ModalBodyContainer = styled(ModalBodyLoadingContainer)`
     width: 100%;
     margin: 0.3rem 0;
     .course-info-property {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: bold;
       text-align: left;
       letter-spacing: 1px;
@@ -248,7 +248,7 @@ export const ModalBodyContainer = styled(ModalBodyLoadingContainer)`
     }
 
     .course-info-content {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       padding-left: 0.3rem;
     }
   }
@@ -263,7 +263,7 @@ export const ModalBodyContainer = styled(ModalBodyLoadingContainer)`
     flex-wrap: wrap;
     padding: 0.3rem;
     .term-box {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       padding: 0.6rem 0.8rem;
       letter-spacing: 1px;
       margin-right: 0.7rem;

@@ -100,8 +100,16 @@ export class TentativePlanner {
     return this._leftCourseItems;
   }
 
+  set leftCourseItems(newValue) {
+    this._leftCourseItems = newValue;
+  }
+
   get rightCourseItems() {
     return this._rightCourseItems;
+  }
+
+  set rightCourseItems(newValue) {
+    this._rightCourseItems = newValue;
   }
 
   get bothCourseItems() {

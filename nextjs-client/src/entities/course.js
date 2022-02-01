@@ -23,12 +23,24 @@ export class Course {
     return this._id;
   }
 
+  set id(newValue) {
+    this._id = newValue;
+  }
+
   get departmentCode() {
     return this._departmentCode;
   }
 
+  set departmentCode(newValue) {
+    this._departmentCode = newValue;
+  }
+
   get number() {
     return this._number;
+  }
+
+  set number(newValue) {
+    this._number = newValue;
   }
 
   get courseCode() {
@@ -47,6 +59,10 @@ export class Course {
     return this._title;
   }
 
+  set title(newValue) {
+    this._title = newValue;
+  }
+
   get isCustomCreated() {
     return this._isCustomCreated;
   }
@@ -62,12 +78,27 @@ export class Course {
     return this._isCustomUnit;
   }
 
+  set isCustomUnit(newValue) {
+    if (typeof newValue !== "boolean") {
+      throw new TypeError("The type must be boolean");
+    }
+    this._isCustomUnit = newValue;
+  }
+
   get customMinUnit() {
     return this._customMinUnit;
   }
 
+  set customMinUnit(newValue) {
+    this._customMinUnit = newValue;
+  }
+
   get customMaxUnit() {
     return this._customMaxUnit;
+  }
+
+  set customMaxUnit(newValue) {
+    this._customMaxUnit = newValue;
   }
 
   get color() {

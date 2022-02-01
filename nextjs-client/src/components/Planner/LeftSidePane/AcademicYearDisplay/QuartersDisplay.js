@@ -1,8 +1,8 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import CourseItem from "../../CourseItem";
 import { QuartersDisplayContainer } from "./styled";
+import CourseItem from "@components/Planner/CourseItem";
 
-export const QuartersDisplay = ({ academicYear }) => {
+export const QuartersDisplay = ({ academicYear, accordionOpenEvent }) => {
   return (
     <QuartersDisplayContainer>
       {academicYear.quarters.map((quarter, index) => (
@@ -28,7 +28,10 @@ export const QuartersDisplay = ({ academicYear }) => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <CourseItem courseInfo={course} />
+                        <CourseItem
+                          courseInfo={course}
+                          accordionOpenEvent={accordionOpenEvent}
+                        />
                       </div>
                     )}
                   </Draggable>
