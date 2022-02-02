@@ -26,6 +26,8 @@ export const lightTheme = {
     emptyButton: "#aaaaaa",
     inputFormBorder: "#9f9f9f",
     inputFormBorderHover: "#0087cb",
+    scrollbar: "#beccd0",
+    scrollbarHover: "#909b9e",
   },
 };
 
