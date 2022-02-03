@@ -1,0 +1,34 @@
+name: PlannerAPI CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOTNET_VERSION: "6.0.x"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: myEnv
+    steps:
+      - name: Check out code 🛎️
+        uses: actions/checkout@v2
+
+      - name: Setup .NET 6 🔧
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Retore dependencies 🛠️
+        working-directory: ./PlannerAPI/
+        run: dotnet restore
+
+      - name: Build app 🚀
+        working-directory: ./PlannerAPI/
+        run: dotnet build -c Release --no-restore
+
+      - name: Run automated tests 🧪
+        working-directory: ./PlannerAPI/
+        run: dotnet test -c Release --no-build

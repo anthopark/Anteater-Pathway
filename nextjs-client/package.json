@@ -1,0 +1,48 @@
+{
+  "name": "nextjs-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prepare": "cd .. && husky install nextjs-client/.husky",
+    "pre-commit": "yarn lint --fix && git add -A .",
+    "prettier-format": "prettier --write ."
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^1.1.1",
+    "@chakra-ui/react": "^1.7.3",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
+    "axios": "^0.24.0",
+    "firebase": "^9.6.1",
+    "firebase-admin": "^8.10.0",
+    "formik": "^2.2.9",
+    "framer-motion": "^4",
+    "husky": "^7.0.2",
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^4.0.1",
+    "react-firebaseui": "^6.0.0",
+    "react-google-recaptcha": "^2.1.0",
+    "react-helmet": "^6.1.0",
+    "react-query": "^3.34.3",
+    "react-select": "^5.1.0",
+    "react-tiny-popover": "^7.0.1",
+    "styled-components": "^5.3.1"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.4.1"
+  }
+}
