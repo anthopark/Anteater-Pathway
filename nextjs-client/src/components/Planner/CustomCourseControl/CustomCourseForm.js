@@ -62,7 +62,6 @@ export const CustomCourseForm = ({ setIsPopoverOpen }) => {
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
     const newCourse = new Course(values);
     newCourse.isCustomCreated = true;
     appUser.tentativePlanner.addCourse(newCourse);

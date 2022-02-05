@@ -13,7 +13,6 @@ export const useLoadPlanner = () => {
     if (appUser.isAuthenticated) {
       loadEntirePlanner(appUser)
         .then((result) => {
-          console.log(result);
           unpackResultToAppUser(result, appUser);
           updateAppUser(appUser);
           showToastBox({
