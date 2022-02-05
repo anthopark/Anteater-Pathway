@@ -34,8 +34,7 @@ export const useSignIn = () => {
           loadPlannerFromBackend(appUser);
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         signOutFromFirebase();
         showToastBox({
           status: "failure",

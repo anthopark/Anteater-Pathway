@@ -46,11 +46,8 @@ export const ContactUsForm = ({ themeStyles, onModalClose }) => {
     const reToken = await reRef.current.executeAsync();
     reRef.current.reset();
 
-    console.log(reToken);
-
     return sendUserContactMessage(values.email, values.content, reToken)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
         showToastBox({
           status: "success",
           dataOfInterest: [],
@@ -60,8 +57,7 @@ export const ContactUsForm = ({ themeStyles, onModalClose }) => {
         resetForm();
         onModalClose();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         showToastBox({
           status: "failure",
           dataOfInterest: ["Server Error"],

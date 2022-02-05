@@ -43,8 +43,6 @@ export const DragDropContextProvider = ({ children }) => {
     const sId = source.droppableId;
     const dId = destination.droppableId;
 
-    console.log(result);
-
     if (sId.startsWith("tp") && dId.startsWith("tp")) {
       // tentative planner -> tentative planner
       if (sId === dId) {
