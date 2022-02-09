@@ -32,13 +32,16 @@ export const Planner = () => {
         );
 
         tokenInterval = setInterval(async () => {
-          const token = await firebaseAuthUser.getIdToken();
-          console.log(token.slice(0, 10));
-          if (token !== appUser.accessToken) {
-            appUser.accessToken = token;
-            updateAppUser(appUser);
-            firebaseAuthUser.reload();
-          }
+          firebaseAuthUser
+            .getIdToken()
+            .then((token) => {
+              if (token !== appUser.accessToken) {
+                appUser.accessToken = token;
+                updateAppUser(appUser);
+                firebaseAuthUser.reload();
+              }
+            })
+            .catch(() => {});
         }, 1000 * 60 * UPDATE_TOKEN_INTERVAL_MINUTE);
       }
 
