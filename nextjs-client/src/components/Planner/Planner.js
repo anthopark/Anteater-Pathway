@@ -13,19 +13,33 @@ import { useSignIn } from "src/hooks/useSignIn";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { useToastBox } from "src/hooks/useToastBox";
 
+const UPDATE_TOKEN_INTERVAL_MINUTE = 1;
+
 export const Planner = () => {
-  const { appUser } = useGlobalObjects();
+  const { appUser, updateAppUser } = useGlobalObjects();
   const [firebaseAuthUser, loading, error] = useAuthState(auth);
   const { signInToBackend } = useSignIn();
   const { showToastBox } = useToastBox();
 
   useEffect(() => {
+    let tokenInterval = null;
+
     const handleSignIn = async () => {
       if (firebaseAuthUser && appUser.isAuthenticated === false) {
         await signInToBackend(
           firebaseAuthUser.uid,
           firebaseAuthUser.accessToken
         );
+
+        tokenInterval = setInterval(async () => {
+          const token = await firebaseAuthUser.getIdToken();
+          console.log(token.slice(0, 10));
+          if (token !== appUser.accessToken) {
+            appUser.accessToken = token;
+            updateAppUser(appUser);
+            firebaseAuthUser.reload();
+          }
+        }, 1000 * 60 * UPDATE_TOKEN_INTERVAL_MINUTE);
       }
 
       if (!loading && error) {
@@ -38,6 +52,8 @@ export const Planner = () => {
     };
 
     handleSignIn();
+
+    return () => clearInterval(tokenInterval);
   }, [firebaseAuthUser]);
 
   return (

@@ -189,7 +189,7 @@ const CustomUnitForm = ({
     <CustomUnitFormContainer>
       <Formik
         initialValues={{
-          customUnit: null,
+          customUnit: "",
         }}
         onSubmit={(values, { resetForm }) => {
           handleSubmit(values);
