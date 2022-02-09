@@ -66,7 +66,7 @@ export const CourseItemMenu = ({
   return (
     <Popover
       isOpen={isPopoverOpen}
-      positions={["bottom"]}
+      positions={["bottom", "top"]}
       padding={5}
       onClickOutside={() => setIsPopoverOpen(false)}
       isLazy={true}
