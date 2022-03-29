@@ -3,7 +3,7 @@ log-*.txt
 test-course-*/
 service-account-key.json
 appsettings.Production.json
-anteater-pathway-71271-firebase-adminsdk-bgz2p-79df6c1846.json
+*firebase-adminsdk*.json
 
 *.swp
 *.*~

@@ -5,7 +5,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import ContactUsModal from "./ContactUsModal";
 // import { ThemeToggler } from "./ThemeToggler";
 
-const ICON_SIZE = "3rem";
+const ICON_SIZE = "2.4rem";
 
 export const LeftSideBar = () => {
   const {
@@ -21,8 +21,8 @@ export const LeftSideBar = () => {
           className="logo-container"
           style={{
             position: "relative",
-            width: "4.5rem",
-            height: "5rem",
+            width: "4rem",
+            height: "4.5rem",
             marginLeft: ".8rem",
           }}
         >

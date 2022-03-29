@@ -23,10 +23,10 @@ export const StyledContainer = styled.div`
 
     .donation-icon-container {
       position: relative;
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 2.7rem;
+      height: 2.7rem;
       margin-top: -0.1rem;
-      margin-right: 0.4rem;
+      margin-right: 0.3rem;
     }
   }
 `;

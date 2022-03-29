@@ -3,6 +3,7 @@
   "rules": {
     "no-unused-vars": "error",
     "template-curly-spacing": "off",
-    "indent": "off"
+    "indent": "off",
+    "@next/next/no-document-import-in-page": "off"
   }
 }

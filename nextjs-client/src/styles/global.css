@@ -17,13 +17,13 @@ html {
 
 @media screen and (min-width: 1400px) {
   html {
-    font-size: 68.75%;
+    font-size: 63.75%;
   }
 }
 
 @media screen and (min-width: 1600px) {
   html {
-    font-size: 75%;
+    font-size: 72.5%;
   }
 }
 
