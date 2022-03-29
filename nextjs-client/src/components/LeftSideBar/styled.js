@@ -7,7 +7,7 @@ export const StyledContainer = styled.div`
   justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.leftSideBarBg};
   align-items: center;
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 0.5rem 1rem 0.5rem;
 
   .logo-container {
     display: flex;
@@ -23,10 +23,10 @@ export const StyledContainer = styled.div`
 
     .donation-icon-container {
       position: relative;
-      width: 2.7rem;
-      height: 2.7rem;
-      margin-top: -0.1rem;
-      margin-right: 0.3rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      margin-top: -0.2rem;
+      margin-right: 0.2rem;
     }
   }
 `;

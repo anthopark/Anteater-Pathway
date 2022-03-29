@@ -22,7 +22,7 @@ export const LeftSideBar = () => {
           style={{
             position: "relative",
             width: "4rem",
-            height: "4.5rem",
+            height: "5rem",
             marginLeft: ".8rem",
           }}
         >
