@@ -34,24 +34,25 @@
 
 ![Spring 2022 Current HL Architecture](./c4-diagrams/spring-2022-current-HL-archiecture.png)
 
-##### Single Page Application
+#### Single Page Application
 
-The [Next JS](https://nextjs.org/) frontend single page application
+The [Next JS](https://nextjs.org/) frontend single page application. UCI students interact with this UI layer to use the service.
 
-##### Planner API
+#### Planner API
 
-The [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-6.0) web API application for serving the frontend
+The [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-6.0) web API application for serving the frontend. This middle layer API application sits between the UI layer and the backend database, and provides the frontend application with the endpoints to which it can make HTTP requests.
 
 API endpoints:
 
 - user sign-in/out
 - contact us
-- search course data
+- search course item
+- course detailed info
 - planner data load/save
 
-##### Planner Database
+#### Planner Database
 
-The MongoDB backend database for Planner API
+The MongoDB backend database for Planner API. It stores user data and course data.
 
 NoSQL documents:
 
@@ -59,12 +60,33 @@ NoSQL documents:
 - courses
 - planners
 
-##### Firebase
+#### Firebase
 
-The external system for user authentication with Google sign-in
+The external system for authentication with Google sign-in.
 
 - Json Web Token (JWT) is returned to the frontend upon sign-in.
 - JWT is used with HTTP requests to Planner API by the frontend.
-- Firebase provides private keys for Planner API to authenticate HTTP requests and authorize its API endpoints.
+- Firebase provides private keys which can be used by Planner API. Planner API authenticate HTTP requests from frontend and authorize its access to the API endpoints.
 
 ### Desired System High Level Architecture
+
+![Spring 2022 Desired HL Architecture](./c4-diagrams/spring-2022-desired-HL-archiecture.png)
+
+#### Course API
+
+The new Web API application dedicated for serving requests that are related to course data. Fast API, a Python web API framework, is going to be used. A Python web framework is chosen because BeautifulSoup, a very nice web scraping library, is available in the Python ecosystem.
+
+API endpoints:
+
+- scrape course data from the UCI catalogue website [the UCI catalogue website](https://catalogue.uci.edu/allcourses/)
+- scrape course offering history data from [Web Reg](https://www.reg.uci.edu/perl/WebSoc)
+- search course item
+- course detailed info
+
+#### Course Database
+
+Redis or MongoDB NoSQL backend database for storing course data that were scraped.
+
+NoSQL documents:
+
+- courses

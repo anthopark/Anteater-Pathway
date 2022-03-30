@@ -12,14 +12,14 @@
 Person(users, "UCI Students", $sprite="users")
 System_Boundary(atpwy, "Anteater Pathway") {
     Container(spa, "Single Page Application", "Javscript, Next JS", $sprite="react")
-    Container(planner_api, "Planner API", "C#, ASP.NET core 6", $sprite="dotnet")
+    Container(planner_api, "Planner API", "C#, ASP.NET Core", $sprite="dotnet")
     ContainerDb(planner_db, "Planner Database", "Mongo DB", $sprite="mongodb")
 }
 
 System_Ext(firebase_auth, "Firebase", "Google Authentication Service", $sprite="firebase")
 
-Rel(users, spa, "Uses", "HTTPS")
-Rel(spa, planner_api, "Uses", "JSON/HTTPS")
+Rel(users, spa, "Uses", "a browser, HTTPS")
+Rel(spa, planner_api, "Makes requests to", "JSON/HTTPS")
 Rel_R(planner_api, planner_db, "Reads/Writes")
-Rel_R(spa, firebase_auth, "Authenticate users with", "JWT")
+Rel_R(spa, firebase_auth, "Authenticates users with", "JWT")
 @enduml
