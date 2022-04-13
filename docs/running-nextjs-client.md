@@ -1,8 +1,6 @@
 # Running Next JS Application
 
-
 ## Prerequisite
-
 
 ### .env.local
 
@@ -10,7 +8,7 @@ The `.env.local` includes some credentials for Firebase Auth and other configura
 
 ### Install Node.js
 
-You can install LTS version of Node.js [here](https://nodejs.org/en/).
+You can install LTS version of Node.js [here](https://nodejs.org/en/). This should install `node` and `npm` in the system.
 
 Check the installation by running:
 ``` Bash
@@ -41,12 +39,9 @@ $ yarn install
 Running the application in dev mode allows the runtime to detect changes in the source files and render the up-to-date UI on a browser.
 
 ``` Bash
-$ yarn dev
+$ yarn dev # run this under "nextjs-client"
 ```
 
 You should be able to access the UI at `localhost:3000`.
 
 If you run into `FirebaseError`, make sure the `.env.local` file is placed under `Anteater-Pathway/nextjs-client`.
-
-
-
