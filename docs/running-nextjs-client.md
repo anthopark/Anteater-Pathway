@@ -4,7 +4,9 @@
 
 ### .env.local
 
-The `.env.local` includes some credentials for Firebase Auth and other configuration values that are necessary for the application at run time. It should be place under `Anteater-Pathway/nextjs-client`. This file will be provided through Slack, and should be kept in safely. 
+The `.env.local` includes some credentials for Firebase Auth and other configuration values that are necessary for the application at run time. It should be place under `Anteater-Pathway/nextjs-client`. This file will be provided through Slack, and should be kept safely. 
+
+The credentials provided are for the development purpose Firebase Auth service.
 
 ### Install Node.js
 
