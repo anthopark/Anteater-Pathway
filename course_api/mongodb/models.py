@@ -1,4 +1,4 @@
-from mongoengine import connect, Document, StringField, IntField, BooleanField
+from mongoengine import connect, Document, StringField, IntField, BooleanField, ListField
 from dotenv import load_dotenv
 import os
 
@@ -33,6 +33,7 @@ class Course(Document):
     gr_option = StringField()
     repeatability = StringField()
     restriction = StringField()
+    offered_terms = ListField(StringField())
 
     meta = {"collection": "courses"}
 
