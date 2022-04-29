@@ -11,12 +11,14 @@ export const StyledContainer = styled.div`
 
 export const TopLayout = styled.div`
   width: 100%;
-  height: 9rem;
+  height: 8.5rem;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #bbbbbb;
   margin-bottom: 1rem;
-
+  .left-end-box {
+    display: flex;
+  }
   .right-end-box {
     display: flex;
     align-items: center;

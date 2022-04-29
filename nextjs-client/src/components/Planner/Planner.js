@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CustomCourseControl } from "./CustomCourseControl/CustomCourseControl";
 import AcademicYearControl from "./AcademicYearControl";
-import { CourseSearchBar } from "./CourseSearchBar/CourseSearchBar";
 import { UserProfile } from "./UserProfile/UserProfile";
+import SearchButtonSwitch from "./SearchButtonSwitch";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { DragDropContextProvider } from "./DragDropContextProvider";
 import { auth } from "src/firebase/firebase-config";
@@ -20,6 +20,7 @@ export const Planner = () => {
   const [firebaseAuthUser, loading, error] = useAuthState(auth);
   const { signInToBackend } = useSignIn();
   const { showToastBox } = useToastBox();
+  const [searchUIOpen, setSearchUIOpen] = useState(false);
 
   useEffect(() => {
     let tokenInterval = null;
@@ -62,23 +63,28 @@ export const Planner = () => {
   return (
     <StyledContainer>
       <TopLayout>
-        <AcademicYearControl />
-        <CourseSearchBar />
+        <div className="left-end-box">
+          <AcademicYearControl />
+          <SearchButtonSwitch
+            searchUIOpen={searchUIOpen}
+            setSearchUIOpen={setSearchUIOpen}
+          />
+        </div>
         <div className="right-end-box">
           {firebaseAuthUser ? <CustomCourseControl /> : null}
           <UserProfile user={firebaseAuthUser} />
         </div>
       </TopLayout>
-      <DragDropContextProvider>
-        <MainLayout>
+      <MainLayout>
+        <DragDropContextProvider>
           <div className="left-pane">
             <LeftSidePane />
           </div>
           <div className="right-pane">
             <RightSidePane />
           </div>
-        </MainLayout>
-      </DragDropContextProvider>
+        </DragDropContextProvider>
+      </MainLayout>
     </StyledContainer>
   );
 };

@@ -11,7 +11,7 @@ export const DefaultButton = ({ children, onClick, ...rest }) => {
       padding="2.1rem 1.6rem"
       letterSpacing=".1rem"
       borderRadius="1rem"
-      fontSize="1.6rem"
+      fontSize="1.7rem"
       type="submit"
       onClick={onClick}
       onSubmit={onClick}
