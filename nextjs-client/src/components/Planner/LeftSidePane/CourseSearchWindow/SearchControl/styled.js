@@ -1,21 +1,19 @@
 import styled from "styled-components";
 import Select from "react-select";
 
-export const StyledContainer = styled.form`
+export const StyledContainer = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
-  height: 100%;
-  padding-right: 2rem;
+  padding: 2rem;
+  width: 50rem;
 `;
 
-export const StyledReactSelect = styled(Select)`
+export const DepartmentSelect = styled(Select)`
   font-family: Oxygen;
   font-size: 1.6rem;
-  padding-top: 0.4rem;
-
   .react-select__control {
-    width: 14rem;
+    width: 20rem;
     height: 4.5rem;
     border: 1px solid ${({ theme }) => theme.colors.inputFormBorder};
     border-radius: 10px;

@@ -6,7 +6,8 @@ const WHITE_DISPLAY_1 = "#f3f9ff";
 
 export const lightTheme = {
   colors: {
-    selectBorder: "transparent",
+    selectBorder: "lightgrey",
+    selectBorderHover: "lightblue",
     leftSideBarBg: PRIMARY_BRAND_COLOR,
     defaultButtonBg: "brand.700",
     pinkButtonBg: "pink.500",

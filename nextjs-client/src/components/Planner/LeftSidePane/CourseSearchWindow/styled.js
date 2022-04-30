@@ -42,4 +42,18 @@ export const StyledContainer = styled.div`
           visibility: hidden;
           margin-bottom: 0rem;
         `}
+  .header {
+    ${({ isSearchOpen }) =>
+      isSearchOpen
+        ? null
+        : css`
+            display: none;
+          `}
+  }
+
+  .body {
+  }
+
+  .footer {
+  }
 `;
