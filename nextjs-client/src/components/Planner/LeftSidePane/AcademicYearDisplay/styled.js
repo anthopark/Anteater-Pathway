@@ -44,10 +44,11 @@ export const AccordionItemContainer = styled.div`
   .accordion-button-box {
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 1.2rem;
     .academic-year-text {
+      padding-left: 0.6rem;
+      padding-bottom: 0.2rem;
       letter-spacing: 1px;
       font-size: 2.1rem;
     }
@@ -63,8 +64,8 @@ export const AccordionItemContainer = styled.div`
 
 export const RemoveBox = styled.div`
   width: 0rem;
-  ${({ isHover }) =>
-    isHover
+  ${({ isOpen }) =>
+    isOpen
       ? css`
           width: 5rem;
           display: flex;

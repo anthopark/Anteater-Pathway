@@ -22,20 +22,11 @@ export const AcademicYearDisplay = () => {
   const [openedYears, setOpenedYears] = useState([]);
   const [openedIndices, setOpenedIndices] = useState([]);
   const [removingIndex, setRemovingIndex] = useState(-1);
-  const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [accordionOpenEvent, setAccordionOpenEvent] = useState(false);
 
   useEffect(() => {
     setOpenedIndices(getUpdatedOpenedIndices(openedYears));
   }, [appUser, openedYears]);
-
-  const handleMouseEnter = (accordionIndex) => {
-    setHoveredIndex(accordionIndex);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(-1);
-  };
 
   const handleRemoveAcademicYear = (year, accordionIndex) => {
     if (openedYears.includes(year)) {
@@ -99,8 +90,6 @@ export const AcademicYearDisplay = () => {
                 borderRadius="12px"
                 boxShadow="0 2px 4px rgba(100, 100, 100, 0.1)"
                 bg={themeStyles.colors.academicYearBg}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={() => handleMouseLeave()}
               >
                 <div className="accordion-top">
                   <AccordionButton
@@ -111,17 +100,17 @@ export const AcademicYearDisplay = () => {
                     onClick={() => handleAccordionOpen(academicYear.year)}
                   >
                     <div className="accordion-button-box">
+                      <AccordionIcon fontSize="2.7rem" />
                       <div className="academic-year-text">{`20${
                         academicYear.year
                       } - 20${academicYear.year + 1}`}</div>
-                      <AccordionIcon fontSize="2.7rem" />
                     </div>
                   </AccordionButton>
                   <RemoveBox
                     className="remove-box"
-                    isHover={hoveredIndex === index}
+                    isOpen={openedIndices.includes(index)}
                   >
-                    {hoveredIndex === index ? (
+                    {openedIndices.includes(index) ? (
                       <FontAwesomeIcon
                         className="remove-box-icon"
                         icon={["fas", "times"]}
