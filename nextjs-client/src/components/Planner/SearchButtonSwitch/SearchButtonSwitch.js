@@ -15,7 +15,7 @@ export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
         colorScheme={themeMode === "light" ? "brand" : null}
         bgColor={themeStyles.colors.defaultButtonBg}
         borderRadius="1rem"
-        fontSize="1.7rem"
+        fontSize="1.6rem"
         onClick={() => setIsSearchOpen(!isSearchOpen)}
       >
         <FontAwesomeIcon
@@ -24,7 +24,7 @@ export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
           color="white"
           style={{ marginRight: ".7rem" }}
         />
-        Courses
+        Course
       </ChakraButton>
     </StyledContainer>
   );

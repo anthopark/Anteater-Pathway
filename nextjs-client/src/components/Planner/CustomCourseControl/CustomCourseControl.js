@@ -29,7 +29,7 @@ export const CustomCourseControl = () => {
             colorScheme={themeMode === "light" ? "brand" : null}
             bgColor={themeStyles.colors.defaultButtonBg}
             borderRadius="1rem"
-            fontSize="1.7rem"
+            fontSize="1.6rem"
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
           >
             <FontAwesomeIcon
