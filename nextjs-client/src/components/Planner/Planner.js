@@ -20,7 +20,7 @@ export const Planner = () => {
   const [firebaseAuthUser, loading, error] = useAuthState(auth);
   const { signInToBackend } = useSignIn();
   const { showToastBox } = useToastBox();
-  const [searchUIOpen, setSearchUIOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     let tokenInterval = null;
@@ -66,8 +66,8 @@ export const Planner = () => {
         <div className="left-end-box">
           <AcademicYearControl />
           <SearchButtonSwitch
-            searchUIOpen={searchUIOpen}
-            setSearchUIOpen={setSearchUIOpen}
+            isSearchOpen={isSearchOpen}
+            setIsSearchOpen={setIsSearchOpen}
           />
         </div>
         <div className="right-end-box">
@@ -78,7 +78,10 @@ export const Planner = () => {
       <MainLayout>
         <DragDropContextProvider>
           <div className="left-pane">
-            <LeftSidePane />
+            <LeftSidePane
+              isSearchOpen={isSearchOpen}
+              setIsSearchOpen={setIsSearchOpen}
+            />
           </div>
           <div className="right-pane">
             <RightSidePane />

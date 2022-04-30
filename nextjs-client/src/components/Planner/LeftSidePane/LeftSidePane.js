@@ -1,10 +1,15 @@
-import AcademicYearDislay from "./AcademicYearDisplay";
+import AcademicYearDisplay from "./AcademicYearDisplay";
+import CourseSearchWindow from "./CourseSearchWindow";
 import { StyledContainer } from "./styled";
 
-export const LeftSidePane = () => {
+export const LeftSidePane = ({ isSearchOpen, setIsSearchOpen }) => {
   return (
     <StyledContainer>
-      <AcademicYearDislay />
+      <CourseSearchWindow
+        isSearchOpen={isSearchOpen}
+        setIsSearchOpen={setIsSearchOpen}
+      />
+      <AcademicYearDisplay />
     </StyledContainer>
   );
 };

@@ -2,7 +2,8 @@ import { Button as ChakraButton } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledContainer } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
-export const SearchButtonSwitch = ({ searchUIOpen, setSearchUIOpen }) => {
+
+export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
   const { themeMode, themeStyles } = useGlobalObjects();
 
   return (
@@ -15,7 +16,7 @@ export const SearchButtonSwitch = ({ searchUIOpen, setSearchUIOpen }) => {
         bgColor={themeStyles.colors.defaultButtonBg}
         borderRadius="1rem"
         fontSize="1.7rem"
-        onClick={() => setSearchUIOpen(!searchUIOpen)}
+        onClick={() => setIsSearchOpen(!isSearchOpen)}
       >
         <FontAwesomeIcon
           icon={["fas", "plus"]}
