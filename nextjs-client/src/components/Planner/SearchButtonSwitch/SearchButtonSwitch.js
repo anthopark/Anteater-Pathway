@@ -16,6 +16,7 @@ export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
         bgColor={themeStyles.colors.defaultButtonBg}
         borderRadius="1rem"
         fontSize="1.6rem"
+        _hover={{ backgroundColor: "brand.400" }}
         onClick={() => setIsSearchOpen(!isSearchOpen)}
       >
         <FontAwesomeIcon

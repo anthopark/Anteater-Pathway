@@ -16,7 +16,7 @@ export const StyledReactSelect = styled(Select)`
 
   .react-select__control {
     width: 14rem;
-    height: 4.5rem;
+    height: 4rem;
     border: 1px solid ${({ theme }) => theme.colors.inputFormBorder};
     border-radius: 10px;
     &:hover {

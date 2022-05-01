@@ -6,16 +6,16 @@ export const StyledContainer = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.pageBg};
   transition: background-color 0.4s linear;
-  padding: 0 2rem;
+  padding: 0 2.5rem;
 `;
 
 export const TopLayout = styled.div`
   width: 100%;
-  height: 8.5rem;
+  height: 8rem;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #bbbbbb;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
   .left-end-box {
     display: flex;
   }

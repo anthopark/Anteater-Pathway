@@ -2,6 +2,7 @@ import { StyledContainer, DepartmentSelect } from "./styled";
 import { Input } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { DefaultButton } from "@components/CustomChakraUI";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const SearchControl = () => {
   const { themeStyles } = useGlobalObjects();
@@ -14,7 +15,7 @@ export const SearchControl = () => {
       <Input
         bg="white"
         width="13rem"
-        height="4.5rem"
+        height="4rem"
         fontSize="1.5rem"
         letterSpacing=".1rem"
         borderRadius="10px"
@@ -26,11 +27,14 @@ export const SearchControl = () => {
           borderColor: themeStyles.colors.inputFormBorderHover,
         }}
         _placeholder={{
+          paddingTop: "2rem",
           color: "darkslategrey",
           fontSize: "1.4rem",
         }}
       />
-      <DefaultButton>Search</DefaultButton>
+      <DefaultButton padding="2rem 1.5rem">
+        <FontAwesomeIcon icon={["fas", "search"]} size="1x" style={{}} />
+      </DefaultButton>
     </StyledContainer>
   );
 };
