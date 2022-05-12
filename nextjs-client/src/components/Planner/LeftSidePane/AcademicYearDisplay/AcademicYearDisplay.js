@@ -117,6 +117,7 @@ export const AcademicYearDisplay = () => {
                       <AccordionIcon fontSize="2.7rem" />
                     </div>
                   </AccordionButton>
+                  {/* Remove box hover icon */}
                   <RemoveBox
                     className="remove-box"
                     isHover={hoveredIndex === index}

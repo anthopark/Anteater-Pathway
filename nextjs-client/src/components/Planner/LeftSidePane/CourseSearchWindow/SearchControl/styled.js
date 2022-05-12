@@ -42,3 +42,7 @@ export const DepartmentSelect = styled(Select)`
     letter-spacing: 1px;
   }
 `;
+
+export const Input = styled(Select)`
+
+`;

@@ -7,9 +7,8 @@ export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
   const { themeMode, themeStyles } = useGlobalObjects();
 
   return (
-    //Course Button
+    // Search Classes Button
     <StyledContainer>
-      
       <ChakraButton
         mt=".4rem"
         letterSpacing=".1rem"
@@ -21,10 +20,9 @@ export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
         _hover={{ backgroundColor: "brand.400" }}
         onClick={() => setIsSearchOpen(!isSearchOpen)}
       >
-        
         Search Classes
       </ChakraButton>
-      {/* Ctrl + / */}
+      {/*Custom Course Button*/}
       <ChakraButton
         right="-1em"
         mt=".4rem"
