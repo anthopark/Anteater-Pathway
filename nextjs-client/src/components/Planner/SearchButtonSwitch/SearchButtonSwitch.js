@@ -7,7 +7,9 @@ export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
   const { themeMode, themeStyles } = useGlobalObjects();
 
   return (
+    //Course Button
     <StyledContainer>
+      
       <ChakraButton
         mt=".4rem"
         letterSpacing=".1rem"
@@ -19,13 +21,23 @@ export const SearchButtonSwitch = ({ isSearchOpen, setIsSearchOpen }) => {
         _hover={{ backgroundColor: "brand.400" }}
         onClick={() => setIsSearchOpen(!isSearchOpen)}
       >
-        <FontAwesomeIcon
-          icon={["fas", "plus"]}
-          size="1x"
-          color="white"
-          style={{ marginRight: ".7rem" }}
-        />
-        Course
+        
+        Search Classes
+      </ChakraButton>
+      {/* Ctrl + / */}
+      <ChakraButton
+        right="-1em"
+        mt=".4rem"
+        letterSpacing=".1rem"
+        padding="2.1rem 1.6rem"
+        colorScheme={themeMode === "light" ? "brand" : null}
+        bgColor={themeStyles.colors.defaultButtonBg}
+        borderRadius="1rem"
+        fontSize="1.6rem"
+        _hover={{ backgroundColor: "brand.400" }}
+        onClick={() => setIsSearchOpen(!isSearchOpen)}
+      >
+        Custom Course
       </ChakraButton>
     </StyledContainer>
   );

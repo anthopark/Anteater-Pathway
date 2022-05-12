@@ -7,12 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const SearchControl = () => {
   const { themeStyles } = useGlobalObjects();
   return (
+    // Select a department Icon
     <StyledContainer>
       <DepartmentSelect
         classNamePrefix="react-select"
         placeholder="Select a department"
       />
       <Input
+    // Input component
         bg="white"
         width="13rem"
         height="4rem"
@@ -32,7 +34,9 @@ export const SearchControl = () => {
           fontSize: "1.4rem",
         }}
       />
+    {/* Search Button Icon */}
       <DefaultButton padding="2rem 1.5rem">
+        
         <FontAwesomeIcon icon={["fas", "search"]} size="1x" style={{}} />
       </DefaultButton>
     </StyledContainer>

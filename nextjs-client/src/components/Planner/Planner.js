@@ -20,6 +20,7 @@ export const Planner = () => {
   const [firebaseAuthUser, loading, error] = useAuthState(auth);
   const { signInToBackend } = useSignIn();
   const { showToastBox } = useToastBox();
+  // If search planner expands the state
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {

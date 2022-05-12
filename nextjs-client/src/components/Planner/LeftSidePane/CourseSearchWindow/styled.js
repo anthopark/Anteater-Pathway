@@ -26,6 +26,12 @@ const showcaseOut = keyframes`
     }
 `;
 
+
+
+
+
+
+
 export const StyledContainer = styled.div`
   width: 100%;
   height: ${windowHeight};
