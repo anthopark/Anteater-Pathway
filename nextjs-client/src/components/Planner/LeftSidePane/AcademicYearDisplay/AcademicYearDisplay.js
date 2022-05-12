@@ -131,7 +131,7 @@ export const AcademicYearDisplay = () => {
                         }
                         style={{
                           fontSize: "1.7rem",
-                          marginTop: ".3rem",
+                          marginTop: "1.3rem",
                           color: "#E34522",
                           cursor: "pointer",
                           paddingBottom: "3px",

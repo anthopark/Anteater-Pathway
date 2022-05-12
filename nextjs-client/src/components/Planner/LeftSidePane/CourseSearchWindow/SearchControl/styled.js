@@ -5,27 +5,37 @@ export const StyledContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 42rem;
+  width: 68rem;
 `;
 
 export const DepartmentSelect = styled(Select)`
   font-family: Oxygen;
   font-size: 1.6rem;
   .react-select__control {
-    width: 22rem;
+    width: 299px;
     height: 4rem;
-    border: 1px solid ${({ theme }) => theme.colors.inputFormBorder};
+    background: #E9E9E9;
+    // can control position here
+    right: 1.2em;
+    border: ${({ theme }) => theme.colors.inputFormBorder};
     border-radius: 10px;
     &:hover {
-      border: 1px solid ${({ theme }) => theme.colors.inputFormBorderHover};
+      border: ${({ theme }) => theme.colors.inputFormBorderHover};
     }
+  }
+  
+  .react-select{
+    padding-left: 2em;
+
   }
 
   // selected value in control
   .react-select__single-value {
+
   }
 
   .react-select__placeholder {
+    color: #5C5C5C;
     letter-spacing: 0.1rem;
     font-size: 1.4rem;
     padding-bottom: 0.2rem;
@@ -34,6 +44,7 @@ export const DepartmentSelect = styled(Select)`
   .react-select__input {
   }
 
+  // changes dropdown menu curvature
   .react-select__menu {
     border-radius: 10px;
   }
@@ -41,8 +52,4 @@ export const DepartmentSelect = styled(Select)`
   .react-select__option {
     letter-spacing: 1px;
   }
-`;
-
-export const Input = styled(Select)`
-
 `;

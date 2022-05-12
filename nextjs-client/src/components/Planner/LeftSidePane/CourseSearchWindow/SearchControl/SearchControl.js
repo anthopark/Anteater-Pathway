@@ -3,7 +3,6 @@ import { Input, Button as ChakraButton } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { DefaultButton } from "@components/CustomChakraUI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Icon, createIcon } from '@chakra-ui/react'
 
 export const SearchControl = () => {
 const { themeMode, themeStyles } = useGlobalObjects();
@@ -16,11 +15,13 @@ const { themeMode, themeStyles } = useGlobalObjects();
       />
       <Input
     // Input component
-        bg="white"
+        classNamePrefix="react-input"    
+        bg="#E9E9E9"
         width="100"
         height="4rem"
         fontSize="1.5rem"
         letterSpacing=".1rem"
+        border='0rem'
         borderRadius="10px"
         autoComplete="off"
         spellCheck={false}
@@ -33,15 +34,8 @@ const { themeMode, themeStyles } = useGlobalObjects();
           paddingTop: "2rem",
           color: "darkslategrey",
           fontSize: "1.4rem",
-          
         }}
       />
-    {/* Search Button Icon */}
-      <DefaultButton padding="2rem 1.5rem">
-        
-        <FontAwesomeIcon icon={["fas", "search"]} size="1x" style={{}} />
-      </DefaultButton>
-      
     {/* Search Button Icon */}
       <ChakraButton
         right="-1em"
@@ -62,13 +56,14 @@ const { themeMode, themeStyles } = useGlobalObjects();
         
         className="remove-box-icon"
         icon={["fas", "times"]}
-        
+        // Add onclick functionality
+        //onClick={() => functionName}
         style={{
           fontSize: "2rem",
-          color: "#E34522"   
+          color: "#5C5C5C",   
         }}
       />
-    
+    <FontAwesomeIcon icon="fa-regular fa-circle-xmark" />
     </StyledContainer>
   );
 };
