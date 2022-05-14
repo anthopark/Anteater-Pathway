@@ -2,7 +2,7 @@ import { extendTheme } from "@chakra-ui/react";
 
 const PRIMARY_BRAND_COLOR = "#0C335A";
 const MAIN_PAGE_BG_COLOR = "#E2E2EB";
-const WHITE_DISPLAY_1 = "#f3f9ff";
+const WHITE_DISPLAY_1 = "#FFFFFF";
 
 export const lightTheme = {
   colors: {

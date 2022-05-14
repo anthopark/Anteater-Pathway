@@ -16,7 +16,9 @@ export const DepartmentSelect = styled(Select)`
     height: 4rem;
     background: #E9E9E9;
     // can control position here
+    // Make sure to change any directional in select__menu
     right: 1.2em;
+    
     border: ${({ theme }) => theme.colors.inputFormBorder};
     border-radius: 10px;
     &:hover {
@@ -26,18 +28,16 @@ export const DepartmentSelect = styled(Select)`
   
   .react-select{
     padding-left: 2em;
-
   }
 
   // selected value in control
   .react-select__single-value {
-
   }
 
   .react-select__placeholder {
     color: #5C5C5C;
     letter-spacing: 0.1rem;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     padding-bottom: 0.2rem;
   }
 
@@ -46,6 +46,7 @@ export const DepartmentSelect = styled(Select)`
 
   // changes dropdown menu curvature
   .react-select__menu {
+    right: 1.2em;
     border-radius: 10px;
   }
 

@@ -1,7 +1,6 @@
 import { StyledContainer, DepartmentSelect} from "./styled";
-import { Input, Button as ChakraButton } from "@chakra-ui/react";
+import { InputRightElement, InputGroup, Input, Button as ChakraButton } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
-import { DefaultButton } from "@components/CustomChakraUI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const SearchControl = () => {
@@ -13,33 +12,44 @@ const { themeMode, themeStyles } = useGlobalObjects();
         classNamePrefix="react-select"
         placeholder="Department..."
       />
-      <Input
-    // Input component
-        classNamePrefix="react-input"    
-        bg="#E9E9E9"
-        width="100"
-        height="4rem"
-        fontSize="1.5rem"
-        letterSpacing=".1rem"
-        border='0rem'
-        borderRadius="10px"
-        autoComplete="off"
-        spellCheck={false}
-        placeholder="Enter Course name here..."
-        borderColor={themeStyles.colors.inputFormBorder}
-        _hover={{
-          borderColor: themeStyles.colors.inputFormBorderHover,
-        }}
-        _placeholder={{
-          paddingTop: "2rem",
-          color: "darkslategrey",
-          fontSize: "1.4rem",
-        }}
-      />
+      <InputGroup>
+        <Input
+        // Input component
+          classNamePrefix="react-input"    
+          bg="#E9E9E9"
+          width="238px"
+          height="4rem"
+          fontSize="1.5rem"
+          letterSpacing=".1rem"
+          border='0rem'
+          borderRadius="10px"
+          autoComplete="off"
+          spellCheck={false}
+          placeholder="Enter Course name here..."
+          left="-1"
+          
+          borderColor={themeStyles.colors.inputFormBorder}
+          _hover={{
+            borderColor: themeStyles.colors.inputFormBorderHover,
+          }}
+          // Letters inside input box
+          _placeholder={{
+            paddingTop: "2rem",
+            color: "darkslategrey",
+            fontSize: "1.6rem",
+          }}
+        />
+        {/* WORK IN PROGRESS */}
+        <InputRightElement 
+          children={<FontAwesomeIcon>icon="fa-regular fa-circle-xmark"</FontAwesomeIcon>}>
+        </InputRightElement>
+      </InputGroup>
+      
     {/* Search Button Icon */}
       <ChakraButton
-        right="-1em"
+        right="20"
         mt=".4rem"
+        width="111px"
         letterSpacing=".1rem"
         padding="2.1rem 1.6rem"
         colorScheme={themeMode === "light" ? "brand" : null}
@@ -53,7 +63,8 @@ const { themeMode, themeStyles } = useGlobalObjects();
       </ChakraButton>
     {/* Top Right Exit Icon */}
     <FontAwesomeIcon
-        
+        // WORK IN PROGRESS
+        // Work on moving it to the right
         className="remove-box-icon"
         icon={["fas", "times"]}
         // Add onclick functionality
