@@ -5,7 +5,6 @@ export const StyledContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 68rem;
 `;
 
 export const DepartmentSelect = styled(Select)`
@@ -13,7 +12,7 @@ export const DepartmentSelect = styled(Select)`
   font-size: 1.6rem;
   .react-select__control {
     width: 299px;
-    height: 4rem;
+    height: 46px;
     background: #E9E9E9;
     // can control position here
     // Make sure to change any directional in select__menu
@@ -52,5 +51,11 @@ export const DepartmentSelect = styled(Select)`
 
   .react-select__option {
     letter-spacing: 1px;
+  }
+`;
+
+export const RemoveBox1 = styled.div`  
+  .remove-box-icon1 {
+    right: 150px;
   }
 `;

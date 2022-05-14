@@ -1,5 +1,4 @@
 import { Button as ChakraButton } from "@chakra-ui/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledContainer } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 
