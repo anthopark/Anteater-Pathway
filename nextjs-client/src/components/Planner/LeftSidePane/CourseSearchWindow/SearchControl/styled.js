@@ -56,6 +56,5 @@ export const DepartmentSelect = styled(Select)`
 
 export const RemoveBox1 = styled.div`  
   .remove-box-icon1 {
-    right: 150px;
   }
 `;

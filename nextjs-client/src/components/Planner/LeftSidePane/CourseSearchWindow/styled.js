@@ -26,15 +26,10 @@ const showcaseOut = keyframes`
     }
 `;
 
-
-
-
-
-
-
+// CONTAINER FOR SEARCH
 export const StyledContainer = styled.div`
-  width: 100%;
-  height: ${windowHeight};
+  width: 918;
+  height: 616px;
   animation: ${showcaseIn} 0.3s ease-out;
   padding: 1rem 2rem;
   margin-bottom: 2rem;
