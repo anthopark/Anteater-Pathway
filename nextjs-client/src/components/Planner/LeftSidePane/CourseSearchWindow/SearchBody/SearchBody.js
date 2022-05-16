@@ -14,10 +14,27 @@ const { } = useGlobalObjects();
                 p={4} 
                 color='5C5C5C' 
                 borderRadius={"10px"}
-                height="230px"y
-                width="400px"
+                height="241px"y
+                width="363px"
             >
                 Please Select Department first to begin searching for courses 
+            </Box>
+            <Box 
+                bg='#F2F9FF' 
+                p={4} 
+                color='5C5C5C' 
+                borderRadius={"10px"}
+                height="241px"y
+                width="363px"
+            >
+                Course Name Course Units
+                Offering history
+                List of available quarters...
+
+                Prerequisite
+                List of classes...
+
+                + More info
             </Box>
         </StyledContainer>
     );
