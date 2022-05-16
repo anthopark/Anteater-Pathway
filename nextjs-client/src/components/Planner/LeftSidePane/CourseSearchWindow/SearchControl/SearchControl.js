@@ -19,7 +19,7 @@ const { themeMode, themeStyles } = useGlobalObjects();
           bg="#E9E9E9"
           width="238px"
           height="46px"
-          fontSize="1.5rem"
+          fontSize="19px"
           letterSpacing=".1rem"
           border='0rem'
           borderRadius="10px"
@@ -46,8 +46,11 @@ const { themeMode, themeStyles } = useGlobalObjects();
       </InputGroup>
       
     {/* Search Button Icon */}
+    {/* WORK IN PROGRESS
+      FIX SPACING
+    */}
       <ChakraButton
-        left="-60px"
+        left="-520px"
         mt=".4rem"
         width="111px"
         height="46px"
@@ -55,8 +58,8 @@ const { themeMode, themeStyles } = useGlobalObjects();
         padding="2.1rem 1.6rem"
         colorScheme={themeMode === "light" ? "brand" : null}
         bgColor={themeStyles.colors.defaultButtonBg}
-        borderRadius="1rem"
-        fontSize="1.6rem"
+        borderRadius="10px"
+        fontSize="19px"
       >
         Search
       </ChakraButton>

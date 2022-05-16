@@ -36,7 +36,7 @@ export const DepartmentSelect = styled(Select)`
   .react-select__placeholder {
     color: #5C5C5C;
     letter-spacing: 0.1rem;
-    font-size: 1.7rem;
+    font-size: 19px;
     padding-bottom: 0.2rem;
   }
 

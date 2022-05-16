@@ -1,6 +1,7 @@
 import { Button as ChakraButton } from "@chakra-ui/react";
 import { StyledContainer } from "./styled";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const CourseAddCourses = ({ isSearchOpen, setIsSearchOpen }) => {
   const { themeMode, themeStyles } = useGlobalObjects();
@@ -19,10 +20,16 @@ export const CourseAddCourses = ({ isSearchOpen, setIsSearchOpen }) => {
         borderRadius="1rem"
         fontSize="1.6rem"
         _hover={{ backgroundColor: "brand.400" }}
-        onClick={() => setIsSearchOpen(!isSearchOpen)}
+        rightIcon={<FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />}
+        // onClick={() => setIsSearchOpen(!isSearchOpen)}
       >
-          Add selected courses
+    Add selected courses
+    {/* WORK IN PROGRESS */}
+    {/* ADD FUNCTION */}
       </ChakraButton>
     </StyledContainer>
   );
 };
+
+// THINK ABOUT IMPLEMENTING TOAST WHEN USER ADDS CLASS
+// https://chakra-ui.com/docs/components/feedback/toast
