@@ -1,4 +1,4 @@
-from mongodb.models import Course
+from mongodb.models import Course, MONGO_CONNECTION_STRING
 from webreg_scraper.webreg_scraper import WebRegScraper
 import pymongo
 
@@ -19,8 +19,7 @@ class OfferHistoryUpdater:
                 course_list.extend(courses_in_page)
 
         # Connect to database
-        client = pymongo.MongoClient(
-            "mongodb+srv://ap-mongo-dev:anteater@planner-api-db-dev.2zfdd.mongodb.net/AnteaterPathwayDB?retryWrites=true&w=majority")
+        client = pymongo.MongoClient(MONGO_CONNECTION_STRING)
         mydatabase = client["AnteaterPathwayDB"]
         coursesDB = mydatabase['courses']
 
