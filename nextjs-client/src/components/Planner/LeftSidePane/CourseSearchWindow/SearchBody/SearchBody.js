@@ -25,16 +25,24 @@ const { } = useGlobalObjects();
                 color='5C5C5C' 
                 borderRadius={"10px"}
                 height="241px"y
-                width="363px"
+                width="400px"
             >
-                Course Name Course Units
-                Offering history
-                List of available quarters...
-
-                Prerequisite
-                List of classes...
-
-                + More info
+                <div>
+                    <p>Course Name Course Units</p>
+                    <span>
+                        Offering history
+                    </span>
+                    <hr/>
+                    Insert function to populate available quarters
+                    <br/>
+                    <br/>
+                    <span>
+                        Prerequisite
+                    </span>
+                    <hr/>
+                    <br/>Insert function to populate available classes
+                    <br/>+ More info
+                </div>
             </Box>
         </StyledContainer>
     );
