@@ -44,6 +44,18 @@ const { } = useGlobalObjects();
                     <br/>+ More info
                 </div>
             </Box>
+            <Box
+                bg='#C4C4C4' 
+                p={4} 
+                color='WHITE'
+                fontSize={"19px"}
+                font 
+                borderRadius={"8px"}
+                height="45px"y
+                width="150px"
+            >
+                IN4MATX 121
+            </Box>
         </StyledContainer>
     );
 };

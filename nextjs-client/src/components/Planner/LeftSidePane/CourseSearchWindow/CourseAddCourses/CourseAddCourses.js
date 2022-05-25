@@ -62,6 +62,3 @@ export const CourseAddCourses = ({ isSearchOpen, setIsSearchOpen }) => {
     </StyledContainer>
   );
 };
-
-// THINK ABOUT IMPLEMENTING TOAST WHEN USER ADDS CLASS
-// https://chakra-ui.com/docs/components/feedback/toast

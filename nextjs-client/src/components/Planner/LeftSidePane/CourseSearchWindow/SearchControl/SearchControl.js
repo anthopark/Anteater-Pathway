@@ -77,9 +77,6 @@ const { themeMode, themeStyles } = useGlobalObjects();
             width: "24px"
           }}
         />
-      <FontAwesomeIcon icon="fa-regular fa-circle-xmark" />
-      {/* WORK IN PROGRESS */}
-      {/* https://chakra-ui.com/docs/components/other/close-button */}
     </RemoveBox1>
     </StyledContainer>
   );
