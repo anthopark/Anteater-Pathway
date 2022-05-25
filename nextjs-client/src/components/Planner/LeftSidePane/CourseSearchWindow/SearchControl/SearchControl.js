@@ -69,7 +69,7 @@ const { themeMode, themeStyles } = useGlobalObjects();
           className="remove-box-icon1"
           icon={["fas", "times"]}
           // WORK IN PROGRESS
-          onClick={() => setIsSearchOpen(!isSearchOpen)}
+          // onClick={() => setIsSearchOpen(!isSearchOpen)}
           style={{
             fontSize: "2rem",
             color: "#5C5C5C",   
