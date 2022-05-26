@@ -1,5 +1,5 @@
 from mongodb.models import Course, MONGO_CONNECTION_STRING
-from webreg_scraper.webreg_scraper import WebRegScraper
+from offer_history_updater.webreg_scraper.webreg_scraper import WebRegScraper
 import pymongo
 
 
@@ -63,9 +63,3 @@ class OfferHistoryUpdater:
                 else:
                     print("Current Term Exists on the DB!")
         print("successfully updated database")
-
-
-y = WebRegScraper()
-x = OfferHistoryUpdater(y)
-
-x.update()
