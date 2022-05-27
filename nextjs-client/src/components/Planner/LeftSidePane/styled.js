@@ -23,4 +23,11 @@ export const StyledContainer = styled.div`
   ::-webkit-scrollbar-button {
     display: none;
   }
+
+  .undo-box {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0rem 0 0.3rem 0;
+  }
 `;

@@ -33,7 +33,7 @@ export const MainLayout = styled.div`
   display: grid;
   grid-template-columns: minmax(auto, 3.8fr) minmax(34rem, 1fr);
   .left-pane {
-    padding-top: 2rem;
+    padding-top: 0rem;
   }
 
   .right-pane {
