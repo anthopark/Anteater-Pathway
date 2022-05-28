@@ -4,13 +4,13 @@ import {
   InputGroup,
   Input,
   Button as ChakraButton,
-  Center,
 } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const SearchControl = ({ isSearchOpen, setIsSearchOpen }) => {
   const { themeMode, themeStyles } = useGlobalObjects();
+
   return (
     // Select a department Icon
     <StyledContainer>
@@ -74,8 +74,7 @@ export const SearchControl = ({ isSearchOpen, setIsSearchOpen }) => {
         <FontAwesomeIcon
           className="remove-box-icon1"
           icon={["fas", "times"]}
-          // WORK IN PROGRESS
-          // onClick={() => setIsSearchOpen(!isSearchOpen)}
+          onClick={() => setIsSearchOpen(!isSearchOpen)}
           style={{
             fontSize: "2rem",
             color: "#5C5C5C",
