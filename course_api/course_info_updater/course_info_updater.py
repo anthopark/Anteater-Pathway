@@ -1,4 +1,3 @@
-
 from mongodb.models import Department, Course
 from course_info_updater.catalogue_scrapper.catalogue_scrapper import CatalogueScraper
 from bs4 import BeautifulSoup
@@ -70,5 +69,4 @@ class CourseInfoUpdater:
                     gr_option=courses[i]['gr_option'],
                     repeatability=courses[i]['repeatability'],
                     restriction=courses[i]['restriction']
-                    >> >>>> > 5-1--implement-web-api
                 ).save()

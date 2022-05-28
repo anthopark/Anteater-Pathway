@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
 import re
+from typing import Dict, List
 
 
 class CatalogueScraper:
-    def scrap_course_items(self, page_content: str) -> [dict]:
+    def scrap_course_items(self, page_content: str) -> List[Dict]:
         soup = BeautifulSoup(page_content)
         courses = soup.find('div', attrs={'id': 'col-content'})
 
