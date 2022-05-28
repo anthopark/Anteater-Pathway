@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-
-connect(host=os.environ["CONNECTION_STRING"])
+MONGO_CONNECTION_STRING = os.environ["CONNECTION_STRING"]
+connect(host=MONGO_CONNECTION_STRING)
 
 
 class Department(Document):
@@ -36,7 +36,3 @@ class Course(Document):
     offered_terms = ListField(StringField())
 
     meta = {"collection": "courses"}
-
-
-Course(dept_code="a", num="a", title="a", unit=2).save()
-print(Department.objects(name='hi'))
