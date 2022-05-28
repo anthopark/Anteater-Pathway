@@ -32,12 +32,11 @@ export const CourseAddCourses = ({ isSearchOpen, setIsSearchOpen }) => {
 
       savePlannerToBackend(appUser);
     }
-    // TEST
-    // showToastBox({
-    //   status: "success",
-    //   dataOfInterest: selectedCourses.map((item) => item.courseCode),
-    //   message: "Course(s) added",
-    // });
+    showToastBox({
+      status: "success",
+      dataOfInterest: selectedCourses.map((item) => item.courseCode),
+      message: "Course(s) added",
+    });
   };
 
   return (
@@ -54,10 +53,12 @@ export const CourseAddCourses = ({ isSearchOpen, setIsSearchOpen }) => {
         borderRadius="1rem"
         fontSize="1.6rem"
         _hover={{ backgroundColor: "brand.400" }}
-        rightIcon={<FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />}
+        rightIcon={
+          <FontAwesomeIcon icon={["fas", "plus"]} size="1x" color="white" />
+        }
         onClick={handleButtonClick}
       >
-    Add selected courses
+        Add selected courses
       </ChakraButton>
     </StyledContainer>
   );
