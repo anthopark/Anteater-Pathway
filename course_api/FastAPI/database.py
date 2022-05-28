@@ -12,6 +12,14 @@ coursesDB = mydatabase.courses
 departmentDB = mydatabase.departments
 
 
+async def getAllCourse():
+    document = coursesDB.find({})
+    courses = []
+    async for docs in document:
+        courses.append(Course(**docs))
+    return courses
+
+
 async def getCourseDept(deptCode):
     document = coursesDB.find({"dept_code": deptCode.upper()})
     courses = []
