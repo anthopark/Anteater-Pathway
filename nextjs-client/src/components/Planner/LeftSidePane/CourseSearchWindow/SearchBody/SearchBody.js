@@ -2,7 +2,7 @@ import { StyledContainer } from "./styled";
 import { Box } from "@chakra-ui/react"; // Divider
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 
-export const SearchBody = ({ searchResults }) => {
+export const SearchBody = ({ searchResults, courseNumber }) => {
   const {} = useGlobalObjects();
   return (
     <StyledContainer>
@@ -23,35 +23,8 @@ export const SearchBody = ({ searchResults }) => {
             </Box>
           ) : null}
         </div>
-      </resultScrollbar>
-
-      <div className="course-container">
-        Course Info
-        <Box
-          bg="#F2F9FF"
-          p={4}
-          color="5C5C5C"
-          borderRadius={"12px"}
-          height="241px"
-          width="400px"
-        >
-          <div>
-            <p>Course Name Course Units</p>
-            <span>Offering history</span>
-            <hr />
-            Insert function to populate available quarters
-            <br />
-            <br />
-            <span>Prerequisite</span>
-            <hr />
-            <br />
-            Insert function to populate available classes
-            <br />+ More info
-          </div>
-        </Box>
-      </div>
-      {/* Dynamically loaded class information */}
-      {/* <Box
+        {/* Dynamically loaded class information */}
+       <Box
         bg="#C4C4C4"
         p={4}
         color="WHITE"
@@ -62,8 +35,37 @@ export const SearchBody = ({ searchResults }) => {
         
         width="150px"
       >
-        IN4MATX 121
-      </Box> */}
+        searchResults
+      </Box> 
+      </resultScrollbar>
+
+      <div className="course-container">
+        Course Info
+        {(searchResults.length > 0 && courseNumber != null) ? (
+          <Box
+          bg="#F2F9FF"
+          p={4}
+          color="5C5C5C"
+          borderRadius={"12px"}
+          height="241px"
+          width="400px"
+          >
+            <div>
+              <p>Course Name Course Units</p>
+              <span>Offering history</span>
+              <hr />
+              Insert function to populate available quarters
+              <br />
+              <br />
+              <span>Prerequisite</span>
+              <hr />
+              <br />
+              Insert function to populate available classes
+              <br />+ More info
+            </div>
+          </Box>
+          ) : null}
+      </div>
     </StyledContainer>
   );
 };

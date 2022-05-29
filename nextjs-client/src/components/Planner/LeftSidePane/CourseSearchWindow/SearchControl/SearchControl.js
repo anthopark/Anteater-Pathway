@@ -1,19 +1,9 @@
 import { useState } from "react";
 import { StyledContainer, DepartmentSelect, RemoveBox1 } from "./styled";
-import {
-  // InputRightElement,
-  // InputGroup,
-  Input,
-  Button as ChakraButton,
-} from "@chakra-ui/react";
+import { Input, Button as ChakraButton } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  fetchAllDepartment,
-  fetchCourseConfig,
-  fetchAllCoursesByDepartment,
-  fetchSpecificCourse,
-} from "src/api/courseAPI";
+import { fetchAllDepartment, fetchCourseConfig, fetchAllCoursesByDepartment, fetchSpecificCourse } from "src/api/courseAPI";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 
@@ -43,8 +33,8 @@ export const SearchControl = ({
   }, [data]);
 
   const handleSearch = async () => {
-    console.log(department);
-    console.log(courseNumber);
+    // console.log(department); TESTING DISPLAY DEPARTMENT
+    // console.log(courseNumber); TESTING DISPLAY COURSE NUMBER
     if (!department) return;
 
     let response;
@@ -53,13 +43,11 @@ export const SearchControl = ({
     } else {
       response = await fetchSpecificCourse(department, courseNumber);
       if (response !== null) {
-        console.log("jaja");
         setSearchResults([response]);
       } else {
         setSearchResults([]);
       }
     }
-
     console.log(response);
   };
 
@@ -72,7 +60,6 @@ export const SearchControl = ({
         options={departmentOptions}
         onChange={(option) => setDepartment(option.value)}
       />
-      {/* <InputGroup> */}
       <Input
         // Input component
         classNamePrefix="react-input"
@@ -101,15 +88,6 @@ export const SearchControl = ({
           fontSize: "1.6rem",
         }}
       />
-
-      {/* WORK IN PROGRESS */}
-      {/* <InputRightElement
-          children={
-            <FontAwesomeIcon>icon="fa-regular fa-circle-xmark"</FontAwesomeIcon>
-          }
-        ></InputRightElement>
-      </InputGroup> */}
-
       {/* Search Button Icon */}
       <ChakraButton
         classNamePrefix="react-searchButton"
