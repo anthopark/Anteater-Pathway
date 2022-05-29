@@ -1,15 +1,67 @@
+import { useState } from "react";
 import { StyledContainer, DepartmentSelect, RemoveBox1 } from "./styled";
 import {
-  InputRightElement,
-  InputGroup,
+  // InputRightElement,
+  // InputGroup,
   Input,
   Button as ChakraButton,
 } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  fetchAllDepartment,
+  fetchCourseConfig,
+  fetchAllCoursesByDepartment,
+  fetchSpecificCourse,
+} from "src/api/courseAPI";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
 
-export const SearchControl = ({ isSearchOpen, setIsSearchOpen }) => {
+export const SearchControl = ({
+  isSearchOpen,
+  setIsSearchOpen,
+  setSearchResults,
+}) => {
   const { themeMode, themeStyles } = useGlobalObjects();
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+  const [department, setDepartment] = useState(null);
+  const [courseNumber, setCourseNumber] = useState();
+
+  const { data } = useQuery(
+    `all-courses`,
+    fetchAllDepartment,
+    fetchCourseConfig
+  );
+
+  useEffect(() => {
+    console.log(data);
+    if (data) {
+      setDepartmentOptions(
+        data.map((dept) => ({ label: dept.code, value: dept.code }))
+      );
+    }
+  }, [data]);
+
+  const handleSearch = async () => {
+    console.log(department);
+    console.log(courseNumber);
+    if (!department) return;
+
+    let response;
+    if (courseNumber === "") {
+      response = await fetchAllCoursesByDepartment(department);
+    } else {
+      response = await fetchSpecificCourse(department, courseNumber);
+      if (response !== null) {
+        console.log("jaja");
+        setSearchResults([response]);
+      } else {
+        setSearchResults([]);
+      }
+    }
+
+    console.log(response);
+  };
 
   return (
     // Select a department Icon
@@ -17,42 +69,46 @@ export const SearchControl = ({ isSearchOpen, setIsSearchOpen }) => {
       <DepartmentSelect
         classNamePrefix="react-select"
         placeholder="Department..."
+        options={departmentOptions}
+        onChange={(option) => setDepartment(option.value)}
       />
-      <InputGroup>
-        <Input
-          // Input component
-          classNamePrefix="react-input"
-          bg="#E9E9E9"
-          width="238px"
-          height="46px"
-          fontSize="19px"
-          letterSpacing=".1rem"
-          border="0rem"
-          borderRadius="10px"
-          autoComplete="off"
-          spellCheck={false}
-          placeholder="Enter Course name here..."
-          left="-1"
-          padding="2.1rem 1.6rem"
-          borderColor={themeStyles.colors.inputFormBorder}
-          _hover={{
-            borderColor: themeStyles.colors.inputFormBorderHover,
-          }}
-          // Letters inside input box
-          _placeholder={{
-            paddingTop: "2rem",
-            color: "darkslategrey",
-            fontSize: "1.6rem",
-          }}
-        />
+      {/* <InputGroup> */}
+      <Input
+        // Input component
+        classNamePrefix="react-input"
+        bg="#E9E9E9"
+        width="238px"
+        height="46px"
+        fontSize="19px"
+        letterSpacing=".1rem"
+        border="0rem"
+        borderRadius="10px"
+        autoComplete="off"
+        spellCheck={false}
+        placeholder="Enter Course name here..."
+        left="-1"
+        padding="2.1rem 1.6rem"
+        borderColor={themeStyles.colors.inputFormBorder}
+        value={courseNumber}
+        onChange={(evt) => setCourseNumber(evt.target.value)}
+        _hover={{
+          borderColor: themeStyles.colors.inputFormBorderHover,
+        }}
+        // Letters inside input box
+        _placeholder={{
+          paddingTop: "2rem",
+          color: "darkslategrey",
+          fontSize: "1.6rem",
+        }}
+      />
 
-        {/* WORK IN PROGRESS */}
-        <InputRightElement
+      {/* WORK IN PROGRESS */}
+      {/* <InputRightElement
           children={
             <FontAwesomeIcon>icon="fa-regular fa-circle-xmark"</FontAwesomeIcon>
           }
         ></InputRightElement>
-      </InputGroup>
+      </InputGroup> */}
 
       {/* Search Button Icon */}
       <ChakraButton
@@ -66,6 +122,7 @@ export const SearchControl = ({ isSearchOpen, setIsSearchOpen }) => {
         bgColor={themeStyles.colors.defaultButtonBg}
         borderRadius="10px"
         fontSize="19px"
+        onClick={handleSearch}
       >
         Search
       </ChakraButton>

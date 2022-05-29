@@ -1,2 +1,2 @@
-import { CourseAddCourses } from "./CourseAddCourses"
+import { CourseAddCourses } from "./CourseAddCourses";
 export default CourseAddCourses;

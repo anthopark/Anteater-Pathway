@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useToastBox } from "src/hooks/useToastBox";
 import { useSavePlanner } from "src/hooks/useSavePlanner";
 
-export const CourseAddCourses = ({ isSearchOpen, setIsSearchOpen }) => {
+export const CourseAddCourses = ({}) => {
   const { themeMode, themeStyles } = useGlobalObjects();
   const { appUser, updateAppUser } = useGlobalObjects();
 

@@ -14,14 +14,27 @@ export const fetchAllDepartment = async () => {
   return response.data;
 };
 
-export const fetchAllCoursesByDepartment = async ({ queryKey }) => {
-  const { departmentCode } = queryKey[1];
+export const fetchAllCoursesByDepartment = async (departmentCode) => {
   const response = await courseApi.get(`course/${departmentCode}/`);
   return response.data;
 };
 
-export const fetchCourseDetail = async ({ queryKey }) => {
-  const { departmentCode, number } = queryKey[1];
-  const response = await courseApi.get(`course/${departmentCode}/${number}`);
-  return response.data;
+export const fetchSpecificCourse = async (departmentCode, number) => {
+  let response;
+  try {
+    response = await courseApi.get(`course/${departmentCode}/${number}`);
+    return response.data;
+  } catch (error) {}
+
+  return null;
+};
+
+export const fetchCourseConfig = {
+  retry: 3,
+  retryDelay: 3000,
+  staleTime: Infinity,
+  cacheTime: Infinity,
+  refetchOnMount: false,
+  refetchOnWindowFocus: false,
+  refetchOnReconnect: false,
 };

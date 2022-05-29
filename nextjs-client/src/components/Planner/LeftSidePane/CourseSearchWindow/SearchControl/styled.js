@@ -13,19 +13,19 @@ export const DepartmentSelect = styled(Select)`
   .react-select__control {
     width: 299px;
     height: 46px;
-    background: #E9E9E9;
+    background: #e9e9e9;
     // can control position here
     // Make sure to change any directional in select__menu
     right: 1.2em;
-    
+
     border: ${({ theme }) => theme.colors.inputFormBorder};
     border-radius: 10px;
     &:hover {
       border: ${({ theme }) => theme.colors.inputFormBorderHover};
     }
   }
-  
-  .react-select{
+
+  .react-select {
     padding-left: 2em;
   }
 
@@ -34,7 +34,7 @@ export const DepartmentSelect = styled(Select)`
   }
 
   .react-select__placeholder {
-    color: #5C5C5C;
+    color: #5c5c5c;
     letter-spacing: 0.1rem;
     font-size: 19px;
     padding-bottom: 0.2rem;
@@ -54,7 +54,7 @@ export const DepartmentSelect = styled(Select)`
   }
 `;
 
-export const RemoveBox1 = styled.div`  
+export const RemoveBox1 = styled.div`
   .remove-box-icon1 {
   }
 `;
