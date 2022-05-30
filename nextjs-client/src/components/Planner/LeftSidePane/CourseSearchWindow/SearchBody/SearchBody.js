@@ -1,6 +1,7 @@
-import { StyledContainer, CompactUIContainer } from "./styled";
-import { Box } from "@chakra-ui/react"; // Divider
+import { StyledContainer, CompactUIContainer, CourseInfoContainer, lineSpec } from "./styled";
+import { Box } from "@chakra-ui/react"; 
 import { useGlobalObjects } from "@components/GlobalContextProvider";
+import { Course } from "src/entities/course";
 
 const shortenText = (maxCharacters, input) => {
   if (typeof input === "string" && input.length > maxCharacters) {
@@ -22,6 +23,20 @@ const shortenText = (maxCharacters, input) => {
 //   )
 // };
 
+const ColoredLine = ({ color, length }) => (
+  <lineSpec>
+    <hr
+      style={{
+          color: color,
+          backgroundColor: color,
+          height: "1px",
+          width: length,
+          margin: "1px"
+      }}
+    />
+  </lineSpec>
+);
+
 export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
   const {} = useGlobalObjects();
 
@@ -42,6 +57,7 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
       {/* <resultScrollbar> */}
         <div className="result-container">
           Results
+          <ColoredLine color="#5C5C5C" length="311px"/>
           {searchResults.length === 0 ? (
             <Box
               bg="#E7E7E7"
@@ -68,31 +84,42 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
           }
         </div>
       {/* </resultScrollbar> */}
-
-      <div className="course-container">
-        Course Info
-          <Box
-          bg="#F2F9FF"
-          p={4}
-          color="5C5C5C"
-          borderRadius={"12px"}
-          height="241px"
-          width="400px"
-          >
-            <div>
-              <p>{searchResults[0].title} {searchResults[0].unit} units</p>
-              <span>Offering history</span>
-              <hr />
-              {searchResults[0].offered_terms}
-              <br />
-              <br />
-              <span>Prerequisite</span>
-              <hr />
-              <br />
-              {searchResults[0].prereq}
-            </div>
-          </Box>
-      </div>
+      { searchResults.length === 0 ? ( null ) : 
+        <CourseInfoContainer>
+          <div className="course-container">
+            Course Info
+            <ColoredLine color="#5C5C5C" length="400px"/>
+            <Box
+            className="myBox"
+            bg="#F2F9FF"
+            p={4}
+            color="5C5C5C"
+            borderRadius={"12px"}
+            height="275px"
+            width="400px"
+            >
+              <div className="course-data">
+                <p className="title">{searchResults[0].title} {searchResults[0].unit} units</p>
+                <span className= "subtitle">Offering history</span>
+                <hr />
+                {searchResults[0].offered_terms}
+                <br />
+                <br />
+                <span className= "subtitle">Prerequisite</span>
+                <hr />
+                {shortenText(154, searchResults[0].prereq)}
+                <br />
+                <br />
+                <div className= "more"
+                  // onClick={height ="300px"}
+                >
+                  + More Info
+                </div>
+              </div>
+            </Box>
+          </div>
+        </CourseInfoContainer>
+      }
     </StyledContainer>
   );
 };

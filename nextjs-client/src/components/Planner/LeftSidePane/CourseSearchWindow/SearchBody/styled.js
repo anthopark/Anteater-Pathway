@@ -5,7 +5,7 @@ export const StyledContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: 19px;
+  font-size: 16px;
   font-family: oxygen;
 
   // Add a hover element
@@ -50,8 +50,8 @@ export const resultScrollbar = styled.div`
 const courseItemBorderRadius = "0.8rem";
 
 export const CompactUIContainer = styled.div`
-  width: 150px;
-  height: 45px;
+  width: 154.24px;
+  height: 40px;
   border-radius: ${courseItemBorderRadius};
   display: flex;
   justify-content: center;
@@ -66,5 +66,33 @@ export const CompactUIContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+  }
+`;
+
+export const CourseInfoContainer = styled.div`
+  height: 45px;
+  border-radius: ${courseItemBorderRadius};
+  display: flex;
+  justify-content: center;
+  font-family: oxygen;
+  letter-spacing: 1px;
+  display: flex;
+
+  .course-data {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+  .subtitle {
+    color: #989898;
+  }
+
+  .more {
+    margin-left: 17.5em;
+    color: #989898;
   }
 `;

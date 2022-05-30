@@ -129,13 +129,3 @@ export const SearchControl = ({
     Load into course info
     Tie into search algorithm
 */
-
-/* searchResults DATA STRUCTURE:
-  dept_code: 
-  num:
-  title:
-  unit:
-  desc:
-  offered_terms:
-  prereq:
-*/
