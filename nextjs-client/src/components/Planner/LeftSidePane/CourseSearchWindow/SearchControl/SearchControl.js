@@ -48,7 +48,7 @@ export const SearchControl = ({
         setSearchResults([]);
       }
     }
-    //console.log(response);
+    console.log(response);
   };
 
   return (
@@ -128,4 +128,14 @@ export const SearchControl = ({
     Hide initial result container box onClick
     Load into course info
     Tie into search algorithm
+*/
+
+/* searchResults DATA STRUCTURE:
+  dept_code: 
+  num:
+  title:
+  unit:
+  desc:
+  offered_terms:
+  prereq:
 */
