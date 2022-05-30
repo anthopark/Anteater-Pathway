@@ -42,8 +42,10 @@ export const SearchControl = ({
         description: "Please enter a department and/or course number!",
         status: "error",
         isClosable: true,
-        position: "bottom-right"
+        position: "bottom-right",
+        duration: 9000
       })
+      return; // Avoids error 404
     }
     else if (!department) {
       toast({
@@ -51,7 +53,8 @@ export const SearchControl = ({
         description: "Please enter a department!",
         status: "error",
         isClosable: true,
-        position: "bottom-right"
+        position: "bottom-right",
+        duration: 9000
       })
     }
 
@@ -64,6 +67,14 @@ export const SearchControl = ({
       if (response !== null) {
         setSearchResults([response]);
       } else {
+        toast({
+          title: 'Search fail',
+          description: "No course found!",
+          status: "error",
+          isClosable: true,
+          position: "bottom-right",
+          duration: 9000
+        })
         setSearchResults([]);
       }
     }
