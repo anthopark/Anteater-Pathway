@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchAllDepartment, fetchCourseConfig, fetchAllCoursesByDepartment, fetchSpecificCourse } from "src/api/courseAPI";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
-import { useToastBox } from "src/hooks/useToastBox";
+import { useToast } from '@chakra-ui/react'
 
 export const SearchControl = ({
   isSearchOpen,
@@ -17,6 +17,7 @@ export const SearchControl = ({
   const [departmentOptions, setDepartmentOptions] = useState([]);
   const [department, setDepartment] = useState(null);
   const [courseNumber, setCourseNumber] = useState();
+  const toast = useToast();
 
   const { data } = useQuery(
     `all-courses`,
@@ -34,9 +35,25 @@ export const SearchControl = ({
   }, [data]);
 
   const handleSearch = async () => {
-    // console.log(department); // TESTING DISPLAY DEPARTMENT
-    // console.log(courseNumber); // TESTING DISPLAY COURSE NUMBER
-    if (!department) return;
+    // TOAST BOX RESPONSE
+    if(!department & !courseNumber) {
+      toast({
+        title: 'Search fail',
+        description: "Please enter a department and/or course number!",
+        status: "error",
+        isClosable: true,
+        position: "bottom-right"
+      })
+    }
+    else if (!department) {
+      toast({
+        title: 'Search fail',
+        description: "Please enter a department!",
+        status: "error",
+        isClosable: true,
+        position: "bottom-right"
+      })
+    }
 
     let response;
     if (courseNumber === "") {
@@ -50,8 +67,6 @@ export const SearchControl = ({
         setSearchResults([]);
       }
     }
-    // console.log(response.length); // TESTING response length
-    // console.log(response); // TESTING DATA OUTPUT
   };
 
   return (

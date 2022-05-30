@@ -56,7 +56,6 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
         <div className="result-container">
           Results
           <ColoredLine color="#5C5C5C" length="360px"/>
-          {returnAllClasses}
 
           {searchResults.length === 0 ? (
             <Box
@@ -69,7 +68,7 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
             >
               Please Select Department first to begin searching for courses
             </Box>
-          ) : null//returnAllClasses
+          ) : returnAllClasses
           }
         </div>
       </resultScrollbar>
