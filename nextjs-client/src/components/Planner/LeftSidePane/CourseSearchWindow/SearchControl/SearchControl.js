@@ -48,7 +48,7 @@ export const SearchControl = ({
         setSearchResults([]);
       }
     }
-    console.log(response);
+    //console.log(response);
   };
 
   return (

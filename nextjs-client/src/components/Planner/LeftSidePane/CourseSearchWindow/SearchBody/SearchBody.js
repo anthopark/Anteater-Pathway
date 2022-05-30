@@ -1,9 +1,17 @@
-import { StyledContainer } from "./styled";
+import { StyledContainer, CompactUIContainer } from "./styled";
 import { Box } from "@chakra-ui/react"; // Divider
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 
-export const SearchBody = ({ searchResults, courseNumber }) => {
+const shortenText = (maxCharacters, input) => {
+  if (typeof input === "string" && input.length > maxCharacters) {
+    return input.slice(0, maxCharacters - 1) + "...";
+  }
+  return input;
+};
+
+export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
   const {} = useGlobalObjects();
+
   return (
     <StyledContainer>
       {/* RESULT BOX */}
@@ -21,27 +29,24 @@ export const SearchBody = ({ searchResults, courseNumber }) => {
             >
               Please Select Department first to begin searching for courses
             </Box>
-          ) : null}
+          ) : 
+          // Dynamically loaded class information
+          <CompactUIContainer
+          //onClick={() => showCourseInfo()}
+          >
+            <div className="course-code-box">
+              <div className="department">
+                {shortenText(7, searchResults[0].dept_code)}
+              </div>
+              <div className="number">{shortenText(5, searchResults[0].num)}</div>
+            </div>
+          </CompactUIContainer>}
         </div>
-        {/* Dynamically loaded class information */}
-       <Box
-        bg="#C4C4C4"
-        p={4}
-        color="WHITE"
-        fontSize={"19px"}
-        font
-        borderRadius={"8px"}
-        height="45px"
-        
-        width="150px"
-      >
-        searchResults
-      </Box> 
       </resultScrollbar>
 
       <div className="course-container">
         Course Info
-        {(searchResults.length > 0 && courseNumber != null) ? (
+        
           <Box
           bg="#F2F9FF"
           p={4}
@@ -64,7 +69,6 @@ export const SearchBody = ({ searchResults, courseNumber }) => {
               <br />+ More info
             </div>
           </Box>
-          ) : null}
       </div>
     </StyledContainer>
   );

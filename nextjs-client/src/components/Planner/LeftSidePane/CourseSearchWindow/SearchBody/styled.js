@@ -46,3 +46,25 @@ export const resultScrollbar = styled.div`
     }
   }
 `;
+
+const courseItemBorderRadius = "0.8rem";
+
+export const CompactUIContainer = styled.div`
+  width: 150px;
+  height: 45px;
+  border-radius: ${courseItemBorderRadius};
+  display: flex;
+  justify-content: center;
+  background-color: #C4C4C4;
+  color: white;
+  align-items: center;
+  font-size: 16px;
+  font-family: oxygen;
+  letter-spacing: 1px;
+
+  .course-code-box {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+`;
