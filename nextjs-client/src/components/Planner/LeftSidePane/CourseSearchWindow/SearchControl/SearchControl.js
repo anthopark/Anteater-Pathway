@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchAllDepartment, fetchCourseConfig, fetchAllCoursesByDepartment, fetchSpecificCourse } from "src/api/courseAPI";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
+import { useToastBox } from "src/hooks/useToastBox";
 
 export const SearchControl = ({
   isSearchOpen,
@@ -40,6 +41,7 @@ export const SearchControl = ({
     let response;
     if (courseNumber === "") {
       response = await fetchAllCoursesByDepartment(department);
+      setSearchResults(response);
     } else {
       response = await fetchSpecificCourse(department, courseNumber);
       if (response !== null) {
@@ -48,6 +50,7 @@ export const SearchControl = ({
         setSearchResults([]);
       }
     }
+    // console.log(response.length); // TESTING response length
     // console.log(response); // TESTING DATA OUTPUT
   };
 
@@ -73,7 +76,6 @@ export const SearchControl = ({
         autoComplete="off"
         spellCheck={false}
         placeholder="Enter Course name here..."
-        left="-1"
         padding="2.1rem 1.6rem"
         borderColor={themeStyles.colors.inputFormBorder}
         value={courseNumber}

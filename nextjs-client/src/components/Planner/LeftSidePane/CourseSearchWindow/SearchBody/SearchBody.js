@@ -52,11 +52,12 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
 
   return (
     <StyledContainer>
-      {/* RESULT BOX */}
       <resultScrollbar>
         <div className="result-container">
           Results
-          <ColoredLine color="#5C5C5C" length="311px"/>
+          <ColoredLine color="#5C5C5C" length="360px"/>
+          {returnAllClasses}
+
           {searchResults.length === 0 ? (
             <Box
               bg="#E7E7E7"
@@ -68,22 +69,11 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
             >
               Please Select Department first to begin searching for courses
             </Box>
-          ) : returnAllClasses
-          // Dynamically loaded class information
-          // <CompactUIContainer
-          // //onClick={() => showCourseInfo()}
-          // >
-          //   <div className="course-code-box">
-          //     <div className="department">
-          //       {shortenText(7, searchResults[0].dept_code)}
-          //     </div>
-          //     <div className="number">{shortenText(5, searchResults[0].num)}</div>
-          //   </div>
-          // </CompactUIContainer>
+          ) : null//returnAllClasses
           }
         </div>
       </resultScrollbar>
-      { searchResults.length === 0 ? ( null ) : 
+      { searchResults.length === 1 ? ( 
         <CourseInfoContainer>
           <div className="course-container">
             Course Info
@@ -101,7 +91,7 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
                 <p className="title">{searchResults[0].title} {searchResults[0].unit} units</p>
                 <span className= "subtitle">Offering history</span>
                 <hr />
-                {searchResults[0].offered_terms}
+                {searchResults[0].offered_terms} {/* got to create a map for this too */}
                 <br />
                 <br />
                 <span className= "subtitle">Prerequisite</span>
@@ -118,6 +108,7 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
             </Box>
           </div>
         </CourseInfoContainer>
+       ) : null
       }
     </StyledContainer>
   );
