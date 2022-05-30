@@ -1,7 +1,6 @@
 import { StyledContainer, CompactUIContainer, CourseInfoContainer, lineSpec } from "./styled";
 import { Box } from "@chakra-ui/react"; 
 import { useGlobalObjects } from "@components/GlobalContextProvider";
-import { Course } from "src/entities/course";
 
 const shortenText = (maxCharacters, input) => {
   if (typeof input === "string" && input.length > maxCharacters) {
@@ -54,7 +53,7 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
   return (
     <StyledContainer>
       {/* RESULT BOX */}
-      {/* <resultScrollbar> */}
+      <resultScrollbar>
         <div className="result-container">
           Results
           <ColoredLine color="#5C5C5C" length="311px"/>
@@ -83,7 +82,7 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
           // </CompactUIContainer>
           }
         </div>
-      {/* </resultScrollbar> */}
+      </resultScrollbar>
       { searchResults.length === 0 ? ( null ) : 
         <CourseInfoContainer>
           <div className="course-container">
@@ -123,7 +122,6 @@ export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
     </StyledContainer>
   );
 };
-
 
 /* searchResults DATA STRUCTURE:
   dept_code: 

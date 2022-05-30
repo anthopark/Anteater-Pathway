@@ -54,11 +54,6 @@ export const DepartmentSelect = styled(Select)`
   }
 `;
 
-export const RemoveBox1 = styled.div`
-  .remove-box-icon1 {
-  }
-`;
-
 export const lineSpec = styled.div`
   right: 20em;
 `;

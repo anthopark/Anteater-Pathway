@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyledContainer, DepartmentSelect, RemoveBox1 } from "./styled";
+import { StyledContainer, DepartmentSelect } from "./styled";
 import { Input, Button as ChakraButton } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,8 +33,8 @@ export const SearchControl = ({
   }, [data]);
 
   const handleSearch = async () => {
-    // console.log(department); TESTING DISPLAY DEPARTMENT
-    // console.log(courseNumber); TESTING DISPLAY COURSE NUMBER
+    // console.log(department); // TESTING DISPLAY DEPARTMENT
+    // console.log(courseNumber); // TESTING DISPLAY COURSE NUMBER
     if (!department) return;
 
     let response;
@@ -48,7 +48,7 @@ export const SearchControl = ({
         setSearchResults([]);
       }
     }
-    console.log(response);
+    // console.log(response); // TESTING DATA OUTPUT
   };
 
   return (
@@ -105,27 +105,18 @@ export const SearchControl = ({
         Search
       </ChakraButton>
       {/* Top Right Exit Icon */}
-      <RemoveBox1>
-        <FontAwesomeIcon
-          className="remove-box-icon1"
-          icon={["fas", "times"]}
-          onClick={() => setIsSearchOpen(!isSearchOpen)}
-          style={{
-            fontSize: "2rem",
-            color: "#5C5C5C",
-            height: "24px",
-            width: "24px",
-            margin: "8px",
-          }}
-        />
-      </RemoveBox1>
+      <FontAwesomeIcon
+        className="remove-box-icon1"
+        icon={["fas", "times"]}
+        onClick={() => setIsSearchOpen(!isSearchOpen)}
+        style={{
+          fontSize: "2rem",
+          color: "#5C5C5C",
+          height: "24px",
+          width: "24px",
+          margin: "8px",
+        }}
+      />
     </StyledContainer>
   );
 };
-
-/*
-  Search button
-    Hide initial result container box onClick
-    Load into course info
-    Tie into search algorithm
-*/
