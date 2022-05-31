@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useToast } from "@chakra-ui/react";
 import { RemoveBox } from "../../AcademicYearDisplay/styled";
+import RightSidePane from "@components/Planner/RightSidePane";
 
 export const SearchControl = ({
   isSearchOpen,
@@ -150,7 +151,7 @@ export const SearchControl = ({
             color: "#5C5C5C",
             height: "24px",
             width: "24px",
-            margin: "8px",
+            margin: "8px"
           }}
         />
       </RemoveBox1>

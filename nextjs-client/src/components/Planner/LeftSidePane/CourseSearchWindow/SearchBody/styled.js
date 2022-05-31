@@ -21,7 +21,7 @@ export const ResultScrollbar = styled.div`
     display: grid;
     width: 30rem;
     grid-template-columns: 1fr 1fr;
-    max-height: 40rem;
+    max-height: 36rem;
     overflow-y: auto;
     overflow-x: hidden;
 

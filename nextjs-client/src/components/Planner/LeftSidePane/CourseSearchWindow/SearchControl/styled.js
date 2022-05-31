@@ -59,5 +59,5 @@ export const lineSpec = styled.div`
 
 export const RemoveBox1 = styled.div`
   display: flex;
-  align-items: center;
+  float: right;
 `;
