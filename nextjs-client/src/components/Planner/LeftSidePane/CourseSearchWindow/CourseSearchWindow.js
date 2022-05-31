@@ -18,13 +18,9 @@ export const CourseSearchWindow = ({ isSearchOpen, setIsSearchOpen }) => {
         />
       </div>
       <div className="body">
-        <SearchBody 
-          searchResults={searchResults} 
-          courseNumber={courseNumber}
-        />
+        <SearchBody searchResults={searchResults} courseNumber={courseNumber} />
       </div>
-      <div className="footer">
-      </div>
+      <div className="footer"></div>
     </StyledContainer>
   );
 };

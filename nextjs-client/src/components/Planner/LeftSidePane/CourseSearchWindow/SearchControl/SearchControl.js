@@ -3,10 +3,15 @@ import { StyledContainer, DepartmentSelect } from "./styled";
 import { Input, Button as ChakraButton } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fetchAllDepartment, fetchCourseConfig, fetchAllCoursesByDepartment, fetchSpecificCourse } from "src/api/courseAPI";
+import {
+  fetchAllDepartment,
+  fetchCourseConfig,
+  fetchAllCoursesByDepartment,
+  fetchSpecificCourse,
+} from "src/api/courseAPI";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
 
 export const SearchControl = ({
   isSearchOpen,
@@ -36,26 +41,25 @@ export const SearchControl = ({
 
   const handleSearch = async () => {
     // TOAST BOX RESPONSE
-    if(!department & !courseNumber) {
+    if (!department & !courseNumber) {
       toast({
-        title: 'Search fail',
+        title: "Search fail",
         description: "Please enter a department and/or course number!",
         status: "error",
         isClosable: true,
         position: "bottom-right",
-        duration: 9000
-      })
+        duration: 9000,
+      });
       return; // Avoids error 404
-    }
-    else if (!department) {
+    } else if (!department) {
       toast({
-        title: 'Search fail',
+        title: "Search fail",
         description: "Please enter a department!",
         status: "error",
         isClosable: true,
         position: "bottom-right",
-        duration: 9000
-      })
+        duration: 9000,
+      });
     }
 
     let response;
@@ -68,13 +72,13 @@ export const SearchControl = ({
         setSearchResults([response]);
       } else {
         toast({
-          title: 'Search fail',
+          title: "Search fail",
           description: "No course found!",
           status: "error",
           isClosable: true,
           position: "bottom-right",
-          duration: 9000
-        })
+          duration: 9000,
+        });
         setSearchResults([]);
       }
     }
