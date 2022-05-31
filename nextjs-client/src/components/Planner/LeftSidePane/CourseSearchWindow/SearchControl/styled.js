@@ -3,7 +3,6 @@ import Select from "react-select";
 
 export const StyledContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -56,4 +55,9 @@ export const DepartmentSelect = styled(Select)`
 
 export const lineSpec = styled.div`
   right: 20em;
+`;
+
+export const RemoveBox1 = styled.div`
+  display: flex;
+  align-items: center;
 `;

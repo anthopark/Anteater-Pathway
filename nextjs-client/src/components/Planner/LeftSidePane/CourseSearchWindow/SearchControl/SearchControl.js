@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { StyledContainer, DepartmentSelect } from "./styled";
-import { Input, Button as ChakraButton, Circle } from "@chakra-ui/react";
+import { StyledContainer, DepartmentSelect, RemoveBox1 } from "./styled";
+import { Input, Button as ChakraButton } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,6 +12,7 @@ import {
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useToast } from "@chakra-ui/react";
+import { RemoveBox } from "../../AcademicYearDisplay/styled";
 
 export const SearchControl = ({
   isSearchOpen,
@@ -98,6 +99,7 @@ export const SearchControl = ({
         classNamePrefix="react-input"
         bg="#E9E9E9"
         width="238px"
+        margin={".5rem"}
         height="46px"
         fontSize="19px"
         letterSpacing=".1rem"
@@ -117,7 +119,7 @@ export const SearchControl = ({
         _placeholder={{
           paddingTop: "2rem",
           color: "darkslategrey",
-          fontSize: "1.6rem",
+          fontSize: "1.6rem"
         }}
       />
       {/* Search Button Icon */}
@@ -125,6 +127,7 @@ export const SearchControl = ({
         classNamePrefix="react-searchButton"
         mt=".4rem"
         width="140px"
+        margin={"1rem"}
         height="46px"
         letterSpacing=".1rem"
         padding="2.1rem 1.6rem"
@@ -137,18 +140,20 @@ export const SearchControl = ({
         Search
       </ChakraButton>
       {/* Exit Icon */}
-      <FontAwesomeIcon
-        className="remove-box-icon1"
-        icon={["fas", "times"]}
-        onClick={() => setIsSearchOpen(!isSearchOpen)}
-        style={{
-          fontSize: "2rem",
-          color: "#5C5C5C",
-          height: "24px",
-          width: "24px",
-          margin: "8px",
-        }}
-      />
+      <RemoveBox1>
+        <FontAwesomeIcon
+          className="remove-box-icon1"
+          icon={["fas", "times"]}
+          onClick={() => setIsSearchOpen(!isSearchOpen)}
+          style={{
+            fontSize: "2rem",
+            color: "#5C5C5C",
+            height: "24px",
+            width: "24px",
+            margin: "8px",
+          }}
+        />
+      </RemoveBox1>
     </StyledContainer>
   );
 };
