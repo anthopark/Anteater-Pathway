@@ -9,19 +9,6 @@ const shortenText = (maxCharacters, input) => {
   return input;
 };
 
-// function returnAllClasses() {
-//   return (
-    // <CompactUIContainer>
-    // <div className="course-code-box">
-    //   <div className="department">
-    //     {shortenText(7, searchResults.map((data) => { dept_code={data} }))}
-    //   </div>
-    //   <div className="number">{shortenText(5, searchResults.map((data) => { num={data} }))}</div>
-    // </div>
-    // </CompactUIContainer>
-//   )
-// };
-
 const ColoredLine = ({ color, length }) => (
   <lineSpec>
     <hr
@@ -36,7 +23,7 @@ const ColoredLine = ({ color, length }) => (
   </lineSpec>
 );
 
-export const SearchBody = ({ searchResults/*, courseNumber*/ }) => {
+export const SearchBody = ({ searchResults }) => {
   const {} = useGlobalObjects();
 
   const returnAllClasses = searchResults.map((data) => 

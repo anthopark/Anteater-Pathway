@@ -79,16 +79,16 @@ export const SearchControl = ({
       }
     }
   };
-
   return (
-    // Select a department Icon
     <StyledContainer>
+      {/* Select a department Icon */}
       <DepartmentSelect
         classNamePrefix="react-select"
         placeholder="Department..."
         options={departmentOptions}
         onChange={(option) => setDepartment(option.value)}
       />
+      {/* Input Icon */}
       <Input
         // Input component
         classNamePrefix="react-input"
@@ -132,7 +132,7 @@ export const SearchControl = ({
       >
         Search
       </ChakraButton>
-      {/* Top Right Exit Icon */}
+      {/* Exit Icon */}
       <FontAwesomeIcon
         className="remove-box-icon1"
         icon={["fas", "times"]}
