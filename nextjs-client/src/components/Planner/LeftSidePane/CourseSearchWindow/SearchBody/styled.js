@@ -13,17 +13,13 @@ export const StyledContainer = styled.div`
 
 export const ResultScrollbar = styled.div`
   padding: 0rem 2rem 0 0;
-  /* height: calc(100vh - 12rem);
-  max-height: calc(100vh - 12rem);
-  overflow-y: auto;
-  overflow-x: hidden; */
 
   .result-container {
     margin-top: 1rem;
     margin-bottom: 0.8rem;
     padding: 0 1.2rem;
     display: grid;
-    width: 40rem;
+    width: 30rem;
     grid-template-columns: 1fr 1fr;
     max-height: 40rem;
     overflow-y: auto;
@@ -46,19 +42,25 @@ export const ResultScrollbar = styled.div`
       display: none;
     }
   }
+
+  .boxy {
+    margin-top: 3rem;
+    margin-right: 3rem;
+    left: -3rem;
+  }
 `;
 
 const courseItemBorderRadius = "0.8rem";
 
 export const CompactUIContainer = styled.div`
-  width: 154.24px;
+  width: 125px;
   height: 40px;
   margin-right: 1.5rem;
   margin-bottom: 0.5rem;
   border-radius: ${courseItemBorderRadius};
   display: flex;
   justify-content: center;
-  background-color: #c4c4c4;
+  background-color: #003358;
   color: white;
   align-items: center;
   font-size: 16px;

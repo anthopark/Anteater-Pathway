@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyledContainer, DepartmentSelect } from "./styled";
-import { Input, Button as ChakraButton } from "@chakra-ui/react";
+import { Input, Button as ChakraButton, Circle } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -63,7 +63,7 @@ export const SearchControl = ({
     }
 
     let response;
-    if (courseNumber === "") {
+    if (courseNumber === "" || courseNumber === undefined) {
       response = await fetchAllCoursesByDepartment(department);
       setSearchResults(response);
     } else {

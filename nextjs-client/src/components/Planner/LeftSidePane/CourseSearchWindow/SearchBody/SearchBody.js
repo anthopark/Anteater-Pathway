@@ -2,7 +2,7 @@ import {
   StyledContainer,
   CompactUIContainer,
   CourseInfoContainer,
-  ResultScrollbar,
+  ResultScrollbar
 } from "./styled";
 import { Box } from "@chakra-ui/react";
 import { useGlobalObjects } from "@components/GlobalContextProvider";
@@ -44,22 +44,20 @@ export const SearchBody = ({ searchResults }) => {
     <StyledContainer>
       <ResultScrollbar>
         <div className="result-container">
-          Results
-          <ColoredLine color="#5C5C5C" length="360px" />
+          Results:
           {searchResults.length === 0 ? (
             <Box
+              className="boxy"
               bg="#E7E7E7"
               p={4}
               color="5C5C5C"
               borderRadius={"10px"}
-              height="241px"
-              width="363px"
+              height="300px"
+              width="235px"
             >
               Please Select Department first to begin searching for courses
             </Box>
-          ) : (
-            returnAllClasses
-          )}
+          ) : ( returnAllClasses )}
         </div>
       </ResultScrollbar>
       {searchResults.length === 1 ? (
@@ -91,10 +89,7 @@ export const SearchBody = ({ searchResults }) => {
                 {shortenText(154, searchResults[0].prereq)}
                 <br />
                 <br />
-                <div
-                  className="more"
-                  // onClick={height ="300px"}
-                >
+                <div className="more">
                   + More Info
                 </div>
               </div>
@@ -105,13 +100,3 @@ export const SearchBody = ({ searchResults }) => {
     </StyledContainer>
   );
 };
-
-/* searchResults DATA STRUCTURE:
-  dept_code: 
-  num:
-  title:
-  unit:
-  desc:
-  offered_terms:
-  prereq:
-*/
