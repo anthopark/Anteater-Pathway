@@ -22,7 +22,7 @@ export const lightTheme = {
     redText: "#F36B6B",
     disabledText: "#cccccc",
     academicYearBg: WHITE_DISPLAY_1,
-    quarterBoxBg: "#EFE9FA",
+    quarterBoxBg: "#EEE9F9",
     emptyButton: "#aaaaaa",
     inputFormBorder: "#9f9f9f",
     inputFormBorderHover: "#0087cb",
