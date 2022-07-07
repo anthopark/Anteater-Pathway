@@ -113,14 +113,14 @@ export const AcademicYearDisplay = () => {
                     {openedIndices.includes(index) ? (
                       <FontAwesomeIcon
                         className="remove-box-icon"
-                        icon={["fas", "times"]}
+                        icon={["fas", "trash"]}
                         onClick={() =>
                           handleRemoveAcademicYear(academicYear.year, index)
                         }
                         style={{
                           fontSize: "1.7rem",
                           marginTop: ".3rem",
-                          color: "#E34522",
+                          color: "#F36B6B",
                           cursor: "pointer",
                           paddingBottom: "3px",
                         }}
