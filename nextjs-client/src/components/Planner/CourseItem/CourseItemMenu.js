@@ -115,7 +115,7 @@ export const CourseItemMenu = ({
                 style={{
                   fontSize: "1.5rem",
                   marginTop: ".3rem",
-                  color: "#E34522",
+                  color: "#F36B6B",
                 }}
               />
               <p className="delete-text">delete</p>

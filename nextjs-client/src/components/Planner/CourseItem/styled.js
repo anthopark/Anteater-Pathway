@@ -11,7 +11,7 @@ const fadeIn = keyframes`
 `;
 
 const darkFontColor = "#5C5C5C";
-const lightFontColor = "#E6EAE7";
+// const lightFontColor = "#E6EAE7";
 
 const bgColors = {
   color1: "#C4C3E4",
@@ -30,13 +30,13 @@ const bgColors = {
 
 const fontColors = {
   color1: darkFontColor,
-  color2: lightFontColor,
+  color2: darkFontColor,
   color3: darkFontColor,
   color4: darkFontColor,
   color5: darkFontColor,
   color6: darkFontColor,
   color7: darkFontColor,
-  color8: lightFontColor,
+  color8: darkFontColor,
   color9: darkFontColor,
   color10: darkFontColor,
   color11: darkFontColor,
