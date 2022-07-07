@@ -111,9 +111,9 @@ export const CourseItemMenu = ({
           <div className="delete-container">
             <a className="delete-link" onClick={handleDelete}>
               <FontAwesomeIcon
-                icon={["fas", "times-circle"]}
+                icon={["fas", "trash"]}
                 style={{
-                  fontSize: "1.6rem",
+                  fontSize: "1.5rem",
                   marginTop: ".3rem",
                   color: "#E34522",
                 }}

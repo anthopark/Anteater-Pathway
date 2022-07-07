@@ -70,6 +70,7 @@ export const RemoveBox = styled.div`
           width: 5rem;
           display: flex;
           padding: 0 2rem 0 0;
+          margin: 0 0 0 4rem;
         `
       : null}
   justify-content: center;

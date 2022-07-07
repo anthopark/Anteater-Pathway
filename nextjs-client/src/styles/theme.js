@@ -19,7 +19,7 @@ export const lightTheme = {
     courseMenuBg: WHITE_DISPLAY_1,
     lightBorder: "#bbbbbb",
     defaultText: "#5C5C5C",
-    redText: "#E34522",
+    redText: "#F36B6B",
     disabledText: "#cccccc",
     academicYearBg: WHITE_DISPLAY_1,
     quarterBoxBg: "#EFE9FA",
