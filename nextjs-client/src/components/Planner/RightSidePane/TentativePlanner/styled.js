@@ -28,10 +28,10 @@ export const StyledContainer = styled.div`
       margin-right: 0.3rem;
       color: ${({ theme }) => theme.colors.emptyButton};
       transition: color 200ms ease-in-out;
-    }
 
-    .clear-all-box:hover {
-      color: ${({ theme }) => theme.colors.courseEmptyButtonHover};
+      &:hover {
+        color: ${({ theme }) => theme.colors.courseEmptyButtonHover};
+      }
     }
   }
 
