@@ -27,6 +27,11 @@ export const StyledContainer = styled.div`
       cursor: pointer;
       margin-right: 0.3rem;
       color: ${({ theme }) => theme.colors.emptyButton};
+      transition: color 200ms ease-in-out;
+
+      &:hover {
+        color: ${({ theme }) => theme.colors.courseEmptyButtonHover};
+      }
     }
   }
 

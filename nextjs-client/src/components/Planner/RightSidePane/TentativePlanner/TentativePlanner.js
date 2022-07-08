@@ -18,7 +18,7 @@ export const TentativePlanner = () => {
   return (
     <StyledContainer>
       <div className="header">
-        <div className="title">Tentatively Planned</div>
+        <div className="title">Course Bag</div>
         <div className="clear-all-box">
           {!appUser.tentativePlanner.isEmpty() ? (
             <a className="clear-all-button" onClick={handleEmptyButtonClick}>
