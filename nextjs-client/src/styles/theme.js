@@ -20,6 +20,7 @@ export const lightTheme = {
     lightBorder: "#bbbbbb",
     defaultText: "#5C5C5C",
     redText: "#F36B6B",
+    courseEmptyButtonHover: "#7D7D7D",
     disabledText: "#cccccc",
     academicYearBg: WHITE_DISPLAY_1,
     quarterBoxBg: "rgba(238, 233, 249, 0.7)",
