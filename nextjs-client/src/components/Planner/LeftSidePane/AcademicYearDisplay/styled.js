@@ -10,7 +10,7 @@ const fadeIn = keyframes`
     }
 `;
 
-const widthfadeOut = keyframes`
+const widthFadeOut = keyframes`
     0% {
         width: 100%;
     }
@@ -33,7 +33,7 @@ export const AccordionItemContainer = styled.div`
       isRemovingAccordion
         ? css`
             width: 0%;
-            animation: ${widthfadeOut} 0.2s ease-out;
+            animation: ${widthFadeOut} 0.2s ease-out;
           `
         : null}
   }
@@ -78,6 +78,26 @@ export const RemoveBox = styled.div`
   transition: all 0.3s;
   .remove-box-icon {
     animation: ${fadeIn} 0.7s ease;
+  }
+`;
+
+export const RemoveConfirmContent = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 0.7rem 1rem;
+  color: ${({ theme }) => theme.colors.defaultText};
+  .text-box {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .button-box {
+    padding-top: 1.5rem;
+    padding-right: 0.1rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 `;
 

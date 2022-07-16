@@ -6,10 +6,16 @@ import {
   AccordionItem,
   AccordionIcon,
   AccordionPanel,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+  PopoverCloseButton,
 } from "@chakra-ui/react";
 import { QuartersDisplay } from "./QuartersDisplay";
 import {
   AcademicYearDisplayContainer,
+  RemoveConfirmContent,
   AccordionItemContainer,
   RemoveBox,
 } from "./styled";
@@ -111,20 +117,73 @@ export const AcademicYearDisplay = () => {
                     isOpen={openedIndices.includes(index)}
                   >
                     {openedIndices.includes(index) ? (
-                      <FontAwesomeIcon
-                        className="remove-box-icon"
-                        icon={["fas", "trash"]}
-                        onClick={() =>
-                          handleRemoveAcademicYear(academicYear.year, index)
-                        }
-                        style={{
-                          fontSize: "1.7rem",
-                          marginTop: ".3rem",
-                          color: "#F36B6B",
-                          cursor: "pointer",
-                          paddingBottom: "3px",
-                        }}
-                      />
+                      <Popover
+                        isLazy
+                        placement="right-start"
+                        arrowSize="1.2rem"
+                      >
+                        <PopoverTrigger>
+                          <Button
+                            bg="transparent"
+                            _active={{ backgroundColor: "none" }}
+                            _focus={{ backgroundColor: "none" }}
+                            _hover={{ backgroundColor: "none" }}
+                          >
+                            <FontAwesomeIcon
+                              className="remove-box-icon"
+                              icon={["fas", "trash"]}
+                              style={{
+                                fontSize: "1.7rem",
+                                marginTop: ".3rem",
+                                color: "#F36B6B",
+                                cursor: "pointer",
+                                paddingBottom: "3px",
+                              }}
+                            />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          w="18rem"
+                          h="8.5rem"
+                          borderRadius="3px"
+                          border="2px solid darkgray"
+                        >
+                          <PopoverCloseButton
+                            fontSize="1.3rem"
+                            letterSpacing="1px"
+                            mt="4.1rem"
+                            mr="8.8rem"
+                            w="7rem"
+                            h="3rem"
+                            border="1px solid gray"
+                          >
+                            Close
+                          </PopoverCloseButton>
+                          <RemoveConfirmContent>
+                            <div className="text-box">{`Delete year ${
+                              academicYear.year
+                            } - ${academicYear.year + 1}?`}</div>
+                            <div className="button-box">
+                              <Button
+                                fontSize="1.3rem"
+                                size="lg"
+                                w="7rem"
+                                h="3rem"
+                                colorScheme="red"
+                                bg="#F36B6B"
+                                onClick={() =>
+                                  handleRemoveAcademicYear(
+                                    academicYear.year,
+                                    index
+                                  )
+                                }
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          </RemoveConfirmContent>
+                        </PopoverContent>
+                      </Popover>
                     ) : null}
                   </RemoveBox>
                 </div>

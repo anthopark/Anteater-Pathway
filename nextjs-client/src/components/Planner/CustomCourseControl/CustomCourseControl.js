@@ -6,7 +6,6 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverArrow,
   PopoverCloseButton,
   Button as ChakraButton,
 } from "@chakra-ui/react";
@@ -44,7 +43,7 @@ export const CustomCourseControl = () => {
         <PopoverContent
           width="30rem"
           padding="1rem"
-          borderRadius="10px"
+          borderRadius="3px"
           margin="0.5rem 1.5rem"
         >
           <PopoverHeader
@@ -54,7 +53,6 @@ export const CustomCourseControl = () => {
           >
             <p>Create Custom Course</p>
           </PopoverHeader>
-          <PopoverArrow />
           <PopoverCloseButton
             mt=".5rem"
             mr=".5rem"
