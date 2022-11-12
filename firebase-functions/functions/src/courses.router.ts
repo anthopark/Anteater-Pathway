@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { collections } from './database.service';
+import { crawlAllDepartments } from './course-updater/course-updater';
 
 export const courseRouter = express.Router();
 
@@ -31,3 +32,13 @@ courseRouter.get('/:dept_code/:num', async (req: Request, res: Response) => {
 
   return res.send(course);
 });
+
+courseRouter.patch(
+  '/update/departments',
+  async (req: Request, res: Response) => {
+    console.log('hi');
+    const data = await crawlAllDepartments();
+
+    return res.send(data);
+  }
+);

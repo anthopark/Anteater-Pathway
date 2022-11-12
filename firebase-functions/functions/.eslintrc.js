@@ -13,7 +13,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['tsconfig.json', 'tsconfig.dev.json'],
+    // project: ['tsconfig.json', 'tsconfig.dev.json'],
     sourceType: 'module',
   },
   ignorePatterns: [
@@ -27,5 +27,6 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'valid-jsdoc': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };

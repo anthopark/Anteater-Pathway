@@ -1,11 +1,14 @@
 import * as functions from 'firebase-functions';
-import { initializeApp } from 'firebase-admin/app';
+import * as admin from 'firebase-admin';
+import * as fireorm from 'fireorm';
 import * as express from 'express';
 import * as cors from 'cors';
 import { connectToDatabase } from './database.service';
 import { courseRouter } from './courses.router';
 
-initializeApp();
+admin.initializeApp();
+const firestore = admin.firestore();
+fireorm.initialize(firestore);
 
 const app = express();
 
