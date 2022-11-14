@@ -9,6 +9,20 @@ export class DepartmentCollection {
   code: string;
 }
 
+@Collection()
+export class CourseCollection {
+  id: string;
+  deptCode: string;
+  num: string;
+  title: string;
+  unit: number | null;
+  isVariableUnit: boolean;
+  isWorkloadCredit: boolean;
+  maxUnit: number | null;
+  minUnit: number | null;
+  geCode: string | null;
+}
+
 interface Repository {
   departments?: BaseFirestoreRepository<DepartmentCollection>;
 }

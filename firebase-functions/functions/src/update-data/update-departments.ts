@@ -54,15 +54,15 @@ const crawlAllDepartments = async (): Promise<CrawledDepartment[]> => {
   try {
     response = await axios.get(ALL_DEPARTMENT_URL);
   } catch (e) {
-    functions.logger.error(`Error while downloading ${ALL_DEPARTMENT_URL}`);
+    functions.logger.error(`Error while requesting ${ALL_DEPARTMENT_URL}`);
     functions.logger.error((e as Error).message);
     return Promise.reject(e);
   }
 
   const $ = cheerio.load(response.data);
 
-  $('#atozindex li a').each((_, element) => {
-    const text = $(element).text();
+  $('#atozindex li a').each((_, elem) => {
+    const text = $(elem).text();
     const name = text.substring(0, text.indexOf('(')).trim();
     const code = text
       .substring(text.indexOf('(') + 1, text.indexOf(')'))

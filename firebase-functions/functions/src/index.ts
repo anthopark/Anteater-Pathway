@@ -14,4 +14,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/course', courseRouter);
-exports.app = functions.https.onRequest(app);
+exports.app = functions
+  .runWith({
+    timeoutSeconds: 300,
+  })
+  .https.onRequest(app);

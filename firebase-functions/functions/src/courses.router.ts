@@ -2,6 +2,7 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import { repository } from './firestore.service';
 import { updateDepartments } from './update-data/update-departments';
+import { updateCourses } from './update-data/update-courses';
 
 export const courseRouter = express.Router();
 
@@ -25,3 +26,8 @@ courseRouter.patch(
     res.sendStatus(200);
   }
 );
+
+courseRouter.patch('/update/courses', async (req: Request, res: Response) => {
+  await updateCourses();
+  res.sendStatus(200);
+});
