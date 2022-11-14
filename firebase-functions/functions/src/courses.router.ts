@@ -1,44 +1,27 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
-import { collections } from './database.service';
-import { crawlAllDepartments } from './course-updater/course-updater';
+import { repository } from './firestore.service';
+import { updateDepartments } from './update-data/update-departments';
 
 export const courseRouter = express.Router();
 
-const simplifiedProjection = {
-  _id: 0,
-  deptCode: 1,
-  num: 1,
-  title: 1,
-  unit: 1,
-};
+courseRouter.get('/department/all', async (req: Request, res: Response) => {
+  const departments = await repository
+    .departments!.orderByAscending('name')
+    .find();
 
-courseRouter.get('/:dept_code/all', async (req: Request, res: Response) => {
-  const courses = await collections
-    .courses!.find({
-      deptCode: req.params.dept_code.toUpperCase(),
-    })
-    .project(simplifiedProjection)
-    .toArray();
+  const result = departments.map((dept) => ({
+    name: dept.name,
+    code: dept.code,
+  }));
 
-  return res.send(courses);
-});
-
-courseRouter.get('/:dept_code/:num', async (req: Request, res: Response) => {
-  const course = await collections.courses!.findOne({
-    deptCode: req.params.dept_code.toUpperCase(),
-    num: req.params.num.toUpperCase(),
-  });
-
-  return res.send(course);
+  return res.send(result);
 });
 
 courseRouter.patch(
   '/update/departments',
   async (req: Request, res: Response) => {
-    console.log('hi');
-    const data = await crawlAllDepartments();
-
-    return res.send(data);
+    await updateDepartments();
+    res.sendStatus(200);
   }
 );
