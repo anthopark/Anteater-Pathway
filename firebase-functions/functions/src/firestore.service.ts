@@ -2,15 +2,15 @@ import * as admin from 'firebase-admin';
 import * as fireorm from 'fireorm';
 import { getRepository, Collection, BaseFirestoreRepository } from 'fireorm';
 
-@Collection()
-export class DepartmentCollection {
+@Collection('Departments')
+export class DepartmentDocument {
   id: string;
   name: string;
   code: string;
 }
 
-@Collection()
-export class CourseCollection {
+@Collection('Courses')
+export class CourseDocument {
   id: string;
   deptCode: string;
   num: string;
@@ -24,7 +24,7 @@ export class CourseCollection {
 }
 
 interface Repository {
-  departments?: BaseFirestoreRepository<DepartmentCollection>;
+  departments?: BaseFirestoreRepository<DepartmentDocument>;
 }
 
 export const repository: Repository = {};
@@ -32,5 +32,5 @@ export const repository: Repository = {};
 export const initializeFirestore = () => {
   fireorm.initialize(admin.firestore());
 
-  repository.departments = getRepository(DepartmentCollection);
+  repository.departments = getRepository(DepartmentDocument);
 };

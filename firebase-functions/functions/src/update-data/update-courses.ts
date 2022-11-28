@@ -1,10 +1,21 @@
 import * as functions from 'firebase-functions';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { repository, CourseCollection } from '../firestore.service';
+import { repository, CourseDocument } from '../firestore.service';
 
 const ALL_DEPARTMENT_URL = 'https://catalogue.uci.edu/allcourses/';
 const CATALOGUE_BASE_URL = 'https://catalogue.uci.edu';
+const COURSE_DESCRIPTIONS = [
+  'Prerequisite:',
+  'Restriction:',
+  'Same as',
+  'Grading Option:',
+  'Overlaps with',
+  'Repeatability:',
+  'Concurrent with',
+  'Corequisite:',
+  'Prerequisite or corequisite:',
+];
 
 interface CrawledCourse {
   deptCode: string;
@@ -25,10 +36,13 @@ export const updateCourses = async () => {
   for (const url of urls) {
     const pageUrl = CATALOGUE_BASE_URL + url;
     functions.logger.info(`Crawling course page: ${pageUrl}`);
-    await crawlCourses(pageUrl);
+    const someSet = new Set<string>();
+    await crawlCourses(pageUrl, someSet);
+
+    console.log(someSet);
   }
 
-  // await crawlCourses('https://catalogue.uci.edu/allcourses/inno/');
+  // await crawlCourses('https://catalogue.uci.edu/allcourses/i_c_sci/');
   // await crawlCourses('https://catalogue.uci.edu/allcourses/uni_stu/');
 
   functions.logger.info('Finished crawling courses.');
@@ -52,7 +66,10 @@ const crawlAllCourseUrls = async (): Promise<string[]> => {
   return Promise.resolve(result);
 };
 
-const crawlCourses = async (url: string): Promise<CrawledCourse[]> => {
+const crawlCourses = async (
+  url: string,
+  someSet: Set<string>
+): Promise<CrawledCourse[]> => {
   const result: CrawledCourse[] = [];
   const pageHTML = await downloadPage(url);
 
@@ -61,21 +78,31 @@ const crawlCourses = async (url: string): Promise<CrawledCourse[]> => {
   $('.courses .courseblock').each((_, elem) => {
     const titleBlock = $(elem).find('.courseblocktitle strong');
 
-    processTitleBlock(titleBlock.text().replace(/\u00A0/g, ' '));
+    const parsedTitleBlock = parseTitleBlock(
+      titleBlock.text().replace(/\u00A0/g, ' ')
+    );
 
-    const descBlock = $(elem).find('.courseblockdesc');
+    const descBlock = $(elem)
+      .find('.courseblockdesc p')
+      .map((_, elem) =>
+        $(elem)
+          .text()
+          .replace(/\u00A0/g, ' ')
+          .trim()
+      );
+
+    parseDescBlock(descBlock.toArray(), someSet);
   });
 
   return Promise.resolve(result);
 };
 
-const processTitleBlock = (titleBlock: string) => {
+const parseTitleBlock = (titleBlock: string) => {
   const firstPeriodIndex = titleBlock.indexOf('.');
   const secondPeriodIndex = titleBlock.indexOf('.', firstPeriodIndex + 1);
 
   // extract deptCode and num
   const courseNumPart = titleBlock.substring(0, firstPeriodIndex).trim();
-  console.log(courseNumPart.lastIndexOf(' '));
   const deptCode = courseNumPart.substring(0, courseNumPart.lastIndexOf(' '));
   const num = courseNumPart.substring(courseNumPart.lastIndexOf(' ') + 1);
 
@@ -91,9 +118,22 @@ const processTitleBlock = (titleBlock: string) => {
     unit = unitPart.substring(0, unitPart.lastIndexOf(' '));
   }
 
-  console.log(
-    `deptCode: ##${deptCode}##\tnum: ##${num}##\tunit: ##${unit}##\ntitle:##${title}##`
-  );
+  return {
+    deptCode,
+    num,
+    title,
+    unit,
+  };
+};
+
+const parseDescBlock = (descBlocks: string[], someSet: Set<string>) => {
+  descBlocks = descBlocks.filter((desc) => desc !== '');
+  const description = descBlocks[0];
+  descBlocks.slice(1).forEach((block) => {
+    if (block.startsWith('(')) {
+      someSet.add(block);
+    }
+  });
 };
 
 const downloadPage = async (url: string): Promise<string> => {

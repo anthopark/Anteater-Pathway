@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { repository, DepartmentCollection } from '../firestore.service';
+import { repository, DepartmentDocument } from '../firestore.service';
 
 const ALL_DEPARTMENT_URL = 'https://catalogue.uci.edu/allcourses/';
 
@@ -28,7 +28,7 @@ export const updateDepartments = async () => {
       .findOne();
 
     if (foundDept === null) {
-      const newDept = new DepartmentCollection();
+      const newDept = new DepartmentDocument();
       newDept.code = crawledDept.code;
       newDept.name = crawledDept.name;
       batch.create(newDept);
