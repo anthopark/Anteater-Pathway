@@ -115,7 +115,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+[data-theme='dark'] {
   .card,
   .footer {
     border-color: #222;
