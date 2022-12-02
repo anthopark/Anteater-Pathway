@@ -1,14 +1,15 @@
 import '@styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 import { ChakraProvider } from '@chakra-ui/react';
-import type { AppProps } from 'next/app';
+import { AppLayoutProps } from 'next/app';
+import { ReactNode } from 'react';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppLayoutProps) {
+  const getLayout = Component.getLayout || ((page: ReactNode) => page);
+
   return (
     <ThemeProvider themes={['light', 'dark']}>
-      <ChakraProvider>
-        <Component {...pageProps} />;
-      </ChakraProvider>
+      <ChakraProvider>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
     </ThemeProvider>
   );
 }

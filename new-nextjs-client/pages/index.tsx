@@ -1,9 +1,11 @@
-import Test from '@components/MyComponent/Test';
-import ThemeToggler from '@components/ThemeToggler/ThemeToggler';
-import styles from '@styles/Home.module.scss';
-import Head from 'next/head';
-import Image from 'next/image';
+import styles from './index.module.scss';
+import MainLayout from '@components/MainLayout/MainLayout';
+import { ReactNode } from 'react';
 
 export default function Home() {
   return <></>;
 }
+
+Home.getLayout = function getLayout(page: ReactNode) {
+  return <MainLayout>{page}</MainLayout>;
+};
