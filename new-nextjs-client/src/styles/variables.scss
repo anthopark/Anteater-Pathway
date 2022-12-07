@@ -1,7 +1,16 @@
 /* Default theme colors */
 
 // text
-$text-color: red;
+$default-text: #212121;
+$secondary-text: #777777;
+$disabled-text: #cccccc;
+
+// body colors
+$primary: #223e68;
+$primary-variant: #6889bb;
+
+$accent: #ee954b;
+$accent-variant: #f9b57c;
 
 // course item colors
 $course-1: purple;
@@ -20,18 +29,27 @@ $course-12: purple;
 /* Dark theme colors */
 
 // text
-$text-color-dm: blue;
+$default-text-dt: #f3f3f3;
+$secondary-text-dt: #c3c3c3;
+$disabled-text-dt: #898989;
+
+// body colors
+$primary-dt: #2f2f2f;
+$primary-variant-dt: #565656;
+
+$accent-dt: #a35a1e;
+$accent-variant-dt: #cc9364;
 
 // course item colors
-$course-1-dm: purple;
-$course-2-dm: purple;
-$course-3-dm: purple;
-$course-4-dm: purple;
-$course-5-dm: purple;
-$course-6-dm: purple;
-$course-7-dm: purple;
-$course-8-dm: purple;
-$course-9-dm: purple;
-$course-10-dm: purple;
-$course-11-dm: purple;
-$course-12-dm: purple;
+$course-1-dt: purple;
+$course-2-dt: purple;
+$course-3-dt: purple;
+$course-4-dt: purple;
+$course-5-dt: purple;
+$course-6-dt: purple;
+$course-7-dt: purple;
+$course-8-dt: purple;
+$course-9-dt: purple;
+$course-10-dt: purple;
+$course-11-dt: purple;
+$course-12-dt: purple;

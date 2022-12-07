@@ -1,5 +1,11 @@
 .container {
   width: 100%;
   height: 100%;
-  background-color: red;
+  background-color: $primary;
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: $primary-dt;
+  }
 }
