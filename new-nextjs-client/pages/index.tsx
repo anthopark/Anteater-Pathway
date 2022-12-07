@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <div className="home-body">
       <ThemeToggler />
-      <div>HI</div>
     </div>
   );
 }
