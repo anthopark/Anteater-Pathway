@@ -1,4 +1,5 @@
 import '@styles/globals.css';
+import '@styles/fontawesome';
 import { ThemeProvider } from 'next-themes';
 import { ChakraProvider } from '@chakra-ui/react';
 import { AppLayoutProps } from 'next/app';
