@@ -2,6 +2,39 @@
   width: 100%;
   height: 100%;
   background-color: $primary;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px 0;
+
+  .logoContainer {
+    position: relative;
+    width: 35px;
+    height: 47px;
+    display: flex;
+    justify-self: center;
+    width: 100%;
+  }
+
+  .menuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .link {
+      width: 100%;
+      height: $menu-item-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      .icon {
+        font-size: $icon-size;
+      }
+    }
+  }
 }
 
 [data-theme='dark'] {
