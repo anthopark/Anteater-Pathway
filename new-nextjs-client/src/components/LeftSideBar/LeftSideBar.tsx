@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 const coffee = findIconDefinition({ prefix: 'fas', iconName: 'coffee' });
 const envelope = findIconDefinition({ prefix: 'fas', iconName: 'envelope' });
@@ -11,10 +12,16 @@ const github = findIconDefinition({ prefix: 'fab', iconName: 'github-alt' });
 export interface ILeftSideBarProps {}
 
 export default function LeftSideBar(props: ILeftSideBarProps) {
+  const { theme, setTheme } = useTheme();
+
   return (
     <div className={style.container}>
       <div className={style.logoContainer}>
-        <Image src="/logo.svg" alt="logo" layout="fill" />
+        {theme === 'light' ? (
+          <Image src="/logo-light.svg" alt="logo" layout="fill" />
+        ) : (
+          <Image src="/logo-dark.svg" alt="logo" layout="fill" />
+        )}
       </div>
       <div className={style.menuContainer}>
         <a className={style.link}>
