@@ -1,14 +1,9 @@
 import style from './LeftSideBar.module.scss';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { findIconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { coffee, envelope, github } from '@styles/fontawesome';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
-const coffee = findIconDefinition({ prefix: 'fas', iconName: 'coffee' });
-const envelope = findIconDefinition({ prefix: 'fas', iconName: 'envelope' });
-const github = findIconDefinition({ prefix: 'fab', iconName: 'github-alt' });
 export interface ILeftSideBarProps {}
 
 export default function LeftSideBar(props: ILeftSideBarProps) {
