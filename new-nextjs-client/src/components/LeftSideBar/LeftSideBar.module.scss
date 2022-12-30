@@ -1,4 +1,4 @@
-$icon-size: 24px;
+$icon-size: 2.4rem;
 
 .container {
   width: 100%;
@@ -8,11 +8,11 @@ $icon-size: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 15px 0 20px 0;
+  padding: 1.5rem 0 2rem 0;
 
   .logoContainer {
     position: relative;
-    height: 50px;
+    height: 5rem;
     display: flex;
     justify-self: center;
   }
@@ -22,10 +22,10 @@ $icon-size: 24px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 130px;
+    height: 13rem;
 
     .link {
-      height: 30px;
+      height: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
