@@ -6,10 +6,12 @@ import {
   controlHeightMD,
   defaultText,
   fontSizeMD,
+  gray3,
   gray4,
   gray5,
   gray6,
   placeholderText,
+  disabledText,
   white1,
 } from '@styles/variables';
 
@@ -57,13 +59,13 @@ const baseStyles: StylesConfig<unknown, false> = {
   option: (provided, state) => ({
     ...provided,
     fontSize: fontSizeMD,
-    color: defaultText,
+    color: state.isDisabled ? disabledText : defaultText,
     padding: '.6rem 1rem',
     borderRadius: borderRadiusXS,
-    backgroundColor: state.isSelected ? gray5 : white1,
-    '&:hover': {
-      backgroundColor: state.isSelected ? gray5 : gray6,
-    },
+    // backgroundColor: state.isSelected ? gray5 : white1,
+    // '&:hover': {
+    //   backgroundColor: state.isSelected ? gray5 : gray6,
+    // },
   }),
   noOptionsMessage: (provided) => ({
     ...provided,
@@ -96,6 +98,16 @@ function AppSingleSelect(props: Props) {
         ...baseStyles,
         ...props.customStyles,
       }}
+      theme={(theme) => ({
+        ...theme,
+        colors: {
+          ...theme.colors,
+          primary: gray3,
+          primary75: gray4,
+          primary50: gray5,
+          primary25: gray6,
+        },
+      })}
     />
   );
 }

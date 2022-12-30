@@ -30,6 +30,7 @@ const fontSizeLG = '1.7rem';
 
 const defaultText = gray1;
 const placeholderText = gray3;
+const disabledText = gray4;
 
 const controlHeightMD = '4rem';
 
@@ -49,6 +50,7 @@ export {
   fontSizeLG,
   defaultText,
   placeholderText,
+  disabledText,
   controlHeightMD,
   blue1,
   blue2,
