@@ -1,9 +1,29 @@
+// control sizes (Button, Input, etc.)
+$control-height: 4.2rem;
+
+// font size
+$fs-sm: 1.2rem;
+$fs-md: 1.4rem;
+$fs-lg: 1.7rem;
+
+// border radius
+$br-sm: 8px;
+$br-md: 12px;
+$br-lg: 20px;
+
+// gray colors
+$gray-1: #303234;
+$gray-2: #696d74;
+$gray-3: #9a9ca1;
+$gray-4: #cfd1d6;
+$gray-5: #edeeef;
+$gray-6: #f5f6f7;
+
 /* Default theme colors */
 
 // text
-$default-text: #212121;
-$secondary-text: #777777;
-$disabled-text: #cccccc;
+$default-text: $gray-1;
+$placeholder-text: $gray-3;
 
 // body colors
 $primary: #223e68;
