@@ -69,9 +69,9 @@ const baseStyles: StylesConfig<unknown, false> = {
 interface Props {
   customStyles?: StylesConfig;
   isClearable?: boolean;
-  isOptionDisabled?: (option: unknown) => boolean;
+  isOptionDisabled?: (option: any) => boolean;
   placeholder?: string;
-  onChange?: (newValue: unknown) => void;
+  onChange?: (newValue: any) => void;
   options: any[];
 }
 
