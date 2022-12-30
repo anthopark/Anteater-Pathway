@@ -3,7 +3,7 @@ import { useId } from 'react';
 import {
   borderRadiusSM,
   borderRadiusXS,
-  controlHeight,
+  controlHeightMD,
   defaultText,
   fontSizeMD,
   gray4,
@@ -17,7 +17,7 @@ const baseStyles: StylesConfig<unknown, false> = {
     ...provided,
     borderRadius: borderRadiusSM,
     borderColor: 'white',
-    height: controlHeight,
+    height: controlHeightMD,
     '&:hover': {
       borderColor: state.isFocused ? 'transparent' : gray4,
     },
@@ -63,6 +63,11 @@ const baseStyles: StylesConfig<unknown, false> = {
     '&:hover': {
       backgroundColor: state.isSelected ? gray5 : gray6,
     },
+  }),
+  noOptionsMessage: (provided) => ({
+    ...provided,
+    fontSize: fontSizeMD,
+    color: placeholderText,
   }),
 };
 

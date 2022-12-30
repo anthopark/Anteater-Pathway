@@ -17,7 +17,7 @@ const fontSizeLG = '1.7rem';
 const defaultText = gray1;
 const placeholderText = gray3;
 
-const controlHeight = '4.2rem';
+const controlHeightMD = '4rem';
 
 export {
   borderRadiusXS,
@@ -35,5 +35,5 @@ export {
   fontSizeLG,
   defaultText,
   placeholderText,
-  controlHeight,
+  controlHeightMD,
 };
