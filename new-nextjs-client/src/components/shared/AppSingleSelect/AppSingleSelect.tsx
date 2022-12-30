@@ -10,13 +10,14 @@ import {
   gray5,
   gray6,
   placeholderText,
+  white1,
 } from '@styles/variables';
 
 const baseStyles: StylesConfig<unknown, false> = {
   control: (provided, state) => ({
     ...provided,
     borderRadius: borderRadiusSM,
-    borderColor: 'white',
+    borderColor: white1,
     height: controlHeightMD,
     '&:hover': {
       borderColor: state.isFocused ? 'transparent' : gray4,
@@ -59,7 +60,7 @@ const baseStyles: StylesConfig<unknown, false> = {
     color: defaultText,
     padding: '.6rem 1rem',
     borderRadius: borderRadiusXS,
-    backgroundColor: state.isSelected ? gray5 : 'white',
+    backgroundColor: state.isSelected ? gray5 : white1,
     '&:hover': {
       backgroundColor: state.isSelected ? gray5 : gray6,
     },
