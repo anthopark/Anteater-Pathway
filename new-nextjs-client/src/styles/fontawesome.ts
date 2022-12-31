@@ -5,8 +5,13 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fab, far, fas);
 
+const plus = findIconDefinition({ prefix: 'fas', iconName: 'plus' });
 const coffee = findIconDefinition({ prefix: 'fas', iconName: 'mug-hot' });
 const envelope = findIconDefinition({ prefix: 'fas', iconName: 'envelope' });
 const github = findIconDefinition({ prefix: 'fab', iconName: 'github-alt' });
+const search = findIconDefinition({
+  prefix: 'fas',
+  iconName: 'magnifying-glass',
+});
 
-export { coffee, envelope, github };
+export { plus, coffee, envelope, github, search };

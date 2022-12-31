@@ -1,3 +1,37 @@
+/**************** 
+    Colors
+ ***************/
+
+$primary-1: #223e68;
+$primary-2: #4f6484;
+
+$accent-1: #d98727;
+$accent-2: #b0824b;
+$accent-3: #cec5a5;
+
+$white-1: #ffffff;
+
+$gray-1: #303234;
+$gray-2: #373e47;
+$gray-3: #696d74;
+$gray-4: #9a9ca1;
+$gray-5: #cfd1d6;
+$gray-6: #edeeef;
+$gray-7: #f5f6f7;
+
+$red-1: #9a3131;
+$red-2: #c93c37;
+$red-3: #e5534b;
+$red-4: #fa7070;
+
+$blue-1: #0037a8;
+$blue-2: #0547cf;
+$blue-3: #0d5bff;
+$blue-4: #82d8ff;
+
+$accent: #ee954b;
+$accent-variant: #f9b57c;
+
 // control sizes (Button, Input, etc.)
 $control-height-md: 4rem;
 
@@ -11,40 +45,11 @@ $br-sm: 8px;
 $br-md: 12px;
 $br-lg: 20px;
 
-// gray colors
-$gray-1: #303234;
-$gray-2: #696d74;
-$gray-3: #9a9ca1;
-$gray-4: #cfd1d6;
-$gray-5: #edeeef;
-$gray-6: #f5f6f7;
-
-// red colors
-$red-1: #7a0000;
-$red-2: #b10000;
-$red-3: #ec3213;
-
-// blue colors
-$blue-1: #0037a8;
-$blue-2: #0547cf;
-$blue-3: #0d5bff;
-$blue-4: #82d8ff;
-
-// while
-$white-1: #ffffff;
-
 /* Default theme colors */
 
 // text
 $default-text: $gray-1;
 $placeholder-text: $gray-3;
-
-// body colors
-$primary: #223e68;
-$primary-variant: #6889bb;
-
-$accent: #ee954b;
-$accent-variant: #f9b57c;
 
 // course item colors
 $course-1: purple;

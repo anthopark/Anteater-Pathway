@@ -6,9 +6,9 @@ import {
   controlHeightMD,
   defaultText,
   fontSizeMD,
-  gray4,
   gray5,
   gray6,
+  gray7,
   placeholderText,
   white1,
 } from '@styles/variables';
@@ -20,7 +20,7 @@ const baseStyles: StylesConfig<unknown, false> = {
     borderColor: white1,
     height: controlHeightMD,
     '&:hover': {
-      borderColor: state.isFocused ? 'transparent' : gray4,
+      borderColor: state.isFocused ? 'transparent' : gray5,
     },
   }),
   placeholder: (provided, state) => ({
@@ -35,20 +35,20 @@ const baseStyles: StylesConfig<unknown, false> = {
   }),
   dropdownIndicator: (provided) => ({
     ...provided,
-    color: gray4,
+    color: gray5,
   }),
   clearIndicator: (provided) => ({
     ...provided,
-    color: gray4,
+    color: gray5,
   }),
   indicatorSeparator: (provided) => ({
     ...provided,
-    backgroundColor: gray4,
+    backgroundColor: gray5,
   }),
   menu: (provided, state) => ({
     ...provided,
     borderRadius: borderRadiusSM,
-    border: `1px solid ${gray5}`,
+    border: `1px solid ${gray6}`,
   }),
   menuList: (provided, state) => ({
     ...provided,
@@ -60,9 +60,9 @@ const baseStyles: StylesConfig<unknown, false> = {
     color: defaultText,
     padding: '.6rem 1rem',
     borderRadius: borderRadiusXS,
-    backgroundColor: state.isSelected ? gray5 : white1,
+    backgroundColor: state.isSelected ? gray6 : white1,
     '&:hover': {
-      backgroundColor: state.isSelected ? gray5 : gray6,
+      backgroundColor: state.isSelected ? gray6 : gray7,
     },
   }),
   noOptionsMessage: (provided) => ({

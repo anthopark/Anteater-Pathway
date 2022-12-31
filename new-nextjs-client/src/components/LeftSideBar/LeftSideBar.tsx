@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { coffee, envelope, github } from '@styles/fontawesome';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import { white1 } from '@styles/variables';
 
 export interface ILeftSideBarProps {}
 
@@ -33,14 +34,22 @@ export default function LeftSideBar(props: ILeftSideBarProps) {
           <FontAwesomeIcon
             className={style.icon}
             icon={envelope}
-            color="white"
+            color={white1}
           />
         </a>
         <a className={style.link}>
-          <FontAwesomeIcon className={style.icon} icon={github} color="white" />
+          <FontAwesomeIcon
+            className={style.icon}
+            icon={github}
+            color={white1}
+          />
         </a>
         <a className={style.link}>
-          <FontAwesomeIcon className={style.icon} icon={coffee} color="white" />
+          <FontAwesomeIcon
+            className={style.icon}
+            icon={coffee}
+            color={white1}
+          />
         </a>
       </div>
     </div>
