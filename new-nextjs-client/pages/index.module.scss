@@ -1,6 +1,6 @@
 .container {
   padding: 0 2rem;
-  background: $gray-5;
+  background: $main-body;
 }
 
 @media (max-width: 600px) {
@@ -12,6 +12,6 @@
 
 [data-theme='dark'] {
   .container {
-    background-color: black;
+    background-color: $main-body-dt;
   }
 }
