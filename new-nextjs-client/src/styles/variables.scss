@@ -1,7 +1,6 @@
 /**************** 
-    Colors
- ***************/
-
+  Colors
+****************/
 $primary-1: #223e68;
 $primary-2: #4f6484;
 
@@ -29,29 +28,36 @@ $blue-2: #0547cf;
 $blue-3: #0d5bff;
 $blue-4: #82d8ff;
 
-$accent: #ee954b;
-$accent-variant: #f9b57c;
-
-// control sizes (Button, Input, etc.)
+/**************** 
+  Control Sizes (Input, Button, etc.)
+****************/
 $control-height-md: 4rem;
 
-// font size
+/**************** 
+  Font
+****************/
 $fs-sm: 1.2rem;
 $fs-md: 1.4rem;
 $fs-lg: 1.7rem;
 
-// border radius
+$letter-spacing-sm: 0.2px;
+$letter-spacing-md: 0.5px;
+$letter-spacing-lg: 1px;
+
+/**************** 
+  Border Radius
+****************/
+$br-xs: 4px;
 $br-sm: 8px;
 $br-md: 12px;
 $br-lg: 20px;
 
-/* Default theme colors */
-
-// text
+/**************** 
+  Light Theme Colors
+****************/
 $default-text: $gray-1;
-$placeholder-text: $gray-3;
+$placeholder-text: $gray-4;
 
-// course item colors
 $course-1: purple;
 $course-2: purple;
 $course-3: purple;
@@ -65,21 +71,16 @@ $course-10: purple;
 $course-11: purple;
 $course-12: purple;
 
-/* Dark theme colors */
-
-// text
+/**************** 
+  Dark Theme Colors
+****************/
 $default-text-dt: #f3f3f3;
 $secondary-text-dt: #c3c3c3;
 $disabled-text-dt: #898989;
 
-// body colors
 $primary-dt: #2f2f2f;
 $primary-variant-dt: #565656;
 
-$accent-dt: #a35a1e;
-$accent-variant-dt: #cc9364;
-
-// course item colors
 $course-1-dt: purple;
 $course-2-dt: purple;
 $course-3-dt: purple;
@@ -92,5 +93,3 @@ $course-9-dt: purple;
 $course-10-dt: purple;
 $course-11-dt: purple;
 $course-12-dt: purple;
-
-/* Sizes */
