@@ -1,3 +1,5 @@
+import style from './AppButton.module.scss';
+import classNames from 'classnames/bind';
 import { Button } from '@chakra-ui/react';
 import {
   useState,
@@ -171,6 +173,7 @@ const dangerBorderColorMap: ColorMap = {
 
 interface Props {
   children: ReactNode;
+  isDisabled?: boolean;
   kind: 'primary' | 'secondary' | 'danger';
   leftIcon?: ReactElement;
   onClick: (event?: MouseEvent<HTMLButtonElement>) => void;
@@ -179,6 +182,7 @@ interface Props {
 
 function AppButton({
   children,
+  isDisabled,
   kind,
   leftIcon,
   onClick,
@@ -252,34 +256,53 @@ function AppButton({
     return null;
   }
 
+  const cx = classNames.bind(style);
+
   return (
-    <Button
-      bgColor={getBgColor('default')}
-      borderColor={getBorderColor('default')}
-      borderWidth={getBorderColor('default') !== undefined ? '1px' : undefined}
-      borderRadius={borderRadiusSM}
-      color={getFontColor('default')}
-      fontSize={fontSizeMD}
-      fontWeight={500}
-      height={controlHeightMD}
-      leftIcon={leftIcon}
-      onClick={onClick}
-      padding={'0 1.2rem'}
-      rightIcon={rightIcon}
-      _hover={{
-        bgColor: getBgColor('hover'),
-        borderColor: getBorderColor('hover'),
-        color: getFontColor('hover'),
-      }}
-      _active={{
-        bgColor: getBgColor('active'),
-        borderColor: getBorderColor('active'),
-        color: getFontColor('active'),
-      }}
-      {...rest}
+    <div
+      className={cx('container', {
+        disabled: isDisabled,
+      })}
     >
-      {children}
-    </Button>
+      <Button
+        bgColor={getBgColor('default')}
+        borderColor={getBorderColor('default')}
+        borderWidth={
+          getBorderColor('default') !== undefined ? '1px' : undefined
+        }
+        borderRadius={borderRadiusSM}
+        color={getFontColor('default')}
+        fontSize={fontSizeMD}
+        fontWeight={500}
+        height={controlHeightMD}
+        leftIcon={leftIcon}
+        letterSpacing={'0.5px'}
+        onClick={onClick}
+        padding={'0 1.2rem'}
+        rightIcon={rightIcon}
+        _hover={{
+          bgColor: getBgColor('hover'),
+          borderColor: getBorderColor('hover'),
+          color: getFontColor('hover'),
+        }}
+        _active={{
+          bgColor: getBgColor('active'),
+          borderColor: getBorderColor('active'),
+          color: getFontColor('active'),
+        }}
+        style={
+          isDisabled
+            ? {
+                opacity: 0.4,
+                pointerEvents: 'none',
+              }
+            : undefined
+        }
+        {...rest}
+      >
+        {children}
+      </Button>
+    </div>
   );
 }
 
