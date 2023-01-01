@@ -1,38 +1,66 @@
+/** 
+    Colors
+ ***/
+const primary1 = '#223e68';
+const primary2 = '#4f6484';
+
+const accent1 = '#d98727';
+const accent2 = '#b0824b';
+const accent3 = '#cec5a5';
+
+const white1 = '#ffffff';
+
 const gray1 = '#303234';
-const gray2 = '#696d74';
-const gray3 = '#9a9ca1';
-const gray4 = '#cfd1d6';
-const gray5 = '#edeeef';
-const gray6 = '#f5f6f7';
+const gray2 = '#373e47';
+const gray3 = '#696d74';
+const gray4 = '#9a9ca1';
+const gray5 = '#cfd1d6';
+const gray6 = '#edeeef';
+const gray7 = '#f5f6f7';
 
-// red colors
-const red1 = '#7a0000;';
-const red2 = '#b10000;';
-const red3 = '#ec3213;';
+const red1 = '#9a3131;';
+const red2 = '#c93c37;';
+const red3 = '#e5534b;';
+const red4 = '#fa7070';
 
-// blue colors
 const blue1 = '#0037a8';
 const blue2 = '#0547cf';
 const blue3 = '#0d5bff';
 const blue4 = '#82d8ff';
 
-// while
-const white1 = '#ffffff';
+/** 
+  Control Sizes (Input, Button, etc.)
+**/
+const controlHeightMD = '4rem';
 
+/** 
+  Font
+**/
+const fontSizeSM = '1.2rem';
+const fontSizeMD = '1.4rem';
+const fontSizeLG = '1.7rem';
+
+const letterSpacingSM = '0.2px';
+const letterSpacingMD = '0.5px';
+const letterSpacingLG = '1px';
+
+/** 
+  Border Radius
+**/
 const borderRadiusXS = '4px';
 const borderRadiusSM = '8px';
 const borderRadiusMD = '12px';
 const borderRadiusLG = '20px';
 
-const fontSizeSM = '1.2rem';
-const fontSizeMD = '1.4rem';
-const fontSizeLG = '1.7rem';
-
+/** 
+  Light Theme Colors
+**/
 const defaultText = gray1;
-const placeholderText = gray3;
-const disabledText = gray4;
+const placeholderText = gray4;
 
-const controlHeightMD = '4rem';
+/** 
+  Dark Theme Colors
+**/
 
 export {
   borderRadiusXS,
@@ -45,12 +73,12 @@ export {
   gray4,
   gray5,
   gray6,
+  gray7,
   fontSizeSM,
   fontSizeMD,
   fontSizeLG,
   defaultText,
   placeholderText,
-  disabledText,
   controlHeightMD,
   blue1,
   blue2,
@@ -59,5 +87,14 @@ export {
   red1,
   red2,
   red3,
+  red4,
   white1,
+  primary1,
+  primary2,
+  accent1,
+  accent2,
+  accent3,
+  letterSpacingSM,
+  letterSpacingMD,
+  letterSpacingLG,
 };
