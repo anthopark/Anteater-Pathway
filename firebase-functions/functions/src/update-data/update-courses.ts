@@ -5,17 +5,17 @@ import { repository, CourseDocument } from '../firestore.service';
 
 const ALL_DEPARTMENT_URL = 'https://catalogue.uci.edu/allcourses/';
 const CATALOGUE_BASE_URL = 'https://catalogue.uci.edu';
-const COURSE_DESCRIPTIONS = [
-  'Prerequisite:',
-  'Restriction:',
-  'Same as',
-  'Grading Option:',
-  'Overlaps with',
-  'Repeatability:',
-  'Concurrent with',
-  'Corequisite:',
-  'Prerequisite or corequisite:',
-];
+const COURSE_DESCRIPTIONS_MAP = new Map([
+  ['prerequisite', 'Prerequisite:'],
+  ['restriction', 'Restriction:'],
+  ['sameAs', 'Same as'],
+  ['gradingOption', 'Grading Option:'],
+  ['overlapsWith', 'Overlaps with'],
+  ['repeatability', 'Repeatability:'],
+  ['concurrentWith', 'Concurrent with'],
+  ['corequisite', 'Corequisite:'],
+  ['prereqOrCoreq', 'Prerequisite or corequisite:'],
+]);
 
 interface CrawledCourse {
   deptCode: string;
@@ -23,6 +23,15 @@ interface CrawledCourse {
   title: string;
   unit: string | null;
   geCode: string | null;
+  prerequisite: string | null;
+  restriction: string | null;
+  sameAs: string | null;
+  gradingOption: string | null;
+  overlapsWith: string | null;
+  repeatability: string | null;
+  concurrentWith: string | null;
+  corequisite: string | null;
+  prereqOrCoreq: string | null;
 }
 
 export const updateCourses = async () => {
@@ -39,11 +48,12 @@ export const updateCourses = async () => {
     const someSet = new Set<string>();
     await crawlCourses(pageUrl, someSet);
 
-    console.log(someSet);
+    // console.log(someSet);
   }
 
   // await crawlCourses('https://catalogue.uci.edu/allcourses/i_c_sci/');
   // await crawlCourses('https://catalogue.uci.edu/allcourses/uni_stu/');
+  // await crawlCourses('https://catalogue.uci.edu/allcourses/rotc/', new Set());
 
   functions.logger.info('Finished crawling courses.');
 
@@ -91,7 +101,7 @@ const crawlCourses = async (
           .trim()
       );
 
-    parseDescBlock(descBlock.toArray(), someSet);
+    const parsedDescBlock = parseDescBlock(descBlock.toArray(), someSet);
   });
 
   return Promise.resolve(result);
@@ -129,11 +139,35 @@ const parseTitleBlock = (titleBlock: string) => {
 const parseDescBlock = (descBlocks: string[], someSet: Set<string>) => {
   descBlocks = descBlocks.filter((desc) => desc !== '');
   const description = descBlocks[0];
+
+  const result: { [key: string]: string | null } = {
+    description,
+    geCode: null,
+    prerequisite: null,
+    restriction: null,
+    sameAs: null,
+    gradingOption: null,
+    overlapsWith: null,
+    repeatability: null,
+    concurrentWith: null,
+    corequisite: null,
+    prereqOrCoreq: null,
+  };
+
   descBlocks.slice(1).forEach((block) => {
-    if (block.startsWith('(')) {
-      someSet.add(block);
+    if (block.startsWith('(') && !block.startsWith('(Design')) {
+      result.geCode = block.replace(/^[(]|[.)]+$/g, '').trim();
+    }
+
+    for (const [attributeName, attrInText] of COURSE_DESCRIPTIONS_MAP) {
+      if (block.startsWith(attrInText)) {
+        // extract the attribute content
+        result[attributeName] = block.slice(attrInText.length).trim();
+      }
     }
   });
+
+  return result;
 };
 
 const downloadPage = async (url: string): Promise<string> => {
