@@ -58,6 +58,8 @@ $br-lg: 20px;
 $default-text: $gray-1;
 $placeholder-text: $gray-4;
 
+$main-background: #e2e2eb;
+
 $course-1: #c4c3e4;
 $course-2: #94add3;
 $course-3: #b0d2a4;
@@ -80,12 +82,21 @@ $summer: #a3ebe2;
 /** 
   Dark Theme Colors
 **/
-$default-text-dt: #f3f3f3;
+$default-text-dt: #e8eaed;
 $secondary-text-dt: #c3c3c3;
 $disabled-text-dt: #898989;
 
-$primary-dt: #2f2f2f;
-$primary-variant-dt: #565656;
+$stroke-dt: #5f6367;
+
+$primary-dt: #ad7014;
+$primary-variant-dt: #5f77a6;
+
+// components colors
+$side-bar-dt: #181818;
+$main-background-dt: #212123;
+$academic-year-dt: #2f3134;
+$search-info-card-dt: #252628;
+$quarter-card-dt: #222222;
 
 $course-1-dt: #9e9ebc;
 $course-2-dt: #5c7395;
