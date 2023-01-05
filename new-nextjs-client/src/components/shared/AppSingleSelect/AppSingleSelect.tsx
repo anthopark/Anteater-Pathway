@@ -9,6 +9,8 @@ import {
   dropdownBackgroundActiveDark,
   defaultText,
   defaultTextDark,
+  disabledText,
+  disabledTextDark,
   fontSizeMD,
   gray4,
   gray5,
@@ -85,11 +87,20 @@ function AppSingleSelect(props: Props) {
     }
   };
 
+  const getOptionFontColor = (state: OptionProps): string => {
+    if (theme === 'light') {
+      return state.isDisabled ? disabledText : defaultText;
+    } else {
+      return state.isDisabled ? disabledTextDark : defaultTextDark;
+    }
+  };
+
   const baseStyles: StylesConfig<unknown, false> = {
     control: (provided, state) => ({
       ...provided,
       borderRadius: borderRadiusSM,
       border: theme === 'light' ? `1px solid ${gray5}` : `1px solid ${gray3}`,
+      boxShadow: 'none',
       backgroundColor: getControlBgColor(state),
       height: controlHeightMD,
 
@@ -141,6 +152,7 @@ function AppSingleSelect(props: Props) {
     }),
     option: (provided, state) => ({
       ...provided,
+      color: getOptionFontColor(state),
       fontSize: fontSizeMD,
       padding: '.6rem 1rem',
       borderRadius: borderRadiusXS,

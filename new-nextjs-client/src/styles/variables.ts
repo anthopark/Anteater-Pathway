@@ -57,6 +57,7 @@ const borderRadiusLG = '20px';
 **/
 const defaultText = gray1;
 const placeholderText = gray4;
+const disabledText = gray5;
 
 /** 
   Dark Theme Colors
@@ -72,6 +73,7 @@ const dropdownBackgroundActiveDark = '#535353';
 
 const defaultTextDark = '#E8EAED';
 const placeholderTextDark = '#C3C3C3';
+const disabledTextDark = gray4;
 
 export {
   borderRadiusXS,
@@ -80,6 +82,8 @@ export {
   borderRadiusLG,
   dropdownBackgroundDark,
   dropdownBackgroundActiveDark,
+  disabledText,
+  disabledTextDark,
   gray1,
   gray2,
   gray3,
