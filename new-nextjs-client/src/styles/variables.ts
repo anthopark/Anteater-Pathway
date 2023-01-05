@@ -61,12 +61,25 @@ const placeholderText = gray4;
 /** 
   Dark Theme Colors
 **/
+const primaryDark1 = '#AD7014';
+const primaryDark2 = '#';
+
+const accentDark1 = '#5F77A6';
+const accentDark2 = '#354E80';
+
+const dropdownBackgroundDark = '#2f3134';
+const dropdownBackgroundActiveDark = '#535353';
+
+const defaultTextDark = '#E8EAED';
+const placeholderTextDark = '#C3C3C3';
 
 export {
   borderRadiusXS,
   borderRadiusSM,
   borderRadiusMD,
   borderRadiusLG,
+  dropdownBackgroundDark,
+  dropdownBackgroundActiveDark,
   gray1,
   gray2,
   gray3,
@@ -78,7 +91,9 @@ export {
   fontSizeMD,
   fontSizeLG,
   defaultText,
+  defaultTextDark,
   placeholderText,
+  placeholderTextDark,
   controlHeightMD,
   blue1,
   blue2,
@@ -91,9 +106,13 @@ export {
   white1,
   primary1,
   primary2,
+  primaryDark1,
+  primaryDark2,
   accent1,
   accent2,
   accent3,
+  accentDark1,
+  accentDark2,
   letterSpacingSM,
   letterSpacingMD,
   letterSpacingLG,
