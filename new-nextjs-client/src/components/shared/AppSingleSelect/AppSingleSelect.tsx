@@ -57,10 +57,10 @@ function AppSingleSelect(props: Props) {
     if (state.isDisabled) {
       return 'none';
     } else {
-      if (theme === 'dark' && state.isSelected) {
-        return accentDark2;
-      } else if (theme === 'light' && state.isSelected) {
+      if (theme === 'light' && state.isSelected) {
         return gray5;
+      } else if (theme === 'dark' && state.isSelected) {
+        return accentDark2;
       } else {
         return 'none';
       }
@@ -73,13 +73,13 @@ function AppSingleSelect(props: Props) {
     } else if (state.isDisabled) {
       return 'none';
     } else {
-      return theme === 'dark' ? accentDark1 : gray6;
+      return theme === 'light' ? gray6 : accentDark1;
     }
   };
 
   const getOptionActiveBgColor = (state: OptionProps): string => {
     if (state.isSelected) {
-      return theme === 'dark' ? accentDark2 : gray5;
+      return theme === 'light' ? gray5 : accentDark2;
     } else {
       return 'none';
     }
@@ -89,8 +89,7 @@ function AppSingleSelect(props: Props) {
     control: (provided, state) => ({
       ...provided,
       borderRadius: borderRadiusSM,
-      border: theme === 'dark' ? `1px solid ${gray3}` : `1px solid ${gray5}`,
-
+      border: theme === 'light' ? `1px solid ${gray5}` : `1px solid ${gray3}`,
       backgroundColor: getControlBgColor(state),
       height: controlHeightMD,
 
@@ -102,7 +101,7 @@ function AppSingleSelect(props: Props) {
     placeholder: (provided, state) => ({
       ...provided,
       fontSize: fontSizeMD,
-      color: theme === 'dark' ? placeholderTextDark : placeholderText,
+      color: theme === 'light' ? placeholderText : placeholderTextDark,
     }),
     valueContainer: (provided, state) => ({
       ...provided,
@@ -123,17 +122,18 @@ function AppSingleSelect(props: Props) {
     }),
     input: (provided) => ({
       ...provided,
-      color: theme === 'dark' ? defaultTextDark : defaultText,
+      color: theme === 'light' ? defaultText : defaultTextDark,
     }),
     singleValue: (provided) => ({
       ...provided,
-      color: theme === 'dark' ? defaultTextDark : defaultText,
+      color: theme === 'light' ? defaultText : defaultTextDark,
     }),
     menu: (provided, state) => ({
       ...provided,
       borderRadius: borderRadiusSM,
-      border: theme === 'dark' ? `1px solid ${gray3}` : `1px solid ${gray5}`,
-      backgroundColor: theme === 'dark' ? dropdownBackgroundActiveDark : white1,
+      border: theme === 'light' ? `1px solid ${gray5}` : `1px solid ${gray3}`,
+      backgroundColor:
+        theme === 'light' ? white1 : dropdownBackgroundActiveDark,
     }),
     menuList: (provided, state) => ({
       ...provided,
