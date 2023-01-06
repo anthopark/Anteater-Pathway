@@ -24,9 +24,7 @@ const red3 = '#e5534b;';
 const red4 = '#fa7070';
 
 const blue1 = '#0037a8';
-const blue2 = '#0547cf';
-const blue3 = '#0d5bff';
-const blue4 = '#82d8ff';
+const blue2 = '#397BDD';
 
 /** 
   Control Sizes (Input, Button, etc.)
@@ -101,8 +99,6 @@ export {
   controlHeightMD,
   blue1,
   blue2,
-  blue3,
-  blue4,
   red1,
   red2,
   red3,

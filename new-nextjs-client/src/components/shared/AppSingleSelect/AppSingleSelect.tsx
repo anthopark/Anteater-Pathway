@@ -1,6 +1,6 @@
 import Select, { ControlProps, OptionProps, StylesConfig } from 'react-select';
 
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   borderRadiusSM,
   borderRadiusXS,
@@ -12,15 +12,17 @@ import {
   disabledText,
   disabledTextDark,
   fontSizeMD,
+  gray3,
   gray4,
   gray5,
   gray6,
   placeholderTextDark,
   placeholderText,
   white1,
-  gray3,
   accentDark1,
   accentDark2,
+  blue2,
+  accent1,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 
@@ -95,17 +97,43 @@ function AppSingleSelect(props: Props) {
     }
   };
 
+  const getControlBorderColor = (state: ControlProps): string => {
+    if (state.menuIsOpen) {
+      return theme === 'light' ? blue2 : accent1;
+    }
+
+    return theme === 'light' ? 'none' : gray3;
+  };
+
+  const getControlHoverBorderColor = (state: ControlProps): string => {
+    if (state.menuIsOpen) {
+      return theme === 'light' ? blue2 : accent1;
+    }
+
+    return theme === 'light' ? gray4 : gray4;
+  };
+
+  const getControlBoxShadow = (state: ControlProps): string => {
+    if (state.menuIsOpen) {
+      return theme === 'light'
+        ? `0px 0px 0px 1px ${blue2}`
+        : `0px 0px 0px 1px ${accent1}`;
+    }
+
+    return 'none';
+  };
+
   const baseStyles: StylesConfig<unknown, false> = {
     control: (provided, state) => ({
       ...provided,
       borderRadius: borderRadiusSM,
-      border: theme === 'light' ? `1px solid ${gray5}` : `1px solid ${gray3}`,
-      boxShadow: 'none',
+      borderColor: getControlBorderColor(state),
       backgroundColor: getControlBgColor(state),
+      boxShadow: getControlBoxShadow(state),
       height: controlHeightMD,
 
       '&:hover': {
-        borderColor: state.isFocused ? 'transparent' : gray4,
+        borderColor: getControlHoverBorderColor(state),
       },
     }),
 
@@ -177,7 +205,6 @@ function AppSingleSelect(props: Props) {
     <>
       <Select
         defaultValue={null}
-        // instanceId={useId()}
         isClearable={props.isClearable}
         isMulti={false}
         isOptionDisabled={props.isOptionDisabled}
