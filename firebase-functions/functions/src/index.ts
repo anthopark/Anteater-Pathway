@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v2';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as cors from 'cors';
@@ -14,8 +14,11 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/course', courseRouter);
-exports.app = functions
-  .runWith({
-    timeoutSeconds: 300,
-  })
-  .https.onRequest(app);
+
+functions.setGlobalOptions({
+  region: 'us-west1',
+  timeoutSeconds: 3600,
+  memory: '2GiB',
+});
+
+exports.app = functions.https.onRequest(app);

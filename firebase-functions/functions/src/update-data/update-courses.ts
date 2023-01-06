@@ -23,6 +23,7 @@ interface CrawledCourse {
   title: string;
   unit: string | null;
   geCode: string | null;
+  description: string;
   prerequisite: string | null;
   restriction: string | null;
   sameAs: string | null;
@@ -42,24 +43,53 @@ export const updateCourses = async () => {
   );
 
   functions.logger.info('Start crawling courses.');
+  const allCrawledCourses: CrawledCourse[][] = [];
   for (const url of urls) {
     const pageUrl = CATALOGUE_BASE_URL + url;
     functions.logger.info(`Crawling course page: ${pageUrl}`);
-    const someSet = new Set<string>();
-    await crawlCourses(pageUrl, someSet);
 
-    // console.log(someSet);
+    allCrawledCourses.push(await crawlCourses(pageUrl));
   }
-
-  // await crawlCourses('https://catalogue.uci.edu/allcourses/i_c_sci/');
-  // await crawlCourses('https://catalogue.uci.edu/allcourses/uni_stu/');
-  // await crawlCourses('https://catalogue.uci.edu/allcourses/rotc/', new Set());
-
   functions.logger.info('Finished crawling courses.');
 
   functions.logger.info('Start updating Course collection');
 
-  functions.logger.info('Finished updating.');
+  let totalCreatedCourses = 0;
+  for (const deptCourses of allCrawledCourses) {
+    if (deptCourses.length > 0) {
+      functions.logger.info(
+        `Updating ${deptCourses.length} ${deptCourses[0].deptCode} courses`
+      );
+
+      let deptCreatedCourses = 0;
+      const batch = repository.courses!.createBatch();
+
+      for (const course of deptCourses) {
+        const foundCourse = await repository.courses
+          ?.whereEqualTo('deptCode', course.deptCode)
+          .whereEqualTo('num', course.num)
+          .findOne();
+
+        if (foundCourse === null) {
+          const newCourse = new CourseDocument();
+          updateCourseDocumentProperties(newCourse, course);
+          batch.create(newCourse);
+          deptCreatedCourses++;
+        }
+      }
+
+      if (deptCreatedCourses > 0) {
+        await batch.commit();
+        totalCreatedCourses += deptCreatedCourses;
+        functions.logger.info(
+          `New ${deptCreatedCourses} ${deptCourses[0].deptCode} courses added`
+        );
+      }
+    }
+  }
+  functions.logger.info(
+    `Finished updating. Total ${totalCreatedCourses} new courses.`
+  );
 };
 
 const crawlAllCourseUrls = async (): Promise<string[]> => {
@@ -76,10 +106,7 @@ const crawlAllCourseUrls = async (): Promise<string[]> => {
   return Promise.resolve(result);
 };
 
-const crawlCourses = async (
-  url: string,
-  someSet: Set<string>
-): Promise<CrawledCourse[]> => {
+const crawlCourses = async (url: string): Promise<CrawledCourse[]> => {
   const result: CrawledCourse[] = [];
   const pageHTML = await downloadPage(url);
 
@@ -101,7 +128,25 @@ const crawlCourses = async (
           .trim()
       );
 
-    const parsedDescBlock = parseDescBlock(descBlock.toArray(), someSet);
+    const parsedDescBlock = parseDescBlock(descBlock.toArray());
+
+    result.push({
+      deptCode: parsedTitleBlock.deptCode,
+      num: parsedTitleBlock.num,
+      title: parsedTitleBlock.title,
+      unit: parsedTitleBlock.unit,
+      description: parsedDescBlock.description!,
+      geCode: parsedDescBlock.geCode,
+      prerequisite: parsedDescBlock.prerequisite,
+      restriction: parsedDescBlock.restriction,
+      sameAs: parsedDescBlock.sameAs,
+      gradingOption: parsedDescBlock.gradingOption,
+      overlapsWith: parsedDescBlock.overlapsWith,
+      repeatability: parsedDescBlock.repeatability,
+      concurrentWith: parsedDescBlock.concurrentWith,
+      corequisite: parsedDescBlock.corequisite,
+      prereqOrCoreq: parsedDescBlock.prereqOrCoreq,
+    });
   });
 
   return Promise.resolve(result);
@@ -136,7 +181,7 @@ const parseTitleBlock = (titleBlock: string) => {
   };
 };
 
-const parseDescBlock = (descBlocks: string[], someSet: Set<string>) => {
+const parseDescBlock = (descBlocks: string[]) => {
   descBlocks = descBlocks.filter((desc) => desc !== '');
   const description = descBlocks[0];
 
@@ -155,6 +200,7 @@ const parseDescBlock = (descBlocks: string[], someSet: Set<string>) => {
   };
 
   descBlocks.slice(1).forEach((block) => {
+    // extract GE
     if (block.startsWith('(') && !block.startsWith('(Design')) {
       result.geCode = block.replace(/^[(]|[.)]+$/g, '').trim();
     }
@@ -168,6 +214,42 @@ const parseDescBlock = (descBlocks: string[], someSet: Set<string>) => {
   });
 
   return result;
+};
+
+const updateCourseDocumentProperties = (
+  document: CourseDocument,
+  crawled: CrawledCourse
+) => {
+  document.deptCode = crawled.deptCode;
+  document.num = crawled.num;
+  document.title = crawled.title;
+
+  if (crawled.unit === null) {
+    document.unit = null;
+  } else if (crawled.unit.includes('-')) {
+    document.isVariableUnit = true;
+    document.minUnit = parseFloat(crawled.unit.split('-')[0]);
+    document.maxUnit = parseFloat(crawled.unit.split('-')[1]);
+    document.unit = document.minUnit;
+  } else if (crawled.unit.includes('Workload')) {
+    document.isWorkloadCredit = true;
+    document.unit = parseFloat(crawled.unit);
+  } else {
+    // regular unit value
+    document.unit = parseFloat(crawled.unit);
+  }
+
+  document.description = crawled.description;
+  document.geCode = crawled.geCode;
+  document.prerequisite = crawled.prerequisite;
+  document.restriction = crawled.restriction;
+  document.sameAs = crawled.sameAs;
+  document.gradingOption = crawled.gradingOption;
+  document.overlapsWith = crawled.overlapsWith;
+  document.repeatability = crawled.repeatability;
+  document.concurrentWith = crawled.concurrentWith;
+  document.corequisite = crawled.corequisite;
+  document.prereqOrCoreq = crawled.prereqOrCoreq;
 };
 
 const downloadPage = async (url: string): Promise<string> => {
