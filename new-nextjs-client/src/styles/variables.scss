@@ -1,57 +1,120 @@
-/* Default theme colors */
+/** 
+  Colors
+**/
+$primary-1: #223e68;
+$primary-2: #4f6484;
 
-// text
-$default-text: #212121;
-$secondary-text: #777777;
-$disabled-text: #cccccc;
+$accent-1: #d98727;
+$accent-2: #b0824b;
+$accent-3: #cec5a5;
 
-// body colors
-$primary: #223e68;
-$primary-variant: #6889bb;
+$white-1: #ffffff;
 
-$accent: #ee954b;
-$accent-variant: #f9b57c;
+$gray-1: #303234;
+$gray-2: #373e47;
+$gray-3: #696d74;
+$gray-4: #9a9ca1;
+$gray-5: #cfd1d6;
+$gray-6: #edeeef;
+$gray-7: #f5f6f7;
 
-// course item colors
-$course-1: purple;
-$course-2: purple;
-$course-3: purple;
-$course-4: purple;
-$course-5: purple;
-$course-6: purple;
-$course-7: purple;
-$course-8: purple;
-$course-9: purple;
-$course-10: purple;
-$course-11: purple;
-$course-12: purple;
+$red-1: #9a3131;
+$red-2: #c93c37;
+$red-3: #e5534b;
+$red-4: #fa7070;
 
-/* Dark theme colors */
+$blue-1: #0037a8;
+$blue-2: #0547cf;
+$blue-3: #0d5bff;
+$blue-4: #82d8ff;
 
-// text
-$default-text-dt: #f3f3f3;
+/** 
+  Control Sizes (Input, Button, etc.)
+**/
+$control-height-md: 4rem;
+
+/** 
+  Font
+**/
+$fs-sm: 1.2rem;
+$fs-md: 1.4rem;
+$fs-lg: 1.7rem;
+
+$letter-spacing-sm: 0.2px;
+$letter-spacing-md: 0.5px;
+$letter-spacing-lg: 1px;
+
+/** 
+  Border Radius
+**/
+$br-xs: 4px;
+$br-sm: 8px;
+$br-md: 12px;
+$br-lg: 20px;
+
+/** 
+  Light Theme Colors
+**/
+$default-text: $gray-1;
+$placeholder-text: $gray-4;
+
+$main-background: #e2e2eb;
+
+$course-1: #c4c3e4;
+$course-2: #94add3;
+$course-3: #b0d2a4;
+$course-4: #adcecc;
+$course-5: #ffc7d4;
+$course-6: #eabfde;
+$course-7: #f5beb2;
+$course-8: #c4a4d2;
+$course-9: #f1dba1;
+$course-10: #f4c294;
+$course-11: #86c6c2;
+$course-12: #b1b1b1;
+
+// quarter item colors
+$fall: #f4d0af;
+$winter: #c8dffa;
+$spring: #d5efb7;
+$summer: #a3ebe2;
+
+/** 
+  Dark Theme Colors
+**/
+$default-text-dt: #e8eaed;
 $secondary-text-dt: #c3c3c3;
 $disabled-text-dt: #898989;
 
-// body colors
-$primary-dt: #2f2f2f;
-$primary-variant-dt: #565656;
+$stroke-dt: #5f6367;
 
-$accent-dt: #a35a1e;
-$accent-variant-dt: #cc9364;
+$primary-dt: #ad7014;
+$primary-variant-dt: #5f77a6;
 
-// course item colors
-$course-1-dt: purple;
-$course-2-dt: purple;
-$course-3-dt: purple;
-$course-4-dt: purple;
-$course-5-dt: purple;
-$course-6-dt: purple;
-$course-7-dt: purple;
-$course-8-dt: purple;
-$course-9-dt: purple;
-$course-10-dt: purple;
-$course-11-dt: purple;
-$course-12-dt: purple;
+// components colors
+$side-bar-dt: #181818;
+$main-background-dt: #212123;
+$academic-year-dt: #2f3134;
+$search-info-card-dt: #252628;
+$quarter-card-dt: #222222;
 
-/* Sizes */
+$drop-down-bg-dt: #2f3134;
+
+$course-1-dt: #9e9ebc;
+$course-2-dt: #5c7395;
+$course-3-dt: #798e72;
+$course-4-dt: #7ea19f;
+$course-5-dt: #c698a3;
+$course-6-dt: #b191a8;
+$course-7-dt: #bf968b;
+$course-8-dt: #796782;
+$course-9-dt: #9f9368;
+$course-10-dt: #b08b68;
+$course-11-dt: #5f8c89;
+$course-12-dt: #7e7e7e;
+
+// quarter item colors
+$fall: #f4d0af;
+$winter: #c8dffa;
+$spring: #d5efb7;
+$summer: #a3ebe2;
