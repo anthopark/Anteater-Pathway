@@ -1,6 +1,6 @@
-/** 
-    Colors
- ***/
+/**************** 
+  Colors
+ ***************/
 const primary1 = '#223e68';
 const primary2 = '#4f6484';
 
@@ -26,14 +26,14 @@ const red4 = '#fa7070';
 const blue1 = '#0037a8';
 const blue2 = '#397BDD';
 
-/** 
+/**************** 
   Control Sizes (Input, Button, etc.)
-**/
+****************/
 const controlHeightMD = '4rem';
 
-/** 
+/**************** 
   Font
-**/
+****************/
 const fontSizeSM = '1.2rem';
 const fontSizeMD = '1.4rem';
 const fontSizeLG = '1.7rem';
@@ -42,26 +42,24 @@ const letterSpacingSM = '0.2px';
 const letterSpacingMD = '0.5px';
 const letterSpacingLG = '1px';
 
-/** 
+/**************** 
   Border Radius
-**/
+****************/
 const borderRadiusXS = '4px';
 const borderRadiusSM = '8px';
 const borderRadiusMD = '12px';
 const borderRadiusLG = '20px';
 
-/** 
+/**************** 
   Light Theme Colors
-**/
+****************/
 const defaultText = gray1;
 const placeholderText = gray4;
 const disabledText = gray5;
 
-/** 
+/**************** 
   Dark Theme Colors
-**/
-const primaryDark1 = '#AD7014';
-const primaryDark2 = '#';
+****************/
 
 const accentDark1 = '#5F77A6';
 const accentDark2 = '#354E80';
@@ -106,8 +104,6 @@ export {
   white1,
   primary1,
   primary2,
-  primaryDark1,
-  primaryDark2,
   accent1,
   accent2,
   accent3,

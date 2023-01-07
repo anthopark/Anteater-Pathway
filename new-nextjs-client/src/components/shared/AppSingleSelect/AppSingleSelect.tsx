@@ -1,5 +1,4 @@
 import Select, { ControlProps, OptionProps, StylesConfig } from 'react-select';
-
 import { useEffect, useState } from 'react';
 import {
   borderRadiusSM,
@@ -102,7 +101,7 @@ function AppSingleSelect(props: Props) {
       return theme === 'light' ? blue2 : accent1;
     }
 
-    return theme === 'light' ? 'none' : gray3;
+    return theme === 'light' ? 'transparent' : gray3;
   };
 
   const getControlHoverBorderColor = (state: ControlProps): string => {

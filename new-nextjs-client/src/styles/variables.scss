@@ -1,6 +1,6 @@
-/** 
+/**************** 
   Colors
-**/
+****************/
 $primary-1: #223e68;
 $primary-2: #4f6484;
 
@@ -28,14 +28,14 @@ $blue-2: #0547cf;
 $blue-3: #0d5bff;
 $blue-4: #82d8ff;
 
-/** 
+/**************** 
   Control Sizes (Input, Button, etc.)
-**/
+****************/
 $control-height-md: 4rem;
 
-/** 
+/**************** 
   Font
-**/
+****************/
 $fs-sm: 1.2rem;
 $fs-md: 1.4rem;
 $fs-lg: 1.7rem;
@@ -44,21 +44,20 @@ $letter-spacing-sm: 0.2px;
 $letter-spacing-md: 0.5px;
 $letter-spacing-lg: 1px;
 
-/** 
+/**************** 
   Border Radius
-**/
+****************/
 $br-xs: 4px;
 $br-sm: 8px;
 $br-md: 12px;
 $br-lg: 20px;
 
-/** 
-  Light Theme Colors
-**/
+/**************** 
+Light Theme Colors
+****************/
+$main-background: $gray-6;
 $default-text: $gray-1;
 $placeholder-text: $gray-4;
-
-$main-background: #e2e2eb;
 
 $course-1: #c4c3e4;
 $course-2: #94add3;
