@@ -24,9 +24,7 @@ const red3 = '#e5534b;';
 const red4 = '#fa7070';
 
 const blue1 = '#0037a8';
-const blue2 = '#0547cf';
-const blue3 = '#0d5bff';
-const blue4 = '#82d8ff';
+const blue2 = '#397BDD';
 
 /**************** 
   Control Sizes (Input, Button, etc.)
@@ -57,16 +55,31 @@ const borderRadiusLG = '20px';
 ****************/
 const defaultText = gray1;
 const placeholderText = gray4;
+const disabledText = gray5;
 
 /**************** 
   Dark Theme Colors
 ****************/
+
+const accentDark1 = '#5F77A6';
+const accentDark2 = '#354E80';
+
+const dropdownBackgroundDark = '#2f3134';
+const dropdownBackgroundActiveDark = '#535353';
+
+const defaultTextDark = '#E8EAED';
+const placeholderTextDark = '#C3C3C3';
+const disabledTextDark = gray4;
 
 export {
   borderRadiusXS,
   borderRadiusSM,
   borderRadiusMD,
   borderRadiusLG,
+  dropdownBackgroundDark,
+  dropdownBackgroundActiveDark,
+  disabledText,
+  disabledTextDark,
   gray1,
   gray2,
   gray3,
@@ -78,12 +91,12 @@ export {
   fontSizeMD,
   fontSizeLG,
   defaultText,
+  defaultTextDark,
   placeholderText,
+  placeholderTextDark,
   controlHeightMD,
   blue1,
   blue2,
-  blue3,
-  blue4,
   red1,
   red2,
   red3,
@@ -91,9 +104,13 @@ export {
   white1,
   primary1,
   primary2,
+  primaryDark1,
+  primaryDark2,
   accent1,
   accent2,
   accent3,
+  accentDark1,
+  accentDark2,
   letterSpacingSM,
   letterSpacingMD,
   letterSpacingLG,
