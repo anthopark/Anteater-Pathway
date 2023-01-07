@@ -1,5 +1,5 @@
 /**************** 
-    Colors
+  Colors
  ***************/
 const primary1 = '#223e68';
 const primary2 = '#4f6484';

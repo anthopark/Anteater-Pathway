@@ -51,13 +51,14 @@ $br-xs: 4px;
 $br-sm: 8px;
 $br-md: 12px;
 $br-lg: 20px;
-$main-background: #e2e2eb;
 
 /**************** 
-  Light Theme Colors
+Light Theme Colors
 ****************/
+$main-background: $gray-6;
 $default-text: $gray-1;
 $placeholder-text: $gray-4;
+
 $course-1: #c4c3e4;
 $course-2: #94add3;
 $course-3: #b0d2a4;
