@@ -104,8 +104,6 @@ export {
   white1,
   primary1,
   primary2,
-  primaryDark1,
-  primaryDark2,
   accent1,
   accent2,
   accent3,
