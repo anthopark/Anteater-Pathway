@@ -11,29 +11,23 @@ import { white1 } from '@styles/variables';
 export default function Home() {
   return (
     <div className={styles.container}>
-      <ThemeToggler />
-      <AddYearDropdown />
-      <AppButton
-        onClick={(e) => console.log(e)}
-        kind="primary"
-        leftIcon={<FontAwesomeIcon icon={search} color={white1} size="1x" />}
-      >
-        Courses
-      </AppButton>
-      <AppButton
-        onClick={(e) => console.log(e)}
-        kind="secondary"
-        leftIcon={<FontAwesomeIcon icon={search} color={white1} size="1x" />}
-      >
-        Courses
-      </AppButton>
-      <AppButton
-        onClick={(e) => console.log(e)}
-        kind="danger"
-        leftIcon={<FontAwesomeIcon icon={search} color={white1} size="1x" />}
-      >
-        Courses
-      </AppButton>
+      <div className={styles.topLayout}>
+        <div className={styles.addYear}>
+          <AddYearDropdown />
+        </div>
+        <AppButton
+          onClick={(e) => console.log(e)}
+          kind="primary"
+          leftIcon={<FontAwesomeIcon icon={search} color={white1} size="1x" />}
+        >
+          Search Courses
+        </AppButton>
+
+        <ThemeToggler />
+        <div className={styles.userProfile}></div>
+      </div>
+
+      <div className={styles.mainLayout}></div>
     </div>
   );
 }

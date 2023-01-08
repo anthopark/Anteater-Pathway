@@ -1,6 +1,27 @@
 .container {
   padding: 0 2rem;
   background: $main-background;
+  display: grid;
+  grid-template-rows: 8rem auto;
+
+  .topLayout {
+    background-color: aqua;
+    display: flex;
+    .addYear {
+      width: 14rem;
+    }
+  }
+
+  .userProfile {
+    background-color: gray;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .mainLayout {
+    background-color: palevioletred;
+  }
 }
 
 @media (max-width: 600px) {
