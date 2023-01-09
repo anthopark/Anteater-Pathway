@@ -13,5 +13,7 @@ const search = findIconDefinition({
   prefix: 'fas',
   iconName: 'magnifying-glass',
 });
+const sun = findIconDefinition({ prefix: 'fas', iconName: 'sun' });
+const moon = findIconDefinition({ prefix: 'fas', iconName: 'moon' });
 
-export { plus, coffee, envelope, github, search };
+export { plus, coffee, envelope, github, search, sun, moon };

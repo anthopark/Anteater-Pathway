@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Button } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react';
+import { sun, moon } from '@styles/fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-type Props = {};
+import styles from './ThemeToggler.module.scss';
 
-export default function ThemeToggler({}: Props) {
+function ThemeToggler() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -17,8 +19,21 @@ export default function ThemeToggler({}: Props) {
   }
 
   return (
-    <Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-      {theme}
-    </Button>
+    <IconButton
+      height={'3rem'}
+      width={'3rem'}
+      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      aria-label="Theme toggle"
+      variant="unstyled"
+      icon={
+        theme === 'light' ? (
+          <FontAwesomeIcon className={styles.themeIcon} icon={moon} />
+        ) : (
+          <FontAwesomeIcon className={styles.themeIcon} icon={sun} />
+        )
+      }
+    />
   );
 }
+
+export default ThemeToggler;
