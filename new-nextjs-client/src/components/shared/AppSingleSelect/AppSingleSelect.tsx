@@ -18,6 +18,7 @@ import {
   white1,
   blue2,
   accent1,
+  gray2,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import {
@@ -34,6 +35,7 @@ interface Props {
   placeholder?: string;
   onChange?: (newValue: any) => void;
   options: any[];
+  value?: any;
 }
 
 function AppSingleSelect(props: Props) {
@@ -146,10 +148,15 @@ function AppSingleSelect(props: Props) {
       fontSize: fontSizeMD,
       color: 'defaultText',
     }),
-    dropdownIndicator: (provided) => ({
+    dropdownIndicator: (provided, state) => ({
       ...provided,
       color: gray4,
+      paddingLeft: '0px',
+      '&:hover': {
+        color: theme === 'light' ? gray3 : gray5,
+      },
     }),
+
     clearIndicator: (provided) => ({
       ...provided,
       color: gray4,
@@ -158,6 +165,11 @@ function AppSingleSelect(props: Props) {
       ...provided,
       display: 'none',
     }),
+    // indicatorsContainer: (provided, props) => ({
+    //   ...provided,
+    //   padding: '8px 0',
+    // }),
+
     input: (provided) => ({
       ...provided,
       color: theme === 'light' ? defaultText : defaultTextDark,
@@ -209,6 +221,7 @@ function AppSingleSelect(props: Props) {
         onChange={props.onChange}
         options={props.options}
         placeholder={props.placeholder}
+        value={props.value}
         styles={{
           ...baseStyles,
           ...props.customStyles,

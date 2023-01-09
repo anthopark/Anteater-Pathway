@@ -1,5 +1,5 @@
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
-import { useAppUser } from '@contexts/AppUserContext/AppUserContext';
+import useAppUser from '@hooks/useAppUser';
 import styles from './AddYearDropdown.module.scss';
 
 interface YearOption {
@@ -39,8 +39,8 @@ function AddYearDropdown() {
         onChange={onSelectChange}
         options={getYearOptions()}
         placeholder="Add years"
+        value={null}
       />
-      {appUser.years?.length}
     </div>
   );
 }
