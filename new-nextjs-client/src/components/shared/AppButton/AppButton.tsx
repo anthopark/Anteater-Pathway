@@ -11,8 +11,6 @@ import {
 import { useTheme } from 'next-themes';
 import {
   accent1,
-  accent2,
-  accent3,
   borderRadiusSM,
   controlHeightMD,
   fontSizeMD,
@@ -24,13 +22,16 @@ import {
   gray6,
   gray7,
   primary1,
-  primary2,
   red1,
   red2,
   red3,
   red4,
   white1,
 } from '@styles/variables';
+import {
+  primaryButtonBgColorHover,
+  primaryButtonBgColorHoverDark,
+} from '@styles/reusable-ui-variables';
 
 interface ColorMap {
   [key: string]: { [key: string]: string | null };
@@ -42,8 +43,8 @@ const primaryBgColorMap: ColorMap = {
     dark: accent1,
   },
   hover: {
-    light: primary2,
-    dark: accent2,
+    light: primaryButtonBgColorHover,
+    dark: primaryButtonBgColorHoverDark,
   },
   active: {
     light: primary1,
@@ -129,15 +130,15 @@ const dangerFontColorMap: ColorMap = {
 const primaryBorderColorMap: ColorMap = {
   default: {
     light: null,
-    dark: accent3,
+    dark: null,
   },
   hover: {
     light: null,
-    dark: accent3,
+    dark: null,
   },
   active: {
     light: null,
-    dark: accent3,
+    dark: null,
   },
 };
 

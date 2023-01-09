@@ -2,11 +2,8 @@
   Colors
  ***************/
 const primary1 = '#223e68';
-const primary2 = '#4f6484';
 
 const accent1 = '#d98727';
-const accent2 = '#b0824b';
-const accent3 = '#cec5a5';
 
 const white1 = '#ffffff';
 
@@ -61,12 +58,6 @@ const disabledText = gray5;
   Dark Theme Colors
 ****************/
 
-const accentDark1 = '#5F77A6';
-const accentDark2 = '#354E80';
-
-const dropdownBackgroundDark = '#2f3134';
-const dropdownBackgroundActiveDark = '#535353';
-
 const defaultTextDark = '#E8EAED';
 const placeholderTextDark = '#C3C3C3';
 const disabledTextDark = gray4;
@@ -76,8 +67,6 @@ export {
   borderRadiusSM,
   borderRadiusMD,
   borderRadiusLG,
-  dropdownBackgroundDark,
-  dropdownBackgroundActiveDark,
   disabledText,
   disabledTextDark,
   gray1,
@@ -103,12 +92,7 @@ export {
   red4,
   white1,
   primary1,
-  primary2,
   accent1,
-  accent2,
-  accent3,
-  accentDark1,
-  accentDark2,
   letterSpacingSM,
   letterSpacingMD,
   letterSpacingLG,
