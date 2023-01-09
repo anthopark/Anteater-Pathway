@@ -33,7 +33,7 @@ function AddYearDropdown() {
         isOptionDisabled={(option: YearOption) => option.disabled}
         onChange={onSelectChange}
         options={getYearOptions()}
-        placeholder="Add year"
+        placeholder="Add Year"
       />
     </div>
   );
