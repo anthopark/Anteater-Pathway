@@ -1,6 +1,13 @@
 .container {
   padding: 0 2rem;
   background: $main-background;
+  display: grid;
+  grid-template-rows: 7rem auto;
+
+  .topSection {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 600px) {

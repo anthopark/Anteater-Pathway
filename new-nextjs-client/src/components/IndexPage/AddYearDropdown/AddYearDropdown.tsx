@@ -1,4 +1,5 @@
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
+import styles from './AddYearDropdown.module.scss';
 
 interface YearOption {
   value: number;
@@ -6,11 +7,19 @@ interface YearOption {
   disabled: boolean;
 }
 
-const options: YearOption[] = [
-  { value: 22, label: '22 / 23', disabled: true },
-  { value: 23, label: '23 / 24', disabled: false },
-  { value: 24, label: '24 / 25', disabled: false },
-];
+const getYearOptions = () => {
+  const getYearArray = (start: number, end: number) =>
+    Array.from(Array(end - start + 1).keys()).map((x) => x + start);
+
+  const currentYear: number = parseInt(
+    new Date().getFullYear().toString().substring(2)
+  );
+
+  const yearOptions: YearOption[] = getYearArray(17, currentYear + 10).map(
+    (year) => ({ value: year, label: `${year} / ${year + 1}`, disabled: false })
+  );
+  return yearOptions;
+};
 
 function AddYearDropdown() {
   const onSelectChange = (newValue: YearOption) => {
@@ -18,13 +27,13 @@ function AddYearDropdown() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <AppSingleSelect
         isClearable={false}
         isOptionDisabled={(option: YearOption) => option.disabled}
         onChange={onSelectChange}
-        options={options}
-        placeholder="Add years..."
+        options={getYearOptions()}
+        placeholder="Add years"
       />
     </div>
   );
