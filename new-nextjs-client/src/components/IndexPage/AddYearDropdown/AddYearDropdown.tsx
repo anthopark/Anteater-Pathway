@@ -1,4 +1,5 @@
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
+import styles from './AddYearDropdown.module.scss';
 
 interface YearOption {
   value: number;
@@ -26,13 +27,13 @@ function AddYearDropdown() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <AppSingleSelect
         isClearable={false}
         isOptionDisabled={(option: YearOption) => option.disabled}
         onChange={onSelectChange}
         options={getYearOptions()}
-        placeholder="Add years..."
+        placeholder="Add year"
       />
     </div>
   );

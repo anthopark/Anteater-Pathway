@@ -7,9 +7,9 @@ import AddYearDropdown from '@components/IndexPage/AddYearDropdown/AddYearDropdo
 export default function Home() {
   return (
     <div className={styles.container}>
-      <div className={styles.topLayout}>
+      <div className={styles.topSection}>
         <div className={styles.leftContainer}>
-          <div className={styles.addYear}>
+          <div className={styles.addYearDropdownWrapper}>
             <AddYearDropdown />
           </div>
         </div>
@@ -18,7 +18,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.mainLayout}></div>
+      <div className={styles.mainSection}></div>
     </div>
   );
 }

@@ -4,15 +4,9 @@
   display: grid;
   grid-template-rows: 7rem auto;
 
-  .topLayout {
+  .topSection {
     display: flex;
     justify-content: space-between;
-    .addYear {
-      width: 14rem;
-    }
-  }
-
-  .mainLayout {
   }
 }
 
