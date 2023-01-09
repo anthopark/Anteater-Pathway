@@ -40,6 +40,12 @@ function AddYearDropdown() {
         options={getYearOptions()}
         placeholder="Add years"
         value={null}
+        customStyles={{
+          dropdownIndicator: (provided) => ({
+            ...provided,
+            paddingLeft: '0px',
+          }),
+        }}
       />
     </div>
   );

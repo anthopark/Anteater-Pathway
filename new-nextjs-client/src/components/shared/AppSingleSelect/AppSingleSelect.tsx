@@ -151,12 +151,10 @@ function AppSingleSelect(props: Props) {
     dropdownIndicator: (provided, state) => ({
       ...provided,
       color: gray4,
-      paddingLeft: '0px',
       '&:hover': {
         color: theme === 'light' ? gray3 : gray5,
       },
     }),
-
     clearIndicator: (provided) => ({
       ...provided,
       color: gray4,
@@ -165,11 +163,6 @@ function AppSingleSelect(props: Props) {
       ...provided,
       display: 'none',
     }),
-    // indicatorsContainer: (provided, props) => ({
-    //   ...provided,
-    //   padding: '8px 0',
-    // }),
-
     input: (provided) => ({
       ...provided,
       color: theme === 'light' ? defaultText : defaultTextDark,
