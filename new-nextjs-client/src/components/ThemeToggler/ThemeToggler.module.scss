@@ -1,5 +1,21 @@
 .container {
   .themeIcon {
-    font-size: 3rem;
+    font-size: 2.7rem;
+    color: $gray-4;
+    transition: color 200ms ease-in-out;
+
+    &:hover {
+      color: $gray-3;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .themeIcon {
+    color: $gray-4;
+
+    &:hover {
+      color: $gray-5;
+    }
   }
 }
