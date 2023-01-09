@@ -4,8 +4,6 @@ import {
   borderRadiusSM,
   borderRadiusXS,
   controlHeightMD,
-  dropdownBackgroundDark,
-  dropdownBackgroundActiveDark,
   defaultText,
   defaultTextDark,
   disabledText,
@@ -18,12 +16,16 @@ import {
   placeholderTextDark,
   placeholderText,
   white1,
-  accentDark1,
-  accentDark2,
   blue2,
   accent1,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
+import {
+  selectBgColorActiveDark,
+  selectBgColorDark,
+  selectOptionBgColorHoverDark,
+  selectOptionBgColorSelectedDark,
+} from '@styles/reusable-ui-variables';
 
 interface Props {
   customStyles?: StylesConfig;
@@ -36,7 +38,7 @@ interface Props {
 
 function AppSingleSelect(props: Props) {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -50,9 +52,7 @@ function AppSingleSelect(props: Props) {
     if (theme === 'light') {
       return white1;
     } else {
-      return state.isFocused
-        ? dropdownBackgroundActiveDark
-        : dropdownBackgroundDark;
+      return state.isFocused ? selectBgColorActiveDark : selectBgColorDark;
     }
   };
 
@@ -63,7 +63,7 @@ function AppSingleSelect(props: Props) {
       if (theme === 'light' && state.isSelected) {
         return gray5;
       } else if (theme === 'dark' && state.isSelected) {
-        return accentDark2;
+        return selectOptionBgColorSelectedDark;
       } else {
         return 'none';
       }
@@ -76,13 +76,13 @@ function AppSingleSelect(props: Props) {
     } else if (state.isDisabled) {
       return 'none';
     } else {
-      return theme === 'light' ? gray6 : accentDark1;
+      return theme === 'light' ? gray6 : selectOptionBgColorHoverDark;
     }
   };
 
   const getOptionActiveBgColor = (state: OptionProps): string => {
     if (state.isSelected) {
-      return theme === 'light' ? gray5 : accentDark2;
+      return theme === 'light' ? gray5 : selectOptionBgColorSelectedDark;
     } else {
       return 'none';
     }
@@ -170,8 +170,7 @@ function AppSingleSelect(props: Props) {
       ...provided,
       borderRadius: borderRadiusSM,
       border: theme === 'light' ? `1px solid ${gray5}` : `1px solid ${gray3}`,
-      backgroundColor:
-        theme === 'light' ? white1 : dropdownBackgroundActiveDark,
+      backgroundColor: theme === 'light' ? white1 : selectBgColorActiveDark,
     }),
     menuList: (provided, state) => ({
       ...provided,
