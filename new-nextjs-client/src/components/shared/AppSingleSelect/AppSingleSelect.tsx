@@ -193,6 +193,7 @@ function AppSingleSelect(props: Props) {
     }),
     option: (provided, state) => ({
       ...provided,
+      height: '3.3rem',
       color: getOptionFontColor(state),
       fontSize: fontSizeMD,
       padding: '.6rem 1rem',

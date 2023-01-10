@@ -1,14 +1,18 @@
+$top-selection-pb: 1.5rem;
+
 .container {
   padding: 0 2rem;
   background: $main-background;
   display: grid;
-  grid-template-rows: 7rem auto;
+  grid-template-rows: 7.5rem auto;
 
   .topSection {
     display: flex;
     justify-content: space-between;
     margin-top: 2rem;
-    height: $control-height-md;
+    height: calc($control-height-md + $top-selection-pb);
+    padding-bottom: $top-selection-pb;
+    border-bottom: 1px solid $gray-5;
 
     .leftContainer {
     }
@@ -30,5 +34,9 @@
 [data-theme='dark'] {
   .container {
     background-color: $main-background-dt;
+  }
+
+  .container .topSection {
+    border-bottom: 1px solid $gray-2;
   }
 }
