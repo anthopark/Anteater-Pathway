@@ -16,17 +16,14 @@
     .rightContainer {
       display: flex;
       align-items: center;
+
+      .themeTogglerWrapper {
+        margin-right: 3rem;
+      }
     }
 
     .addYearDropdownWrapper {
     }
-  }
-}
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
   }
 }
 
