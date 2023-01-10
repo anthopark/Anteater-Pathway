@@ -41,8 +41,7 @@ function AddYearDropdown() {
         placeholder="Add years"
         value={null}
         customStyles={{
-          dropdownIndicator: (provided) => ({
-            ...provided,
+          dropdownIndicator: () => ({
             paddingLeft: '0px',
           }),
         }}
