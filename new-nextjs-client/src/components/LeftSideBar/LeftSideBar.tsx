@@ -15,25 +15,13 @@ export default function LeftSideBar(props: ILeftSideBarProps) {
       </div>
       <div className={style.menuContainer}>
         <a className={style.link}>
-          <FontAwesomeIcon
-            className={style.icon}
-            icon={envelope}
-            color={white1}
-          />
+          <FontAwesomeIcon className={style.icon} icon={envelope} />
         </a>
         <a className={style.link}>
-          <FontAwesomeIcon
-            className={style.icon}
-            icon={github}
-            color={white1}
-          />
+          <FontAwesomeIcon className={style.icon} icon={github} />
         </a>
         <a className={style.link}>
-          <FontAwesomeIcon
-            className={style.icon}
-            icon={coffee}
-            color={white1}
-          />
+          <FontAwesomeIcon className={style.icon} icon={coffee} />
         </a>
       </div>
     </div>

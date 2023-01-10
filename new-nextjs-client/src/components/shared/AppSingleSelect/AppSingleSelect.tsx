@@ -18,6 +18,7 @@ import {
   white1,
   blue2,
   accent1,
+  gray2,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import {
@@ -34,6 +35,7 @@ interface Props {
   placeholder?: string;
   onChange?: (newValue: any) => void;
   options: any[];
+  value?: any;
 }
 
 function AppSingleSelect(props: Props) {
@@ -134,47 +136,60 @@ function AppSingleSelect(props: Props) {
       '&:hover': {
         borderColor: getControlHoverBorderColor(state),
       },
+      ...props.customStyles?.['control']?.(provided, state),
     }),
 
     placeholder: (provided, state) => ({
       ...provided,
       fontSize: fontSizeMD,
       color: theme === 'light' ? placeholderText : placeholderTextDark,
+      ...props.customStyles?.['placeholder']?.(provided, state),
     }),
     valueContainer: (provided, state) => ({
       ...provided,
       fontSize: fontSizeMD,
       color: 'defaultText',
+      ...props.customStyles?.['valueContainer']?.(provided, state),
     }),
-    dropdownIndicator: (provided) => ({
+    dropdownIndicator: (provided, state) => ({
       ...provided,
       color: gray4,
+      '&:hover': {
+        color: theme === 'light' ? gray3 : gray5,
+      },
+      ...props.customStyles?.['dropdownIndicator']?.(provided, state),
     }),
-    clearIndicator: (provided) => ({
+    clearIndicator: (provided, state) => ({
       ...provided,
       color: gray4,
+      ...props.customStyles?.['clearIndicator']?.(provided, state),
     }),
-    indicatorSeparator: (provided) => ({
+    indicatorSeparator: (provided, state) => ({
       ...provided,
       display: 'none',
+      ...props.customStyles?.['indicatorSeparator']?.(provided, state),
     }),
-    input: (provided) => ({
+    input: (provided, state) => ({
       ...provided,
       color: theme === 'light' ? defaultText : defaultTextDark,
+      ...props.customStyles?.['input']?.(provided, state),
     }),
-    singleValue: (provided) => ({
+    singleValue: (provided, state) => ({
       ...provided,
       color: theme === 'light' ? defaultText : defaultTextDark,
+      ...props.customStyles?.['singleValue']?.(provided, state),
     }),
     menu: (provided, state) => ({
       ...provided,
       borderRadius: borderRadiusSM,
       border: theme === 'light' ? `1px solid ${gray5}` : `1px solid ${gray3}`,
       backgroundColor: theme === 'light' ? white1 : selectBgColorActiveDark,
+      ...props.customStyles?.['menu']?.(provided, state),
     }),
     menuList: (provided, state) => ({
       ...provided,
       padding: '.6rem .4rem',
+      ...props.customStyles?.['menuList']?.(provided, state),
     }),
     option: (provided, state) => ({
       ...provided,
@@ -190,12 +205,14 @@ function AppSingleSelect(props: Props) {
       '&:active': {
         backgroundColor: getOptionActiveBgColor(state),
       },
+      ...props.customStyles?.['option']?.(provided, state),
     }),
 
-    noOptionsMessage: (provided) => ({
+    noOptionsMessage: (provided, state) => ({
       ...provided,
       fontSize: fontSizeMD,
       color: placeholderText,
+      ...props.customStyles?.['noOptionsMessage']?.(provided, state),
     }),
   };
 
@@ -209,10 +226,8 @@ function AppSingleSelect(props: Props) {
         onChange={props.onChange}
         options={props.options}
         placeholder={props.placeholder}
-        styles={{
-          ...baseStyles,
-          ...props.customStyles,
-        }}
+        value={props.value}
+        styles={baseStyles}
       />
     </>
   );
