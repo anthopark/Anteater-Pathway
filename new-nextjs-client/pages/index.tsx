@@ -3,6 +3,8 @@ import MainLayout from '@components/MainLayout/MainLayout';
 import { ReactNode } from 'react';
 import ThemeToggler from '@components/ThemeToggler/ThemeToggler';
 import AddYearDropdown from '@components/IndexPage/AddYearDropdown/AddYearDropdown';
+import { Button } from '@chakra-ui/react';
+import useAppToast from '@hooks/useAppToast';
 
 export default function Home() {
   return (
@@ -17,6 +19,8 @@ export default function Home() {
           <ThemeToggler />
         </div>
       </div>
+
+      <Button onClick={useAppToast()}>App Toast Btn</Button>
 
       <div className={styles.mainSection}></div>
     </div>
