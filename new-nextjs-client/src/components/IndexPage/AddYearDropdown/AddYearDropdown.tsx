@@ -1,4 +1,5 @@
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
+import useAppUser from '@hooks/useAppUser';
 import styles from './AddYearDropdown.module.scss';
 
 interface YearOption {
@@ -7,7 +8,7 @@ interface YearOption {
   disabled: boolean;
 }
 
-const getYearOptions = () => {
+const getYearOptions = (): YearOption[] => {
   const getYearArray = (start: number, end: number) =>
     Array.from(Array(end - start + 1).keys()).map((x) => x + start);
 
@@ -22,8 +23,12 @@ const getYearOptions = () => {
 };
 
 function AddYearDropdown() {
+  const { appUser, updateAppUser } = useAppUser();
+
   const onSelectChange = (newValue: YearOption) => {
-    console.log(newValue);
+    updateAppUser((draft) => {
+      draft.addYear(newValue.value);
+    });
   };
 
   return (
@@ -34,6 +39,12 @@ function AddYearDropdown() {
         onChange={onSelectChange}
         options={getYearOptions()}
         placeholder="Add years"
+        value={null}
+        customStyles={{
+          dropdownIndicator: () => ({
+            paddingLeft: '0px',
+          }),
+        }}
       />
     </div>
   );

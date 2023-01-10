@@ -2,6 +2,7 @@ import '@styles/globals.css';
 import '@styles/fontawesome';
 import { ThemeProvider } from 'next-themes';
 import { ChakraProvider } from '@chakra-ui/react';
+import { AppUserProvider } from '@contexts/AppUserContext/AppUserContext';
 import { AppLayoutProps } from 'next/app';
 import { ReactNode } from 'react';
 
@@ -10,7 +11,11 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
 
   return (
     <ThemeProvider themes={['light', 'dark']}>
-      <ChakraProvider>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
+      <ChakraProvider>
+        <AppUserProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </AppUserProvider>
+      </ChakraProvider>
     </ThemeProvider>
   );
 }

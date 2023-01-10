@@ -33,6 +33,7 @@ $icon-size: 2.4rem;
 
       .icon {
         font-size: $icon-size;
+        color: $white-1;
       }
     }
   }
@@ -41,5 +42,9 @@ $icon-size: 2.4rem;
 [data-theme='dark'] {
   .container {
     background-color: $side-bar-dt;
+  }
+
+  .container .menuContainer .link .icon {
+    color: $gray-5;
   }
 }
