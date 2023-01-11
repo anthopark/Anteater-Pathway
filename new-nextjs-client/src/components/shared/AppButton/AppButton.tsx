@@ -179,6 +179,9 @@ interface Props {
   leftIcon?: ReactElement;
   onClick: (event?: MouseEvent<HTMLButtonElement>) => void;
   rightIcon?: ReactElement;
+  fontSize?: string;
+  width?: string;
+  padding?: string;
 }
 
 function AppButton({

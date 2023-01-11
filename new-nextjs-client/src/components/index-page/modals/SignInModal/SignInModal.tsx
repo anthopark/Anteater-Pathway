@@ -1,3 +1,4 @@
+import styles from './SignInModal.module.scss';
 import {
   Modal,
   ModalOverlay,
@@ -16,12 +17,14 @@ import {
   defaultText,
   defaultTextDark,
   gray4,
+  fontSizeMD,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
 import AppButton from '@components/shared/AppButton/AppButton';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from 'src/firebase/service-access';
+import Image from 'next/image';
 
 const provider = new GoogleAuthProvider();
 
@@ -58,12 +61,15 @@ function SignInModal(props: Props) {
         bgColor={theme === 'light' ? gray7 : gray1}
         border="0 4rem"
       >
+        <div className={styles.logoContainer}>
+          <Image src="/anteater-logo.svg" alt="logo" fill />
+        </div>
         <ModalHeader
           pt="3rem"
           textAlign="center"
           letterSpacing={letterSpacingLG}
           fontSize={fontSizeLG}
-          fontWeight="medium"
+          fontWeight="light"
           color={theme === 'light' ? defaultText : defaultTextDark}
         >
           Sign in to Anteater Pathway
@@ -74,17 +80,39 @@ function SignInModal(props: Props) {
           mr=".7rem"
           color={gray4}
         />
-        <ModalBody p="3rem 4rem">
-          <div>
-            <AppButton kind="primary" onClick={handleSignIn} p="0 5rem">
+        <ModalBody p="3.5rem 4rem">
+          <div className={styles.signInBtnContainer}>
+            <AppButton
+              kind="primary"
+              onClick={handleSignIn}
+              fontSize={fontSizeLG}
+              width="28rem"
+              padding="0 0 0 3rem"
+            >
               Sign in with Google
             </AppButton>
+            <div style={{ position: 'absolute', top: '.4rem', left: '.5rem' }}>
+              <div className={styles.googleLogoContainer}>
+                <Image src="/google-logo.svg" alt="google-logo" fill />
+              </div>
+            </div>
           </div>
         </ModalBody>
         <ModalFooter
           borderTop={`1px solid ${gray4}`}
           margin="0 4rem"
-        ></ModalFooter>
+          p="0.5rem 0 2.5rem 0"
+          flexDir="column"
+          alignItems="none"
+        >
+          <p className={styles.footerParagraph}>
+            We do not monetize user identifiable data, such as an email address,
+            in any way.
+          </p>
+          <p className={styles.footerParagraph}>
+            By signing in, you agree to our privacy policy
+          </p>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
