@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/layout';
-
+import { Badge } from '@chakra-ui/react';
+import styles from './AppToast.module.scss';
 interface Props {
   status: string;
   highlightedData: string;
@@ -8,9 +8,11 @@ interface Props {
 
 function AppToast(props: Props) {
   return (
-    <Box color="black" bg="gray.300">
-      {`${props.highlightedData} ${props.message}`}
-    </Box>
+    <div className={styles.appToastContainer}>
+      <Badge fontSize="5rem" backgroundColor="purple">
+        {props.highlightedData}
+      </Badge>
+    </div>
   );
 }
 

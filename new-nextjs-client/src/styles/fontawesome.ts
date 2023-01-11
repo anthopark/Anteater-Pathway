@@ -16,4 +16,23 @@ const search = findIconDefinition({
 const sun = findIconDefinition({ prefix: 'fas', iconName: 'sun' });
 const moon = findIconDefinition({ prefix: 'fas', iconName: 'moon' });
 
-export { plus, coffee, envelope, github, search, sun, moon };
+const checkCircle = findIconDefinition({
+  prefix: 'fas',
+  iconName: 'check-circle',
+});
+const exclamationCircle = findIconDefinition({
+  prefix: 'fas',
+  iconName: 'exclamation-circle',
+});
+
+export {
+  plus,
+  coffee,
+  envelope,
+  github,
+  search,
+  sun,
+  moon,
+  checkCircle,
+  exclamationCircle,
+};
