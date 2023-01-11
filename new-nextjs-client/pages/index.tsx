@@ -2,7 +2,8 @@ import styles from './index.module.scss';
 import MainLayout from '@components/MainLayout/MainLayout';
 import { ReactNode } from 'react';
 import ThemeToggler from '@components/ThemeToggler/ThemeToggler';
-import AddYearDropdown from '@components/IndexPage/AddYearDropdown/AddYearDropdown';
+import AddYearDropdown from '@components/index-page/AddYearDropdown/AddYearDropdown';
+import Avatar from '@components/index-page/Avatar/Avatar';
 
 export default function Home() {
   return (
@@ -14,7 +15,12 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.rightContainer}>
-          <ThemeToggler />
+          <div className={styles.themeTogglerWrapper}>
+            <ThemeToggler />
+          </div>
+          <div className={styles.avatarWrapper}>
+            <Avatar />
+          </div>
         </div>
       </div>
 

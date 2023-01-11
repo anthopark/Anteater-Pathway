@@ -3,7 +3,7 @@
  ***************/
 const primary1 = '#223e68';
 
-const accent1 = '#d98727';
+const accent1 = '#BE731A';
 
 const white1 = '#ffffff';
 

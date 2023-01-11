@@ -15,5 +15,9 @@ const search = findIconDefinition({
 });
 const sun = findIconDefinition({ prefix: 'fas', iconName: 'sun' });
 const moon = findIconDefinition({ prefix: 'fas', iconName: 'moon' });
+const signOut = findIconDefinition({
+  prefix: 'fas',
+  iconName: 'right-from-bracket',
+});
 
-export { plus, coffee, envelope, github, search, sun, moon };
+export { plus, coffee, envelope, github, signOut, search, sun, moon };
