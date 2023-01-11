@@ -9,6 +9,12 @@ import useAppToast from '@hooks/useAppToast';
 export default function Home() {
   const showToastBox = useAppToast();
 
+  const tempData = {
+    status: 'success',
+    highlightedData: '12/13',
+    message: 'Added',
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.topSection}>
@@ -22,7 +28,7 @@ export default function Home() {
         </div>
       </div>
 
-      <Button onClick={() => showToastBox()}>App Toast Btn</Button>
+      <Button onClick={() => showToastBox(tempData)}>App Toast Btn</Button>
 
       <div className={styles.mainSection}></div>
     </div>

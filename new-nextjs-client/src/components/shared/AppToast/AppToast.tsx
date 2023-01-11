@@ -1,15 +1,15 @@
 import { Box } from '@chakra-ui/layout';
 
-// interface Props {
-//   status: string;
-//   highlightedData: string;
-//   message: string;
-// }
+interface Props {
+  status: string;
+  highlightedData: string;
+  message: string;
+}
 
-function AppToast() {
+function AppToast(props: Props) {
   return (
     <Box color="black" bg="gray.300">
-      APP TOAST
+      {`${props.highlightedData} ${props.message}`}
     </Box>
   );
 }
