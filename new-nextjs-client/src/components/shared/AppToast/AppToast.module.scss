@@ -4,8 +4,9 @@
   align-items: center;
   max-width: 30rem;
   min-height: 6.8rem;
-  font-size: 1.8rem;
-  border-radius: 0.9rem;
+  font-size: $fs-lg;
+  letter-spacing: $letter-spacing-sm;
+  border-radius: $br-md;
 
   .messageWrapper {
     display: flex;

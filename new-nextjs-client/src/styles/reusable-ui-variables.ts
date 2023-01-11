@@ -27,6 +27,20 @@ const selectOptionBgColorSelectedDark = '#354E80';
   AppToast
 ****************/
 
+// Light theme
+const toastBgSuccessColor = '#38A169';
+const toastHighlightSuccessColor = '#2D6A35';
+
+const toastBgFailColor = '#E53E3E';
+const toastHighlightFailColor = '#A62F36';
+
+// Dark theme
+const toastBgSuccessColorDark = '#9AE6B4';
+const toastHighlightSuccessColorDark = '#DCFEE0';
+
+const toastBgFailColorDark = '#FEB2B2';
+const toastHighlightFailColorDark = '#FFCECE';
+
 export {
   primaryButtonBgColorHover,
   primaryButtonBgColorHoverDark,
@@ -34,4 +48,12 @@ export {
   selectBgColorActiveDark,
   selectOptionBgColorHoverDark,
   selectOptionBgColorSelectedDark,
+  toastBgSuccessColor,
+  toastHighlightSuccessColor,
+  toastBgFailColor,
+  toastHighlightFailColor,
+  toastBgSuccessColorDark,
+  toastHighlightSuccessColorDark,
+  toastBgFailColorDark,
+  toastHighlightFailColorDark,
 };
