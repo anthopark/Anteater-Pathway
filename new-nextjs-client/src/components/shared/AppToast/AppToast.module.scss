@@ -1,3 +1,22 @@
 .appToastContainer {
   background-color: aqua;
+  display: flex;
+  align-items: center;
+  max-width: 30rem;
+  min-height: 6.8rem;
+  font-size: 1.8rem;
+  border-radius: 0.9rem;
+
+  .messageWrapper {
+    display: flex;
+
+    .statusIconWrapper {
+      font-size: 1.8rem;
+      margin: 0 1rem;
+    }
+
+    .message {
+      margin: 0 0.3rem;
+    }
+  }
 }
