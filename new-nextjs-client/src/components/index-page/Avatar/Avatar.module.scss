@@ -1,0 +1,11 @@
+.menuItemIcon {
+  color: $default-text;
+  font-size: 1.3rem;
+  padding-top: 0.3rem;
+}
+
+[data-theme='dark'] {
+  .menuItemIcon {
+    color: $default-text-dt;
+  }
+}

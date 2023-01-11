@@ -2,9 +2,10 @@ import styles from './index.module.scss';
 import MainLayout from '@components/MainLayout/MainLayout';
 import { ReactNode } from 'react';
 import ThemeToggler from '@components/ThemeToggler/ThemeToggler';
-import AddYearDropdown from '@components/IndexPage/AddYearDropdown/AddYearDropdown';
-import { Button } from '@chakra-ui/react';
+import AddYearDropdown from '@components/index-page/AddYearDropdown/AddYearDropdown';
+import Avatar from '@components/index-page/Avatar/Avatar';
 import useAppToast from '@hooks/useAppToast';
+import { Button } from '@chakra-ui/react';
 
 export default function Home() {
   const showToastBox = useAppToast();
@@ -24,7 +25,12 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.rightContainer}>
-          <ThemeToggler />
+          <div className={styles.themeTogglerWrapper}>
+            <ThemeToggler />
+          </div>
+          <div className={styles.avatarWrapper}>
+            <Avatar />
+          </div>
         </div>
       </div>
 
