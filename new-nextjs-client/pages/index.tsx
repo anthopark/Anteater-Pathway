@@ -10,6 +10,7 @@ import { Button } from '@chakra-ui/react';
 export default function Home() {
   const showToastBox = useAppToast();
 
+  // Temp data for Toast
   const suceessTempData = {
     status: 'success',
     highlightedData: '12 / 13',
@@ -18,8 +19,8 @@ export default function Home() {
 
   const failTempData = {
     status: 'fail',
-    highlightedData: '',
-    message: 'Something went wrong',
+    highlightedData: 'something',
+    message: 'went wrong in unexpectedly',
   };
 
   return (
@@ -40,6 +41,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Temp button for Toast */}
       <Button onClick={() => showToastBox(suceessTempData)}>
         App Toast Btn
       </Button>

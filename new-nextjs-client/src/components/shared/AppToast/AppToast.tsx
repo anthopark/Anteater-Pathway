@@ -1,9 +1,20 @@
-import { Badge } from '@chakra-ui/react';
+import styles from './AppToast.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { checkCircle, exclamationCircle } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import styles from './AppToast.module.scss';
+import {
+  toastBgSuccessColor,
+  toastHighlightSuccessColor,
+  toastBgFailColor,
+  toastHighlightFailColor,
+  toastBgSuccessColorDark,
+  toastHighlightSuccessColorDark,
+  toastBgFailColorDark,
+  toastHighlightFailColorDark,
+} from '@styles/reusable-ui-variables';
+import { white1 } from '@styles/variables';
+
 interface Props {
   status: string;
   highlightedData: string;
@@ -12,7 +23,7 @@ interface Props {
 
 function AppToast(props: Props) {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -21,8 +32,42 @@ function AppToast(props: Props) {
   if (!mounted) {
     return null;
   }
+
+  const getToastBgColor = () => {
+    if (theme === 'light') {
+      if (props.status === 'success') {
+        return {
+          background: toastBgSuccessColor,
+          highlight: toastHighlightSuccessColor,
+        };
+      } else {
+        return {
+          background: toastBgFailColor,
+          highlight: toastHighlightFailColor,
+        };
+      }
+    } else {
+      if (props.status === 'success') {
+        return {
+          background: toastBgSuccessColorDark,
+          highlight: toastHighlightSuccessColorDark,
+        };
+      } else {
+        return {
+          background: toastBgFailColorDark,
+          highlight: toastHighlightFailColorDark,
+        };
+      }
+    }
+  };
   return (
-    <div className={styles.appToastContainer}>
+    <div
+      className={styles.appToastContainer}
+      style={{
+        backgroundColor: getToastBgColor().background,
+        color: theme === 'light' ? white1 : '#171923',
+      }}
+    >
       <div className={styles.messageWrapper}>
         <div className={styles.statusIconWrapper}>
           {props.status === 'success' ? (
@@ -31,18 +76,18 @@ function AppToast(props: Props) {
             <FontAwesomeIcon icon={exclamationCircle} />
           )}
         </div>
-        <div>
-          <Badge
-            fontSize="1.7rem"
-            margin={`0 .7rem`}
-            padding={`.3rem .6rem`}
-            variant="subtle"
-            borderRadius=".5rem"
+        <p className={styles.message}>
+          <span
+            className={styles.highlight}
+            style={{
+              backgroundColor: getToastBgColor().highlight,
+              color: theme === 'light' ? white1 : '#171923',
+            }}
           >
             {props.highlightedData}
-          </Badge>
-        </div>
-        <div className={styles.message}>{props.message}</div>
+          </span>
+          {props.message}
+        </p>
       </div>
     </div>
   );
