@@ -4,21 +4,22 @@ import { checkCircle, exclamationCircle } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import {
-  toastBgSuccessColor,
-  toastHighlightSuccessColor,
-  toastBgFailColor,
-  toastHighlightFailColor,
-  toastBgSuccessColorDark,
-  toastHighlightSuccessColorDark,
-  toastBgFailColorDark,
-  toastHighlightFailColorDark,
+  toastSuccessBgColor,
+  toastSuccessHighlightColor,
+  toastFailBgColor,
+  toastFailHighlightColor,
+  toastSuccessBgColorDark,
+  toastSuccessHighlightColorDark,
+  toastFailBgColorDark,
+  toastFailHighlightColorDark,
 } from '@styles/reusable-ui-variables';
 import { white1 } from '@styles/variables';
+import { background } from '@chakra-ui/react';
 
 const toastTextColorDark = '#171923';
 interface Props {
   status: string;
-  highlightedData: string;
+  highlightedData: string | null;
   message: string;
 }
 
@@ -38,25 +39,25 @@ function AppToast(props: Props) {
     if (theme === 'light') {
       if (props.status === 'success') {
         return {
-          background: toastBgSuccessColor,
-          highlight: toastHighlightSuccessColor,
+          background: toastSuccessBgColor,
+          highlight: toastSuccessHighlightColor,
         };
       } else {
         return {
-          background: toastBgFailColor,
-          highlight: toastHighlightFailColor,
+          background: toastFailBgColor,
+          highlight: toastFailHighlightColor,
         };
       }
     } else {
       if (props.status === 'success') {
         return {
-          background: toastBgSuccessColorDark,
-          highlight: toastHighlightSuccessColorDark,
+          background: toastSuccessBgColorDark,
+          highlight: toastSuccessHighlightColorDark,
         };
       } else {
         return {
-          background: toastBgFailColorDark,
-          highlight: toastHighlightFailColorDark,
+          background: toastFailBgColorDark,
+          highlight: toastFailHighlightColorDark,
         };
       }
     }
@@ -80,10 +81,14 @@ function AppToast(props: Props) {
         <p className={styles.message}>
           <span
             className={styles.highlight}
-            style={{
-              backgroundColor: getToastBgColor().highlight,
-              color: theme === 'light' ? white1 : toastTextColorDark,
-            }}
+            style={
+              props.highlightedData !== null
+                ? {
+                    backgroundColor: getToastBgColor().highlight,
+                    color: theme === 'light' ? white1 : toastTextColorDark,
+                  }
+                : { display: 'none' }
+            }
           >
             {props.highlightedData}
           </span>

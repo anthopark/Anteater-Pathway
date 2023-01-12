@@ -3,7 +3,7 @@ import AppToast from '@components/shared/AppToast/AppToast';
 
 interface Props {
   status: string;
-  highlightedData: string;
+  highlightedData: string | null;
   message: string;
   duration: number;
 }

@@ -25,6 +25,13 @@ export default function Home() {
     duration: 4500,
   };
 
+  const failTempData2 = {
+    status: 'fail',
+    highlightedData: null,
+    message: 'went wrong in unexpectedly',
+    duration: 4500,
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.topSection}>
