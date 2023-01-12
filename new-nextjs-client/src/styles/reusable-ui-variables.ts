@@ -28,18 +28,18 @@ const selectOptionBgColorSelectedDark = '#354E80';
 ****************/
 
 // Light theme
-const toastBgSuccessColor = '#38A169';
-const toastHighlightSuccessColor = '#2D6A35';
+const toastSuccessBgColor = '#38A169';
+const toastSuccessHighlightColor = '#2D6A35';
 
-const toastBgFailColor = '#E53E3E';
-const toastHighlightFailColor = '#A62F36';
+const toastFailBgColor = '#E53E3E';
+const toastFailHighlightColor = '#A62F36';
 
 // Dark theme
-const toastBgSuccessColorDark = '#9AE6B4';
-const toastHighlightSuccessColorDark = '#DCFEE0';
+const toastSuccessBgColorDark = '#9AE6B4';
+const toastSuccessHighlightColorDark = '#DCFEE0';
 
-const toastBgFailColorDark = '#FEB2B2';
-const toastHighlightFailColorDark = '#FFCECE';
+const toastFailBgColorDark = '#FEB2B2';
+const toastFailHighlightColorDark = '#FFCECE';
 
 export {
   primaryButtonBgColorHover,
@@ -48,12 +48,12 @@ export {
   selectBgColorActiveDark,
   selectOptionBgColorHoverDark,
   selectOptionBgColorSelectedDark,
-  toastBgSuccessColor,
-  toastHighlightSuccessColor,
-  toastBgFailColor,
-  toastHighlightFailColor,
-  toastBgSuccessColorDark,
-  toastHighlightSuccessColorDark,
-  toastBgFailColorDark,
-  toastHighlightFailColorDark,
+  toastSuccessBgColor as toastBgSuccessColor,
+  toastSuccessHighlightColor as toastHighlightSuccessColor,
+  toastFailBgColor as toastBgFailColor,
+  toastFailHighlightColor as toastHighlightFailColor,
+  toastSuccessBgColorDark as toastBgSuccessColorDark,
+  toastSuccessHighlightColorDark as toastHighlightSuccessColorDark,
+  toastFailBgColorDark as toastBgFailColorDark,
+  toastFailHighlightColorDark as toastHighlightFailColorDark,
 };

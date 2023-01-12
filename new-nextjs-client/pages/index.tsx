@@ -15,12 +15,14 @@ export default function Home() {
     status: 'success',
     highlightedData: '12 / 13',
     message: 'year added',
+    duration: 3500,
   };
 
   const failTempData = {
     status: 'fail',
     highlightedData: 'something',
     message: 'went wrong in unexpectedly',
+    duration: 4500,
   };
 
   return (

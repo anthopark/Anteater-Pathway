@@ -5,6 +5,7 @@ interface Props {
   status: string;
   highlightedData: string;
   message: string;
+  duration: number;
 }
 const useAppToast = () => {
   const toast = useToast();
@@ -12,7 +13,7 @@ const useAppToast = () => {
   const showToastBox = (props: Props) => {
     toast({
       position: 'bottom-right',
-      duration: 3500,
+      duration: props.duration,
       render: () => (
         <AppToast
           status={props.status}

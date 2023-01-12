@@ -15,6 +15,7 @@ import {
 } from '@styles/reusable-ui-variables';
 import { white1 } from '@styles/variables';
 
+const toastTextColorDark = '#171923';
 interface Props {
   status: string;
   highlightedData: string;
@@ -65,7 +66,7 @@ function AppToast(props: Props) {
       className={styles.appToastContainer}
       style={{
         backgroundColor: getToastBgColor().background,
-        color: theme === 'light' ? white1 : '#171923',
+        color: theme === 'light' ? white1 : toastTextColorDark,
       }}
     >
       <div className={styles.messageWrapper}>
@@ -81,7 +82,7 @@ function AppToast(props: Props) {
             className={styles.highlight}
             style={{
               backgroundColor: getToastBgColor().highlight,
-              color: theme === 'light' ? white1 : '#171923',
+              color: theme === 'light' ? white1 : toastTextColorDark,
             }}
           >
             {props.highlightedData}
