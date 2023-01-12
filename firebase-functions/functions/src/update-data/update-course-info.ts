@@ -17,6 +17,13 @@ const COURSE_DESCRIPTIONS_MAP = new Map([
   ['prereqOrCoreq', 'Prerequisite or corequisite:'],
 ]);
 
+interface ParsedTitleBlock {
+  deptCode: string | null;
+  num: string | null;
+  title: string | null;
+  unitPart: string | null;
+}
+
 interface CrawledCourse {
   deptCode: string;
   num: string;
@@ -116,7 +123,10 @@ const crawlCourses = async (url: string): Promise<CrawledCourse[]> => {
     const titleBlock = $(elem).find('.courseblocktitle strong');
 
     const parsedTitleBlock = parseTitleBlock(
-      titleBlock.text().replace(/\u00A0/g, ' ')
+      titleBlock
+        .text()
+        .replace(/\u00A0/g, ' ')
+        .trim()
     );
 
     const descBlock = $(elem)
@@ -131,10 +141,10 @@ const crawlCourses = async (url: string): Promise<CrawledCourse[]> => {
     const parsedDescBlock = parseDescBlock(descBlock.toArray());
 
     result.push({
-      deptCode: parsedTitleBlock.deptCode,
-      num: parsedTitleBlock.num,
-      title: parsedTitleBlock.title,
-      unit: parsedTitleBlock.unit,
+      deptCode: parsedTitleBlock.deptCode!,
+      num: parsedTitleBlock.num!,
+      title: parsedTitleBlock.title!,
+      unit: parsedTitleBlock.unitPart,
       description: parsedDescBlock.description!,
       geCode: parsedDescBlock.geCode,
       prerequisite: parsedDescBlock.prerequisite,
@@ -153,32 +163,110 @@ const crawlCourses = async (url: string): Promise<CrawledCourse[]> => {
 };
 
 const parseTitleBlock = (titleBlock: string) => {
+  const numOfPeriods = titleBlock.split('.').length - 1;
+
+  const parsedResult: ParsedTitleBlock = {
+    deptCode: null,
+    num: null,
+    title: null,
+    unitPart: null,
+  };
+
+  if (numOfPeriods >= 2 && !titleBlock.includes('Unit')) {
+    parseTwoPeriodsCase(titleBlock, parsedResult);
+  } else if (numOfPeriods === 3 && titleBlock.includes('Unit')) {
+    parseThreePeriodsCase(titleBlock, parsedResult);
+  } else if (numOfPeriods >= 4 && titleBlock.includes('Unit')) {
+    parseFourOrMorePeriodsCase(titleBlock, parsedResult);
+  } else {
+    functions.logger.error(`Unexpected titleBlock format: "${titleBlock}"`);
+  }
+
+  return parsedResult;
+};
+
+const parseTwoPeriodsCase = (titleBlock: string, result: ParsedTitleBlock) => {
+  // parse deptCode, num, and title
+  const firstPeriodIndex = titleBlock.indexOf('.');
+  const lastPeriodIndex = titleBlock.lastIndexOf('.');
+
+  const deptCodeNumPart = titleBlock.substring(0, firstPeriodIndex);
+  const deptCode = deptCodeNumPart.substring(
+    0,
+    deptCodeNumPart.lastIndexOf(' ')
+  );
+  const num = deptCodeNumPart.substring(deptCodeNumPart.lastIndexOf(' ') + 1);
+  const title = titleBlock
+    .substring(firstPeriodIndex + 1, lastPeriodIndex)
+    .trim();
+
+  result.deptCode = deptCode;
+  result.num = num;
+  result.title = title;
+};
+
+const parseThreePeriodsCase = (
+  titleBlock: string,
+  result: ParsedTitleBlock
+) => {
   const firstPeriodIndex = titleBlock.indexOf('.');
   const secondPeriodIndex = titleBlock.indexOf('.', firstPeriodIndex + 1);
 
-  // extract deptCode and num
-  const courseNumPart = titleBlock.substring(0, firstPeriodIndex).trim();
-  const deptCode = courseNumPart.substring(0, courseNumPart.lastIndexOf(' '));
-  const num = courseNumPart.substring(courseNumPart.lastIndexOf(' ') + 1);
+  const deptCodeNumPart = titleBlock.substring(0, firstPeriodIndex);
+  const deptCode = deptCodeNumPart.substring(
+    0,
+    deptCodeNumPart.lastIndexOf(' ')
+  );
+  const num = deptCodeNumPart.substring(deptCodeNumPart.lastIndexOf(' ') + 1);
 
-  // extract title
   const title = titleBlock
     .substring(firstPeriodIndex + 1, secondPeriodIndex)
     .trim();
 
-  // extract unit
-  let unit = null;
-  const unitPart = titleBlock.substring(secondPeriodIndex + 1).trim();
-  if (unitPart !== '') {
-    unit = unitPart.substring(0, unitPart.lastIndexOf(' '));
-  }
+  const unitPartWithUNIT = titleBlock.substring(secondPeriodIndex + 1).trim();
+  const unitPart = unitPartWithUNIT.substring(
+    0,
+    unitPartWithUNIT.lastIndexOf(' ')
+  );
 
-  return {
-    deptCode,
-    num,
-    title,
-    unit,
-  };
+  result.deptCode = deptCode;
+  result.num = num;
+  result.title = title;
+  result.unitPart = unitPart;
+};
+
+const parseFourOrMorePeriodsCase = (
+  titleBlock: string,
+  result: ParsedTitleBlock
+) => {
+  const firstPeriodIndex = titleBlock.indexOf('.');
+  const secondToTheLastPeriodIndex = titleBlock.lastIndexOf(
+    '.',
+    titleBlock.length - 2
+  );
+
+  const deptCodeNumPart = titleBlock.substring(0, firstPeriodIndex);
+  const deptCode = deptCodeNumPart.substring(
+    0,
+    deptCodeNumPart.lastIndexOf(' ')
+  );
+  const num = deptCodeNumPart.substring(deptCodeNumPart.lastIndexOf(' ') + 1);
+  const title = titleBlock
+    .substring(firstPeriodIndex + 1, secondToTheLastPeriodIndex)
+    .trim();
+
+  const unitPartWithUNIT = titleBlock
+    .substring(secondToTheLastPeriodIndex + 1)
+    .trim();
+  const unitPart = unitPartWithUNIT.substring(
+    0,
+    unitPartWithUNIT.lastIndexOf(' ')
+  );
+
+  result.deptCode = deptCode;
+  result.num = num;
+  result.title = title;
+  result.unitPart = unitPart;
 };
 
 const parseDescBlock = (descBlocks: string[]) => {
