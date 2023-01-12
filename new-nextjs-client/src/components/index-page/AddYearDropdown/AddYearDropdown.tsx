@@ -1,5 +1,6 @@
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
 import useAppUser from '@hooks/useAppUser';
+import { useState } from 'react';
 import styles from './AddYearDropdown.module.scss';
 
 interface YearOption {
@@ -24,12 +25,28 @@ const getYearOptions = (): YearOption[] => {
 
 function AddYearDropdown() {
   const { appUser, updateAppUser } = useAppUser();
+  const [yearOptions, setYearOptions] = useState(getYearOptions());
 
   const onSelectChange = (newValue: YearOption) => {
-    updateAppUser((draft) => {
-      draft.addYear(newValue.value);
-    });
+    // if there's exist value, do not update...
+    // if updates happened, find that year from year options and set disabled: true
+
+    if (!appUser.years.includes(newValue.value)) {
+      updateAppUser((draft) => {
+        draft.addYear(newValue.value);
+      });
+
+      const newYearOptionsArr = yearOptions.map((obj) => {
+        if (obj.value === newValue.value) {
+          return { ...obj, disabled: true };
+        }
+        return obj;
+      });
+
+      setYearOptions(newYearOptionsArr);
+    }
   };
+  console.log('APP USER', appUser.years);
 
   return (
     <div className={styles.container}>
@@ -37,7 +54,7 @@ function AddYearDropdown() {
         isClearable={false}
         isOptionDisabled={(option: YearOption) => option.disabled}
         onChange={onSelectChange}
-        options={getYearOptions()}
+        options={yearOptions}
         placeholder="Add years"
         value={null}
         customStyles={{
