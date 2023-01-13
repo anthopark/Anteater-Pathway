@@ -23,10 +23,6 @@ const selectOptionBgColorSelectedDark = '#354E80';
   AppInput
 ****************/
 
-/**************** 
-  AppToast
-****************/
-
 export {
   primaryButtonBgColorHover,
   primaryButtonBgColorHoverDark,
