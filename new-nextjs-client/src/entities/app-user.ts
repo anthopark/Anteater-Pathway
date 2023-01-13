@@ -3,6 +3,7 @@ import { immerable } from 'immer';
 interface IAppUser {
   years: number[];
   addYear: (year: number) => void;
+  sortYear: () => void;
 }
 
 class AppUser implements IAppUser {
@@ -16,6 +17,10 @@ class AppUser implements IAppUser {
 
   public addYear(year: number) {
     this._years.push(year);
+  }
+
+  public sortYear() {
+    this._years.sort((a, b) => a - b);
   }
 }
 

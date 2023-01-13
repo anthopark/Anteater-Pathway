@@ -34,6 +34,7 @@ function AddYearDropdown() {
     if (!appUser.years.includes(newValue.value)) {
       updateAppUser((draft) => {
         draft.addYear(newValue.value);
+        draft.sortYear();
       });
 
       const newYearOptionsArr = yearOptions.map((obj) => {
