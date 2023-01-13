@@ -1,4 +1,5 @@
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
+import useAppToast from '@hooks/useAppToast';
 import useAppUser from '@hooks/useAppUser';
 import { useState } from 'react';
 import styles from './AddYearDropdown.module.scss';
@@ -27,14 +28,20 @@ function AddYearDropdown() {
   const { appUser, updateAppUser } = useAppUser();
   const [yearOptions, setYearOptions] = useState(getYearOptions());
 
-  const onSelectChange = (newValue: YearOption) => {
-    // if there's exist value, do not update...
-    // if updates happened, find that year from year options and set disabled: true
+  const showToastBox = useAppToast();
 
+  const onSelectChange = (newValue: YearOption) => {
     if (!appUser.years.includes(newValue.value)) {
       updateAppUser((draft) => {
         draft.addYear(newValue.value);
         draft.sortYear();
+
+        showToastBox({
+          status: 'success',
+          highlightedData: newValue.label,
+          message: 'year added',
+          duration: 3500,
+        });
       });
 
       const newYearOptionsArr = yearOptions.map((obj) => {
@@ -47,7 +54,6 @@ function AddYearDropdown() {
       setYearOptions(newYearOptionsArr);
     }
   };
-  console.log('APP USER', appUser.years);
 
   return (
     <div className={styles.container}>
