@@ -20,4 +20,23 @@ const signOut = findIconDefinition({
   iconName: 'right-from-bracket',
 });
 
-export { plus, coffee, envelope, github, signOut, search, sun, moon };
+const checkCircle = findIconDefinition({
+  prefix: 'fas',
+  iconName: 'check-circle',
+});
+const exclamationCircle = findIconDefinition({
+  prefix: 'fas',
+  iconName: 'exclamation-circle',
+});
+export {
+  plus,
+  coffee,
+  envelope,
+  github,
+  signOut,
+  search,
+  sun,
+  moon,
+  checkCircle,
+  exclamationCircle,
+};
