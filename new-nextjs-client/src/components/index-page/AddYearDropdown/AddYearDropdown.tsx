@@ -30,28 +30,31 @@ function AddYearDropdown() {
 
   const showToastBox = useAppToast();
 
+  const disableSelectedOptions = (selectedValue: number) => {
+    setYearOptions(
+      yearOptions.map((obj) => {
+        if (obj.value === selectedValue) {
+          return { ...obj, disabled: true };
+        }
+        return obj;
+      })
+    );
+  };
+
   const onSelectChange = (newValue: YearOption) => {
     if (!appUser.years.includes(newValue.value)) {
       updateAppUser((draft) => {
         draft.addYear(newValue.value);
-        draft.sortYear();
-
-        showToastBox({
-          status: 'success',
-          highlightedData: newValue.label,
-          message: 'year added',
-          duration: 3500,
-        });
       });
 
-      const newYearOptionsArr = yearOptions.map((obj) => {
-        if (obj.value === newValue.value) {
-          return { ...obj, disabled: true };
-        }
-        return obj;
+      showToastBox({
+        status: 'success',
+        highlightedData: newValue.label,
+        message: 'year added',
+        duration: 3500,
       });
 
-      setYearOptions(newYearOptionsArr);
+      disableSelectedOptions(newValue.value);
     }
   };
 
