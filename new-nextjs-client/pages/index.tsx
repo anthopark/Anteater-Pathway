@@ -8,21 +8,11 @@ import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { search } from '@styles/fontawesome';
 
-import { useSpring, animated } from '@react-spring/web';
 import { white1 } from '@styles/variables';
+import CourseSeachWindow from '@components/CourseSearchWindow/CourseSeachWindow';
 
 export default function Home() {
-  const contentRef = useRef<HTMLDivElement>(null);
   const [toggle, setToggle] = useState(false);
-  const [style, animate] = useSpring(() => ({ height: '0px' }), []);
-
-  useEffect(() => {
-    if (contentRef.current !== null) {
-      animate({
-        height: (toggle ? contentRef.current.offsetHeight : 0) + 'px',
-      });
-    }
-  }, [animate, contentRef, toggle]);
 
   return (
     <div className={styles.container}>
@@ -52,19 +42,7 @@ export default function Home() {
       </div>
 
       <div className={styles.mainSection}>
-        <animated.div
-          style={{
-            background: white1,
-            overflow: 'hidden',
-            width: '100%',
-            ...style,
-          }}
-        >
-          <div
-            ref={contentRef}
-            style={{ height: '20rem', margin: '1rem 0' }}
-          ></div>
-        </animated.div>
+        <CourseSeachWindow toggle={toggle} />
       </div>
     </div>
   );
