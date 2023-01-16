@@ -1,0 +1,23 @@
+.container {
+  padding: 1rem 2rem;
+  min-height: 18rem;
+  background-color: $bg-color-2;
+  border-radius: $br-md;
+}
+
+.heading {
+  margin-top: 0.3rem;
+  font-size: $fs-lg;
+  letter-spacing: $letter-spacing-lg;
+  color: $secondary-text;
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: $bg-color-2-dt;
+  }
+
+  .heading {
+    color: $secondary-text-dt;
+  }
+}

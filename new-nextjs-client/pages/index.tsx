@@ -8,6 +8,7 @@ import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { search } from '@styles/fontawesome';
 import CourseSearchWindow from '@components/index-page/CourseSearchWindow/CourseSearchWindow';
+import CourseBag from '@components/index-page/CourseBag/CourseBag';
 
 export default function Home() {
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
@@ -40,7 +41,12 @@ export default function Home() {
       </div>
 
       <div className={styles.mainSection}>
-        <CourseSearchWindow toggle={searchWindowToggle} />
+        <div className={styles.mainLeftContainer}>
+          <CourseSearchWindow toggle={searchWindowToggle} />
+        </div>
+        <div className={styles.mainRightContainer}>
+          <CourseBag />
+        </div>
       </div>
     </div>
   );
