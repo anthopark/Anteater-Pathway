@@ -1,4 +1,4 @@
-import styles from './CourseSeachWindow.module.scss';
+import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
@@ -6,7 +6,7 @@ interface Props {
   toggle: boolean;
 }
 
-const CourseSeachWindow = (props: Props) => {
+const CourseSearchWindow = (props: Props) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   const [style, animate] = useSpring(() => ({ height: '0px' }), []);
@@ -31,4 +31,4 @@ const CourseSeachWindow = (props: Props) => {
   );
 };
 
-export default CourseSeachWindow;
+export default CourseSearchWindow;

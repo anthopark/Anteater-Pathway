@@ -7,11 +7,10 @@ import Avatar from '@components/index-page/Avatar/Avatar';
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { search } from '@styles/fontawesome';
-
-import CourseSeachWindow from '@components/CourseSearchWindow/CourseSeachWindow';
+import CourseSearchWindow from '@components/index-page/CourseSearchWindow/CourseSearchWindow';
 
 export default function Home() {
-  const [toggle, setToggle] = useState(false);
+  const [searchWindowToggle, setSearchWindowToggle] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -24,7 +23,7 @@ export default function Home() {
             <AppButton
               kind="primary"
               leftIcon={<FontAwesomeIcon icon={search} />}
-              onClick={() => setToggle(!toggle)}
+              onClick={() => setSearchWindowToggle(!searchWindowToggle)}
             >
               Courses
             </AppButton>
@@ -41,7 +40,7 @@ export default function Home() {
       </div>
 
       <div className={styles.mainSection}>
-        <CourseSeachWindow toggle={toggle} />
+        <CourseSearchWindow toggle={searchWindowToggle} />
       </div>
     </div>
   );
