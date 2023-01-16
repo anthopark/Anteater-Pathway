@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 import MainLayout from '@components/MainLayout/MainLayout';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import ThemeToggler from '@components/ThemeToggler/ThemeToggler';
 import AddYearDropdown from '@components/index-page/AddYearDropdown/AddYearDropdown';
 import Avatar from '@components/index-page/Avatar/Avatar';
