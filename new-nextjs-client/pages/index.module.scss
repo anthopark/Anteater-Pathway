@@ -1,5 +1,4 @@
 $top-selection-pb: 1.5rem;
-$button-margin: 0 1.7rem;
 
 .container {
   padding: 0 2rem;
@@ -32,8 +31,12 @@ $button-margin: 0 1.7rem;
     }
 
     .searchBtnWrapper {
-      margin: $button-margin;
+      margin-left: 2rem;
     }
+  }
+
+  .mainSection {
+    margin-top: 2rem;
   }
 }
 

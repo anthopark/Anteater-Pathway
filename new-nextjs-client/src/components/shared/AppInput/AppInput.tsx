@@ -1,5 +1,8 @@
 import { Input } from '@chakra-ui/react';
-import { selectBgColorDark } from '@styles/reusable-ui-variables';
+import {
+  inputBgColorActiveDark,
+  inputBgColorDark,
+} from '@styles/reusable-ui-variables';
 import {
   borderRadiusSM,
   controlHeightMD,
@@ -21,6 +24,7 @@ interface Props {
 }
 
 function AppInput(props: Props) {
+  const { onChange, value, ...rest } = props;
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
@@ -34,13 +38,13 @@ function AppInput(props: Props) {
 
   return (
     <Input
-      bgColor={theme === 'light' ? white1 : selectBgColorDark}
+      bgColor={theme === 'light' ? white1 : inputBgColorDark}
       borderRadius={borderRadiusSM}
       color={theme === 'light' ? defaultText : defaultTextDark}
       fontSize={fontSizeMD}
       height={controlHeightMD}
-      onChange={props.onChange}
-      value={props.value}
+      onChange={onChange}
+      value={value}
       borderColor={theme === 'light' ? 'transparent' : gray3}
       _hover={{
         borderColor: gray4,
@@ -58,7 +62,9 @@ function AppInput(props: Props) {
           theme === 'light'
             ? `0px 0px 0px 1px ${blue2}`
             : `0px 0px 0px 1px ${accent1}`,
+        backgroundColor: theme === 'light' ? white1 : inputBgColorActiveDark,
       }}
+      {...rest}
     />
   );
 }
