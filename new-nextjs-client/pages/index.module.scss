@@ -36,7 +36,17 @@ $top-selection-pb: 1.5rem;
   }
 
   .mainSection {
-    margin-top: 2rem;
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: minmax(auto, 3.8fr) minmax(34rem, 1fr);
+  }
+
+  .mainLeftContainer {
+    margin-right: 1rem;
+  }
+
+  .mainRightContainer {
+    margin-left: 1rem;
   }
 }
 
