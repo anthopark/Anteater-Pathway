@@ -1,0 +1,19 @@
+$top-animated-div-mt: 2rem;
+
+.animatedDiv {
+  background-color: $bg-color-2;
+  overflow: hidden;
+  width: 100%;
+  margin: $top-animated-div-mt 0;
+  border-radius: $br-md;
+
+  .contentWrapper {
+    height: 20rem;
+  }
+}
+
+[data-theme='dark'] {
+  .animatedDiv {
+    background-color: $bg-color-2-dt;
+  }
+}

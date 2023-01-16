@@ -1,4 +1,5 @@
 $top-selection-pb: 1.5rem;
+$button-margin: 0 1.7rem;
 
 .container {
   padding: 0 2rem;
@@ -15,6 +16,7 @@ $top-selection-pb: 1.5rem;
     border-bottom: 1px solid $gray-5;
 
     .leftContainer {
+      display: flex;
     }
 
     .rightContainer {
@@ -28,12 +30,16 @@ $top-selection-pb: 1.5rem;
 
     .addYearDropdownWrapper {
     }
+
+    .searchBtnWrapper {
+      margin: $button-margin;
+    }
   }
 }
 
 [data-theme='dark'] {
   .container {
-    background-color: $main-background-dt;
+    background-color: $bg-color-1-dt;
   }
 
   .container .topSection {
