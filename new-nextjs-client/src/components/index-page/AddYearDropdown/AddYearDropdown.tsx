@@ -1,5 +1,7 @@
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
+import useAppToast from '@hooks/useAppToast';
 import useAppUser from '@hooks/useAppUser';
+import { useState } from 'react';
 import styles from './AddYearDropdown.module.scss';
 
 interface YearOption {
@@ -24,11 +26,36 @@ const getYearOptions = (): YearOption[] => {
 
 function AddYearDropdown() {
   const { appUser, updateAppUser } = useAppUser();
+  const [yearOptions, setYearOptions] = useState(getYearOptions());
+
+  const showToastBox = useAppToast();
+
+  const disableSelectedOptions = (selectedValue: number) => {
+    setYearOptions(
+      yearOptions.map((obj) => {
+        if (obj.value === selectedValue) {
+          return { ...obj, disabled: true };
+        }
+        return obj;
+      })
+    );
+  };
 
   const onSelectChange = (newValue: YearOption) => {
-    updateAppUser((draft) => {
-      draft.addYear(newValue.value);
-    });
+    if (!appUser.years.includes(newValue.value)) {
+      updateAppUser((draft) => {
+        draft.addYear(newValue.value);
+      });
+
+      showToastBox({
+        status: 'success',
+        highlightedData: newValue.label,
+        message: 'year added',
+        duration: 3500,
+      });
+
+      disableSelectedOptions(newValue.value);
+    }
   };
 
   return (
@@ -37,7 +64,7 @@ function AddYearDropdown() {
         isClearable={false}
         isOptionDisabled={(option: YearOption) => option.disabled}
         onChange={onSelectChange}
-        options={getYearOptions()}
+        options={yearOptions}
         placeholder="Add years"
         value={null}
         customStyles={{
