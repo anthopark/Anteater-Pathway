@@ -21,14 +21,12 @@ const CourseSeachWindow = (props: Props) => {
 
   return (
     <animated.div
+      className={styles.animatedDiv}
       style={{
-        background: 'white',
-        overflow: 'hidden',
-        width: '100%',
         ...style,
       }}
     >
-      <div ref={contentRef} style={{ height: '20rem', margin: '1rem 0' }}></div>
+      <div ref={contentRef} className={styles.contentWrapper}></div>
     </animated.div>
   );
 };

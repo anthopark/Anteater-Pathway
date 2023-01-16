@@ -8,7 +8,6 @@ import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { search } from '@styles/fontawesome';
 
-import { white1 } from '@styles/variables';
 import CourseSeachWindow from '@components/CourseSearchWindow/CourseSeachWindow';
 
 export default function Home() {
