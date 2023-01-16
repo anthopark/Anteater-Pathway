@@ -1,6 +1,7 @@
 import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect } from 'react';
 import { useSpring, animated } from '@react-spring/web';
+import classNames from 'classnames/bind';
 
 interface Props {
   toggle: boolean;
@@ -9,7 +10,12 @@ interface Props {
 const CourseSearchWindow = (props: Props) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
-  const [style, animate] = useSpring(() => ({ height: '0px' }), []);
+  const [style, animate] = useSpring(
+    () => ({
+      height: '0px',
+    }),
+    []
+  );
 
   useEffect(() => {
     if (contentRef.current !== null) {
@@ -19,9 +25,13 @@ const CourseSearchWindow = (props: Props) => {
     }
   }, [animate, contentRef, props.toggle]);
 
+  const cx = classNames.bind(styles);
+
   return (
     <animated.div
-      className={styles.animatedDiv}
+      className={cx('animatedDiv', {
+        opened: props.toggle,
+      })}
       style={{
         ...style,
       }}

@@ -1,14 +1,15 @@
-$top-animated-div-mt: 2rem;
-
 .animatedDiv {
   background-color: $bg-color-2;
-  overflow: hidden;
   width: 100%;
-  margin: $top-animated-div-mt 0;
   border-radius: $br-md;
+  overflow: hidden;
+
+  &.opened {
+    margin-bottom: 2rem;
+  }
 
   .contentWrapper {
-    height: 20rem;
+    height: 30rem;
   }
 }
 
