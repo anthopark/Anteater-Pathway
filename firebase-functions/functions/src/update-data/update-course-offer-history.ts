@@ -71,7 +71,7 @@ export const updateCourseOfferHistory = async (
     await new Promise((r) => setTimeout(r, 1000));
   }
 
-  functions.logger.info('Course offer history update finished');
+  functions.logger.info(`Course offer history update finished: ${quarterCode}`);
 
   await browser.close();
 };
