@@ -36,7 +36,14 @@ const CourseSearchWindow = (props: Props) => {
         ...style,
       }}
     >
-      <div ref={contentRef} className={styles.contentWrapper}></div>
+      <div ref={contentRef} className={styles.contentWrapper}>
+        <div className={styles.container}>
+          <div className={styles.box}>A</div>
+          <div className={styles.box}>B</div>
+          <div className={styles.box}>C</div>
+          <div className={styles.box}>D</div>
+        </div>
+      </div>
     </animated.div>
   );
 };
