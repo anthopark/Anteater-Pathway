@@ -2,6 +2,7 @@
   background-color: $bg-color-2;
   width: 100%;
   border-radius: $br-md;
+  overflow: hidden;
 
   &.opened {
     margin-bottom: 2rem;
