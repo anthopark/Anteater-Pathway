@@ -60,6 +60,18 @@ $default-text: $gray-1;
 $secondary-text: $gray-3;
 $placeholder-text: $gray-4;
 
+/****************  
+  Dark Theme Colors
+****************/
+$default-text-dt: #e8eaed;
+$secondary-text-dt: #c3c3c3;
+$disabled-text-dt: #898989;
+
+$stroke-dt: #5f6367;
+
+$primary-dt: #ad7014;
+$primary-variant-dt: #5f77a6;
+
 /**************** 
 Background Colors
 ****************/
@@ -87,24 +99,6 @@ $fall: #f4d0af;
 $winter: #c8dffa;
 $spring: #d5efb7;
 $summer: #a3ebe2;
-
-/** 
-  Dark Theme Colors
-**/
-$default-text-dt: #e8eaed;
-$secondary-text-dt: #c3c3c3;
-$disabled-text-dt: #898989;
-
-$stroke-dt: #5f6367;
-
-$primary-dt: #ad7014;
-$primary-variant-dt: #5f77a6;
-
-// components colors
-$side-bar-dt: #181818;
-$search-info-card-dt: #252628;
-$quarter-card-dt: #222222;
-$drop-down-bg-dt: #2f3134;
 
 $course-1-dt: #9e9ebc;
 $course-2-dt: #5c7395;
