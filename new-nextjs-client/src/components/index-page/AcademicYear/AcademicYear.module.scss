@@ -1,0 +1,38 @@
+.container {
+  margin-bottom: 2rem;
+}
+
+.header {
+  display: flex;
+}
+
+.removeBtnWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.trashIcon {
+  padding: 0.3rem;
+  font-size: 1.6rem;
+  color: $red-4;
+  cursor: pointer;
+}
+
+.yearText {
+  display: flex;
+  align-items: center;
+  font-size: $fs-xl;
+  letter-spacing: $letter-spacing-md;
+  color: $default-text;
+}
+
+[data-theme='dark'] {
+  .yearText {
+    color: $default-text-dt;
+  }
+
+  .trashIcon {
+    color: $red-1;
+  }
+}

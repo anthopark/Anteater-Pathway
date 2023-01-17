@@ -54,10 +54,15 @@ const defaultText = gray1;
 const placeholderText = gray4;
 const disabledText = gray5;
 
+const bgColor1 = gray6;
+const bgColor2 = white1;
+
+const bgColorDark1 = '#212123';
+const bgColorDark2 = '#2f3134';
+
 /**************** 
   Dark Theme Colors
 ****************/
-
 const defaultTextDark = '#E8EAED';
 const placeholderTextDark = '#C3C3C3';
 const disabledTextDark = gray4;
@@ -96,4 +101,8 @@ export {
   letterSpacingSM,
   letterSpacingMD,
   letterSpacingLG,
+  bgColor1,
+  bgColor2,
+  bgColorDark1,
+  bgColorDark2,
 };

@@ -33,7 +33,7 @@ function AppToast(props: Props) {
 
   return (
     <div
-      className={cx('appToastContainer', {
+      className={cx('container', {
         success: props.status === 'success',
         fail: props.status === 'fail',
       })}
