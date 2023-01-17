@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react';
 interface Props {
   onChange?: (newValue: any) => void;
   value?: any;
+  placeholder: string;
 }
 
 function AppInput(props: Props) {

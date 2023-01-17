@@ -2,6 +2,8 @@ import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import classNames from 'classnames/bind';
+import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
+import AppInput from '@components/shared/AppInput/AppInput';
 
 interface Props {
   toggle: boolean;
@@ -38,9 +40,24 @@ const CourseSearchWindow = (props: Props) => {
     >
       <div ref={contentRef} className={styles.contentWrapper}>
         <div className={styles.container}>
-          <div className={styles.box}>A</div>
+          {/* row 1 column 1 */}
+          <div className={styles.box}>
+            <div className={styles.departmentInputWrapper}>
+              <AppSingleSelect
+                placeholder="Find the department..."
+                options={[{ department: 'INF', number: 43 }]}
+                value={null}
+              />
+            </div>
+            <div className={styles.courseNumberInputWrapper}>
+              <AppInput placeholder="Enter number" />
+            </div>
+          </div>
+          {/* row 1 column 2 */}
           <div className={styles.box}>B</div>
+          {/* row 2 column 1 */}
           <div className={styles.box}>C</div>
+          {/* row 2 column 2 */}
           <div className={styles.box}>D</div>
         </div>
       </div>
