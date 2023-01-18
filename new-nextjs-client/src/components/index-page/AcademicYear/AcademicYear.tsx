@@ -90,47 +90,45 @@ function AcademicYear(props: Props) {
   };
 
   return (
-    <div className={cx('container')}>
-      <Accordion allowToggle index={openedIndex} onChange={handleExpand}>
-        <AccordionItem
-          bgColor={theme === 'light' ? bgColor2 : bgColorDark2}
-          border="none"
-          borderRadius={borderRadiusMD}
-        >
-          <div className={cx('header')}>
-            <AccordionButton
-              borderRadius={borderRadiusMD}
-              p={isExpanded() ? '1.2rem .3rem 1.2rem 2rem' : '1.2rem 2rem'}
-              color={theme === 'light' ? gray3 : gray6}
-              justifyContent="space-between"
-              _hover={{
-                bgColor: theme === 'light' ? bgColor2 : bgColorDark2,
-              }}
+    <Accordion allowToggle index={openedIndex} onChange={handleExpand}>
+      <AccordionItem
+        bgColor={theme === 'light' ? bgColor2 : bgColorDark2}
+        border="none"
+        borderRadius={borderRadiusMD}
+      >
+        <div className={cx('header')}>
+          <AccordionButton
+            borderRadius={borderRadiusMD}
+            p={isExpanded() ? '1.2rem .3rem 1.2rem 2rem' : '1.2rem 2rem'}
+            color={theme === 'light' ? gray3 : gray6}
+            justifyContent="space-between"
+            _hover={{
+              bgColor: theme === 'light' ? bgColor2 : bgColorDark2,
+            }}
+          >
+            <div className={styles.yearText}>
+              <AccordionIcon fontSize="2.7rem" mr=".8rem" />
+              {getYearText(props.year)}
+            </div>
+          </AccordionButton>
+          {showRemoveIcon ? (
+            <animated.div
+              className={cx('removeIconWrapper')}
+              style={springProps}
             >
-              <div className={styles.yearText}>
-                <AccordionIcon fontSize="2.7rem" mr=".8rem" />
-                {getYearText(props.year)}
-              </div>
-            </AccordionButton>
-            {showRemoveIcon ? (
-              <animated.div
-                className={cx('removeIconWrapper')}
-                style={springProps}
-              >
-                <FontAwesomeIcon
-                  className={cx('trashIcon')}
-                  icon={trash}
-                  onClick={handleDelete}
-                />
-              </animated.div>
-            ) : null}
-          </div>
-          <AccordionPanel>
-            <div></div>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </div>
+              <FontAwesomeIcon
+                className={cx('trashIcon')}
+                icon={trash}
+                onClick={handleDelete}
+              />
+            </animated.div>
+          ) : null}
+        </div>
+        <AccordionPanel>
+          <div></div>
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   );
 }
 
