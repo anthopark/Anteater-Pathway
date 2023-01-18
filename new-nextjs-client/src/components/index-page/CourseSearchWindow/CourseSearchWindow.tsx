@@ -6,6 +6,8 @@ import classNames from 'classnames/bind';
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
 import AppInput from '@components/shared/AppInput/AppInput';
 import AppButton from '@components/shared/AppButton/AppButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { plus } from '@styles/fontawesome';
 
 interface Props {
   toggle: boolean;
@@ -27,10 +29,6 @@ const departmentOptions = [
   },
 ];
 
-// type Inputs = {
-//   courseNumber: number;
-// };
-
 const CourseSearchWindow = (props: Props) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [deptOptions, setDeptOptions] =
@@ -44,8 +42,6 @@ const CourseSearchWindow = (props: Props) => {
   } = useForm<DeptOption[]>();
 
   const { control } = useForm();
-
-  // const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   const [style, animate] = useSpring(
     () => ({
@@ -96,24 +92,30 @@ const CourseSearchWindow = (props: Props) => {
                 <label>Number</label>
                 <AppInput placeholder="Enter number" />
               </div>
+
               <AppButton kind="primary" onClick={() => console.log('clicked')}>
                 Search
               </AppButton>
             </div>
             {/* row 1 column 2 */}
-            <div className={styles.box}>
+            <div className={styles.customBtnWrapper}>
               <AppButton
                 kind="secondary"
                 onClick={() => console.log('clicked')}
+                leftIcon={<FontAwesomeIcon icon={plus} />}
               >
                 Custom
               </AppButton>
             </div>
             {/* row 2 column 1 */}
-            <div className={styles.box}></div>
+            <div className={styles.leftPane}>
+              <div className={styles.searchResult}></div>
+            </div>
 
             {/* row 2 column 2 */}
-            <div className={styles.box}>D</div>
+            <div className={styles.rightPane}>
+              <div></div>
+            </div>
           </div>
         </div>
       </form>

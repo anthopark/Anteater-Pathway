@@ -13,10 +13,10 @@
     font-size: $fs-md;
 
     .container {
-      padding: 1.5rem;
+      padding: 1.5rem 2rem;
       display: grid;
       grid-template-columns: 5.5fr 4.5fr;
-      grid-template-rows: 5rem 1fr;
+      grid-template-rows: 5.5rem 1fr;
       grid-column-gap: 10px;
       grid-row-gap: 10px;
       height: 100%;
@@ -25,9 +25,20 @@
       .searchSectionWrapper {
         display: flex;
         align-items: flex-end;
+
+        .departmentInputWrapper {
+          margin-right: 2rem;
+        }
+
+        .courseNumberInputWrapper {
+          margin-right: 2rem;
+        }
       }
-      .box {
-        background-color: rgb(35, 35, 35);
+
+      .customBtnWrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
       }
     }
   }
