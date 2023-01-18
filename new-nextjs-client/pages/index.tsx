@@ -46,13 +46,8 @@ export default function Home() {
       <div className={styles.mainSection}>
         <div className={styles.mainLeftContainer}>
           <CourseSearchWindow toggle={searchWindowToggle} />
-          {appUser.years.map((year, i) => (
-            <AcademicYear
-              key={year}
-              index={i}
-              searchWindowToggle={searchWindowToggle}
-              year={year}
-            />
+          {appUser.years.map((year, index) => (
+            <AcademicYear key={index} year={year} />
           ))}
         </div>
         <div className={styles.mainRightContainer}>

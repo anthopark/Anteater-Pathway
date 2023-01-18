@@ -23,6 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trash } from '@styles/fontawesome';
 import { IAppUser } from '@entities/app-user';
 import useAppUser from '@hooks/useAppUser';
+import { useSpring, animated } from '@react-spring/web';
 
 interface Props {
   year: number;
@@ -39,6 +40,27 @@ function AcademicYear(props: Props) {
   const [openedIndex, setOpenedIndex] = useState<number[]>([]);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const [showRemoveIcon, setShowRemoveIcon] = useState(false);
+  const [springProps, springApi] = useSpring(() => ({
+    marginRight: '-0.5rem',
+    opacity: 0,
+  }));
+
+  useEffect(() => {
+    if (mounted) {
+      springApi.start({
+        marginRight: isExpanded() ? '2rem' : '-0.5rem',
+        opacity: isExpanded() ? 1 : 0,
+        onRest: () => {
+          if (!isExpanded()) {
+            setShowRemoveIcon(false);
+          } else {
+            setShowRemoveIcon(true);
+          }
+        },
+      });
+    }
+  }, [openedIndex]);
 
   useEffect(() => {
     setMounted(true);
@@ -57,6 +79,7 @@ function AcademicYear(props: Props) {
       setOpenedIndex([]);
     } else {
       setOpenedIndex([0]);
+      setShowRemoveIcon(true);
     }
   };
 
@@ -89,14 +112,17 @@ function AcademicYear(props: Props) {
                 {getYearText(props.year)}
               </div>
             </AccordionButton>
-            {isExpanded() ? (
-              <div className={cx('removeBtnWrapper')}>
+            {showRemoveIcon ? (
+              <animated.div
+                className={cx('removeIconWrapper')}
+                style={springProps}
+              >
                 <FontAwesomeIcon
                   className={cx('trashIcon')}
                   icon={trash}
                   onClick={handleDelete}
                 />
-              </div>
+              </animated.div>
             ) : null}
           </div>
           <AccordionPanel>

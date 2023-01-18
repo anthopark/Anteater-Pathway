@@ -6,17 +6,21 @@
   display: flex;
 }
 
-.removeBtnWrapper {
+.removeIconWrapper {
   display: flex;
   align-items: center;
-  margin-left: 1rem;
+  margin-left: 3rem;
 }
 
 .trashIcon {
-  padding: 0.3rem;
+  padding: 0.5rem;
   font-size: 1.6rem;
-  color: $red-4;
+  color: $gray-4;
   cursor: pointer;
+  &:hover {
+    color: $red-4;
+  }
+  transition: color 250ms;
 }
 
 .yearText {
@@ -33,6 +37,8 @@
   }
 
   .trashIcon {
-    color: $red-1;
+    &:hover {
+      color: $red-1;
+    }
   }
 }
