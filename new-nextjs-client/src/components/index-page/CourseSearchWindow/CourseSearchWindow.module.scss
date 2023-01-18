@@ -15,7 +15,8 @@
     .container {
       padding: 1.5rem 2rem;
       display: grid;
-      grid-template-columns: 5.5fr 4.5fr;
+      // grid-template-columns: 5.5fr 4.5fr;
+      grid-template-columns: 2fr 1fr;
       grid-template-rows: 5.5rem 1fr;
       grid-column-gap: 10px;
       grid-row-gap: 10px;
