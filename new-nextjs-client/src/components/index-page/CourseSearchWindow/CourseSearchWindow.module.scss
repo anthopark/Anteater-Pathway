@@ -10,6 +10,7 @@
 
   .contentWrapper {
     height: 30rem;
+    font-size: $fs-md;
 
     .container {
       padding: 1.5rem;
@@ -20,8 +21,13 @@
       grid-row-gap: 10px;
       height: 100%;
       grid-row: auto auto;
+
+      .searchSectionWrapper {
+        display: flex;
+        align-items: flex-end;
+      }
       .box {
-        background-color: rgb(238, 238, 238);
+        background-color: rgb(35, 35, 35);
       }
     }
   }

@@ -1,16 +1,51 @@
 import styles from './CourseSearchWindow.module.scss';
-import { useRef, useEffect } from 'react';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import React, { useRef, useEffect, forwardRef, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import classNames from 'classnames/bind';
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
 import AppInput from '@components/shared/AppInput/AppInput';
+import AppButton from '@components/shared/AppButton/AppButton';
 
 interface Props {
   toggle: boolean;
 }
 
+interface DeptOption {
+  label: string;
+  value: string;
+}
+
+const departmentOptions = [
+  {
+    label: 'Informatics (IN4MATX)',
+    value: 'IN4MATX',
+  },
+  {
+    label: 'Computer Science (COMPSCI)',
+    value: 'COMPSCI',
+  },
+];
+
+// type Inputs = {
+//   courseNumber: number;
+// };
+
 const CourseSearchWindow = (props: Props) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
+  const [deptOptions, setDeptOptions] =
+    useState<DeptOption[]>(departmentOptions);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<DeptOption[]>();
+
+  const { control } = useForm();
+
+  // const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   const [style, animate] = useSpring(
     () => ({
@@ -38,29 +73,50 @@ const CourseSearchWindow = (props: Props) => {
         ...style,
       }}
     >
-      <div ref={contentRef} className={styles.contentWrapper}>
-        <div className={styles.container}>
-          {/* row 1 column 1 */}
-          <div className={styles.box}>
-            <div className={styles.departmentInputWrapper}>
-              <AppSingleSelect
-                placeholder="Find the department..."
-                options={[{ department: 'INF', number: 43 }]}
-                value={null}
-              />
+      <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <div ref={contentRef} className={styles.contentWrapper}>
+          <div className={styles.container}>
+            {/* row 1 column 1 */}
+            <div className={styles.searchSectionWrapper}>
+              <div className={styles.departmentInputWrapper}>
+                <label>Department</label>
+                <Controller
+                  name="departmentInput"
+                  control={control}
+                  render={({ field }) => (
+                    <AppSingleSelect
+                      placeholder="Find the department..."
+                      options={deptOptions}
+                      value={null}
+                    />
+                  )}
+                />
+              </div>
+              <div className={styles.courseNumberInputWrapper}>
+                <label>Number</label>
+                <AppInput placeholder="Enter number" />
+              </div>
+              <AppButton kind="primary" onClick={() => console.log('clicked')}>
+                Search
+              </AppButton>
             </div>
-            <div className={styles.courseNumberInputWrapper}>
-              <AppInput placeholder="Enter number" />
+            {/* row 1 column 2 */}
+            <div className={styles.box}>
+              <AppButton
+                kind="secondary"
+                onClick={() => console.log('clicked')}
+              >
+                Custom
+              </AppButton>
             </div>
+            {/* row 2 column 1 */}
+            <div className={styles.box}></div>
+
+            {/* row 2 column 2 */}
+            <div className={styles.box}>D</div>
           </div>
-          {/* row 1 column 2 */}
-          <div className={styles.box}>B</div>
-          {/* row 2 column 1 */}
-          <div className={styles.box}>C</div>
-          {/* row 2 column 2 */}
-          <div className={styles.box}>D</div>
         </div>
-      </div>
+      </form>
     </animated.div>
   );
 };
