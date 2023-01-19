@@ -31,6 +31,7 @@ import {
 interface Props {
   customStyles?: StylesConfig;
   isClearable?: boolean;
+  name?: string;
   isOptionDisabled?: (option: any) => boolean;
   placeholder?: string;
   onChange?: (newValue: any) => void;
@@ -223,6 +224,7 @@ function AppSingleSelect(props: Props) {
         defaultValue={null}
         isClearable={props.isClearable}
         isMulti={false}
+        name={props.name}
         isOptionDisabled={props.isOptionDisabled}
         onChange={props.onChange}
         options={props.options}

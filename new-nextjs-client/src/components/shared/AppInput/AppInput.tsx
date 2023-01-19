@@ -14,6 +14,8 @@ import {
   white1,
   blue2,
   accent1,
+  placeholderText,
+  placeholderTextDark,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -42,6 +44,9 @@ function AppInput(props: Props) {
       bgColor={theme === 'light' ? white1 : inputBgColorDark}
       borderRadius={borderRadiusSM}
       color={theme === 'light' ? defaultText : defaultTextDark}
+      _placeholder={{
+        color: theme === 'light' ? placeholderText : placeholderTextDark,
+      }}
       fontSize={fontSizeMD}
       height={controlHeightMD}
       onChange={onChange}

@@ -8,6 +8,14 @@ import AppInput from '@components/shared/AppInput/AppInput';
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
+import { FormControl, FormLabel } from '@chakra-ui/react';
+import {
+  defaultText,
+  defaultTextDark,
+  fontSizeMD,
+  letterSpacingMD,
+} from '@styles/variables';
+import { useTheme } from 'next-themes';
 
 interface Props {
   toggle: boolean;
@@ -30,19 +38,18 @@ const departmentOptions = [
 ];
 
 const CourseSearchWindow = (props: Props) => {
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [deptOptions, setDeptOptions] =
     useState<DeptOption[]>(departmentOptions);
-
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<DeptOption[]>();
-
-  const { control } = useForm();
-
+    control,
+  } = useForm();
   const [style, animate] = useSpring(
     () => ({
       height: '0px',
@@ -58,7 +65,15 @@ const CourseSearchWindow = (props: Props) => {
     }
   }, [animate, contentRef, props.toggle]);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const cx = classNames.bind(styles);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <animated.div
@@ -69,56 +84,67 @@ const CourseSearchWindow = (props: Props) => {
         ...style,
       }}
     >
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <div ref={contentRef} className={styles.contentWrapper}>
-          <div className={styles.container}>
-            {/* row 1 column 1 */}
-            <div className={styles.searchSectionWrapper}>
-              <div className={styles.departmentInputWrapper}>
-                <label>Department</label>
-                <Controller
-                  name="departmentInput"
-                  control={control}
-                  render={({ field }) => (
-                    <AppSingleSelect
-                      placeholder="Find the department..."
-                      options={deptOptions}
-                      value={null}
-                    />
-                  )}
-                />
-              </div>
-              <div className={styles.courseNumberInputWrapper}>
-                <label>Number</label>
-                <AppInput placeholder="Enter number" />
-              </div>
-
-              <AppButton kind="primary" onClick={() => console.log('clicked')}>
-                Search
-              </AppButton>
-            </div>
-            {/* row 1 column 2 */}
-            <div className={styles.customBtnWrapper}>
-              <AppButton
-                kind="secondary"
-                onClick={() => console.log('clicked')}
-                leftIcon={<FontAwesomeIcon icon={plus} />}
+      <div ref={contentRef} className={styles.contentWrapper}>
+        <div className={styles.container}>
+          {/* top left */}
+          <form
+            onSubmit={handleSubmit((data) => console.log(data))}
+            className={styles.searchFormWrapper}
+          >
+            <FormControl isRequired mr="2rem" w="35rem">
+              <FormLabel
+                fontSize={fontSizeMD}
+                letterSpacing={letterSpacingMD}
+                color={theme === 'light' ? defaultText : defaultTextDark}
               >
-                Custom
-              </AppButton>
-            </div>
-            {/* row 2 column 1 */}
-            <div className={styles.leftPane}>
-              <div className={styles.searchResult}></div>
-            </div>
+                Department
+              </FormLabel>
+              <Controller
+                name="deptCode"
+                control={control}
+                render={({ field: { onChange, value, name } }) => (
+                  <AppSingleSelect
+                    name={name}
+                    value={deptOptions.find((o) => o.value === value)}
+                    placeholder="Select the department..."
+                    options={deptOptions}
+                    onChange={(option: DeptOption) => onChange(option.value)}
+                  />
+                )}
+              />
+            </FormControl>
+            <FormControl mr="2rem" w="15rem">
+              <FormLabel
+                fontSize={fontSizeMD}
+                letterSpacing={letterSpacingMD}
+                color={theme === 'light' ? defaultText : defaultTextDark}
+              >
+                Number
+              </FormLabel>
+              <AppInput placeholder="Ex. 1A, 101" />
+            </FormControl>
 
-            {/* row 2 column 2 */}
-            <div className={styles.rightPane}>
-              <div></div>
-            </div>
+            <AppButton kind="primary" type="submit">
+              Search
+            </AppButton>
+          </form>
+
+          {/* row 1 column 2 */}
+          <div className={styles.customBtnWrapper}>
+            <AppButton
+              kind="secondary"
+              leftIcon={<FontAwesomeIcon icon={plus} />}
+            >
+              Custom
+            </AppButton>
           </div>
+          {/* row 2 column 1 */}
+          <div className={styles.leftPane}></div>
+
+          {/* row 2 column 2 */}
+          <div className={styles.rightPane}></div>
         </div>
-      </form>
+      </div>
     </animated.div>
   );
 };

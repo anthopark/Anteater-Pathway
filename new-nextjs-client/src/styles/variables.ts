@@ -59,7 +59,7 @@ const disabledText = gray5;
 ****************/
 
 const defaultTextDark = '#E8EAED';
-const placeholderTextDark = '#C3C3C3';
+const placeholderTextDark = gray4;
 const disabledTextDark = gray4;
 
 export {
