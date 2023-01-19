@@ -163,6 +163,9 @@ function AppSingleSelect(props: Props) {
     clearIndicator: (provided, state) => ({
       ...provided,
       color: gray4,
+      '&:hover': {
+        color: theme === 'light' ? gray3 : gray5,
+      },
       ...props.customStyles?.['clearIndicator']?.(provided, state),
     }),
     indicatorSeparator: (provided, state) => ({
