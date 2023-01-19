@@ -23,8 +23,6 @@ function SearchControl(props: Props) {
   const [inputValue, setInputValue] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
 
-  // const isError = inputValue !== null && selectValue === null;
-
   const [selectOptions, setSelectOptions] = useState<DeptOption[]>([
     { label: 'Computer Science (COMPSCI)', value: 'COMPSCI' },
     { label: 'Informatics (IN4MTX)', value: 'IN4MTX' },
