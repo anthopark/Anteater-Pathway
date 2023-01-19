@@ -21,8 +21,13 @@ interface Props {}
 function SearchControl(props: Props) {
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState<string | null>(null);
+  const [isError, setIsError] = useState(false);
+
+  // const isError = inputValue !== null && selectValue === null;
+
   const [selectOptions, setSelectOptions] = useState<DeptOption[]>([
     { label: 'Computer Science (COMPSCI)', value: 'COMPSCI' },
+    { label: 'Informatics (IN4MTX)', value: 'IN4MTX' },
   ]);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -37,7 +42,7 @@ function SearchControl(props: Props) {
 
   return (
     <div className={styles.container}>
-      <FormControl isRequired>
+      <FormControl className={styles.departmentSelectWrapper} isRequired>
         <FormLabel
           fontSize={fontSizeMD}
           letterSpacing={letterSpacingMD}
@@ -48,7 +53,11 @@ function SearchControl(props: Props) {
 
         <AppSingleSelect
           placeholder="Select the department..."
+          onFocus={() => setIsError(false)}
           options={selectOptions}
+          onChange={(newValue) => {
+            setSelectValue(newValue);
+          }}
           isClearable
           customStyles={{
             dropdownIndicator: () => ({
@@ -56,6 +65,11 @@ function SearchControl(props: Props) {
             }),
           }}
         />
+        {isError ? (
+          <span className={styles.errorMessage}>
+            Please select department first.
+          </span>
+        ) : null}
       </FormControl>
       <FormControl>
         <FormLabel
@@ -65,7 +79,11 @@ function SearchControl(props: Props) {
         >
           Number
         </FormLabel>
-        <AppInput placeholder="Ex. 1A, 101" />
+        <AppInput
+          onFocus={() => selectValue === null && setIsError(true)}
+          onChange={(newValue) => setInputValue(newValue.target.value)}
+          placeholder="Ex. 1A, 101"
+        />
       </FormControl>
     </div>
   );

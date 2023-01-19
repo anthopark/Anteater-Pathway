@@ -37,6 +37,7 @@ interface Props {
   onChange?: (newValue: any) => void;
   options: any[];
   value?: any;
+  onFocus?: () => void;
 }
 
 function AppSingleSelect(props: Props) {
@@ -234,6 +235,7 @@ function AppSingleSelect(props: Props) {
         placeholder={props.placeholder}
         value={props.value}
         styles={baseStyles}
+        onFocus={props.onFocus}
       />
     </>
   );

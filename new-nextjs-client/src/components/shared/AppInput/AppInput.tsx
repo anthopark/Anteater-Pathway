@@ -24,6 +24,7 @@ interface Props {
   onChange?: (newValue: any) => void;
   value?: any;
   placeholder: string;
+  onFocus?: () => void;
 }
 
 function AppInput(props: Props) {
