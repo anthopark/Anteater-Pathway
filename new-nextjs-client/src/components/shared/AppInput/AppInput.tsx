@@ -16,6 +16,7 @@ import {
   accent1,
   placeholderText,
   placeholderTextDark,
+  gray5,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -52,7 +53,7 @@ function AppInput(props: Props) {
       height={controlHeightMD}
       onChange={onChange}
       value={value}
-      borderColor={theme === 'light' ? 'transparent' : gray3}
+      borderColor={theme === 'light' ? gray5 : gray3}
       _hover={{
         borderColor: gray4,
       }}
