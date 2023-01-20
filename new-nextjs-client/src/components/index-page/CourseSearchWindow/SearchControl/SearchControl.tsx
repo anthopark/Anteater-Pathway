@@ -10,6 +10,7 @@ import {
 } from '@styles/variables';
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
 import AppInput from '@components/shared/AppInput/AppInput';
+import departments from 'src/data/departments.json';
 
 interface DeptOption {
   label: string;
@@ -22,10 +23,18 @@ function SearchControl(props: Props) {
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState<string | null>(null);
 
-  const [selectOptions, setSelectOptions] = useState<DeptOption[]>([
-    { label: 'Computer Science (COMPSCI)', value: 'COMPSCI' },
-    { label: 'Informatics (IN4MTX)', value: 'IN4MTX' },
-  ]);
+  const departmentOptionsArray = departments.departments.map(
+    (departmentData) => {
+      return {
+        label: `${departmentData.name} (${departmentData.code})`,
+        value: departmentData.code,
+      };
+    }
+  );
+
+  const [selectOptions, setSelectOptions] = useState<DeptOption[]>(
+    departmentOptionsArray
+  );
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
