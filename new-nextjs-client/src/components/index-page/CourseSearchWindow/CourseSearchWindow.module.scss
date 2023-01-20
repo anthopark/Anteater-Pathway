@@ -9,7 +9,22 @@
   }
 
   .contentWrapper {
-    height: 30rem;
+    height: 40rem;
+    font-size: $fs-md;
+
+    .container {
+      height: 100%;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 5.5fr 4.5fr;
+      grid-template-rows: auto 1fr;
+
+      .customBtnWrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+    }
   }
 }
 

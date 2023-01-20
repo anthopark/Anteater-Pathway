@@ -176,8 +176,9 @@ interface Props {
   children: ReactNode;
   isDisabled?: boolean;
   kind: 'primary' | 'secondary' | 'danger';
+  type?: 'button' | 'reset' | 'submit';
   leftIcon?: ReactElement;
-  onClick: (event?: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
   rightIcon?: ReactElement;
   fontSize?: string;
   width?: string;
@@ -191,6 +192,7 @@ function AppButton({
   leftIcon,
   onClick,
   rightIcon,
+  type,
   ...rest
 }: Props) {
   const [mounted, setMounted] = useState(false);
@@ -284,6 +286,7 @@ function AppButton({
         onClick={onClick}
         padding={'0 1.2rem'}
         rightIcon={rightIcon}
+        type={type}
         _hover={{
           bgColor: getBgColor('hover'),
           borderColor: getBorderColor('hover'),

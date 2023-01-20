@@ -14,6 +14,9 @@ import {
   white1,
   blue2,
   accent1,
+  placeholderText,
+  placeholderTextDark,
+  gray5,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -21,6 +24,7 @@ import { useEffect, useState } from 'react';
 interface Props {
   onChange?: (newValue: any) => void;
   value?: any;
+  placeholder: string;
 }
 
 function AppInput(props: Props) {
@@ -41,11 +45,14 @@ function AppInput(props: Props) {
       bgColor={theme === 'light' ? white1 : inputBgColorDark}
       borderRadius={borderRadiusSM}
       color={theme === 'light' ? defaultText : defaultTextDark}
+      _placeholder={{
+        color: theme === 'light' ? placeholderText : placeholderTextDark,
+      }}
       fontSize={fontSizeMD}
       height={controlHeightMD}
       onChange={onChange}
       value={value}
-      borderColor={theme === 'light' ? 'transparent' : gray3}
+      borderColor={theme === 'light' ? gray5 : gray3}
       _hover={{
         borderColor: gray4,
       }}

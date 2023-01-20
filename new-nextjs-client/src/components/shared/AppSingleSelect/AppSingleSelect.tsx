@@ -31,6 +31,7 @@ import {
 interface Props {
   customStyles?: StylesConfig;
   isClearable?: boolean;
+  name?: string;
   isOptionDisabled?: (option: any) => boolean;
   placeholder?: string;
   onChange?: (newValue: any) => void;
@@ -103,7 +104,7 @@ function AppSingleSelect(props: Props) {
       return theme === 'light' ? blue2 : accent1;
     }
 
-    return theme === 'light' ? 'transparent' : gray3;
+    return theme === 'light' ? gray5 : gray3;
   };
 
   const getControlHoverBorderColor = (state: ControlProps): string => {
@@ -162,6 +163,9 @@ function AppSingleSelect(props: Props) {
     clearIndicator: (provided, state) => ({
       ...provided,
       color: gray4,
+      '&:hover': {
+        color: theme === 'light' ? gray3 : gray5,
+      },
       ...props.customStyles?.['clearIndicator']?.(provided, state),
     }),
     indicatorSeparator: (provided, state) => ({
@@ -223,6 +227,7 @@ function AppSingleSelect(props: Props) {
         defaultValue={null}
         isClearable={props.isClearable}
         isMulti={false}
+        name={props.name}
         isOptionDisabled={props.isOptionDisabled}
         onChange={props.onChange}
         options={props.options}
