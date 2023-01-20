@@ -1,28 +1,11 @@
-$error-msg: #e53e3e;
-$error-msg-dt: #feb2b2;
-
 .container {
   display: grid;
   grid-template-columns: 7fr 3fr;
   gap: 2rem;
   padding-right: 2rem;
-
-  .departmentSelectWrapper {
-    position: relative;
-
-    .errorMessage {
-      position: absolute;
-      top: 6.7rem;
-      left: 2px;
-      color: $error-msg;
-    }
-  }
 }
 
 [data-theme='dark'] {
   .container {
-    .errorMessage {
-      color: $error-msg-dt;
-    }
   }
 }

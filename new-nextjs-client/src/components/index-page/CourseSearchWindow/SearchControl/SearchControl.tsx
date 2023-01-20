@@ -21,7 +21,6 @@ interface Props {}
 function SearchControl(props: Props) {
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState<string | null>(null);
-  const [isError, setIsError] = useState(false);
 
   const [selectOptions, setSelectOptions] = useState<DeptOption[]>([
     { label: 'Computer Science (COMPSCI)', value: 'COMPSCI' },
@@ -51,7 +50,6 @@ function SearchControl(props: Props) {
 
         <AppSingleSelect
           placeholder="Select the department..."
-          onFocus={() => setIsError(false)}
           options={selectOptions}
           onChange={(newValue) => {
             setSelectValue(newValue);
@@ -63,11 +61,6 @@ function SearchControl(props: Props) {
             }),
           }}
         />
-        {isError ? (
-          <span className={styles.errorMessage}>
-            Please select department first.
-          </span>
-        ) : null}
       </FormControl>
       <FormControl>
         <FormLabel
@@ -78,8 +71,12 @@ function SearchControl(props: Props) {
           Number
         </FormLabel>
         <AppInput
-          onFocus={() => selectValue === null && setIsError(true)}
-          onChange={(newValue) => setInputValue(newValue.target.value)}
+          onChange={(e) => {
+            if (e.target.value === '') {
+              return setInputValue(null);
+            }
+            setInputValue(e.target.value);
+          }}
           placeholder="Ex. 1A, 101"
         />
       </FormControl>
