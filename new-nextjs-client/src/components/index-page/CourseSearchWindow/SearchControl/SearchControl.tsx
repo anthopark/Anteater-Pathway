@@ -72,10 +72,7 @@ function SearchControl(props: Props) {
         </FormLabel>
         <AppInput
           onChange={(e) => {
-            if (e.target.value === '') {
-              return setInputValue(null);
-            }
-            setInputValue(e.target.value);
+            setInputValue(e.target.value === '' ? null : e.target.value);
           }}
           placeholder="Ex. 1A, 101"
         />
