@@ -10,7 +10,7 @@ import { search } from '@styles/fontawesome';
 import CourseSearchWindow from '@components/index-page/CourseSearchWindow/CourseSearchWindow';
 import CourseBag from '@components/index-page/CourseBag/CourseBag';
 import useAppUser from '@hooks/useAppUser';
-import AcademicYear from '@components/index-page/AcademicYear/AcademicYear';
+import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYearList';
 
 export default function Home() {
   const { appUser, updateAppUser } = useAppUser();
@@ -46,11 +46,7 @@ export default function Home() {
       <div className={styles.mainSection}>
         <div className={styles.mainLeftContainer}>
           <CourseSearchWindow toggle={searchWindowToggle} />
-          {appUser.years.map((year, index) => (
-            <div className={styles.academicYearWrapper}>
-              <AcademicYear key={index} year={year} />
-            </div>
-          ))}
+          <AcademicYearList appUser={appUser} />
         </div>
         <div className={styles.mainRightContainer}>
           <CourseBag />
