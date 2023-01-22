@@ -62,30 +62,10 @@ function AppSingleSelect(props: Props) {
   const getOptionBgColor = (state: OptionProps): string => {
     if (state.isDisabled) {
       return 'none';
-    } else {
-      if (theme === 'light' && state.isSelected) {
-        return gray5;
-      } else if (theme === 'dark' && state.isSelected) {
-        return selectOptionBgColorSelectedDark;
-      } else {
-        return 'none';
-      }
-    }
-  };
-
-  const getOptionHoverBgColor = (state: OptionProps): string => {
-    if (state.isSelected) {
-      return 'none';
-    } else if (state.isDisabled) {
-      return 'none';
-    } else {
-      return theme === 'light' ? gray6 : selectOptionBgColorHoverDark;
-    }
-  };
-
-  const getOptionActiveBgColor = (state: OptionProps): string => {
-    if (state.isSelected) {
+    } else if (state.isSelected) {
       return theme === 'light' ? gray5 : selectOptionBgColorSelectedDark;
+    } else if (state.isFocused) {
+      return theme === 'light' ? gray6 : selectOptionBgColorHoverDark;
     } else {
       return 'none';
     }
@@ -197,19 +177,12 @@ function AppSingleSelect(props: Props) {
     }),
     option: (provided, state) => ({
       ...provided,
-      height: '3.3rem',
       color: getOptionFontColor(state),
       fontSize: fontSizeMD,
       padding: '.6rem 1rem',
       borderRadius: borderRadiusXS,
       backgroundColor: getOptionBgColor(state),
       cursor: state.isDisabled ? 'not-allowed' : 'default',
-      '&:hover': {
-        backgroundColor: getOptionHoverBgColor(state),
-      },
-      '&:active': {
-        backgroundColor: getOptionActiveBgColor(state),
-      },
       ...props.customStyles?.['option']?.(provided, state),
     }),
 
