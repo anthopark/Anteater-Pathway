@@ -45,7 +45,10 @@ export default function Home() {
 
       <div className={styles.mainSection}>
         <div className={styles.mainLeftContainer}>
-          <CourseSearchWindow toggle={searchWindowToggle} />
+          <CourseSearchWindow
+            windowToggle={searchWindowToggle}
+            setWindowToggle={setSearchWindowToggle}
+          />
           <AcademicYearList appUser={appUser} />
         </div>
         <div className={styles.mainRightContainer}>

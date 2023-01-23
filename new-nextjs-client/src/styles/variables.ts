@@ -64,7 +64,7 @@ const bgColorDark2 = '#2f3134';
   Dark Theme Colors
 ****************/
 const defaultTextDark = '#E8EAED';
-const placeholderTextDark = '#C3C3C3';
+const placeholderTextDark = gray4;
 const disabledTextDark = gray4;
 
 export {
