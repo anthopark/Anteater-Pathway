@@ -25,11 +25,12 @@ const CourseSearchWindow = (props: Props) => {
   useEffect(() => {
     if (contentRef.current !== null) {
       springApi.start({
-        height: (props.toggle ? contentRef.current.offsetHeight : 0) + 'px',
-        marginBottom: props.toggle ? '2rem' : '0',
+        height:
+          (props.windowToggle ? contentRef.current.offsetHeight : 0) + 'px',
+        marginBottom: props.windowToggle ? '2rem' : '0',
       });
     }
-  }, [springApi, contentRef, props.toggle]);
+  }, [springApi, contentRef, props.windowToggle]);
 
   useEffect(() => {
     setMounted(true);
@@ -43,11 +44,9 @@ const CourseSearchWindow = (props: Props) => {
 
   return (
     <animated.div
-      className={cx('animatedDiv', {
-        opened: props.windowToggle,
-      })}
+      className={cx('animatedDiv')}
       style={{
-        ...style,
+        ...springProps,
       }}
     >
       <div ref={contentRef} className={styles.contentWrapper}>
