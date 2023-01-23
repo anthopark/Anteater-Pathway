@@ -4,10 +4,6 @@
   border-radius: $br-md;
   overflow: hidden;
 
-  &.opened {
-    margin-bottom: 2rem;
-  }
-
   .contentWrapper {
     height: 40rem;
     font-size: $fs-md;

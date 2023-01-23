@@ -9,8 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { search } from '@styles/fontawesome';
 import CourseSearchWindow from '@components/index-page/CourseSearchWindow/CourseSearchWindow';
 import CourseBag from '@components/index-page/CourseBag/CourseBag';
+import useAppUser from '@hooks/useAppUser';
+import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYearList';
 
 export default function Home() {
+  const { appUser, updateAppUser } = useAppUser();
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
 
   return (
@@ -46,6 +49,7 @@ export default function Home() {
             windowToggle={searchWindowToggle}
             setWindowToggle={setSearchWindowToggle}
           />
+          <AcademicYearList appUser={appUser} />
         </div>
         <div className={styles.mainRightContainer}>
           <CourseBag />

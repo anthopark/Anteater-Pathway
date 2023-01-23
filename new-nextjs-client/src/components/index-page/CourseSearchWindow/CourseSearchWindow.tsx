@@ -1,5 +1,5 @@
 import styles from './CourseSearchWindow.module.scss';
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import classNames from 'classnames/bind';
 import AppButton from '@components/shared/AppButton/AppButton';
@@ -17,21 +17,20 @@ const CourseSearchWindow = (props: Props) => {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const [style, animate] = useSpring(
-    () => ({
-      height: '0px',
-    }),
-    []
-  );
+  const [springProps, springApi] = useSpring(() => ({
+    height: '0px',
+    marginBottom: '0',
+  }));
 
   useEffect(() => {
     if (contentRef.current !== null) {
-      animate.start({
+      springApi.start({
         height:
           (props.windowToggle ? contentRef.current.offsetHeight : 0) + 'px',
+        marginBottom: props.windowToggle ? '2rem' : '0',
       });
     }
-  }, [animate, contentRef, props.windowToggle]);
+  }, [springApi, contentRef, props.windowToggle]);
 
   useEffect(() => {
     setMounted(true);
@@ -45,11 +44,9 @@ const CourseSearchWindow = (props: Props) => {
 
   return (
     <animated.div
-      className={cx('animatedDiv', {
-        opened: props.windowToggle,
-      })}
+      className={cx('animatedDiv')}
       style={{
-        ...style,
+        ...springProps,
       }}
     >
       <div ref={contentRef} className={styles.contentWrapper}>

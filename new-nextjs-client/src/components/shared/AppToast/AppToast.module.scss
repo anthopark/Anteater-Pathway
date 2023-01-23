@@ -14,7 +14,7 @@ $fail-highlight-color-dark: #ffcece;
 
 $text-color-dark: #171923;
 
-.appToastContainer {
+.container {
   color: $white-1;
   display: flex;
   align-items: center;
@@ -65,7 +65,7 @@ $text-color-dark: #171923;
 }
 
 [data-theme='dark'] {
-  .appToastContainer {
+  .container {
     color: $text-color-dark;
     &.success {
       background-color: $success-bg-color-dark;

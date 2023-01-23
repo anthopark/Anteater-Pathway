@@ -19,7 +19,6 @@ const signOut = findIconDefinition({
   prefix: 'fas',
   iconName: 'right-from-bracket',
 });
-
 const checkCircle = findIconDefinition({
   prefix: 'fas',
   iconName: 'check-circle',
@@ -28,6 +27,8 @@ const exclamationCircle = findIconDefinition({
   prefix: 'fas',
   iconName: 'exclamation-circle',
 });
+const trash = findIconDefinition({ prefix: 'fas', iconName: 'trash' });
+
 export {
   plus,
   coffee,
@@ -39,4 +40,5 @@ export {
   moon,
   checkCircle,
   exclamationCircle,
+  trash,
 };
