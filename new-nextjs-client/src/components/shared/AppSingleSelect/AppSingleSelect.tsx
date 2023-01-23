@@ -30,12 +30,15 @@ import {
 
 interface Props {
   customStyles?: StylesConfig;
+  filterOptions?: (option: any, inputValue: string) => boolean;
+  inputValue?: string;
   isClearable?: boolean;
-  name?: string;
   isOptionDisabled?: (option: any) => boolean;
-  placeholder?: string;
+  name?: string;
   onChange?: (newValue: any) => void;
+  onInputChange?: (newInputValue: string) => void;
   options: any[];
+  placeholder?: string;
   value?: any;
 }
 
@@ -84,7 +87,7 @@ function AppSingleSelect(props: Props) {
       return theme === 'light' ? blue2 : accent1;
     }
 
-    return theme === 'light' ? gray5 : gray3;
+    return theme === 'light' ? gray4 : gray3;
   };
 
   const getControlHoverBorderColor = (state: ControlProps): string => {
@@ -92,7 +95,7 @@ function AppSingleSelect(props: Props) {
       return theme === 'light' ? blue2 : accent1;
     }
 
-    return theme === 'light' ? gray4 : gray4;
+    return theme === 'light' ? gray2 : gray4;
   };
 
   const getControlBoxShadow = (state: ControlProps): string => {
@@ -184,6 +187,10 @@ function AppSingleSelect(props: Props) {
       backgroundColor: getOptionBgColor(state),
       cursor: state.isDisabled ? 'not-allowed' : 'default',
       ...props.customStyles?.['option']?.(provided, state),
+      '&:active': {
+        backgroundColor:
+          theme === 'light' ? gray5 : selectOptionBgColorSelectedDark,
+      },
     }),
 
     noOptionsMessage: (provided, state) => ({
@@ -198,11 +205,14 @@ function AppSingleSelect(props: Props) {
     <>
       <Select
         defaultValue={null}
+        inputValue={props.inputValue}
         isClearable={props.isClearable}
         isMulti={false}
         name={props.name}
+        filterOption={props.filterOptions}
         isOptionDisabled={props.isOptionDisabled}
         onChange={props.onChange}
+        onInputChange={props.onInputChange}
         options={props.options}
         placeholder={props.placeholder}
         value={props.value}

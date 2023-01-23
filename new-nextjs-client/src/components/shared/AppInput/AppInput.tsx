@@ -17,6 +17,7 @@ import {
   placeholderText,
   placeholderTextDark,
   gray5,
+  gray2,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -42,6 +43,7 @@ function AppInput(props: Props) {
 
   return (
     <Input
+      autoComplete="off"
       bgColor={theme === 'light' ? white1 : inputBgColorDark}
       borderRadius={borderRadiusSM}
       color={theme === 'light' ? defaultText : defaultTextDark}
@@ -52,9 +54,9 @@ function AppInput(props: Props) {
       height={controlHeightMD}
       onChange={onChange}
       value={value}
-      borderColor={theme === 'light' ? gray5 : gray3}
+      borderColor={theme === 'light' ? gray4 : gray3}
       _hover={{
-        borderColor: gray4,
+        borderColor: theme === 'light' ? gray2 : gray4,
       }}
       _active={{
         borderColor: theme === 'light' ? blue2 : accent1,
