@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v2';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { repository, CourseDocument } from '../firestore.service';

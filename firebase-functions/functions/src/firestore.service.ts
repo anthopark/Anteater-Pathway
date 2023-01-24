@@ -34,9 +34,18 @@ export class CourseDocument {
   offered: string[] = [];
 }
 
+@Collection('courseAttributes')
+export class CourseAttributeDocument {
+  id: string;
+  name: string;
+  value: string;
+  ordinal: number;
+}
+
 interface Repository {
   departments?: BaseFirestoreRepository<DepartmentDocument>;
   courses?: BaseFirestoreRepository<CourseDocument>;
+  courseAttributes?: BaseFirestoreRepository<CourseAttributeDocument>;
 }
 
 export const repository: Repository = {};
@@ -46,4 +55,5 @@ export const initializeFirestore = () => {
 
   repository.departments = getRepository(DepartmentDocument);
   repository.courses = getRepository(CourseDocument);
+  repository.courseAttributes = getRepository(CourseAttributeDocument);
 };

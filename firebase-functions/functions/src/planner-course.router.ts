@@ -5,7 +5,7 @@ import { repository } from './firestore.service';
 
 export const plannerCourseRouter = express.Router();
 
-interface AllDepartmentResponse {
+interface AllDepartmentsResponse {
   departmentCount: number;
   departments: {
     name: string;
@@ -27,9 +27,18 @@ interface CourseResponse {
   prereq: string | null;
 }
 
+interface AllAttributesResponse {
+  attributeCount: number;
+  attributes: {
+    name: string;
+    value: string;
+    ordinal: number;
+  }[];
+}
+
 plannerCourseRouter.get(
   '/all-departments',
-  async (req: Request, res: Response<AllDepartmentResponse>) => {
+  async (req: Request, res: Response<AllDepartmentsResponse>) => {
     const departments = await repository
       .departments!.orderByAscending('name')
       .find();
@@ -42,6 +51,26 @@ plannerCourseRouter.get(
     return res.send({
       departmentCount: result.length,
       departments: result,
+    });
+  }
+);
+
+plannerCourseRouter.get(
+  '/all-attributes',
+  async (req: Request, res: Response<AllAttributesResponse>) => {
+    const attributes = await repository
+      .courseAttributes!.orderByAscending('ordinal')
+      .find();
+
+    const result = attributes.map((attr) => ({
+      name: attr.name,
+      value: attr.value,
+      ordinal: attr.ordinal,
+    }));
+
+    return res.send({
+      attributeCount: result.length,
+      attributes: result,
     });
   }
 );

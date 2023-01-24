@@ -3,6 +3,7 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import { updateDepartments } from './update-data/update-departments';
 import { updateCourses } from './update-data/update-course-info';
+import { updateCourseAttributes } from './update-data/update-course-attributes';
 import {
   isValidQuarterCode,
   updateCourseOfferHistory,
@@ -19,6 +20,14 @@ updateDataRouter.patch('/courses/info', async (req: Request, res: Response) => {
   await updateCourses();
   res.sendStatus(200);
 });
+
+updateDataRouter.patch(
+  '/course/attributes',
+  async (req: Request, res: Response) => {
+    await updateCourseAttributes();
+    res.sendStatus(200);
+  }
+);
 
 interface OfferHistoryRequest extends Request {
   body: {
