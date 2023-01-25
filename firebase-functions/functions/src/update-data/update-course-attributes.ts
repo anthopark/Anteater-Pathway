@@ -15,7 +15,7 @@ export const updateCourseAttributes = async () => {
   ];
 
   functions.logger.info(`Updating ${attributes.length} course attributes`);
-
+  let updateCount = 0;
   for (const attr of attributes) {
     const courseAttr = await repository.courseAttributes
       ?.whereEqualTo('value', attr.value)
@@ -26,10 +26,11 @@ export const updateCourseAttributes = async () => {
       newAttr.value = attr.value;
       newAttr.ordinal = attr.ordinal;
       await repository.courseAttributes?.create(newAttr);
+      updateCount++;
     }
   }
 
   functions.logger.info(
-    `Finished Updating ${attributes.length} course attributes`
+    `Finished Updating course attributes, updated count: ${updateCount}`
   );
 };

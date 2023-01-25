@@ -24,7 +24,15 @@ interface CourseResponse {
   maxUnit: number | null;
   geCode: string | null;
   offered: string[];
-  prereq: string | null;
+  prerequisite: string | null;
+  corequisite: string | null;
+  prereqOrCoreq: string | null;
+  sameAs: string | null;
+  concurrentWith: string | null;
+  overlapsWith: string | null;
+  gradingOption: string | null;
+  repeatability: string | null;
+  restriction: string | null;
 }
 
 interface AllAttributesResponse {
@@ -85,19 +93,7 @@ plannerCourseRouter.get(
       .orderByAscending('num')
       .find();
 
-    const result = courses?.map((course) => ({
-      deptCode: course.deptCode,
-      num: course.num,
-      title: course.title,
-      unit: course.unit,
-      isVariableUnit: course.isVariableUnit,
-      isWorkloadCredit: course.isWorkloadCredit,
-      minUnit: course.minUnit,
-      maxUnit: course.maxUnit,
-      geCode: course.geCode,
-      offered: course.offered,
-      prereq: course.prerequisite,
-    }));
+    const result = courses?.map(({ id, ...rest }) => rest);
 
     return res.send(result);
   }
@@ -116,19 +112,7 @@ plannerCourseRouter.get(
       .orderByAscending('num')
       .find();
 
-    const result = courses?.map((course) => ({
-      deptCode: course.deptCode,
-      num: course.num,
-      title: course.title,
-      unit: course.unit,
-      isVariableUnit: course.isVariableUnit,
-      isWorkloadCredit: course.isWorkloadCredit,
-      minUnit: course.minUnit,
-      maxUnit: course.maxUnit,
-      geCode: course.geCode,
-      offered: course.offered,
-      prereq: course.prerequisite,
-    }));
+    const result = courses?.map(({ id, ...rest }) => rest);
 
     return res.send(result);
   }

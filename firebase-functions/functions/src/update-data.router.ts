@@ -16,13 +16,13 @@ updateDataRouter.patch('/departments', async (req: Request, res: Response) => {
   res.sendStatus(200);
 });
 
-updateDataRouter.patch('/courses/info', async (req: Request, res: Response) => {
+updateDataRouter.patch('/course-info', async (req: Request, res: Response) => {
   await updateCourses();
   res.sendStatus(200);
 });
 
 updateDataRouter.patch(
-  '/course/attributes',
+  '/course-attributes',
   async (req: Request, res: Response) => {
     await updateCourseAttributes();
     res.sendStatus(200);
@@ -37,7 +37,7 @@ interface OfferHistoryRequest extends Request {
 }
 
 updateDataRouter.patch(
-  '/courses/offer-history',
+  '/course-offer-history',
   async (req: OfferHistoryRequest, res: Response) => {
     const { optionCode, quarterCode } = req.body;
 

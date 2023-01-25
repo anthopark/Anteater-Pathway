@@ -23,14 +23,14 @@ export class CourseDocument {
   description: string;
   geCode: string | null;
   prerequisite: string | null;
-  restriction: string | null;
-  sameAs: string | null;
-  gradingOption: string | null;
-  overlapsWith: string | null;
-  repeatability: string | null;
-  concurrentWith: string | null;
   corequisite: string | null;
   prereqOrCoreq: string | null;
+  sameAs: string | null;
+  concurrentWith: string | null;
+  overlapsWith: string | null;
+  gradingOption: string | null;
+  repeatability: string | null;
+  restriction: string | null;
   offered: string[] = [];
 }
 
