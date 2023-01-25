@@ -11,13 +11,25 @@ import CourseSearchWindow from '@components/index-page/CourseSearchWindow/Course
 import CourseBag from '@components/index-page/CourseBag/CourseBag';
 import useAppUser from '@hooks/useAppUser';
 import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYearList';
+import AppAlertDialog from '@components/shared/AppAlertDialog/AppAlertDialog';
 
 export default function Home() {
   const { appUser, updateAppUser } = useAppUser();
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
+  const text = `
+  
+  `;
 
   return (
     <div className={styles.container}>
+      {/* test... */}
+      <AppAlertDialog
+        headerTitle="Delete Academic Year"
+        bodyText={
+          "Are you sure delete year 20 - 21? You can't undo this action afterwards."
+        }
+        actionButtonName="Delete"
+      />
       <div className={styles.topSection}>
         <div className={styles.leftContainer}>
           <div className={styles.addYearDropdownWrapper}>
