@@ -1,0 +1,14 @@
+$course-bg-1: #c4c3e4;
+$course-bg-1-dt: #9e9ebc;
+
+.container {
+  background-color: $course-bg-1;
+  height: 3.6rem;
+  max-width: 20rem;
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: $course-bg-1-dt;
+  }
+}

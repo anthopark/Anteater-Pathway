@@ -27,6 +27,10 @@ class AppUser implements IAppUser {
     return this._years;
   }
 
+  public get courseBag() {
+    return this._degreePlan.courseBag;
+  }
+
   public addYear(year: number) {
     this._years.push(year);
     this._years.sort((a, b) => a - b);

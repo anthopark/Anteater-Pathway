@@ -17,6 +17,9 @@
   "dependencies": {
     "@chakra-ui/icon": "^3.0.14",
     "@chakra-ui/react": "^2.4.6",
+    "@dnd-kit/core": "^6.0.7",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
@@ -42,9 +45,11 @@
     "react-firebase-hooks": "^5.1.1",
     "react-select": "^5.7.0",
     "typescript": "4.9.3",
-    "use-immer": "^0.8.1"
+    "use-immer": "^0.8.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.0",
     "prettier": "^2.8.0",
     "sass": "^1.56.1"
   }
