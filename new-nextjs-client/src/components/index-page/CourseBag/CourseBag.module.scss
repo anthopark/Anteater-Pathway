@@ -12,6 +12,16 @@
   color: $secondary-text;
 }
 
+.course-box {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.course-item-wrapper {
+  max-width: 30%;
+}
+
 [data-theme='dark'] {
   .container {
     background-color: $bg-color-2-dt;

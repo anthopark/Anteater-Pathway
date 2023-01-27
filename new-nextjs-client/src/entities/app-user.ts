@@ -1,11 +1,13 @@
 import { immerable } from 'immer';
 import { DegreePlan, IDegreePlan } from './degree-plan';
+import { Course } from 'src/models/course';
 
 interface IAppUser {
-  degreePlan: IDegreePlan;
-  years: number[];
   addYear: (year: number) => void;
+  courseBag: Course[];
+  degreePlan: IDegreePlan;
   removeYear: (year: number) => void;
+  years: number[];
 }
 
 class AppUser implements IAppUser {
@@ -14,21 +16,22 @@ class AppUser implements IAppUser {
   private _years: number[] = [];
   private _authToken: string | null = null;
   private _degreePlan = new DegreePlan();
-
-  public get degreePlan() {
-    return this._degreePlan;
-  }
+  private _courseBag: Course[] = [];
 
   public constructor() {
     this._addCurrentYear();
   }
 
-  public get years(): number[] {
-    return this._years;
+  public get courseBag() {
+    return this._courseBag;
   }
 
-  public get courseBag() {
-    return this._degreePlan.courseBag;
+  public get degreePlan() {
+    return this._degreePlan;
+  }
+
+  public get years(): number[] {
+    return this._years;
   }
 
   public addYear(year: number) {
@@ -40,6 +43,12 @@ class AppUser implements IAppUser {
     if (this._years.includes(year)) {
       const removeIndex = this._years.indexOf(year);
       this._years.splice(removeIndex, 1);
+    }
+  }
+
+  public addToCourseBag(courses: Course[]) {
+    for (const course of courses) {
+      this._courseBag.push(course);
     }
   }
 

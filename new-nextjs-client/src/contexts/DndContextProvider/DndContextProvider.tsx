@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import useAppUser from '@hooks/useAppUser';
 import { ReactNode } from 'react';
 
@@ -7,7 +7,11 @@ function DndContextProvider({ children }: { children: ReactNode }) {
 
   const handleDragEnd = (event: DragEndEvent) => {};
 
-  return <DndContext onDragEnd={handleDragEnd}>{children}</DndContext>;
+  return (
+    <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
+      {children}
+    </DndContext>
+  );
 }
 
 export default DndContextProvider;
