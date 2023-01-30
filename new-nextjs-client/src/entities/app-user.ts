@@ -1,6 +1,6 @@
 import { immerable } from 'immer';
 import { DegreePlan, IDegreePlan } from './degree-plan';
-import { Course } from 'src/models/course';
+import { Course, CourseInfo } from 'src/models/course';
 
 interface IAppUser {
   addYear: (year: number) => void;
@@ -16,7 +16,12 @@ class AppUser implements IAppUser {
   private _years: number[] = [];
   private _authToken: string | null = null;
   private _degreePlan = new DegreePlan();
-  private _courseBag: Course[] = [];
+  private _courseBag: Course[] = [
+    new Course({ deptCode: 'IN4MATX', num: '121' } as CourseInfo, true),
+    new Course({ deptCode: 'COMPSCI', num: '171' } as CourseInfo, true),
+    new Course({ deptCode: 'ECON', num: '1A' } as CourseInfo, true),
+    new Course({ deptCode: 'HISTORY', num: '7C' } as CourseInfo, true),
+  ];
 
   public constructor() {
     this._addCurrentYear();
@@ -24,6 +29,10 @@ class AppUser implements IAppUser {
 
   public get courseBag() {
     return this._courseBag;
+  }
+
+  public set courseBag(newBag: Course[]) {
+    this._courseBag = newBag;
   }
 
   public get degreePlan() {

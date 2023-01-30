@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 
 export interface CourseInfo {
   deptCode: string;
@@ -29,12 +29,12 @@ export class Course {
   public courseInfo: CourseInfo;
 
   constructor(courseInfo: CourseInfo, isCustomCreated: boolean) {
-    this._id = uuidv4();
+    this._id = nanoid();
     this.courseInfo = courseInfo;
     this.isCustomCreated = isCustomCreated;
   }
 
   public get id() {
-    return this._id;
+    return `${this.courseInfo.deptCode}-${this.courseInfo.num}-${this.color}-${this._id}`;
   }
 }

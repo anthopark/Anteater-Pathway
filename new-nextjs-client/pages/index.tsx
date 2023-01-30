@@ -11,14 +11,14 @@ import CourseSearchWindow from '@components/index-page/CourseSearchWindow/Course
 import CourseBag from '@components/index-page/CourseBag/CourseBag';
 import useAppUser from '@hooks/useAppUser';
 import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYearList';
-import DndContextProvider from '@contexts/DndContextProvider/DndContextProvider';
+import CourseItemDndProvider from '@contexts/DndContextProvider/CourseItemDndProvider';
 
 export default function Home() {
   const { appUser, updateAppUser } = useAppUser();
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
 
   return (
-    <DndContextProvider>
+    <CourseItemDndProvider>
       <div className={styles.container}>
         <div className={styles.topSection}>
           <div className={styles.leftContainer}>
@@ -58,7 +58,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </DndContextProvider>
+    </CourseItemDndProvider>
   );
 }
 

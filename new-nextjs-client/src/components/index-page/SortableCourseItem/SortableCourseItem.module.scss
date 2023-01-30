@@ -2,13 +2,40 @@ $course-bg-1: #c4c3e4;
 $course-bg-1-dt: #9e9ebc;
 
 .container {
-  background-color: $course-bg-1;
-  height: 3.6rem;
   max-width: 20rem;
+  height: 3.6rem;
+  background-color: $course-bg-1;
+  border-radius: $br-sm;
+  padding: 0rem 1rem;
+  user-select: none;
+  cursor: grab;
+
+  &.dragging {
+    opacity: 0.3;
+  }
+
+  &.overlay {
+    cursor: grabbing;
+  }
+}
+
+.dept-code-num {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: $default-text;
+  font-size: $fs-md;
+  letter-spacing: $letter-spacing-md;
+  font-weight: 500;
 }
 
 [data-theme='dark'] {
   .container {
     background-color: $course-bg-1-dt;
+  }
+
+  .dept-code-num {
+    color: $default-text-dt;
   }
 }

@@ -13,14 +13,14 @@ function CourseBag(props: Props) {
 
   return (
     <div className={cx('container')}>
-      <div className={cx('heading')}>Course Bag</div>
+      <div className={cx('heading')}>Course bag</div>
       <div className={cx('course-box')}>
         <SortableContext
           items={appUser.courseBag}
           strategy={rectSortingStrategy}
         >
           {appUser.courseBag.map((course) => (
-            <div className={cx('course-item-wrapper')}>
+            <div className={cx('course-item-wrapper')} key={course.id}>
               <SortableCourseItem course={course} isInCourseBag />
             </div>
           ))}
