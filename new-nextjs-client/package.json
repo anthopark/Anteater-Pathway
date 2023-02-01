@@ -17,6 +17,10 @@
   "dependencies": {
     "@chakra-ui/icon": "^3.0.14",
     "@chakra-ui/react": "^2.4.6",
+    "@dnd-kit/core": "^6.0.7",
+    "@dnd-kit/modifiers": "^6.0.1",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
@@ -35,6 +39,7 @@
     "framer-motion": "^7.6.12",
     "fuse.js": "^6.6.2",
     "immer": "^9.0.17",
+    "nanoid": "^4.0.0",
     "next": "13.0.5",
     "next-themes": "^0.2.1",
     "react": "18.2.0",
@@ -45,6 +50,7 @@
     "use-immer": "^0.8.1"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.0",
     "prettier": "^2.8.0",
     "sass": "^1.56.1"
   }

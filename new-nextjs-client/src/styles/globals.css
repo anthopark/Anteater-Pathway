@@ -16,20 +16,14 @@ a {
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 1400px) {
-  html {
-    font-size: 63.75%;
-  }
-}
-
 @media screen and (min-width: 1600px) {
   html {
-    font-size: 72.5%;
+    font-size: 62.5;
   }
 }
 
-@media screen and (min-width: 2000px) {
+@media screen and (min-width: 1900px) {
   html {
-    font-size: 77.5%;
+    font-size: 72.5%;
   }
 }

@@ -1,11 +1,13 @@
 import { immerable } from 'immer';
 import { DegreePlan, IDegreePlan } from './degree-plan';
+import { Course, CourseInfo } from 'src/models/course';
 
 interface IAppUser {
-  degreePlan: IDegreePlan;
-  years: number[];
   addYear: (year: number) => void;
+  courseBag: Course[];
+  degreePlan: IDegreePlan;
   removeYear: (year: number) => void;
+  years: number[];
 }
 
 class AppUser implements IAppUser {
@@ -14,13 +16,27 @@ class AppUser implements IAppUser {
   private _years: number[] = [];
   private _authToken: string | null = null;
   private _degreePlan = new DegreePlan();
-
-  public get degreePlan() {
-    return this._degreePlan;
-  }
+  private _courseBag: Course[] = [
+    new Course({ deptCode: 'IN4MATX', num: '121' } as CourseInfo, true),
+    new Course({ deptCode: 'COMPSCI', num: '171' } as CourseInfo, true),
+    new Course({ deptCode: 'ECON', num: '1A' } as CourseInfo, true),
+    new Course({ deptCode: 'HISTORY', num: '7C' } as CourseInfo, true),
+  ];
 
   public constructor() {
     this._addCurrentYear();
+  }
+
+  public get courseBag() {
+    return this._courseBag;
+  }
+
+  public set courseBag(newBag: Course[]) {
+    this._courseBag = newBag;
+  }
+
+  public get degreePlan() {
+    return this._degreePlan;
   }
 
   public get years(): number[] {
@@ -36,6 +52,12 @@ class AppUser implements IAppUser {
     if (this._years.includes(year)) {
       const removeIndex = this._years.indexOf(year);
       this._years.splice(removeIndex, 1);
+    }
+  }
+
+  public addToCourseBag(courses: Course[]) {
+    for (const course of courses) {
+      this._courseBag.push(course);
     }
   }
 
