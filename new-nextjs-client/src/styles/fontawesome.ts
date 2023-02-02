@@ -32,12 +32,14 @@ const threeDot = findIconDefinition({
   prefix: 'fas',
   iconName: 'ellipsis-vertical',
 });
+const info = findIconDefinition({ prefix: 'fas', iconName: 'circle-info' });
 
 export {
   plus,
   coffee,
   envelope,
   github,
+  info,
   signOut,
   search,
   sun,
