@@ -28,6 +28,10 @@ const exclamationCircle = findIconDefinition({
   iconName: 'exclamation-circle',
 });
 const trash = findIconDefinition({ prefix: 'fas', iconName: 'trash' });
+const threeDot = findIconDefinition({
+  prefix: 'fas',
+  iconName: 'ellipsis-vertical',
+});
 
 export {
   plus,
@@ -41,4 +45,5 @@ export {
   checkCircle,
   exclamationCircle,
   trash,
+  threeDot,
 };
