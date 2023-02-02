@@ -10,16 +10,17 @@ $course-bg-1-dt: #9e9ebc;
   }
 }
 
-.container {
+.outer-container {
   position: relative;
+}
+
+.container {
   max-width: 20rem;
   height: 3.6rem;
   background-color: $course-1;
   border-radius: $br-sm;
   padding: 0rem 1rem;
   user-select: none;
-  cursor: grab;
-  z-index: 1;
 
   &.dragging {
     opacity: 0.3;
@@ -41,15 +42,12 @@ $course-bg-1-dt: #9e9ebc;
 }
 
 .menu-trigger {
-  position: absolute;
-  z-index: 1000;
-  top: 0.65rem;
-  right: 0.5rem;
   border-radius: 2px;
   padding: 0.2rem 0.5rem;
   background-color: transparent;
   transition: background 0.2s;
-  &:hover {
+  &.menu-open,
+  &.menu-trigger-hover {
     background-color: #b1b7c6;
 
     .three-dot-icon {
@@ -81,7 +79,8 @@ $course-bg-1-dt: #9e9ebc;
   }
 
   .menu-trigger {
-    &:hover {
+    &.menu-open,
+    &.menu-trigger-hover {
       background-color: $gray-4;
     }
   }
