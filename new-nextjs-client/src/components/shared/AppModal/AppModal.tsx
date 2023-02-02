@@ -57,7 +57,6 @@ function AppModal({
 
   return (
     <>
-      <button onClick={onOpen}>Delete</button>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent

@@ -22,13 +22,6 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* test... */}
-      <AppModal
-        headerTitle="Delete Academic Year"
-        bodyText="Are you sure delete 20 - 21 academic year?"
-        actionButtonName="Delete"
-        actionFn={() => console.log()}
-      />
       <div className={styles.topSection}>
         <div className={styles.leftContainer}>
           <div className={styles.addYearDropdownWrapper}>
