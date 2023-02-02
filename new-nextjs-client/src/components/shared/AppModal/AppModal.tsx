@@ -9,7 +9,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
 } from '@chakra-ui/react';
 import {
   borderRadiusMD,
@@ -30,6 +29,7 @@ interface Props {
   headerTitle: string;
   bodyText: string;
   actionButtonName: string;
+  actionKind: 'primary' | 'danger';
   actionFn: () => void;
 }
 
@@ -39,6 +39,7 @@ function AppModal({
   headerTitle,
   bodyText,
   actionButtonName,
+  actionKind,
   actionFn,
 }: Props) {
   const [mounted, setMounted] = useState(false);
@@ -99,7 +100,11 @@ function AppModal({
                 Cancel
               </AppButton>
             </div>
-            <AppButton kind="danger" onClick={onClose} fontSize={fontSizeMD}>
+            <AppButton
+              kind={actionKind}
+              onClick={onClose}
+              fontSize={fontSizeMD}
+            >
               {actionButtonName}
             </AppButton>
           </ModalFooter>

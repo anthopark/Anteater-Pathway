@@ -42,6 +42,8 @@ export default function Home() {
               headerTitle={`Delete ${'20-21'} year?`}
               bodyText={`Are you sure you want to delete ${'20-21'} year?`}
               actionButtonName="Delete"
+              actionKind="danger"
+              actionFn={() => console.log()}
             />
           </div>
         </div>
