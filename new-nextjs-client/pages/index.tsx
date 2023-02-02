@@ -25,7 +25,7 @@ export default function Home() {
       {/* test... */}
       <AppModal
         headerTitle="Delete Academic Year"
-        bodyText="Are you sure delete 20 - 21 academic year? You can't undo this action afterwards."
+        bodyText="Are you sure delete 20 - 21 academic year?"
         actionButtonName="Delete"
         actionFn={() => console.log()}
       />

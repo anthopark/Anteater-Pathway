@@ -19,6 +19,7 @@ import {
   fontSizeMD,
   defaultText,
   defaultTextDark,
+  gray4,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import AppButton from '@components/shared/AppButton/AppButton';
@@ -57,35 +58,46 @@ function AppModal({
   return (
     <>
       <button onClick={onOpen}>Delete</button>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent
           borderRadius={borderRadiusMD}
-          border="0 4rem"
           bgColor={theme === 'light' ? gray7 : gray1}
-          padding="1.5rem 2.3rem"
+          m="4.08rem"
         >
           <ModalHeader
             fontSize={fontSizeLG}
             color={theme === 'light' ? defaultText : defaultTextDark}
+            p="3rem 4rem 0 4rem"
           >
             {headerTitle}
           </ModalHeader>
-          <ModalCloseButton size="lg" />
-          <ModalBody fontSize={fontSizeLG} marginBottom="1.5rem">
+          <ModalCloseButton
+            fontSize="1.2rem"
+            mt=".7rem"
+            mr=".7rem"
+            color={gray4}
+          />
+          <ModalBody fontSize={fontSizeMD} p="3rem 4rem 1rem 4rem" m="0">
             {bodyText}
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter padding="3.5rem 4rem 2.5rem 4rem">
             <div className={styles.cancelBtn}>
               <AppButton
                 kind="secondary"
                 onClick={onClose}
-                fontSize={fontSizeLG}
+                fontSize={fontSizeMD}
+                width="8rem"
               >
                 Cancel
               </AppButton>
             </div>
-            <AppButton kind="danger" onClick={onClose} fontSize={fontSizeLG}>
+            <AppButton
+              kind="danger"
+              onClick={onClose}
+              fontSize={fontSizeMD}
+              width="8rem"
+            >
               {actionButtonName}
             </AppButton>
           </ModalFooter>
