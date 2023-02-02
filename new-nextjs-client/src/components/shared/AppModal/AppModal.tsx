@@ -72,7 +72,7 @@ function AppModal({
             {headerTitle}
           </ModalHeader>
           <ModalCloseButton size="lg" />
-          <ModalBody fontSize={fontSizeMD} marginBottom="1.5rem">
+          <ModalBody fontSize={fontSizeLG} marginBottom="1.5rem">
             {bodyText}
           </ModalBody>
           <ModalFooter>
@@ -80,12 +80,12 @@ function AppModal({
               <AppButton
                 kind="secondary"
                 onClick={onClose}
-                fontSize={fontSizeMD}
+                fontSize={fontSizeLG}
               >
                 Cancel
               </AppButton>
             </div>
-            <AppButton kind="danger" onClick={onClose} fontSize={fontSizeMD}>
+            <AppButton kind="danger" onClick={onClose} fontSize={fontSizeLG}>
               {actionButtonName}
             </AppButton>
           </ModalFooter>
