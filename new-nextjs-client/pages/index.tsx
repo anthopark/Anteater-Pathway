@@ -16,9 +16,7 @@ import AppModal from '@components/shared/AppModal/AppModal';
 export default function Home() {
   const { appUser, updateAppUser } = useAppUser();
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
-  const text = `
-  
-  `;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -31,10 +29,20 @@ export default function Home() {
             <AppButton
               kind="primary"
               leftIcon={<FontAwesomeIcon icon={search} />}
-              onClick={() => setSearchWindowToggle(!searchWindowToggle)}
+              onClick={() => {
+                setSearchWindowToggle(!searchWindowToggle);
+                setIsModalOpen(true);
+              }}
             >
               Courses
             </AppButton>
+            <AppModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              headerTitle={`Delete ${'20-21'} year?`}
+              bodyText={`Are you sure you want to delete ${'20-21'} year?`}
+              actionButtonName="Delete"
+            />
           </div>
         </div>
         <div className={styles.rightContainer}>

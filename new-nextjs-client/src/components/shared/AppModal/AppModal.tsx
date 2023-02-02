@@ -25,6 +25,8 @@ import { useTheme } from 'next-themes';
 import AppButton from '@components/shared/AppButton/AppButton';
 
 interface Props {
+  isOpen: boolean;
+  onClose: () => void;
   headerTitle: string;
   bodyText: string;
   actionButtonName: string;
@@ -32,13 +34,13 @@ interface Props {
 }
 
 function AppModal({
+  isOpen,
+  onClose,
   headerTitle,
   bodyText,
   actionButtonName,
   actionFn,
 }: Props) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
@@ -57,17 +59,18 @@ function AppModal({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent
           borderRadius={borderRadiusMD}
           bgColor={theme === 'light' ? gray7 : gray1}
-          m="4.08rem"
+          p="2rem 2.5rem"
         >
           <ModalHeader
-            fontSize={fontSizeLG}
+            fontSize="2rem"
             color={theme === 'light' ? defaultText : defaultTextDark}
-            p="3rem 4rem 0 4rem"
+            p="0"
+            mb="2rem"
           >
             {headerTitle}
           </ModalHeader>
@@ -76,27 +79,27 @@ function AppModal({
             mt=".7rem"
             mr=".7rem"
             color={gray4}
+            onClick={onClose}
           />
-          <ModalBody fontSize={fontSizeMD} p="3rem 4rem 1rem 4rem" m="0">
+          <ModalBody
+            fontSize={fontSizeLG}
+            p="0"
+            mb="3rem"
+            color={theme === 'light' ? defaultText : defaultTextDark}
+          >
             {bodyText}
           </ModalBody>
-          <ModalFooter padding="3.5rem 4rem 2.5rem 4rem">
+          <ModalFooter padding="0">
             <div className={styles.cancelBtn}>
               <AppButton
                 kind="secondary"
                 onClick={onClose}
                 fontSize={fontSizeMD}
-                width="8rem"
               >
                 Cancel
               </AppButton>
             </div>
-            <AppButton
-              kind="danger"
-              onClick={onClose}
-              fontSize={fontSizeMD}
-              width="8rem"
-            >
+            <AppButton kind="danger" onClick={onClose} fontSize={fontSizeMD}>
               {actionButtonName}
             </AppButton>
           </ModalFooter>
