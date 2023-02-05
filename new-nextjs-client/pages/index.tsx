@@ -11,11 +11,13 @@ import CourseSearchWindow from '@components/index-page/CourseSearchWindow/Course
 import CourseBag from '@components/index-page/CourseBag/CourseBag';
 import useAppUser from '@hooks/useAppUser';
 import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYearList';
+import AppModal from '@components/shared/AppModal/AppModal';
 import CourseItemDndProvider from '@contexts/DndContextProvider/CourseItemDndProvider';
 
 export default function Home() {
   const { appUser, updateAppUser } = useAppUser();
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <CourseItemDndProvider>
