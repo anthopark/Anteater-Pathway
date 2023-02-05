@@ -12,6 +12,7 @@ import CourseBag from '@components/index-page/CourseBag/CourseBag';
 import useAppUser from '@hooks/useAppUser';
 import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYearList';
 import AppModal from '@components/shared/AppModal/AppModal';
+import CourseItemDndProvider from '@contexts/DndContextProvider/CourseItemDndProvider';
 
 export default function Home() {
   const { appUser, updateAppUser } = useAppUser();
@@ -19,57 +20,47 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.topSection}>
-        <div className={styles.leftContainer}>
-          <div className={styles.addYearDropdownWrapper}>
-            <AddYearDropdown />
+    <CourseItemDndProvider>
+      <div className={styles.container}>
+        <div className={styles.topSection}>
+          <div className={styles.leftContainer}>
+            <div className={styles.addYearDropdownWrapper}>
+              <AddYearDropdown />
+            </div>
+            <div className={styles.searchBtnWrapper}>
+              <AppButton
+                kind="primary"
+                leftIcon={<FontAwesomeIcon icon={search} />}
+                onClick={() => setSearchWindowToggle(!searchWindowToggle)}
+              >
+                Courses
+              </AppButton>
+            </div>
           </div>
-          <div className={styles.searchBtnWrapper}>
-            <AppButton
-              kind="primary"
-              leftIcon={<FontAwesomeIcon icon={search} />}
-              onClick={() => {
-                setSearchWindowToggle(!searchWindowToggle);
-                setIsModalOpen(true);
-              }}
-            >
-              Courses
-            </AppButton>
-            <AppModal
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-              headerTitle={`Delete ${'20-21'} year?`}
-              bodyText={`Are you sure you want to delete ${'20-21'} year?`}
-              actionButtonName="Delete"
-              actionKind="danger"
-              actionFn={() => console.log()}
-            />
+          <div className={styles.rightContainer}>
+            <div className={styles.themeTogglerWrapper}>
+              <ThemeToggler />
+            </div>
+            <div className={styles.avatarWrapper}>
+              <Avatar />
+            </div>
           </div>
         </div>
-        <div className={styles.rightContainer}>
-          <div className={styles.themeTogglerWrapper}>
-            <ThemeToggler />
-          </div>
-          <div className={styles.avatarWrapper}>
-            <Avatar />
-          </div>
-        </div>
-      </div>
 
-      <div className={styles.mainSection}>
-        <div className={styles.mainLeftContainer}>
-          <CourseSearchWindow
-            windowToggle={searchWindowToggle}
-            setWindowToggle={setSearchWindowToggle}
-          />
-          <AcademicYearList appUser={appUser} />
-        </div>
-        <div className={styles.mainRightContainer}>
-          <CourseBag />
+        <div className={styles.mainSection}>
+          <div className={styles.mainLeftContainer}>
+            <CourseSearchWindow
+              windowToggle={searchWindowToggle}
+              setWindowToggle={setSearchWindowToggle}
+            />
+            <AcademicYearList appUser={appUser} />
+          </div>
+          <div className={styles.mainRightContainer}>
+            <CourseBag />
+          </div>
         </div>
       </div>
-    </div>
+    </CourseItemDndProvider>
   );
 }
 

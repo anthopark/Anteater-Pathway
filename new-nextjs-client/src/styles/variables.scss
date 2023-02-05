@@ -120,3 +120,24 @@ $fall: #f4d0af;
 $winter: #c8dffa;
 $spring: #d5efb7;
 $summer: #a3ebe2;
+
+@mixin scrollbar-light() {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100vw;
+    background-color: $gray-5;
+  }
+}
+
+@mixin scrollbar-dark() {
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-3;
+  }
+}
