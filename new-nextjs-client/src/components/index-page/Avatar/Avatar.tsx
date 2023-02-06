@@ -18,6 +18,7 @@ import {
   defaultText,
   defaultTextDark,
   fontSizeMD,
+  gray2,
   gray3,
   gray4,
   gray5,
@@ -74,7 +75,7 @@ function Avatar() {
             fontSize={fontSizeMD}
             color={theme === 'light' ? defaultText : defaultTextDark}
             padding="6px 4px"
-            bgColor={theme === 'light' ? white1 : selectBgColorActiveDark}
+            bgColor={theme === 'light' ? white1 : gray2}
           >
             <MenuItem
               pl="12px"
