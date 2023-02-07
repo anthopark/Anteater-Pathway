@@ -1,4 +1,4 @@
-import { Course } from 'src/models/course';
+import { Course } from '@entities/course';
 
 export interface IDegreePlan {}
 

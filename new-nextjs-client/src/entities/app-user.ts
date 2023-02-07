@@ -1,6 +1,6 @@
 import { immerable } from 'immer';
 import { DegreePlan, IDegreePlan } from './degree-plan';
-import { Course, ICourse, CourseInfo } from 'src/models/course';
+import { Course, ICourse, CourseInfo } from '@entities/course';
 
 interface UpdateCourseColorParam {
   courseId: string;

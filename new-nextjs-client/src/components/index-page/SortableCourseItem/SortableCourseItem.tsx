@@ -1,5 +1,5 @@
 import styles from './SortableCourseItem.module.scss';
-import { Course } from 'src/models/course';
+import { Course } from '@entities/course';
 import classNames from 'classnames/bind';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -19,14 +19,13 @@ import {
   gray4,
   gray5,
   gray6,
-  white1,
   red2,
   red3,
   gray7,
 } from '@styles/variables';
 import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';
 import ColorPalette from './ColorPalette/ColorPalette';
-import { ICourse } from 'src/models/course';
+import { ICourse } from '@entities/course';
 
 interface Props {
   course: ICourse;
@@ -77,16 +76,8 @@ const SortableCourseItem = (props: Props) => {
     setMounted(true);
   }, []);
 
-  const deptCode = () => {
-    return props.course!.deptCode;
-  };
-
-  const num = () => {
-    return props.course!.num;
-  };
-
   const handleContainerMouseEnter = () => {
-    if (props.course.id?.startsWith('overlay')) {
+    if (props.course.id.startsWith('overlay')) {
       return setIsHover(false);
     }
     setIsHover(true);
@@ -125,12 +116,12 @@ const SortableCourseItem = (props: Props) => {
         ref={setNodeRef}
         className={cx('container', `color-${color}`, {
           dragging: isDragging,
-          'drag-overlay': props.course.id?.startsWith('overlay'),
+          'drag-overlay': props.course.id.startsWith('overlay'),
         })}
       >
         <div className={cx('dept-code-num')}>
-          <div className={cx('dept-code')}>{deptCode()}</div>
-          <div className={cx('num')}>{num()}</div>
+          <div className={cx('dept-code')}>{props.course.deptCode}</div>
+          <div className={cx('num')}>{props.course.num}</div>
         </div>
       </div>
       {isHover || isMenuOpen ? (
