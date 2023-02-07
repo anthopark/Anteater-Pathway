@@ -17,12 +17,28 @@ import { arrayMove } from '@dnd-kit/sortable';
 import useAppUser from '@hooks/useAppUser';
 import { ReactNode, useState } from 'react';
 
+interface DraggingCourse {
+  id: string;
+  deptCode: string;
+  num: string;
+  color: number;
+}
+
 function CourseItemDndProvider({ children }: { children: ReactNode }) {
   const { updateAppUser } = useAppUser();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+  const [draggingCourse, setDraggingCourse] = useState<DraggingCourse | null>(
+    null
+  );
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   const handleDragStart = (event: DragStartEvent) => {
+    setDraggingCourse({
+      id: `overlay-${event.active.id}`,
+      deptCode: event.active.data.current!.deptCode,
+      num: event.active.data.current!.num,
+      color: event.active.data.current!.color,
+    });
     setActiveId(event.active.id);
   };
 
@@ -39,10 +55,12 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
       });
     }
     setActiveId(null);
+    setDraggingCourse(null);
   };
 
   const handleDragCancel = () => {
     setActiveId(null);
+    setDraggingCourse(null);
   };
 
   return (
@@ -58,7 +76,14 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
       {children}
       <DragOverlay adjustScale>
         {activeId ? (
-          <SortableCourseItem sortableId={activeId} isInCourseBag={false} />
+          <SortableCourseItem
+            course={{
+              id: draggingCourse!.id,
+              deptCode: draggingCourse!.deptCode,
+              num: draggingCourse!.num,
+              color: draggingCourse!.color,
+            }}
+          />
         ) : null}
       </DragOverlay>
     </DndContext>

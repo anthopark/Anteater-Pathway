@@ -19,18 +19,14 @@ import {
   defaultTextDark,
   fontSizeMD,
   gray2,
-  gray3,
   gray4,
   gray5,
   gray6,
-  white1,
+  gray7,
 } from '@styles/variables';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import {
-  selectBgColorActiveDark,
-  selectOptionBgColorHoverDark,
-} from '@styles/reusable-ui-variables';
+import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { signOut as signOutIcon } from '@styles/fontawesome';
 
@@ -75,7 +71,7 @@ function Avatar() {
             fontSize={fontSizeMD}
             color={theme === 'light' ? defaultText : defaultTextDark}
             padding="6px 4px"
-            bgColor={theme === 'light' ? white1 : gray2}
+            bgColor={theme === 'light' ? gray7 : gray2}
           >
             <MenuItem
               pl="12px"

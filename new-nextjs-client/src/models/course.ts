@@ -22,19 +22,38 @@ export interface CourseInfo {
   restriction: string | null;
 }
 
-export class Course {
+export interface ICourse {
+  id: string;
+  deptCode: string;
+  num: string;
+  color: number;
+}
+
+export class Course implements ICourse {
   private _id: string;
+  public deptCode: string;
+  public num: string;
+  public title: string;
+  public unit: number | null;
+  public isVariableUnit: boolean;
+  public minUnit: number | null;
+  public maxUnit: number | null;
   public isCustomCreated: boolean = false;
   public color = 1;
-  public courseInfo: CourseInfo;
 
   constructor(courseInfo: CourseInfo, isCustomCreated: boolean) {
     this._id = nanoid();
-    this.courseInfo = courseInfo;
+    this.deptCode = courseInfo.deptCode;
+    this.num = courseInfo.num;
+    this.title = courseInfo.title;
+    this.unit = courseInfo.unit;
+    this.isVariableUnit = courseInfo.isVariableUnit;
+    this.minUnit = courseInfo.minUnit;
+    this.maxUnit = courseInfo.maxUnit;
     this.isCustomCreated = isCustomCreated;
   }
 
   public get id() {
-    return `${this.courseInfo.deptCode}-${this.courseInfo.num}-${this.color}-${this._id}`;
+    return this._id;
   }
 }
