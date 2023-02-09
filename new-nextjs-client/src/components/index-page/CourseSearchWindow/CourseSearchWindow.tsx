@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
+import ResultWindow from './ResultWindow/ResultWindow';
+import { CourseResponse } from 'src/models/course-response';
+
+const cx = classNames.bind(styles);
 
 interface Props {
   windowToggle: boolean;
@@ -14,6 +18,11 @@ interface Props {
 }
 
 const CourseSearchWindow = (props: Props) => {
+  const [searchResults, setSearchResults] = useState<CourseResponse[] | null>(
+    null
+  );
+  const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
+
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -36,8 +45,6 @@ const CourseSearchWindow = (props: Props) => {
     setMounted(true);
   }, []);
 
-  const cx = classNames.bind(styles);
-
   if (!mounted) {
     return null;
   }
@@ -52,7 +59,7 @@ const CourseSearchWindow = (props: Props) => {
       <div ref={contentRef} className={styles.contentWrapper}>
         <div className={styles.container}>
           {/* top left */}
-          <SearchControl />
+          <SearchControl setSearchResults={setSearchResults} />
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
@@ -64,10 +71,28 @@ const CourseSearchWindow = (props: Props) => {
             </AppButton>
           </div>
           {/* row 2 column 1 */}
-          <div className={styles.leftPane}></div>
+          <div className={cx('result-window-wrapper')}>
+            <ResultWindow
+              searchResults={searchResults}
+              selectedIndices={selectedIndices}
+              setSelectedIndices={setSelectedIndices}
+            />
+          </div>
 
           {/* row 2 column 2 */}
           <div className={styles.rightPane}></div>
+
+          <div className={cx('footer-right')}>
+            <AppButton
+              isDisabled
+              kind="primary"
+              leftIcon={<FontAwesomeIcon icon={plus} />}
+            >
+              Add to Course Bag
+            </AppButton>
+          </div>
+
+          <div className={cx('footer-left')}></div>
         </div>
       </div>
     </animated.div>

@@ -1,0 +1,11 @@
+.container {
+  height: 100%;
+  border-radius: $br-md;
+  border: 1px solid $gray-4;
+}
+
+[data-theme='dark'] {
+  .container {
+    border-color: $gray-3;
+  }
+}

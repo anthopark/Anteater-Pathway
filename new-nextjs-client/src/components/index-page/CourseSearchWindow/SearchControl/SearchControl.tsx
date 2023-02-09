@@ -12,6 +12,7 @@ import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect'
 import AppInput from '@components/shared/AppInput/AppInput';
 import DEFAULT_DEPARTMENTS_DATA from 'src/data/departments.json';
 import Fuse from 'fuse.js';
+import { CourseResponse } from 'src/models/course-response';
 
 const fuseOptions = {
   keys: ['value', 'label'],
@@ -24,7 +25,9 @@ interface DeptOption {
   value: string;
 }
 
-interface Props {}
+interface Props {
+  setSearchResults: (searchResults: CourseResponse[]) => void;
+}
 
 function SearchControl(props: Props) {
   const [deptData, setDeptData] = useState(
