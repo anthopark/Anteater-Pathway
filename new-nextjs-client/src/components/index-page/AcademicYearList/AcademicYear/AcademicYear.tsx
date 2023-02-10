@@ -102,7 +102,7 @@ const AcademicYear = (props: Props) => {
           props.year + 1
         }`} year?`}
         actionButtonName="Delete"
-        actionKind="primary"
+        actionKind="danger"
         actionFn={handleDelete}
       />
       <AccordionItem
