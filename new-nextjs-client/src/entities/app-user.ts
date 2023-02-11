@@ -1,12 +1,22 @@
 import { immerable } from 'immer';
 import { DegreePlan, IDegreePlan } from './degree-plan';
-import { Course, CourseInfo } from 'src/models/course';
+import { Course, ICourse, CourseInfo } from '@entities/course';
 
+interface UpdateCourseColorParam {
+  courseId: string;
+  newColor: number;
+  isInCourseBag: boolean;
+}
 interface IAppUser {
   addYear: (year: number) => void;
-  courseBag: Course[];
+  courseBag: ICourse[];
   degreePlan: IDegreePlan;
   removeYear: (year: number) => void;
+  updateCourseColor: ({
+    courseId,
+    isInCourseBag,
+    newColor,
+  }: UpdateCourseColorParam) => void;
   years: number[];
 }
 
@@ -16,7 +26,7 @@ class AppUser implements IAppUser {
   private _years: number[] = [];
   private _authToken: string | null = null;
   private _degreePlan = new DegreePlan();
-  private _courseBag: Course[] = [
+  private _courseBag: ICourse[] = [
     new Course({ deptCode: 'IN4MATX', num: '121' } as CourseInfo, true),
     new Course({ deptCode: 'COMPSCI', num: '171' } as CourseInfo, true),
     new Course({ deptCode: 'ECON', num: '1A' } as CourseInfo, true),
@@ -31,7 +41,7 @@ class AppUser implements IAppUser {
     return this._courseBag;
   }
 
-  public set courseBag(newBag: Course[]) {
+  public set courseBag(newBag: ICourse[]) {
     this._courseBag = newBag;
   }
 
@@ -55,9 +65,19 @@ class AppUser implements IAppUser {
     }
   }
 
-  public addToCourseBag(courses: Course[]) {
+  public addToCourseBag(courses: ICourse[]) {
     for (const course of courses) {
       this._courseBag.push(course);
+    }
+  }
+
+  public updateCourseColor({
+    courseId,
+    isInCourseBag,
+    newColor,
+  }: UpdateCourseColorParam) {
+    if (isInCourseBag) {
+      this._updateColorInCourseBag(courseId, newColor);
     }
   }
 
@@ -70,6 +90,16 @@ class AppUser implements IAppUser {
     }
 
     this._years.push(twoDigitCurrentYear);
+  }
+
+  private _updateColorInCourseBag(courseId: string, newColor: number) {
+    const indexToUpdate = this._courseBag.findIndex(
+      (course) => course.id === courseId
+    );
+
+    if (indexToUpdate !== -1) {
+      this._courseBag[indexToUpdate].color = newColor;
+    }
   }
 }
 
