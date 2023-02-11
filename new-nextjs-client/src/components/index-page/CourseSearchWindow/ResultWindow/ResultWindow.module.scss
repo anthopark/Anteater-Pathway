@@ -2,6 +2,14 @@
   height: 100%;
   border-radius: $br-md;
   border: 1px solid $gray-4;
+
+  padding: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  column-gap: 1.5rem;
+  row-gap: auto;
 }
 
 [data-theme='dark'] {

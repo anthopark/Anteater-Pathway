@@ -42,6 +42,14 @@ const CourseSearchWindow = (props: Props) => {
   }, [springApi, contentRef, props.windowToggle]);
 
   useEffect(() => {
+    setSearchResults([
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+    ]);
     setMounted(true);
   }, []);
 
