@@ -1,5 +1,5 @@
 import styles from './SortableCourseItem.module.scss';
-import { Course } from 'src/models/course';
+import { Course } from '@entities/course';
 import classNames from 'classnames/bind';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -19,16 +19,19 @@ import {
   gray4,
   gray5,
   gray6,
-  white1,
   red2,
   red3,
+  gray7,
 } from '@styles/variables';
 import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';
+import ColorPalette from './ColorPalette/ColorPalette';
+import { ICourse } from '@entities/course';
 
 interface Props {
-  course?: Course;
-  isInCourseBag: boolean;
-  sortableId?: UniqueIdentifier;
+  course: ICourse;
+  isInCourseBag?: boolean;
+  onColorSelect?: (newColor: number) => void;
+  onRemove?: () => void;
 }
 
 const cx = classNames.bind(styles);
@@ -41,9 +44,17 @@ const SortableCourseItem = (props: Props) => {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: props.sortableId ?? props.course!.id });
+  } = useSortable({
+    id: props.course.id,
+    data: {
+      deptCode: props.course.deptCode,
+      num: props.course.num,
+      color: props.course.color,
+    },
+  });
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const [color, setColor] = useState(props.course.color);
   const [isHover, setIsHover] = useState(false);
   const [isMenuTriggerHover, setIsMenuTriggerHover] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,22 +76,8 @@ const SortableCourseItem = (props: Props) => {
     setMounted(true);
   }, []);
 
-  const deptCode = () => {
-    if (props.sortableId) {
-      return (props.sortableId as string).split('-')[0];
-    }
-    return props.course!.courseInfo.deptCode;
-  };
-
-  const num = () => {
-    if (props.sortableId) {
-      return (props.sortableId as string).split('-')[1];
-    }
-    return props.course!.courseInfo.num;
-  };
-
   const handleContainerMouseEnter = () => {
-    if (Boolean(props.sortableId)) {
+    if (props.course.id.startsWith('overlay')) {
       return setIsHover(false);
     }
     setIsHover(true);
@@ -100,7 +97,9 @@ const SortableCourseItem = (props: Props) => {
 
   const handleDetailsClick = () => {};
 
-  const handleRemoveClick = () => {};
+  const handleRemoveClick = () => {
+    props.onRemove?.();
+  };
 
   if (!mounted) {
     return null;
@@ -115,14 +114,14 @@ const SortableCourseItem = (props: Props) => {
       <div
         style={style}
         ref={setNodeRef}
-        className={cx('container', {
+        className={cx('container', `color-${color}`, {
           dragging: isDragging,
-          'drag-overlay': Boolean(props.sortableId),
+          'drag-overlay': props.course.id.startsWith('overlay'),
         })}
       >
         <div className={cx('dept-code-num')}>
-          <div className={cx('dept-code')}>{deptCode()}</div>
-          <div className={cx('num')}>{num()}</div>
+          <div className={cx('dept-code')}>{props.course.deptCode}</div>
+          <div className={cx('num')}>{props.course.num}</div>
         </div>
       </div>
       {isHover || isMenuOpen ? (
@@ -168,15 +167,22 @@ const SortableCourseItem = (props: Props) => {
               </div>
             </MenuButton>
             <MenuList
-              w={'10rem'}
               mt="5px"
               borderRadius={borderRadiusSM}
               borderColor={theme === 'light' ? gray5 : gray4}
               fontSize={fontSizeMD}
               color={theme === 'light' ? defaultText : defaultTextDark}
-              padding="6px 4px"
-              bgColor={theme === 'light' ? white1 : gray2}
+              padding=".6rem .4rem"
+              bgColor={theme === 'light' ? gray7 : gray2}
+              minW={'12rem'}
             >
+              <div className={cx('color-palette-wrapper')}>
+                <ColorPalette
+                  onColorSelect={props.onColorSelect!}
+                  selectedColor={props.course.color}
+                  setColor={setColor}
+                />
+              </div>
               <MenuItem
                 pl="12px"
                 borderRadius={borderRadiusXS}

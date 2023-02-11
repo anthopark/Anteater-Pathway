@@ -17,7 +17,6 @@ $course-bg-1-dt: #9e9ebc;
 .container {
   max-width: 20rem;
   height: 3.6rem;
-  background-color: $course-1;
   border-radius: $br-sm;
   padding: 0rem 1rem;
   user-select: none;
@@ -28,6 +27,54 @@ $course-bg-1-dt: #9e9ebc;
 
   &.drag-overlay {
     cursor: grabbing;
+  }
+
+  &.color-1 {
+    background-color: $course-1;
+  }
+
+  &.color-2 {
+    background-color: $course-2;
+  }
+
+  &.color-3 {
+    background-color: $course-3;
+  }
+
+  &.color-4 {
+    background-color: $course-4;
+  }
+
+  &.color-5 {
+    background-color: $course-5;
+  }
+
+  &.color-6 {
+    background-color: $course-6;
+  }
+
+  &.color-7 {
+    background-color: $course-7;
+  }
+
+  &.color-8 {
+    background-color: $course-8;
+  }
+
+  &.color-9 {
+    background-color: $course-9;
+  }
+
+  &.color-10 {
+    background-color: $course-10;
+  }
+
+  &.color-11 {
+    background-color: $course-11;
+  }
+
+  &.color-12 {
+    background-color: $course-12;
   }
 }
 
@@ -72,6 +119,11 @@ $course-bg-1-dt: #9e9ebc;
   margin-right: 0.3rem;
 }
 
+.color-palette-wrapper {
+  border-bottom: 1px solid $gray-5;
+  margin-bottom: 0.6rem;
+}
+
 .dept-code-num {
   height: 100%;
   display: flex;
@@ -85,7 +137,53 @@ $course-bg-1-dt: #9e9ebc;
 
 [data-theme='dark'] {
   .container {
-    background-color: $course-1-dt;
+    &.color-1 {
+      background-color: $course-1-dt;
+    }
+
+    &.color-2 {
+      background-color: $course-2-dt;
+    }
+
+    &.color-3 {
+      background-color: $course-3-dt;
+    }
+
+    &.color-4 {
+      background-color: $course-4-dt;
+    }
+
+    &.color-5 {
+      background-color: $course-5-dt;
+    }
+
+    &.color-6 {
+      background-color: $course-6-dt;
+    }
+
+    &.color-7 {
+      background-color: $course-7-dt;
+    }
+
+    &.color-8 {
+      background-color: $course-8-dt;
+    }
+
+    &.color-9 {
+      background-color: $course-9-dt;
+    }
+
+    &.color-10 {
+      background-color: $course-10-dt;
+    }
+
+    &.color-11 {
+      background-color: $course-11-dt;
+    }
+
+    &.color-12 {
+      background-color: $course-12-dt;
+    }
   }
 
   .menu-trigger {
@@ -93,6 +191,10 @@ $course-bg-1-dt: #9e9ebc;
     &.menu-trigger-hover {
       background-color: $gray-4;
     }
+  }
+
+  .color-palette-wrapper {
+    border-bottom: 1px solid $gray-4;
   }
 
   .dept-code-num {
