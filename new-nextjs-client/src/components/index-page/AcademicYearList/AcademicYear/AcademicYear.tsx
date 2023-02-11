@@ -21,6 +21,7 @@ import { trash } from '@styles/fontawesome';
 import useAppUser from '@hooks/useAppUser';
 import { useSpring, animated } from '@react-spring/web';
 import { IAppUser } from '@entities/app-user';
+import AppModal from '@components/shared/AppModal/AppModal';
 
 interface Props {
   appUser: IAppUser;
@@ -35,6 +36,8 @@ const cx = classNames.bind(styles);
 
 const AcademicYear = (props: Props) => {
   const { updateAppUser } = useAppUser();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [openedIndex, setOpenedIndex] = useState<number[]>([]);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -85,8 +88,23 @@ const AcademicYear = (props: Props) => {
     updateAppUser((draft) => draft.removeYear(props.year));
   };
 
+  const onClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Accordion allowToggle index={openedIndex} onChange={handleExpand}>
+      <AppModal
+        isOpen={isModalOpen}
+        onClose={onClose}
+        headerTitle={`Delete ${`${props.year}-${props.year + 1}`} year?`}
+        bodyText={`Are you sure you want to delete ${`${props.year}-${
+          props.year + 1
+        }`} year?`}
+        actionButtonName="Delete"
+        actionKind="danger"
+        actionFn={handleDelete}
+      />
       <AccordionItem
         bgColor={theme === 'light' ? bgColor2 : bgColorDark2}
         border="none"
@@ -115,7 +133,7 @@ const AcademicYear = (props: Props) => {
               <FontAwesomeIcon
                 className={cx('trashIcon')}
                 icon={trash}
-                onClick={handleDelete}
+                onClick={() => setIsModalOpen(true)}
               />
             </animated.div>
           ) : null}

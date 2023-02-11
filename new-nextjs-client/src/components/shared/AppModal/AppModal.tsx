@@ -102,7 +102,7 @@ function AppModal({
             </div>
             <AppButton
               kind={actionKind}
-              onClick={onClose}
+              onClick={handleActionConfirm}
               fontSize={fontSizeMD}
             >
               {actionButtonName}
