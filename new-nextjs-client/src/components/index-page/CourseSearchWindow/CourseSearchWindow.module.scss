@@ -1,6 +1,5 @@
 .animatedDiv {
   background-color: $bg-color-2;
-  width: 100%;
   border-radius: $br-md;
   overflow: hidden;
 
@@ -8,10 +7,9 @@
     font-size: $fs-md;
 
     .container {
-      height: 100%;
       padding: 2rem;
       display: grid;
-      grid-template-columns: 6fr 4fr;
+      grid-template-columns: 6.5fr 3.5fr;
       grid-template-rows: auto 30rem auto;
 
       .customBtnWrapper {
@@ -24,14 +22,14 @@
 }
 
 .result-window-wrapper {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   padding-right: 2rem;
 }
 
 .footer-right {
   display: flex;
   justify-content: flex-end;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   padding-right: 2rem;
 }
 

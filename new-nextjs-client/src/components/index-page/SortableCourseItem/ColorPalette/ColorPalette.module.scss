@@ -1,5 +1,3 @@
-$selected-border-color-dt: #ff8c38;
-
 .container {
   padding: 0.7rem 0.5rem 1.3rem 0.5rem;
   display: grid;
@@ -14,8 +12,7 @@ $selected-border-color-dt: #ff8c38;
   height: 1.7rem;
   cursor: pointer;
   &.selected {
-    border: 1px solid $blue-2;
-    box-shadow: 0 0 0 2px $blue-2;
+    @include selected-border(1px, 1px);
   }
   &.color-1 {
     background-color: $course-1;
@@ -58,8 +55,7 @@ $selected-border-color-dt: #ff8c38;
 [data-theme='dark'] {
   .color-btn {
     &.selected {
-      border: 1px solid $accent-1;
-      box-shadow: 0 0 0 2px $selected-border-color-dt;
+      @include selected-border-dt(1px, 1px);
     }
     &.color-1 {
       background-color: $course-1-dt;

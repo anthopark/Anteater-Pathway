@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
-    additionalData: `@import "src/styles/variables.scss";`,
+    additionalData: `@import "src/styles/variables.scss";@import "src/styles/mixins.scss";`,
   },
 };
 
