@@ -9,6 +9,17 @@
   font-size: $fs-lg;
   letter-spacing: $letter-spacing-lg;
   color: $secondary-text;
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-button {
+  font-size: $fs-md;
+  margin-right: 4%;
+}
+
+.eraser-icon {
+  margin-right: 0.4rem;
 }
 
 .course-box {
