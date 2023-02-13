@@ -40,6 +40,15 @@
   @include scrollbar-light();
 }
 
+.total-unit {
+  font-size: $fs-md;
+  color: $secondary-text;
+
+  text-align: end;
+  margin-right: 0.4rem;
+  margin-top: 1rem;
+}
+
 .course-item-wrapper {
   width: 47%;
   margin-right: 0.3rem;
@@ -70,5 +79,9 @@
   }
   .course-box {
     @include scrollbar-dark();
+  }
+
+  .total-unit {
+    color: $secondary-text-dt;
   }
 }

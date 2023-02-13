@@ -6,7 +6,7 @@ import SortableCourseItem from '../SortableCourseItem/SortableCourseItem';
 import { eraser } from '@styles/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AppModal from '@components/shared/AppModal/AppModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {}
 
@@ -15,6 +15,11 @@ const cx = classNames.bind(styles);
 function CourseBag(props: Props) {
   const { appUser, updateAppUser } = useAppUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [totalUnit, setTotalUnit] = useState(0);
+
+  useEffect(() => {
+    updateTotalUnit();
+  }, [appUser.courseBag]);
 
   const handleColorSelect = (courseId: string) => {
     return (colorNumber: number) => {
@@ -36,6 +41,17 @@ function CourseBag(props: Props) {
 
   const handleCourseBagClear = () => {
     updateAppUser((draft) => draft.clearCourseBag());
+  };
+
+  const updateTotalUnit = () => {
+    let totalCount = 0;
+
+    appUser.courseBag.forEach((course) => {
+      if (course.unit !== null) {
+        totalCount += course.unit;
+      }
+    });
+    setTotalUnit(totalCount);
   };
 
   const onClose = () => {
@@ -83,6 +99,9 @@ function CourseBag(props: Props) {
           ))}
         </SortableContext>
       </div>
+      {appUser.courseBag.length > 0 ? (
+        <div className={cx('total-unit')}>{totalUnit} units</div>
+      ) : null}
     </div>
   );
 }
