@@ -26,7 +26,7 @@ function CourseBag(props: Props) {
 
   const handleCourseRemove = (courseId: string) => {
     return () => {
-      console.log('delete', courseId);
+      updateAppUser((draft) => draft.removeCourseItem(courseId, true));
     };
   };
 
