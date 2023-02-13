@@ -10,7 +10,7 @@ interface UpdateCourseColorParam {
 interface IAppUser {
   addYear: (year: number) => void;
   courseBag: ICourse[];
-  emptyCourseBag: () => void;
+  clearCourseBag: () => void;
   degreePlan: IDegreePlan;
   removeYear: (year: number) => void;
   updateCourseColor: ({
@@ -72,7 +72,7 @@ class AppUser implements IAppUser {
     }
   }
 
-  public emptyCourseBag() {
+  public clearCourseBag() {
     this._courseBag = [];
   }
 

@@ -5,6 +5,8 @@ import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import SortableCourseItem from '../SortableCourseItem/SortableCourseItem';
 import { eraser } from '@styles/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AppModal from '@components/shared/AppModal/AppModal';
+import { useState } from 'react';
 
 interface Props {}
 
@@ -12,6 +14,7 @@ const cx = classNames.bind(styles);
 
 function CourseBag(props: Props) {
   const { appUser, updateAppUser } = useAppUser();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleColorSelect = (courseId: string) => {
     return (colorNumber: number) => {
@@ -31,16 +34,32 @@ function CourseBag(props: Props) {
     };
   };
 
-  const handleCourseBagEmpty = () => {
-    updateAppUser((draft) => draft.emptyCourseBag());
+  const handleCourseBagClear = () => {
+    updateAppUser((draft) => draft.clearCourseBag());
+  };
+
+  const onClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className={cx('container')}>
+      <AppModal
+        isOpen={isModalOpen}
+        onClose={onClose}
+        headerTitle="Clear course bag"
+        bodyText="Are you sure you want to clear the course bag?"
+        actionButtonName="Clear"
+        actionKind="danger"
+        actionFn={handleCourseBagClear}
+      />
       <div className={cx('heading')}>
         <span>Course bag</span>
         {appUser.courseBag.length > 0 ? (
-          <button onClick={handleCourseBagEmpty} className={cx('clear-button')}>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className={cx('clear-button')}
+          >
             <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
             <span>Clear</span>
           </button>
