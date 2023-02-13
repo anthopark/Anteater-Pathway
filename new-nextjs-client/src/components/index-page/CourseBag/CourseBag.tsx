@@ -4,7 +4,6 @@ import useAppUser from '@hooks/useAppUser';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import SortableCourseItem from '../SortableCourseItem/SortableCourseItem';
 import { eraser } from '@styles/fontawesome';
-import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Props {}
@@ -32,14 +31,20 @@ function CourseBag(props: Props) {
     };
   };
 
+  const handleCourseBagEmpty = () => {
+    updateAppUser((draft) => draft.emptyCourseBag());
+  };
+
   return (
     <div className={cx('container')}>
       <div className={cx('heading')}>
         <span>Course bag</span>
-        <button className={cx('empty-button')}>
-          <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
-          <span>Empty</span>
-        </button>
+        {appUser.courseBag.length > 0 ? (
+          <button onClick={handleCourseBagEmpty} className={cx('clear-button')}>
+            <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
+            <span>Clear</span>
+          </button>
+        ) : null}
       </div>
 
       <div className={cx('course-box')}>

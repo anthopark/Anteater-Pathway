@@ -13,9 +13,14 @@
   justify-content: space-between;
 }
 
-.empty-button {
+.clear-button {
   font-size: $fs-md;
-  margin-right: 4%;
+  margin-right: 0.5rem;
+  color: $gray-4;
+  &:hover {
+    color: $red-4;
+  }
+  transition: color 250ms;
 }
 
 .eraser-icon {
@@ -58,6 +63,11 @@
     color: $secondary-text-dt;
   }
 
+  .clear-button {
+    &:hover {
+      color: $red-2;
+    }
+  }
   .course-box {
     @include scrollbar-dark();
   }
