@@ -101,7 +101,7 @@ function CourseBag(props: Props) {
       </div>
       {appUser.courseBag.length > 0 ? (
         <div className={cx('total-unit')}>
-          {totalUnit} {totalUnit > 1 ? 'units' : 'unit'}
+          {totalUnit} {totalUnit === 1 ? 'unit' : 'units'}
         </div>
       ) : null}
     </div>
