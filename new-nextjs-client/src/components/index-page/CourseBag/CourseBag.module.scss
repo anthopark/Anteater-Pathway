@@ -9,6 +9,22 @@
   font-size: $fs-lg;
   letter-spacing: $letter-spacing-lg;
   color: $secondary-text;
+  display: flex;
+  justify-content: space-between;
+}
+
+.clear-button {
+  font-size: $fs-md;
+  margin-right: 0.5rem;
+  color: $gray-4;
+  &:hover {
+    color: $red-4;
+  }
+  transition: color 250ms;
+}
+
+.eraser-icon {
+  margin-right: 0.4rem;
 }
 
 .course-box {
@@ -22,6 +38,15 @@
   overflow-x: hidden;
 
   @include scrollbar-light();
+}
+
+.total-unit {
+  font-size: $fs-md;
+  color: $secondary-text;
+
+  text-align: end;
+  margin-right: 0.4rem;
+  margin-top: 1rem;
 }
 
 .course-item-wrapper {
@@ -47,7 +72,16 @@
     color: $secondary-text-dt;
   }
 
+  .clear-button {
+    &:hover {
+      color: $red-2;
+    }
+  }
   .course-box {
     @include scrollbar-dark();
+  }
+
+  .total-unit {
+    color: $secondary-text-dt;
   }
 }
