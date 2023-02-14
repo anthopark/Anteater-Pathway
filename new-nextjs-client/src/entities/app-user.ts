@@ -13,6 +13,7 @@ interface IAppUser {
   clearCourseBag: () => void;
   degreePlan: IDegreePlan;
   removeYear: (year: number) => void;
+  removeCourseItem: (courseId: string, isInCourseBag: boolean) => void;
   updateCourseColor: ({
     courseId,
     isInCourseBag,
@@ -80,6 +81,14 @@ class AppUser implements IAppUser {
 
   public clearCourseBag() {
     this._courseBag = [];
+  }
+
+  public removeCourseItem(courseId: string, isInCourseBag: boolean) {
+    if (isInCourseBag) {
+      this._courseBag = this.courseBag.filter(
+        (course) => course.id !== courseId
+      );
+    }
   }
 
   public updateCourseColor({
