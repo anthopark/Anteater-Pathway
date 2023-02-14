@@ -100,7 +100,9 @@ function CourseBag(props: Props) {
         </SortableContext>
       </div>
       {appUser.courseBag.length > 0 ? (
-        <div className={cx('total-unit')}>{totalUnit} units</div>
+        <div className={cx('total-unit')}>
+          {totalUnit} {totalUnit > 1 ? 'units' : 'unit'}
+        </div>
       ) : null}
     </div>
   );
