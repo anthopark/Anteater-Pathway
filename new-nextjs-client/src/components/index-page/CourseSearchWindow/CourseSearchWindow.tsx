@@ -7,7 +7,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
-
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  Button,
+} from '@chakra-ui/react';
+import {
+  borderRadiusSM,
+  defaultText,
+  defaultTextDark,
+  fontSizeMD,
+  gray2,
+  gray4,
+  gray5,
+  gray7,
+} from '@styles/variables';
 interface Props {
   windowToggle: boolean;
   setWindowToggle: (value: boolean) => void;
@@ -56,12 +76,32 @@ const CourseSearchWindow = (props: Props) => {
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
-            <AppButton
-              kind="secondary"
-              leftIcon={<FontAwesomeIcon icon={plus} />}
-            >
-              Custom
-            </AppButton>
+            <Menu offset={[-80, 9]}>
+              <MenuButton>
+                <AppButton
+                  kind="secondary"
+                  leftIcon={<FontAwesomeIcon icon={plus} />}
+                >
+                  Custom
+                </AppButton>
+              </MenuButton>
+
+              <MenuList
+                borderRadius={borderRadiusSM}
+                borderColor={theme === 'light' ? gray5 : gray4}
+                fontSize={fontSizeMD}
+                color={theme === 'light' ? defaultText : defaultTextDark}
+                padding=".6rem .4rem"
+                bgColor={theme === 'light' ? gray7 : gray2}
+              >
+                <MenuItem>
+                  <span>Fluffybuns the Destroyer</span>
+                </MenuItem>
+                <MenuItem>
+                  <span>Simon the pensive</span>
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </div>
           {/* row 2 column 1 */}
           <div className={styles.leftPane}></div>
