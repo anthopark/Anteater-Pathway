@@ -83,14 +83,13 @@ const CourseSearchWindow = (props: Props) => {
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
-            <Menu offset={[-80, 9]}>
-              <MenuButton>
-                <AppButton
-                  kind="secondary"
-                  leftIcon={<FontAwesomeIcon icon={plus} />}
-                >
-                  Custom
-                </AppButton>
+            <Menu offset={[0, 10]}>
+              <MenuButton
+                as={AppButton}
+                kind="secondary"
+                leftIcon={<FontAwesomeIcon icon={plus} />}
+              >
+                Custom
               </MenuButton>
 
               <MenuList
