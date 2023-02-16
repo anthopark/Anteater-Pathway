@@ -7,17 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button,
-} from '@chakra-ui/react';
+import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import {
   borderRadiusSM,
   defaultText,
@@ -28,6 +19,14 @@ import {
   gray5,
   gray7,
 } from '@styles/variables';
+
+type Inputs = {
+  department: string;
+  number: number;
+  unit: number;
+  title: string;
+};
+
 interface Props {
   windowToggle: boolean;
   setWindowToggle: (value: boolean) => void;
@@ -41,6 +40,14 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   useEffect(() => {
     if (contentRef.current !== null) {
@@ -94,12 +101,32 @@ const CourseSearchWindow = (props: Props) => {
                 padding=".6rem .4rem"
                 bgColor={theme === 'light' ? gray7 : gray2}
               >
-                <MenuItem>
-                  <span>Fluffybuns the Destroyer</span>
-                </MenuItem>
-                <MenuItem>
-                  <span>Simon the pensive</span>
-                </MenuItem>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className={cx('input-form')}>
+                    <label>Department</label>
+                    <input {...register('department')} />
+                  </div>
+
+                  <div>
+                    <div className={cx('input-form')}>
+                      <label>Number</label>
+                      <input {...register('number')} />
+                    </div>
+                    <div className={cx('input-form')}>
+                      <label>Unit</label>
+                      <input {...register('unit')} />
+                    </div>
+                  </div>
+
+                  <div className={cx('input-form')}>
+                    <label>Title</label>
+                    <input {...register('title')} />
+                  </div>
+
+                  <AppButton kind="primary" type="submit">
+                    Create
+                  </AppButton>
+                </form>
               </MenuList>
             </Menu>
           </div>
