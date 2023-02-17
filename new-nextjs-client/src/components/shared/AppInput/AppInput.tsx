@@ -20,16 +20,17 @@ import {
   gray2,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 interface Props {
   onChange?: (newValue: any) => void;
   value?: any;
+  id?: string | undefined;
   placeholder: string;
 }
 
-function AppInput(props: Props) {
-  const { onChange, value, ...rest } = props;
+const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
+  const { onChange, value, id, ...rest } = props;
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
@@ -43,6 +44,7 @@ function AppInput(props: Props) {
 
   return (
     <Input
+      ref={ref}
       autoComplete="off"
       bgColor={theme === 'light' ? white1 : inputBgColorDark}
       borderRadius={borderRadiusSM}
@@ -54,6 +56,7 @@ function AppInput(props: Props) {
       height={controlHeightMD}
       onChange={onChange}
       value={value}
+      id={id}
       borderColor={theme === 'light' ? gray4 : gray3}
       _hover={{
         borderColor: theme === 'light' ? gray2 : gray4,
@@ -76,6 +79,6 @@ function AppInput(props: Props) {
       {...rest}
     />
   );
-}
+});
 
 export default AppInput;

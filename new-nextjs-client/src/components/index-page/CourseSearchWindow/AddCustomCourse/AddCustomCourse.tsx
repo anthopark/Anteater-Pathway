@@ -1,6 +1,7 @@
 import styles from './AddCustomCourse.module.scss';
 import classNames from 'classnames';
 import { useTheme } from 'next-themes';
+import AppInput from '@components/shared/AppInput/AppInput';
 
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,7 +36,7 @@ const AddCustomCourse = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  const cx = classNames.bind(styles);
+
   return (
     <Menu offset={[0, 10]}>
       <MenuButton
@@ -55,25 +56,42 @@ const AddCustomCourse = () => {
         bgColor={theme === 'light' ? gray7 : gray2}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={cx('input-form')}>
-            <label>Department</label>
-            <input {...register('department')} />
+          <div className={styles.inputForm}>
+            <label className={styles.inputLabel}>Department</label>
+
+            <AppInput
+              id="department"
+              placeholder="Ex. Econ, History"
+              {...register('department')}
+            />
           </div>
 
           <div>
-            <div className={cx('input-form')}>
-              <label>Number</label>
-              <input {...register('number')} />
+            <div className={styles.inputForm}>
+              <label className={styles.inputLabel}>Number</label>
+              <AppInput
+                id="number"
+                placeholder="Ex. 101, 1A"
+                {...register('number')}
+              />
             </div>
-            <div className={cx('input-form')}>
-              <label>Unit</label>
-              <input {...register('unit')} />
+            <div className={styles.inputForm}>
+              <label className={styles.inputLabel}>Unit</label>
+              <AppInput
+                id="unit"
+                placeholder="Ex. 2, 4"
+                {...register('unit')}
+              />
             </div>
           </div>
 
-          <div className={cx('input-form')}>
-            <label>Title</label>
-            <input {...register('title')} />
+          <div className={styles.inputForm}>
+            <label className={styles.inputLabel}>Title</label>
+            <AppInput
+              id="title"
+              placeholder="Ex. Basic statistics"
+              {...register('title')}
+            />
           </div>
 
           <AppButton kind="primary" type="submit">
