@@ -12,14 +12,22 @@ import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect'
 import AppInput from '@components/shared/AppInput/AppInput';
 import DEFAULT_DEPARTMENT_DATA from 'src/data/default-department-data.json';
 import Fuse from 'fuse.js';
+import { getAllDepartments } from 'src/api/course';
 
 const fuseOptions = {
   keys: ['value', 'label'],
   threshold: 0.3,
 };
-let fuse: Fuse<DeptOption>;
+let fuse: Fuse<SelectOption>;
 
-interface DeptOption {
+const mapDeptOptions = (deptData: ResponseModel.Department[]) => {
+  return deptData.map((dept) => ({
+    label: `${dept.name} (${dept.code})`,
+    value: dept.code,
+  }));
+};
+
+interface SelectOption {
   label: string;
   value: string;
 }
@@ -32,7 +40,7 @@ function SearchControl(props: Props) {
   const [deptData, setDeptData] = useState<ResponseModel.Department[]>(
     DEFAULT_DEPARTMENT_DATA
   );
-  const [selectOptions, setSelectOptions] = useState<DeptOption[]>([]);
+  const [selectOptions, setSelectOptions] = useState<SelectOption[]>([]);
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectInputValue, setSelectInputValue] = useState<string>('');
   const [inputValue, setInputValue] = useState<string | null>(null);
@@ -41,27 +49,29 @@ function SearchControl(props: Props) {
   const { theme } = useTheme();
 
   useEffect(() => {
-    // TODO: load dept data from BE and setDeptData
-    const deptOptions = deptData.map((dept) => ({
-      label: `${dept.name} (${dept.code})`,
-      value: dept.code,
-    }));
-    setSelectOptions(deptOptions);
-
-    const fuseIndex = Fuse.createIndex(fuseOptions.keys, deptOptions);
-    fuse = new Fuse(deptOptions, fuseOptions, fuseIndex);
-
     setMounted(true);
+
+    let deptSelectOptions: SelectOption[];
+
+    getAllDepartments()
+      .then((deptData) => {
+        deptSelectOptions = mapDeptOptions(deptData);
+        setDeptData(deptData);
+      })
+      .catch(() => {
+        deptSelectOptions = mapDeptOptions(DEFAULT_DEPARTMENT_DATA);
+      })
+      .finally(() => {
+        setSelectOptions(deptSelectOptions);
+
+        const fuseIndex = Fuse.createIndex(fuseOptions.keys, deptSelectOptions);
+        fuse = new Fuse(deptSelectOptions, fuseOptions, fuseIndex);
+      });
   }, []);
 
   useEffect(() => {
     if (selectInputValue === '') {
-      return setSelectOptions(
-        deptData.map((dept) => ({
-          label: `${dept.name} (${dept.code})`,
-          value: dept.code,
-        }))
-      );
+      return setSelectOptions(mapDeptOptions(deptData));
     }
 
     const fuseSearchResult = fuse.search(selectInputValue);
@@ -99,7 +109,7 @@ function SearchControl(props: Props) {
           inputValue={selectInputValue}
           isClearable
           options={selectOptions}
-          onChange={(newValue: DeptOption) => {
+          onChange={(newValue: SelectOption) => {
             setSelectValue(newValue?.value);
           }}
           onInputChange={(newInputValue) => {
