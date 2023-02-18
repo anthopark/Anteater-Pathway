@@ -2,18 +2,16 @@ import * as functions from 'firebase-functions/v2';
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { repository } from './firestore.service';
+import * as apicache from 'apicache';
 
 export const plannerCourseRouter = express.Router();
 
-interface AllDepartmentsResponse {
-  departmentCount: number;
-  departments: {
-    name: string;
-    code: string;
-  }[];
+interface Department {
+  name: string;
+  code: string;
 }
 
-interface CourseResponse {
+interface Course {
   deptCode: string;
   num: string;
   title: string;
@@ -35,18 +33,20 @@ interface CourseResponse {
   restriction: string | null;
 }
 
-interface AllAttributesResponse {
-  attributeCount: number;
-  attributes: {
-    name: string;
-    value: string;
-    ordinal: number;
-  }[];
+interface Attribute {
+  name: string;
+  value: string;
+  ordinal: number;
 }
+
+const cache = apicache.middleware;
+const onlyStatus200 = (req: Request, res: Response) => res.statusCode === 200;
+const cacheSuccesses = cache('1 day', onlyStatus200);
 
 plannerCourseRouter.get(
   '/all-departments',
-  async (req: Request, res: Response<AllDepartmentsResponse>) => {
+  cacheSuccesses,
+  async (req: Request, res: Response<Department[]>) => {
     const departments = await repository
       .departments!.orderByAscending('name')
       .find();
@@ -56,16 +56,18 @@ plannerCourseRouter.get(
       code: dept.code,
     }));
 
-    return res.send({
-      departmentCount: result.length,
-      departments: result,
-    });
+    if (result.length === 0) {
+      return res.status(404).send([]);
+    }
+
+    return res.status(200).send(result);
   }
 );
 
 plannerCourseRouter.get(
   '/all-attributes',
-  async (req: Request, res: Response<AllAttributesResponse>) => {
+  cacheSuccesses,
+  async (req: Request, res: Response<Attribute[]>) => {
     const attributes = await repository
       .courseAttributes!.orderByAscending('ordinal')
       .find();
@@ -76,16 +78,18 @@ plannerCourseRouter.get(
       ordinal: attr.ordinal,
     }));
 
-    return res.send({
-      attributeCount: result.length,
-      attributes: result,
-    });
+    if (result.length === 0) {
+      return res.status(404).send([]);
+    }
+
+    return res.status(200).send(result);
   }
 );
 
 plannerCourseRouter.get(
   '/:deptCode',
-  async (req: Request, res: Response<CourseResponse[]>) => {
+  cacheSuccesses,
+  async (req: Request, res: Response<Course[]>) => {
     const deptCode = req.params.deptCode;
 
     const courses = await repository.courses
@@ -95,13 +99,18 @@ plannerCourseRouter.get(
 
     const result = courses?.map(({ id, ...rest }) => rest);
 
-    return res.send(result);
+    if (result!.length === 0) {
+      return res.status(404).send([]);
+    }
+
+    return res.status(200).send(result);
   }
 );
 
 plannerCourseRouter.get(
   '/:deptCode/:num',
-  async (req: Request, res: Response<CourseResponse[] | string>) => {
+  cacheSuccesses,
+  async (req: Request, res: Response<Course[] | string>) => {
     const deptCode = req.params.deptCode;
     const num = req.params.num;
 
@@ -114,6 +123,10 @@ plannerCourseRouter.get(
 
     const result = courses?.map(({ id, ...rest }) => rest);
 
-    return res.send(result);
+    if (result!.length === 0) {
+      return res.status(404).send([]);
+    }
+
+    return res.status(200).send(result);
   }
 );
