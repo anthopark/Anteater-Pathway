@@ -10,9 +10,8 @@ import {
 } from '@styles/variables';
 import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect';
 import AppInput from '@components/shared/AppInput/AppInput';
-import DEFAULT_DEPARTMENTS_DATA from 'src/data/departments.json';
+import DEFAULT_DEPARTMENT_DATA from 'src/data/default-department-data.json';
 import Fuse from 'fuse.js';
-import { CourseResponse } from 'src/models/course-response';
 
 const fuseOptions = {
   keys: ['value', 'label'],
@@ -26,12 +25,12 @@ interface DeptOption {
 }
 
 interface Props {
-  setSearchResults: (searchResults: CourseResponse[]) => void;
+  setSearchResults: (searchResults: ResponseModel.Course[]) => void;
 }
 
 function SearchControl(props: Props) {
-  const [deptData, setDeptData] = useState(
-    DEFAULT_DEPARTMENTS_DATA.departments
+  const [deptData, setDeptData] = useState<ResponseModel.Department[]>(
+    DEFAULT_DEPARTMENT_DATA
   );
   const [selectOptions, setSelectOptions] = useState<DeptOption[]>([]);
   const [selectValue, setSelectValue] = useState<string | null>(null);

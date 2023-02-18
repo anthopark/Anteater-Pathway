@@ -1,6 +1,5 @@
 import styles from './ResultWindow.module.scss';
 import classNames from 'classnames/bind';
-import { CourseResponse } from 'src/models/course-response';
 import SearchResultCourseItem from '../SearchResultCourseItem/SearchResultCourseItem';
 import { ReactNode, useMemo, useState, useEffect } from 'react';
 import { Updater } from 'use-immer';
@@ -12,7 +11,7 @@ const cx = classNames.bind(styles);
 
 interface Props {
   isLoading: boolean;
-  searchResults: CourseResponse[] | null;
+  searchResults: ResponseModel.Course[] | null;
   selectedIndices: Set<number>;
   updateSelectedIndices: Updater<Set<number>>;
 }
@@ -20,7 +19,6 @@ interface Props {
 function ResultWindow(props: Props) {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
-  let content: ReactNode;
 
   const isInitialState = useMemo(() => {
     return props.searchResults === null;
@@ -51,6 +49,8 @@ function ResultWindow(props: Props) {
   if (!mounted) {
     return null;
   }
+
+  let content: ReactNode;
 
   if (props.isLoading) {
     content = (

@@ -8,7 +8,6 @@ import { plus } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
 import ResultWindow from './ResultWindow/ResultWindow';
-import { CourseResponse } from 'src/models/course-response';
 import { useImmer, Updater } from 'use-immer';
 
 const cx = classNames.bind(styles);
@@ -19,9 +18,9 @@ interface Props {
 }
 
 const CourseSearchWindow = (props: Props) => {
-  const [searchResults, setSearchResults] = useState<CourseResponse[] | null>(
-    null
-  );
+  const [searchResults, setSearchResults] = useState<
+    ResponseModel.Course[] | null
+  >(null);
   const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
     new Set<number>()
   );
@@ -46,30 +45,30 @@ const CourseSearchWindow = (props: Props) => {
 
   useEffect(() => {
     setSearchResults([
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
+      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
     ]);
     setMounted(true);
   }, []);
