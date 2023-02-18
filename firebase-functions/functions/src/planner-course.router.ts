@@ -88,7 +88,6 @@ plannerCourseRouter.get(
 
 plannerCourseRouter.get(
   '/:deptCode',
-  cacheSuccesses,
   async (req: Request, res: Response<Course[]>) => {
     const deptCode = req.params.deptCode;
 
@@ -109,7 +108,6 @@ plannerCourseRouter.get(
 
 plannerCourseRouter.get(
   '/:deptCode/:num',
-  cacheSuccesses,
   async (req: Request, res: Response<Course[] | string>) => {
     const deptCode = req.params.deptCode;
     const num = req.params.num;
