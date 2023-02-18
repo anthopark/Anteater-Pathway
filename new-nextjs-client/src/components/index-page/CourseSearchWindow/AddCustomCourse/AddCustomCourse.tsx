@@ -8,14 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
 import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import {
+  bgColor2,
+  bgColorDark2,
   borderRadiusSM,
   defaultText,
   defaultTextDark,
   fontSizeMD,
-  gray2,
   gray4,
   gray5,
-  gray7,
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -38,7 +38,7 @@ const AddCustomCourse = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
-    <Menu offset={[0, 10]}>
+    <Menu placement="bottom-end">
       <MenuButton
         as={AppButton}
         kind="secondary"
@@ -52,12 +52,13 @@ const AddCustomCourse = () => {
         borderColor={theme === 'light' ? gray5 : gray4}
         fontSize={fontSizeMD}
         color={theme === 'light' ? defaultText : defaultTextDark}
-        padding=".6rem .4rem"
-        bgColor={theme === 'light' ? gray7 : gray2}
+        padding="1.8rem 1.4rem"
+        bgColor={theme === 'light' ? bgColor2 : bgColorDark2}
+        w={'23rem'}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputForm}>
-            <label className={styles.inputLabel}>Department</label>
+            <label>Department</label>
 
             <AppInput
               id="department"
@@ -66,9 +67,9 @@ const AddCustomCourse = () => {
             />
           </div>
 
-          <div>
-            <div className={styles.inputForm}>
-              <label className={styles.inputLabel}>Number</label>
+          <div className={styles.additionalIntoWrapper}>
+            <div className={styles.inputForm} style={{ marginRight: '.7rem' }}>
+              <label>Number</label>
               <AppInput
                 id="number"
                 placeholder="Ex. 101, 1A"
@@ -76,7 +77,7 @@ const AddCustomCourse = () => {
               />
             </div>
             <div className={styles.inputForm}>
-              <label className={styles.inputLabel}>Unit</label>
+              <label>Unit</label>
               <AppInput
                 id="unit"
                 placeholder="Ex. 2, 4"
@@ -93,10 +94,11 @@ const AddCustomCourse = () => {
               {...register('title')}
             />
           </div>
-
-          <AppButton kind="primary" type="submit">
-            Create
-          </AppButton>
+          <div className={styles.createBtnWrapper}>
+            <AppButton kind="primary" type="submit" width="20rem">
+              Create
+            </AppButton>
+          </div>
         </form>
       </MenuList>
     </Menu>

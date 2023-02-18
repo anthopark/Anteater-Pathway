@@ -1,9 +1,13 @@
 .inputForm {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-.inputBox {
-  display: block;
-  width: 100%;
+.additionalIntoWrapper {
+  display: flex;
+}
+
+.createBtnWrapper {
+  margin-top: 1.5rem;
 }
