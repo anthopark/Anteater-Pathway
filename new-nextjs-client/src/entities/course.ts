@@ -6,6 +6,7 @@ export interface ICourse {
   deptCode: string;
   num: string;
   color: number;
+  unit: number | null;
 }
 
 export class Course implements ICourse {

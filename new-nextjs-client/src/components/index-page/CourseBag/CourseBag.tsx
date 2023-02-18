@@ -3,6 +3,9 @@ import classNames from 'classnames/bind';
 import useAppUser from '@hooks/useAppUser';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import SortableCourseItem from '../SortableCourseItem/SortableCourseItem';
+import { eraser } from '@styles/fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import AppModal from '@components/shared/AppModal/AppModal';
 import { useEffect, useState } from 'react';
 
 interface Props {}
@@ -11,6 +14,12 @@ const cx = classNames.bind(styles);
 
 function CourseBag(props: Props) {
   const { appUser, updateAppUser } = useAppUser();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [totalUnit, setTotalUnit] = useState(0);
+
+  useEffect(() => {
+    updateTotalUnit();
+  }, [appUser.courseBag]);
 
   const handleColorSelect = (courseId: string) => {
     return (colorNumber: number) => {
@@ -26,13 +35,53 @@ function CourseBag(props: Props) {
 
   const handleCourseRemove = (courseId: string) => {
     return () => {
-      console.log('delete', courseId);
+      updateAppUser((draft) => draft.removeCourseItem(courseId, true));
     };
+  };
+
+  const handleCourseBagClear = () => {
+    updateAppUser((draft) => draft.clearCourseBag());
+  };
+
+  const updateTotalUnit = () => {
+    let totalCount = 0;
+
+    appUser.courseBag.forEach((course) => {
+      if (course.unit !== null) {
+        totalCount += course.unit;
+      }
+    });
+    setTotalUnit(totalCount);
+  };
+
+  const onClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className={cx('container')}>
-      <div className={cx('heading')}>Course bag</div>
+      <AppModal
+        isOpen={isModalOpen}
+        onClose={onClose}
+        headerTitle="Clear course bag"
+        bodyText="Are you sure you want to clear the course bag?"
+        actionButtonName="Clear"
+        actionKind="danger"
+        actionFn={handleCourseBagClear}
+      />
+      <div className={cx('heading')}>
+        <span>Course bag</span>
+        {appUser.courseBag.length > 0 ? (
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className={cx('clear-button')}
+          >
+            <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
+            <span>Clear</span>
+          </button>
+        ) : null}
+      </div>
+
       <div className={cx('course-box')}>
         <SortableContext
           items={appUser.courseBag}
@@ -50,6 +99,11 @@ function CourseBag(props: Props) {
           ))}
         </SortableContext>
       </div>
+      {appUser.courseBag.length > 0 ? (
+        <div className={cx('total-unit')}>
+          {totalUnit} {totalUnit === 1 ? 'unit' : 'units'}
+        </div>
+      ) : null}
     </div>
   );
 }

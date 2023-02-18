@@ -11,8 +11,10 @@ interface UpdateCourseColorParam {
 interface IAppUser {
   addYear: (year: number) => void;
   courseBag: ICourse[];
+  clearCourseBag: () => void;
   degreePlan: IDegreePlan;
   removeYear: (year: number) => void;
+  removeCourseItem: (courseId: string, isInCourseBag: boolean) => void;
   updateCourseColor: ({
     courseId,
     isInCourseBag,
@@ -28,10 +30,10 @@ class AppUser implements IAppUser {
   private _authToken: string | null = null;
   private _degreePlan = new DegreePlan();
   private _courseBag: ICourse[] = [
-    new Course({ deptCode: 'IN4MATX', num: '121' } as CourseResponse, true),
-    new Course({ deptCode: 'COMPSCI', num: '171' } as CourseResponse, true),
-    new Course({ deptCode: 'ECON', num: '1A' } as CourseResponse, true),
-    new Course({ deptCode: 'HISTORY', num: '7C' } as CourseResponse, true),
+    new Course({ deptCode: 'IN4MATX', num: '121', unit: 4 } as CourseResponse, false),
+    new Course({ deptCode: 'COMPSCI', num: '171', unit: 4 } as CourseResponse, false),
+    new Course({ deptCode: 'ECON', num: '1A', unit: 4 } as CourseResponse, false),
+    new Course({ deptCode: 'HISTORY', num: '7C', unit: 4 } as CourseResponse, false),
   ];
 
   public constructor() {
@@ -69,6 +71,18 @@ class AppUser implements IAppUser {
   public addToCourseBag(courses: ICourse[]) {
     for (const course of courses) {
       this._courseBag.push(course);
+    }
+  }
+
+  public clearCourseBag() {
+    this._courseBag = [];
+  }
+
+  public removeCourseItem(courseId: string, isInCourseBag: boolean) {
+    if (isInCourseBag) {
+      this._courseBag = this.courseBag.filter(
+        (course) => course.id !== courseId
+      );
     }
   }
 
