@@ -1,0 +1,30 @@
+@mixin selected-border($border-width: 1px, $shadow-width: 2px) {
+  border: $border-width solid $blue-2;
+  box-shadow: 0 0 0 $shadow-width $blue-2;
+}
+
+@mixin selected-border-dt($border-width: 1px, $shadow-width: 2px) {
+  border: $border-width solid $accent-2;
+  box-shadow: 0 0 0 $shadow-width $accent-2;
+}
+
+@mixin scrollbar-light() {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100vw;
+    background-color: $gray-5;
+  }
+}
+
+@mixin scrollbar-dark() {
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-3;
+  }
+}

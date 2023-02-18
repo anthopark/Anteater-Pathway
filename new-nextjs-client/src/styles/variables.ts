@@ -4,6 +4,7 @@
 const primary1 = '#223e68';
 
 const accent1 = '#BE731A';
+const accent2 = '#ff8c38';
 
 const white1 = '#ffffff';
 

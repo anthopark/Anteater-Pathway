@@ -7,6 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
+import ResultWindow from './ResultWindow/ResultWindow';
+import { CourseResponse } from 'src/models/course-response';
+import { useImmer, Updater } from 'use-immer';
+
+const cx = classNames.bind(styles);
 
 interface Props {
   windowToggle: boolean;
@@ -14,6 +19,13 @@ interface Props {
 }
 
 const CourseSearchWindow = (props: Props) => {
+  const [searchResults, setSearchResults] = useState<CourseResponse[] | null>(
+    null
+  );
+  const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
+    new Set<number>()
+  );
+
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -33,10 +45,34 @@ const CourseSearchWindow = (props: Props) => {
   }, [springApi, contentRef, props.windowToggle]);
 
   useEffect(() => {
+    setSearchResults([
+      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
+    ]);
     setMounted(true);
   }, []);
-
-  const cx = classNames.bind(styles);
 
   if (!mounted) {
     return null;
@@ -52,7 +88,7 @@ const CourseSearchWindow = (props: Props) => {
       <div ref={contentRef} className={styles.contentWrapper}>
         <div className={styles.container}>
           {/* top left */}
-          <SearchControl />
+          <SearchControl setSearchResults={setSearchResults} />
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
@@ -63,11 +99,31 @@ const CourseSearchWindow = (props: Props) => {
               Custom
             </AppButton>
           </div>
+
           {/* row 2 column 1 */}
-          <div className={styles.leftPane}></div>
+          <div className={cx('result-window-wrapper')}>
+            <ResultWindow
+              searchResults={searchResults}
+              selectedIndices={selectedIndices}
+              updateSelectedIndices={updateSelectedIndices}
+            />
+          </div>
 
           {/* row 2 column 2 */}
           <div className={styles.rightPane}></div>
+
+          {/* row 3 column 1 */}
+          <div className={cx('footer-right')}>
+            <AppButton
+              isDisabled
+              kind="primary"
+              leftIcon={<FontAwesomeIcon icon={plus} />}
+            >
+              Add to Course Bag
+            </AppButton>
+          </div>
+
+          <div className={cx('footer-left')}></div>
         </div>
       </div>
     </animated.div>

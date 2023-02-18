@@ -1,6 +1,7 @@
 import { immerable } from 'immer';
 import { DegreePlan, IDegreePlan } from './degree-plan';
-import { Course, ICourse, CourseInfo } from '@entities/course';
+import { Course, ICourse } from '@entities/course';
+import { CourseResponse } from 'src/models/course-response';
 
 interface UpdateCourseColorParam {
   courseId: string;
@@ -29,16 +30,10 @@ class AppUser implements IAppUser {
   private _authToken: string | null = null;
   private _degreePlan = new DegreePlan();
   private _courseBag: ICourse[] = [
-    new Course(
-      { deptCode: 'IN4MATX', num: '121', unit: 4 } as CourseInfo,
-      true
-    ),
-    new Course(
-      { deptCode: 'COMPSCI', num: '171', unit: 4 } as CourseInfo,
-      true
-    ),
-    new Course({ deptCode: 'ECON', num: '1A', unit: 4 } as CourseInfo, true),
-    new Course({ deptCode: 'HISTORY', num: '7C', unit: 4 } as CourseInfo, true),
+    new Course({ deptCode: 'IN4MATX', num: '121', unit: 4 } as CourseResponse, false),
+    new Course({ deptCode: 'COMPSCI', num: '171', unit: 4 } as CourseResponse, false),
+    new Course({ deptCode: 'ECON', num: '1A', unit: 4 } as CourseResponse, false),
+    new Course({ deptCode: 'HISTORY', num: '7C', unit: 4 } as CourseResponse, false),
   ];
 
   public constructor() {
