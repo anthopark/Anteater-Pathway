@@ -1,5 +1,5 @@
 .container {
-  padding: 1.3rem 1.2rem 1.3rem 2rem;
+  padding: 1.3rem 1.2rem 0.8rem 2rem;
 
   background-color: $bg-color-2;
   border-radius: $br-md;
@@ -13,9 +13,10 @@
   justify-content: space-between;
 }
 
-.clear-button {
+.empty-button {
   font-size: $fs-md;
-  margin-right: 0.5rem;
+  margin-top: 0.4rem;
+  margin-right: 1rem;
   color: $gray-4;
   &:hover {
     color: $red-4;
@@ -41,11 +42,11 @@
 }
 
 .total-unit {
-  font-size: $fs-md;
+  font-size: $fs-lg;
   color: $secondary-text;
-
+  letter-spacing: $letter-spacing-sm;
   text-align: end;
-  margin-right: 0.4rem;
+  margin-right: 1rem;
   margin-top: 1rem;
 }
 
