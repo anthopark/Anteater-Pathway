@@ -1,7 +1,7 @@
 .inputForm {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
 
   .inputLabel {
     font-size: $fs-md;
@@ -13,7 +13,7 @@
 }
 
 .createBtnWrapper {
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
 
   & > * {
     width: 100%;

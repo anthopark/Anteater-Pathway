@@ -27,6 +27,7 @@ interface Props {
   value?: any;
   id?: string | undefined;
   placeholder: string;
+  height?: string;
 }
 
 const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {

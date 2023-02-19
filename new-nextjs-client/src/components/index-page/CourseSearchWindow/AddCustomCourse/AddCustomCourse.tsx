@@ -20,10 +20,14 @@ import {
   bgColor2,
   bgColorDark2,
   borderRadiusSM,
+  controlHeightSM,
   defaultText,
   defaultTextDark,
+  gray2,
   gray4,
   gray5,
+  gray7,
+  letterSpacingMD,
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -57,18 +61,23 @@ const AddCustomCourse = () => {
         borderColor={theme === 'light' ? gray5 : gray4}
         color={theme === 'light' ? defaultText : defaultTextDark}
         padding="1.2rem .8rem"
-        bg={theme === 'light' ? bgColor2 : bgColorDark2}
-        w={'25rem'}
+        bg={theme === 'light' ? gray7 : gray2}
+        w={'24.5rem'}
       >
         <PopoverBody>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
+            <FormControl isRequired>
               <div className={styles.inputForm}>
-                <FormLabel htmlFor="department" className={styles.inputLabel}>
+                <FormLabel
+                  letterSpacing={letterSpacingMD}
+                  htmlFor="department"
+                  className={styles.inputLabel}
+                >
                   Department
                 </FormLabel>
                 <AppInput
                   id="department"
+                  height={controlHeightSM}
                   placeholder="Ex. Econ, History"
                   {...register('department', { required: true })}
                 />
@@ -76,28 +85,38 @@ const AddCustomCourse = () => {
             </FormControl>
 
             <div className={styles.additionalIntoWrapper}>
-              <FormControl>
+              <FormControl isRequired>
                 <div
                   className={styles.inputForm}
-                  style={{ marginRight: '.7rem' }}
+                  style={{ marginRight: '1rem' }}
                 >
-                  <FormLabel htmlFor="number" className={styles.inputLabel}>
+                  <FormLabel
+                    letterSpacing={letterSpacingMD}
+                    htmlFor="number"
+                    className={styles.inputLabel}
+                  >
                     Number
                   </FormLabel>
                   <AppInput
                     id="number"
+                    height={controlHeightSM}
                     placeholder="Ex. 101, 1A"
                     {...register('number', { required: true })}
                   />
                 </div>
               </FormControl>
-              <FormControl>
+              <FormControl isRequired>
                 <div className={styles.inputForm}>
-                  <FormLabel htmlFor="unit" className={styles.inputLabel}>
+                  <FormLabel
+                    letterSpacing={letterSpacingMD}
+                    htmlFor="unit"
+                    className={styles.inputLabel}
+                  >
                     Unit
                   </FormLabel>
                   <AppInput
                     id="unit"
+                    height={controlHeightSM}
                     placeholder="Ex. 2, 4"
                     {...register('unit', { required: true })}
                   />
@@ -106,16 +125,28 @@ const AddCustomCourse = () => {
             </div>
 
             <div className={styles.inputForm}>
-              <FormLabel className={styles.inputLabel}>Title</FormLabel>
+              <FormLabel
+                letterSpacing={letterSpacingMD}
+                htmlFor="title"
+                className={styles.inputLabel}
+              >
+                Title
+              </FormLabel>
               <AppInput
                 id="title"
+                height={controlHeightSM}
                 placeholder="Ex. Basic statistics"
                 {...register('title')}
               />
             </div>
 
             <div className={styles.createBtnWrapper}>
-              <AppButton kind="primary" type="submit" width="100%">
+              <AppButton
+                kind="primary"
+                type="submit"
+                width="100%"
+                height="3.4rem"
+              >
                 Create
               </AppButton>
             </div>

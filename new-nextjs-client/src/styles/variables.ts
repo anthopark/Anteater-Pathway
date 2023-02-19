@@ -26,6 +26,7 @@ const blue2 = '#397BDD';
 /**************** 
   Control Sizes (Input, Button, etc.)
 ****************/
+const controlHeightSM = '3.4rem';
 const controlHeightMD = '4rem';
 
 /**************** 
@@ -88,6 +89,7 @@ export {
   defaultTextDark,
   placeholderText,
   placeholderTextDark,
+  controlHeightSM,
   controlHeightMD,
   blue1,
   blue2,

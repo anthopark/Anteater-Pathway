@@ -183,6 +183,7 @@ interface Props {
   rightIcon?: ReactElement;
   fontSize?: string;
   width?: string;
+  height?: string;
   padding?: string;
 }
 
