@@ -26,9 +26,9 @@ export class Course implements ICourse {
     this.num = courseResponse.num;
     this.title = courseResponse.title;
     this.unit = courseResponse.unit;
-    this.isVariableUnit = courseResponse.isVariableUnit;
-    this.minUnit = courseResponse.minUnit;
-    this.maxUnit = courseResponse.maxUnit;
+    this.isVariableUnit = courseResponse.isVariableUnit ?? false;
+    this.minUnit = courseResponse.minUnit ?? null;
+    this.maxUnit = courseResponse.maxUnit ?? null;
     this.isCustomCreated = isCustomCreated;
   }
 

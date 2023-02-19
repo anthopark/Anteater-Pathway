@@ -12,7 +12,8 @@ import AppSingleSelect from '@components/shared/AppSingleSelect/AppSingleSelect'
 import AppInput from '@components/shared/AppInput/AppInput';
 import DEFAULT_DEPARTMENT_DATA from 'src/data/default-department-data.json';
 import Fuse from 'fuse.js';
-import { getAllDepartments } from 'src/api/course';
+import { getAllDepartments, getAllDepartmentCourses } from 'src/api/course';
+import { Updater } from 'use-immer';
 
 const fuseOptions = {
   keys: ['value', 'label'],
@@ -33,7 +34,9 @@ interface SelectOption {
 }
 
 interface Props {
+  setIsLoading: (isLoading: boolean) => void;
   setSearchResults: (searchResults: ResponseModel.Course[]) => void;
+  updateSelectedIndices: Updater<Set<number>>;
 }
 
 function SearchControl(props: Props) {
@@ -84,6 +87,24 @@ function SearchControl(props: Props) {
     );
   }, [selectInputValue]);
 
+  useEffect(() => {
+    setInputValue('');
+    if (selectValue) {
+      props.setIsLoading(true);
+      getAllDepartmentCourses(selectValue)
+        .then((courses) => {
+          props.setSearchResults(courses);
+        })
+        .catch(() => props.setSearchResults([]))
+        .finally(() => {
+          props.updateSelectedIndices((draft) => {
+            draft.clear();
+          });
+          props.setIsLoading(false);
+        });
+    }
+  }, [selectValue]);
+
   if (!mounted) {
     return null;
   }
@@ -128,8 +149,9 @@ function SearchControl(props: Props) {
         </FormLabel>
         <AppInput
           onChange={(e) => {
-            setInputValue(e.target.value === '' ? null : e.target.value);
+            setInputValue(e.target.value);
           }}
+          value={inputValue}
           placeholder="Ex. 1A, 101"
         />
       </FormControl>

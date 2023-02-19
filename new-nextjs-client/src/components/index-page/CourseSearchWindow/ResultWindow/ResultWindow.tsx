@@ -25,7 +25,7 @@ function ResultWindow(props: Props) {
   }, [props.searchResults]);
 
   const isResultEmpty = useMemo(() => {
-    return props.searchResults && props.searchResults.length === 1;
+    return props.searchResults && props.searchResults.length === 0;
   }, [props.searchResults]);
 
   const isResultReturned = useMemo(() => {
@@ -98,8 +98,8 @@ function ResultWindow(props: Props) {
   return (
     <div
       className={cx('container', {
-        'display-courses': isResultReturned,
-        'display-message': !isResultReturned,
+        'display-courses': isResultReturned && !props.isLoading,
+        'display-message': !isResultReturned || props.isLoading,
       })}
     >
       {content}

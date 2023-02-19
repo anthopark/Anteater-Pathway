@@ -21,6 +21,7 @@ const CourseSearchWindow = (props: Props) => {
   const [searchResults, setSearchResults] = useState<
     ResponseModel.Course[] | null
   >(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
     new Set<number>()
   );
@@ -44,32 +45,6 @@ const CourseSearchWindow = (props: Props) => {
   }, [springApi, contentRef, props.windowToggle]);
 
   useEffect(() => {
-    setSearchResults([
-      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121AB' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-      { deptCode: 'IN4MATX', num: '121' } as ResponseModel.Course,
-    ]);
     setMounted(true);
   }, []);
 
@@ -87,7 +62,11 @@ const CourseSearchWindow = (props: Props) => {
       <div ref={contentRef} className={styles.contentWrapper}>
         <div className={styles.container}>
           {/* top left */}
-          <SearchControl setSearchResults={setSearchResults} />
+          <SearchControl
+            setIsLoading={setIsLoading}
+            setSearchResults={setSearchResults}
+            updateSelectedIndices={updateSelectedIndices}
+          />
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
@@ -102,6 +81,7 @@ const CourseSearchWindow = (props: Props) => {
           {/* row 2 column 1 */}
           <div className={cx('result-window-wrapper')}>
             <ResultWindow
+              isLoading={isLoading}
               searchResults={searchResults}
               selectedIndices={selectedIndices}
               updateSelectedIndices={updateSelectedIndices}
