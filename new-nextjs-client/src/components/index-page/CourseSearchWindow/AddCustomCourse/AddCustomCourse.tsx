@@ -1,4 +1,5 @@
 import styles from './AddCustomCourse.module.scss';
+import classNames from 'classnames';
 import { useTheme } from 'next-themes';
 import AppInput from '@components/shared/AppInput/AppInput';
 
@@ -19,8 +20,10 @@ import {
   bgColor2,
   bgColorDark2,
   borderRadiusSM,
+  defaultText,
   defaultTextDark,
   gray4,
+  gray5,
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
