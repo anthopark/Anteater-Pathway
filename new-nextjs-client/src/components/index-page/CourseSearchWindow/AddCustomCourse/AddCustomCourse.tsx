@@ -1,21 +1,26 @@
 import styles from './AddCustomCourse.module.scss';
-import classNames from 'classnames';
 import { useTheme } from 'next-themes';
 import AppInput from '@components/shared/AppInput/AppInput';
 
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
-import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  FormLabel,
+  FormControl,
+} from '@chakra-ui/react';
+
 import {
   bgColor2,
   bgColorDark2,
   borderRadiusSM,
-  defaultText,
   defaultTextDark,
-  fontSizeMD,
   gray4,
-  gray5,
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -38,70 +43,83 @@ const AddCustomCourse = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
-    <Menu placement="bottom-end">
-      <MenuButton
-        as={AppButton}
-        kind="secondary"
-        leftIcon={<FontAwesomeIcon icon={plus} />}
-      >
-        Custom
-      </MenuButton>
-
-      <MenuList
+    <Popover placement="bottom-end">
+      <PopoverTrigger>
+        <AppButton kind="secondary" leftIcon={<FontAwesomeIcon icon={plus} />}>
+          Custom
+        </AppButton>
+      </PopoverTrigger>
+      <PopoverContent
         borderRadius={borderRadiusSM}
         borderColor={theme === 'light' ? gray5 : gray4}
-        fontSize={fontSizeMD}
         color={theme === 'light' ? defaultText : defaultTextDark}
-        padding="1.8rem 1.4rem"
-        bgColor={theme === 'light' ? bgColor2 : bgColorDark2}
-        w={'23rem'}
+        padding="1.2rem .8rem"
+        bg={theme === 'light' ? bgColor2 : bgColorDark2}
+        w={'25rem'}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.inputForm}>
-            <label>Department</label>
+        <PopoverBody>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl>
+              <div className={styles.inputForm}>
+                <FormLabel htmlFor="department" className={styles.inputLabel}>
+                  Department
+                </FormLabel>
+                <AppInput
+                  id="department"
+                  placeholder="Ex. Econ, History"
+                  {...register('department', { required: true })}
+                />
+              </div>
+            </FormControl>
 
-            <AppInput
-              id="department"
-              placeholder="Ex. Econ, History"
-              {...register('department')}
-            />
-          </div>
-
-          <div className={styles.additionalIntoWrapper}>
-            <div className={styles.inputForm} style={{ marginRight: '.7rem' }}>
-              <label>Number</label>
-              <AppInput
-                id="number"
-                placeholder="Ex. 101, 1A"
-                {...register('number')}
-              />
+            <div className={styles.additionalIntoWrapper}>
+              <FormControl>
+                <div
+                  className={styles.inputForm}
+                  style={{ marginRight: '.7rem' }}
+                >
+                  <FormLabel htmlFor="number" className={styles.inputLabel}>
+                    Number
+                  </FormLabel>
+                  <AppInput
+                    id="number"
+                    placeholder="Ex. 101, 1A"
+                    {...register('number', { required: true })}
+                  />
+                </div>
+              </FormControl>
+              <FormControl>
+                <div className={styles.inputForm}>
+                  <FormLabel htmlFor="unit" className={styles.inputLabel}>
+                    Unit
+                  </FormLabel>
+                  <AppInput
+                    id="unit"
+                    placeholder="Ex. 2, 4"
+                    {...register('unit', { required: true })}
+                  />
+                </div>
+              </FormControl>
             </div>
+
             <div className={styles.inputForm}>
-              <label>Unit</label>
+              <FormLabel className={styles.inputLabel}>Title</FormLabel>
               <AppInput
-                id="unit"
-                placeholder="Ex. 2, 4"
-                {...register('unit')}
+                id="title"
+                placeholder="Ex. Basic statistics"
+                {...register('title')}
               />
             </div>
-          </div>
 
-          <div className={styles.inputForm}>
-            <label className={styles.inputLabel}>Title</label>
-            <AppInput
-              id="title"
-              placeholder="Ex. Basic statistics"
-              {...register('title')}
-            />
-          </div>
-          <div className={styles.createBtnWrapper}>
-            <AppButton kind="primary" type="submit" width="20rem">
-              Create
-            </AppButton>
-          </div>
-        </form>
-      </MenuList>
-    </Menu>
+            <div className={styles.createBtnWrapper}>
+              <AppButton kind="primary" type="submit" width="100%">
+                Create
+              </AppButton>
+            </div>
+          </form>
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
   );
 };
 
