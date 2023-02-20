@@ -9,6 +9,7 @@ import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
 import ResultWindow from './ResultWindow/ResultWindow';
 import { useImmer, Updater } from 'use-immer';
+import CourseInfoWindow from './CourseInfoWindow/CourseInfoWindow';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +22,8 @@ const CourseSearchWindow = (props: Props) => {
   const [searchResults, setSearchResults] = useState<
     ResponseModel.Course[] | null
   >(null);
+  const [clickedCourse, setClickedCourse] =
+    useState<ResponseModel.Course | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
     new Set<number>()
@@ -63,6 +66,7 @@ const CourseSearchWindow = (props: Props) => {
         <div className={styles.container}>
           {/* top left */}
           <SearchControl
+            setClickedCourse={setClickedCourse}
             setIsLoading={setIsLoading}
             setSearchResults={setSearchResults}
             updateSelectedIndices={updateSelectedIndices}
@@ -84,12 +88,15 @@ const CourseSearchWindow = (props: Props) => {
               isLoading={isLoading}
               searchResults={searchResults}
               selectedIndices={selectedIndices}
+              setClickedCourse={setClickedCourse}
               updateSelectedIndices={updateSelectedIndices}
             />
           </div>
 
           {/* row 2 column 2 */}
-          <div className={styles.rightPane}></div>
+          <div className={cx('course-info-window-wrapper')}>
+            <CourseInfoWindow clickedCourse={clickedCourse} />
+          </div>
 
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>

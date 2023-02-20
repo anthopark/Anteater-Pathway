@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  height: 100%;
+  border-radius: $br-md;
+  background-color: #f6f6ff;
+  padding: 1.5rem 0.8rem 1.5rem 1.5rem;
+}
+
+.info-content {
+  max-height: 100%;
+  padding-right: 0.7rem;
+  overflow-y: auto;
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: rgba($bg-color-1-dt, 0.5);
+  }
+}

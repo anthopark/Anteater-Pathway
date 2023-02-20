@@ -13,6 +13,7 @@ interface Props {
   isLoading: boolean;
   searchResults: ResponseModel.Course[] | null;
   selectedIndices: Set<number>;
+  setClickedCourse: (course: ResponseModel.Course | null) => void;
   updateSelectedIndices: Updater<Set<number>>;
 }
 
@@ -83,7 +84,13 @@ function ResultWindow(props: Props) {
     content = (
       <div className={cx('grid-container')}>
         {props.searchResults!.map((courseInfo, index) => (
-          <div key={index} onClick={() => handleCourseSelect(index)}>
+          <div
+            key={index}
+            onClick={() => {
+              handleCourseSelect(index);
+              props.setClickedCourse(props.searchResults![index]);
+            }}
+          >
             <SearchResultCourseItem
               deptCode={courseInfo.deptCode}
               num={courseInfo.num}
