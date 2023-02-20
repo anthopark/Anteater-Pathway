@@ -31,6 +31,7 @@ import {
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useAppUser from '@hooks/useAppUser';
 import { Course, CourseInfo } from '@entities/course';
+import { useState } from 'react';
 
 type Inputs = {
   department: string;
@@ -61,44 +62,6 @@ const AddCustomCourse = () => {
       true
     );
     updateAppUser((draft) => draft.addToCourseBag([addedCourseItem]));
-  };
-
-  const validateDepartmentCode = (value: string) => {
-    let error;
-    if (value.trim().length >= 9) {
-      error = 'Please use < 9 characters';
-      return false;
-    }
-  };
-
-  const validateNumber = (value: string) => {
-    let error;
-    if (value.trim().length >= 6) {
-      error = 'Please use < 6 characters';
-      return false;
-    }
-  };
-
-  const validateUnit = (value: string) => {
-    let error;
-    if (isNaN(Number(value.trim()))) {
-      error = 'Invalid value for unit';
-      return false;
-    } else if (Number(value.trim()) < 0) {
-      error = "Unit can't be negative";
-      return false;
-    } else if (Number(value.trim()) > 20) {
-      error = 'Unit is too big';
-      return false;
-    }
-  };
-
-  const validateTitle = (value: string) => {
-    let error;
-    if (value.trim().length >= 80) {
-      error = 'Please use < 80 characters';
-      return false;
-    }
   };
 
   return (
@@ -133,9 +96,14 @@ const AddCustomCourse = () => {
                   placeholder="Ex. ECON, HISTORY"
                   {...register('department', {
                     required: true,
-                    validate: (value) => validateDepartmentCode(value),
+                    maxLength: {
+                      value: 9,
+                      message: 'Please use < 9 characters',
+                    },
                   })}
                 />
+
+                {errors.department && <span>{errors.department.message}</span>}
               </div>
             </FormControl>
 
@@ -158,9 +126,13 @@ const AddCustomCourse = () => {
                     placeholder="Ex. 101, 1A"
                     {...register('number', {
                       required: true,
-                      validate: (value) => validateNumber(String(value)),
+                      maxLength: {
+                        value: 6,
+                        message: 'Please use < 6 characters',
+                      },
                     })}
                   />
+                  {errors.number && <span>{errors.number.message}</span>}
                 </div>
               </FormControl>
               <FormControl isRequired>
@@ -181,9 +153,11 @@ const AddCustomCourse = () => {
                     placeholder="Ex. 2, 4"
                     {...register('unit', {
                       required: true,
-                      validate: (value) => validateUnit(String(value)),
+                      min: { value: 0, message: "Unit can't be negative" },
+                      max: { value: 19, message: 'Unit is too big' },
                     })}
                   />
+                  {errors.unit && <span>{errors.unit.message}</span>}
                 </div>
               </FormControl>
             </div>
@@ -201,9 +175,13 @@ const AddCustomCourse = () => {
                 height={controlHeightSM}
                 placeholder="Ex. Basic Statistics"
                 {...register('title', {
-                  validate: (value) => validateTitle(value),
+                  maxLength: {
+                    value: 80,
+                    message: 'Please use < 80 characters',
+                  },
                 })}
               />
+              {errors.title && <span>{errors.title.message}</span>}
             </div>
 
             <div className={styles.createBtnWrapper}>
