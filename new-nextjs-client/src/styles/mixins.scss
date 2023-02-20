@@ -20,11 +20,19 @@
   &::-webkit-scrollbar-thumb {
     border-radius: 100vw;
     background-color: $gray-5;
+
+    &:hover {
+      background-color: $gray-4;
+    }
   }
 }
 
 @mixin scrollbar-dark() {
   &::-webkit-scrollbar-thumb {
     background-color: $gray-3;
+
+    &:hover {
+      background-color: $gray-4;
+    }
   }
 }

@@ -29,8 +29,14 @@
 .footer-right {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   padding-right: 2rem;
+}
+
+.footer-left {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
 }
 
 [data-theme='dark'] {

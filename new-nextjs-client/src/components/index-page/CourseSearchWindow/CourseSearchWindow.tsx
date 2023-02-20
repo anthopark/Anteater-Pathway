@@ -102,7 +102,14 @@ const CourseSearchWindow = (props: Props) => {
             </AppButton>
           </div>
 
-          <div className={cx('footer-left')}></div>
+          <div className={cx('footer-left')}>
+            <AppButton
+              kind="secondary"
+              onClick={() => props.setWindowToggle(false)}
+            >
+              Close
+            </AppButton>
+          </div>
         </div>
       </div>
     </animated.div>

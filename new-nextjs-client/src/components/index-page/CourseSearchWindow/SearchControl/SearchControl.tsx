@@ -35,7 +35,7 @@ interface SelectOption {
 
 interface Props {
   setIsLoading: (isLoading: boolean) => void;
-  setSearchResults: (searchResults: ResponseModel.Course[]) => void;
+  setSearchResults: (searchResults: ResponseModel.Course[] | null) => void;
   updateSelectedIndices: Updater<Set<number>>;
 }
 
@@ -102,6 +102,8 @@ function SearchControl(props: Props) {
           });
           props.setIsLoading(false);
         });
+    } else {
+      props.setSearchResults(null);
     }
   }, [selectValue]);
 
