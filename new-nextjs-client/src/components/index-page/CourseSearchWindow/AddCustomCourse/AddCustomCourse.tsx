@@ -30,6 +30,8 @@ import {
   letterSpacingMD,
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import useAppUser from '@hooks/useAppUser';
+import { Course, CourseInfo } from '@entities/course';
 
 type Inputs = {
   department: string;
@@ -39,6 +41,7 @@ type Inputs = {
 };
 
 const AddCustomCourse = () => {
+  const { appUser, updateAppUser } = useAppUser();
   const { theme } = useTheme();
 
   const {
@@ -47,7 +50,18 @@ const AddCustomCourse = () => {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    let addedCourseItem = new Course(
+      {
+        deptCode: data.department,
+        num: String(data.number),
+        unit: data.unit,
+      } as CourseInfo,
+      true
+    );
+    updateAppUser((draft) => draft.addToCourseBag([addedCourseItem]));
+  };
 
   return (
     <Popover placement="bottom-end">
@@ -78,7 +92,7 @@ const AddCustomCourse = () => {
                 <AppInput
                   id="department"
                   height={controlHeightSM}
-                  placeholder="Ex. Econ, History"
+                  placeholder="Ex. ECON, HISTORY"
                   {...register('department', { required: true })}
                 />
               </div>
@@ -88,7 +102,7 @@ const AddCustomCourse = () => {
               <FormControl isRequired>
                 <div
                   className={styles.inputForm}
-                  style={{ marginRight: '1rem' }}
+                  style={{ marginRight: '.7rem' }}
                 >
                   <FormLabel
                     letterSpacing={letterSpacingMD}
@@ -106,7 +120,10 @@ const AddCustomCourse = () => {
                 </div>
               </FormControl>
               <FormControl isRequired>
-                <div className={styles.inputForm}>
+                <div
+                  style={{ marginLeft: '.7rem' }}
+                  className={styles.inputForm}
+                >
                   <FormLabel
                     letterSpacing={letterSpacingMD}
                     htmlFor="unit"
@@ -135,7 +152,7 @@ const AddCustomCourse = () => {
               <AppInput
                 id="title"
                 height={controlHeightSM}
-                placeholder="Ex. Basic statistics"
+                placeholder="Ex. Basic Statistics"
                 {...register('title')}
               />
             </div>
