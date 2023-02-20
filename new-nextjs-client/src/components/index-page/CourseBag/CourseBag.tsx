@@ -51,6 +51,7 @@ function CourseBag(props: Props) {
         totalCount += course.unit;
       }
     });
+
     setTotalUnit(totalCount);
   };
 
@@ -63,9 +64,9 @@ function CourseBag(props: Props) {
       <AppModal
         isOpen={isModalOpen}
         onClose={onClose}
-        headerTitle="Clear course bag"
-        bodyText="Are you sure you want to clear the course bag?"
-        actionButtonName="Clear"
+        headerTitle="Empty course bag?"
+        bodyText="Are you sure you want to empty the course bag?"
+        actionButtonName="Empty"
         actionKind="danger"
         actionFn={handleCourseBagClear}
       />
@@ -74,10 +75,10 @@ function CourseBag(props: Props) {
         {appUser.courseBag.length > 0 ? (
           <button
             onClick={() => setIsModalOpen(true)}
-            className={cx('clear-button')}
+            className={cx('empty-button')}
           >
             <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
-            <span>Clear</span>
+            <span>Empty</span>
           </button>
         ) : null}
       </div>

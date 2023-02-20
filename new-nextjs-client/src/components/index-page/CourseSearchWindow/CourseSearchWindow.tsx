@@ -8,7 +8,6 @@ import { plus } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
 import ResultWindow from './ResultWindow/ResultWindow';
-import { CourseResponse } from 'src/models/course-response';
 import { useImmer, Updater } from 'use-immer';
 
 const cx = classNames.bind(styles);
@@ -19,9 +18,10 @@ interface Props {
 }
 
 const CourseSearchWindow = (props: Props) => {
-  const [searchResults, setSearchResults] = useState<CourseResponse[] | null>(
-    null
-  );
+  const [searchResults, setSearchResults] = useState<
+    ResponseModel.Course[] | null
+  >(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
     new Set<number>()
   );
@@ -45,32 +45,6 @@ const CourseSearchWindow = (props: Props) => {
   }, [springApi, contentRef, props.windowToggle]);
 
   useEffect(() => {
-    setSearchResults([
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121AB' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-      { deptCode: 'IN4MATX', num: '121' } as CourseResponse,
-    ]);
     setMounted(true);
   }, []);
 
@@ -88,7 +62,11 @@ const CourseSearchWindow = (props: Props) => {
       <div ref={contentRef} className={styles.contentWrapper}>
         <div className={styles.container}>
           {/* top left */}
-          <SearchControl setSearchResults={setSearchResults} />
+          <SearchControl
+            setIsLoading={setIsLoading}
+            setSearchResults={setSearchResults}
+            updateSelectedIndices={updateSelectedIndices}
+          />
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
@@ -103,6 +81,7 @@ const CourseSearchWindow = (props: Props) => {
           {/* row 2 column 1 */}
           <div className={cx('result-window-wrapper')}>
             <ResultWindow
+              isLoading={isLoading}
               searchResults={searchResults}
               selectedIndices={selectedIndices}
               updateSelectedIndices={updateSelectedIndices}
