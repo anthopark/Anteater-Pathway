@@ -1,5 +1,4 @@
 import styles from './AddCustomCourse.module.scss';
-import classNames from 'classnames';
 import { useTheme } from 'next-themes';
 import AppInput from '@components/shared/AppInput/AppInput';
 
@@ -50,17 +49,56 @@ const AddCustomCourse = () => {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     let addedCourseItem = new Course(
       {
         deptCode: data.department,
         num: String(data.number),
-        unit: data.unit,
+        unit: Number(data.unit),
       } as CourseInfo,
       true
     );
     updateAppUser((draft) => draft.addToCourseBag([addedCourseItem]));
+  };
+
+  const validateDepartmentCode = (value: string) => {
+    let error;
+    if (value.trim().length >= 9) {
+      error = 'Please use < 9 characters';
+      return false;
+    }
+  };
+
+  const validateNumber = (value: string) => {
+    let error;
+    if (value.trim().length >= 6) {
+      error = 'Please use < 6 characters';
+      return false;
+    }
+  };
+
+  const validateUnit = (value: string) => {
+    let error;
+    if (isNaN(Number(value.trim()))) {
+      error = 'Invalid value for unit';
+      return false;
+    } else if (Number(value.trim()) < 0) {
+      error = "Unit can't be negative";
+      return false;
+    } else if (Number(value.trim()) > 20) {
+      error = 'Unit is too big';
+      return false;
+    }
+  };
+
+  const validateTitle = (value: string) => {
+    let error;
+    if (value.trim().length >= 80) {
+      error = 'Please use < 80 characters';
+      return false;
+    }
   };
 
   return (
@@ -93,7 +131,10 @@ const AddCustomCourse = () => {
                   id="department"
                   height={controlHeightSM}
                   placeholder="Ex. ECON, HISTORY"
-                  {...register('department', { required: true })}
+                  {...register('department', {
+                    required: true,
+                    validate: (value) => validateDepartmentCode(value),
+                  })}
                 />
               </div>
             </FormControl>
@@ -115,7 +156,10 @@ const AddCustomCourse = () => {
                     id="number"
                     height={controlHeightSM}
                     placeholder="Ex. 101, 1A"
-                    {...register('number', { required: true })}
+                    {...register('number', {
+                      required: true,
+                      validate: (value) => validateNumber(String(value)),
+                    })}
                   />
                 </div>
               </FormControl>
@@ -135,7 +179,10 @@ const AddCustomCourse = () => {
                     id="unit"
                     height={controlHeightSM}
                     placeholder="Ex. 2, 4"
-                    {...register('unit', { required: true })}
+                    {...register('unit', {
+                      required: true,
+                      validate: (value) => validateUnit(String(value)),
+                    })}
                   />
                 </div>
               </FormControl>
@@ -153,7 +200,9 @@ const AddCustomCourse = () => {
                 id="title"
                 height={controlHeightSM}
                 placeholder="Ex. Basic Statistics"
-                {...register('title')}
+                {...register('title', {
+                  validate: (value) => validateTitle(value),
+                })}
               />
             </div>
 
