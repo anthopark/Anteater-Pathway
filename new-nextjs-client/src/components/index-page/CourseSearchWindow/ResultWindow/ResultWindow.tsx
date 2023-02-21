@@ -34,6 +34,10 @@ function ResultWindow(props: Props) {
   }, [props.searchResults]);
 
   const handleCourseSelect = (index: number) => {
+    if (!props.selectedIndices.has(index)) {
+      props.setClickedCourse(props.searchResults![index]);
+    }
+
     props.updateSelectedIndices((draft) => {
       if (draft.has(index)) {
         draft.delete(index);
@@ -88,7 +92,6 @@ function ResultWindow(props: Props) {
             key={index}
             onClick={() => {
               handleCourseSelect(index);
-              props.setClickedCourse(props.searchResults![index]);
             }}
           >
             <SearchResultCourseItem
