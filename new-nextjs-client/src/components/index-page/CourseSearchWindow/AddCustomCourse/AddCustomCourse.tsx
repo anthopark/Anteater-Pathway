@@ -119,8 +119,8 @@ const AddCustomCourse = () => {
                   {...register('department', {
                     required: true,
                     maxLength: {
-                      value: 9,
-                      message: 'Please use < 8 characters',
+                      value: 8,
+                      message: 'Please use < 9 characters',
                     },
                   })}
                 />
@@ -212,7 +212,7 @@ const AddCustomCourse = () => {
                 placeholder="Ex. Basic Statistics"
                 {...register('title', {
                   maxLength: {
-                    value: 80,
+                    value: 79,
                     message: 'Please use < 80 characters',
                   },
                 })}
