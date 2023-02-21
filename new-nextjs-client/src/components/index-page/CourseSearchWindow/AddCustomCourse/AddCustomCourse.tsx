@@ -30,7 +30,7 @@ import {
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useAppUser from '@hooks/useAppUser';
-import { Course, CourseInfo } from '@entities/course';
+import { Course } from '@entities/course';
 import { useState } from 'react';
 import useAppToast from '@hooks/useAppToast';
 
@@ -61,7 +61,7 @@ const AddCustomCourse = () => {
         deptCode: data.department.toUpperCase(),
         num: String(data.number).toUpperCase(),
         unit: Number(data.unit),
-      } as CourseInfo,
+      } as ResponseModel.Course,
       true
     );
     updateAppUser((draft) => draft.addToCourseBag([addedCourseItem]));
