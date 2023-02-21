@@ -134,7 +134,7 @@ const AddCustomCourse = () => {
               </div>
             </FormControl>
 
-            <div className={styles.additionalIntoWrapper}>
+            <div className={styles.additionalInfoWrapper}>
               <FormControl isRequired>
                 <div
                   className={styles.inputForm}
