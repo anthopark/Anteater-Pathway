@@ -5,6 +5,10 @@ import classNames from 'classnames/bind';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
 import AddCustomCourse from './AddCustomCourse/AddCustomCourse';
+import ResultWindow from './ResultWindow/ResultWindow';
+import { useImmer, Updater } from 'use-immer';
+
+const cx = classNames.bind(styles);
 
 interface Props {
   windowToggle: boolean;
@@ -12,6 +16,14 @@ interface Props {
 }
 
 const CourseSearchWindow = (props: Props) => {
+  const [searchResults, setSearchResults] = useState<
+    ResponseModel.Course[] | null
+  >(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
+    new Set<number>()
+  );
+
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -34,8 +46,6 @@ const CourseSearchWindow = (props: Props) => {
     setMounted(true);
   }, []);
 
-  const cx = classNames.bind(styles);
-
   if (!mounted) {
     return null;
   }
@@ -50,17 +60,42 @@ const CourseSearchWindow = (props: Props) => {
       <div ref={contentRef} className={styles.contentWrapper}>
         <div className={styles.container}>
           {/* top left */}
-          <SearchControl />
+          <SearchControl
+            setIsLoading={setIsLoading}
+            setSearchResults={setSearchResults}
+            updateSelectedIndices={updateSelectedIndices}
+          />
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
             <AddCustomCourse />
           </div>
+
           {/* row 2 column 1 */}
-          <div className={styles.leftPane}></div>
+          <div className={cx('result-window-wrapper')}>
+            <ResultWindow
+              isLoading={isLoading}
+              searchResults={searchResults}
+              selectedIndices={selectedIndices}
+              updateSelectedIndices={updateSelectedIndices}
+            />
+          </div>
 
           {/* row 2 column 2 */}
           <div className={styles.rightPane}></div>
+
+          {/* row 3 column 1 */}
+          <div className={cx('footer-right')}>
+            <AppButton
+              isDisabled
+              kind="primary"
+              leftIcon={<FontAwesomeIcon icon={plus} />}
+            >
+              Add to Course Bag
+            </AppButton>
+          </div>
+
+          <div className={cx('footer-left')}></div>
         </div>
       </div>
     </animated.div>
