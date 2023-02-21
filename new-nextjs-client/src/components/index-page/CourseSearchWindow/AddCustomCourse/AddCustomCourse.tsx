@@ -56,11 +56,10 @@ const AddCustomCourse = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     let addedCourseItem = new Course(
       {
-        deptCode: data.department,
-        num: String(data.number),
+        deptCode: data.department.toUpperCase(),
+        num: String(data.number).toUpperCase(),
         unit: Number(data.unit),
       } as CourseInfo,
       true
@@ -71,7 +70,9 @@ const AddCustomCourse = () => {
 
     showToastBox({
       status: 'success',
-      highlightedData: `${data.department} ${data.number}`,
+      highlightedData: `${data.department.toUpperCase()} ${String(
+        data.number
+      ).toUpperCase()}`,
       message: 'course added',
       duration: 3500,
     });
@@ -184,7 +185,7 @@ const AddCustomCourse = () => {
                     {...register('unit', {
                       required: true,
                       min: { value: 0, message: "Unit can't be negative" },
-                      max: { value: 19, message: 'Unit is too big' },
+                      max: { value: 20, message: 'Unit is too big' },
                       validate: (value) =>
                         !isNaN(value) || 'Invalid value for unit',
                     })}
