@@ -48,7 +48,7 @@ const AddCustomCourse = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -63,6 +63,8 @@ const AddCustomCourse = () => {
       true
     );
     updateAppUser((draft) => draft.addToCourseBag([addedCourseItem]));
+    setIsOpen(false);
+    reset();
   };
 
   return (
@@ -173,6 +175,8 @@ const AddCustomCourse = () => {
                       required: true,
                       min: { value: 0, message: "Unit can't be negative" },
                       max: { value: 19, message: 'Unit is too big' },
+                      validate: (value) =>
+                        !isNaN(value) || 'Invalid value for unit',
                     })}
                   />
                   {errors.unit && (
