@@ -32,6 +32,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import useAppUser from '@hooks/useAppUser';
 import { Course, CourseInfo } from '@entities/course';
 import { useState } from 'react';
+import useAppToast from '@hooks/useAppToast';
 
 type Inputs = {
   department: string;
@@ -44,6 +45,8 @@ const AddCustomCourse = () => {
   const { appUser, updateAppUser } = useAppUser();
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+
+  const showToastBox = useAppToast();
 
   const {
     register,
@@ -65,6 +68,13 @@ const AddCustomCourse = () => {
     updateAppUser((draft) => draft.addToCourseBag([addedCourseItem]));
     setIsOpen(false);
     reset();
+
+    showToastBox({
+      status: 'success',
+      highlightedData: `${data.department} ${data.number}`,
+      message: 'course added',
+      duration: 3500,
+    });
   };
 
   return (
