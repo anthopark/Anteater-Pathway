@@ -19,3 +19,13 @@
     width: 100%;
   }
 }
+
+.errorMessage {
+  color: $red-4;
+}
+
+[data-theme='dark'] {
+  .errorMessage {
+    color: $red-2;
+  }
+}

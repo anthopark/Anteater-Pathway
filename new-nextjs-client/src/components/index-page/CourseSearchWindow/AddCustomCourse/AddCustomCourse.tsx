@@ -43,6 +43,7 @@ type Inputs = {
 const AddCustomCourse = () => {
   const { appUser, updateAppUser } = useAppUser();
   const { theme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
 
   const {
     register,
@@ -65,9 +66,17 @@ const AddCustomCourse = () => {
   };
 
   return (
-    <Popover placement="bottom-end">
+    <Popover
+      placement="bottom-end"
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+    >
       <PopoverTrigger>
-        <AppButton kind="secondary" leftIcon={<FontAwesomeIcon icon={plus} />}>
+        <AppButton
+          onClick={() => setIsOpen(!isOpen)}
+          kind="secondary"
+          leftIcon={<FontAwesomeIcon icon={plus} />}
+        >
           Custom
         </AppButton>
       </PopoverTrigger>
@@ -77,6 +86,7 @@ const AddCustomCourse = () => {
         color={theme === 'light' ? defaultText : defaultTextDark}
         padding="1.2rem .8rem"
         bg={theme === 'light' ? gray7 : gray2}
+        // bg={theme === 'light' ? bgColor2 : bgColorDark2}
         w={'24.5rem'}
       >
         <PopoverBody>
@@ -98,12 +108,16 @@ const AddCustomCourse = () => {
                     required: true,
                     maxLength: {
                       value: 9,
-                      message: 'Please use < 9 characters',
+                      message: 'Please use < 8 characters',
                     },
                   })}
                 />
 
-                {errors.department && <span>{errors.department.message}</span>}
+                {errors.department && (
+                  <span className={styles.errorMessage}>
+                    {errors.department.message}
+                  </span>
+                )}
               </div>
             </FormControl>
 
@@ -127,12 +141,16 @@ const AddCustomCourse = () => {
                     {...register('number', {
                       required: true,
                       maxLength: {
-                        value: 6,
+                        value: 5,
                         message: 'Please use < 6 characters',
                       },
                     })}
                   />
-                  {errors.number && <span>{errors.number.message}</span>}
+                  {errors.number && (
+                    <span className={styles.errorMessage}>
+                      {errors.number.message}
+                    </span>
+                  )}
                 </div>
               </FormControl>
               <FormControl isRequired>
@@ -157,7 +175,11 @@ const AddCustomCourse = () => {
                       max: { value: 19, message: 'Unit is too big' },
                     })}
                   />
-                  {errors.unit && <span>{errors.unit.message}</span>}
+                  {errors.unit && (
+                    <span className={styles.errorMessage}>
+                      {errors.unit.message}
+                    </span>
+                  )}
                 </div>
               </FormControl>
             </div>
@@ -181,7 +203,11 @@ const AddCustomCourse = () => {
                   },
                 })}
               />
-              {errors.title && <span>{errors.title.message}</span>}
+              {errors.title && (
+                <span className={styles.errorMessage}>
+                  {errors.title.message}
+                </span>
+              )}
             </div>
 
             <div className={styles.createBtnWrapper}>
