@@ -12,6 +12,7 @@ export const updateCourseAttributes = async () => {
     { name: 'Grading option', value: 'gradingOption', ordinal: 6 },
     { name: 'Repeatability', value: 'repeatability', ordinal: 7 },
     { name: 'Restriction', value: 'restriction', ordinal: 8 },
+    { name: 'Description', value: 'description', ordinal: 9 },
   ];
 
   functions.logger.info(`Updating ${attributes.length} course attributes`);

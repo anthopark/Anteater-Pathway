@@ -31,6 +31,7 @@ interface Course {
   gradingOption: string | null;
   repeatability: string | null;
   restriction: string | null;
+  description: string | null;
 }
 
 interface Attribute {
