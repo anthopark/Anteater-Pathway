@@ -16,8 +16,6 @@ import {
 } from '@chakra-ui/react';
 
 import {
-  bgColor2,
-  bgColorDark2,
   borderRadiusSM,
   controlHeightSM,
   defaultText,
@@ -99,7 +97,6 @@ const AddCustomCourse = () => {
         color={theme === 'light' ? defaultText : defaultTextDark}
         padding="1.2rem .8rem"
         bg={theme === 'light' ? gray7 : gray2}
-        // bg={theme === 'light' ? bgColor2 : bgColorDark2}
         w={'24.5rem'}
       >
         <PopoverBody>

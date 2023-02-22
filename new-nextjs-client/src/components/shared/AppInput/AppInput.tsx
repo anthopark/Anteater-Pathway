@@ -25,7 +25,7 @@ import { forwardRef, useEffect, useState } from 'react';
 interface Props {
   onChange?: (newValue: any) => void;
   value?: any;
-  id?: string | undefined;
+  id?: string;
   placeholder: string;
   height?: string;
 }
