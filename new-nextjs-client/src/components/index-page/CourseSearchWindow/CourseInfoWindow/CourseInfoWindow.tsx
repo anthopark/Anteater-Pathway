@@ -1,6 +1,8 @@
 import styles from './CourseInfoWindow.module.scss';
 import classNames from 'classnames/bind';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
+import DEFAULT_COURSE_ATTRIBUTES_DATA from 'src/data/default-course-attributes-data.json';
+import { getAllCourseAttributes } from 'src/api/course';
 
 const cx = classNames.bind(styles);
 
@@ -24,9 +26,20 @@ const getQuarterText = (quarterCode: string) => {
 };
 
 function CourseInfoWindow(props: Props) {
+  const [attributes, setAttributes] = useState<ResponseModel.CourseAttribute[]>(
+    DEFAULT_COURSE_ATTRIBUTES_DATA
+  );
   let content: ReactNode;
 
-  console.log(props.clickedCourse?.offered);
+  useEffect(() => {
+    getAllCourseAttributes()
+      .then((data) => {
+        setAttributes(data);
+      })
+      .catch(() => {
+        setAttributes(DEFAULT_COURSE_ATTRIBUTES_DATA);
+      });
+  }, []);
 
   if (props.clickedCourse) {
     content = (
@@ -67,6 +80,18 @@ function CourseInfoWindow(props: Props) {
             </div>
           </div>
         ) : null}
+        {attributes.map((attr) => {
+          if (props.clickedCourse![attr.value]) {
+            return (
+              <div className={cx('course-attribute-section')}>
+                <span className={cx('attribute-label')}>{attr.name}:</span>
+                <div className={cx('attribute-content')}>
+                  {props.clickedCourse![attr.value]}
+                </div>
+              </div>
+            );
+          }
+        })}
       </div>
     );
   }

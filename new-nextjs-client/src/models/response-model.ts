@@ -1,5 +1,6 @@
 namespace ResponseModel {
   export interface Course {
+    [key: string]: string | number | null | boolean | string[];
     deptCode: string;
     num: string;
     title: string;
@@ -24,5 +25,11 @@ namespace ResponseModel {
   export interface Department {
     name: string;
     code: string;
+  }
+
+  export interface CourseAttribute {
+    name: string;
+    value: string;
+    ordinal: number;
   }
 }

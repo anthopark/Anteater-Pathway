@@ -5,6 +5,7 @@ const baseRouterUrl = '/planner/course';
 const endpoints = {
   allDepartments: `${baseRouterUrl}/all-departments`,
   allDepartmentCourses: baseRouterUrl,
+  allCourseAttributes: `${baseRouterUrl}/all-attributes`,
 };
 
 export const getAllDepartments = async (): Promise<
@@ -20,5 +21,12 @@ export const getAllDepartmentCourses = async (
   const response = await axiosClient.get(
     `${endpoints.allDepartmentCourses}/${encodeURIComponent(deptCode)}`
   );
+  return response.data;
+};
+
+export const getAllCourseAttributes = async (): Promise<
+  ResponseModel.CourseAttribute[]
+> => {
+  const response = await axiosClient.get(endpoints.allCourseAttributes);
   return response.data;
 };
