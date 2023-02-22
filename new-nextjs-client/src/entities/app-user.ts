@@ -11,6 +11,7 @@ interface IAppUser {
   addYear: (year: number) => void;
   courseBag: ICourse[];
   clearCourseBag: () => void;
+  addToCourseBag: (courses: ICourse[]) => void;
   degreePlan: IDegreePlan;
   removeYear: (year: number) => void;
   removeCourseItem: (courseId: string, isInCourseBag: boolean) => void;

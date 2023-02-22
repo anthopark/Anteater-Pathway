@@ -2,14 +2,14 @@ import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import classNames from 'classnames/bind';
+import { useTheme } from 'next-themes';
+import SearchControl from './SearchControl/SearchControl';
+import AddCustomCourse from './AddCustomCourse/AddCustomCourse';
+import ResultWindow from './ResultWindow/ResultWindow';
+import { useImmer, Updater } from 'use-immer';
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
-import { useTheme } from 'next-themes';
-import SearchControl from './SearchControl/SearchControl';
-import ResultWindow from './ResultWindow/ResultWindow';
-import { useImmer, Updater } from 'use-immer';
-
 const cx = classNames.bind(styles);
 
 interface Props {
@@ -70,12 +70,7 @@ const CourseSearchWindow = (props: Props) => {
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
-            <AppButton
-              kind="secondary"
-              leftIcon={<FontAwesomeIcon icon={plus} />}
-            >
-              Custom
-            </AppButton>
+            <AddCustomCourse />
           </div>
 
           {/* row 2 column 1 */}

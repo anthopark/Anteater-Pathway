@@ -7,6 +7,7 @@ import {
   ReactElement,
   ReactNode,
   MouseEvent,
+  forwardRef,
 } from 'react';
 import { useTheme } from 'next-themes';
 import {
@@ -182,135 +183,142 @@ interface Props {
   rightIcon?: ReactElement;
   fontSize?: string;
   width?: string;
+  height?: string;
   padding?: string;
 }
 
-function AppButton({
-  children,
-  isDisabled,
-  kind,
-  leftIcon,
-  onClick,
-  rightIcon,
-  type,
-  ...rest
-}: Props) {
-  const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
+const AppButton = forwardRef<HTMLButtonElement, Props>(
+  (
+    {
+      children,
+      isDisabled,
+      kind,
+      leftIcon,
+      onClick,
+      rightIcon,
+      type,
+      ...rest
+    }: Props,
+    ref
+  ) => {
+    const [mounted, setMounted] = useState(false);
+    const { theme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+    useEffect(() => {
+      setMounted(true);
+    }, []);
 
-  const getBgColor = (useCase: 'default' | 'hover' | 'active'): string => {
-    let color: string;
+    const getBgColor = (useCase: 'default' | 'hover' | 'active'): string => {
+      let color: string;
 
-    switch (kind) {
-      case 'primary':
-        color = primaryBgColorMap[useCase][theme!]!;
-        break;
-      case 'secondary':
-        color = secondaryBgColorMap[useCase][theme!]!;
-        break;
-      case 'danger':
-        color = dangerBgColorMap[useCase][theme!]!;
-        break;
+      switch (kind) {
+        case 'primary':
+          color = primaryBgColorMap[useCase][theme!]!;
+          break;
+        case 'secondary':
+          color = secondaryBgColorMap[useCase][theme!]!;
+          break;
+        case 'danger':
+          color = dangerBgColorMap[useCase][theme!]!;
+          break;
+      }
+
+      return color;
+    };
+
+    const getFontColor = (useCase: 'default' | 'hover' | 'active'): string => {
+      let color: string;
+
+      switch (kind) {
+        case 'primary':
+          color = primaryFontColorMap[useCase][theme!]!;
+          break;
+        case 'secondary':
+          color = secondaryFontColorMap[useCase][theme!]!;
+          break;
+        case 'danger':
+          color = dangerFontColorMap[useCase][theme!]!;
+          break;
+      }
+
+      return color;
+    };
+
+    const getBorderColor = (
+      useCase: 'default' | 'hover' | 'active'
+    ): string | undefined => {
+      let color: string | undefined;
+
+      switch (kind) {
+        case 'primary':
+          color = primaryBorderColorMap[useCase][theme!] ?? undefined;
+          break;
+        case 'secondary':
+          color = secondaryBorderColorMap[useCase][theme!] ?? undefined;
+          break;
+        case 'danger':
+          color = dangerBorderColorMap[useCase][theme!] ?? undefined;
+          break;
+      }
+
+      return color;
+    };
+
+    if (!mounted) {
+      return null;
     }
 
-    return color;
-  };
+    const cx = classNames.bind(style);
 
-  const getFontColor = (useCase: 'default' | 'hover' | 'active'): string => {
-    let color: string;
-
-    switch (kind) {
-      case 'primary':
-        color = primaryFontColorMap[useCase][theme!]!;
-        break;
-      case 'secondary':
-        color = secondaryFontColorMap[useCase][theme!]!;
-        break;
-      case 'danger':
-        color = dangerFontColorMap[useCase][theme!]!;
-        break;
-    }
-
-    return color;
-  };
-
-  const getBorderColor = (
-    useCase: 'default' | 'hover' | 'active'
-  ): string | undefined => {
-    let color: string | undefined;
-
-    switch (kind) {
-      case 'primary':
-        color = primaryBorderColorMap[useCase][theme!] ?? undefined;
-        break;
-      case 'secondary':
-        color = secondaryBorderColorMap[useCase][theme!] ?? undefined;
-        break;
-      case 'danger':
-        color = dangerBorderColorMap[useCase][theme!] ?? undefined;
-        break;
-    }
-
-    return color;
-  };
-
-  if (!mounted) {
-    return null;
-  }
-
-  const cx = classNames.bind(style);
-
-  return (
-    <div
-      className={cx('container', {
-        disabled: isDisabled,
-      })}
-    >
-      <Button
-        bgColor={getBgColor('default')}
-        borderColor={getBorderColor('default')}
-        borderWidth={
-          getBorderColor('default') !== undefined ? '1px' : undefined
-        }
-        borderRadius={borderRadiusSM}
-        color={getFontColor('default')}
-        fontSize={fontSizeMD}
-        fontWeight={500}
-        height={controlHeightMD}
-        leftIcon={leftIcon}
-        letterSpacing={'0.5px'}
-        onClick={onClick}
-        padding={'0 1.2rem'}
-        rightIcon={rightIcon}
-        type={type}
-        _hover={{
-          bgColor: getBgColor('hover'),
-          borderColor: getBorderColor('hover'),
-          color: getFontColor('hover'),
-        }}
-        _active={{
-          bgColor: getBgColor('active'),
-          borderColor: getBorderColor('active'),
-          color: getFontColor('active'),
-        }}
-        style={
-          isDisabled
-            ? {
-                opacity: 0.4,
-                pointerEvents: 'none',
-              }
-            : undefined
-        }
-        {...rest}
+    return (
+      <div
+        className={cx('container', {
+          disabled: isDisabled,
+        })}
       >
-        {children}
-      </Button>
-    </div>
-  );
-}
+        <Button
+          ref={ref}
+          bgColor={getBgColor('default')}
+          borderColor={getBorderColor('default')}
+          borderWidth={
+            getBorderColor('default') !== undefined ? '1px' : undefined
+          }
+          borderRadius={borderRadiusSM}
+          color={getFontColor('default')}
+          fontSize={fontSizeMD}
+          fontWeight={500}
+          height={controlHeightMD}
+          leftIcon={leftIcon}
+          letterSpacing={'0.5px'}
+          onClick={onClick}
+          padding={'0 1.2rem'}
+          rightIcon={rightIcon}
+          type={type}
+          _hover={{
+            bgColor: getBgColor('hover'),
+            borderColor: getBorderColor('hover'),
+            color: getFontColor('hover'),
+          }}
+          _active={{
+            bgColor: getBgColor('active'),
+            borderColor: getBorderColor('active'),
+            color: getFontColor('active'),
+          }}
+          style={
+            isDisabled
+              ? {
+                  opacity: 0.4,
+                  pointerEvents: 'none',
+                }
+              : undefined
+          }
+          {...rest}
+        >
+          {children}
+        </Button>
+      </div>
+    );
+  }
+);
 
 export default AppButton;
