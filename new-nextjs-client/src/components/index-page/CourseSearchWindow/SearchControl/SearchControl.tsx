@@ -105,6 +105,18 @@ function SearchControl(props: Props) {
     }
   }, [selectValue]);
 
+  useEffect(() => {
+    if (selectValue) {
+      getAllDepartmentCourses(selectValue).then((courses) =>
+        props.setSearchResults(
+          courses.filter((course) =>
+            course.num.includes(inputValue?.toUpperCase()!)
+          )
+        )
+      );
+    }
+  }, [inputValue]);
+
   if (!mounted) {
     return null;
   }
