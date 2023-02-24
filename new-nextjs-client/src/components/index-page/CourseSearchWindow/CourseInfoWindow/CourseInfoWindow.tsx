@@ -80,10 +80,10 @@ function CourseInfoWindow(props: Props) {
             </div>
           </div>
         ) : null}
-        {attributes.map((attr) => {
+        {attributes.map((attr, index) => {
           if (props.clickedCourse![attr.value]) {
             return (
-              <div className={cx('course-attribute-section')}>
+              <div className={cx('course-attribute-section')} key={index}>
                 <span className={cx('attribute-label')}>{attr.name}:</span>
                 <div className={cx('attribute-content')}>
                   {props.clickedCourse![attr.value]}

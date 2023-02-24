@@ -98,6 +98,7 @@ function ResultWindow(props: Props) {
               deptCode={courseInfo.deptCode}
               num={courseInfo.num}
               isSelected={props.selectedIndices.has(index)}
+              setSelectedIndices={props.selectedIndices}
             />
           </div>
         ))}
