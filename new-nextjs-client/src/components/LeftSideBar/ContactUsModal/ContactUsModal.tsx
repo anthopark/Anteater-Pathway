@@ -8,6 +8,20 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
+import {
+  borderRadiusMD,
+  defaultText,
+  defaultTextDark,
+  fontSizeLG,
+  gray1,
+  gray4,
+  gray7,
+  letterSpacingLG,
+  letterSpacingSM,
+} from '@styles/variables';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface Props {
   isOpen: boolean;
@@ -15,17 +29,50 @@ interface Props {
 }
 
 const ContactUsModal = ({ isOpen, onClose }: Props) => {
-  return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Header</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>Body</ModalBody>
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
 
-        <ModalFooter>
-          <button>Submit</button>
-        </ModalFooter>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+      <ModalOverlay />
+      <ModalContent
+        borderRadius={borderRadiusMD}
+        bgColor={theme === 'light' ? gray7 : gray1}
+      >
+        <ModalHeader
+          fontSize="2rem"
+          color={theme === 'light' ? defaultText : defaultTextDark}
+          letterSpacing={letterSpacingLG}
+          textAlign="center"
+        >
+          <div className={styles.logoContainer}>
+            <Image src="/anteater-logo.svg" alt="logo" fill />
+          </div>
+          <span>Help us become more useful to you!</span>
+        </ModalHeader>
+
+        <ModalCloseButton
+          fontSize="1.2rem"
+          mt=".7rem"
+          mr=".7rem"
+          color={gray4}
+          onClick={onClose}
+        />
+        <ModalBody
+          fontSize={fontSizeLG}
+          letterSpacing={letterSpacingSM}
+          color={theme === 'light' ? defaultText : defaultTextDark}
+        >
+          Body
+        </ModalBody>
       </ModalContent>
     </Modal>
   );
