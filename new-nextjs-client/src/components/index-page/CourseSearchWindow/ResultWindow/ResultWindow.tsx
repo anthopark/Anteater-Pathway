@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 interface Props {
   isLoading: boolean;
-  searchResults: ResponseModel.Course[] | null;
+  displayResults: ResponseModel.Course[] | null;
   selectedIndices: Set<number>;
   updateSelectedIndices: Updater<Set<number>>;
 }
@@ -21,16 +21,16 @@ function ResultWindow(props: Props) {
   const { theme } = useTheme();
 
   const isInitialState = useMemo(() => {
-    return props.searchResults === null;
-  }, [props.searchResults]);
+    return props.displayResults === null;
+  }, [props.displayResults]);
 
   const isResultEmpty = useMemo(() => {
-    return props.searchResults && props.searchResults.length === 0;
-  }, [props.searchResults]);
+    return props.displayResults && props.displayResults.length === 0;
+  }, [props.displayResults]);
 
   const isResultReturned = useMemo(() => {
-    return props.searchResults && props.searchResults.length > 0;
-  }, [props.searchResults]);
+    return props.displayResults && props.displayResults.length > 0;
+  }, [props.displayResults]);
 
   const handleCourseSelect = (index: number) => {
     props.updateSelectedIndices((draft) => {
@@ -82,7 +82,7 @@ function ResultWindow(props: Props) {
   } else if (isResultReturned) {
     content = (
       <div className={cx('grid-container')}>
-        {props.searchResults!.map((courseInfo, index) => (
+        {props.displayResults!.map((courseInfo, index) => (
           <div key={index} onClick={() => handleCourseSelect(index)}>
             <SearchResultCourseItem
               deptCode={courseInfo.deptCode}
