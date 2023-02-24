@@ -9,7 +9,7 @@ import ResultWindow from './ResultWindow/ResultWindow';
 import { useImmer, Updater } from 'use-immer';
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { plus, search } from '@styles/fontawesome';
+import { plus } from '@styles/fontawesome';
 const cx = classNames.bind(styles);
 
 interface Props {
