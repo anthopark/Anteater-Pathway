@@ -108,7 +108,7 @@ function SearchControl(props: Props) {
   }, [selectValue]);
 
   useEffect(() => {
-    if (selectValue) {
+    if (selectValue && inputValue !== null) {
       const filteredData = props.searchResults!.filter((course) =>
         course.num.includes(inputValue.toUpperCase())
       );
