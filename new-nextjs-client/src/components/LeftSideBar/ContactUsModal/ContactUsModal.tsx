@@ -22,6 +22,7 @@ import {
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import ContactUsForm from '../ContactUsForm/ContactUsForm';
 
 interface Props {
   isOpen: boolean;
@@ -46,6 +47,7 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
       <ModalContent
         borderRadius={borderRadiusMD}
         bgColor={theme === 'light' ? gray7 : gray1}
+        padding="2.5rem 0"
       >
         <ModalHeader
           fontSize="2rem"
@@ -70,8 +72,10 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
           fontSize={fontSizeLG}
           letterSpacing={letterSpacingSM}
           color={theme === 'light' ? defaultText : defaultTextDark}
+          textAlign="center"
+          padding="2rem 5rem"
         >
-          Body
+          <ContactUsForm />
         </ModalBody>
       </ModalContent>
     </Modal>

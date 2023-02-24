@@ -1,0 +1,11 @@
+.inputForm {
+  margin-bottom: 2rem;
+  .inputLabel {
+    font-size: $fs-md;
+  }
+}
+
+.sendBtnWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
