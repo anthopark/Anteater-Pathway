@@ -42,23 +42,24 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
+    <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent
         borderRadius={borderRadiusMD}
         bgColor={theme === 'light' ? gray7 : gray1}
-        padding="2.5rem 0"
       >
+        <div className={styles.logoContainer}>
+          <Image src="/anteater-logo.svg" alt="logo" fill />
+        </div>
         <ModalHeader
-          fontSize="2rem"
-          color={theme === 'light' ? defaultText : defaultTextDark}
-          letterSpacing={letterSpacingLG}
+          pt="3rem"
           textAlign="center"
+          letterSpacing={letterSpacingLG}
+          fontSize={fontSizeLG}
+          fontWeight="light"
+          color={theme === 'light' ? defaultText : defaultTextDark}
         >
-          <div className={styles.logoContainer}>
-            <Image src="/anteater-logo.svg" alt="logo" fill />
-          </div>
-          <span>Help us become more useful to you!</span>
+          Help us become more useful to you!
         </ModalHeader>
 
         <ModalCloseButton
@@ -66,14 +67,14 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
           mt=".7rem"
           mr=".7rem"
           color={gray4}
-          onClick={onClose}
         />
         <ModalBody
           fontSize={fontSizeLG}
           letterSpacing={letterSpacingSM}
           color={theme === 'light' ? defaultText : defaultTextDark}
           textAlign="center"
-          padding="2rem 5rem"
+          padding="1rem 5rem"
+          p="3.2rem 4rem"
         >
           <ContactUsForm />
         </ModalBody>

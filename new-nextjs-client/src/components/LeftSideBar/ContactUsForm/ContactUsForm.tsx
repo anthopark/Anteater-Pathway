@@ -118,7 +118,7 @@ const ContactUsForm = () => {
         </div>
       </FormControl>
       <div className={styles.sendBtnWrapper}>
-        <AppButton kind="primary" type="submit">
+        <AppButton kind="primary" type="submit" width="7rem">
           Send
         </AppButton>
       </div>
