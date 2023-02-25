@@ -33,11 +33,11 @@ function ResultWindow(props: Props) {
     return props.searchResults && props.searchResults.length > 0;
   }, [props.searchResults]);
 
-  const handleCourseSelect = (index: number) => {
-    if (!props.selectedIndices.has(index)) {
-      props.setClickedCourse(props.searchResults![index]);
-    }
+  const handleInfoClick = (index: number) => {
+    props.setClickedCourse(props.searchResults![index]);
+  };
 
+  const handleCourseSelect = (index: number) => {
     props.updateSelectedIndices((draft) => {
       if (draft.has(index)) {
         draft.delete(index);
@@ -98,7 +98,7 @@ function ResultWindow(props: Props) {
               deptCode={courseInfo.deptCode}
               num={courseInfo.num}
               isSelected={props.selectedIndices.has(index)}
-              setSelectedIndices={props.selectedIndices}
+              handleInfoClick={() => handleInfoClick(index)}
             />
           </div>
         ))}

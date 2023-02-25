@@ -10,7 +10,7 @@ interface Props {
   deptCode: string;
   num: string;
   isSelected: boolean;
-  setSelectedIndices: Updater<Set<number>>;
+  handleInfoClick: () => void;
 }
 
 const cx = classNames.bind(styles);
@@ -43,7 +43,11 @@ function SearchResultCourseItem(props: Props) {
             className={cx('info-icon-wrapper')}
             onClick={(e) => e.stopPropagation()}
           >
-            <FontAwesomeIcon className={cx('info-icon')} icon={info} />
+            <FontAwesomeIcon
+              className={cx('info-icon')}
+              icon={info}
+              onClick={props.handleInfoClick}
+            />
           </div>
         </>
       ) : null}

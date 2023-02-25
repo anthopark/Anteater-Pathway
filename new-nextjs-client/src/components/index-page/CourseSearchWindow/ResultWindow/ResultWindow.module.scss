@@ -10,7 +10,7 @@
   }
 
   &.display-courses {
-    padding: 1.5rem 0.8rem 1rem 1.5rem;
+    padding: 1rem 0.5rem 1rem 1.5rem;
   }
 }
 
@@ -29,13 +29,13 @@
 
 .grid-container {
   max-height: 100%;
-  padding-right: 0.7rem;
+  padding-right: 0.8rem;
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  column-gap: 0.8rem;
-  row-gap: 1rem;
+  column-gap: 1.2rem;
+  row-gap: 1.3rem;
 
   @include scrollbar-light();
 }

@@ -1,3 +1,5 @@
+$info-icon-color: #0eabc0;
+
 @keyframes fade-in-opacity {
   from {
     opacity: 0;
@@ -13,7 +15,7 @@
   background-color: $course-1;
   padding: 0rem 1rem;
   user-select: none;
-  margin: 0.3rem;
+  margin-top: 0.4rem;
   position: relative;
   cursor: pointer;
 
@@ -29,22 +31,27 @@
   width: 100%;
   height: 100%;
   border-radius: $br-sm;
-  @include animate-course-overlay(overlay-light, 0.6);
+  // @include animate-course-overlay(overlay-light, 0.3);
 }
 
 .info-icon-wrapper {
   position: absolute;
-  top: 0.1rem;
-  right: 0.2rem;
+  top: -0.4rem;
+  right: -0.6rem;
   cursor: default;
-  padding: 0.6rem;
-  animation: fade-in-opacity 500ms;
+  opacity: 0;
+  padding-bottom: 0.3rem;
+  padding-left: 0.3rem;
+  animation: fade-in-opacity 300ms forwards;
+  animation-delay: 300ms;
 }
 
 .info-icon {
   cursor: pointer;
   font-size: 2.1rem;
-  color: $gray-3;
+  color: $info-icon-color;
+  background-color: $white-1;
+  border-radius: 100vw;
 }
 
 .deptCodeNum {
@@ -68,11 +75,11 @@
   }
 
   .overlay {
-    @include animate-course-overlay(overlay-dark, 0.3);
+    // @include animate-course-overlay(overlay-dark, 0.3);
   }
 
   .info-icon {
-    color: $gray-2;
+    color: $info-icon-color;
   }
 
   .deptCodeNum {
