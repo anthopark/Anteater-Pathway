@@ -8,6 +8,9 @@ import AddCustomCourse from './AddCustomCourse/AddCustomCourse';
 import ResultWindow from './ResultWindow/ResultWindow';
 import { useImmer, Updater } from 'use-immer';
 import CourseInfoWindow from './CourseInfoWindow/CourseInfoWindow';
+import AppButton from '@components/shared/AppButton/AppButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { plus } from '@styles/fontawesome';
 
 const cx = classNames.bind(styles);
 
@@ -26,8 +29,8 @@ const CourseSearchWindow = (props: Props) => {
     ResponseModel.Course[] | null
   >(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
-    new Set<number>()
+  const [selectedIds, updateSelectedIds] = useImmer<Set<string>>(
+    new Set<string>()
   );
 
   const [mounted, setMounted] = useState(false);
@@ -76,7 +79,7 @@ const CourseSearchWindow = (props: Props) => {
             searchResults={searchResults}
             setSearchResults={setSearchResults}
             setDisplayResults={setDisplayResults}
-            updateSelectedIndices={updateSelectedIndices}
+            updateSelectedIds={updateSelectedIds}
           />
 
           {/* top right */}
@@ -89,9 +92,9 @@ const CourseSearchWindow = (props: Props) => {
             <ResultWindow
               isLoading={isLoading}
               displayResults={displayResults}
-              selectedIndices={selectedIndices}
+              selectedIds={selectedIds}
               setClickedCourse={setClickedCourse}
-              updateSelectedIndices={updateSelectedIndices}
+              updateSelectedIds={updateSelectedIds}
             />
           </div>
 

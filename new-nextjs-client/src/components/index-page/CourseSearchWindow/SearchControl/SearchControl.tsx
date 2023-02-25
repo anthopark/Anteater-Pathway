@@ -37,9 +37,9 @@ interface Props {
   setClickedCourse: (course: ResponseModel.Course | null) => void;
   setIsLoading: (isLoading: boolean) => void;
   searchResults: ResponseModel.Course[] | null;
-  setSearchResults: (searchResults: ResponseModel.Course[]) => void;
+  setSearchResults: (searchResults: ResponseModel.Course[] | null) => void;
   setDisplayResults: (displayResults: ResponseModel.Course[]) => void;
-  updateSelectedIndices: Updater<Set<number>>;
+  updateSelectedIds: Updater<Set<string>>;
 }
 
 function SearchControl(props: Props) {
@@ -92,6 +92,7 @@ function SearchControl(props: Props) {
 
   useEffect(() => {
     setInputValue('');
+
     if (selectValue) {
       props.setIsLoading(true);
       getAllDepartmentCourses(selectValue)
@@ -100,7 +101,7 @@ function SearchControl(props: Props) {
         })
         .catch(() => props.setSearchResults([]))
         .finally(() => {
-          props.updateSelectedIndices((draft) => {
+          props.updateSelectedIds((draft) => {
             draft.clear();
           });
           props.setIsLoading(false);

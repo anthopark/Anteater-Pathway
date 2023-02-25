@@ -7,7 +7,7 @@
     font-size: $fs-md;
 
     .container {
-      padding: 2rem;
+      padding: 2rem 2rem 1.5rem 2rem;
       display: grid;
       grid-template-columns: 6.5fr 3.5fr;
       grid-template-rows: auto 30rem auto;
@@ -33,14 +33,14 @@
 .footer-right {
   display: flex;
   justify-content: flex-end;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   padding-right: 2rem;
 }
 
 .footer-left {
   display: flex;
   justify-content: flex-end;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 [data-theme='dark'] {
