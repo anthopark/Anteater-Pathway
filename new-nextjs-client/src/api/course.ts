@@ -21,7 +21,16 @@ export const getAllDepartmentCourses = async (
   const response = await axiosClient.get(
     `${endpoints.allDepartmentCourses}/${encodeURIComponent(deptCode)}`
   );
-  return response.data;
+  const sortedData = response.data.sort(
+    (a: ResponseModel.Course, b: ResponseModel.Course) => {
+      return a.num.localeCompare(b.num, undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      });
+    }
+  );
+
+  return sortedData;
 };
 
 export const getAllCourseAttributes = async (): Promise<

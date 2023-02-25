@@ -2,11 +2,9 @@ import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import classNames from 'classnames/bind';
-import AppButton from '@components/shared/AppButton/AppButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { plus } from '@styles/fontawesome';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
+import AddCustomCourse from './AddCustomCourse/AddCustomCourse';
 import ResultWindow from './ResultWindow/ResultWindow';
 import { useImmer, Updater } from 'use-immer';
 import CourseInfoWindow from './CourseInfoWindow/CourseInfoWindow';
@@ -24,6 +22,9 @@ const CourseSearchWindow = (props: Props) => {
   >(null);
   const [clickedCourse, setClickedCourse] =
     useState<ResponseModel.Course | null>(null);
+  const [displayResults, setDisplayResults] = useState<
+    ResponseModel.Course[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
     new Set<number>()
@@ -36,6 +37,10 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
+
+  useEffect(() => {
+    setDisplayResults(searchResults);
+  }, [searchResults]);
 
   useEffect(() => {
     if (contentRef.current !== null) {
@@ -68,25 +73,22 @@ const CourseSearchWindow = (props: Props) => {
           <SearchControl
             setClickedCourse={setClickedCourse}
             setIsLoading={setIsLoading}
+            searchResults={searchResults}
             setSearchResults={setSearchResults}
+            setDisplayResults={setDisplayResults}
             updateSelectedIndices={updateSelectedIndices}
           />
 
           {/* top right */}
           <div className={styles.customBtnWrapper}>
-            <AppButton
-              kind="secondary"
-              leftIcon={<FontAwesomeIcon icon={plus} />}
-            >
-              Custom
-            </AppButton>
+            <AddCustomCourse />
           </div>
 
           {/* row 2 column 1 */}
           <div className={cx('result-window-wrapper')}>
             <ResultWindow
               isLoading={isLoading}
-              searchResults={searchResults}
+              displayResults={displayResults}
               selectedIndices={selectedIndices}
               setClickedCourse={setClickedCourse}
               updateSelectedIndices={updateSelectedIndices}

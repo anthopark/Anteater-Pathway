@@ -12,7 +12,7 @@ export class Course implements ICourse {
   private _id: string;
   public deptCode: string;
   public num: string;
-  public title: string;
+  public title: string | null;
   public unit: number | null;
   public isVariableUnit: boolean;
   public minUnit: number | null;
@@ -24,7 +24,7 @@ export class Course implements ICourse {
     this._id = nanoid();
     this.deptCode = courseResponse.deptCode;
     this.num = courseResponse.num;
-    this.title = courseResponse.title;
+    this.title = courseResponse.title ?? null;
     this.unit = courseResponse.unit;
     this.isVariableUnit = courseResponse.isVariableUnit ?? false;
     this.minUnit = courseResponse.minUnit ?? null;
