@@ -1,4 +1,7 @@
-$info-icon-color: #0eabc0;
+$info-icon: #05a0e9;
+$info-icon-hover: #5fc1ef;
+$info-icon-dt: #1d8ede;
+$info-icon-hover-dt: #45b3e7;
 
 @keyframes fade-in-opacity {
   from {
@@ -15,7 +18,8 @@ $info-icon-color: #0eabc0;
   background-color: $course-1;
   padding: 0rem 1rem;
   user-select: none;
-  margin-top: 0.4rem;
+  margin: 0.4rem;
+
   position: relative;
   cursor: pointer;
 
@@ -37,21 +41,26 @@ $info-icon-color: #0eabc0;
 .info-icon-wrapper {
   position: absolute;
   top: -0.4rem;
-  right: -0.6rem;
+  right: -0.7rem;
   cursor: default;
   opacity: 0;
-  padding-bottom: 0.3rem;
-  padding-left: 0.3rem;
-  animation: fade-in-opacity 300ms forwards;
-  animation-delay: 300ms;
+  padding-bottom: 0.1rem;
+  padding-left: 0.1rem;
+  animation: fade-in-opacity 200ms forwards;
+  animation-delay: 350ms;
 }
 
 .info-icon {
   cursor: pointer;
-  font-size: 2.1rem;
-  color: $info-icon-color;
+  font-size: 2.2rem;
+  color: $info-icon;
   background-color: $white-1;
   border-radius: 100vw;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $info-icon-hover;
+  }
 }
 
 .deptCodeNum {
@@ -74,12 +83,12 @@ $info-icon-color: #0eabc0;
     }
   }
 
-  .overlay {
-    // @include animate-course-overlay(overlay-dark, 0.3);
-  }
-
   .info-icon {
-    color: $info-icon-color;
+    color: $info-icon-dt;
+
+    &:hover {
+      color: $info-icon-hover-dt;
+    }
   }
 
   .deptCodeNum {

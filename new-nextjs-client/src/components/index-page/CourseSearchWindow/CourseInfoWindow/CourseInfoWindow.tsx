@@ -3,6 +3,8 @@ import classNames from 'classnames/bind';
 import { ReactNode, useEffect, useState } from 'react';
 import DEFAULT_COURSE_ATTRIBUTES_DATA from 'src/data/default-course-attributes-data.json';
 import { getAllCourseAttributes } from 'src/api/course';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { info } from '@styles/fontawesome';
 
 const cx = classNames.bind(styles);
 
@@ -29,7 +31,6 @@ function CourseInfoWindow(props: Props) {
   const [attributes, setAttributes] = useState<ResponseModel.CourseAttribute[]>(
     DEFAULT_COURSE_ATTRIBUTES_DATA
   );
-  let content: ReactNode;
 
   useEffect(() => {
     getAllCourseAttributes()
@@ -40,6 +41,8 @@ function CourseInfoWindow(props: Props) {
         setAttributes(DEFAULT_COURSE_ATTRIBUTES_DATA);
       });
   }, []);
+
+  let content: ReactNode;
 
   if (props.clickedCourse) {
     content = (
@@ -94,9 +97,31 @@ function CourseInfoWindow(props: Props) {
         })}
       </div>
     );
+  } else {
+    content = (
+      <div className={cx('message-wrapper')}>
+        <div className={cx('message')}>
+          <span>
+            Click{' '}
+            <span>
+              <FontAwesomeIcon icon={info} className={cx('info-icon')} />
+            </span>{' '}
+            on courses to view details!
+          </span>
+        </div>
+      </div>
+    );
   }
 
-  return <div className={cx('container')}>{content}</div>;
+  return (
+    <div
+      className={cx('container', {
+        'display-message': props.clickedCourse === null,
+      })}
+    >
+      {content}
+    </div>
+  );
 }
 
 export default CourseInfoWindow;

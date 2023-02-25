@@ -1,9 +1,39 @@
+$info-icon: #05a0e9;
+$info-icon-dt: #1d8ede;
+
 .container {
   width: 100%;
   height: 100%;
   border-radius: $br-md;
   background-color: #f6f6ff;
   padding: 1.5rem 1rem 1.5rem 2rem;
+
+  &.display-message {
+    padding: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  color: $secondary-text;
+
+  .message {
+    text-align: center;
+    font-size: $fs-md;
+    letter-spacing: $letter-spacing-md;
+
+    .info-icon {
+      margin: 0 0.2rem;
+      font-size: 1.7rem;
+      color: $info-icon;
+      background-color: $white-1;
+      border-radius: 100vw;
+    }
+  }
 }
 
 .info-content {
@@ -96,6 +126,14 @@
 [data-theme='dark'] {
   .container {
     background-color: rgba($bg-color-1-dt, 0.5);
+  }
+
+  .message-wrapper {
+    color: $secondary-text-dt;
+
+    .info-icon {
+      color: $info-icon-dt;
+    }
   }
 
   .info-content {
