@@ -35,7 +35,9 @@ interface SelectOption {
 
 interface Props {
   setIsLoading: (isLoading: boolean) => void;
+  searchResults: ResponseModel.Course[] | null;
   setSearchResults: (searchResults: ResponseModel.Course[]) => void;
+  setDisplayResults: (displayResults: ResponseModel.Course[]) => void;
   updateSelectedIndices: Updater<Set<number>>;
 }
 
@@ -46,7 +48,7 @@ function SearchControl(props: Props) {
   const [selectOptions, setSelectOptions] = useState<SelectOption[]>([]);
   const [selectValue, setSelectValue] = useState<string | null>(null);
   const [selectInputValue, setSelectInputValue] = useState<string>('');
-  const [inputValue, setInputValue] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState<string>('');
 
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -104,6 +106,15 @@ function SearchControl(props: Props) {
         });
     }
   }, [selectValue]);
+
+  useEffect(() => {
+    if (selectValue) {
+      const filteredData = props.searchResults!.filter((course) =>
+        course.num.includes(inputValue.toUpperCase())
+      );
+      props.setDisplayResults(filteredData);
+    }
+  }, [inputValue]);
 
   if (!mounted) {
     return null;

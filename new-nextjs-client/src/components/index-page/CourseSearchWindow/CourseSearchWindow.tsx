@@ -21,6 +21,9 @@ const CourseSearchWindow = (props: Props) => {
   const [searchResults, setSearchResults] = useState<
     ResponseModel.Course[] | null
   >(null);
+  const [displayResults, setDisplayResults] = useState<
+    ResponseModel.Course[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedIndices, updateSelectedIndices] = useImmer<Set<number>>(
     new Set<number>()
@@ -33,6 +36,10 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
+
+  useEffect(() => {
+    setDisplayResults(searchResults);
+  }, [searchResults]);
 
   useEffect(() => {
     if (contentRef.current !== null) {
@@ -64,7 +71,9 @@ const CourseSearchWindow = (props: Props) => {
           {/* top left */}
           <SearchControl
             setIsLoading={setIsLoading}
+            searchResults={searchResults}
             setSearchResults={setSearchResults}
+            setDisplayResults={setDisplayResults}
             updateSelectedIndices={updateSelectedIndices}
           />
 
@@ -77,7 +86,7 @@ const CourseSearchWindow = (props: Props) => {
           <div className={cx('result-window-wrapper')}>
             <ResultWindow
               isLoading={isLoading}
-              searchResults={searchResults}
+              displayResults={displayResults}
               selectedIndices={selectedIndices}
               updateSelectedIndices={updateSelectedIndices}
             />
