@@ -36,3 +36,16 @@
     }
   }
 }
+
+@mixin animate-course-overlay($name, $opacity) {
+  @keyframes #{$name} {
+    from {
+      background-color: transparent;
+    }
+    to {
+      background-color: rgba($white-1, $opacity);
+    }
+  }
+
+  animation: $name 250ms forwards;
+}

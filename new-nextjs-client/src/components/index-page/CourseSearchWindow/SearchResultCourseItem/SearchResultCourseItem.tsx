@@ -2,16 +2,10 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './SearchResultCourseItem.module.scss';
 import { Updater } from 'use-immer';
-import { Checkbox } from '@chakra-ui/react';
-import {
-  accent1,
-  gray2,
-  gray3,
-  gray5,
-  primary1,
-  white1,
-} from '@styles/variables';
 import { useTheme } from 'next-themes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { info } from '@styles/fontawesome';
+
 interface Props {
   deptCode: string;
   num: string;
@@ -42,7 +36,18 @@ function SearchResultCourseItem(props: Props) {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      {isHover ? <div className={cx('overlay')}></div> : null}
+      {isHover ? (
+        <>
+          <div className={cx('overlay')}></div>
+          <div
+            className={cx('info-icon-wrapper')}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FontAwesomeIcon className={cx('info-icon')} icon={info} />
+          </div>
+        </>
+      ) : null}
+
       <div className={styles.deptCodeNum}>
         <div className={styles.deptCode}>{props.deptCode}</div>
         <div className={styles.num}>{props.num}</div>
