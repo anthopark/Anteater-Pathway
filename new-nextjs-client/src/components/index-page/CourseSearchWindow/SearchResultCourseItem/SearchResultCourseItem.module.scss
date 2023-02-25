@@ -40,14 +40,13 @@ $info-icon-hover-dt: #45b3e7;
 
 .info-icon-wrapper {
   position: absolute;
-  top: -0.4rem;
-  right: -0.7rem;
+  top: -0.7rem;
+  right: -1rem;
   cursor: default;
   opacity: 0;
-  padding-bottom: 0.1rem;
-  padding-left: 0.1rem;
-  animation: fade-in-opacity 200ms forwards;
-  animation-delay: 350ms;
+  padding: 0.3rem;
+  animation: fade-in-opacity 300ms forwards;
+  animation-delay: 300ms;
 }
 
 .info-icon {
@@ -56,7 +55,7 @@ $info-icon-hover-dt: #45b3e7;
   color: $info-icon;
   background-color: $white-1;
   border-radius: 100vw;
-  transition: color 0.2s;
+  transition: color 100ms;
 
   &:hover {
     color: $info-icon-hover;
