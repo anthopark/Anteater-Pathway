@@ -76,7 +76,7 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
           padding="1rem 5rem"
           p="3.2rem 4rem"
         >
-          <ContactUsForm />
+          <ContactUsForm onClose={onClose} />
         </ModalBody>
       </ModalContent>
     </Modal>

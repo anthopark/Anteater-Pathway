@@ -2,12 +2,10 @@ import styles from './ContactUsForm.module.scss';
 import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import {
-  FormErrorMessage,
   FormLabel,
   FormControl,
-  Input,
-  Button,
   Textarea,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import AppInput from '@components/shared/AppInput/AppInput';
 import {
@@ -32,18 +30,28 @@ import {
 } from '@styles/reusable-ui-variables';
 import { useTheme } from 'next-themes';
 
+interface Props {
+  onClose: () => void;
+}
+
 type Inputs = {
   email: string;
   message: string;
 };
 
-const ContactUsForm = () => {
+const ContactUsForm = ({ onClose }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      email: 'emilyphee93@gmail.com',
+      message: '',
+    },
+  });
 
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -56,12 +64,18 @@ const ContactUsForm = () => {
     return null;
   }
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    reset();
+    onClose();
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl>
         <div className={styles.inputForm}>
           <FormLabel
+            htmlFor="email"
             letterSpacing={letterSpacingMD}
             className={styles.inputLabel}
           >
@@ -69,9 +83,23 @@ const ContactUsForm = () => {
           </FormLabel>
           <AppInput
             id="email"
-            value={'emilypark93@gmail.com'}
-            {...register('email')}
+            {...register('email', {
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: 'Invalid email address',
+              },
+            })}
           />
+
+          {errors.email ? (
+            <span className={styles.errorMessage}>
+              {errors.email && errors.email.message}
+            </span>
+          ) : (
+            <span className={styles.emailFieldMessage}>
+              Fill this if you'd like our response.
+            </span>
+          )}
         </div>
       </FormControl>
 
@@ -86,7 +114,12 @@ const ContactUsForm = () => {
           <Textarea
             id="message"
             placeholder="feedback or a bug report?"
-            {...register('message')}
+            {...register('message', {
+              maxLength: {
+                value: 299,
+                message: "Message can't be more than 300 characters",
+              },
+            })}
             bgColor={theme === 'light' ? white1 : inputBgColorDark}
             height="10rem"
             borderRadius={borderRadiusMD}
@@ -115,6 +148,11 @@ const ContactUsForm = () => {
                 theme === 'light' ? white1 : inputBgColorActiveDark,
             }}
           />
+          {errors.message && (
+            <span className={styles.errorMessage}>
+              {errors.message && errors.message.message}
+            </span>
+          )}
         </div>
       </FormControl>
       <div className={styles.sendBtnWrapper}>
