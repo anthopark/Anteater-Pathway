@@ -6,7 +6,7 @@ $info-icon-dt: #1d8ede;
   height: 100%;
   border-radius: $br-md;
   background-color: #f6f6ff;
-  padding: 1.3rem 0.6rem 1.3rem 1.3rem;
+  padding: 1.3rem 0.8rem 1.3rem 1.3rem;
 
   &.display-message {
     padding: unset;
@@ -38,7 +38,7 @@ $info-icon-dt: #1d8ede;
 
 .info-content {
   max-height: 100%;
-  padding-right: 0.7rem;
+  padding-right: 1rem;
   overflow-y: auto;
   @include scrollbar-light();
 }
