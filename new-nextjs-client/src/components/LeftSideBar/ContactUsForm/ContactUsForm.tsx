@@ -12,6 +12,7 @@ import {
   accent1,
   blue2,
   borderRadiusMD,
+  borderRadiusSM,
   defaultText,
   defaultTextDark,
   fontSizeMD,
@@ -19,6 +20,7 @@ import {
   gray3,
   gray4,
   letterSpacingMD,
+  letterSpacingSM,
   placeholderText,
   placeholderTextDark,
   white1,
@@ -76,7 +78,7 @@ const ContactUsForm = ({ onClose }: Props) => {
         <div className={styles.inputForm}>
           <FormLabel
             htmlFor="email"
-            letterSpacing={letterSpacingMD}
+            letterSpacing={letterSpacingSM}
             className={styles.inputLabel}
           >
             Email address (Optional)
@@ -106,7 +108,7 @@ const ContactUsForm = ({ onClose }: Props) => {
       <FormControl isRequired>
         <div className={styles.inputForm}>
           <FormLabel
-            letterSpacing={letterSpacingMD}
+            letterSpacing={letterSpacingSM}
             className={styles.inputLabel}
           >
             Message
@@ -114,6 +116,7 @@ const ContactUsForm = ({ onClose }: Props) => {
           <Textarea
             id="message"
             placeholder="feedback or a bug report?"
+            padding="1rem"
             {...register('message', {
               maxLength: {
                 value: 299,
@@ -121,8 +124,8 @@ const ContactUsForm = ({ onClose }: Props) => {
               },
             })}
             bgColor={theme === 'light' ? white1 : inputBgColorDark}
-            height="10rem"
-            borderRadius={borderRadiusMD}
+            height="8.5rem"
+            borderRadius={borderRadiusSM}
             color={theme === 'light' ? defaultText : defaultTextDark}
             _placeholder={{
               color: theme === 'light' ? placeholderText : placeholderTextDark,
