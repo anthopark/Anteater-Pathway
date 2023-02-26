@@ -16,9 +16,15 @@ a {
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (max-width: 1300px) {
   html {
-    font-size: 62.5;
+    font-size: 55%;
+  }
+}
+
+@media screen and (min-width: 1301px) {
+  html {
+    font-size: 62.5%;
   }
 }
 

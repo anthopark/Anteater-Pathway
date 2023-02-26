@@ -7,9 +7,9 @@
     font-size: $fs-md;
 
     .container {
-      padding: 2rem;
+      padding: 2rem 2rem 1.5rem 2rem;
       display: grid;
-      grid-template-columns: 6.5fr 3.5fr;
+      grid-template-columns: 6.6fr 3.4fr;
       grid-template-rows: auto 30rem auto;
 
       .customBtnWrapper {
@@ -22,8 +22,12 @@
 }
 
 .result-window-wrapper {
-  margin-top: 2rem;
+  padding-top: 2rem;
   padding-right: 2rem;
+}
+
+.course-info-window-wrapper {
+  padding-top: 2rem;
 }
 
 .footer-right {
@@ -31,6 +35,12 @@
   justify-content: flex-end;
   margin-top: 1.5rem;
   padding-right: 2rem;
+}
+
+.footer-left {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
 }
 
 [data-theme='dark'] {

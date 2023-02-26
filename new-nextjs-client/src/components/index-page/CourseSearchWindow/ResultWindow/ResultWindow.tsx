@@ -12,8 +12,9 @@ const cx = classNames.bind(styles);
 interface Props {
   isLoading: boolean;
   displayResults: ResponseModel.Course[] | null;
-  selectedIndices: Set<number>;
-  updateSelectedIndices: Updater<Set<number>>;
+  selectedIds: Set<string>;
+  setClickedCourse: (course: ResponseModel.Course | null) => void;
+  updateSelectedIds: Updater<Set<string>>;
 }
 
 function ResultWindow(props: Props) {
@@ -32,12 +33,16 @@ function ResultWindow(props: Props) {
     return props.displayResults && props.displayResults.length > 0;
   }, [props.displayResults]);
 
-  const handleCourseSelect = (index: number) => {
-    props.updateSelectedIndices((draft) => {
-      if (draft.has(index)) {
-        draft.delete(index);
+  const handleInfoClick = (index: number) => {
+    props.setClickedCourse(props.displayResults![index]);
+  };
+
+  const handleCourseSelect = (courseId: string) => {
+    props.updateSelectedIds((draft) => {
+      if (draft.has(courseId)) {
+        draft.delete(courseId);
       } else {
-        draft.add(index);
+        draft.add(courseId);
       }
     });
   };
@@ -83,11 +88,12 @@ function ResultWindow(props: Props) {
     content = (
       <div className={cx('grid-container')}>
         {props.displayResults!.map((courseInfo, index) => (
-          <div key={index} onClick={() => handleCourseSelect(index)}>
+          <div key={index} onClick={() => handleCourseSelect(courseInfo.id)}>
             <SearchResultCourseItem
               deptCode={courseInfo.deptCode}
               num={courseInfo.num}
-              isSelected={props.selectedIndices.has(index)}
+              isSelected={props.selectedIds.has(courseInfo.id)}
+              handleInfoClick={() => handleInfoClick(index)}
             />
           </div>
         ))}

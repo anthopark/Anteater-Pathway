@@ -1,15 +1,64 @@
+$info-icon: #05a0e9;
+$info-icon-hover: #5fc1ef;
+$info-icon-dt: #1d8ede;
+$info-icon-hover-dt: #45b3e7;
+
+@keyframes fade-in-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .container {
-  max-width: 17rem;
   height: 3.6rem;
   border-radius: $br-sm;
   background-color: $course-1;
-  padding: 0rem 1rem;
-  cursor: pointer;
+  padding: 0 0.3rem;
   user-select: none;
-  margin: 0.2rem;
+  margin: 0.4rem;
+
+  position: relative;
+  cursor: pointer;
 
   &.selected {
-    @include selected-border();
+    @include selected-border(0px, 3px);
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: $br-sm;
+  // @include animate-course-overlay(overlay-light, 0.3);
+}
+
+.info-icon-wrapper {
+  position: absolute;
+  top: -0.7rem;
+  right: -1rem;
+  cursor: default;
+  opacity: 0;
+  padding: 0.3rem;
+  animation: fade-in-opacity 300ms forwards;
+  animation-delay: 200ms;
+}
+
+.info-icon {
+  cursor: pointer;
+  font-size: 2.2rem;
+  color: $info-icon;
+  background-color: $white-1;
+  border-radius: 100vw;
+  transition: color 100ms;
+
+  &:hover {
+    color: $info-icon-hover;
   }
 }
 
@@ -29,7 +78,15 @@
     background-color: $course-1-dt;
 
     &.selected {
-      @include selected-border-dt();
+      @include selected-border-dt(0px, 3px);
+    }
+  }
+
+  .info-icon {
+    color: $info-icon-dt;
+
+    &:hover {
+      color: $info-icon-hover-dt;
     }
   }
 

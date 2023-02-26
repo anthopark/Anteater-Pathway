@@ -1,6 +1,7 @@
 import '@styles/globals.css';
 import '@styles/fontawesome';
 import { ThemeProvider } from 'next-themes';
+import { chakraTheme } from '@styles/charkra-theme';
 import { ChakraProvider } from '@chakra-ui/react';
 import { AppUserProvider } from '@contexts/AppUserContext/AppUserContext';
 import { AppLayoutProps } from 'next/app';
@@ -14,7 +15,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
 
   return (
     <ThemeProvider themes={['light', 'dark']}>
-      <ChakraProvider>
+      <ChakraProvider theme={chakraTheme}>
         <AppUserProvider>
           {getLayout(<Component {...pageProps} />)}
         </AppUserProvider>

@@ -1,0 +1,160 @@
+$info-icon: #05a0e9;
+$info-icon-dt: #1d8ede;
+
+.container {
+  width: 100%;
+  height: 100%;
+  border-radius: $br-md;
+  background-color: #f6f6ff;
+  padding: 1.3rem 0.8rem 1.3rem 1.3rem;
+
+  &.display-message {
+    padding: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  color: $secondary-text;
+
+  .message {
+    text-align: center;
+    font-size: $fs-md;
+    letter-spacing: $letter-spacing-md;
+
+    .info-icon {
+      margin: 0 0.2rem;
+      font-size: 1.7rem;
+      color: $info-icon;
+      background-color: $white-1;
+      border-radius: 100vw;
+    }
+  }
+}
+
+.info-content {
+  max-height: 100%;
+  padding-right: 1rem;
+  overflow-y: auto;
+  @include scrollbar-light();
+}
+
+.title-section {
+  font-size: 1.8rem;
+  letter-spacing: $letter-spacing-md;
+  .top {
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bottom {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+    .course-title {
+      font-size: $fs-lg;
+      letter-spacing: $letter-spacing-sm;
+      text-align: center;
+    }
+  }
+}
+
+.course-property-label {
+  display: inline-block;
+  letter-spacing: $letter-spacing-md;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.offered-quarter-section {
+  margin-top: 1.5rem;
+
+  .quarter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 0.8rem;
+    row-gap: 1rem;
+
+    .quarter-box {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      border-radius: 6px;
+      height: 3rem;
+      padding-top: 0.3rem;
+
+      &.fall {
+        background-color: $fall;
+      }
+
+      &.winter {
+        background-color: $winter;
+      }
+
+      &.spring {
+        background-color: $spring;
+      }
+
+      &.summer {
+        background-color: $summer;
+      }
+    }
+  }
+}
+
+.course-attribute-section {
+  margin: 2rem 0;
+
+  .attribute-label {
+    display: inline-block;
+    letter-spacing: $letter-spacing-md;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .attribute-content {
+    font-size: $fs-md;
+  }
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: rgba($bg-color-1-dt, 0.5);
+  }
+
+  .message-wrapper {
+    color: $secondary-text-dt;
+
+    .info-icon {
+      color: $info-icon-dt;
+    }
+  }
+
+  .info-content {
+    @include scrollbar-dark();
+  }
+
+  .offered-quarter-section .quarter-grid .quarter-box {
+    &.fall {
+      background-color: $fall-dt;
+    }
+
+    &.winter {
+      background-color: $winter-dt;
+    }
+
+    &.spring {
+      background-color: $spring-dt;
+    }
+
+    &.summer {
+      background-color: $summer-dt;
+    }
+  }
+}

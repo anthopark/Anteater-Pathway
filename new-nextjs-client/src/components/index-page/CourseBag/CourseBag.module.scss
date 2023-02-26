@@ -42,7 +42,7 @@
 }
 
 .total-unit {
-  font-size: $fs-lg;
+  font-size: 1.6rem;
   color: $secondary-text;
   letter-spacing: $letter-spacing-sm;
   text-align: end;
@@ -53,7 +53,7 @@
 .course-item-wrapper {
   width: 47%;
   margin-right: 0.3rem;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.4rem;
 
   &:nth-child(odd) {
     margin-right: 4%;

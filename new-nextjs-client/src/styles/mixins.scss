@@ -10,7 +10,7 @@
 
 @mixin scrollbar-light() {
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 0.7rem;
   }
 
   &::-webkit-scrollbar-track {
@@ -20,11 +20,32 @@
   &::-webkit-scrollbar-thumb {
     border-radius: 100vw;
     background-color: $gray-5;
+
+    &:hover {
+      background-color: $gray-4;
+    }
   }
 }
 
 @mixin scrollbar-dark() {
   &::-webkit-scrollbar-thumb {
     background-color: $gray-3;
+
+    &:hover {
+      background-color: $gray-4;
+    }
   }
+}
+
+@mixin animate-course-overlay($name, $opacity) {
+  @keyframes #{$name} {
+    from {
+      background-color: transparent;
+    }
+    to {
+      background-color: rgba($white-1, $opacity);
+    }
+  }
+
+  animation: $name 250ms forwards;
 }
