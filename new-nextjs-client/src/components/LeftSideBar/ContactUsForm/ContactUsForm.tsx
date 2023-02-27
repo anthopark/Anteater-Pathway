@@ -1,17 +1,11 @@
 import styles from './ContactUsForm.module.scss';
 import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import {
-  FormLabel,
-  FormControl,
-  Textarea,
-  FormErrorMessage,
-} from '@chakra-ui/react';
+import { FormLabel, FormControl, Textarea, Spinner } from '@chakra-ui/react';
 import AppInput from '@components/shared/AppInput/AppInput';
 import {
   accent1,
   blue2,
-  borderRadiusMD,
   borderRadiusSM,
   defaultText,
   defaultTextDark,
@@ -19,7 +13,6 @@ import {
   gray2,
   gray3,
   gray4,
-  letterSpacingMD,
   letterSpacingSM,
   placeholderText,
   placeholderTextDark,
@@ -31,6 +24,7 @@ import {
   inputBgColorDark,
 } from '@styles/reusable-ui-variables';
 import { useTheme } from 'next-themes';
+import useAppToast from '@hooks/useAppToast';
 
 interface Props {
   onClose: () => void;
@@ -58,6 +52,15 @@ const ContactUsForm = ({ onClose }: Props) => {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
+  const [emailSending, setEmailSending] = useState(false);
+  const [emailSuccess, setEmailSuccess] = useState(false);
+
+  const showToastBox = useAppToast();
+
+  useEffect(() => {
+    reset();
+  }, [emailSuccess]);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -67,6 +70,7 @@ const ContactUsForm = ({ onClose }: Props) => {
   }
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setEmailSending(true);
     try {
       await fetch('/api/contact', {
         method: 'POST',
@@ -75,11 +79,25 @@ const ContactUsForm = ({ onClose }: Props) => {
         },
         body: JSON.stringify(data),
       });
+
+      showToastBox({
+        status: 'success',
+        message: 'Sent! Thank you :)',
+        highlightedData: null,
+        duration: 3500,
+      });
     } catch (error) {
-      console.log(error);
+      showToastBox({
+        status: 'fail',
+        highlightedData: null,
+        message: 'Something went wrong :(',
+        duration: 3500,
+      });
     }
 
-    reset();
+    setEmailSending(false);
+    setEmailSuccess(true);
+
     onClose();
   };
 
@@ -171,7 +189,7 @@ const ContactUsForm = ({ onClose }: Props) => {
       </FormControl>
       <div className={styles.sendBtnWrapper}>
         <AppButton kind="primary" type="submit" width="7rem">
-          Send
+          {emailSending ? <Spinner /> : 'Send'}
         </AppButton>
       </div>
     </form>
