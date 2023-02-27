@@ -85,6 +85,7 @@ function CourseBag(props: Props) {
 
       <div className={cx('course-box')}>
         <SortableContext
+          id="course-bag"
           items={appUser.courseBag}
           strategy={rectSortingStrategy}
         >

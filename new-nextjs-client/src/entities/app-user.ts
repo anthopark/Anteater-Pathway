@@ -1,18 +1,19 @@
 import { immerable } from 'immer';
-import { DegreePlan, IDegreePlan } from './degree-plan';
 import { Course, ICourse } from '@entities/course';
+import { IAcademicYear, AcademicYear } from './academic-year';
 
 interface UpdateCourseColorParam {
   courseId: string;
   newColor: number;
   isInCourseBag: boolean;
 }
+
 interface IAppUser {
-  addYear: (year: number) => void;
-  courseBag: ICourse[];
-  clearCourseBag: () => void;
   addToCourseBag: (courses: ICourse[]) => void;
-  degreePlan: IDegreePlan;
+  addYear: (year: number) => void;
+  clearCourseBag: () => void;
+  courseBag: ICourse[];
+  degreePlan: IAcademicYear[];
   removeYear: (year: number) => void;
   removeCourseItem: (courseId: string, isInCourseBag: boolean) => void;
   updateCourseColor: ({
@@ -28,7 +29,7 @@ class AppUser implements IAppUser {
 
   private _years: number[] = [];
   private _authToken: string | null = null;
-  private _degreePlan = new DegreePlan();
+  private _degreePlan: AcademicYear[] = [];
   private _courseBag: ICourse[] = [
     new Course(
       {
@@ -69,18 +70,22 @@ class AppUser implements IAppUser {
   }
 
   public get years(): number[] {
-    return this._years;
+    return this._degreePlan.map((academicYear) => academicYear.year);
   }
 
   public addYear(year: number) {
     this._years.push(year);
     this._years.sort((a, b) => a - b);
+
+    this._degreePlan.push(new AcademicYear(year));
+    this._degreePlan.sort((a, b) => a.year - b.year);
   }
 
   public removeYear(year: number) {
-    if (this._years.includes(year)) {
-      const removeIndex = this._years.indexOf(year);
-      this._years.splice(removeIndex, 1);
+    const years = this._degreePlan.map((academicYear) => academicYear.year);
+    if (years.includes(year)) {
+      const removeIndex = years.indexOf(year);
+      this._degreePlan.splice(removeIndex, 1);
     }
   }
 
@@ -120,7 +125,7 @@ class AppUser implements IAppUser {
       twoDigitCurrentYear--;
     }
 
-    this._years.push(twoDigitCurrentYear);
+    this.addYear(twoDigitCurrentYear);
   }
 
   private _updateColorInCourseBag(courseId: string, newColor: number) {

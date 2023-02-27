@@ -14,6 +14,7 @@ import {
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
+import { ICourse } from '@entities/course';
 import useAppUser from '@hooks/useAppUser';
 import { ReactNode, useState } from 'react';
 
@@ -44,6 +45,9 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+
+    console.log('active:', active);
+    console.log('over:', over);
 
     if (active.id !== over?.id) {
       updateAppUser((draft) => {
@@ -77,12 +81,14 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
       <DragOverlay adjustScale>
         {activeId ? (
           <SortableCourseItem
-            course={{
-              id: draggingCourse!.id,
-              deptCode: draggingCourse!.deptCode,
-              num: draggingCourse!.num,
-              color: draggingCourse!.color,
-            }}
+            course={
+              {
+                id: draggingCourse!.id,
+                deptCode: draggingCourse!.deptCode,
+                num: draggingCourse!.num,
+                color: draggingCourse!.color,
+              } as ICourse
+            }
           />
         ) : null}
       </DragOverlay>
