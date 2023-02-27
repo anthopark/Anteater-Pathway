@@ -9,15 +9,15 @@ const sendContactEmail = async (
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) => {
-  const { name, email, message } = req.body;
+  const { email, message } = req.body;
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 456,
+    port: 465,
     secure: true,
     auth: {
       user: process.env.SMTP_USER,
-      pass: 'SMTP_PASSWORD',
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 
@@ -25,8 +25,8 @@ const sendContactEmail = async (
     await transporter.sendMail({
       from: email,
       to: process.env.EMAIL_RECIPIENT,
-      subject: `[Anteaterpathway.com] Contact Message from ${name}`,
-      html: `<p><strong>Name: </strong> ${name}</p><br>
+      subject: `[Anteaterpathway.com] Contact Message from ${email}`,
+      html: `
              <p><strong>Email: </strong> ${email}</p><br>
              <p><strong>Message: </strong> ${message}</p><br>`,
     });
