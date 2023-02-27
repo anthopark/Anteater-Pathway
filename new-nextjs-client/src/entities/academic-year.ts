@@ -32,7 +32,7 @@ enum Term {
   SUMMER = 'su',
 }
 
-interface IQuarter {
+export interface IQuarter {
   year: number;
   term: Term;
   courses: ICourse[];

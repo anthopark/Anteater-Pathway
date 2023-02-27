@@ -1,0 +1,18 @@
+.container {
+  background-color: $bg-color-3;
+  padding: 1rem;
+  border-radius: $br-md;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: $letter-spacing-lg;
+  margin-bottom: 1rem;
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: $bg-color-3-dt;
+  }
+}

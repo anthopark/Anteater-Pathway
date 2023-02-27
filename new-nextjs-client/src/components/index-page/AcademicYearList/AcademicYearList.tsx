@@ -7,7 +7,7 @@ interface Props {
 }
 
 function AcademicYearList(props: Props) {
-  const transitions = useTransition(props.appUser.years, {
+  const transitions = useTransition(props.appUser.degreePlan, {
     from: { opacity: 1, maxHeight: 0, marginBottom: '0rem' },
     enter: { opacity: 1, maxHeight: 5000, marginBottom: '2rem' },
     leave: { opacity: 0, maxHeight: 0, marginBottom: '0rem' },
@@ -15,9 +15,9 @@ function AcademicYearList(props: Props) {
 
   return (
     <>
-      {transitions((style, year) => (
+      {transitions((style, academicYear) => (
         <animated.div style={style}>
-          <AcademicYear appUser={props.appUser} year={year} />
+          <AcademicYear academicYear={academicYear} />
         </animated.div>
       ))}
     </>

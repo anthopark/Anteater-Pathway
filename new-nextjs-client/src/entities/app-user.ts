@@ -27,7 +27,6 @@ interface IAppUser {
 class AppUser implements IAppUser {
   [immerable] = true;
 
-  private _years: number[] = [];
   private _authToken: string | null = null;
   private _degreePlan: AcademicYear[] = [];
   private _courseBag: ICourse[] = [
@@ -74,9 +73,6 @@ class AppUser implements IAppUser {
   }
 
   public addYear(year: number) {
-    this._years.push(year);
-    this._years.sort((a, b) => a - b);
-
     this._degreePlan.push(new AcademicYear(year));
     this._degreePlan.sort((a, b) => a.year - b.year);
   }

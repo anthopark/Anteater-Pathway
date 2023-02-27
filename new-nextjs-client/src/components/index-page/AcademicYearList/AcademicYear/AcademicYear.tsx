@@ -20,12 +20,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { trash } from '@styles/fontawesome';
 import useAppUser from '@hooks/useAppUser';
 import { useSpring, animated } from '@react-spring/web';
-import { IAppUser } from '@entities/app-user';
 import AppModal from '@components/shared/AppModal/AppModal';
+import { IAcademicYear } from '@entities/academic-year';
+import Quarter from './Quarter/Quarter';
 
 interface Props {
-  appUser: IAppUser;
-  year: number;
+  academicYear: IAcademicYear;
 }
 
 const getYearText = (year: number) => {
@@ -85,7 +85,7 @@ const AcademicYear = (props: Props) => {
   };
 
   const handleDelete = () => {
-    updateAppUser((draft) => draft.removeYear(props.year));
+    updateAppUser((draft) => draft.removeYear(props.academicYear.year));
   };
 
   const onClose = () => {
@@ -97,9 +97,11 @@ const AcademicYear = (props: Props) => {
       <AppModal
         isOpen={isModalOpen}
         onClose={onClose}
-        headerTitle={`Delete ${`${props.year}-${props.year + 1}`} year?`}
-        bodyText={`Are you sure you want to delete ${`${props.year}-${
-          props.year + 1
+        headerTitle={`Delete ${`${props.academicYear}-${
+          props.academicYear.year + 1
+        }`} year?`}
+        bodyText={`Are you sure you want to delete ${`${props.academicYear}-${
+          props.academicYear.year + 1
         }`} year?`}
         actionButtonName="Delete"
         actionKind="danger"
@@ -120,18 +122,18 @@ const AcademicYear = (props: Props) => {
               bgColor: theme === 'light' ? bgColor2 : bgColorDark2,
             }}
           >
-            <div className={styles.yearText}>
+            <div className={cx('year-text')}>
               <AccordionIcon fontSize="2.7rem" mr=".8rem" />
-              {getYearText(props.year)}
+              {getYearText(props.academicYear.year)}
             </div>
           </AccordionButton>
           {showRemoveIcon ? (
             <animated.div
-              className={cx('removeIconWrapper')}
+              className={cx('remove-icon-wrapper')}
               style={removeIconSpringProps}
             >
               <FontAwesomeIcon
-                className={cx('trashIcon')}
+                className={cx('trash-icon')}
                 icon={trash}
                 onClick={() => setIsModalOpen(true)}
               />
@@ -139,7 +141,11 @@ const AcademicYear = (props: Props) => {
           ) : null}
         </div>
         <AccordionPanel>
-          <div></div>
+          <div className={cx('quarters-container')}>
+            {props.academicYear.quarters.map((quarter) => (
+              <Quarter quarter={quarter} />
+            ))}
+          </div>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
