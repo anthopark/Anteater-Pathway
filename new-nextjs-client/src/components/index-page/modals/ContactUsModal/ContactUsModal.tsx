@@ -45,6 +45,7 @@ import AppButton from '@components/shared/AppButton/AppButton';
 import useAppToast from '@hooks/useAppToast';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'src/firebase/service-access';
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -60,7 +61,6 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
   const { theme } = useTheme();
   const [firebaseUser] = useAuthState(auth);
   const [emailSending, setEmailSending] = useState(false);
-  const [emailSuccess, setEmailSuccess] = useState(false);
 
   const showToastBox = useAppToast();
 
@@ -78,12 +78,6 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
       setValue('email', '');
     }
   }, [firebaseUser]);
-
-  useEffect(() => {
-    if (emailSuccess) {
-      setValue('message', '');
-    }
-  }, [emailSuccess]);
 
   useEffect(() => {
     setMounted(true);
@@ -112,7 +106,7 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
         duration: 3500,
       });
 
-      setEmailSuccess(true);
+      setValue('message', '');
       onClose();
     } catch (error) {
       showToastBox({
@@ -121,7 +115,6 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
         message: 'Something went wrong :(',
         duration: 3500,
       });
-      setEmailSuccess(false);
     }
 
     setEmailSending(false);
