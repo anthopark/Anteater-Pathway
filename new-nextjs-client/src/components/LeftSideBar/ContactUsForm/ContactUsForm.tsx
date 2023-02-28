@@ -127,9 +127,7 @@ const ContactUsForm = ({ onClose }: Props) => {
           />
 
           {errors.email ? (
-            <span className={styles.errorMessage}>
-              {errors.email && errors.email.message}
-            </span>
+            <span className={styles.errorMessage}>{errors.email.message}</span>
           ) : (
             <span className={styles.emailFieldMessage}>
               Fill this if you'd like our response.
