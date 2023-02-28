@@ -2,7 +2,8 @@ import * as nodemailer from 'nodemailer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Data = {
-  error: string;
+  error?: string;
+  message?: string;
 };
 
 const sendContactEmail = async (
@@ -36,7 +37,7 @@ const sendContactEmail = async (
     }
   }
 
-  return res.status(200).json({ error: '' });
+  return res.status(200).json({ message: 'Email sent successfully.' });
 };
 
 export default sendContactEmail;

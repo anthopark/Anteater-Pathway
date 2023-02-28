@@ -75,6 +75,7 @@ const ContactUsForm = ({ onClose }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setEmailSending(true);
+
     try {
       await fetch('/api/contact', {
         method: 'POST',
@@ -90,6 +91,9 @@ const ContactUsForm = ({ onClose }: Props) => {
         highlightedData: null,
         duration: 3500,
       });
+
+      setEmailSuccess(true);
+      onClose();
     } catch (error) {
       showToastBox({
         status: 'fail',
@@ -97,12 +101,10 @@ const ContactUsForm = ({ onClose }: Props) => {
         message: 'Something went wrong :(',
         duration: 3500,
       });
+      setEmailSuccess(false);
     }
 
-    setEmailSuccess(true);
     setEmailSending(false);
-
-    onClose();
   };
 
   return (
