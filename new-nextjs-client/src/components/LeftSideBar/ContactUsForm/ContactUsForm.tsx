@@ -43,7 +43,6 @@ const ContactUsForm = ({ onClose }: Props) => {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -61,7 +60,9 @@ const ContactUsForm = ({ onClose }: Props) => {
   const showToastBox = useAppToast();
 
   useEffect(() => {
-    reset();
+    if (emailSuccess) {
+      reset();
+    }
   }, [emailSuccess]);
 
   useEffect(() => {
@@ -98,8 +99,8 @@ const ContactUsForm = ({ onClose }: Props) => {
       });
     }
 
-    setEmailSending(false);
     setEmailSuccess(true);
+    setEmailSending(false);
 
     onClose();
   };
