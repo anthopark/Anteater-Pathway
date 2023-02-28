@@ -45,7 +45,7 @@ const SortableCourseItem = (props: Props) => {
     transition,
     isDragging,
   } = useSortable({
-    id: props.course.id,
+    id: `course-${props.course.id}`,
     data: {
       deptCode: props.course.deptCode,
       num: props.course.num,

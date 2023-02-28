@@ -1,6 +1,5 @@
 import SortableCourseItem from '@components/index-page/SortableCourseItem/SortableCourseItem';
 import {
-  closestCenter,
   DndContext,
   DragEndEvent,
   DragStartEvent,
@@ -11,6 +10,7 @@ import {
   MouseSensor,
   TouchSensor,
   DragOverEvent,
+  closestCenter,
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
@@ -49,7 +49,7 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     console.log('active:', active);
     console.log('over:', over);
 
-    if (active.id !== over?.id) {
+    if (over && active.id !== over!.id) {
       updateAppUser((draft) => {
         const courseIds = draft.courseBag.map((course) => course.id);
         const oldIndex = courseIds.indexOf(active.id as string);
@@ -73,12 +73,11 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
-      collisionDetection={closestCenter}
       modifiers={[restrictToWindowEdges]}
       sensors={sensors}
     >
       {children}
-      <DragOverlay adjustScale>
+      <DragOverlay>
         {activeId ? (
           <SortableCourseItem
             course={

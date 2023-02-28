@@ -97,12 +97,12 @@ const AcademicYear = (props: Props) => {
       <AppModal
         isOpen={isModalOpen}
         onClose={onClose}
-        headerTitle={`Delete ${`${props.academicYear}-${
+        headerTitle={`Delete ${`${props.academicYear.year}-${
           props.academicYear.year + 1
         }`} year?`}
-        bodyText={`Are you sure you want to delete ${`${props.academicYear}-${
-          props.academicYear.year + 1
-        }`} year?`}
+        bodyText={`Are you sure you want to delete ${`${
+          props.academicYear.year
+        }-${props.academicYear.year + 1}`} year?`}
         actionButtonName="Delete"
         actionKind="danger"
         actionFn={handleDelete}
