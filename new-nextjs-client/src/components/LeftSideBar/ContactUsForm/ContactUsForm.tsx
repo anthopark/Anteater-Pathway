@@ -25,17 +25,20 @@ import {
 } from '@styles/reusable-ui-variables';
 import { useTheme } from 'next-themes';
 import useAppToast from '@hooks/useAppToast';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from 'src/firebase/service-access';
 
 interface Props {
   onClose: () => void;
 }
 
 type Inputs = {
-  email: string;
+  email: string | null;
   message: string;
 };
 
 const ContactUsForm = ({ onClose }: Props) => {
+  const [firebaseUser] = useAuthState(auth);
   const {
     register,
     handleSubmit,
@@ -44,7 +47,7 @@ const ContactUsForm = ({ onClose }: Props) => {
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
-      email: 'emilyphee93@gmail.com',
+      email: firebaseUser ? firebaseUser.email : '',
       message: '',
     },
   });
