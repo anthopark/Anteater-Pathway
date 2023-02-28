@@ -12,6 +12,7 @@ interface Department {
 }
 
 interface Course {
+  id: string;
   deptCode: string;
   num: string;
   title: string;
@@ -92,37 +93,12 @@ plannerCourseRouter.get(
   async (req: Request, res: Response<Course[]>) => {
     const deptCode = req.params.deptCode;
 
-    const courses = await repository.courses
+    const result = await repository.courses
       ?.whereEqualTo('deptCode', deptCode as string)
       .orderByAscending('num')
       .find();
 
-    const result = courses?.map(({ id, ...rest }) => rest);
-
-    if (result!.length === 0) {
-      return res.status(404).send([]);
-    }
-
-    return res.status(200).send(result);
-  }
-);
-
-plannerCourseRouter.get(
-  '/:deptCode/:num',
-  async (req: Request, res: Response<Course[] | string>) => {
-    const deptCode = req.params.deptCode;
-    const num = req.params.num;
-
-    const courses = await repository.courses
-      ?.whereEqualTo('deptCode', deptCode)
-      .whereGreaterOrEqualThan('num', num)
-      .whereLessOrEqualThan('num', num + '\uf8ff')
-      .orderByAscending('num')
-      .find();
-
-    const result = courses?.map(({ id, ...rest }) => rest);
-
-    if (result!.length === 0) {
+    if (!result || result!.length === 0) {
       return res.status(404).send([]);
     }
 
