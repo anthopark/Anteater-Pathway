@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { white1 } from '@styles/variables';
 import { useDisclosure } from '@chakra-ui/react';
-import ContactUsModal from './ContactUsModal/ContactUsModal';
+import ContactUsModal from '../index-page/modals/ContactUsModal/ContactUsModal';
 
 export interface ILeftSideBarProps {}
 

@@ -1,3 +1,12 @@
+.logoContainer {
+  position: relative;
+  height: 5.5rem;
+  display: flex;
+  justify-self: center;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
+}
+
 .inputForm {
   margin-bottom: 1.5rem;
   .inputLabel {
