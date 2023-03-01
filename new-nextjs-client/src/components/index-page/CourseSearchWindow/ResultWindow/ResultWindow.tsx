@@ -88,7 +88,12 @@ function ResultWindow(props: Props) {
     content = (
       <div className={cx('grid-container')}>
         {props.displayResults!.map((courseInfo, index) => (
-          <div key={index} onClick={() => handleCourseSelect(courseInfo.id)}>
+          <div
+            key={index}
+            onClick={() => {
+              handleCourseSelect(courseInfo.id);
+            }}
+          >
             <SearchResultCourseItem
               deptCode={courseInfo.deptCode}
               num={courseInfo.num}

@@ -28,6 +28,7 @@ const CourseSearchWindow = (props: Props) => {
   const [displayResults, setDisplayResults] = useState<
     ResponseModel.Course[] | null
   >(null);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedIds, updateSelectedIds] = useImmer<Set<string>>(
     new Set<string>()
@@ -40,6 +41,15 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
+
+  const handleAddToCourseBag = () => {
+    console.log(selectedIds);
+    console.log(displayResults);
+    const filteredIds = displayResults?.filter((result) =>
+      selectedIds.has(result.id)
+    );
+    console.log(filteredIds);
+  };
 
   useEffect(() => {
     setDisplayResults(searchResults);
@@ -106,7 +116,8 @@ const CourseSearchWindow = (props: Props) => {
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>
             <AppButton
-              isDisabled
+              onClick={() => handleAddToCourseBag()}
+              isDisabled={false}
               kind="primary"
               leftIcon={<FontAwesomeIcon icon={plus} />}
             >
