@@ -141,12 +141,19 @@ const CourseSearchWindow = (props: Props) => {
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>
             <AppButton
-              onClick={() => handleAddToCourseBag()}
+              onClick={() => {
+                handleAddToCourseBag();
+                updateSelectedIds((draft) => draft.clear());
+              }}
               isDisabled={!isCourseSelected}
               kind="primary"
               leftIcon={<FontAwesomeIcon icon={plus} />}
             >
-              Add to Course Bag
+              {!isCourseSelected
+                ? 'Add to Course Bag'
+                : `Add ${selectedIds.size} ${
+                    selectedIds.size === 1 ? 'course' : 'courses'
+                  }`}
             </AppButton>
           </div>
 
