@@ -11,6 +11,8 @@ import CourseInfoWindow from './CourseInfoWindow/CourseInfoWindow';
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
+import useAppUser from '@hooks/useAppUser';
+import { Course, ICourse } from '@entities/course';
 
 const cx = classNames.bind(styles);
 
@@ -41,14 +43,30 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
+  const { appUser, updateAppUser } = useAppUser();
 
   const handleAddToCourseBag = () => {
-    console.log(selectedIds);
-    console.log(displayResults);
-    const filteredIds = displayResults?.filter((result) =>
+    const selectedCourses = displayResults?.filter((result) =>
       selectedIds.has(result.id)
     );
-    console.log(filteredIds);
+
+    console.log(selectedCourses);
+
+    if (selectedCourses) {
+      const mappedArr = selectedCourses.map(
+        (course) =>
+          new Course(
+            {
+              deptCode: course.deptCode,
+              num: course.num,
+              unit: course.unit,
+            } as ResponseModel.Course,
+            false
+          )
+      );
+      console.log(mappedArr);
+      updateAppUser((draft) => draft.addToCourseBag(mappedArr));
+    }
   };
 
   useEffect(() => {
