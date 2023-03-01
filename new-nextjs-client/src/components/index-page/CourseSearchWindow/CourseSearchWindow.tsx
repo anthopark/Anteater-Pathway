@@ -35,6 +35,7 @@ const CourseSearchWindow = (props: Props) => {
   const [selectedIds, updateSelectedIds] = useImmer<Set<string>>(
     new Set<string>()
   );
+  const [isCourseSelected, setIsCourseSelected] = useState(false);
 
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
@@ -43,17 +44,15 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
-  const { appUser, updateAppUser } = useAppUser();
+  const { updateAppUser } = useAppUser();
 
   const handleAddToCourseBag = () => {
     const selectedCourses = displayResults?.filter((result) =>
       selectedIds.has(result.id)
     );
 
-    console.log(selectedCourses);
-
     if (selectedCourses) {
-      const mappedArr = selectedCourses.map(
+      const selectedCoursesToAdd = selectedCourses.map(
         (course) =>
           new Course(
             {
@@ -64,8 +63,8 @@ const CourseSearchWindow = (props: Props) => {
             false
           )
       );
-      console.log(mappedArr);
-      updateAppUser((draft) => draft.addToCourseBag(mappedArr));
+
+      updateAppUser((draft) => draft.addToCourseBag(selectedCoursesToAdd));
     }
   };
 
@@ -82,6 +81,14 @@ const CourseSearchWindow = (props: Props) => {
       });
     }
   }, [springApi, contentRef, props.windowToggle]);
+
+  useEffect(() => {
+    if (selectedIds.size > 0) {
+      setIsCourseSelected(true);
+    } else {
+      setIsCourseSelected(false);
+    }
+  }, [selectedIds]);
 
   useEffect(() => {
     setMounted(true);
@@ -135,7 +142,7 @@ const CourseSearchWindow = (props: Props) => {
           <div className={cx('footer-right')}>
             <AppButton
               onClick={() => handleAddToCourseBag()}
-              isDisabled={false}
+              isDisabled={!isCourseSelected}
               kind="primary"
               leftIcon={<FontAwesomeIcon icon={plus} />}
             >
