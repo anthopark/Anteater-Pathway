@@ -23,24 +23,6 @@ function CourseBag(props: Props) {
     updateTotalUnit();
   }, [appUser.courseBag]);
 
-  const handleColorSelect = (courseId: string) => {
-    return (colorNumber: number) => {
-      updateAppUser((draft) => {
-        draft.updateCourseColor({
-          courseId,
-          isInCourseBag: true,
-          newColor: colorNumber,
-        });
-      });
-    };
-  };
-
-  const handleCourseRemove = (courseId: string) => {
-    return () => {
-      updateAppUser((draft) => draft.removeCourseItem(courseId, true));
-    };
-  };
-
   const handleCourseBagClear = () => {
     updateAppUser((draft) => draft.clearCourseBag());
   };
@@ -89,12 +71,7 @@ function CourseBag(props: Props) {
         <SortableContext id="course-bag" items={appUser.courseBag}>
           {appUser.courseBag.map((course) => (
             <div className={cx('course-item-wrapper')} key={course.id}>
-              <SortableCourseItem
-                course={course}
-                onColorSelect={handleColorSelect(course.id)}
-                onRemove={handleCourseRemove(course.id)}
-                isInCourseBag
-              />
+              <SortableCourseItem course={course} isInCourseBag />
             </div>
           ))}
         </SortableContext>

@@ -88,6 +88,7 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
                 color: draggingCourse!.color,
               } as ICourse
             }
+            isInCourseBag={false}
           />
         ) : null}
       </DragOverlay>

@@ -26,12 +26,11 @@ import {
 import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';
 import ColorPalette from './ColorPalette/ColorPalette';
 import { ICourse } from '@entities/course';
+import { useCourseMenuHandler } from '@hooks/useCourseItemHandler';
 
 interface Props {
   course: ICourse;
-  isInCourseBag?: boolean;
-  onColorSelect?: (newColor: number) => void;
-  onRemove?: () => void;
+  isInCourseBag: boolean;
 }
 
 const cx = classNames.bind(styles);
@@ -58,6 +57,10 @@ const SortableCourseItem = (props: Props) => {
   const [isHover, setIsHover] = useState(false);
   const [isMenuTriggerHover, setIsMenuTriggerHover] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { handleColorSelect, handleCourseRemove } = useCourseMenuHandler(
+    props.course.id,
+    props.isInCourseBag
+  );
 
   const style: CSSProperties = {
     transform: CSS.Transform.toString(transform),
@@ -96,10 +99,6 @@ const SortableCourseItem = (props: Props) => {
   };
 
   const handleDetailsClick = () => {};
-
-  const handleRemoveClick = () => {
-    props.onRemove?.();
-  };
 
   if (!mounted) {
     return null;
@@ -178,7 +177,7 @@ const SortableCourseItem = (props: Props) => {
             >
               <div className={cx('color-palette-wrapper')}>
                 <ColorPalette
-                  onColorSelect={props.onColorSelect!}
+                  onColorSelect={handleColorSelect}
                   selectedColor={props.course.color}
                   setColor={setColor}
                 />
@@ -210,7 +209,7 @@ const SortableCourseItem = (props: Props) => {
                 icon={
                   <FontAwesomeIcon className={cx('trash-icon')} icon={trash} />
                 }
-                onClick={handleRemoveClick}
+                onClick={() => handleCourseRemove()}
                 _hover={{
                   bgColor:
                     theme === 'light' ? gray6 : selectOptionBgColorHoverDark,
