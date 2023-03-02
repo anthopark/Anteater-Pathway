@@ -44,7 +44,7 @@ function CourseBag(props: Props) {
   };
 
   return (
-    <div className={cx('container')}>
+    <>
       <AppModal
         isOpen={isModalOpen}
         onClose={onClose}
@@ -54,34 +54,36 @@ function CourseBag(props: Props) {
         actionKind="danger"
         actionFn={handleCourseBagClear}
       />
-      <div className={cx('heading')}>
-        <span>Course bag</span>
+      <div className={cx('container')}>
+        <div className={cx('heading')}>
+          <span>Course bag</span>
+          {appUser.courseBag.length > 0 ? (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className={cx('empty-button')}
+            >
+              <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
+              <span>Empty</span>
+            </button>
+          ) : null}
+        </div>
+
+        <div className={cx('courses-box')} ref={setNodeRef}>
+          <SortableContext id="course-bag" items={appUser.courseBag}>
+            {appUser.courseBag.map((course) => (
+              <div className={cx('course-item-wrapper')} key={course.id}>
+                <SortableCourseItem course={course} isInCourseBag />
+              </div>
+            ))}
+          </SortableContext>
+        </div>
         {appUser.courseBag.length > 0 ? (
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className={cx('empty-button')}
-          >
-            <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
-            <span>Empty</span>
-          </button>
+          <div className={cx('total-unit')}>
+            {totalUnit} {totalUnit === 1 ? 'unit' : 'units'}
+          </div>
         ) : null}
       </div>
-
-      <div className={cx('courses-box')} ref={setNodeRef}>
-        <SortableContext id="course-bag" items={appUser.courseBag}>
-          {appUser.courseBag.map((course) => (
-            <div className={cx('course-item-wrapper')} key={course.id}>
-              <SortableCourseItem course={course} isInCourseBag />
-            </div>
-          ))}
-        </SortableContext>
-      </div>
-      {appUser.courseBag.length > 0 ? (
-        <div className={cx('total-unit')}>
-          {totalUnit} {totalUnit === 1 ? 'unit' : 'units'}
-        </div>
-      ) : null}
-    </div>
+    </>
   );
 }
 

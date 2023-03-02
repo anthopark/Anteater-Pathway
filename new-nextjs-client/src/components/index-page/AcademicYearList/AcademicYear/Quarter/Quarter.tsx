@@ -2,7 +2,10 @@ import React from 'react';
 import { IQuarter } from '@entities/academic-year';
 import styles from './Quarter.module.scss';
 import classNames from 'classnames/bind';
-import { SortableContext } from '@dnd-kit/sortable';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import SortableCourseItem from '@components/index-page/SortableCourseItem/SortableCourseItem';
 import { useDroppable } from '@dnd-kit/core';
 
@@ -29,6 +32,7 @@ function Quarter(props: Props) {
   const { setNodeRef } = useDroppable({
     id: `quarter-${props.quarter.year}-${props.quarter.term}`,
   });
+
   return (
     <div className={cx('container')}>
       <div className={cx('header')}>{headerText(props.quarter)}</div>
@@ -36,10 +40,11 @@ function Quarter(props: Props) {
         <SortableContext
           id={`quarter-${props.quarter.year}-${props.quarter.term}`}
           items={props.quarter.courses}
+          // strategy={verticalListSortingStrategy}
         >
           {props.quarter.courses.map((course) => (
             <div className={cx('course-item-wrapper')} key={course.id}>
-              <SortableCourseItem course={course} />
+              <SortableCourseItem course={course} isInCourseBag={false} />
             </div>
           ))}
         </SortableContext>

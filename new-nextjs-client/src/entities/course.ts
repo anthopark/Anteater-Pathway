@@ -29,7 +29,7 @@ export class Course implements ICourse {
     courseResponse: ResponseModel.Course,
     isCustomCreated: boolean = false
   ) {
-    this._id = nanoid();
+    this._id = `course-${nanoid()}`;
     this.deptCode = courseResponse.deptCode;
     this.num = courseResponse.num;
     this.title = courseResponse.title ?? null;

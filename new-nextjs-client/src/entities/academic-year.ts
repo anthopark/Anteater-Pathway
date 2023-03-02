@@ -1,4 +1,4 @@
-import { Course, ICourse } from '@entities/course';
+import { ICourse } from '@entities/course';
 
 export interface IAcademicYear {
   year: number;
@@ -25,12 +25,7 @@ export class AcademicYear implements IAcademicYear {
   }
 }
 
-enum Term {
-  FALL = 'fa',
-  WINTER = 'wi',
-  SPRING = 'sp',
-  SUMMER = 'su',
-}
+export type Term = 'fa' | 'wi' | 'sp' | 'su';
 
 export interface IQuarter {
   year: number;

@@ -11,6 +11,8 @@ import {
   TouchSensor,
   DragOverEvent,
   closestCenter,
+  Active,
+  Over,
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
@@ -24,6 +26,20 @@ interface DraggingCourse {
   num: string;
   color: number;
 }
+
+const withinCourseBag = (active: Active, over: Over): boolean => {
+  return (
+    active.data.current?.sortable?.containerId === 'course-bag' &&
+    over.data.current?.sortable?.containerId === 'course-bag'
+  );
+};
+
+const fromCourseBagToEmptyQuarter = (active: Active, over: Over): boolean => {
+  return (
+    active.data.current?.sortable?.containerId === 'course-bag' &&
+    (over.id as string).startsWith('quarter')
+  );
+};
 
 function CourseItemDndProvider({ children }: { children: ReactNode }) {
   const { updateAppUser } = useAppUser();
@@ -49,14 +65,20 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     console.log('active:', active);
     console.log('over:', over);
 
-    if (over && active.id !== over!.id) {
-      updateAppUser((draft) => {
-        const courseIds = draft.courseBag.map((course) => course.id);
-        const oldIndex = courseIds.indexOf(active.id as string);
-        const newIndex = courseIds.indexOf(over!.id as string);
+    if (over !== null && active.id !== over.id) {
+      if (withinCourseBag(active, over)) {
+        updateAppUser((draft) => {
+          const courseIds = draft.courseBag.map((course) => course.id);
+          const oldIndex = courseIds.indexOf(active.id as string);
+          const newIndex = courseIds.indexOf(over.id as string);
 
-        draft.courseBag = arrayMove(draft.courseBag, oldIndex, newIndex);
-      });
+          draft.courseBag = arrayMove(draft.courseBag, oldIndex, newIndex);
+        });
+      } else if (fromCourseBagToEmptyQuarter(active, over)) {
+        updateAppUser((draft) => {
+          draft.removeCourseItem(active.id as string, true);
+        });
+      }
     }
     setActiveId(null);
     setDraggingCourse(null);

@@ -1,6 +1,6 @@
 import { immerable } from 'immer';
 import { Course, ICourse } from '@entities/course';
-import { IAcademicYear, AcademicYear } from './academic-year';
+import { IAcademicYear, AcademicYear, Term } from './academic-year';
 
 interface UpdateCourseColorParam {
   courseId: string;
@@ -13,6 +13,8 @@ interface IAppUser {
   addYear: (year: number) => void;
   clearCourseBag: () => void;
   courseBag: ICourse[];
+  getQuarterCourses: (year: string, term: Term) => ICourse[];
+  setQuarterCourses: (year: string, term: Term) => void;
   degreePlan: IAcademicYear[];
   removeYear: (year: number) => void;
   removeCourseItem: (courseId: string, isInCourseBag: boolean) => void;
@@ -112,6 +114,9 @@ class AppUser implements IAppUser {
       this._updateColorInCourseBag(courseId, newColor);
     }
   }
+
+  public getQuarterCourses(year: string, term: Term): ICourse[] {}
+  public setQuarterCourses(year: string, term: Term): void {}
 
   private _addCurrentYear() {
     const currentMonth = new Date().getMonth();

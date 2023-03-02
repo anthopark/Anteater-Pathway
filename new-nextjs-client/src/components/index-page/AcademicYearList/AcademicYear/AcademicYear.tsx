@@ -142,8 +142,8 @@ const AcademicYear = (props: Props) => {
         </div>
         <AccordionPanel>
           <div className={cx('quarters-container')}>
-            {props.academicYear.quarters.map((quarter) => (
-              <Quarter quarter={quarter} />
+            {props.academicYear.quarters.map((quarter, index) => (
+              <Quarter key={index} quarter={quarter} />
             ))}
           </div>
         </AccordionPanel>
