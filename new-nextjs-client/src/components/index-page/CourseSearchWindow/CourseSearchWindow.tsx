@@ -50,8 +50,7 @@ const CourseSearchWindow = (props: Props) => {
   const transition = useTransition(isCourseSelected, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 80 },
+    config: { duration: 100 },
   });
 
   const { updateAppUser } = useAppUser();
