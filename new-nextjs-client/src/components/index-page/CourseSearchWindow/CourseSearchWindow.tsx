@@ -13,6 +13,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
 import useAppUser from '@hooks/useAppUser';
 import { Course, ICourse } from '@entities/course';
+import useAppToast from '@hooks/useAppToast';
+import { Button } from '@chakra-ui/react';
+import { defaultText, defaultTextDark, fontSizeMD } from '@styles/variables';
 
 const cx = classNames.bind(styles);
 
@@ -35,16 +38,18 @@ const CourseSearchWindow = (props: Props) => {
   const [selectedIds, updateSelectedIds] = useImmer<Set<string>>(
     new Set<string>()
   );
+
   const [isCourseSelected, setIsCourseSelected] = useState(false);
 
-  const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [springProps, springApi] = useSpring(() => ({
     height: '0px',
     marginBottom: '0',
   }));
   const { updateAppUser } = useAppUser();
+  const showToastBox = useAppToast();
 
   const handleAddToCourseBag = () => {
     const selectedCourses = displayResults?.filter((result) =>
@@ -53,19 +58,29 @@ const CourseSearchWindow = (props: Props) => {
 
     if (selectedCourses) {
       const selectedCoursesToAdd = selectedCourses.map(
-        (course) =>
-          new Course(
-            {
-              deptCode: course.deptCode,
-              num: course.num,
-              unit: course.unit,
-            } as ResponseModel.Course,
-            false
-          )
+        (courseInfo) => new Course(courseInfo, false)
       );
 
       updateAppUser((draft) => draft.addToCourseBag(selectedCoursesToAdd));
+      showToastBox({
+        status: 'success',
+        highlightedData: null,
+        message:
+          selectedIds.size === 1
+            ? `${selectedCoursesToAdd[0]?.deptCode} ${selectedCoursesToAdd[0]?.num}`
+            : `${selectedIds.size} courses added`,
+        duration: 3500,
+      });
     }
+    updateSelectedIds((draft) => draft.clear());
+  };
+
+  const getAddCourseBtnText = (): string => {
+    return !isCourseSelected
+      ? 'Add to Course Bag'
+      : `Add ${selectedIds.size} ${
+          selectedIds.size === 1 ? 'course' : 'courses'
+        }`;
   };
 
   useEffect(() => {
@@ -140,20 +155,26 @@ const CourseSearchWindow = (props: Props) => {
 
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>
+            <Button
+              variant="link"
+              fontSize={fontSizeMD}
+              fontWeight={500}
+              letterSpacing={'0.2px'}
+              padding={'0 1.2rem'}
+              mr={'.8rem'}
+              color={theme === 'light' ? defaultText : defaultTextDark}
+              onClick={() => updateSelectedIds(new Set<string>())}
+            >
+              Reset
+            </Button>
+
             <AppButton
-              onClick={() => {
-                handleAddToCourseBag();
-                updateSelectedIds((draft) => draft.clear());
-              }}
+              onClick={() => handleAddToCourseBag()}
               isDisabled={!isCourseSelected}
               kind="primary"
               leftIcon={<FontAwesomeIcon icon={plus} />}
             >
-              {!isCourseSelected
-                ? 'Add to Course Bag'
-                : `Add ${selectedIds.size} ${
-                    selectedIds.size === 1 ? 'course' : 'courses'
-                  }`}
+              {getAddCourseBtnText()}
             </AppButton>
           </div>
 
