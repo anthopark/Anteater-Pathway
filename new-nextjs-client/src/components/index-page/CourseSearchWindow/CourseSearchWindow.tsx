@@ -64,10 +64,13 @@ const CourseSearchWindow = (props: Props) => {
       updateAppUser((draft) => draft.addToCourseBag(selectedCoursesToAdd));
       showToastBox({
         status: 'success',
-        highlightedData: null,
-        message:
+        highlightedData:
           selectedIds.size === 1
             ? `${selectedCoursesToAdd[0]?.deptCode} ${selectedCoursesToAdd[0]?.num}`
+            : null,
+        message:
+          selectedIds.size === 1
+            ? 'added'
             : `${selectedIds.size} courses added`,
         duration: 3500,
       });
@@ -155,18 +158,20 @@ const CourseSearchWindow = (props: Props) => {
 
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>
-            <Button
-              variant="link"
-              fontSize={fontSizeMD}
-              fontWeight={500}
-              letterSpacing={'0.2px'}
-              padding={'0 1.2rem'}
-              mr={'.8rem'}
-              color={theme === 'light' ? defaultText : defaultTextDark}
-              onClick={() => updateSelectedIds(new Set<string>())}
-            >
-              Reset
-            </Button>
+            {isCourseSelected ? (
+              <Button
+                variant="link"
+                fontSize={fontSizeMD}
+                fontWeight={500}
+                letterSpacing={'0.2px'}
+                padding={'0 1.2rem'}
+                mr={'.8rem'}
+                color={theme === 'light' ? defaultText : defaultTextDark}
+                onClick={() => updateSelectedIds(new Set<string>())}
+              >
+                Reset
+              </Button>
+            ) : null}
 
             <AppButton
               onClick={() => handleAddToCourseBag()}
