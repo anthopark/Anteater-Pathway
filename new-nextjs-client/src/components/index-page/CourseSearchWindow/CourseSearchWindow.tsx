@@ -1,6 +1,6 @@
 import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect, useState } from 'react';
-import { useSpring, animated } from '@react-spring/web';
+import { useSpring, animated, useTransition } from '@react-spring/web';
 import classNames from 'classnames/bind';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
@@ -12,7 +12,7 @@ import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
 import useAppUser from '@hooks/useAppUser';
-import { Course, ICourse } from '@entities/course';
+import { Course } from '@entities/course';
 import useAppToast from '@hooks/useAppToast';
 import { Button } from '@chakra-ui/react';
 import { defaultText, defaultTextDark, fontSizeMD } from '@styles/variables';
@@ -38,7 +38,6 @@ const CourseSearchWindow = (props: Props) => {
   const [selectedIds, updateSelectedIds] = useImmer<Set<string>>(
     new Set<string>()
   );
-
   const [isCourseSelected, setIsCourseSelected] = useState(false);
 
   const { theme } = useTheme();
@@ -48,6 +47,13 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
+  const transition = useTransition(isCourseSelected, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { duration: 80 },
+  });
+
   const { updateAppUser } = useAppUser();
   const showToastBox = useAppToast();
 
@@ -158,20 +164,26 @@ const CourseSearchWindow = (props: Props) => {
 
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>
-            {isCourseSelected ? (
-              <Button
-                variant="link"
-                fontSize={fontSizeMD}
-                fontWeight={500}
-                letterSpacing={'0.2px'}
-                padding={'0 1.2rem'}
-                mr={'.8rem'}
-                color={theme === 'light' ? defaultText : defaultTextDark}
-                onClick={() => updateSelectedIds(new Set<string>())}
-              >
-                Reset
-              </Button>
-            ) : null}
+            {transition((style, item) =>
+              item ? (
+                <animated.div className={cx('reset-button')} style={style}>
+                  <Button
+                    variant="link"
+                    fontSize={fontSizeMD}
+                    fontWeight={500}
+                    letterSpacing={'0.2px'}
+                    padding={'0 1.2rem'}
+                    mr={'.8rem'}
+                    color={theme === 'light' ? defaultText : defaultTextDark}
+                    onClick={() => updateSelectedIds(new Set<string>())}
+                  >
+                    Reset
+                  </Button>
+                </animated.div>
+              ) : (
+                ''
+              )
+            )}
 
             <AppButton
               onClick={() => handleAddToCourseBag()}
