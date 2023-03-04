@@ -68,18 +68,21 @@ function CourseInfoWindow(props: Props) {
               Recent quarters:
             </span>
             <div className={cx('quarter-grid')}>
-              {props.clickedCourse.offered.slice(0, 6).map((quarterCode) => (
-                <div
-                  className={cx(
-                    'quarter-box',
-                    QUARTER_MAP[
-                      quarterCode.split('-')[1] as string
-                    ].toLowerCase()
-                  )}
-                >
-                  {getQuarterText(quarterCode)}
-                </div>
-              ))}
+              {props.clickedCourse.offered
+                .slice(0, 6)
+                .map((quarterCode, index) => (
+                  <div
+                    key={index}
+                    className={cx(
+                      'quarter-box',
+                      QUARTER_MAP[
+                        quarterCode.split('-')[1] as string
+                      ].toLowerCase()
+                    )}
+                  >
+                    {getQuarterText(quarterCode)}
+                  </div>
+                ))}
             </div>
           </div>
         ) : null}

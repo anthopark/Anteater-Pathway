@@ -17,9 +17,11 @@ export const useCourseMenuHandler = (
   };
 
   const handleCourseRemove = () => {
-    updateAppUser((draft) => {
-      draft.removeCourseItem(courseId, isInCourseBag);
-    });
+    if (isInCourseBag) {
+      updateAppUser((draft) => {
+        draft.removeCourseFromCourseBag(courseId);
+      });
+    }
   };
 
   return {

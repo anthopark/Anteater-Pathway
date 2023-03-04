@@ -1,6 +1,6 @@
 .container {
   background-color: $bg-color-3;
-  padding: 1rem 3rem;
+  padding: 1rem 0 2rem 0;
   border-radius: $br-md;
 }
 
@@ -9,11 +9,12 @@
   font-size: 1.5rem;
   letter-spacing: $letter-spacing-lg;
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .courses-box {
   min-height: 3.8rem;
+  padding: 0rem 1.5rem;
 }
 
 [data-theme='dark'] {
@@ -23,5 +24,5 @@
 }
 
 .course-item-wrapper {
-  margin: 0.5rem;
+  margin: 1rem;
 }

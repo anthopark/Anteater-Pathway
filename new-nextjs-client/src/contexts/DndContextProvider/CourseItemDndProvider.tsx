@@ -16,6 +16,7 @@ import {
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
+import { Term } from '@entities/academic-year';
 import { ICourse } from '@entities/course';
 import useAppUser from '@hooks/useAppUser';
 import { ReactNode, useState } from 'react';
@@ -39,6 +40,11 @@ const fromCourseBagToEmptyQuarter = (active: Active, over: Over): boolean => {
     active.data.current?.sortable?.containerId === 'course-bag' &&
     (over.id as string).startsWith('quarter')
   );
+};
+
+const getQuarterTerm = (id: string): [number, Term] => {
+  const [year, term] = id.split('-').slice(1, 3);
+  return [parseInt(year), term as Term];
 };
 
 function CourseItemDndProvider({ children }: { children: ReactNode }) {
@@ -76,7 +82,9 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
         });
       } else if (fromCourseBagToEmptyQuarter(active, over)) {
         updateAppUser((draft) => {
-          draft.removeCourseItem(active.id as string, true);
+          const course = draft.removeCourseFromCourseBag(active.id as string);
+          const [year, term] = getQuarterTerm(over.id as string);
+          draft.setQuarterCourses(year, term, [course]);
         });
       }
     }

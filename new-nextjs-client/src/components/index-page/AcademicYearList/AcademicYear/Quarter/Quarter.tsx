@@ -38,9 +38,9 @@ function Quarter(props: Props) {
       <div className={cx('header')}>{headerText(props.quarter)}</div>
       <div className={cx('courses-box')} ref={setNodeRef}>
         <SortableContext
-          id={`quarter-${props.quarter.year}-${props.quarter.term}`}
+          id={`course-bag`}
           items={props.quarter.courses}
-          // strategy={verticalListSortingStrategy}
+          strategy={verticalListSortingStrategy}
         >
           {props.quarter.courses.map((course) => (
             <div className={cx('course-item-wrapper')} key={course.id}>

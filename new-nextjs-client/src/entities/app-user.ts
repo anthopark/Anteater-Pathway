@@ -13,11 +13,11 @@ interface IAppUser {
   addYear: (year: number) => void;
   clearCourseBag: () => void;
   courseBag: ICourse[];
-  getQuarterCourses: (year: string, term: Term) => ICourse[];
-  setQuarterCourses: (year: string, term: Term) => void;
+  getQuarterCourses: (year: number, term: Term) => ICourse[];
+  setQuarterCourses: (year: number, term: Term, courses: ICourse[]) => void;
   degreePlan: IAcademicYear[];
   removeYear: (year: number) => void;
-  removeCourseItem: (courseId: string, isInCourseBag: boolean) => void;
+  removeCourseFromCourseBag: (courseId: string) => ICourse;
   updateCourseColor: ({
     courseId,
     isInCourseBag,
@@ -97,12 +97,16 @@ class AppUser implements IAppUser {
     this._courseBag = [];
   }
 
-  public removeCourseItem(courseId: string, isInCourseBag: boolean) {
-    if (isInCourseBag) {
-      this._courseBag = this.courseBag.filter(
-        (course) => course.id !== courseId
-      );
+  public removeCourseFromCourseBag(courseId: string): ICourse {
+    let removedCourse: ICourse | undefined;
+
+    removedCourse = this._courseBag.find((course) => course.id === courseId);
+    if (!removedCourse) {
+      throw new Error(`No course to remove in the course bag`);
     }
+    this._courseBag = this.courseBag.filter((course) => course.id !== courseId);
+
+    return removedCourse;
   }
 
   public updateCourseColor({
@@ -115,8 +119,30 @@ class AppUser implements IAppUser {
     }
   }
 
-  public getQuarterCourses(year: string, term: Term): ICourse[] {}
-  public setQuarterCourses(year: string, term: Term): void {}
+  public getQuarterCourses(year: number, term: Term): ICourse[] {
+    const quarter = this._getQuarter(year, term);
+    return quarter.courses;
+  }
+  public setQuarterCourses(year: number, term: Term, courses: ICourse[]): void {
+    const quarter = this._getQuarter(year, term);
+    quarter.courses = courses;
+  }
+
+  private _getQuarter(year: number, term: Term) {
+    const years = this._degreePlan.map((academicYear) => academicYear.year);
+    const yearIndex = years.indexOf(year);
+
+    if (yearIndex === -1) {
+      throw new Error(`Can't find the academic year of ${year}`);
+    }
+
+    const terms = this._degreePlan[yearIndex].quarters.map(
+      (quarter) => quarter.term
+    );
+    const quarterIndex = terms.indexOf(term);
+
+    return this._degreePlan[yearIndex].quarters[quarterIndex];
+  }
 
   private _addCurrentYear() {
     const currentMonth = new Date().getMonth();
