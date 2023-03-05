@@ -41,6 +41,12 @@ interface Attribute {
   ordinal: number;
 }
 
+interface RequestBody<T> extends Request {
+  body: T;
+}
+
+type SingleCourseRequest = RequestBody<{ deptCode: string; num: string }>;
+
 const cache = apicache.middleware;
 const onlyStatus200 = (req: Request, res: Response) => res.statusCode === 200;
 const cacheSuccesses = cache('1 day', onlyStatus200);
@@ -82,6 +88,25 @@ plannerCourseRouter.get(
 
     if (result.length === 0) {
       return res.status(404).send([]);
+    }
+
+    return res.status(200).send(result);
+  }
+);
+
+plannerCourseRouter.get(
+  '/single',
+  async (req: SingleCourseRequest, res: Response<Course>) => {
+    const deptCode = req.body.deptCode.toUpperCase();
+    const num = req.body.num.toUpperCase();
+
+    const result = await repository.courses
+      ?.whereEqualTo('deptCode', deptCode)
+      .whereEqualTo('num', num)
+      .findOne();
+
+    if (!result) {
+      return res.status(404).send();
     }
 
     return res.status(200).send(result);
