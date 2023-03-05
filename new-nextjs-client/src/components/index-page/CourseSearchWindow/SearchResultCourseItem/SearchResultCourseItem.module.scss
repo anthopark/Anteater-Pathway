@@ -3,6 +3,11 @@ $info-icon-hover: #5fc1ef;
 $info-icon-dt: #1d8ede;
 $info-icon-hover-dt: #45b3e7;
 
+$search-result-default: #e7e7e7;
+$search-result-default-dt: #424242;
+$search-result-default-hover: #d9d9e1;
+$search-result-default-hover-dt: #67667b;
+
 @keyframes fade-in-opacity {
   from {
     opacity: 0;
@@ -15,16 +20,26 @@ $info-icon-hover-dt: #45b3e7;
 .container {
   height: 3.6rem;
   border-radius: $br-sm;
-  background-color: $course-1;
+  background-color: $search-result-default;
   padding: 0 0.3rem;
   user-select: none;
   margin: 0.4rem;
 
   position: relative;
   cursor: pointer;
+  transition: background-color 100ms;
+
+  &:hover {
+    background-color: $search-result-default-hover;
+  }
 
   &.selected {
-    @include selected-border(0px, 3px);
+    transition: background-color 0ms;
+    background-color: $course-1;
+
+    .deptCodeNum {
+      font-weight: 500;
+    }
   }
 }
 
@@ -35,7 +50,6 @@ $info-icon-hover-dt: #45b3e7;
   width: 100%;
   height: 100%;
   border-radius: $br-sm;
-  // @include animate-course-overlay(overlay-light, 0.3);
 }
 
 .info-icon-wrapper {
@@ -70,15 +84,19 @@ $info-icon-hover-dt: #45b3e7;
   color: $default-text;
   font-size: $fs-md;
   letter-spacing: $letter-spacing-md;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 [data-theme='dark'] {
   .container {
-    background-color: $course-1-dt;
-
+    // background-color: $course-1-dt;
+    background-color: $search-result-default-dt;
+    &:hover {
+      background-color: $search-result-default-hover-dt;
+    }
     &.selected {
-      @include selected-border-dt(0px, 3px);
+      // @include selected-border-dt(0px, 3px);
+      background-color: $course-1-dt;
     }
   }
 
