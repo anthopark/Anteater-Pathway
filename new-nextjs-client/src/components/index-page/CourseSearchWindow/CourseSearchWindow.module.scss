@@ -36,9 +36,16 @@
 
 .footer-right {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 1.5rem;
   padding-right: 2rem;
+}
+
+.selected-courses {
+  color: $secondary-text;
+  padding-left: 1rem;
+  font-size: 1.6rem;
 }
 
 .footer-left {
@@ -50,5 +57,9 @@
 [data-theme='dark'] {
   .animatedDiv {
     background-color: $bg-color-2-dt;
+  }
+
+  .selected-courses {
+    color: $secondary-text-dt;
   }
 }

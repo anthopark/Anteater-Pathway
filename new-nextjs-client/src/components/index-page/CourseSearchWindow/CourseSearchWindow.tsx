@@ -1,6 +1,6 @@
 import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect, useState } from 'react';
-import { useSpring, animated, useTransition } from '@react-spring/web';
+import { useSpring, animated } from '@react-spring/web';
 import classNames from 'classnames/bind';
 import { useTheme } from 'next-themes';
 import SearchControl from './SearchControl/SearchControl';
@@ -47,11 +47,6 @@ const CourseSearchWindow = (props: Props) => {
     height: '0px',
     marginBottom: '0',
   }));
-  const transition = useTransition(isCourseSelected, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    config: { duration: 100 },
-  });
 
   const { updateAppUser } = useAppUser();
   const showToastBox = useAppToast();
@@ -83,12 +78,8 @@ const CourseSearchWindow = (props: Props) => {
     updateSelectedIds((draft) => draft.clear());
   };
 
-  const getAddCourseBtnText = (): string => {
-    return !isCourseSelected
-      ? 'Add to Course Bag'
-      : `Add ${selectedIds.size} ${
-          selectedIds.size === 1 ? 'course' : 'courses'
-        }`;
+  const getSelectedCourseText = (): string => {
+    return isCourseSelected ? `${selectedIds.size} selected` : '';
   };
 
   useEffect(() => {
@@ -163,35 +154,35 @@ const CourseSearchWindow = (props: Props) => {
 
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>
-            {transition((style, item) =>
-              item ? (
-                <animated.div className={cx('reset-button')} style={style}>
-                  <Button
-                    variant="link"
-                    fontSize={fontSizeMD}
-                    fontWeight={500}
-                    letterSpacing={'0.2px'}
-                    padding={'0 1.2rem'}
-                    mr={'.8rem'}
-                    color={theme === 'light' ? defaultText : defaultTextDark}
-                    onClick={() => updateSelectedIds(new Set<string>())}
-                  >
-                    Reset
-                  </Button>
-                </animated.div>
-              ) : (
-                ''
-              )
-            )}
+            <span className={cx('selected-courses')}>
+              {getSelectedCourseText()}
+            </span>
 
-            <AppButton
-              onClick={() => handleAddToCourseBag()}
-              isDisabled={!isCourseSelected}
-              kind="primary"
-              leftIcon={<FontAwesomeIcon icon={plus} />}
-            >
-              {getAddCourseBtnText()}
-            </AppButton>
+            <div>
+              {isCourseSelected ? (
+                <Button
+                  variant="link"
+                  fontSize={fontSizeMD}
+                  fontWeight={500}
+                  letterSpacing={'0.2px'}
+                  padding={'0 1.2rem'}
+                  mr={'.8rem'}
+                  color={theme === 'light' ? defaultText : defaultTextDark}
+                  onClick={() => updateSelectedIds(new Set<string>())}
+                >
+                  Reset
+                </Button>
+              ) : null}
+
+              <AppButton
+                onClick={() => handleAddToCourseBag()}
+                isDisabled={!isCourseSelected}
+                kind="primary"
+                leftIcon={<FontAwesomeIcon icon={plus} />}
+              >
+                Add to Course Bag
+              </AppButton>
+            </div>
           </div>
 
           <div className={cx('footer-left')}>
