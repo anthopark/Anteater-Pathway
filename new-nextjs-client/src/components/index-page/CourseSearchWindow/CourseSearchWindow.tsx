@@ -38,7 +38,6 @@ const CourseSearchWindow = (props: Props) => {
   const [selectedIds, updateSelectedIds] = useImmer<Set<string>>(
     new Set<string>()
   );
-  const [isCourseSelected, setIsCourseSelected] = useState(false);
 
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -78,10 +77,6 @@ const CourseSearchWindow = (props: Props) => {
     updateSelectedIds((draft) => draft.clear());
   };
 
-  const getSelectedCourseText = (): string => {
-    return isCourseSelected ? `${selectedIds.size} selected` : '';
-  };
-
   useEffect(() => {
     setDisplayResults(searchResults);
   }, [searchResults]);
@@ -95,14 +90,6 @@ const CourseSearchWindow = (props: Props) => {
       });
     }
   }, [springApi, contentRef, props.windowToggle]);
-
-  useEffect(() => {
-    if (selectedIds.size > 0) {
-      setIsCourseSelected(true);
-    } else {
-      setIsCourseSelected(false);
-    }
-  }, [selectedIds]);
 
   useEffect(() => {
     setMounted(true);
@@ -155,11 +142,11 @@ const CourseSearchWindow = (props: Props) => {
           {/* row 3 column 1 */}
           <div className={cx('footer-right')}>
             <span className={cx('selected-courses')}>
-              {getSelectedCourseText()}
+              {selectedIds.size > 0 ? `${selectedIds.size} selected` : ''}
             </span>
 
             <div>
-              {isCourseSelected ? (
+              {selectedIds.size > 0 ? (
                 <Button
                   variant="link"
                   fontSize={fontSizeMD}
@@ -176,7 +163,7 @@ const CourseSearchWindow = (props: Props) => {
 
               <AppButton
                 onClick={() => handleAddToCourseBag()}
-                isDisabled={!isCourseSelected}
+                isDisabled={selectedIds.size === 0}
                 kind="primary"
                 leftIcon={<FontAwesomeIcon icon={plus} />}
               >
