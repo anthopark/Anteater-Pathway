@@ -168,7 +168,7 @@ const CourseSearchWindow = (props: Props) => {
                   padding={'0 1.2rem'}
                   mr={'.8rem'}
                   color={theme === 'light' ? defaultText : defaultTextDark}
-                  onClick={() => updateSelectedIds(new Set<string>())}
+                  onClick={() => updateSelectedIds((draft) => draft.clear())}
                 >
                   Reset
                 </Button>
