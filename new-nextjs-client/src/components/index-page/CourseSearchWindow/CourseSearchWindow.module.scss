@@ -26,10 +26,6 @@
   padding-right: 2rem;
 }
 
-.reset-button {
-  display: flex;
-}
-
 .course-info-window-wrapper {
   padding-top: 2rem;
 }
@@ -37,15 +33,15 @@
 .footer-right {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-top: 1.5rem;
   padding-right: 2rem;
 }
 
 .selected-courses {
   color: $secondary-text;
-  padding-left: 1rem;
-  font-size: 1.6rem;
+  padding-left: 2.5rem;
+  letter-spacing: $letter-spacing-sm;
+  font-size: 1.5rem;
 }
 
 .footer-left {

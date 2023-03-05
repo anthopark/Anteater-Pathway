@@ -15,7 +15,12 @@ import useAppUser from '@hooks/useAppUser';
 import { Course } from '@entities/course';
 import useAppToast from '@hooks/useAppToast';
 import { Button } from '@chakra-ui/react';
-import { defaultText, defaultTextDark, fontSizeMD } from '@styles/variables';
+import {
+  defaultText,
+  defaultTextDark,
+  fontSizeMD,
+  letterSpacingSM,
+} from '@styles/variables';
 
 const cx = classNames.bind(styles);
 
@@ -151,11 +156,14 @@ const CourseSearchWindow = (props: Props) => {
                   variant="link"
                   fontSize={fontSizeMD}
                   fontWeight={500}
-                  letterSpacing={'0.2px'}
+                  letterSpacing={letterSpacingSM}
                   padding={'0 1.2rem'}
-                  mr={'.8rem'}
+                  mr={'1rem'}
                   color={theme === 'light' ? defaultText : defaultTextDark}
                   onClick={() => updateSelectedIds((draft) => draft.clear())}
+                  _active={{
+                    color: theme === 'light' ? defaultText : defaultTextDark,
+                  }}
                 >
                   Reset
                 </Button>
