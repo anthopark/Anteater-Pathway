@@ -4,7 +4,7 @@ const baseRouterUrl = '/planner/course';
 
 const endpoints = {
   allDepartments: `${baseRouterUrl}/all-departments`,
-  allDepartmentCourses: baseRouterUrl,
+  allDepartmentCourses: `${baseRouterUrl}/department`,
   allCourseAttributes: `${baseRouterUrl}/all-attributes`,
 };
 
