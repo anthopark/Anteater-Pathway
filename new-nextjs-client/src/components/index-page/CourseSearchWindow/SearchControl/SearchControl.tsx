@@ -101,15 +101,13 @@ function SearchControl(props: Props) {
         })
         .catch(() => props.setSearchResults([]))
         .finally(() => {
-          props.updateSelectedIds((draft) => {
-            draft.clear();
-          });
           props.setIsLoading(false);
         });
     } else {
       props.setSearchResults(null);
       props.setClickedCourse(null);
     }
+    props.updateSelectedIds((draft) => draft.clear());
   }, [selectValue]);
 
   useEffect(() => {

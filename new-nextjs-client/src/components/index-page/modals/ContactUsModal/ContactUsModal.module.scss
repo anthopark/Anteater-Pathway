@@ -1,0 +1,44 @@
+.logoContainer {
+  position: relative;
+  height: 5.5rem;
+  display: flex;
+  justify-self: center;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
+}
+
+.inputForm {
+  margin-bottom: 1.5rem;
+  .inputLabel {
+    font-size: $fs-md;
+  }
+}
+
+.sendBtnWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.errorMessage {
+  color: $red-4;
+  font-size: $fs-md;
+  display: flex;
+  margin-top: 0.1rem;
+}
+
+.emailFieldMessage {
+  color: $gray-4;
+  font-size: $fs-md;
+  display: flex;
+  margin-top: 0.1rem;
+}
+
+[data-theme='dark'] {
+  .errorMessage {
+    color: $red-2;
+  }
+
+  .emailFieldMessage {
+    color: $gray-4;
+  }
+}
