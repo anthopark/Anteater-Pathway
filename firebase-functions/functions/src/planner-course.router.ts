@@ -41,12 +41,6 @@ interface Attribute {
   ordinal: number;
 }
 
-interface RequestBody<T> extends Request {
-  body: T;
-}
-
-type SingleCourseRequest = RequestBody<{ deptCode: string; num: string }>;
-
 const cache = apicache.middleware;
 const onlyStatus200 = (req: Request, res: Response) => res.statusCode === 200;
 const cacheSuccesses = cache('1 day', onlyStatus200);
@@ -96,7 +90,7 @@ plannerCourseRouter.get(
 
 plannerCourseRouter.get(
   '/one/:deptCode/:num',
-  async (req: SingleCourseRequest, res: Response<Course>) => {
+  async (req: Request, res: Response<Course>) => {
     const deptCode = req.params.deptCode.toUpperCase();
     const num = req.params.num.toUpperCase();
 
