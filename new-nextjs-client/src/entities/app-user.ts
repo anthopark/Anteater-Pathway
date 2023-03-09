@@ -13,9 +13,9 @@ interface IAppUser {
   addYear: (year: number) => void;
   clearCourseBag: () => void;
   courseBag: ICourse[];
+  degreePlan: IAcademicYear[];
   getQuarterCourses: (year: number, term: Term) => ICourse[];
   setQuarterCourses: (year: number, term: Term, courses: ICourse[]) => void;
-  degreePlan: IAcademicYear[];
   removeYear: (year: number) => void;
   removeCourseFromCourseBag: (courseId: string) => ICourse;
   updateCourseColor: ({

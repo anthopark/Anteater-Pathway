@@ -28,17 +28,45 @@ interface DraggingCourse {
   color: number;
 }
 
-const withinCourseBag = (active: Active, over: Over): boolean => {
+const getOverContainerId = (over: Over) => {
+  return (over.id as string).startsWith('course')
+    ? over.data.current?.sortable?.containerId
+    : over.id;
+};
+
+const overWithinTheSameContainer = (active: Active, over: Over) => {
+  const activeContainerId = active.data.current?.sortable?.containerId;
+  let overContainerId = getOverContainerId(over);
+
+  return activeContainerId === overContainerId;
+};
+
+const overFromQuarterToBag = (active: Active, over: Over) => {
+  const activeContainerId = active.data.current?.sortable?.containerId;
+  let overContainerId = getOverContainerId(over);
+
+  return activeContainerId.startsWith('quarter') && overContainerId === 'bag';
+};
+
+const overFromBagToQuarter = (active: Active, over: Over) => {
+  const activeContainerId = active.data.current?.sortable?.containerId;
+  let overContainerId = getOverContainerId(over);
+
+  return activeContainerId === 'bag' && overContainerId.startsWith('quarter');
+};
+
+const endWithinBag = (active: Active, over: Over): boolean => {
   return (
-    active.data.current?.sortable?.containerId === 'course-bag' &&
-    over.data.current?.sortable?.containerId === 'course-bag'
+    active.data.current?.sortable?.containerId === 'bag' &&
+    over.data.current?.sortable?.containerId === 'bag'
   );
 };
 
-const fromCourseBagToEmptyQuarter = (active: Active, over: Over): boolean => {
+const endWithinSameQuarter = (active: Active, over: Over): boolean => {
   return (
-    active.data.current?.sortable?.containerId === 'course-bag' &&
-    (over.id as string).startsWith('quarter')
+    active.data.current?.sortable?.containerId.startsWith('quarter') &&
+    active.data.current?.sortable?.containerId ===
+      over.data.current?.sortable?.containerId
   );
 };
 
@@ -65,6 +93,77 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     setActiveId(event.active.id);
   };
 
+  const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event;
+
+    if (over !== null && active.id !== over.id) {
+      // console.log(event);
+      if (overWithinTheSameContainer(active, over)) {
+        console.log('same container');
+        return;
+      } else if (overFromQuarterToBag(active, over)) {
+        // console.log('from quarter to bag');
+        updateAppUser((draft) => {
+          const [year, term] = getQuarterTerm(
+            active.data.current?.sortable?.containerId
+          );
+          const courseToMove = draft
+            .getQuarterCourses(year, term)
+            .find((course) => course.id === active.id);
+
+          let newIndex: number;
+
+          if (over.data.current?.sortable?.index >= 0) {
+            newIndex = over.data.current?.sortable?.index;
+          } else {
+            newIndex = draft.courseBag.length;
+          }
+
+          // remove course from the quarter
+          draft.setQuarterCourses(
+            year,
+            term,
+            draft
+              .getQuarterCourses(year, term)
+              .filter((course) => course.id !== active.id)
+          );
+
+          draft.courseBag = [
+            ...draft.courseBag.slice(0, newIndex),
+            courseToMove,
+            ...draft.courseBag.slice(newIndex),
+          ] as ICourse[];
+        });
+      } else if (overFromBagToQuarter(active, over)) {
+        // console.log('from bag to quarter');
+        updateAppUser((draft) => {
+          const [year, term] = getQuarterTerm(getOverContainerId(over));
+          const courseToMove = draft.courseBag.find(
+            (course) => course.id === active.id
+          );
+
+          let newIndex: number;
+
+          if (over.data.current?.sortable?.index >= 0) {
+            newIndex = over.data.current?.sortable?.index;
+          } else {
+            newIndex = draft.getQuarterCourses(year, term).length;
+          }
+
+          draft.courseBag = draft.courseBag.filter(
+            (course) => course.id !== active.id
+          );
+
+          draft.setQuarterCourses(year, term, [
+            ...draft.getQuarterCourses(year, term).slice(0, newIndex),
+            courseToMove!,
+            ...draft.getQuarterCourses(year, term).slice(newIndex),
+          ]);
+        });
+      }
+    }
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -72,7 +171,7 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     console.log('over:', over);
 
     if (over !== null && active.id !== over.id) {
-      if (withinCourseBag(active, over)) {
+      if (endWithinBag(active, over)) {
         updateAppUser((draft) => {
           const courseIds = draft.courseBag.map((course) => course.id);
           const oldIndex = courseIds.indexOf(active.id as string);
@@ -80,11 +179,23 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
 
           draft.courseBag = arrayMove(draft.courseBag, oldIndex, newIndex);
         });
-      } else if (fromCourseBagToEmptyQuarter(active, over)) {
+      } else if (endWithinSameQuarter(active, over)) {
+        console.log('withinQuarter');
+        const [year, term] = getQuarterTerm(
+          active.data.current?.sortable?.containerId
+        );
         updateAppUser((draft) => {
-          const course = draft.removeCourseFromCourseBag(active.id as string);
-          const [year, term] = getQuarterTerm(over.id as string);
-          draft.setQuarterCourses(year, term, [course]);
+          const courseIds = draft
+            .getQuarterCourses(year, term)
+            .map((course) => course.id);
+          const oldIndex = courseIds.indexOf(active.id as string);
+          const newIndex = courseIds.indexOf(over.id as string);
+
+          draft.setQuarterCourses(
+            year,
+            term,
+            arrayMove(draft.getQuarterCourses(year, term), oldIndex, newIndex)
+          );
         });
       }
     }
@@ -100,10 +211,12 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
   return (
     <DndContext
       id={'0'}
+      // collisionDetection={closestCenter}
+      modifiers={[restrictToWindowEdges]}
       onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
-      modifiers={[restrictToWindowEdges]}
       sensors={sensors}
     >
       {children}

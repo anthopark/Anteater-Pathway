@@ -1,7 +1,12 @@
 import styles from './CourseBag.module.scss';
 import classNames from 'classnames/bind';
 import useAppUser from '@hooks/useAppUser';
-import { SortableContext } from '@dnd-kit/sortable';
+import {
+  horizontalListSortingStrategy,
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import { useDroppable } from '@dnd-kit/core';
 import SortableCourseItem from '../SortableCourseItem/SortableCourseItem';
 import { eraser } from '@styles/fontawesome';
@@ -17,7 +22,7 @@ function CourseBag(props: Props) {
   const { appUser, updateAppUser } = useAppUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totalUnit, setTotalUnit] = useState(0);
-  const { setNodeRef } = useDroppable({ id: 'course-bag' });
+  const { setNodeRef } = useSortable({ id: 'bag' });
 
   useEffect(() => {
     updateTotalUnit();
@@ -69,7 +74,7 @@ function CourseBag(props: Props) {
         </div>
 
         <div className={cx('courses-box')} ref={setNodeRef}>
-          <SortableContext id="course-bag" items={appUser.courseBag}>
+          <SortableContext id="bag" items={appUser.courseBag}>
             {appUser.courseBag.map((course) => (
               <div className={cx('course-item-wrapper')} key={course.id}>
                 <SortableCourseItem course={course} isInCourseBag />

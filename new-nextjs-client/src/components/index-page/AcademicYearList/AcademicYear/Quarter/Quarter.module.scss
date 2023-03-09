@@ -1,12 +1,12 @@
 .container {
   background-color: $bg-color-3;
-  padding: 1rem 0 2rem 0;
+  padding: 1rem 2rem 2rem 2rem;
   border-radius: $br-md;
 }
 
 .header {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   letter-spacing: $letter-spacing-lg;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
@@ -14,15 +14,19 @@
 
 .courses-box {
   min-height: 3.8rem;
-  padding: 0rem 1.5rem;
+}
+
+.course-item-wrapper {
+  margin: 0 0.5rem;
+  margin-bottom: 1.3rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 [data-theme='dark'] {
   .container {
     background-color: $bg-color-3-dt;
   }
-}
-
-.course-item-wrapper {
-  margin: 1rem;
 }

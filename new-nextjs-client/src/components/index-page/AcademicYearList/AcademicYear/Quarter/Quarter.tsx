@@ -4,10 +4,10 @@ import styles from './Quarter.module.scss';
 import classNames from 'classnames/bind';
 import {
   SortableContext,
+  useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import SortableCourseItem from '@components/index-page/SortableCourseItem/SortableCourseItem';
-import { useDroppable } from '@dnd-kit/core';
 
 const cx = classNames.bind(styles);
 
@@ -29,7 +29,7 @@ const headerText = (quarter: IQuarter) => {
 };
 
 function Quarter(props: Props) {
-  const { setNodeRef } = useDroppable({
+  const { setNodeRef } = useSortable({
     id: `quarter-${props.quarter.year}-${props.quarter.term}`,
   });
 
@@ -38,7 +38,7 @@ function Quarter(props: Props) {
       <div className={cx('header')}>{headerText(props.quarter)}</div>
       <div className={cx('courses-box')} ref={setNodeRef}>
         <SortableContext
-          id={`course-bag`}
+          id={`quarter-${props.quarter.year}-${props.quarter.term}`}
           items={props.quarter.courses}
           strategy={verticalListSortingStrategy}
         >

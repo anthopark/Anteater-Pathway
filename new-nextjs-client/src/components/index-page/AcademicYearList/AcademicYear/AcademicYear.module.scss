@@ -29,9 +29,10 @@
 
 .quarters-container {
   padding: 0rem 1rem 1rem 1rem;
-  column-gap: 2rem;
+  column-gap: 2.5rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  align-items: start;
 }
 
 [data-theme='dark'] {
