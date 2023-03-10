@@ -2,12 +2,6 @@ import { immerable } from 'immer';
 import { Course, ICourse } from '@entities/course';
 import { IAcademicYear, AcademicYear, Term } from './academic-year';
 
-interface UpdateCourseColorParam {
-  courseId: string;
-  newColor: number;
-  isInCourseBag: boolean;
-}
-
 interface IAppUser {
   addToCourseBag: (courses: ICourse[]) => void;
   addYear: (year: number) => void;
@@ -17,12 +11,15 @@ interface IAppUser {
   getQuarterCourses: (year: number, term: Term) => ICourse[];
   setQuarterCourses: (year: number, term: Term, courses: ICourse[]) => void;
   removeYear: (year: number) => void;
-  removeCourseFromCourseBag: (courseId: string) => ICourse;
-  updateCourseColor: ({
-    courseId,
-    isInCourseBag,
-    newColor,
-  }: UpdateCourseColorParam) => void;
+  removeCourse: (
+    courseId: string,
+    isInCourseBag: boolean
+  ) => ICourse | undefined;
+  updateCourseColor: (
+    courseId: string,
+    isInCourseBag: boolean,
+    newColor: number
+  ) => void;
   years: number[];
 }
 
@@ -30,29 +27,8 @@ class AppUser implements IAppUser {
   [immerable] = true;
 
   private _authToken: string | null = null;
-  private _degreePlan: AcademicYear[] = [];
-  private _courseBag: ICourse[] = [
-    new Course(
-      {
-        deptCode: 'IN4MATX',
-        num: '121',
-        unit: 4,
-      } as ResponseModel.Course,
-      false
-    ),
-    new Course(
-      { deptCode: 'COMPSCI', num: '171', unit: 4 } as ResponseModel.Course,
-      false
-    ),
-    new Course(
-      { deptCode: 'ECON', num: '1A', unit: 4 } as ResponseModel.Course,
-      false
-    ),
-    new Course(
-      { deptCode: 'HISTORY', num: '7C', unit: 4 } as ResponseModel.Course,
-      false
-    ),
-  ];
+  private _degreePlan: IAcademicYear[] = [];
+  private _courseBag: ICourse[] = [];
 
   public constructor() {
     this._addCurrentYear();
@@ -68,6 +44,10 @@ class AppUser implements IAppUser {
 
   public get degreePlan() {
     return this._degreePlan;
+  }
+
+  public set degreePlan(newDegreePlan: IAcademicYear[]) {
+    this._degreePlan = newDegreePlan;
   }
 
   public get years(): number[] {
@@ -87,6 +67,40 @@ class AppUser implements IAppUser {
     }
   }
 
+  public removeCourse(
+    courseId: string,
+    isInCourseBag: boolean
+  ): ICourse | undefined {
+    let removedCourse: ICourse | undefined;
+
+    if (isInCourseBag) {
+      removedCourse = this._courseBag.find((course) => course.id === courseId);
+
+      if (removedCourse) {
+        this._courseBag = this._courseBag.filter(
+          (course) => course.id !== courseId
+        );
+      }
+    } else {
+      const { course, year, term } = this._findCourseInDegreePlan(courseId);
+
+      if (course) {
+        removedCourse = course;
+        this.setQuarterCourses(
+          year!,
+          term!,
+          this.getQuarterCourses(year!, term!).filter(
+            (course) => course.id !== removedCourse!.id
+          )
+        );
+      }
+
+      this._updateDegreePlan();
+    }
+
+    return removedCourse;
+  }
+
   public addToCourseBag(courses: ICourse[]) {
     for (const course of courses) {
       this._courseBag.push(course);
@@ -97,25 +111,22 @@ class AppUser implements IAppUser {
     this._courseBag = [];
   }
 
-  public removeCourseFromCourseBag(courseId: string): ICourse {
-    let removedCourse: ICourse | undefined;
+  public updateCourseColor(
+    courseId: string,
+    isInCourseBag: boolean,
+    newColor: number
+  ) {
+    let courseToUpdate: ICourse | undefined;
 
-    removedCourse = this._courseBag.find((course) => course.id === courseId);
-    if (!removedCourse) {
-      throw new Error(`No course to remove in the course bag`);
-    }
-    this._courseBag = this.courseBag.filter((course) => course.id !== courseId);
-
-    return removedCourse;
-  }
-
-  public updateCourseColor({
-    courseId,
-    isInCourseBag,
-    newColor,
-  }: UpdateCourseColorParam) {
     if (isInCourseBag) {
-      this._updateColorInCourseBag(courseId, newColor);
+      courseToUpdate = this._courseBag.find((course) => course.id === courseId);
+    } else {
+      const { course } = this._findCourseInDegreePlan(courseId);
+      courseToUpdate = course;
+    }
+
+    if (courseToUpdate) {
+      courseToUpdate.color = newColor;
     }
   }
 
@@ -126,6 +137,10 @@ class AppUser implements IAppUser {
   public setQuarterCourses(year: number, term: Term, courses: ICourse[]): void {
     const quarter = this._getQuarter(year, term);
     quarter.courses = courses;
+  }
+
+  private _updateDegreePlan() {
+    this._degreePlan = [...this._degreePlan];
   }
 
   private _getQuarter(year: number, term: Term) {
@@ -155,14 +170,24 @@ class AppUser implements IAppUser {
     this.addYear(twoDigitCurrentYear);
   }
 
-  private _updateColorInCourseBag(courseId: string, newColor: number) {
-    const indexToUpdate = this._courseBag.findIndex(
-      (course) => course.id === courseId
-    );
+  private _findCourseInDegreePlan(courseId: string) {
+    let course: ICourse | undefined;
+    let year: number | undefined;
+    let term: Term | undefined;
 
-    if (indexToUpdate !== -1) {
-      this._courseBag[indexToUpdate].color = newColor;
+    for (const academicYear of this._degreePlan) {
+      for (const quarter of academicYear.quarters) {
+        const result = quarter.courses.find((course) => course.id === courseId);
+        if (result) {
+          course = result;
+          year = quarter.year;
+          term = quarter.term;
+          break;
+        }
+      }
     }
+
+    return { course, year, term };
   }
 }
 

@@ -1,7 +1,11 @@
 .container {
   background-color: $bg-color-3;
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 1rem 2.2rem 2rem 2.2rem;
   border-radius: $br-md;
+
+  &.show-total-unit {
+    padding-bottom: 1rem;
+  }
 }
 
 .header {
@@ -17,16 +21,33 @@
 }
 
 .course-item-wrapper {
-  margin: 0 0.5rem;
-  margin-bottom: 1.3rem;
+  margin: 0;
+  margin-bottom: 1.2rem;
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.total-unit {
+  margin-top: 0.8rem;
+  margin-right: 0.8rem;
+  font-size: $fs-md;
+  display: inline-block;
+  color: $secondary-text;
+}
+
 [data-theme='dark'] {
   .container {
     background-color: $bg-color-3-dt;
+  }
+
+  .total-unit {
+    color: $secondary-text-dt;
   }
 }

@@ -14,7 +14,7 @@ import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYe
 import CourseItemDndProvider from '@contexts/DndContextProvider/CourseItemDndProvider';
 
 export default function Home() {
-  const { appUser, updateAppUser } = useAppUser();
+  const { appUser } = useAppUser();
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
 
   return (

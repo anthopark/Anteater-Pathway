@@ -55,6 +55,16 @@ const overFromBagToQuarter = (active: Active, over: Over) => {
   return activeContainerId === 'bag' && overContainerId.startsWith('quarter');
 };
 
+const overFromQuarterToQuarter = (active: Active, over: Over) => {
+  const activeContainerId = active.data.current?.sortable?.containerId;
+  let overContainerId = getOverContainerId(over);
+
+  return (
+    activeContainerId.startsWith('quarter') &&
+    overContainerId.startsWith('quarter')
+  );
+};
+
 const endWithinBag = (active: Active, over: Over): boolean => {
   return (
     active.data.current?.sortable?.containerId === 'bag' &&
@@ -97,12 +107,9 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     const { active, over } = event;
 
     if (over !== null && active.id !== over.id) {
-      // console.log(event);
       if (overWithinTheSameContainer(active, over)) {
-        console.log('same container');
         return;
       } else if (overFromQuarterToBag(active, over)) {
-        // console.log('from quarter to bag');
         updateAppUser((draft) => {
           const [year, term] = getQuarterTerm(
             active.data.current?.sortable?.containerId
@@ -119,7 +126,6 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
             newIndex = draft.courseBag.length;
           }
 
-          // remove course from the quarter
           draft.setQuarterCourses(
             year,
             term,
@@ -135,7 +141,6 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
           ] as ICourse[];
         });
       } else if (overFromBagToQuarter(active, over)) {
-        // console.log('from bag to quarter');
         updateAppUser((draft) => {
           const [year, term] = getQuarterTerm(getOverContainerId(over));
           const courseToMove = draft.courseBag.find(
@@ -160,15 +165,45 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
             ...draft.getQuarterCourses(year, term).slice(newIndex),
           ]);
         });
+      } else if (overFromQuarterToQuarter(active, over)) {
+        updateAppUser((draft) => {
+          const [activeYear, activeTerm] = getQuarterTerm(
+            active.data.current?.sortable?.containerId
+          );
+          const [overYear, overTerm] = getQuarterTerm(getOverContainerId(over));
+
+          const courseToMove = draft
+            .getQuarterCourses(activeYear, activeTerm)
+            .find((course) => course.id === active.id);
+
+          let newIndex: number;
+
+          if (over.data.current?.sortable?.index >= 0) {
+            newIndex = over.data.current?.sortable?.index;
+          } else {
+            newIndex = draft.getQuarterCourses(overYear, overTerm).length;
+          }
+
+          draft.setQuarterCourses(
+            activeYear,
+            activeTerm,
+            draft
+              .getQuarterCourses(activeYear, activeTerm)
+              .filter((course) => course.id !== active.id)
+          );
+
+          draft.setQuarterCourses(overYear, overTerm, [
+            ...draft.getQuarterCourses(overYear, overTerm).slice(0, newIndex),
+            courseToMove,
+            ...draft.getQuarterCourses(overYear, overTerm).slice(newIndex),
+          ] as ICourse[]);
+        });
       }
     }
   };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-
-    console.log('active:', active);
-    console.log('over:', over);
 
     if (over !== null && active.id !== over.id) {
       if (endWithinBag(active, over)) {
@@ -180,7 +215,6 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
           draft.courseBag = arrayMove(draft.courseBag, oldIndex, newIndex);
         });
       } else if (endWithinSameQuarter(active, over)) {
-        console.log('withinQuarter');
         const [year, term] = getQuarterTerm(
           active.data.current?.sortable?.containerId
         );
@@ -211,7 +245,6 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
   return (
     <DndContext
       id={'0'}
-      // collisionDetection={closestCenter}
       modifiers={[restrictToWindowEdges]}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}

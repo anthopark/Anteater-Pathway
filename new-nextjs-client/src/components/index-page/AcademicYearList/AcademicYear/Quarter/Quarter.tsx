@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IQuarter } from '@entities/academic-year';
 import styles from './Quarter.module.scss';
 import classNames from 'classnames/bind';
@@ -8,6 +8,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import SortableCourseItem from '@components/index-page/SortableCourseItem/SortableCourseItem';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -33,8 +34,28 @@ function Quarter(props: Props) {
     id: `quarter-${props.quarter.year}-${props.quarter.term}`,
   });
 
+  const [totalUnit, setTotalUnit] = useState(0);
+
+  useEffect(() => {
+    calculateTotalUnit();
+  }, [props.quarter.courses.length]);
+
+  const calculateTotalUnit = () => {
+    let totalUnit = 0;
+
+    props.quarter.courses.forEach((course) => {
+      totalUnit += course.unit ?? 0;
+    });
+
+    setTotalUnit(totalUnit);
+  };
+
   return (
-    <div className={cx('container')}>
+    <div
+      className={cx('container', {
+        'show-total-unit': totalUnit > 0,
+      })}
+    >
       <div className={cx('header')}>{headerText(props.quarter)}</div>
       <div className={cx('courses-box')} ref={setNodeRef}>
         <SortableContext
@@ -48,6 +69,13 @@ function Quarter(props: Props) {
             </div>
           ))}
         </SortableContext>
+      </div>
+      <div className={cx('footer')}>
+        {totalUnit > 0 ? (
+          <span className={cx('total-unit')}>{`${totalUnit} ${
+            totalUnit === 1 ? 'unit' : 'units'
+          }`}</span>
+        ) : null}
       </div>
     </div>
   );

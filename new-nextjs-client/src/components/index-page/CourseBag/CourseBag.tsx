@@ -1,13 +1,7 @@
 import styles from './CourseBag.module.scss';
 import classNames from 'classnames/bind';
 import useAppUser from '@hooks/useAppUser';
-import {
-  horizontalListSortingStrategy,
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { useDroppable } from '@dnd-kit/core';
+import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import SortableCourseItem from '../SortableCourseItem/SortableCourseItem';
 import { eraser } from '@styles/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

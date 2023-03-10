@@ -8,20 +8,14 @@ export const useCourseMenuHandler = (
 
   const handleColorSelect = (newColor: number) => {
     updateAppUser((draft) => {
-      draft.updateCourseColor({
-        courseId,
-        isInCourseBag,
-        newColor,
-      });
+      draft.updateCourseColor(courseId, isInCourseBag, newColor);
     });
   };
 
   const handleCourseRemove = () => {
-    if (isInCourseBag) {
-      updateAppUser((draft) => {
-        draft.removeCourseFromCourseBag(courseId);
-      });
-    }
+    updateAppUser((draft) => {
+      draft.removeCourse(courseId, isInCourseBag);
+    });
   };
 
   return {

@@ -5,15 +5,17 @@ export interface IAcademicYear {
   quarters: IQuarter[];
 }
 
+export type Term = 'fa' | 'wi' | 'sp' | 'su';
+
+export const terms: Term[] = ['fa', 'wi', 'sp', 'su'];
+
 export class AcademicYear implements IAcademicYear {
   private _year: number;
   private _quarters: IQuarter[];
 
   public constructor(year: number) {
     this._year = year;
-    this._quarters = ['fa', 'wi', 'sp', 'su'].map(
-      (term) => new Quarter(this._year, term as Term)
-    );
+    this._quarters = terms.map((term) => new Quarter(this._year, term as Term));
   }
 
   public get year() {
@@ -25,15 +27,13 @@ export class AcademicYear implements IAcademicYear {
   }
 }
 
-export type Term = 'fa' | 'wi' | 'sp' | 'su';
-
 export interface IQuarter {
   year: number;
   term: Term;
   courses: ICourse[];
 }
 
-class Quarter implements IQuarter {
+export class Quarter implements IQuarter {
   public courses: ICourse[] = [];
 
   private _year: number;
