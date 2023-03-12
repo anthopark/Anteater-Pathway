@@ -137,6 +137,7 @@ class AppUser implements IAppUser {
   public setQuarterCourses(year: number, term: Term, courses: ICourse[]): void {
     const quarter = this._getQuarter(year, term);
     quarter.courses = courses;
+    this._updateDegreePlan();
   }
 
   private _updateDegreePlan() {

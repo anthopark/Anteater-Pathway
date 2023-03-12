@@ -53,7 +53,7 @@ function CourseBag(props: Props) {
         actionKind="danger"
         actionFn={handleCourseBagClear}
       />
-      <div className={cx('container')}>
+      <div className={cx('container')} ref={setNodeRef}>
         <div className={cx('heading')}>
           <span>Course bag</span>
           {appUser.courseBag.length > 0 ? (
@@ -67,7 +67,7 @@ function CourseBag(props: Props) {
           ) : null}
         </div>
 
-        <div className={cx('courses-box')} ref={setNodeRef}>
+        <div className={cx('courses-box')}>
           <SortableContext id="bag" items={appUser.courseBag}>
             {appUser.courseBag.map((course) => (
               <div className={cx('course-item-wrapper')} key={course.id}>

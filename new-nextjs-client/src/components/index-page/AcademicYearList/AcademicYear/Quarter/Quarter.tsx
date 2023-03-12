@@ -55,19 +55,24 @@ function Quarter(props: Props) {
       className={cx('container', {
         'show-total-unit': totalUnit > 0,
       })}
+      ref={setNodeRef}
     >
       <div className={cx('header')}>{headerText(props.quarter)}</div>
-      <div className={cx('courses-box')} ref={setNodeRef}>
+      <div className={cx('courses-box')}>
         <SortableContext
           id={`quarter-${props.quarter.year}-${props.quarter.term}`}
           items={props.quarter.courses}
           strategy={verticalListSortingStrategy}
         >
-          {props.quarter.courses.map((course) => (
-            <div className={cx('course-item-wrapper')} key={course.id}>
-              <SortableCourseItem course={course} isInCourseBag={false} />
-            </div>
-          ))}
+          {props.quarter.courses.map((course) => {
+            if (course) {
+              return (
+                <div className={cx('course-item-wrapper')} key={course.id}>
+                  <SortableCourseItem course={course} isInCourseBag={false} />
+                </div>
+              );
+            }
+          })}
         </SortableContext>
       </div>
       <div className={cx('footer')}>

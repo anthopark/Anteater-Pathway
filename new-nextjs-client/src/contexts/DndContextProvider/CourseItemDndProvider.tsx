@@ -10,16 +10,21 @@ import {
   MouseSensor,
   TouchSensor,
   DragOverEvent,
-  closestCenter,
   Active,
   Over,
+  CollisionDetection,
+  pointerWithin,
+  rectIntersection,
+  getFirstCollision,
+  closestCenter,
+  MeasuringStrategy,
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
 import { Term } from '@entities/academic-year';
 import { ICourse } from '@entities/course';
 import useAppUser from '@hooks/useAppUser';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 interface DraggingCourse {
   id: string;
@@ -80,18 +85,67 @@ const endWithinSameQuarter = (active: Active, over: Over): boolean => {
   );
 };
 
-const getQuarterTerm = (id: string): [number, Term] => {
-  const [year, term] = id.split('-').slice(1, 3);
+const getQuarterTerm = (id: UniqueIdentifier): [number, Term] => {
+  const [year, term] = (id as string).split('-').slice(1, 3);
   return [parseInt(year), term as Term];
 };
 
 function CourseItemDndProvider({ children }: { children: ReactNode }) {
-  const { updateAppUser } = useAppUser();
+  const { appUser, updateAppUser } = useAppUser();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
+  const lastOverId = useRef<UniqueIdentifier | null>(null);
+  const recentlyMovedToNewContainer = useRef(false);
   const [draggingCourse, setDraggingCourse] = useState<DraggingCourse | null>(
     null
   );
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+
+  const collisionDetectionStrategy: CollisionDetection = useCallback(
+    (args) => {
+      const pointerIntersections = pointerWithin(args);
+      const intersections =
+        pointerIntersections.length > 0
+          ? pointerIntersections
+          : pointerIntersections;
+      let overId = getFirstCollision(intersections, 'id');
+
+      if (overId !== null) {
+        let courseIds: string[] | undefined;
+
+        if ((overId as string).startsWith('quarter')) {
+          const [year, term] = getQuarterTerm(overId);
+          courseIds = appUser
+            .getQuarterCourses(year, term)
+            .map((course) => course?.id);
+        } else if (overId === 'bag') {
+          courseIds = appUser.courseBag.map((course) => course.id);
+        }
+
+        if (courseIds && courseIds.length > 0) {
+          // If a container is matched and it contains courses
+          overId = closestCenter({
+            ...args,
+            droppableContainers: args.droppableContainers.filter(
+              (container) =>
+                container.id !== overId &&
+                courseIds!.includes(container.id as string)
+            ),
+          })[0]?.id;
+        }
+
+        lastOverId.current = overId;
+
+        return [{ id: overId }];
+      }
+
+      if (recentlyMovedToNewContainer.current) {
+        lastOverId.current = activeId;
+      }
+
+      return lastOverId.current ? [{ id: lastOverId.current }] : [];
+    },
+    [activeId, appUser]
+  );
 
   const handleDragStart = (event: DragStartEvent) => {
     setDraggingCourse({
@@ -107,31 +161,30 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     const { active, over } = event;
 
     if (over !== null && active.id !== over.id) {
-      if (overWithinTheSameContainer(active, over)) {
-        return;
-      } else if (overFromQuarterToBag(active, over)) {
+      if (overWithinTheSameContainer(active, over)) return;
+
+      console.log('DragOver', active, over);
+
+      if (overFromQuarterToBag(active, over)) {
         updateAppUser((draft) => {
           const [year, term] = getQuarterTerm(
             active.data.current?.sortable?.containerId
           );
-          const courseToMove = draft
-            .getQuarterCourses(year, term)
-            .find((course) => course.id === active.id);
+          const quarterCourses = draft.getQuarterCourses(year, term);
+          const courseBag = draft.courseBag;
+          const courseToMove = quarterCourses.find(
+            (course) => course.id === active.id
+          );
 
-          let newIndex: number;
+          if (!courseToMove) return;
 
-          if (over.data.current?.sortable?.index >= 0) {
-            newIndex = over.data.current?.sortable?.index;
-          } else {
-            newIndex = draft.courseBag.length;
-          }
+          const overIndex = over.data.current?.sortable?.index;
+          const newIndex = overIndex >= 0 ? overIndex : 0;
 
           draft.setQuarterCourses(
             year,
             term,
-            draft
-              .getQuarterCourses(year, term)
-              .filter((course) => course.id !== active.id)
+            quarterCourses.filter((course) => course.id !== active.id)
           );
 
           draft.courseBag = [
@@ -147,18 +200,17 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
             (course) => course.id === active.id
           );
 
-          let newIndex: number;
+          if (!courseToMove) return;
 
+          let newIndex: number;
           if (over.data.current?.sortable?.index >= 0) {
             newIndex = over.data.current?.sortable?.index;
           } else {
             newIndex = draft.getQuarterCourses(year, term).length;
           }
-
           draft.courseBag = draft.courseBag.filter(
             (course) => course.id !== active.id
           );
-
           draft.setQuarterCourses(year, term, [
             ...draft.getQuarterCourses(year, term).slice(0, newIndex),
             courseToMove!,
@@ -199,6 +251,8 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
           ] as ICourse[]);
         });
       }
+
+      recentlyMovedToNewContainer.current = true;
     }
   };
 
@@ -233,6 +287,7 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
         });
       }
     }
+
     setActiveId(null);
     setDraggingCourse(null);
   };
@@ -241,6 +296,10 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     setActiveId(null);
     setDraggingCourse(null);
   };
+
+  useEffect(() => {
+    recentlyMovedToNewContainer.current = false;
+  }, [appUser]);
 
   return (
     <DndContext
@@ -251,6 +310,7 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
       sensors={sensors}
+      collisionDetection={collisionDetectionStrategy}
     >
       {children}
       <DragOverlay>
