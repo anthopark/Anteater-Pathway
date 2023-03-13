@@ -90,15 +90,15 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setEmailSending(true);
 
-    try {
-      await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
+    if (response.status === 200) {
       showToastBox({
         status: 'success',
         message: 'Sent! Thank you :)',
@@ -108,7 +108,7 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
 
       setValue('message', '');
       onClose();
-    } catch (error) {
+    } else {
       showToastBox({
         status: 'fail',
         highlightedData: null,
@@ -134,11 +134,11 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
           pt="2.5rem"
           textAlign="center"
           letterSpacing={letterSpacingLG}
-          fontSize={fontSizeLG}
-          fontWeight="light"
+          fontSize={'1.8rem'}
+          fontWeight={400}
           color={theme === 'light' ? defaultText : defaultTextDark}
         >
-          Help us become more useful to you!
+          Help us become more useful!
         </ModalHeader>
 
         <ModalCloseButton

@@ -2,11 +2,7 @@ import React, { useEffect } from 'react';
 import { IQuarter } from '@entities/academic-year';
 import styles from './Quarter.module.scss';
 import classNames from 'classnames/bind';
-import {
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import SortableCourseItem from '@components/index-page/SortableCourseItem/SortableCourseItem';
 import { useState } from 'react';
 
@@ -62,17 +58,12 @@ function Quarter(props: Props) {
         <SortableContext
           id={`quarter-${props.quarter.year}-${props.quarter.term}`}
           items={props.quarter.courses}
-          strategy={verticalListSortingStrategy}
         >
-          {props.quarter.courses.map((course) => {
-            if (course) {
-              return (
-                <div className={cx('course-item-wrapper')} key={course.id}>
-                  <SortableCourseItem course={course} isInCourseBag={false} />
-                </div>
-              );
-            }
-          })}
+          {props.quarter.courses.map((course) => (
+            <div className={cx('course-item-wrapper')} key={course.id}>
+              <SortableCourseItem course={course} isInCourseBag={false} />
+            </div>
+          ))}
         </SortableContext>
       </div>
       <div className={cx('footer')}>

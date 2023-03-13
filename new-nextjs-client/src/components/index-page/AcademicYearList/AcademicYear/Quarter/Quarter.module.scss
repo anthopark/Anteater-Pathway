@@ -1,6 +1,6 @@
 .container {
   background-color: $bg-color-3;
-  padding: 1rem 0;
+  padding: 1rem 2.3rem;
   border-radius: $br-md;
 
   &.show-total-unit {
@@ -13,12 +13,11 @@
   font-size: 1.6rem;
   letter-spacing: $letter-spacing-lg;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .courses-box {
   min-height: 3.8rem;
-  padding: 1rem 2.2rem;
 }
 
 .course-item-wrapper {
@@ -36,8 +35,9 @@
 }
 
 .total-unit {
-  margin-right: 2.2rem;
-  font-size: $fs-md;
+  margin-top: 0.8rem;
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
   display: inline-block;
   color: $secondary-text;
 }

@@ -14,10 +14,8 @@ import {
   Over,
   CollisionDetection,
   pointerWithin,
-  rectIntersection,
   getFirstCollision,
   closestCenter,
-  MeasuringStrategy,
 } from '@dnd-kit/core';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
@@ -163,7 +161,7 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
     if (over !== null && active.id !== over.id) {
       if (overWithinTheSameContainer(active, over)) return;
 
-      console.log('DragOver', active, over);
+      recentlyMovedToNewContainer.current = true;
 
       if (overFromQuarterToBag(active, over)) {
         updateAppUser((draft) => {
@@ -188,33 +186,40 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
           );
 
           draft.courseBag = [
-            ...draft.courseBag.slice(0, newIndex),
+            ...courseBag.slice(0, newIndex),
             courseToMove,
-            ...draft.courseBag.slice(newIndex),
-          ] as ICourse[];
+            ...courseBag.slice(newIndex),
+          ];
         });
       } else if (overFromBagToQuarter(active, over)) {
         updateAppUser((draft) => {
           const [year, term] = getQuarterTerm(getOverContainerId(over));
+          const quarterCourses = draft.getQuarterCourses(year, term);
+          const courseBag = draft.courseBag;
           const courseToMove = draft.courseBag.find(
             (course) => course.id === active.id
           );
 
           if (!courseToMove) return;
 
-          let newIndex: number;
-          if (over.data.current?.sortable?.index >= 0) {
-            newIndex = over.data.current?.sortable?.index;
-          } else {
-            newIndex = draft.getQuarterCourses(year, term).length;
-          }
-          draft.courseBag = draft.courseBag.filter(
+          const overIndex = over.data.current?.sortable?.index;
+
+          const isBelowOver =
+            active.rect.current.translated &&
+            active.rect.current.translated.top >
+              over.rect.top + over.rect.height / 2;
+
+          const modifier = isBelowOver ? 1 : 0;
+
+          const newIndex = overIndex >= 0 ? overIndex + modifier : 0;
+
+          draft.courseBag = courseBag.filter(
             (course) => course.id !== active.id
           );
           draft.setQuarterCourses(year, term, [
-            ...draft.getQuarterCourses(year, term).slice(0, newIndex),
-            courseToMove!,
-            ...draft.getQuarterCourses(year, term).slice(newIndex),
+            ...quarterCourses.slice(0, newIndex),
+            courseToMove,
+            ...quarterCourses.slice(newIndex),
           ]);
         });
       } else if (overFromQuarterToQuarter(active, over)) {
@@ -223,36 +228,42 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
             active.data.current?.sortable?.containerId
           );
           const [overYear, overTerm] = getQuarterTerm(getOverContainerId(over));
+          const fromQuarterCourses = draft.getQuarterCourses(
+            activeYear,
+            activeTerm
+          );
+          const toQuarterCourses = draft.getQuarterCourses(overYear, overTerm);
 
           const courseToMove = draft
             .getQuarterCourses(activeYear, activeTerm)
             .find((course) => course.id === active.id);
 
-          let newIndex: number;
+          if (!courseToMove) return;
 
-          if (over.data.current?.sortable?.index >= 0) {
-            newIndex = over.data.current?.sortable?.index;
-          } else {
-            newIndex = draft.getQuarterCourses(overYear, overTerm).length;
-          }
+          const overIndex = over.data.current?.sortable?.index;
+
+          const isBelowOver =
+            active.rect.current.translated &&
+            active.rect.current.translated.top >
+              over.rect.top + over.rect.height / 2;
+
+          const modifier = isBelowOver ? 1 : 0;
+
+          const newIndex = overIndex >= 0 ? overIndex + modifier : 0;
 
           draft.setQuarterCourses(
             activeYear,
             activeTerm,
-            draft
-              .getQuarterCourses(activeYear, activeTerm)
-              .filter((course) => course.id !== active.id)
+            fromQuarterCourses.filter((course) => course.id !== active.id)
           );
 
           draft.setQuarterCourses(overYear, overTerm, [
-            ...draft.getQuarterCourses(overYear, overTerm).slice(0, newIndex),
+            ...toQuarterCourses.slice(0, newIndex),
             courseToMove,
-            ...draft.getQuarterCourses(overYear, overTerm).slice(newIndex),
-          ] as ICourse[]);
+            ...toQuarterCourses.slice(newIndex),
+          ]);
         });
       }
-
-      recentlyMovedToNewContainer.current = true;
     }
   };
 
