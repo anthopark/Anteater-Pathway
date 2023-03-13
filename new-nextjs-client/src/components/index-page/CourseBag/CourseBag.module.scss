@@ -1,17 +1,17 @@
 .container {
-  padding: 1.3rem 1.2rem 0.8rem 0rem;
+  padding: 1.3rem 1.2rem 1.3rem 2rem;
 
   background-color: $bg-color-2;
   border-radius: $br-md;
 }
 
 .heading {
-  padding-left: 2rem;
   font-size: $fs-lg;
   letter-spacing: $letter-spacing-lg;
   color: $secondary-text;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .empty-button {
@@ -30,13 +30,9 @@
 }
 
 .courses-box {
-  margin-top: 0.5rem;
   width: 100%;
   min-height: 3.8rem;
   max-height: 25rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left: 2rem;
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
@@ -46,11 +42,12 @@
 }
 
 .total-unit {
+  margin-top: 0.8rem;
+  margin-right: 1rem;
   font-size: 1.6rem;
   color: $secondary-text;
   letter-spacing: $letter-spacing-sm;
   text-align: end;
-  margin-right: 1rem;
 }
 
 .course-item-wrapper {

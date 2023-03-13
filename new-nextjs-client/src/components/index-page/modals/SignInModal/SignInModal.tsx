@@ -65,11 +65,11 @@ function SignInModal(props: Props) {
           <Image src="/anteater-logo.svg" alt="logo" fill />
         </div>
         <ModalHeader
-          pt="3rem"
+          pt="2rem"
           textAlign="center"
           letterSpacing={letterSpacingLG}
           fontSize={fontSizeLG}
-          fontWeight="light"
+          fontWeight={400}
           color={theme === 'light' ? defaultText : defaultTextDark}
         >
           Sign in to Anteater Pathway

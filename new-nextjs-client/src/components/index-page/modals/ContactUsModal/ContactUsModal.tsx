@@ -121,7 +121,7 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent
         borderRadius={borderRadiusMD}
@@ -131,14 +131,14 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
           <Image src="/anteater-logo.svg" alt="logo" fill />
         </div>
         <ModalHeader
-          pt="2.5rem"
+          pt="2rem"
           textAlign="center"
           letterSpacing={letterSpacingLG}
           fontSize={'1.8rem'}
           fontWeight={400}
           color={theme === 'light' ? defaultText : defaultTextDark}
         >
-          Help us become more useful!
+          Help us become more useful to you!
         </ModalHeader>
 
         <ModalCloseButton
