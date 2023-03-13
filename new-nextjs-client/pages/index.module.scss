@@ -2,7 +2,7 @@ $top-selection-pb: 1.5rem;
 
 .container {
   padding: 0 2rem;
-  background: $main-background;
+  background: $gray-6;
   display: grid;
   grid-template-rows: 7.5rem auto;
 
@@ -42,7 +42,11 @@ $top-selection-pb: 1.5rem;
   }
 
   .mainLeftContainer {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+    padding-right: 1.2rem;
+    max-height: calc(100vh - 9.5rem);
+    overflow-y: auto;
+    @include scrollbar-light();
   }
 
   .academicYearWrapper {
@@ -50,7 +54,7 @@ $top-selection-pb: 1.5rem;
   }
 
   .mainRightContainer {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
 }
 
@@ -61,5 +65,9 @@ $top-selection-pb: 1.5rem;
 
   .container .topSection {
     border-bottom: 1px solid $gray-2;
+  }
+
+  .mainLeftContainer {
+    @include scrollbar-dark();
   }
 }

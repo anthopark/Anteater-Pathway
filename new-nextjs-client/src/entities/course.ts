@@ -4,8 +4,13 @@ export interface ICourse {
   id: string;
   deptCode: string;
   num: string;
-  color: number;
+  title: string | null;
   unit: number | null;
+  isVariableUnit: boolean;
+  minUnit: number | null;
+  maxUnit: number | null;
+  isCustomCreated: boolean;
+  color: number;
 }
 
 export class Course implements ICourse {
@@ -17,11 +22,14 @@ export class Course implements ICourse {
   public isVariableUnit: boolean;
   public minUnit: number | null;
   public maxUnit: number | null;
-  public isCustomCreated: boolean = false;
+  public isCustomCreated: boolean;
   public color = 1;
 
-  constructor(courseResponse: ResponseModel.Course, isCustomCreated: boolean) {
-    this._id = nanoid();
+  constructor(
+    courseResponse: ResponseModel.Course,
+    isCustomCreated: boolean = false
+  ) {
+    this._id = `course-${nanoid()}`;
     this.deptCode = courseResponse.deptCode;
     this.num = courseResponse.num;
     this.title = courseResponse.title ?? null;

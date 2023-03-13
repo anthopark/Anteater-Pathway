@@ -1,11 +1,12 @@
 .container {
-  padding: 1.3rem 1.2rem 0.8rem 2rem;
+  padding: 1.3rem 1.2rem 0.8rem 0rem;
 
   background-color: $bg-color-2;
   border-radius: $br-md;
 }
 
 .heading {
+  padding-left: 2rem;
   font-size: $fs-lg;
   letter-spacing: $letter-spacing-lg;
   color: $secondary-text;
@@ -28,11 +29,14 @@
   margin-right: 0.4rem;
 }
 
-.course-box {
-  margin-top: 1.5rem;
+.courses-box {
+  margin-top: 0.5rem;
   width: 100%;
   min-height: 3.8rem;
-  max-height: 24rem;
+  max-height: 25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
@@ -47,13 +51,12 @@
   letter-spacing: $letter-spacing-sm;
   text-align: end;
   margin-right: 1rem;
-  margin-top: 1rem;
 }
 
 .course-item-wrapper {
   width: 47%;
   margin-right: 0.3rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.2rem;
 
   &:nth-child(odd) {
     margin-right: 4%;
@@ -78,7 +81,7 @@
       color: $red-2;
     }
   }
-  .course-box {
+  .courses-box {
     @include scrollbar-dark();
   }
 

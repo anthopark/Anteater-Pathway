@@ -1,7 +1,7 @@
 import styles from './CourseBag.module.scss';
 import classNames from 'classnames/bind';
 import useAppUser from '@hooks/useAppUser';
-import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
+import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import SortableCourseItem from '../SortableCourseItem/SortableCourseItem';
 import { eraser } from '@styles/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,28 +16,11 @@ function CourseBag(props: Props) {
   const { appUser, updateAppUser } = useAppUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totalUnit, setTotalUnit] = useState(0);
+  const { setNodeRef } = useSortable({ id: 'bag' });
 
   useEffect(() => {
     updateTotalUnit();
   }, [appUser.courseBag]);
-
-  const handleColorSelect = (courseId: string) => {
-    return (colorNumber: number) => {
-      updateAppUser((draft) => {
-        draft.updateCourseColor({
-          courseId,
-          isInCourseBag: true,
-          newColor: colorNumber,
-        });
-      });
-    };
-  };
-
-  const handleCourseRemove = (courseId: string) => {
-    return () => {
-      updateAppUser((draft) => draft.removeCourseItem(courseId, true));
-    };
-  };
 
   const handleCourseBagClear = () => {
     updateAppUser((draft) => draft.clearCourseBag());
@@ -60,7 +43,7 @@ function CourseBag(props: Props) {
   };
 
   return (
-    <div className={cx('container')}>
+    <>
       <AppModal
         isOpen={isModalOpen}
         onClose={onClose}
@@ -70,42 +53,36 @@ function CourseBag(props: Props) {
         actionKind="danger"
         actionFn={handleCourseBagClear}
       />
-      <div className={cx('heading')}>
-        <span>Course bag</span>
+      <div className={cx('container')} ref={setNodeRef}>
+        <div className={cx('heading')}>
+          <span>Course bag</span>
+          {appUser.courseBag.length > 0 ? (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className={cx('empty-button')}
+            >
+              <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
+              <span>Empty</span>
+            </button>
+          ) : null}
+        </div>
+
+        <div className={cx('courses-box')}>
+          <SortableContext id="bag" items={appUser.courseBag}>
+            {appUser.courseBag.map((course) => (
+              <div className={cx('course-item-wrapper')} key={course.id}>
+                <SortableCourseItem course={course} isInCourseBag />
+              </div>
+            ))}
+          </SortableContext>
+        </div>
         {appUser.courseBag.length > 0 ? (
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className={cx('empty-button')}
-          >
-            <FontAwesomeIcon icon={eraser} className={cx('eraser-icon')} />
-            <span>Empty</span>
-          </button>
+          <div className={cx('total-unit')}>
+            {totalUnit} {totalUnit === 1 ? 'unit' : 'units'}
+          </div>
         ) : null}
       </div>
-
-      <div className={cx('course-box')}>
-        <SortableContext
-          items={appUser.courseBag}
-          strategy={rectSortingStrategy}
-        >
-          {appUser.courseBag.map((course) => (
-            <div className={cx('course-item-wrapper')} key={course.id}>
-              <SortableCourseItem
-                course={course}
-                onColorSelect={handleColorSelect(course.id)}
-                onRemove={handleCourseRemove(course.id)}
-                isInCourseBag
-              />
-            </div>
-          ))}
-        </SortableContext>
-      </div>
-      {appUser.courseBag.length > 0 ? (
-        <div className={cx('total-unit')}>
-          {totalUnit} {totalUnit === 1 ? 'unit' : 'units'}
-        </div>
-      ) : null}
-    </div>
+    </>
   );
 }
 

@@ -5,7 +5,7 @@ $info-icon-dt: #1d8ede;
   width: 100%;
   height: 100%;
   border-radius: $br-md;
-  background-color: #f6f6ff;
+  background-color: $bg-color-3;
   padding: 1.3rem 0.8rem 1.3rem 1.3rem;
 
   &.display-message {
@@ -125,7 +125,7 @@ $info-icon-dt: #1d8ede;
 
 [data-theme='dark'] {
   .container {
-    background-color: rgba($bg-color-1-dt, 0.5);
+    background-color: $bg-color-3-dt;
   }
 
   .message-wrapper {

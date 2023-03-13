@@ -1,56 +1,34 @@
 import { immerable } from 'immer';
-import { DegreePlan, IDegreePlan } from './degree-plan';
 import { Course, ICourse } from '@entities/course';
+import { IAcademicYear, AcademicYear, Term } from './academic-year';
 
-interface UpdateCourseColorParam {
-  courseId: string;
-  newColor: number;
-  isInCourseBag: boolean;
-}
 interface IAppUser {
-  addYear: (year: number) => void;
-  courseBag: ICourse[];
-  clearCourseBag: () => void;
   addToCourseBag: (courses: ICourse[]) => void;
-  degreePlan: IDegreePlan;
+  addYear: (year: number) => void;
+  clearCourseBag: () => void;
+  courseBag: ICourse[];
+  degreePlan: IAcademicYear[];
+  getQuarterCourses: (year: number, term: Term) => ICourse[];
+  setQuarterCourses: (year: number, term: Term, courses: ICourse[]) => void;
   removeYear: (year: number) => void;
-  removeCourseItem: (courseId: string, isInCourseBag: boolean) => void;
-  updateCourseColor: ({
-    courseId,
-    isInCourseBag,
-    newColor,
-  }: UpdateCourseColorParam) => void;
+  removeCourse: (
+    courseId: string,
+    isInCourseBag: boolean
+  ) => ICourse | undefined;
+  updateCourseColor: (
+    courseId: string,
+    isInCourseBag: boolean,
+    newColor: number
+  ) => void;
   years: number[];
 }
 
 class AppUser implements IAppUser {
   [immerable] = true;
 
-  private _years: number[] = [];
   private _authToken: string | null = null;
-  private _degreePlan = new DegreePlan();
-  private _courseBag: ICourse[] = [
-    new Course(
-      {
-        deptCode: 'IN4MATX',
-        num: '121',
-        unit: 4,
-      } as ResponseModel.Course,
-      false
-    ),
-    new Course(
-      { deptCode: 'COMPSCI', num: '171', unit: 4 } as ResponseModel.Course,
-      false
-    ),
-    new Course(
-      { deptCode: 'ECON', num: '1A', unit: 4 } as ResponseModel.Course,
-      false
-    ),
-    new Course(
-      { deptCode: 'HISTORY', num: '7C', unit: 4 } as ResponseModel.Course,
-      false
-    ),
-  ];
+  private _degreePlan: IAcademicYear[] = [];
+  private _courseBag: ICourse[] = [];
 
   public constructor() {
     this._addCurrentYear();
@@ -68,20 +46,59 @@ class AppUser implements IAppUser {
     return this._degreePlan;
   }
 
+  public set degreePlan(newDegreePlan: IAcademicYear[]) {
+    this._degreePlan = newDegreePlan;
+  }
+
   public get years(): number[] {
-    return this._years;
+    return this._degreePlan.map((academicYear) => academicYear.year);
   }
 
   public addYear(year: number) {
-    this._years.push(year);
-    this._years.sort((a, b) => a - b);
+    this._degreePlan.push(new AcademicYear(year));
+    this._degreePlan.sort((a, b) => a.year - b.year);
   }
 
   public removeYear(year: number) {
-    if (this._years.includes(year)) {
-      const removeIndex = this._years.indexOf(year);
-      this._years.splice(removeIndex, 1);
+    const years = this._degreePlan.map((academicYear) => academicYear.year);
+    if (years.includes(year)) {
+      const removeIndex = years.indexOf(year);
+      this._degreePlan.splice(removeIndex, 1);
     }
+  }
+
+  public removeCourse(
+    courseId: string,
+    isInCourseBag: boolean
+  ): ICourse | undefined {
+    let removedCourse: ICourse | undefined;
+
+    if (isInCourseBag) {
+      removedCourse = this._courseBag.find((course) => course.id === courseId);
+
+      if (removedCourse) {
+        this._courseBag = this._courseBag.filter(
+          (course) => course.id !== courseId
+        );
+      }
+    } else {
+      const { course, year, term } = this._findCourseInDegreePlan(courseId);
+
+      if (course) {
+        removedCourse = course;
+        this.setQuarterCourses(
+          year!,
+          term!,
+          this.getQuarterCourses(year!, term!).filter(
+            (course) => course.id !== removedCourse!.id
+          )
+        );
+      }
+
+      this._updateDegreePlan();
+    }
+
+    return removedCourse;
   }
 
   public addToCourseBag(courses: ICourse[]) {
@@ -94,22 +111,53 @@ class AppUser implements IAppUser {
     this._courseBag = [];
   }
 
-  public removeCourseItem(courseId: string, isInCourseBag: boolean) {
+  public updateCourseColor(
+    courseId: string,
+    isInCourseBag: boolean,
+    newColor: number
+  ) {
+    let courseToUpdate: ICourse | undefined;
+
     if (isInCourseBag) {
-      this._courseBag = this.courseBag.filter(
-        (course) => course.id !== courseId
-      );
+      courseToUpdate = this._courseBag.find((course) => course.id === courseId);
+    } else {
+      const { course } = this._findCourseInDegreePlan(courseId);
+      courseToUpdate = course;
+    }
+
+    if (courseToUpdate) {
+      courseToUpdate.color = newColor;
     }
   }
 
-  public updateCourseColor({
-    courseId,
-    isInCourseBag,
-    newColor,
-  }: UpdateCourseColorParam) {
-    if (isInCourseBag) {
-      this._updateColorInCourseBag(courseId, newColor);
+  public getQuarterCourses(year: number, term: Term): ICourse[] {
+    const quarter = this._getQuarter(year, term);
+    return quarter.courses;
+  }
+  public setQuarterCourses(year: number, term: Term, courses: ICourse[]): void {
+    const quarter = this._getQuarter(year, term);
+    quarter.courses = courses;
+    this._updateDegreePlan();
+  }
+
+  private _updateDegreePlan() {
+    this._degreePlan = [...this._degreePlan];
+  }
+
+  private _getQuarter(year: number, term: Term) {
+    const years = this._degreePlan.map((academicYear) => academicYear.year);
+    const yearIndex = years.indexOf(year);
+
+    if (yearIndex === -1) {
+      throw new Error(`Can't find the academic year of ${year}`);
     }
+
+    const terms = this._degreePlan[yearIndex].quarters.map(
+      (quarter) => quarter.term
+    );
+    const quarterIndex = terms.indexOf(term);
+
+    return this._degreePlan[yearIndex].quarters[quarterIndex];
   }
 
   private _addCurrentYear() {
@@ -120,17 +168,27 @@ class AppUser implements IAppUser {
       twoDigitCurrentYear--;
     }
 
-    this._years.push(twoDigitCurrentYear);
+    this.addYear(twoDigitCurrentYear);
   }
 
-  private _updateColorInCourseBag(courseId: string, newColor: number) {
-    const indexToUpdate = this._courseBag.findIndex(
-      (course) => course.id === courseId
-    );
+  private _findCourseInDegreePlan(courseId: string) {
+    let course: ICourse | undefined;
+    let year: number | undefined;
+    let term: Term | undefined;
 
-    if (indexToUpdate !== -1) {
-      this._courseBag[indexToUpdate].color = newColor;
+    for (const academicYear of this._degreePlan) {
+      for (const quarter of academicYear.quarters) {
+        const result = quarter.courses.find((course) => course.id === courseId);
+        if (result) {
+          course = result;
+          year = quarter.year;
+          term = quarter.term;
+          break;
+        }
+      }
     }
+
+    return { course, year, term };
   }
 }
 

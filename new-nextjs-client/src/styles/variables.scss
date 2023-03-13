@@ -55,7 +55,6 @@ $br-lg: 20px;
 /**************** 
 Light Theme Colors
 ****************/
-$main-background: $gray-6;
 $default-text: $gray-1;
 $secondary-text: $gray-3;
 $placeholder-text: $gray-4;
@@ -67,19 +66,16 @@ $default-text-dt: #e8eaed;
 $secondary-text-dt: #c3c3c3;
 $disabled-text-dt: #898989;
 
-$stroke-dt: #5f6367;
-
-$primary-dt: #ad7014;
-$primary-variant-dt: #5f77a6;
-
 /**************** 
 Background Colors
 ****************/
 $bg-color-1: $gray-6;
 $bg-color-2: $white-1;
+$bg-color-3: #f4f4fb;
 
 $bg-color-1-dt: #212123;
 $bg-color-2-dt: #2f3134;
+$bg-color-3-dt: rgba($bg-color-1-dt, 0.5);
 
 $course-1: #c4c3e4;
 $course-2: #94add3;

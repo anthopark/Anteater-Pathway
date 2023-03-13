@@ -1,0 +1,53 @@
+.container {
+  background-color: $bg-color-3;
+  padding: 1rem 2.3rem;
+  border-radius: $br-md;
+
+  &.show-total-unit {
+    padding-bottom: 1rem;
+  }
+}
+
+.header {
+  text-align: center;
+  font-size: 1.6rem;
+  letter-spacing: $letter-spacing-lg;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.courses-box {
+  min-height: 3.8rem;
+}
+
+.course-item-wrapper {
+  margin: 0;
+  margin-bottom: 1.2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.total-unit {
+  margin-top: 0.8rem;
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+  display: inline-block;
+  color: $secondary-text;
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: $bg-color-3-dt;
+  }
+
+  .total-unit {
+    color: $secondary-text-dt;
+  }
+}

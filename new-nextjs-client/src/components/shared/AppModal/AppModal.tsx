@@ -20,7 +20,7 @@ import {
   defaultTextDark,
   gray4,
   letterSpacingSM,
-  letterSpacingLG,
+  letterSpacingMD,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import AppButton from '@components/shared/AppButton/AppButton';
@@ -72,7 +72,7 @@ function AppModal({
           <ModalHeader
             fontSize="2rem"
             color={theme === 'light' ? defaultText : defaultTextDark}
-            letterSpacing={letterSpacingLG}
+            letterSpacing={letterSpacingMD}
             p="0"
             mb="2rem"
           >

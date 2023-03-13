@@ -2,13 +2,13 @@
   display: flex;
 }
 
-.removeIconWrapper {
+.remove-icon-wrapper {
   display: flex;
   align-items: center;
   margin-left: 3rem;
 }
 
-.trashIcon {
+.trash-icon {
   padding: 0.5rem;
   font-size: 1.6rem;
   color: $gray-4;
@@ -19,7 +19,7 @@
   transition: color 250ms;
 }
 
-.yearText {
+.year-text {
   display: flex;
   align-items: center;
   font-size: $fs-xl;
@@ -27,12 +27,20 @@
   color: $default-text;
 }
 
+.quarters-container {
+  padding: 0rem 1rem 1rem 1rem;
+  column-gap: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+}
+
 [data-theme='dark'] {
-  .yearText {
+  .year-text {
     color: $default-text-dt;
   }
 
-  .trashIcon {
+  .trash-icon {
     &:hover {
       color: $red-2;
     }
