@@ -181,7 +181,7 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
                   </span>
                 ) : (
                   <span className={styles.emailFieldMessage}>
-                    Fill this if you'd like our response.
+                    Leave your email if you'd like our response :)
                   </span>
                 )}
               </div>

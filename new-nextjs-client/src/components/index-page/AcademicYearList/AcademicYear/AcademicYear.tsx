@@ -23,6 +23,7 @@ import { useSpring, animated } from '@react-spring/web';
 import AppModal from '@components/shared/AppModal/AppModal';
 import { IAcademicYear } from '@entities/academic-year';
 import Quarter from './Quarter/Quarter';
+import { useDroppable } from '@dnd-kit/core';
 
 interface Props {
   academicYear: IAcademicYear;
@@ -47,6 +48,10 @@ const AcademicYear = (props: Props) => {
     opacity: 0,
   }));
 
+  const { isOver, setNodeRef } = useDroppable({
+    id: `year-${props.academicYear.year}`,
+  });
+
   useEffect(() => {
     if (mounted) {
       removeIconSpringApi.start({
@@ -62,6 +67,13 @@ const AcademicYear = (props: Props) => {
       });
     }
   }, [openedIndex]);
+
+  useEffect(() => {
+    if (openedIndex.length === 0 && isOver) {
+      setOpenedIndex([0]);
+      setShowRemoveIcon(true);
+    }
+  }, [isOver]);
 
   useEffect(() => {
     setMounted(true);
@@ -112,7 +124,7 @@ const AcademicYear = (props: Props) => {
         border="none"
         borderRadius={borderRadiusMD}
       >
-        <div className={cx('header')}>
+        <div className={cx('header')} ref={setNodeRef}>
           <AccordionButton
             borderRadius={borderRadiusMD}
             p={isExpanded() ? '1.2rem .3rem 1.2rem 2rem' : '1.2rem 2rem'}
