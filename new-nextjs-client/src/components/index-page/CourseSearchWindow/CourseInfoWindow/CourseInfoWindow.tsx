@@ -27,6 +27,12 @@ const getQuarterText = (quarterCode: string) => {
   return `${QUARTER_MAP[quarter]} ${parseInt(year) % 100} `;
 };
 
+const getUnitText = (course: ResponseModel.Course) => {
+  return course.isVariableUnit
+    ? `${course.minUnit}-${course.maxUnit}`
+    : course.unit;
+};
+
 function CourseInfoWindow(props: Props) {
   const [attributes, setAttributes] = useState<ResponseModel.CourseAttribute[]>(
     DEFAULT_COURSE_ATTRIBUTES_DATA
@@ -52,8 +58,13 @@ function CourseInfoWindow(props: Props) {
             <span
               className={cx('course-code')}
             >{`${props.clickedCourse.deptCode} ${props.clickedCourse.num}`}</span>
-            <span className={cx('unit')}>{`${props.clickedCourse.unit} ${
-              props.clickedCourse.unit === 1 ? 'unit' : 'units'
+            <span className={cx('unit')}>{`${getUnitText(
+              props.clickedCourse
+            )} ${
+              props.clickedCourse.unit === 1 &&
+              !props.clickedCourse.isVariableUnit
+                ? 'unit'
+                : 'units'
             }`}</span>
           </div>
           <div className={cx('bottom')}>
