@@ -5,6 +5,7 @@ import * as cors from 'cors';
 import { updateDataRouter } from './update-data.router';
 import { initializeFirestore } from './firestore.service';
 import { plannerCourseRouter } from './planner-course.router';
+import { userRouter } from './user.router';
 
 admin.initializeApp();
 initializeFirestore();
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use('/user', userRouter);
 app.use('/update', updateDataRouter);
 app.use('/planner/course', plannerCourseRouter);
 
