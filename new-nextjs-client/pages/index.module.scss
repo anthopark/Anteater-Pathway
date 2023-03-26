@@ -21,6 +21,7 @@ $top-selection-pb: 1.5rem;
     .rightContainer {
       display: flex;
       align-items: center;
+      padding-right: 0.5rem;
 
       .themeTogglerWrapper {
         margin-right: 3rem;
@@ -43,10 +44,14 @@ $top-selection-pb: 1.5rem;
 
   .mainLeftContainer {
     margin-right: 0.5rem;
-    padding-right: 1.2rem;
+    padding-right: 1rem;
     max-height: calc(100vh - 9.5rem);
     overflow-y: auto;
-    @include scrollbar-light();
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .academicYearWrapper {
