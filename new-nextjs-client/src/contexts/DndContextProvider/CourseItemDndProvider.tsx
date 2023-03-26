@@ -17,6 +17,7 @@ import {
   getFirstCollision,
   closestCenter,
 } from '@dnd-kit/core';
+import { RectMap } from '@dnd-kit/core/dist/store';
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
 import { Term } from '@entities/academic-year';
@@ -92,11 +93,34 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
   const { appUser, updateAppUser } = useAppUser();
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const lastOverId = useRef<UniqueIdentifier | null>(null);
+  const lastOverYearTop = useRef<{ id: string; top: number | null } | null>(
+    null
+  );
   const recentlyMovedToNewContainer = useRef(false);
   const [draggingCourse, setDraggingCourse] = useState<DraggingCourse | null>(
     null
   );
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+
+  /**
+   * To handle the case where the position of AcademicYear does not update
+   * when the accordion is opened during the dragging session.
+   */
+  const isOverYearPositionNotUpdated = useCallback(
+    (overId: string, args: { droppableRects: RectMap }) => {
+      return (
+        overId &&
+        (overId as string).startsWith('year') &&
+        lastOverYearTop.current !== null &&
+        lastOverYearTop.current.id < overId &&
+        lastOverYearTop.current.top !== null &&
+        Math.abs(
+          lastOverYearTop.current.top - args.droppableRects.get(overId!)!.top
+        ) < 100
+      );
+    },
+    [lastOverYearTop.current]
+  );
 
   const collisionDetectionStrategy: CollisionDetection = useCallback(
     (args) => {
@@ -105,7 +129,12 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
         pointerIntersections.length > 0
           ? pointerIntersections
           : pointerIntersections;
+
       let overId = getFirstCollision(intersections, 'id');
+
+      if (isOverYearPositionNotUpdated(overId as string, args)) {
+        return [];
+      }
 
       if (overId !== null) {
         let courseIds: string[] | undefined;
@@ -132,6 +161,13 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
         }
 
         lastOverId.current = overId;
+
+        if (overId && (overId as string).startsWith('year')) {
+          lastOverYearTop.current = {
+            id: overId as string,
+            top: args.droppableRects.get(overId)?.top ?? null,
+          };
+        }
 
         return [{ id: overId }];
       }
@@ -301,6 +337,7 @@ function CourseItemDndProvider({ children }: { children: ReactNode }) {
 
     setActiveId(null);
     setDraggingCourse(null);
+    lastOverYearTop.current = null;
   };
 
   const handleDragCancel = () => {
