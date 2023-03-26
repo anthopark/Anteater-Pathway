@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 import * as fireorm from 'fireorm';
 import { getRepository, Collection, BaseFirestoreRepository } from 'fireorm';
+import { IAcademicYear, ICourse } from './models/planner';
 
 @Collection('departments')
 export class DepartmentDocument {
@@ -44,8 +45,16 @@ export class CourseAttributeDocument {
 
 @Collection('users')
 export class UserDocument {
+  // uid from Firebase Auth
+  id: string;
+}
+
+@Collection('planners')
+export class PlannerDocument {
   id: string;
   uid: string;
+  plan: IAcademicYear[] | null;
+  courseBag: ICourse[];
 }
 
 interface Repository {
@@ -53,6 +62,7 @@ interface Repository {
   courses?: BaseFirestoreRepository<CourseDocument>;
   courseAttributes?: BaseFirestoreRepository<CourseAttributeDocument>;
   users?: BaseFirestoreRepository<UserDocument>;
+  planners?: BaseFirestoreRepository<PlannerDocument>;
 }
 
 export const repository: Repository = {};
@@ -64,4 +74,5 @@ export const initializeFirestore = () => {
   repository.courses = getRepository(CourseDocument);
   repository.courseAttributes = getRepository(CourseAttributeDocument);
   repository.users = getRepository(UserDocument);
+  repository.planners = getRepository(PlannerDocument);
 };
