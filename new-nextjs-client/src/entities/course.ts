@@ -43,4 +43,23 @@ export class Course implements ICourse {
   public get id() {
     return this._id;
   }
+
+  public set id(id) {
+    this._id = id;
+  }
+
+  public toJSON() {
+    return {
+      id: this._id,
+      deptCode: this.deptCode,
+      num: this.num,
+      title: this.title,
+      unit: this.unit,
+      isVariableUnit: this.isVariableUnit,
+      minUnit: this.minUnit,
+      maxUnit: this.maxUnit,
+      isCustomCreated: this.isCustomCreated,
+      color: this.color,
+    };
+  }
 }

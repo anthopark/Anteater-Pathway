@@ -29,16 +29,99 @@ import { useTheme } from 'next-themes';
 import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { signOut as signOutIcon } from '@styles/fontawesome';
+import useAppUser from '@hooks/useAppUser';
+import { loadPlannerFromBE, savePlannerToBE, signInToBE } from 'src/api/user';
+import { useInterval } from 'use-interval';
+import useAppToast from '@hooks/useAppToast';
+import { useSavePlanner } from '@hooks/useSavePlanner';
 
 function Avatar() {
+  const { appUser, updateAppUser } = useAppUser();
   const [firebaseUser, loading, error] = useAuthState(auth);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const showToastBox = useAppToast();
+
+  const handleSignIn = async (authToken: string) => {
+    if (!authToken) {
+      throw new Error('Auth Token must be defined');
+    }
+
+    const signInResult = await signInToBE(authToken);
+
+    if (signInResult.isFirstSignIn) {
+      await savePlannerToBE(authToken, appUser.getPlannerInJSON());
+
+      showToastBox({
+        status: 'success',
+        highlightedData: null,
+        message: 'Welcome to Anteater Pathway :)',
+      });
+    } else {
+      const plannerFromBE = await loadPlannerFromBE(authToken);
+
+      updateAppUser((draft) => {
+        draft.setPlannerFromBE(plannerFromBE);
+        draft.isPlannerLoaded = true;
+      });
+
+      showToastBox({
+        status: 'success',
+        highlightedData: null,
+        message: 'Signed in successfully :)',
+      });
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  /**
+   * This hook is responsible for saving the planner data to BE
+   */
+  useSavePlanner();
+
+  useEffect(() => {
+    if (firebaseUser) {
+      firebaseUser.getIdToken().then((authToken) => {
+        updateAppUser((draft) => {
+          draft.authToken = authToken;
+        });
+
+        handleSignIn(authToken).catch(() => {
+          showToastBox({
+            status: 'failure',
+            highlightedData: null,
+            message: 'Signed in failed. Server error :(',
+          });
+        });
+      });
+    } else {
+      updateAppUser((draft) => {
+        draft.authToken = undefined;
+        draft.isPlannerLoaded = false;
+      });
+    }
+  }, [firebaseUser]);
+
+  /**
+   * Refresh idToken for every 30 minutes if user is signed in
+   */
+  useInterval(
+    () => {
+      if (firebaseUser) {
+        firebaseUser.getIdToken(true).then((authToken) => {
+          updateAppUser((draft) => {
+            draft.authToken = authToken;
+          });
+        });
+      }
+    },
+    1000 * 60 * 30,
+    false
+  );
 
   if (!mounted) {
     return null;

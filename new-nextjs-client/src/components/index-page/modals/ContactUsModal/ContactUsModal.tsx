@@ -103,17 +103,15 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
         status: 'success',
         message: 'Sent! Thank you :)',
         highlightedData: null,
-        duration: 3500,
       });
 
       setValue('message', '');
       onClose();
     } else {
       showToastBox({
-        status: 'fail',
+        status: 'failure',
         highlightedData: null,
         message: 'Something went wrong :(',
-        duration: 3500,
       });
     }
 

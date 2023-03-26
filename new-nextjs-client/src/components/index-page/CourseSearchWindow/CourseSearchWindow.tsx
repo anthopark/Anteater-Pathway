@@ -65,7 +65,9 @@ const CourseSearchWindow = (props: Props) => {
         (courseInfo) => new Course(courseInfo, false)
       );
 
-      updateAppUser((draft) => draft.addToCourseBag(selectedCoursesToAdd));
+      updateAppUser((draft) => {
+        draft.addToCourseBag(selectedCoursesToAdd);
+      });
       showToastBox({
         status: 'success',
         highlightedData:
@@ -76,9 +78,9 @@ const CourseSearchWindow = (props: Props) => {
           selectedIds.size === 1
             ? 'added'
             : `${selectedIds.size} courses added`,
-        duration: 3500,
       });
     }
+
     updateSelectedIds((draft) => draft.clear());
   };
 

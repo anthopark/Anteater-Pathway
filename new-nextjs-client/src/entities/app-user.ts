@@ -1,15 +1,30 @@
 import { immerable } from 'immer';
 import { Course, ICourse } from '@entities/course';
-import { IAcademicYear, AcademicYear, Term } from './academic-year';
+import {
+  IAcademicYear,
+  AcademicYear,
+  Term,
+  Quarter,
+  IQuarter,
+} from './academic-year';
+import serialize from 'serialize-javascript';
+import { loadPlannerFromBE, savePlannerToBE, signInToBE } from 'src/api/user';
 
 interface IAppUser {
   addToCourseBag: (courses: ICourse[]) => void;
   addYear: (year: number) => void;
+  authToken: string | undefined;
   clearCourseBag: () => void;
   courseBag: ICourse[];
-  degreePlan: IAcademicYear[];
+  plan: IAcademicYear[];
   getQuarterCourses: (year: number, term: Term) => ICourse[];
+  isPlannerLoaded: boolean;
   setQuarterCourses: (year: number, term: Term, courses: ICourse[]) => void;
+  setPlannerFromBE: (planFromBE: {
+    plan: IAcademicYear[];
+    courseBag: ICourse[];
+  }) => void;
+  getPlannerInJSON: () => string;
   removeYear: (year: number) => void;
   removeCourse: (
     courseId: string,
@@ -26,8 +41,8 @@ interface IAppUser {
 class AppUser implements IAppUser {
   [immerable] = true;
 
-  private _authToken: string | null = null;
-  private _degreePlan: IAcademicYear[] = [];
+  private _authToken: string | undefined = undefined;
+  private _plan: IAcademicYear[] = [];
   private _courseBag: ICourse[] = [];
 
   public constructor() {
@@ -42,29 +57,60 @@ class AppUser implements IAppUser {
     this._courseBag = newBag;
   }
 
-  public get degreePlan() {
-    return this._degreePlan;
+  public get authToken() {
+    return this._authToken;
   }
 
-  public set degreePlan(newDegreePlan: IAcademicYear[]) {
-    this._degreePlan = newDegreePlan;
+  public set authToken(token: string | undefined) {
+    this._authToken = token;
+  }
+
+  public get plan() {
+    return this._plan;
+  }
+
+  public set plan(newPlan: IAcademicYear[]) {
+    this._plan = newPlan;
   }
 
   public get years(): number[] {
-    return this._degreePlan.map((academicYear) => academicYear.year);
+    return this._plan.map((academicYear) => academicYear.year);
   }
 
+  public isPlannerLoaded: boolean = false;
+
   public addYear(year: number) {
-    this._degreePlan.push(new AcademicYear(year));
-    this._degreePlan.sort((a, b) => a.year - b.year);
+    this._plan.push(new AcademicYear(year));
+    this._plan.sort((a, b) => a.year - b.year);
   }
 
   public removeYear(year: number) {
-    const years = this._degreePlan.map((academicYear) => academicYear.year);
+    const years = this._plan.map((academicYear) => academicYear.year);
     if (years.includes(year)) {
       const removeIndex = years.indexOf(year);
-      this._degreePlan.splice(removeIndex, 1);
+      this._plan.splice(removeIndex, 1);
     }
+  }
+
+  public setPlannerFromBE(planFromBE: {
+    plan: IAcademicYear[];
+    courseBag: ICourse[];
+  }): void {
+    this._plan = this._deserializePlan(planFromBE.plan);
+    this._courseBag = this._deserializeCourseBag(planFromBE.courseBag);
+  }
+
+  public getPlannerInJSON(): string {
+    return serialize(
+      {
+        plan: this._plan,
+        courseBag: this._courseBag,
+      },
+      {
+        isJSON: true,
+        ignoreFunction: true,
+      }
+    );
   }
 
   public removeCourse(
@@ -95,7 +141,7 @@ class AppUser implements IAppUser {
         );
       }
 
-      this._updateDegreePlan();
+      this._updatePlanner();
     }
 
     return removedCourse;
@@ -128,6 +174,8 @@ class AppUser implements IAppUser {
     if (courseToUpdate) {
       courseToUpdate.color = newColor;
     }
+
+    this._updatePlanner();
   }
 
   public getQuarterCourses(year: number, term: Term): ICourse[] {
@@ -137,27 +185,26 @@ class AppUser implements IAppUser {
   public setQuarterCourses(year: number, term: Term, courses: ICourse[]): void {
     const quarter = this._getQuarter(year, term);
     quarter.courses = courses;
-    this._updateDegreePlan();
+    this._updatePlanner();
   }
 
-  private _updateDegreePlan() {
-    this._degreePlan = [...this._degreePlan];
+  private _updatePlanner() {
+    this._plan = [...this._plan];
+    this._courseBag = [...this._courseBag];
   }
 
   private _getQuarter(year: number, term: Term) {
-    const years = this._degreePlan.map((academicYear) => academicYear.year);
+    const years = this._plan.map((academicYear) => academicYear.year);
     const yearIndex = years.indexOf(year);
 
     if (yearIndex === -1) {
       throw new Error(`Can't find the academic year of ${year}`);
     }
 
-    const terms = this._degreePlan[yearIndex].quarters.map(
-      (quarter) => quarter.term
-    );
+    const terms = this._plan[yearIndex].quarters.map((quarter) => quarter.term);
     const quarterIndex = terms.indexOf(term);
 
-    return this._degreePlan[yearIndex].quarters[quarterIndex];
+    return this._plan[yearIndex].quarters[quarterIndex];
   }
 
   private _addCurrentYear() {
@@ -176,7 +223,7 @@ class AppUser implements IAppUser {
     let year: number | undefined;
     let term: Term | undefined;
 
-    for (const academicYear of this._degreePlan) {
+    for (const academicYear of this._plan) {
       for (const quarter of academicYear.quarters) {
         const result = quarter.courses.find((course) => course.id === courseId);
         if (result) {
@@ -189,6 +236,80 @@ class AppUser implements IAppUser {
     }
 
     return { course, year, term };
+  }
+
+  private _deserializePlan(planFromBE: IAcademicYear[]): IAcademicYear[] {
+    if (!planFromBE) {
+      return [];
+    }
+
+    const result: IAcademicYear[] = [];
+
+    for (const academicYearObject of planFromBE) {
+      const academicYear = new AcademicYear(academicYearObject.year);
+
+      const quarters: IQuarter[] = [];
+      for (const quarterObject of academicYearObject.quarters) {
+        const quarter = new Quarter(quarterObject.year, quarterObject.term);
+
+        const courses: ICourse[] = [];
+        for (const courseObject of quarterObject.courses) {
+          const course = new Course(
+            {
+              deptCode: courseObject.deptCode,
+              num: courseObject.num,
+              title: courseObject.title,
+              unit: courseObject.unit,
+              isVariableUnit: courseObject.isVariableUnit,
+              minUnit: courseObject.minUnit,
+              maxUnit: courseObject.maxUnit,
+            } as ResponseModel.Course,
+            courseObject.isCustomCreated
+          );
+          course.id = courseObject.id;
+          course.color = courseObject.color;
+
+          courses.push(course);
+        }
+
+        quarter.courses = courses;
+        quarters.push(quarter);
+      }
+
+      academicYear.quarters = quarters;
+      result.push(academicYear);
+    }
+
+    return result;
+  }
+
+  private _deserializeCourseBag(courseBagFromBE: ICourse[]): ICourse[] {
+    if (!courseBagFromBE) {
+      return [];
+    }
+
+    const result: ICourse[] = [];
+
+    for (const courseObject of courseBagFromBE) {
+      const course = new Course(
+        {
+          deptCode: courseObject.deptCode,
+          num: courseObject.num,
+          title: courseObject.title,
+          unit: courseObject.unit,
+          isVariableUnit: courseObject.isVariableUnit,
+          minUnit: courseObject.minUnit,
+          maxUnit: courseObject.maxUnit,
+        } as ResponseModel.Course,
+        courseObject.isCustomCreated
+      );
+      course.id = courseObject.id;
+      course.color = courseObject.color;
+
+      result.push(course);
+    }
+
+    return result;
   }
 }
 

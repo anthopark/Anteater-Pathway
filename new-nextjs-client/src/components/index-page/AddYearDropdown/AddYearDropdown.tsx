@@ -49,7 +49,6 @@ function AddYearDropdown() {
         status: 'success',
         highlightedData: newValue.label,
         message: 'year added',
-        duration: 3500,
       });
     }
   };

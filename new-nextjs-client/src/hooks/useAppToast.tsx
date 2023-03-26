@@ -2,10 +2,9 @@ import { useToast } from '@chakra-ui/react';
 import AppToast from '@components/shared/AppToast/AppToast';
 
 interface Props {
-  status: string;
+  status: 'success' | 'failure';
   highlightedData: string | null;
   message: string;
-  duration: number;
 }
 const useAppToast = () => {
   const toast = useToast();
@@ -13,7 +12,7 @@ const useAppToast = () => {
   const showToastBox = (props: Props) => {
     toast({
       position: 'bottom-right',
-      duration: props.duration,
+      duration: props.status === 'success' ? 3500 : 4500,
       render: () => (
         <AppToast
           status={props.status}

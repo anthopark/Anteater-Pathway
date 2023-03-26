@@ -72,7 +72,6 @@ const AddCustomCourse = () => {
         data.number
       ).toUpperCase()}`,
       message: 'course added',
-      duration: 3500,
     });
   };
 

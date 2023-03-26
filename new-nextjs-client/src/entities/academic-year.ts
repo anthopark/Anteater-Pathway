@@ -25,6 +25,17 @@ export class AcademicYear implements IAcademicYear {
   public get quarters() {
     return this._quarters;
   }
+
+  public set quarters(newQuarter) {
+    this._quarters = newQuarter;
+  }
+
+  public toJSON() {
+    return {
+      year: this._year,
+      quarters: this._quarters,
+    };
+  }
 }
 
 export interface IQuarter {
@@ -50,5 +61,13 @@ export class Quarter implements IQuarter {
 
   public get term() {
     return this._term;
+  }
+
+  public toJSON() {
+    return {
+      year: this._year,
+      term: this._term,
+      courses: this.courses,
+    };
   }
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 interface Props {
-  status: string;
+  status: 'success' | 'failure';
   highlightedData: string | null;
   message: string;
 }
@@ -35,7 +35,7 @@ function AppToast(props: Props) {
     <div
       className={cx('container', {
         success: props.status === 'success',
-        fail: props.status === 'fail',
+        fail: props.status === 'failure',
       })}
     >
       <div className={styles.messageWrapper}>

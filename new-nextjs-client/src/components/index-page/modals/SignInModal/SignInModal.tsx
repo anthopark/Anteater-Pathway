@@ -25,6 +25,8 @@ import AppButton from '@components/shared/AppButton/AppButton';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from 'src/firebase/service-access';
 import Image from 'next/image';
+import { FirebaseError } from 'firebase/app';
+import useAppToast from '@hooks/useAppToast';
 
 const provider = new GoogleAuthProvider();
 
@@ -36,6 +38,7 @@ interface Props {
 function SignInModal(props: Props) {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const showToastBox = useAppToast();
 
   useEffect(() => {
     setMounted(true);
@@ -48,9 +51,17 @@ function SignInModal(props: Props) {
   const handleSignIn = async () => {
     try {
       await signInWithPopup(auth, provider);
-    } catch (e) {}
-
-    props.onClose();
+      props.onClose();
+    } catch (error) {
+      if (!(error as FirebaseError).message.includes('popup-closed-by-user')) {
+        showToastBox({
+          status: 'failure',
+          highlightedData: null,
+          message: 'Failed to sign in with Google :(',
+        });
+        props.onClose();
+      }
+    }
   };
 
   return (

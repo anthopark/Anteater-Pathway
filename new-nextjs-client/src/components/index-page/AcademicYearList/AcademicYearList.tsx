@@ -7,7 +7,7 @@ interface Props {
 }
 
 function AcademicYearList(props: Props) {
-  const transitions = useTransition(props.appUser.degreePlan, {
+  const transitions = useTransition(props.appUser.plan, {
     from: { opacity: 1, maxHeight: 0, marginBottom: '0rem' },
     enter: { opacity: 1, maxHeight: 5000, marginBottom: '2rem' },
     leave: { opacity: 0, maxHeight: 0, marginBottom: '0rem' },
