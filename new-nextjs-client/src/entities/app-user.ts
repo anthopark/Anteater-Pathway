@@ -8,7 +8,6 @@ import {
   IQuarter,
 } from './academic-year';
 import serialize from 'serialize-javascript';
-import { loadPlannerFromBE, savePlannerToBE, signInToBE } from 'src/api/user';
 
 interface IAppUser {
   addToCourseBag: (courses: ICourse[]) => void;
@@ -18,7 +17,7 @@ interface IAppUser {
   courseBag: ICourse[];
   plan: IAcademicYear[];
   getQuarterCourses: (year: number, term: Term) => ICourse[];
-  isPlannerLoaded: boolean;
+  plannerLoaded: boolean;
   setQuarterCourses: (year: number, term: Term, courses: ICourse[]) => void;
   setPlannerFromBE: (planFromBE: {
     plan: IAcademicYear[];
@@ -30,6 +29,8 @@ interface IAppUser {
     courseId: string,
     isInCourseBag: boolean
   ) => ICourse | undefined;
+  reset: () => void;
+  updatePlanner: () => void;
   updateCourseColor: (
     courseId: string,
     isInCourseBag: boolean,
@@ -41,11 +42,22 @@ interface IAppUser {
 class AppUser implements IAppUser {
   [immerable] = true;
 
+  public plannerLoaded: boolean = false;
+
   private _authToken: string | undefined = undefined;
   private _plan: IAcademicYear[] = [];
   private _courseBag: ICourse[] = [];
 
   public constructor() {
+    this._addCurrentYear();
+  }
+
+  public reset(): void {
+    this._authToken = undefined;
+    this._plan = [];
+    this._courseBag = [];
+    this.plannerLoaded = false;
+
     this._addCurrentYear();
   }
 
@@ -76,8 +88,6 @@ class AppUser implements IAppUser {
   public get years(): number[] {
     return this._plan.map((academicYear) => academicYear.year);
   }
-
-  public isPlannerLoaded: boolean = false;
 
   public addYear(year: number) {
     this._plan.push(new AcademicYear(year));
@@ -141,7 +151,7 @@ class AppUser implements IAppUser {
         );
       }
 
-      this._updatePlanner();
+      this.updatePlanner();
     }
 
     return removedCourse;
@@ -175,7 +185,7 @@ class AppUser implements IAppUser {
       courseToUpdate.color = newColor;
     }
 
-    this._updatePlanner();
+    this.updatePlanner();
   }
 
   public getQuarterCourses(year: number, term: Term): ICourse[] {
@@ -185,10 +195,10 @@ class AppUser implements IAppUser {
   public setQuarterCourses(year: number, term: Term, courses: ICourse[]): void {
     const quarter = this._getQuarter(year, term);
     quarter.courses = courses;
-    this._updatePlanner();
+    this.updatePlanner();
   }
 
-  private _updatePlanner() {
+  public updatePlanner() {
     this._plan = [...this._plan];
     this._courseBag = [...this._courseBag];
   }
