@@ -9,11 +9,8 @@
     "target": "es2017",
     "allowSyntheticDefaultImports": true,
     "strictPropertyInitialization": false,
-    "experimentalDecorators": true,
-    
+    "experimentalDecorators": true
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
