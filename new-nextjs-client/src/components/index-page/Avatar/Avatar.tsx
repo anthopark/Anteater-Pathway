@@ -63,7 +63,7 @@ function Avatar() {
 
       updateAppUser((draft) => {
         draft.setPlannerFromBE(plannerFromBE);
-        draft.isPlannerLoaded = true;
+        draft.plannerLoaded = true;
       });
 
       showToastBox({
@@ -101,7 +101,7 @@ function Avatar() {
     } else {
       updateAppUser((draft) => {
         draft.authToken = undefined;
-        draft.isPlannerLoaded = false;
+        draft.plannerLoaded = false;
       });
     }
   }, [firebaseUser]);
@@ -129,6 +129,16 @@ function Avatar() {
 
   const handleSignOut = async () => {
     await signOut(auth);
+
+    updateAppUser((draft) => {
+      draft.reset();
+    });
+
+    showToastBox({
+      status: 'success',
+      message: 'Signed out. See you soon!',
+      highlightedData: null,
+    });
   };
 
   return (
