@@ -4,8 +4,17 @@
   padding-top: 0.3rem;
 }
 
+.signing-in-loading-box {
+  padding-right: 1rem;
+  @include dot-elastic-light();
+}
+
 [data-theme='dark'] {
   .menuItemIcon {
     color: $default-text-dt;
+  }
+
+  .signing-in-loading-box {
+    @include dot-elastic-dark();
   }
 }

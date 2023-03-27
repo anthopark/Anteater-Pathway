@@ -34,11 +34,15 @@ import { loadPlannerFromBE, savePlannerToBE, signInToBE } from 'src/api/user';
 import { useInterval } from 'use-interval';
 import useAppToast from '@hooks/useAppToast';
 import { useSavePlanner } from '@hooks/useSavePlanner';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 function Avatar() {
   const { appUser, updateAppUser } = useAppUser();
   const [firebaseUser, loading, error] = useAuthState(auth);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isSigningIn, setIsSigningIn] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   const showToastBox = useAppToast();
@@ -72,6 +76,8 @@ function Avatar() {
         message: 'Signed in successfully :)',
       });
     }
+
+    setIsSigningIn(false);
   };
 
   useEffect(() => {
@@ -85,6 +91,8 @@ function Avatar() {
 
   useEffect(() => {
     if (firebaseUser) {
+      setIsSigningIn(true);
+
       firebaseUser.getIdToken().then((authToken) => {
         updateAppUser((draft) => {
           draft.authToken = authToken;
@@ -141,62 +149,71 @@ function Avatar() {
     });
   };
 
-  return (
-    <>
-      {firebaseUser ? (
-        <Menu>
-          <MenuButton
-            as={ChakraAvatar}
+  let uiContent;
+
+  if (isSigningIn) {
+    uiContent = (
+      <div className={cx('signing-in-loading-box')}>
+        <div className={cx('dot-elastic')}></div>
+      </div>
+    );
+  } else if (firebaseUser) {
+    uiContent = (
+      <Menu>
+        <MenuButton
+          as={ChakraAvatar}
+          icon={
+            <ChakraAvatar
+              name={firebaseUser.displayName!}
+              src={firebaseUser.photoURL!}
+              size="lg"
+              cursor="pointer"
+            />
+          }
+        />
+        <MenuList
+          minW="12rem"
+          mt="5px"
+          borderRadius={borderRadiusSM}
+          borderColor={theme === 'light' ? gray5 : gray4}
+          fontSize={fontSizeMD}
+          color={theme === 'light' ? defaultText : defaultTextDark}
+          padding="6px 4px"
+          bgColor={theme === 'light' ? gray7 : gray2}
+        >
+          <MenuItem
+            pl="12px"
+            onClick={handleSignOut}
+            borderRadius={borderRadiusXS}
+            bgColor="transparent"
+            h="3.3rem"
             icon={
-              <ChakraAvatar
-                name={firebaseUser.displayName!}
-                src={firebaseUser.photoURL!}
-                size="lg"
-                cursor="pointer"
+              <FontAwesomeIcon
+                className={styles.menuItemIcon}
+                icon={signOutIcon}
               />
             }
-          />
-          <MenuList
-            minW="12rem"
-            mt="5px"
-            borderRadius={borderRadiusSM}
-            borderColor={theme === 'light' ? gray5 : gray4}
-            fontSize={fontSizeMD}
-            color={theme === 'light' ? defaultText : defaultTextDark}
-            padding="6px 4px"
-            bgColor={theme === 'light' ? gray7 : gray2}
+            _hover={{
+              bgColor: theme === 'light' ? gray6 : selectOptionBgColorHoverDark,
+            }}
           >
-            <MenuItem
-              pl="12px"
-              onClick={handleSignOut}
-              borderRadius={borderRadiusXS}
-              bgColor="transparent"
-              h="3.3rem"
-              icon={
-                <FontAwesomeIcon
-                  className={styles.menuItemIcon}
-                  icon={signOutIcon}
-                />
-              }
-              _hover={{
-                bgColor:
-                  theme === 'light' ? gray6 : selectOptionBgColorHoverDark,
-              }}
-            >
-              Sign out
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      ) : (
-        <>
-          <AppButton kind="primary" onClick={onOpen}>
-            Sign in
-          </AppButton>
-          <SignInModal isOpen={isOpen} onClose={onClose} />
-        </>
-      )}
-    </>
-  );
+            Sign out
+          </MenuItem>
+        </MenuList>
+      </Menu>
+    );
+  } else {
+    uiContent = (
+      <>
+        <AppButton kind="primary" onClick={onOpen}>
+          Sign in
+        </AppButton>
+        <SignInModal isOpen={isOpen} onClose={onClose} />
+      </>
+    );
+  }
+
+  return <>{uiContent}</>;
 }
 
 export default Avatar;
