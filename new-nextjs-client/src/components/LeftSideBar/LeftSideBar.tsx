@@ -21,10 +21,18 @@ export default function LeftSideBar(props: ILeftSideBarProps) {
         <a className={style.link} onClick={onOpen}>
           <FontAwesomeIcon className={style.icon} icon={envelope} />
         </a>
-        <a className={style.link}>
+        <a
+          className={style.link}
+          href="https://github.com/anthopark/Anteater-Pathway"
+          target="_blank"
+        >
           <FontAwesomeIcon className={style.icon} icon={github} />
         </a>
-        <a className={style.link}>
+        <a
+          className={style.link}
+          href="https://ko-fi.com/anthonypark"
+          target="_blank"
+        >
           <FontAwesomeIcon className={style.icon} icon={coffee} />
         </a>
       </div>
