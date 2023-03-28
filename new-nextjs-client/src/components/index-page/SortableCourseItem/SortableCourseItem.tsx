@@ -27,6 +27,7 @@ import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';
 import ColorPalette from './ColorPalette/ColorPalette';
 import { ICourse } from '@entities/course';
 import { useCourseMenuHandler } from '@hooks/useCourseItemHandler';
+import VariableUnitForm from './VariableUnitForm/VariableUnitForm';
 
 interface Props {
   course: ICourse;
@@ -57,10 +58,8 @@ const SortableCourseItem = (props: Props) => {
   const [isHover, setIsHover] = useState(false);
   const [isMenuTriggerHover, setIsMenuTriggerHover] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { handleColorSelect, handleCourseRemove } = useCourseMenuHandler(
-    props.course.id,
-    props.isInCourseBag
-  );
+  const { handleColorSelect, handleCourseRemove, handleUnitUpdate } =
+    useCourseMenuHandler(props.course.id, props.isInCourseBag);
 
   const style: CSSProperties = {
     transform: CSS.Transform.toString(transform),
@@ -182,6 +181,15 @@ const SortableCourseItem = (props: Props) => {
                   setColor={setColor}
                 />
               </div>
+              {props.course.isVariableUnit ? (
+                <div className={cx('variable-unit-form-wrapper')}>
+                  <VariableUnitForm
+                    minUnit={props.course.minUnit!}
+                    maxUnit={props.course.maxUnit!}
+                    onUnitUpdate={handleUnitUpdate}
+                  />
+                </div>
+              ) : null}
               <MenuItem
                 pl="12px"
                 borderRadius={borderRadiusXS}

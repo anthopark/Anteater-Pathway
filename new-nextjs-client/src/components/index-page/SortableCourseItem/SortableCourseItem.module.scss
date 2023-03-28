@@ -123,6 +123,11 @@ $course-bg-1-dt: #9e9ebc;
   margin-bottom: 0.6rem;
 }
 
+.variable-unit-form-wrapper {
+  border-bottom: 1px solid $gray-5;
+  margin-bottom: 0.6rem;
+}
+
 .dept-code-num {
   height: 100%;
   display: flex;
@@ -193,6 +198,10 @@ $course-bg-1-dt: #9e9ebc;
   }
 
   .color-palette-wrapper {
+    border-bottom: 1px solid $gray-4;
+  }
+
+  .variable-unit-form-wrapper {
     border-bottom: 1px solid $gray-4;
   }
 

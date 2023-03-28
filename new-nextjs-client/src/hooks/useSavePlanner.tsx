@@ -28,7 +28,7 @@ export const useSavePlanner = () => {
           console.error(error);
           showToastBox({
             status: 'failure',
-            message: 'Failed to save planner. Server error :(',
+            message: 'Failed to save change. Server error :(',
             highlightedData: null,
           });
         }

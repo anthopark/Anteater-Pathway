@@ -18,8 +18,13 @@ export const useCourseMenuHandler = (
     });
   };
 
+  const handleUnitUpdate = (newUnit: number) => {
+    console.log('newUnit', newUnit);
+  };
+
   return {
     handleColorSelect,
     handleCourseRemove,
+    handleUnitUpdate,
   };
 };

@@ -20,7 +20,7 @@ import {
   gray2,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
-import { forwardRef, useEffect, useState } from 'react';
+import { CSSProperties, forwardRef, useEffect, useState } from 'react';
 
 interface Props {
   onChange?: (newValue: any) => void;
