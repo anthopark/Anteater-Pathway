@@ -165,6 +165,11 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
                 </FormLabel>
                 <AppInput
                   id="email"
+                  placeholder={`${
+                    firebaseUser
+                      ? ''
+                      : "Enter your email if you'd like a response :)"
+                  }`}
                   {...register('email', {
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -177,11 +182,11 @@ const ContactUsModal = ({ isOpen, onClose }: Props) => {
                   <span className={styles.errorMessage}>
                     {errors.email.message}
                   </span>
-                ) : (
+                ) : firebaseUser ? (
                   <span className={styles.emailFieldMessage}>
-                    Leave your email if you'd like our response :)
+                    Leave your email if you'd like a response :)
                   </span>
-                )}
+                ) : null}
               </div>
             </FormControl>
 
