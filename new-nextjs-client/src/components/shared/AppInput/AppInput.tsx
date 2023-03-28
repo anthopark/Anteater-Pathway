@@ -16,22 +16,21 @@ import {
   accent1,
   placeholderText,
   placeholderTextDark,
-  gray5,
   gray2,
+  letterSpacingSM,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { CSSProperties, forwardRef, useEffect, useState } from 'react';
 
 interface Props {
   onChange?: (newValue: any) => void;
-  value?: any;
   id?: string;
   placeholder?: string;
-  height?: string;
+  style?: CSSProperties;
+  value?: any;
 }
 
 const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
-  const { onChange, value, id, ...rest } = props;
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
@@ -44,6 +43,7 @@ const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
   }
 
   return (
+    // @ts-ignore
     <Input
       ref={ref}
       autoComplete="off"
@@ -55,9 +55,11 @@ const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
       }}
       fontSize={fontSizeMD}
       height={controlHeightMD}
-      onChange={onChange}
-      value={value}
-      id={id}
+      placeholder={props.placeholder}
+      letterSpacing={letterSpacingSM}
+      onChange={props.onChange}
+      value={props.value}
+      id={props.id}
       borderColor={theme === 'light' ? gray4 : gray3}
       _hover={{
         borderColor: theme === 'light' ? gray2 : gray4,
@@ -77,7 +79,7 @@ const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
             : `0px 0px 0px 1px ${accent1}`,
         backgroundColor: theme === 'light' ? white1 : inputBgColorActiveDark,
       }}
-      {...rest}
+      {...props.style}
     />
   );
 });

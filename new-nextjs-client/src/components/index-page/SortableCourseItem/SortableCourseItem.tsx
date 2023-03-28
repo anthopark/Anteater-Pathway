@@ -1,9 +1,7 @@
 import styles from './SortableCourseItem.module.scss';
-import { Course } from '@entities/course';
 import classNames from 'classnames/bind';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { UniqueIdentifier } from '@dnd-kit/core';
 import { CSSProperties, memo, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { threeDot, trash, info } from '@styles/fontawesome';
@@ -22,6 +20,7 @@ import {
   red2,
   red3,
   gray7,
+  white1,
 } from '@styles/variables';
 import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';
 import ColorPalette from './ColorPalette/ColorPalette';
@@ -168,10 +167,11 @@ const SortableCourseItem = (props: Props) => {
               mt="5px"
               borderRadius={borderRadiusSM}
               borderColor={theme === 'light' ? gray5 : gray4}
+              borderWidth={theme === 'light' ? '2px' : '1px'}
               fontSize={fontSizeMD}
               color={theme === 'light' ? defaultText : defaultTextDark}
               padding=".6rem .4rem"
-              bgColor={theme === 'light' ? gray7 : gray2}
+              bgColor={theme === 'light' ? white1 : gray2}
               minW={'12rem'}
             >
               <div className={cx('color-palette-wrapper')}>

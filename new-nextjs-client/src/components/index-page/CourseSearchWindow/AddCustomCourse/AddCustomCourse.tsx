@@ -25,6 +25,7 @@ import {
   gray5,
   gray7,
   letterSpacingMD,
+  white1,
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useAppUser from '@hooks/useAppUser';
@@ -92,10 +93,11 @@ const AddCustomCourse = () => {
       </PopoverTrigger>
       <PopoverContent
         borderRadius={borderRadiusSM}
+        borderWidth={theme === 'light' ? '2px' : '1px'}
         borderColor={theme === 'light' ? gray5 : gray4}
         color={theme === 'light' ? defaultText : defaultTextDark}
         padding="1.2rem .8rem"
-        bg={theme === 'light' ? gray7 : gray2}
+        bg={theme === 'light' ? white1 : gray2}
         w={'24.5rem'}
       >
         <PopoverBody>
@@ -111,7 +113,9 @@ const AddCustomCourse = () => {
                 </FormLabel>
                 <AppInput
                   id="department"
-                  height={controlHeightSM}
+                  style={{
+                    height: controlHeightSM,
+                  }}
                   placeholder="Ex. ECON, HISTORY"
                   {...register('department', {
                     required: true,
@@ -145,7 +149,9 @@ const AddCustomCourse = () => {
                   </FormLabel>
                   <AppInput
                     id="number"
-                    height={controlHeightSM}
+                    style={{
+                      height: controlHeightSM,
+                    }}
                     placeholder="Ex. 101, 1A"
                     {...register('number', {
                       required: true,
@@ -176,7 +182,9 @@ const AddCustomCourse = () => {
                   </FormLabel>
                   <AppInput
                     id="unit"
-                    height={controlHeightSM}
+                    style={{
+                      height: controlHeightSM,
+                    }}
                     placeholder="Ex. 2, 4"
                     {...register('unit', {
                       required: true,
@@ -205,7 +213,9 @@ const AddCustomCourse = () => {
               </FormLabel>
               <AppInput
                 id="title"
-                height={controlHeightSM}
+                style={{
+                  height: controlHeightSM,
+                }}
                 placeholder="Ex. Basic Statistics"
                 {...register('title', {
                   maxLength: {

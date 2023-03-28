@@ -113,7 +113,7 @@ function SearchControl(props: Props) {
   useEffect(() => {
     if (selectValue) {
       const filteredData = props.searchResults!.filter((course) =>
-        course.num.includes(inputValue.toUpperCase())
+        course.num.includes(inputValue.trim().toUpperCase())
       );
       props.setDisplayResults(filteredData);
     }

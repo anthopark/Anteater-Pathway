@@ -1,8 +1,7 @@
 import styles from './VariableUnitForm.module.scss';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormControl, FormLabel } from '@chakra-ui/react';
+import { FormLabel } from '@chakra-ui/react';
 import AppButton from '@components/shared/AppButton/AppButton';
 import AppInput from '@components/shared/AppInput/AppInput';
 
@@ -20,33 +19,32 @@ interface Input {
 
 function VariableUnitForm(props: Props) {
   const { register, handleSubmit, formState, setValue } = useForm<Input>();
+
+  const updateUnit = (newUnit: Input) => {
+    console.log(newUnit);
+  };
+
   return (
-    <div className={cx('container')}>
-      <FormLabel htmlFor="newUnit" fontSize={'1.4rem'}>
+    <form className={cx('container')} onSubmit={handleSubmit(updateUnit)}>
+      <FormLabel htmlFor="newUnit" fontSize={'1.5rem'}>
         Update unit
       </FormLabel>
       <div className={cx('form-wrapper')}>
         <AppInput
           id="newUnit"
-          width="5.5rem"
-          height="3.5rem"
-          letterSpacing="1px"
+          style={{
+            width: '5.5rem',
+            height: '3.5rem',
+          }}
           placeholder={`${props.minUnit}-${props.maxUnit}`}
           {...register('newUnit', {})}
         />
 
-        <div className={cx('btn-wrapper')}>
-          <AppButton
-            kind="primary"
-            type="submit"
-            width="3.5rem"
-            height="3.5rem"
-          >
-            Set
-          </AppButton>
-        </div>
+        <AppButton kind="primary" type="submit" width="3.5rem" height="3.5rem">
+          Set
+        </AppButton>
       </div>
-    </div>
+    </form>
   );
 }
 

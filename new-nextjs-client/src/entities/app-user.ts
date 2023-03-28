@@ -36,6 +36,11 @@ interface IAppUser {
     isInCourseBag: boolean,
     newColor: number
   ) => void;
+  updateCourseUnit: (
+    courseId: string,
+    isInCourseBag: boolean,
+    newUnit: number
+  ) => void;
   years: number[];
 }
 
@@ -183,6 +188,27 @@ class AppUser implements IAppUser {
 
     if (courseToUpdate) {
       courseToUpdate.color = newColor;
+    }
+
+    this.updatePlanner();
+  }
+
+  public updateCourseUnit(
+    courseId: string,
+    isInCourseBag: boolean,
+    newUnit: number
+  ): void {
+    let courseToUpdate: ICourse | undefined;
+
+    if (isInCourseBag) {
+      courseToUpdate = this._courseBag.find((course) => course.id === courseId);
+    } else {
+      const { course } = this._findCourseInDegreePlan(courseId);
+      courseToUpdate = course;
+    }
+
+    if (courseToUpdate) {
+      courseToUpdate.unit = newUnit;
     }
 
     this.updatePlanner();

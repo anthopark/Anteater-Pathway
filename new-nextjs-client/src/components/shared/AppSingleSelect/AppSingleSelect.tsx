@@ -19,6 +19,7 @@ import {
   blue2,
   accent1,
   gray2,
+  letterSpacingSM,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import {
@@ -127,6 +128,7 @@ function AppSingleSelect(props: Props) {
       ...provided,
       fontSize: fontSizeMD,
       color: theme === 'light' ? placeholderText : placeholderTextDark,
+      letterSpacing: letterSpacingSM,
       ...props.customStyles?.['placeholder']?.(provided, state),
     }),
     valueContainer: (provided, state) => ({

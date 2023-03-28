@@ -22,7 +22,7 @@ import {
   gray4,
   gray5,
   gray6,
-  gray7,
+  white1,
 } from '@styles/variables';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
@@ -175,11 +175,12 @@ function Avatar() {
           minW="12rem"
           mt="5px"
           borderRadius={borderRadiusSM}
+          borderWidth={theme === 'light' ? '2px' : '1px'}
           borderColor={theme === 'light' ? gray5 : gray4}
           fontSize={fontSizeMD}
           color={theme === 'light' ? defaultText : defaultTextDark}
           padding="6px 4px"
-          bgColor={theme === 'light' ? gray7 : gray2}
+          bgColor={theme === 'light' ? white1 : gray2}
         >
           <MenuItem
             pl="12px"
