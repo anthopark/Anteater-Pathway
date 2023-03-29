@@ -23,15 +23,17 @@ import { useTheme } from 'next-themes';
 import { CSSProperties, forwardRef, useEffect, useState } from 'react';
 
 interface Props {
-  onChange?: (newValue: any) => void;
   id?: string;
   placeholder?: string;
+  onChange?: (newValue: any) => void;
   style?: CSSProperties;
-  value?: any;
   type?: string | 'number';
+  value?: any;
 }
 
 const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
+  const { id, placeholder, onChange, style, type, value, ...rest } = props;
+
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
@@ -47,6 +49,7 @@ const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
     // @ts-ignore
     <Input
       ref={ref}
+      id={props.id}
       autoComplete="off"
       bgColor={theme === 'light' ? white1 : inputBgColorDark}
       borderRadius={borderRadiusSM}
@@ -61,7 +64,6 @@ const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
       type={props.type}
       onChange={props.onChange}
       value={props.value}
-      id={props.id}
       borderColor={theme === 'light' ? gray4 : gray3}
       _hover={{
         borderColor: theme === 'light' ? gray2 : gray4,
@@ -82,6 +84,7 @@ const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
         backgroundColor: theme === 'light' ? white1 : inputBgColorActiveDark,
       }}
       {...props.style}
+      {...rest}
     />
   );
 });

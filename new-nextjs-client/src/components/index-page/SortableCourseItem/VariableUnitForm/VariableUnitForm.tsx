@@ -17,7 +17,7 @@ interface Props {
 }
 
 interface FormData {
-  unit: number | null;
+  variableUnit: number | null;
 }
 
 function VariableUnitForm(props: Props) {
@@ -28,18 +28,20 @@ function VariableUnitForm(props: Props) {
     setValue,
   } = useForm<FormData>({
     defaultValues: {
-      unit: null,
+      variableUnit: null,
     },
   });
   const showToastBox = useAppToast();
 
   const onSubmit = (data: FormData) => {
-    props.onUnitUpdate(data.unit!);
+    props.onUnitUpdate(data.variableUnit!);
 
     showToastBox({
       status: 'success',
-      message: `set to ${props.courseNumber}`,
-      highlightedData: `${data.unit} ${data.unit === 1 ? 'unit' : 'units'}`,
+      message: `set for ${props.courseNumber}`,
+      highlightedData: `${data.variableUnit} ${
+        data.variableUnit === 1 ? 'unit' : 'units'
+      }`,
     });
   };
 
@@ -50,7 +52,7 @@ function VariableUnitForm(props: Props) {
       </FormLabel>
       <div className={cx('form-wrapper')}>
         <AppInput
-          id="unit"
+          id="variableUnit"
           style={{
             width: '5.5rem',
             height: '3.5rem',
@@ -58,7 +60,7 @@ function VariableUnitForm(props: Props) {
           }}
           type="number"
           placeholder={`${props.minUnit}-${props.maxUnit}`}
-          {...register('unit', {
+          {...register('variableUnit', {
             valueAsNumber: true,
             required: 'Provide a unit',
             min: {
@@ -70,7 +72,6 @@ function VariableUnitForm(props: Props) {
               message: `Maximum is ${props.maxUnit}`,
             },
           })}
-          onChange={(e) => setValue('unit', e.target.value)}
         />
 
         <AppButton kind="primary" type="submit" width="3.5rem" height="3.5rem">
@@ -78,8 +79,10 @@ function VariableUnitForm(props: Props) {
         </AppButton>
       </div>
 
-      {errors.unit && errors.unit.message !== '' ? (
-        <span className={cx('error-message')}>{errors.unit.message}</span>
+      {errors.variableUnit && errors.variableUnit.message !== '' ? (
+        <span className={cx('error-message')}>
+          {errors.variableUnit.message}
+        </span>
       ) : null}
     </form>
   );

@@ -23,14 +23,13 @@ import {
   gray2,
   gray4,
   gray5,
-  gray7,
   letterSpacingMD,
   white1,
 } from '@styles/variables';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useAppUser from '@hooks/useAppUser';
 import { Course } from '@entities/course';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAppToast from '@hooks/useAppToast';
 
 type Inputs = {
@@ -41,7 +40,7 @@ type Inputs = {
 };
 
 const AddCustomCourse = () => {
-  const { appUser, updateAppUser } = useAppUser();
+  const { updateAppUser } = useAppUser();
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -55,6 +54,7 @@ const AddCustomCourse = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
     let addedCourseItem = new Course(
       {
         deptCode: data.department.toUpperCase(),
@@ -75,6 +75,10 @@ const AddCustomCourse = () => {
       message: 'course added',
     });
   };
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   return (
     <Popover
