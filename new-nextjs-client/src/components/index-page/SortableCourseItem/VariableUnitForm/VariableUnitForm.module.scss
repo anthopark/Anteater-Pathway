@@ -2,8 +2,21 @@
   padding: 0.5rem 0.5rem 1.5rem 0.5rem;
 }
 
+.error-message {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: $fs-md;
+  color: $red-4;
+}
+
 .form-wrapper {
   margin-top: 0.8rem;
   display: flex;
   justify-content: space-between;
+}
+
+[data-theme='dark'] {
+  .error-message {
+    color: $red-2;
+  }
 }

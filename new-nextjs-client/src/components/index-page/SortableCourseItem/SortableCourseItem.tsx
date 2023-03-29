@@ -184,6 +184,7 @@ const SortableCourseItem = (props: Props) => {
               {props.course.isVariableUnit ? (
                 <div className={cx('variable-unit-form-wrapper')}>
                   <VariableUnitForm
+                    courseNumber={`${props.course.deptCode} ${props.course.num}`}
                     minUnit={props.course.minUnit!}
                     maxUnit={props.course.maxUnit!}
                     onUnitUpdate={handleUnitUpdate}

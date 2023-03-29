@@ -28,6 +28,7 @@ interface Props {
   placeholder?: string;
   style?: CSSProperties;
   value?: any;
+  type?: string | 'number';
 }
 
 const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
@@ -57,6 +58,7 @@ const AppInput = forwardRef<HTMLInputElement, Props>((props: Props, ref) => {
       height={controlHeightMD}
       placeholder={props.placeholder}
       letterSpacing={letterSpacingSM}
+      type={props.type}
       onChange={props.onChange}
       value={props.value}
       id={props.id}

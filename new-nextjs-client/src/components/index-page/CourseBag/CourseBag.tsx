@@ -20,7 +20,7 @@ function CourseBag(props: Props) {
 
   useEffect(() => {
     updateTotalUnit();
-  }, [appUser.courseBag]);
+  }, [appUser]);
 
   const handleCourseBagClear = () => {
     updateAppUser((draft) => draft.clearCourseBag());

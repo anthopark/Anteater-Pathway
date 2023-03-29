@@ -19,9 +19,8 @@ export const useCourseMenuHandler = (
   };
 
   const handleUnitUpdate = (newUnit: number) => {
-    console.log('newUnit', newUnit);
     updateAppUser((draft) => {
-      draft.updateCourseColor(courseId, isInCourseBag, newUnit);
+      draft.updateCourseUnit(courseId, isInCourseBag, newUnit);
     });
   };
 

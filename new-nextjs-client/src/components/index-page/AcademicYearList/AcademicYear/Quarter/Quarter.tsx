@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import SortableCourseItem from '@components/index-page/SortableCourseItem/SortableCourseItem';
 import { useState } from 'react';
+import useAppUser from '@hooks/useAppUser';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ const headerText = (quarter: IQuarter) => {
 };
 
 function Quarter(props: Props) {
+  const { appUser } = useAppUser();
   const { setNodeRef } = useSortable({
     id: `quarter-${props.quarter.year}-${props.quarter.term}`,
   });
@@ -34,7 +36,7 @@ function Quarter(props: Props) {
 
   useEffect(() => {
     calculateTotalUnit();
-  }, [props.quarter.courses.length]);
+  }, [appUser]);
 
   const calculateTotalUnit = () => {
     let totalUnit = 0;
