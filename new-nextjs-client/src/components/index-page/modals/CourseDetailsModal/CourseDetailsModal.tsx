@@ -26,7 +26,8 @@ import { useTheme } from 'next-themes';
 import useAppToast from '@hooks/useAppToast';
 import AppButton from '@components/shared/AppButton/AppButton';
 import classNames from 'classnames/bind';
-import { getOneCourse } from 'src/api/course';
+import { getAllCourseAttributes, getOneCourse } from 'src/api/course';
+import DEFAULT_COURSE_ATTRIBUTES_DATA from 'src/data/default-course-attributes-data.json';
 
 interface Props {
   isCustomCreated: boolean;
@@ -61,6 +62,9 @@ function CourseDetailsModal(props: Props) {
     useState<ResponseModel.Course | null>(null);
   const { theme } = useTheme();
   const showToastBox = useAppToast();
+  const [attributes, setAttributes] = useState<ResponseModel.CourseAttribute[]>(
+    DEFAULT_COURSE_ATTRIBUTES_DATA
+  );
 
   useEffect(() => {
     if (props.isOpen && courseResponse === null && !props.isCustomCreated) {
@@ -76,22 +80,34 @@ function CourseDetailsModal(props: Props) {
             highlightedData: null,
           });
         });
+
+      getAllCourseAttributes()
+        .then((data) => {
+          setAttributes(data);
+        })
+        .catch(() => {
+          setAttributes(DEFAULT_COURSE_ATTRIBUTES_DATA);
+        });
     }
   }, [props.isOpen]);
 
-  const getUnitText = useCallback(() => {
+  const getUnitText = () => {
     if (courseResponse) {
-      if (courseResponse.unit === null) return '';
+      if (courseResponse.unit === null) {
+        return '';
+      }
 
       return courseResponse.isVariableUnit
-        ? `${courseResponse.minUnit}-${courseResponse.maxUnit} units`
+        ? `${props.unit} ${props.unit === 1 ? 'unit' : 'units'} (${
+            courseResponse.minUnit
+          }-${courseResponse.maxUnit})`
         : courseResponse.unit === 1
         ? `${courseResponse.unit} unit`
         : `${courseResponse.unit} units`;
     }
 
     return props.unit === 1 ? `${props.unit} unit` : `${props.unit} units`;
-  }, [courseResponse]);
+  };
 
   useEffect(() => {
     setMounted(true);

@@ -25,7 +25,6 @@ import {
   gray6,
   red2,
   red3,
-  gray7,
   white1,
 } from '@styles/variables';
 import { selectOptionBgColorHoverDark } from '@styles/reusable-ui-variables';

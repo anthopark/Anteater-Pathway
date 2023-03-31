@@ -54,13 +54,12 @@ const AddCustomCourse = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     let addedCourseItem = new Course(
       {
-        deptCode: data.department.toUpperCase(),
-        num: data.num.toUpperCase(),
-        unit: Number(data.unit),
-        title: data.title,
+        deptCode: data.department.trim().toUpperCase(),
+        num: data.num.trim().toUpperCase(),
+        unit: data.unit,
+        title: data.title.trim(),
       } as ResponseModel.Course,
       true
     );
@@ -70,16 +69,12 @@ const AddCustomCourse = () => {
 
     showToastBox({
       status: 'success',
-      highlightedData: `${data.department.toUpperCase()} ${String(
-        data.num
-      ).toUpperCase()}`,
+      highlightedData: `${data.department.trim().toUpperCase()} ${data.num
+        .trim()
+        .toUpperCase()}`,
       message: 'course added',
     });
   };
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <Popover

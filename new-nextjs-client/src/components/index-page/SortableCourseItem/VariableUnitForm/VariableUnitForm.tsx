@@ -58,18 +58,17 @@ function VariableUnitForm(props: Props) {
             height: '3.5rem',
             letterSpacing: '1px',
           }}
-          type="number"
           placeholder={`${props.minUnit}-${props.maxUnit}`}
           {...register('variableUnit', {
             valueAsNumber: true,
             required: 'Provide a unit',
             min: {
               value: props.minUnit,
-              message: `Minimum is ${props.minUnit}`,
+              message: `${props.minUnit} is Minimum`,
             },
             max: {
               value: props.maxUnit,
-              message: `Maximum is ${props.maxUnit}`,
+              message: `${props.maxUnit} is Maximum`,
             },
           })}
         />
