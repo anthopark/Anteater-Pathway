@@ -6,6 +6,7 @@ const endpoints = {
   allDepartments: `${baseRouterUrl}/all-departments`,
   allDepartmentCourses: `${baseRouterUrl}/department`,
   allCourseAttributes: `${baseRouterUrl}/all-attributes`,
+  oneCourse: `${baseRouterUrl}/one`,
 };
 
 export const getAllDepartments = async (): Promise<
@@ -37,5 +38,18 @@ export const getAllCourseAttributes = async (): Promise<
   ResponseModel.CourseAttribute[]
 > => {
   const response = await axiosClient.get(endpoints.allCourseAttributes);
+  return response.data;
+};
+
+export const getOneCourse = async (
+  deptCode: string,
+  num: string
+): Promise<ResponseModel.Course> => {
+  const response = await axiosClient.get(
+    `${endpoints.oneCourse}/${encodeURIComponent(
+      deptCode
+    )}/${encodeURIComponent(num)}`
+  );
+
   return response.data;
 };

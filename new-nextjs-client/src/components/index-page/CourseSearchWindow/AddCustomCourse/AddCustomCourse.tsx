@@ -34,7 +34,7 @@ import useAppToast from '@hooks/useAppToast';
 
 type Inputs = {
   department: string;
-  number: number;
+  num: string;
   unit: number;
   title: string;
 };
@@ -58,8 +58,9 @@ const AddCustomCourse = () => {
     let addedCourseItem = new Course(
       {
         deptCode: data.department.toUpperCase(),
-        num: String(data.number).toUpperCase(),
+        num: data.num.toUpperCase(),
         unit: Number(data.unit),
+        title: data.title,
       } as ResponseModel.Course,
       true
     );
@@ -70,7 +71,7 @@ const AddCustomCourse = () => {
     showToastBox({
       status: 'success',
       highlightedData: `${data.department.toUpperCase()} ${String(
-        data.number
+        data.num
       ).toUpperCase()}`,
       message: 'course added',
     });
@@ -146,18 +147,18 @@ const AddCustomCourse = () => {
                 >
                   <FormLabel
                     letterSpacing={letterSpacingMD}
-                    htmlFor="number"
+                    htmlFor="num"
                     className={styles.inputLabel}
                   >
                     Number
                   </FormLabel>
                   <AppInput
-                    id="number"
+                    id="num"
                     style={{
                       height: controlHeightSM,
                     }}
                     placeholder="Ex. 101, 1A"
-                    {...register('number', {
+                    {...register('num', {
                       required: true,
                       maxLength: {
                         value: 5,
@@ -165,9 +166,9 @@ const AddCustomCourse = () => {
                       },
                     })}
                   />
-                  {errors.number && (
+                  {errors.num && (
                     <span className={styles.errorMessage}>
-                      {errors.number.message}
+                      {errors.num.message}
                     </span>
                   )}
                 </div>
