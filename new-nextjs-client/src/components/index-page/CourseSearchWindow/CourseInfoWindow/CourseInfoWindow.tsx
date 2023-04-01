@@ -5,6 +5,7 @@ import DEFAULT_COURSE_ATTRIBUTES_DATA from 'src/data/default-course-attributes-d
 import { getAllCourseAttributes } from 'src/api/course';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { info } from '@styles/fontawesome';
+import { ResponseModel } from 'src/models/response-model';
 
 const cx = classNames.bind(styles);
 

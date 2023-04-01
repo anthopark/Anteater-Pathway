@@ -1,3 +1,4 @@
+import { ResponseModel } from 'src/models/response-model';
 import styles from './CourseSearchWindow.module.scss';
 import { useRef, useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';

@@ -14,6 +14,7 @@ import DEFAULT_DEPARTMENT_DATA from 'src/data/default-department-data.json';
 import Fuse from 'fuse.js';
 import { getAllDepartments, getAllDepartmentCourses } from 'src/api/course';
 import { Updater } from 'use-immer';
+import { ResponseModel } from 'src/models/response-model';
 
 const fuseOptions = {
   keys: ['value', 'label'],

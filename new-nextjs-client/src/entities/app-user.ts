@@ -8,6 +8,7 @@ import {
   IQuarter,
 } from './academic-year';
 import serialize from 'serialize-javascript';
+import { ResponseModel } from 'src/models/response-model';
 
 interface IAppUser {
   addToCourseBag: (courses: ICourse[]) => void;

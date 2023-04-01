@@ -1,4 +1,4 @@
-namespace ResponseModel {
+export namespace ResponseModel {
   export interface Course {
     [key: string]: string | number | null | boolean | string[];
     id: string;

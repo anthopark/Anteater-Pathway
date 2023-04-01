@@ -1,4 +1,5 @@
 import { axiosClient } from './client';
+import { ResponseModel } from 'src/models/response-model';
 
 const baseRouterUrl = '/planner/course';
 

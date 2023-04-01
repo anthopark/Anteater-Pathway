@@ -6,6 +6,7 @@ import { Updater } from 'use-immer';
 import { Spinner } from '@chakra-ui/react';
 import { primary1, accent1 } from '@styles/variables';
 import { useTheme } from 'next-themes';
+import { ResponseModel } from 'src/models/response-model';
 
 const cx = classNames.bind(styles);
 
