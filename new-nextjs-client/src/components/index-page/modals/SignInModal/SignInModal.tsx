@@ -17,7 +17,6 @@ import {
   defaultText,
   defaultTextDark,
   gray4,
-  fontSizeMD,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
@@ -27,6 +26,7 @@ import { auth } from 'src/firebase/service-access';
 import Image from 'next/image';
 import { FirebaseError } from 'firebase/app';
 import useAppToast from '@hooks/useAppToast';
+import Link from 'next/link';
 
 const provider = new GoogleAuthProvider();
 
@@ -121,7 +121,10 @@ function SignInModal(props: Props) {
             in any way.
           </p>
           <p className={styles.footerParagraph}>
-            By signing in, you agree to our privacy policy
+            By signing in, you agree to our{' '}
+            <Link href="/privacy">
+              <span className={styles.privacyLink}>privacy policy</span>
+            </Link>
           </p>
         </ModalFooter>
       </ModalContent>

@@ -18,47 +18,49 @@ export default function Home() {
   const [searchWindowToggle, setSearchWindowToggle] = useState(false);
 
   return (
-    <CourseItemDndProvider>
-      <div className={styles.container}>
-        <div className={styles.topSection}>
-          <div className={styles.leftContainer}>
-            <div className={styles.addYearDropdownWrapper}>
-              <AddYearDropdown />
+    <>
+      <CourseItemDndProvider>
+        <div className={styles.container}>
+          <div className={styles.topSection}>
+            <div className={styles.leftContainer}>
+              <div className={styles.addYearDropdownWrapper}>
+                <AddYearDropdown />
+              </div>
+              <div className={styles.searchBtnWrapper}>
+                <AppButton
+                  kind="primary"
+                  leftIcon={<FontAwesomeIcon icon={search} />}
+                  onClick={() => setSearchWindowToggle(!searchWindowToggle)}
+                >
+                  Courses
+                </AppButton>
+              </div>
             </div>
-            <div className={styles.searchBtnWrapper}>
-              <AppButton
-                kind="primary"
-                leftIcon={<FontAwesomeIcon icon={search} />}
-                onClick={() => setSearchWindowToggle(!searchWindowToggle)}
-              >
-                Courses
-              </AppButton>
+            <div className={styles.rightContainer}>
+              <div className={styles.themeTogglerWrapper}>
+                <ThemeToggler />
+              </div>
+              <div className={styles.avatarWrapper}>
+                <Avatar />
+              </div>
             </div>
           </div>
-          <div className={styles.rightContainer}>
-            <div className={styles.themeTogglerWrapper}>
-              <ThemeToggler />
-            </div>
-            <div className={styles.avatarWrapper}>
-              <Avatar />
-            </div>
-          </div>
-        </div>
 
-        <div className={styles.mainSection}>
-          <div className={styles.mainLeftContainer}>
-            <CourseSearchWindow
-              windowToggle={searchWindowToggle}
-              setWindowToggle={setSearchWindowToggle}
-            />
-            <AcademicYearList appUser={appUser} />
-          </div>
-          <div className={styles.mainRightContainer}>
-            <CourseBag />
+          <div className={styles.mainSection}>
+            <div className={styles.mainLeftContainer}>
+              <CourseSearchWindow
+                windowToggle={searchWindowToggle}
+                setWindowToggle={setSearchWindowToggle}
+              />
+              <AcademicYearList appUser={appUser} />
+            </div>
+            <div className={styles.mainRightContainer}>
+              <CourseBag />
+            </div>
           </div>
         </div>
-      </div>
-    </CourseItemDndProvider>
+      </CourseItemDndProvider>
+    </>
   );
 }
 
