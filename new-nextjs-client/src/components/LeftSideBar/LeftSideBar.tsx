@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes';
 import { white1 } from '@styles/variables';
 import { useDisclosure } from '@chakra-ui/react';
 import ContactUsModal from '../index-page/modals/ContactUsModal/ContactUsModal';
+import Link from 'next/link';
 
 export interface ILeftSideBarProps {}
 
@@ -15,7 +16,9 @@ export default function LeftSideBar(props: ILeftSideBarProps) {
   return (
     <div className={style.container}>
       <div className={style.logoContainer}>
-        <Image src="/anteater-logo.svg" alt="logo" fill />
+        <Link href="/">
+          <Image src="/anteater-logo.svg" alt="logo" fill />
+        </Link>
       </div>
       <div className={style.menuContainer}>
         <a className={style.link} onClick={onOpen}>
