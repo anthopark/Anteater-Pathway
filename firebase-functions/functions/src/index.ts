@@ -29,7 +29,7 @@ app.get('/migrate', async (req, res) => {
 });
 
 functions.setGlobalOptions({
-  region: 'us-west1',
+  region: 'us-west2',
   timeoutSeconds: 3600,
   memory: '2GiB',
 });
