@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
   const getLayout = Component.getLayout || ((page: ReactNode) => page);
 
   return (
-    <ThemeProvider themes={['light', 'dark']}>
+    <ThemeProvider defaultTheme={'light'} themes={['light', 'dark']}>
       <ChakraProvider theme={chakraTheme}>
         <AppUserProvider>
           {getLayout(<Component {...pageProps} />)}
