@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+}
+
+.remove-icon-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.trash-icon {
+  padding: 0.5rem;
+  font-size: 1.6rem;
+  color: $gray-4;
+  cursor: pointer;
+  &:hover {
+    color: $red-4;
+  }
+  transition: color 250ms;
+}
+
+.year-text {
+  display: flex;
+  align-items: center;
+  font-size: $fs-xl;
+  letter-spacing: $letter-spacing-md;
+  color: $default-text;
+}
+
+.quarters-container {
+  padding: 0rem 1rem 1rem 1rem;
+  column-gap: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+}
+
+[data-theme='dark'] {
+  .year-text {
+    color: $default-text-dt;
+  }
+
+  .trash-icon {
+    &:hover {
+      color: $red-2;
+    }
+  }
+}

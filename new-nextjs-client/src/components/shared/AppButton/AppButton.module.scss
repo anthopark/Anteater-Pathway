@@ -1,0 +1,7 @@
+.container {
+  display: inline-block;
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+}

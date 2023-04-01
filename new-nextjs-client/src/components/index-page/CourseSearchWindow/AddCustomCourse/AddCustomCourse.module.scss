@@ -1,0 +1,31 @@
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.7rem;
+
+  .inputLabel {
+    font-size: $fs-md;
+  }
+}
+
+.additionalInfoWrapper {
+  display: flex;
+}
+
+.createBtnWrapper {
+  margin-top: 1.8rem;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.errorMessage {
+  color: $red-4;
+}
+
+[data-theme='dark'] {
+  .errorMessage {
+    color: $red-2;
+  }
+}

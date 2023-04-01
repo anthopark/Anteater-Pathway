@@ -1,0 +1,149 @@
+@mixin selected-border($border-width: 1px, $shadow-width: 2px) {
+  border: $border-width solid $blue-2;
+  box-shadow: 0 0 0 $shadow-width $blue-2;
+}
+
+@mixin selected-border-dt($border-width: 1px, $shadow-width: 2px) {
+  border: $border-width solid $accent-2;
+  box-shadow: 0 0 0 $shadow-width $accent-2;
+}
+
+@mixin scrollbar-light() {
+  &::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100vw;
+    background-color: $gray-5;
+
+    &:hover {
+      background-color: $gray-4;
+    }
+  }
+}
+
+@mixin scrollbar-dark() {
+  &::-webkit-scrollbar-thumb {
+    background-color: $gray-3;
+
+    &:hover {
+      background-color: $gray-4;
+    }
+  }
+}
+
+@mixin animate-course-overlay($name, $opacity) {
+  @keyframes #{$name} {
+    from {
+      background-color: transparent;
+    }
+    to {
+      background-color: rgba($white-1, $opacity);
+    }
+  }
+
+  animation: $name 250ms forwards;
+}
+
+@mixin dot-elastic-light() {
+  @keyframes dot-elastic-before {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1.5);
+    }
+    50% {
+      transform: scale(1, 0.67);
+    }
+    75% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+  @keyframes dot-elastic {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1, 1.5);
+    }
+    75% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+  @keyframes dot-elastic-after {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1, 0.67);
+    }
+    75% {
+      transform: scale(1, 1.5);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+
+  .dot-elastic {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: $course-8;
+    color: $course-8;
+    animation: dot-elastic 1s infinite linear;
+  }
+  .dot-elastic::before,
+  .dot-elastic::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+  .dot-elastic::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: $course-8;
+    color: $course-8;
+    animation: dot-elastic-before 1s infinite linear;
+  }
+  .dot-elastic::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: $course-8;
+    color: $course-8;
+    animation: dot-elastic-after 1s infinite linear;
+  }
+}
+
+@mixin dot-elastic-dark() {
+  .dot-elastic,
+  .dot-elastic::before,
+  .dot-elastic::after {
+    background-color: $accent-1;
+    color: $accent-1;
+  }
+}

@@ -1,0 +1,19 @@
+.themeIcon {
+  font-size: 2.3rem;
+  color: $gray-4;
+  transition: color 100ms ease-in-out;
+
+  &:hover {
+    color: $gray-3;
+  }
+}
+
+[data-theme='dark'] {
+  .themeIcon {
+    color: $gray-4;
+
+    &:hover {
+      color: $gray-5;
+    }
+  }
+}

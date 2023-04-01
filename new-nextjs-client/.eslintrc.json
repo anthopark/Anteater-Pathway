@@ -1,0 +1,10 @@
+{
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
+  "plugins": ["@typescript-eslint", "react/recommended"],
+  "rules": {
+    "no-unused-vars": "warn"
+  },
+  "globals": {
+    "React": "readonly"
+  }
+}

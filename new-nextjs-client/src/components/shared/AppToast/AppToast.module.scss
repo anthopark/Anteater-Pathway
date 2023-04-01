@@ -1,0 +1,86 @@
+// Light theme
+$success-bg-color: #38a169;
+$success-highlight-color: #2d6a35;
+
+$fail-bg-color: #e53e3e;
+$fail-highlight-color: #a62f36;
+
+// Dark theme
+$success-bg-color-dark: #9ae6b4;
+$success-highlight-color-dark: #dcfee0;
+
+$fail-bg-color-dark: #feb2b2;
+$fail-highlight-color-dark: #ffcece;
+
+$text-color-dark: #171923;
+
+.container {
+  color: $white-1;
+  display: flex;
+  align-items: center;
+  max-width: 34rem;
+  padding-right: 1.1rem;
+  padding-left: 1rem;
+  min-height: 6.8rem;
+  font-size: $fs-lg;
+  letter-spacing: $letter-spacing-sm;
+  border-radius: $br-md;
+
+  &.success {
+    background-color: $success-bg-color;
+    .highlight {
+      background-color: $success-highlight-color;
+    }
+  }
+
+  &.fail {
+    background-color: $fail-bg-color;
+    .highlight {
+      background-color: $fail-highlight-color;
+    }
+  }
+
+  .messageWrapper {
+    display: flex;
+
+    .statusIconWrapper {
+      font-size: 1.8rem;
+      margin: 0 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .message {
+      margin: 0 0.1rem;
+      padding: 1.2rem 0.4rem;
+      line-height: 2.8rem;
+      font-weight: bold;
+      text-align: start;
+
+      .highlight {
+        margin-right: 0.8rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .container {
+    color: $text-color-dark;
+    &.success {
+      background-color: $success-bg-color-dark;
+      .highlight {
+        background-color: $success-highlight-color-dark;
+      }
+    }
+
+    &.fail {
+      background-color: $fail-bg-color-dark;
+      .highlight {
+        background-color: $fail-highlight-color-dark;
+      }
+    }
+  }
+}

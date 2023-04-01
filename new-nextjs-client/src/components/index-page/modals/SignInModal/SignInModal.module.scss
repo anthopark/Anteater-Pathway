@@ -1,0 +1,31 @@
+.logoContainer {
+  position: relative;
+  height: 5.5rem;
+  display: flex;
+  justify-self: center;
+  margin-top: 3rem;
+}
+
+.signInBtnContainer {
+  position: relative;
+}
+
+.googleLogoContainer {
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem;
+  background-color: $white-1;
+  border-radius: $br-xs;
+}
+
+.footerParagraph {
+  margin-top: 0.6rem;
+  font-size: $fs-sm;
+  color: $secondary-text;
+}
+
+[data-theme='dark'] {
+  .footerParagraph {
+    color: $secondary-text-dt;
+  }
+}

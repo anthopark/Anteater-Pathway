@@ -1,0 +1,116 @@
+/**************** 
+  Colors
+****************/
+$primary-1: #223e68;
+
+$accent-1: #d98727;
+$accent-2: #ff8c38;
+
+$white-1: #ffffff;
+
+$gray-1: #303234;
+$gray-2: #373e47;
+$gray-3: #696d74;
+$gray-4: #9a9ca1;
+$gray-5: #cfd1d6;
+$gray-6: #edeeef;
+$gray-7: #f5f6f7;
+
+$red-1: #9a3131;
+$red-2: #c93c37;
+$red-3: #e5534b;
+$red-4: #fa7070;
+
+$blue-1: #0037a8;
+$blue-2: #0547cf;
+$blue-3: #0d5bff;
+$blue-4: #82d8ff;
+
+/**************** 
+  Control Sizes (Input, Button, etc.)
+****************/
+$control-height-md: 4rem;
+
+/**************** 
+  Font
+****************/
+$fs-sm: 1.2rem;
+$fs-md: 1.4rem;
+$fs-lg: 1.7rem;
+$fs-xl: 2.3rem;
+
+$letter-spacing-sm: 0.2px;
+$letter-spacing-md: 0.5px;
+$letter-spacing-lg: 1px;
+$letter-spacing-xl: 1.5px;
+
+/**************** 
+  Border Radius
+****************/
+$br-xs: 4px;
+$br-sm: 8px;
+$br-md: 12px;
+$br-lg: 20px;
+
+/**************** 
+Light Theme Colors
+****************/
+$default-text: $gray-1;
+$secondary-text: $gray-3;
+$placeholder-text: $gray-4;
+
+/****************  
+  Dark Theme Colors
+****************/
+$default-text-dt: #e8eaed;
+$secondary-text-dt: #c3c3c3;
+$disabled-text-dt: #898989;
+
+/**************** 
+Background Colors
+****************/
+$bg-color-1: $gray-6;
+$bg-color-2: $white-1;
+$bg-color-3: #f4f4fb;
+
+$bg-color-1-dt: #212123;
+$bg-color-2-dt: #2f3134;
+$bg-color-3-dt: rgba($bg-color-1-dt, 0.5);
+
+$course-1: #c4c3e4;
+$course-2: #94add3;
+$course-3: #b0d2a4;
+$course-4: #adcecc;
+$course-5: #ffc7d4;
+$course-6: #eabfde;
+$course-7: #f5beb2;
+$course-8: #c4a4d2;
+$course-9: #f1dba1;
+$course-10: #f4c294;
+$course-11: #86c6c2;
+$course-12: #b1b1b1;
+
+// quarter item colors
+$fall: #f4d0af;
+$winter: #c8dffa;
+$spring: #d5efb7;
+$summer: #a3ebe2;
+
+$course-1-dt: #9e9ebc;
+$course-2-dt: #5c7395;
+$course-3-dt: #798e72;
+$course-4-dt: #7ea19f;
+$course-5-dt: #c698a3;
+$course-6-dt: #b191a8;
+$course-7-dt: #bf968b;
+$course-8-dt: #796782;
+$course-9-dt: #9f9368;
+$course-10-dt: #b08b68;
+$course-11-dt: #5f8c89;
+$course-12-dt: #7e7e7e;
+
+// quarter item colors
+$fall-dt: #a08e7e;
+$winter-dt: #99adc3;
+$spring-dt: #8b9d76;
+$summer-dt: #708782;

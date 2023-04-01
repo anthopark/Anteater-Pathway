@@ -1,0 +1,78 @@
+$top-selection-pb: 1.5rem;
+
+.container {
+  padding: 0 2rem;
+  background: $gray-6;
+  display: grid;
+  grid-template-rows: 7.5rem auto;
+
+  .topSection {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    height: calc($control-height-md + $top-selection-pb);
+    padding-bottom: $top-selection-pb;
+    border-bottom: 1px solid $gray-5;
+
+    .leftContainer {
+      display: flex;
+    }
+
+    .rightContainer {
+      display: flex;
+      align-items: center;
+      padding-right: 0.5rem;
+
+      .themeTogglerWrapper {
+        margin-right: 3rem;
+      }
+    }
+
+    .addYearDropdownWrapper {
+    }
+
+    .searchBtnWrapper {
+      margin-left: 2rem;
+    }
+  }
+
+  .mainSection {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: minmax(95rem, 3.5fr) minmax(34rem, 1.2fr);
+  }
+
+  .mainLeftContainer {
+    margin-right: 0.5rem;
+    padding-right: 1rem;
+    max-height: calc(100vh - 9.5rem);
+    overflow-y: auto;
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .academicYearWrapper {
+    margin-bottom: 2rem;
+  }
+
+  .mainRightContainer {
+    margin-left: 0.5rem;
+  }
+}
+
+[data-theme='dark'] {
+  .container {
+    background-color: $bg-color-1-dt;
+  }
+
+  .container .topSection {
+    border-bottom: 1px solid $gray-2;
+  }
+
+  .mainLeftContainer {
+    @include scrollbar-dark();
+  }
+}

@@ -1,0 +1,55 @@
+.container {
+  height: 100%;
+  border-radius: $br-md;
+  border: 1px solid $gray-4;
+
+  &.display-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.display-courses {
+    padding: 1.3rem 0.7rem 1rem 1.3rem;
+  }
+}
+
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  color: $secondary-text;
+
+  .message {
+    margin-bottom: 0.3rem;
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: $letter-spacing-md;
+  }
+}
+
+.grid-container {
+  max-height: 100%;
+  padding-right: 0.6rem;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  column-gap: 0.6rem;
+  row-gap: 0.8rem;
+
+  @include scrollbar-light();
+}
+
+[data-theme='dark'] {
+  .container {
+    border-color: $gray-3;
+  }
+
+  .message-wrapper {
+    color: $secondary-text-dt;
+  }
+
+  .grid-container {
+    @include scrollbar-dark();
+  }
+}
