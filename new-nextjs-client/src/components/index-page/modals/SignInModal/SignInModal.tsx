@@ -17,7 +17,6 @@ import {
   defaultText,
   defaultTextDark,
   gray4,
-  fontSizeMD,
 } from '@styles/variables';
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';

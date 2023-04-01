@@ -2,8 +2,6 @@ import style from './LeftSideBar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { coffee, envelope, github } from '@styles/fontawesome';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
-import { white1 } from '@styles/variables';
 import { useDisclosure } from '@chakra-ui/react';
 import ContactUsModal from '../index-page/modals/ContactUsModal/ContactUsModal';
 import Link from 'next/link';

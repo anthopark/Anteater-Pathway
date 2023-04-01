@@ -12,7 +12,6 @@ import CourseBag from '@components/index-page/CourseBag/CourseBag';
 import useAppUser from '@hooks/useAppUser';
 import AcademicYearList from '@components/index-page/AcademicYearList/AcademicYearList';
 import CourseItemDndProvider from '@contexts/DndContextProvider/CourseItemDndProvider';
-import { Helmet } from 'react-helmet';
 
 export default function Home() {
   const { appUser } = useAppUser();
@@ -20,9 +19,6 @@ export default function Home() {
 
   return (
     <>
-      <Helmet>
-        <title>Anteater Pathway</title>
-      </Helmet>
       <CourseItemDndProvider>
         <div className={styles.container}>
           <div className={styles.topSection}>
