@@ -2654,6 +2654,11 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
+expected-round@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/expected-round/-/expected-round-0.0.4.tgz#72ee3621680be8e459fa12ad7196f422bdb016a3"
+  integrity sha512-UeVaov8mrp3MVxRWgqOT+DFH5rVPCAM4yzFBB23NquMxmqR6AfB0+DKNbZYXfJzsSVxpE59Z7CYeF87RA7WDpQ==
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"

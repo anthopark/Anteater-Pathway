@@ -7,6 +7,8 @@ import { eraser } from '@styles/fontawesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AppModal from '@components/shared/AppModal/AppModal';
 import { useEffect, useState } from 'react';
+// @ts-ignore
+import { round10 } from 'expected-round';
 
 interface Props {}
 
@@ -78,7 +80,7 @@ function CourseBag(props: Props) {
         </div>
         {appUser.courseBag.length > 0 ? (
           <div className={cx('total-unit')}>
-            {totalUnit} {totalUnit === 1 ? 'unit' : 'units'}
+            {round10(totalUnit, -1)} {totalUnit === 1 ? 'unit' : 'units'}
           </div>
         ) : null}
       </div>

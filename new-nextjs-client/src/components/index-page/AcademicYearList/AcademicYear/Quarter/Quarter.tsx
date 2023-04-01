@@ -6,6 +6,8 @@ import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import SortableCourseItem from '@components/index-page/SortableCourseItem/SortableCourseItem';
 import { useState } from 'react';
 import useAppUser from '@hooks/useAppUser';
+// @ts-ignore
+import { round10 } from 'expected-round';
 
 const cx = classNames.bind(styles);
 
@@ -70,7 +72,7 @@ function Quarter(props: Props) {
       </div>
       <div className={cx('footer')}>
         {totalUnit > 0 ? (
-          <span className={cx('total-unit')}>{`${totalUnit} ${
+          <span className={cx('total-unit')}>{`${round10(totalUnit, -1)} ${
             totalUnit === 1 ? 'unit' : 'units'
           }`}</span>
         ) : null}

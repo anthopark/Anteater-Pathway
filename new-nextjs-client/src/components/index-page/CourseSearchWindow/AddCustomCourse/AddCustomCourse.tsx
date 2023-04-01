@@ -58,7 +58,7 @@ const AddCustomCourse = () => {
       {
         deptCode: data.department.trim().toUpperCase(),
         num: data.num.trim().toUpperCase(),
-        unit: data.unit,
+        unit: Number(data.unit),
         title: data.title.trim(),
       } as ResponseModel.Course,
       true
