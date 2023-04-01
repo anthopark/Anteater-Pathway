@@ -15,9 +15,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 let analytics;
 
-isSupported().then(() => {
-  analytics = getAnalytics(app);
-});
+isSupported()
+  .then(() => {
+    analytics = getAnalytics(app);
+  })
+  .catch((e) => {
+    console.error(e);
+  });
 
 const auth = getAuth(app);
 // connectAuthEmulator(auth, 'http://localhost:9099');
