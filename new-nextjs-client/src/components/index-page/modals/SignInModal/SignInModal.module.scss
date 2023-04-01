@@ -20,12 +20,20 @@
 
 .footerParagraph {
   margin-top: 0.6rem;
-  font-size: $fs-sm;
+  font-size: 1.3rem;
   color: $secondary-text;
+}
+
+.privacyLink {
+  color: $blue-3;
+  text-decoration: underline;
 }
 
 [data-theme='dark'] {
   .footerParagraph {
     color: $secondary-text-dt;
+  }
+  .privacyLink {
+    color: $blue-4;
   }
 }
