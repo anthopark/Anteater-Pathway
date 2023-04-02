@@ -23,7 +23,8 @@ import {
   primary1,
   accent1,
 } from '@styles/variables';
-import { useState, useEffect, useCallback } from 'react';
+import { ResponseModel } from 'src/models/response-model';
+import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import useAppToast from '@hooks/useAppToast';
 import AppButton from '@components/shared/AppButton/AppButton';

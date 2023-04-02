@@ -1,11 +1,10 @@
+import { ResponseModel } from 'src/models/response-model';
 import styles from './AddCustomCourse.module.scss';
 import { useTheme } from 'next-themes';
 import AppInput from '@components/shared/AppInput/AppInput';
-
 import AppButton from '@components/shared/AppButton/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plus } from '@styles/fontawesome';
-
 import {
   Popover,
   PopoverTrigger,
@@ -14,7 +13,6 @@ import {
   FormLabel,
   FormControl,
 } from '@chakra-ui/react';
-
 import {
   borderRadiusSM,
   controlHeightSM,
@@ -29,7 +27,7 @@ import {
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useAppUser from '@hooks/useAppUser';
 import { Course } from '@entities/course';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useAppToast from '@hooks/useAppToast';
 
 type Inputs = {

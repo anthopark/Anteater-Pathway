@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { ResponseModel } from 'src/models/response-model';
 
 export interface ICourse {
   id: string;
