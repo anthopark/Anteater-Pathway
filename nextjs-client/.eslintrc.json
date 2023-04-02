@@ -1,9 +1,10 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
+  "plugins": ["@typescript-eslint", "react/recommended"],
   "rules": {
-    "no-unused-vars": "error",
-    "template-curly-spacing": "off",
-    "indent": "off",
-    "@next/next/no-document-import-in-page": "off"
+    "no-unused-vars": "warn"
+  },
+  "globals": {
+    "React": "readonly"
   }
 }
