@@ -16,7 +16,7 @@
 
 <p align="center">
     <a href="https://anteaterpathway.com">
-        <img alt="demo-animation" src="demo-version2.gif" width="795"/>
+        <img alt="demo-animation" src="2023-april-demo.gif" width="795"/>
     </a>
 </p>
 
@@ -30,7 +30,7 @@ Anteater Pathway helps UCI students create and manage their degree plans. Studen
 -  New course search window
 -  Update-to-date course offer history
 
-### Old User Interface (Version 1)
+### The first publish in 2021
 
 <p align="center">
     <a href="https://anteaterpathway.com">
