@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://anteaterpathway.com">
-        <img alt="anteater-pathway-logo" src="nextjs-client/public/logo.svg" width="50" />
+        <img alt="anteater-pathway-logo" src="nextjs-client/public/anteater-logo.svg" width="50" />
     </a>
 </p>
 
@@ -22,22 +22,13 @@
 
 ### What is Anteater Pathway?
 
-Anteater Pathway helps UCI students create and manage their degree planners. Students can search for courses to enroll, and save them to their planner by dragging and dropping the course items.
+Anteater Pathway helps UCI students create and manage their degree plans. Students can search for courses to enroll, view course information, and save them to their planners.
 
-### New Features
+### Update - April 2023
 
-- New UI/UX design
-- Google sign in Support
-- Auto save & load planner data
-- Color code your course items
-- Create your own courses if not found through the search bar
-- Updated UCI course / offering data
-
-### Coming Soon
-
-- [ ] Dark theme
-- [ ] Better user experience for the search bar
-- [ ] Auto-periodic updates for course data
+-  Dark theme available
+-  New course search window
+-  Update-to-date course offer history
 
 ### Old User Interface (Version 1)
 
