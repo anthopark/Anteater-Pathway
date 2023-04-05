@@ -12,11 +12,11 @@
     </a>
 </p>
 
-<p align="center">Drag & Drop UCI Degree Planner</p>
+<p align="center">UC Irvine Degree Planner</p>
 
 <p align="center">
     <a href="https://anteaterpathway.com">
-        <img alt="demo-animation" src="demo-april-2023.gif" width="795"/>
+        <video width="795" src="demo-april-2023.mp4" autoplay muted loop></video>
     </a>
 </p>
 
